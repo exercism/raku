@@ -5,8 +5,8 @@ plan 8;
 
 BEGIN { @*INC.unshift('./') }
 
-BEGIN { EVAL('use Accumulate') }; pass 'Module loaded';
-ok Accumulate.can('accumulate'), 'Module has accumulate() method';
+BEGIN { EVAL('use Example') }; pass 'Load module';
+ok Accumulate.can('accumulate'), 'Accumulate class has accumulate() method';
 
 is_deeply Accumulate.accumulate([ ], sub {}),
           [ ],

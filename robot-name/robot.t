@@ -5,10 +5,10 @@ plan 7;
 
 BEGIN { @*INC.unshift('./') }
 
-BEGIN { EVAL('use Robot') }; pass 'Module loaded';
+BEGIN { EVAL('use Example') }; pass 'Load module';
 
-ok Robot.can('name'), 'Has name attribute';
-ok Robot.can('reset_name'), 'Has reset_name method';
+ok Robot.can('name'), 'Robot class has name attribute';
+ok Robot.can('reset_name'), 'Robot class has reset_name method';
 
 # robot method tests
 my $robot = Robot.new;

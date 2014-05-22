@@ -6,7 +6,7 @@ plan 8;
 # add the current directory to the module PATH
 BEGIN { @*INC.unshift: './' }
 
-BEGIN { EVAL('use Leap') };pass 'Leap loaded successfully';
+BEGIN { EVAL('use Example') };pass 'Load module';
 
 ok Leap.can('is_leap'), 'Leap class has is_leap() method';
 
