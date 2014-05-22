@@ -1,0 +1,33 @@
+use v6;
+use Test;
+
+plan 8;
+
+BEGIN { @*INC.unshift('./') }
+
+BEGIN { EVAL('use Accumulate') }; pass 'Module loaded';
+ok Accumulate.can('accumulate'), 'Module has accumulate() method';
+
+is_deeply Accumulate.accumulate([ ], sub {}),
+          [ ],
+          'test empty';
+
+is_deeply Accumulate.accumulate([1, 2, 3, 4, 5], sub { @_[0] * @_[0] }),
+          [1, 4, 9, 16, 25],
+          'raise to 2';
+
+is_deeply Accumulate.accumulate([10, 17, 23], sub { [ (@_[0] / 7).truncate, (@_[0] % 7).truncate ] }),
+          [[1, 3], [2, 3], [3, 2] ],
+          'divmod';
+
+is_deeply Accumulate.accumulate(['hello', 'exercism'], sub { @_[0].uc }),
+          ['HELLO', 'EXERCISM'],
+          'capitalize';
+
+is_deeply Accumulate.accumulate(['a', 'b', 'c' ], sub ($inp) { [ Accumulate.accumulate( [1, 2, 3], sub ($inp2) { $inp ~ $inp2 } )]}),
+          [['a1', 'a2', 'a3'], ['b1', 'b2', 'b3'], ['c1', 'c2', 'c3']],
+          'recursive';
+
+is_deeply Accumulate.accumulate(['the', 'quick', 'brown', 'fox'], sub { @_[0].flip }),
+          ['eht', 'kciuq', 'nworb', 'xof'],
+          'reverse strings';
