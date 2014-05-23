@@ -1,9 +1,8 @@
 use v6;
 use Test;
+use lib './';
 
 plan 8;
-
-BEGIN { @*INC.unshift('./') }
 
 BEGIN { EVAL('use Example') }; pass 'Load module';
 ok Accumulate.can('accumulate'), 'Accumulate class has accumulate() method';

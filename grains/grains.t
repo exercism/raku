@@ -1,11 +1,10 @@
 use v6;
 use Test;
+use lib './';
 
 plan 11;
 
-BEGIN { @*INC.unshift('./') }
-
-BEGIN { EVAL('use Example') }; pass 'Module loaded';
+BEGIN { EVAL('use Example') }; pass 'Load module';
 
 ok Grains.can('square'), 'Grains class has square method';
 ok Grains.can('total'), 'Grains class has total method';

@@ -1,12 +1,10 @@
 use v6;
 use Test;
+use lib './';
 
 plan 8;
 
-# add the current directory to the module PATH
-BEGIN { @*INC.unshift: './' }
-
-BEGIN { EVAL('use Example') };pass 'Load module';
+BEGIN { EVAL('use Example') }; pass 'Load module';
 
 ok Leap.can('is_leap'), 'Leap class has is_leap() method';
 

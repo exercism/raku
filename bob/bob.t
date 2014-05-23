@@ -1,9 +1,8 @@
 use v6;
 use Test;
+use lib './';
 
 plan 21;
-
-BEGIN { @*INC.unshift('./') }
 
 BEGIN { EVAL('use Example') }; pass 'Load module';
 
