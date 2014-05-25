@@ -1,5 +1,4 @@
 class Anagram {
-
     method match ($word, @words) {
         my @results;
         my $canonical = self!canonize($word);

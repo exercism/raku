@@ -1,6 +1,6 @@
 class Accumulate {
     method accumulate (@list, $function){
-        my @accumulated = < >;
+        my @accumulated;
         for @list -> $element {
             @accumulated.push: $function($element);
         }
