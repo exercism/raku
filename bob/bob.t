@@ -4,7 +4,14 @@ use lib './';
 
 plan 21;
 
-BEGIN { EVAL('use Example') }; pass 'Load module';
+
+BEGIN { 
+    my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Bob';
+
+    EVAL("use $module");
+}; 
+
+pass 'Load module';
 
 ok Bob.can('hey'), 'Class Bob has hey() method';
 
@@ -31,6 +38,6 @@ my @cases =
     ['    ',                                           'Fine. Be that way!', 'prolonged silence'],
 ;
 
-for @cases -> @c {
-    is @c[1], Bob.hey(@c[0]), @c[2];
+for @cases -> ( $string, $expected, $msg ) {
+    is Bob.hey($string), $expected, $msg;
 }
