@@ -22,4 +22,4 @@ is-deeply Anagram.match('good', ['dog', 'goody']), [], 'eleminates anagram subse
 is-deeply Anagram.match('listen', ['enlists', 'google', 'inlets', 'banana']), ['inlets'], 'detect anagram';
 is-deeply Anagram.match('allergy', ['gallery', 'ballerina', 'regally', 'clergy', 'largely', 'leading']), ['gallery', 'regally', 'largely'], 'multiple anagrams';
 is-deeply Anagram.match('Orchestra', ['cashregister', 'Carthorse', 'radishes']), ['Carthorse'], 'anagrams are case-insensitive';
-is-deeply Anagram.match('banana', ['banana']), [], 'same word is not an anagram';
+is-deeply Anagram.match('banana', ['banana', 'Banana']), [], 'same word is not an anagram, whatever the case';
