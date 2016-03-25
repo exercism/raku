@@ -4,7 +4,10 @@ use lib './';
 
 plan 8;
 
-BEGIN { EVAL('use Example') }; pass 'Load module';
+BEGIN {
+    my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Leap';
+    EVAL("use $module");
+};
 
 ok Leap.can('is_leap'), 'Leap class has is_leap() method';
 
