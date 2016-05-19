@@ -15,5 +15,5 @@ is $scrabble.score("a"),                1,  "a scores 1";
 is $scrabble.score("f"),                4,  "f scores 4";
 is $scrabble.score("street"),           6,  "street scores 6";
 is $scrabble.score("alacrity"),         13, "alacrity scores 13";
-is $scrabble.score("MULTIBILLIONAIRE"), 20, "MULTIBILLIONAIRE scores 20";
+is $scrabble.score("OXYPHENBUTAZONE"),  41, "OXYPHENBUTAZONE scores 41";
 is $scrabble.score("quirky"),           22, "quirky scores 22";
