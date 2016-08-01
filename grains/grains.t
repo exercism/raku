@@ -4,7 +4,11 @@ use lib './';
 
 plan 11;
 
-BEGIN { EVAL('use Example') }; pass 'Load module';
+BEGIN { 
+    my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Grains';
+    EVAL("use $module");
+}; 
+pass 'Load module';
 
 ok Grains.can('square'), 'Grains class has square method';
 ok Grains.can('total'), 'Grains class has total method';
