@@ -21,6 +21,7 @@
 
   ],
   "ignored": [
+    "docs",
     "img"
   ],
   "foregone": [
