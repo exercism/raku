@@ -4,19 +4,6 @@
   "repository": "https://github.com/exercism/xperl6",
   "checklist_issue": 30,
   "active": false,
-  "problems": [
-    "bob",
-    "leap",
-    "grains",
-    "raindrops",
-    "scrabble-score",
-    "word-count",
-    "anagram",
-    "robot-name",
-    "accumulate",
-    "rna-transcription",
-    "binary"
-  ],
   "deprecated": [
 
   ],
@@ -26,5 +13,62 @@
   ],
   "foregone": [
 
+  ],
+  "exercises": [
+    {
+      "difficulty": 1,
+      "slug": "bob",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "leap",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "grains",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "raindrops",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "scrabble-score",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "word-count",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "anagram",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "robot-name",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "accumulate",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "rna-transcription",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "binary",
+      "topics": []
+    }
   ]
 }
