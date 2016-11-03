@@ -2,7 +2,7 @@ use v6;
 use Test;
 use lib './';
 
-plan 8;
+plan 7;
 
 BEGIN {
     my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Leap';
