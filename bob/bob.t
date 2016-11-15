@@ -4,10 +4,8 @@ use lib './';
 
 plan 21;
 
-
 BEGIN { 
     my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Bob';
-
     EVAL("use $module");
 }; 
 

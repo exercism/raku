@@ -4,7 +4,13 @@ use lib './';
 
 plan 8;
 
-BEGIN { EVAL('use Example') }; pass 'Load module';
+BEGIN {
+  my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Word_Counter';
+  EVAL("use $module")
+};
+
+pass 'Load module';
+
 
 ok Word_Counter.can('count_words'), 'Class Word_Counter has count_words method';
 

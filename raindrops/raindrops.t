@@ -4,7 +4,13 @@ use lib './';
 
 plan 18;
 
-BEGIN { EVAL('use Example') }; pass ('Load module');
+BEGIN {
+  my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Raindrops';
+  EVAL("use $module")
+};
+
+pass 'Load module';
+
 
 ok Raindrops.can('convert'), 'Class Raindrops has convert method';
 

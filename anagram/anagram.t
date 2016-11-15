@@ -2,15 +2,14 @@ use v6;
 use Test;
 use lib './';
 
-BEGIN {
-    plan 11;
+plan 11;
 
-    my @files = <Example Anagram>;
-    my $file = @files.grep({ ( $_ ~ '.pm' ).IO.f })[0] 
-        or exit flunk "neither " ~ ( @files.map({ $_ ~ '.pm' }).join( ' or ' ) ) ~ ' found';
-    EVAL( 'use ' ~ $file );
-    pass 'Load module';
-}
+BEGIN {
+  my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Anagram';
+  EVAL("use $module")
+};
+
+pass 'Load module';
 
 ok Anagram.can('match'), 'Class Anagram has match method';
 
