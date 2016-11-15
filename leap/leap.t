@@ -9,6 +9,8 @@ BEGIN {
     EVAL("use $module");
 };
 
+pass 'Load module';
+
 ok Leap.can('is_leap'), 'Leap class has is_leap() method';
 
 ok my $leap = Leap.new, 'Create new Leap object';

@@ -4,7 +4,13 @@ use lib './';
 
 plan 10;
 
-BEGIN { EVAL('use Example') }; pass 'Load module';
+BEGIN {
+  my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Scrabble';
+  EVAL("use $module")
+};
+
+pass 'Load module';
+
 ok Scrabble.can('score'), 'Scrabble class has score() method';
 
 my $scrabble = Scrabble.new();
