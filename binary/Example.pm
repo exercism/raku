@@ -5,7 +5,7 @@ class Binary {
         my $decimal = 0;
         my $index = $binary.chars;
 
-        for $binary.split('') -> $bit {
+        for $binary.split('',:skip-empty) -> $bit {
            $decimal += $bit * 2 ** --$index;
         }
         return $decimal;
