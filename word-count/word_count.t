@@ -1,6 +1,6 @@
 use v6;
 use Test;
-use lib './';
+use lib IO::Path.new($?FILE).parent.path;
 
 plan 8;
 
