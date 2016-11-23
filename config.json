@@ -4,6 +4,7 @@
   "repository": "https://github.com/exercism/xperl6",
   "checklist_issue": 30,
   "active": false,
+  "test_pattern": ".*\\.t$",
   "deprecated": [
 
   ],

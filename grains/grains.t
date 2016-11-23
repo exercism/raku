@@ -1,10 +1,15 @@
 use v6;
 use Test;
-use lib './';
+use lib IO::Path.new($?FILE).parent.path;
 
 plan 11;
 
-BEGIN { EVAL('use Example') }; pass 'Load module';
+BEGIN {
+  my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Grains';
+  EVAL("use $module")
+};
+
+pass 'Load module';
 
 ok Grains.can('square'), 'Grains class has square method';
 ok Grains.can('total'), 'Grains class has total method';

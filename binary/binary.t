@@ -1,16 +1,15 @@
 use v6;
 use Test;
-use lib './';
+use lib IO::Path.new($?FILE).parent.path;
+
+plan 10;
 
 BEGIN {
-    plan 10;
+  my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Anagram';
+  EVAL("use $module")
+};
 
-    my @files = <Example Binary>;
-    my $file = @files.grep({ ( $_ ~ '.pm' ).IO.f })[0] 
-        or exit flunk "neither " ~ ( @files.map({ $_ ~ '.pm' }).join( ' or ' ) ) ~ ' found';
-    EVAL( 'use ' ~ $file );
-    pass 'Load module';
-}
+pass 'Load module';
 
 ok Binary.can('to_decimal'), 'Class Binary has to_decimal method';
 

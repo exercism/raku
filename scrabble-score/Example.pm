@@ -13,7 +13,7 @@ class Scrabble {
     method score ($word) {
         my $score = 0;
 
-        for $word.lc.split('') -> $letter {
+        for $word.lc.split('',:skip-empty) -> $letter {
             $score
             += self.values{ self.values.keys.first(/$letter/) or 'ZERO' };
         }

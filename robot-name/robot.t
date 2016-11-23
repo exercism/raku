@@ -1,16 +1,15 @@
 use v6;
 use Test;
-use lib './';
+use lib IO::Path.new($?FILE).parent.path;
 
-BEGIN {
-    plan 7;
+plan 7;
 
-    my @files = <Example Robot>;
-    my $file = @files.grep({ ( $_ ~ '.pm' ).IO.f })[0] 
-        or exit flunk "neither " ~ ( @files.map({ $_ ~ '.pm' }).join( ' or ' ) ) ~ ' found';
-    EVAL( 'use ' ~ $file );
-    pass 'Load module';
-}
+BEGIN { 
+    my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Robot';
+    EVAL("use $module");
+}; 
+
+pass 'Load module';
 
 ok Robot.can('name'), 'Robot class has name attribute';
 ok Robot.can('reset_name'), 'Robot class has reset_name method';

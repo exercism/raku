@@ -1,13 +1,11 @@
 use v6;
 use Test;
-use lib './';
+use lib IO::Path.new($?FILE).parent.path;
 
 plan 21;
 
-
 BEGIN { 
     my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Bob';
-
     EVAL("use $module");
 }; 
 
