@@ -2,7 +2,7 @@ use v6;
 use Test;
 use lib IO::Path.new($?FILE).parent.path;
 
-plan 8;
+plan 7;
 
 BEGIN {
     my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Leap';
