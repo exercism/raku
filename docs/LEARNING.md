@@ -1,3 +1,3 @@
 # Learning Perl 6
 
-See the [Getting started](https://perl6.org/getting-started/) page on Perl6.org.
+The [Resources](https://perl6.org/resources/) page on Perl6.org contains a 'For Newcomers' section with a selection of useful material to get you up and running.
