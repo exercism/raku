@@ -1,6 +1,12 @@
 ---
-language: bash
-script:
-- bin/fetch-configlet
-- bin/configlet .
 sudo: false
+language: perl6
+perl6:
+  - latest
+  - '2016.10'
+  - '2016.07'
+before_script:
+  - bin/fetch-configlet
+script:
+  - bin/configlet .
+  - EXERCISM=1 prove -vr --exec=perl6 exercises/
