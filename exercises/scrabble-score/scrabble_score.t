@@ -3,14 +3,10 @@ use v6;
 use Test;
 use lib IO::Path.new($?FILE).parent.path;
 
-plan 10;
-
 BEGIN {
-  my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Scrabble';
-  EVAL("use $module")
-};
-
-pass 'Load module';
+  plan 10;
+  eval-lives-ok %*ENV<EXERCISM>.so ?? 'use Example' !! 'use Scrabble', 'Module loaded';
+}
 
 ok Scrabble.can('score'), 'Scrabble class has score() method';
 
