@@ -6,7 +6,7 @@ use lib IO::Path.new($?FILE).parent.path;
 plan 10;
 
 BEGIN {
-  my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Anagram';
+  my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Binary';
   EVAL("use $module")
 };
 
