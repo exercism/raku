@@ -5,6 +5,9 @@ perl6:
   - latest
   - '2016.10'
   - '2016.07'
+install:
+  - rakudobrew build-panda
+  - panda install JSON::Tiny
 before_script:
   - bin/fetch-configlet
 script:
