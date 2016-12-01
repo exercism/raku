@@ -3,14 +3,10 @@ use v6;
 use Test;
 use lib IO::Path.new($?FILE).parent.path;
 
-plan 8;
-
 BEGIN {
-  my $module = %*ENV{'EXERCISM'} ?? 'Example' !! 'Accumulate';
-  EVAL("use $module")
-};
-
-pass 'Load module';
+  plan 8;
+  eval-lives-ok %*ENV<EXERCISM>.so ?? 'use Example' !! 'use Accumulate', 'Module loaded';
+}
 
 ok Accumulate.can('accumulate'), 'Accumulate class has accumulate() method';
 
