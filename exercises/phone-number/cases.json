@@ -1,0 +1,47 @@
+{
+  "valid": [
+    {
+      "input": 1234567890,
+      "number": "1234567890",
+      "area-code": "123",
+      "pretty": "(123) 456-7890",
+      "test": "10 digit integer"
+    },
+    {
+      "input": "+1 (234) 555-6789",
+      "number": "2345556789",
+      "area-code": "234",
+      "pretty": "(234) 555-6789",
+      "test": "11 digit formatted number"
+    },
+    {
+      "input": "1.379.555.2468",
+      "number": "3795552468",
+      "area-code": "379",
+      "pretty": "(379) 555-2468",
+      "test": "11 digit number containing separators"
+    }
+  ],
+  "invalid": [
+    {
+      "input": "",
+      "test": "empty input"
+    },
+    {
+      "input": "13579",
+      "test": "5 digit number"
+    },
+    {
+      "input": "123456789011",
+      "test": "12 digit number"
+    },
+    {
+      "input": "+2 (468) 555-1379",
+      "test": "11 digit number not beginning with 1"
+    },
+    {
+      "input": "phone number",
+      "test": "not a number"
+    }
+  ]
+}
