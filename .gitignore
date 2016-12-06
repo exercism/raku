@@ -1,2 +1,4 @@
 bin/configlet
 bin/configlet.exe
+# dir created when a Perl 6 module is used
+.precomp
