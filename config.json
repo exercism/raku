@@ -80,6 +80,11 @@
       "difficulty": 1,
       "slug": "trinary",
       "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "space-age",
+      "topics": []
     }
   ]
 }
