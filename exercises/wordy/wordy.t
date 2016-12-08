@@ -3,16 +3,19 @@
 use Test;
 use JSON::Tiny;
 
-use lib IO::Path.new($?FILE).parent.path;
+use lib ( my $dir = IO::Path.new($?FILE).parent ).path;
 
+my $module_name = %*ENV<EXERCISM>.so ?? 'Example' !! 'Wordy';
+my @potential_module = <p6 pm6 pm>.map:  $module_name ~ '.' ~ *; 
 
-my $module = %*ENV<EXERCISM>.so ?? 'Example.pm' !! 'Wordy.pm';
+my $module = first { $dir.child($_).e }, |@potential_module
+    or die "No file '$module_name.p6' found\n";
 
 require $module <&answer>;
 
 plan 16;
 
-my %cases = from-json IO::Path.new($?FILE).parent.child('cases.json').slurp;
+my %cases = from-json $dir.child('cases.json').slurp;
 
 for |%cases<cases> -> %case {
     with %case<expected> {

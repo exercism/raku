@@ -1,5 +1,3 @@
-unit module Wordy;
-
 sub answer($q is copy)  is export { 
 
     given $q {
