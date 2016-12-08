@@ -2,9 +2,13 @@
 
 use Test;
 
-use lib IO::Path.new($?FILE).parent.path;
+use lib ( my $dir = IO::Path.new($?FILE).parent ).path;
 
-my $module = %*ENV<EXERCISM>.so ?? 'Example.pm' !! 'Trinary.pm';
+my $module_name = %*ENV<EXERCISM>.so ?? 'Example' !! 'Trinary';
+my @potential_module = <p6 pm6 pm>.map:  $module_name ~ '.' ~ *;
+
+my $module = first { $dir.child($_).e }, |@potential_module
+    or die "No file '$module_name.p6' found\n";
 
 require $module <&to-decimal>;
 

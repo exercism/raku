@@ -1,5 +1,3 @@
-unit module Trinary;
-
 sub to-decimal($num) is export {
 
     return 0 if $num ~~ /<-[012]>/;
