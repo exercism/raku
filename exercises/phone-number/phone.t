@@ -7,13 +7,6 @@ use lib my $path = IO::Path.new($?FILE).parent.path;
 BEGIN {
   plan 12;
   use-ok %*ENV<EXERCISM> ?? 'Example' !! 'Phone', 'Module loaded';
-
-  unless $*PERL.compiler.version ~~ v2016.10+ {
-    sub bail-out {};
-    note 'Perl 6 ' ~ $*PERL.compiler.version ~ ' is not supported. Please use v2016.10 or newer';
-    skip-rest;
-    exit;
-  }
 }
 
 my %tests = from-json open("$path/cases.json").slurp-rest;
@@ -23,7 +16,7 @@ subtest 'number, area-code and pretty methods', {
   ok Phone.can('number'), 'can Phone.number';
   ok Phone.can('area-code'), 'can Phone.area-code';
   ok Phone.can('pretty'), 'can Phone.pretty';
-} or bail-out 'Missing method(s).';
+} or fail 'Missing method(s).';
 
 for @(%tests<valid>) {
   my $phone = Phone.new(number => .<input>);
