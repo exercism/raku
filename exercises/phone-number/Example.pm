@@ -11,8 +11,8 @@ class Phone {
   method new (:$number!) {
     my $validated = $number;
     $validated ~~ s:g/<:!Decimal_Number>//;
-    $validated ~~ /^ 1? (\d ** 10) $/ ?? ($validated = ~$0) !! X::Phone::Invalid.new(:payload«$number»).throw;
-    self.bless(:number«$validated»);
+    $validated ~~ /^ 1? (\d ** 10) $/ ?? ($validated = ~$0) !! X::Phone::Invalid.new(payload => $number).throw;
+    self.bless(number => $validated);
   }
 
   method area-code {
