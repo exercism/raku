@@ -53,6 +53,11 @@
     },
     {
       "difficulty": 1,
+      "slug": "grade-school",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
       "slug": "robot-name",
       "topics": []
     },
