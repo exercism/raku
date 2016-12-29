@@ -3,10 +3,10 @@ use v6;
 use Test;
 use lib IO::Path.new($?FILE).parent.path;
 
-BEGIN {
-  plan 7;
-  eval-lives-ok %*ENV<EXERCISM>.so ?? 'use Example' !! 'use Robot', 'Module loaded';
-}
+plan 7;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Robot';
+use-ok $module;
+require ::($module) <Robot>;
 
 ok Robot.can('name'), 'Robot class has name attribute';
 ok Robot.can('reset_name'), 'Robot class has reset_name method';

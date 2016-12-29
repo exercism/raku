@@ -3,10 +3,10 @@ use v6;
 use Test;
 use lib IO::Path.new($?FILE).parent.path;
 
-BEGIN {
-  plan 11;
-  eval-lives-ok %*ENV<EXERCISM>.so ?? 'use Example' !! 'use Anagram', 'Module loaded';
-}
+plan 11;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Anagram';
+use-ok $module;
+require ::($module) <Anagram>;
 
 ok Anagram.can('match'), 'Class Anagram has match method';
 

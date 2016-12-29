@@ -1,4 +1,4 @@
-class Raindrops {
+class Raindrops is export {
     method convert (Int:D $num --> Str:D) {
        my $str = '';
        $str ~= "Pling" if $num % 3 == 0;

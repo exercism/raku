@@ -1,4 +1,4 @@
-class Anagram {
+class Anagram is export {
     method match ($word, @words) {
         my @results;
         my $canonical = self!canonize($word);

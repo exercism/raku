@@ -1,4 +1,4 @@
-class Word_Counter {
+class Word_Counter is export {
     method count_words ($text) {
         my %word_counts;
         for $text.comb(/\w+/) {

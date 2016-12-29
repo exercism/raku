@@ -3,10 +3,10 @@ use v6;
 use Test;
 use lib IO::Path.new($?FILE).parent.path;
 
-BEGIN {
-  plan 23;
-  eval-lives-ok %*ENV<EXERCISM>.so ?? 'use Example' !! 'use Raindrops', 'Module loaded';
-}
+plan 23;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Raindrops';
+use-ok $module;
+require ::($module) <Raindrops>;
 
 ok Raindrops.can('convert'), 'Class Raindrops has convert method';
 

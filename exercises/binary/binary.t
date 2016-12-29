@@ -3,10 +3,10 @@ use v6;
 use Test;
 use lib IO::Path.new($?FILE).parent.path;
 
-BEGIN {
-  plan 10;
-  eval-lives-ok %*ENV<EXERCISM>.so ?? 'use Example' !! 'use Binary', 'Module loaded';
-}
+plan 10;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Binary';
+use-ok $module;
+require ::($module) <Binary>;
 
 ok Binary.can('to_decimal'), 'Class Binary has to_decimal method';
 

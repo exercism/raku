@@ -4,10 +4,10 @@ use Test;
 use JSON::Tiny;
 use lib my $path = IO::Path.new($?FILE).parent.path;
 
-BEGIN {
-  plan 12;
-  use-ok %*ENV<EXERCISM> ?? 'Example' !! 'Phone', 'Module loaded';
-}
+plan 12;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Phone';
+use-ok $module;
+require ::($module) <Phone>;
 
 my %tests = from-json open("$path/cases.json").slurp-rest;
 
@@ -26,16 +26,8 @@ for @(%tests<valid>) {
   is $phone.pretty, .<pretty>, "pretty $msg";
 }
 
-my $exception;
-if %*ENV<EXERCISM> {
-  $exception = X::Phone::Invalid;
-}
-else {
-  todo 'Optional Exception Tests'; # Remove this line for invalid input tests
-  $exception = Exception; # Change this if you wish to specify a specific exception
-}
-
+todo 'Optional Exception Tests' unless %*ENV<EXERCISM>; # Remove this line for invalid input tests
 subtest 'Throw exceptions for invalid input', {
   plan 5;
-  throws-like {Phone.new(number => .<input>)}, $exception, .<test> for @(%tests<invalid>);
+  throws-like {Phone.new(number => .<input>)}, Exception, .<test> for @(%tests<invalid>);
 }
