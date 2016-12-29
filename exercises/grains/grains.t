@@ -3,10 +3,10 @@ use v6;
 use Test;
 use lib IO::Path.new($?FILE).parent.path;
 
-BEGIN {
-  plan 11;
-  eval-lives-ok %*ENV<EXERCISM>.so ?? 'use Example' !! 'use Grains', 'Module loaded';
-}
+plan 11;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Grains';
+use-ok $module;
+require ::($module) <Grains>;
 
 ok Grains.can('square'), 'Grains class has square method';
 ok Grains.can('total'), 'Grains class has total method';

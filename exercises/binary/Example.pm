@@ -1,4 +1,4 @@
-class Binary {
+class Binary is export {
     method to_decimal ($binary) {
         return 0 if $binary ~~ /<-[^01]>/;
 

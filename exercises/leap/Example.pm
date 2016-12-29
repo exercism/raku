@@ -1,4 +1,4 @@
-class Leap {
+class Leap is export {
     method is_leap ($year) {
         self.is_divisible($year, 400)
         || self.is_divisible($year, 4)

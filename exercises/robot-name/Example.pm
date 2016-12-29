@@ -1,4 +1,4 @@
-class Robot {
+class Robot is export {
     has $.name is rw = self.reset_name;
 
     method rand_letter {

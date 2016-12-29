@@ -1,4 +1,4 @@
-class Grains {
+class Grains is export {
     method square($number) {
         2**($number-1);
     }

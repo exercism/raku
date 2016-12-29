@@ -3,10 +3,10 @@ use v6;
 use Test;
 use lib IO::Path.new($?FILE).parent.path;
 
-BEGIN {
-  plan 8;
-  eval-lives-ok %*ENV<EXERCISM>.so ?? 'use Example' !! 'use Word_Counter', 'Module loaded';
-}
+plan 8;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Word_Counter';
+use-ok $module;
+require ::($module) <Word_Counter>;
 
 ok Word_Counter.can('count_words'), 'Class Word_Counter has count_words method';
 

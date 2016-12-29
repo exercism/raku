@@ -1,4 +1,4 @@
-class Bob {
+class Bob is export {
     method hey ($input) {
         given $input {
             when /^\s*$/                            { 'Fine. Be that way!' }
