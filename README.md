@@ -1,6 +1,7 @@
 # xPerl6
 
-[![Gitter](https://badges.gitter.im/exercism/xperl.svg)](https://gitter.im/exercism/xperl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Build Status](https://travis-ci.org/exercism/xperl6.svg?branch=master)](https://travis-ci.org/exercism/xperl6) [![Gitter](https://badges.gitter.im/exercism/xperl.svg)](https://gitter.im/exercism/xperl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 Exercism exercises in Perl 6
 
 ## Contributing Guide
