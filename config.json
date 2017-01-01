@@ -87,6 +87,11 @@
       "topics": []
     },
     {
+      "difficulty" : 1,
+      "slug" : "allergies",
+      "topics" : [] 
+    },
+    {
       "difficulty": 1,
       "slug": "space-age",
       "topics": []
