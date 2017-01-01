@@ -3,10 +3,10 @@ use v6;
 use Test;
 use lib IO::Path.new($?FILE).parent.path;
 
-BEGIN {
-  plan 7;
-  eval-lives-ok %*ENV<EXERCISM>.so ?? 'use Example' !! 'use RNA_Transcription', 'Module loaded';
-}
+plan 7;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! 'RNA_Transcription';
+use-ok $module;
+require ::($module) <RNA_Transcription>;
 
 ok RNA_Transcription.can('to_rna'), 'Class RNA_Transcription has to_rna() method';
 

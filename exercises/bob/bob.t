@@ -3,10 +3,10 @@ use v6;
 use Test;
 use lib IO::Path.new($?FILE).parent.path;
 
-BEGIN {
-  plan 21;
-  eval-lives-ok %*ENV<EXERCISM>.so ?? 'use Example' !! 'use Bob', 'Module loaded';
-}
+plan 21;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Bob';
+use-ok $module;
+require ::($module) <Bob>;
 
 ok Bob.can('hey'), 'Class Bob has hey() method';
 

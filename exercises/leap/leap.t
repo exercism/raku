@@ -3,10 +3,10 @@ use v6;
 use Test;
 use lib IO::Path.new($?FILE).parent.path;
 
-BEGIN {
-  plan 8;
-  eval-lives-ok %*ENV<EXERCISM>.so ?? 'use Example' !! 'use Leap', 'Module loaded';
-}
+plan 8;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Leap';
+use-ok $module;
+require ::($module) <Leap>;
 
 ok Leap.can('is_leap'), 'Leap class has is_leap() method';
 

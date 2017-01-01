@@ -1,4 +1,4 @@
-class Scrabble {
+class Scrabble is export {
     has %.values = (
             aeioulnrst => 1,
             dg         => 2,

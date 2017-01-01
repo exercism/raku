@@ -5,7 +5,7 @@ class X::Phone::Invalid is Exception {
   method message {"'$!payload' is not valid."}
 }
 
-class Phone {
+class Phone is export {
   has $.number;
 
   method new (:$number!) {

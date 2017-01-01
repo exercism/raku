@@ -1,4 +1,4 @@
-class Accumulate {
+class Accumulate is export {
     method accumulate (@list, $function){
         my @accumulated;
         for @list -> $element {
