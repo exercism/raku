@@ -22,6 +22,11 @@
       "topics": []
     },
     {
+        "difficulty" : 1, 
+        "slug" : "atbash-cipher",
+        "topics" : [] 
+    },
+    {
       "difficulty": 1,
       "slug": "leap",
       "topics": []
