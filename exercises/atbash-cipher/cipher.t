@@ -34,5 +34,3 @@ subtest 'decode' => {
     is decode( .<phrase> ), .<expected>, .<description>
         for @cases;
 };
-
-done-testing;
