@@ -5,7 +5,7 @@ use JSON::Tiny;
 
 use lib ( my $dir = IO::Path.new($?FILE).parent ).path;
 
-my $module_name = %*ENV<EXERCISM>.so ?? 'Example' !! 'Allergies';
+my $module_name = %*ENV<EXERCISM>.so ?? 'Example' !! 'Cipher';
 my @potential_module = <p6 pm6 pm>.map:  $module_name ~ '.' ~ *; 
 
 my $module = first { $dir.child($_).e }, |@potential_module
