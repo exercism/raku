@@ -66,6 +66,11 @@
     },
     {
       "difficulty": 1,
+      "slug": "luhn",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
       "slug": "word-count",
       "topics": []
     },
