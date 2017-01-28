@@ -11,6 +11,8 @@ require ::($module_name) <LinkedList>;
 
 my @cases = from-json $dir.child('cases.json').slurp;
 
+plan 0 + @cases;
+
 for @cases -> $c {
     subtest $c.<name>, sub {
         my $ll = LinkedList.new;
