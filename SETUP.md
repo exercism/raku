@@ -7,7 +7,7 @@ examples if you get stuck.
 ## Running the tests
 
 There is a test script included with the exercise; a file with the extension
-`.t`. You can run the test script for the exercise with the following commands:
-
-  - `prove -ve perl6 .`
-  - `perl6 example.t` (replacing `example.t` with the included `.t` file.)
+`.t`. You can run the test script for the exercise by executing the command
+`prove . --exec=perl6` in the exercise directory. You can also add the `-v` flag
+e.g. `prove . --exec=perl6 -v` to display all tests, including any optional
+tests marked as 'TODO'.
