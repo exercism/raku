@@ -1,10 +1,10 @@
-class Bob is export {
-    method hey ($input) {
-        given $input {
-            when /^\s*$/                            { 'Fine. Be that way!' }
-            when /<:Upper>/ and $input.uc eq $input { 'Whoa, chill out!'   }
-            when /'?'$/                             { 'Sure.'              }
-            default                                 { 'Whatever.'          }
-        }
-    }
+unit class Bob:ver<1>;
+
+method hey ($msg) {
+  given $msg.trim {
+    when !*                        { 'Fine. Be that way!' }
+    when /<:Upper>/ and $_.uc eq * { 'Whoa, chill out!'   }
+    when /'?'$/                    { 'Sure.'              }
+    default                        { 'Whatever.'          }
+  }
 }
