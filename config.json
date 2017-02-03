@@ -18,6 +18,11 @@
   "exercises": [
     {
       "difficulty": 1,
+      "slug": "hello-world",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
       "slug": "bob",
       "topics": []
     },
