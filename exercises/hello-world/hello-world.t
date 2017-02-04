@@ -17,12 +17,13 @@ if ::($exercise).^ver !~~ $version {
   bail-out 'Example version must match test version.' if %*ENV<EXERCISM>;
 }
 
-my @subs = <&hello>;
+my @subs;
+BEGIN { @subs = <&hello> };
 subtest 'Subroutine(s)', {
   plan 1;
   eval-lives-ok "use $module; ::('$_').defined or die '$_ is not defined.'", $_ for @subs;
 } or bail-out 'All subroutines must be defined and exported.';
-require ::($module) <&hello>;
+require ::($module) @subs.eager;
 
 is hello, 'Hello, World!', 'No argument';
 is ''.&hello, 'Hello, World!', 'Empty string';
