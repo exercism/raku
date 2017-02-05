@@ -1,15 +1,11 @@
 ---
 sudo: false
-language: perl6
-perl6:
-  - latest
-  - '2017.04.3' # Latest Rakudo Star
-install:
-  - rakudobrew build zef
-  - zef install JSON::Tiny
+services:
+  - docker
 before_script:
   - git clone https://github.com/exercism/x-common.git
   - bin/fetch-configlet
+  - docker pull rakudo-star:latest
 script:
   - bin/configlet .
-  - prove -re perl6 exercises/
+  - docker run -e EXERCISM=1 -t -v $PWD:/exercism rakudo-star prove /exercism -re perl6
