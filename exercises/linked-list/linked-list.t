@@ -3,13 +3,13 @@
 use Test;
 use JSON::Tiny;
 
-use lib ( my $dir = IO::Path.new($?FILE).parent ).path;
+use lib IO::Path.new($?FILE).parent.path;
 
 my $module_name = %*ENV<EXERCISM>.so ?? 'Example' !! 'LinkedList';
 
 require ::($module_name) <LinkedList>;
 
-my @cases = from-json $dir.child('cases.json').slurp;
+my @cases; # defined in INIT
 
 plan 0 + @cases;
 
@@ -32,3 +32,61 @@ for @cases -> $c {
 
 
 done-testing;
+
+INIT {
+  @cases := from-json ｢
+    [
+      {
+        "set" : [
+          { "push" : 10 },
+          { "push" : 20 },
+          { "pop"  : 20 },
+          { "pop"  : 10 }
+        ],
+        "name" : "push_pop"
+      },
+      {
+        "set" : [
+          { "push" : 10  },
+          { "push" : 20  },
+          { "shift" : 10 },
+          { "shift" : 20 }
+        ],
+        "name" : "push_shift"
+      },
+      {
+        "set" : [
+          { "unshift" : 10 },
+          { "unshift" : 20 },
+          { "shift"   : 20 },
+          { "shift"   : 10 }
+        ],
+        "name" : "unshift_shift"
+      },
+      {
+        "set" : [
+          { "unshift" : 10 },
+          { "unshift" : 20 },
+          { "pop"     : 10 },
+          { "pop"     : 20 }
+        ],
+        "name" : "unshift_pop"
+      },
+      {
+        "set" : [
+          { "push"    : 10 },
+          { "push"    : 20 },
+          { "pop"     : 20 },
+          { "push"    : 30 },
+          { "shift"   : 10 },
+          { "unshift" : 40 },
+          { "push"    : 50 },
+          { "shift"   : 40 },
+          { "pop"     : 50 },
+          { "shift"   : 30 }
+        ],
+        "name" : "example"
+      }
+    ]
+  ｣
+}
