@@ -2,8 +2,8 @@
 sudo: false
 language: perl6
 install:
-  - rakudobrew build-panda
-  - panda install JSON::Tiny
+  - rakudobrew build zef
+  - zef install JSON::Tiny
 before_script:
   - bin/fetch-configlet
 script:
