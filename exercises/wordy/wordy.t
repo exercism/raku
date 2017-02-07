@@ -5,13 +5,8 @@ use JSON::Tiny;
 
 use lib ( my $dir = IO::Path.new($?FILE).parent ).path;
 
-my $module_name = %*ENV<EXERCISM>.so ?? 'Example' !! 'Wordy';
-my @potential_module = <p6 pm6 pm>.map:  $module_name ~ '.' ~ *; 
-
-my $module = first { $dir.child($_).e }, |@potential_module
-    or die "No file '$module_name.p6' found\n";
-
-require $module <&answer>;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Wordy';
+require ::($module) <&answer>;
 
 plan 16;
 

@@ -5,9 +5,8 @@ use JSON::Tiny;
 
 use lib IO::Path.new($?FILE).parent.path;
 
-my $module_name = %*ENV<EXERCISM>.so ?? 'Example' !! 'LinkedList';
-
-require ::($module_name) <LinkedList>;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! 'LinkedList';
+require ::($module) <LinkedList>;
 
 my @cases; # defined in INIT
 
