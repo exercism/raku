@@ -6,7 +6,8 @@
   "active": false,
   "test_pattern": ".*\\.t$",
   "deprecated": [
-
+    "binary",
+    "trinary"
   ],
   "ignored": [
     "docs",
@@ -88,17 +89,7 @@
     },
     {
       "difficulty": 1,
-      "slug": "binary",
-      "topics": []
-    },
-    {
-      "difficulty": 1,
       "slug": "wordy",
-      "topics": []
-    },
-    {
-      "difficulty": 1,
-      "slug": "trinary",
       "topics": []
     },
     {
