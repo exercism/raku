@@ -8,4 +8,4 @@ before_script:
   - bin/fetch-configlet
 script:
   - bin/configlet .
-  - EXERCISM=1 prove -vr --exec=perl6 exercises/
+  - prove -re perl6 exercises/
