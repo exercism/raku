@@ -3,11 +3,12 @@ use v6;
 use Test;
 use lib IO::Path.new($?FILE).parent.path;
 
-plan 21;
+plan 22;
 my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Bob';
 use-ok $module;
 require ::($module) <Bob>;
 
+is Bob.^ver, 1, 'Version check';
 ok Bob.can('hey'), 'Class Bob has hey() method';
 
 my @cases =
