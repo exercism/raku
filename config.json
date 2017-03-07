@@ -10,7 +10,8 @@
   ],
   "ignored": [
     "docs",
-    "img"
+    "img",
+    "x-common"
   ],
   "foregone": [
 
