@@ -1,0 +1,4 @@
+---
+blurb: "Given a DNA strand, return its RNA complement (per RNA transcription)."
+source: "Rosalind"
+source_url: "http://rosalind.info/problems/rna"
