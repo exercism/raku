@@ -1,0 +1,150 @@
+{
+  "#": [
+    "The expected outputs are represented as arrays of strings to improve readability in this JSON file.",
+    "Your track may choose whether to present the input as a single string (concatenating all the lines) or as the list."
+  ],
+  "cases": [
+    {
+      "description": "no rows",
+      "input" : [],
+      "expected": []
+    },
+    {
+      "description": "no columns",
+      "input" : [""],
+      "expected": [""]
+    },
+    {
+      "description": "no mines",
+      "input": [
+        "   ",
+        "   ",
+        "   "
+      ],
+      "expected": [
+        "   ",
+        "   ",
+        "   "
+      ]
+    },
+    {
+      "description": "board with only mines",
+      "input": [
+        "***",
+        "***",
+        "***"
+      ],
+      "expected": [
+        "***",
+        "***",
+        "***"
+      ]
+    },
+    {
+      "description": "mine surrounded by spaces",
+      "input": [
+        "   ",
+        " * ",
+        "   "
+      ],
+      "expected": [
+        "111",
+        "1*1",
+        "111"
+      ]
+    },
+    {
+      "description": "space surrounded by mines",
+      "input": [
+        "***",
+        "* *",
+        "***"
+      ],
+      "expected": [
+        "***",
+        "*8*",
+        "***"
+      ]
+    },
+    {
+      "description": "horizontal line",
+      "input": [" * * "],
+      "expected": ["1*2*1"]
+    },
+    {
+      "description": "horizontal line, mines at edges",
+      "input": ["*   *"],
+      "expected": ["*1 1*"]
+    },
+    {
+      "description": "vertical line",
+      "input": [
+        " ",
+        "*",
+        " ",
+        "*",
+        " "
+      ],
+      "expected": [
+        "1",
+        "*",
+        "2",
+        "*",
+        "1"
+      ]
+    },
+    {
+      "description": "vertical line, mines at edges",
+      "input": [
+        "*",
+        " ",
+        " ",
+        " ",
+        "*"
+      ],
+      "expected": [
+        "*",
+        "1",
+        " ",
+        "1",
+        "*"
+      ]
+    },
+    {
+      "description": "cross",
+      "input": [
+        "  *  ",
+        "  *  ",
+        "*****",
+        "  *  ",
+        "  *  "
+      ],
+      "expected": [
+        " 2*2 ",
+        "25*52",
+        "*****",
+        "25*52",
+        " 2*2 "
+      ]
+    },
+    {
+      "description": "large board",
+      "input": [
+        " *  * ",
+        "  *   ",
+        "    * ",
+        "   * *",
+        " *  * ",
+        "      "
+      ],
+      "expected": [
+        "1*22*1",
+        "12*322",
+        " 123*2",
+        "112*4*",
+        "1*22*2",
+        "111111"
+      ]
+    }
+  ]
+}

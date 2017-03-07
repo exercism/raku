@@ -1,0 +1,12 @@
+language: bash
+
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - jq
+
+script:
+  - bin/jsonlint
+  - bin/check_required_files_present
