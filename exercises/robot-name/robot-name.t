@@ -1,23 +1,48 @@
 #!/usr/bin/env perl6
 use v6;
 use Test;
-use lib IO::Path.new($?FILE).parent.path;
+use lib $?FILE.IO.dirname;
 
-plan 7;
-my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Robot';
-use-ok $module;
-require ::($module) <Robot>;
+my $exercise = 'Robot';
+my $version = v1;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
+plan 8;
 
-ok Robot.can('name'), 'Robot class has name attribute';
-ok Robot.can('reset_name'), 'Robot class has reset_name method';
+use-ok $module or bail-out;
+require ::($module);
+if ::($exercise).^ver !~~ $version {
+  warn "\nExercise version mismatch. Further tests may fail!"
+    ~ "\n$exercise is $(::($exercise).^ver.gist). "
+    ~ "Test is $($version.gist).\n";
+  bail-out 'Example must match test.' if %*ENV<EXERCISM>;
+}
 
-my $robot = Robot.new;
-my $name = $robot.name;
+subtest 'Class method(s)', {
+  plan 2;
+  ok ::($exercise).can($_), $_ for <name reset-name>;
+}
 
-like $name, /^^<[A..Z]>**2 <[0..9]>**3$$/, 'Name should match schema';
-is $name, $robot.name, 'Name should be persistent';
-ok $robot.name ne Robot.new.name, 'Robots should have different names';
+srand 1;
+my $robot = ::($exercise).?new;
+my Str $name = $robot.?name;
 
-$robot.reset_name;
+like $name, /^^<[A..Z]>**2 <[0..9]>**3$$/, 'Name matches schema';
+srand 2;
+is $robot.?name, $name, 'Name is persistent';
 
-ok $robot.name ne $name, 'reset_name should change the robot name';
+srand 1;
+isnt ::($exercise).new.?name, $name, 'New Robot cannot claim previous Robot name';
+
+srand 1;
+$robot.?reset-name;
+$robot.?reset_name; # Allows next test to still pass for older solutions
+isnt $robot.?name, $name, "'reset-name' cannot use previous Robot name";
+
+diag "\nCreating 100 robots...";
+push my @names, ::($exercise).new.name for 1..100;
+is @names, @names.unique, 'All names are unique';
+subtest 'Randomness', {
+  plan 2;
+  isnt @names, @names.sort, 'Names not ordered';
+  isnt @names, @names.sort.reverse, 'Names not reverse ordered';
+}

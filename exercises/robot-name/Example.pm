@@ -1,19 +1,12 @@
-class Robot is export {
-    has $.name is rw = self.reset_name;
+unit class Robot:ver<1>;
 
-    method rand_letter {
-        ['A'..'Z'].pick;
-    }
+state %record;
 
-    method rand_suffix {
-        100 + 900.rand.truncate;
-    }
+has Str:D $.name = self.reset-name;
 
-    method new_name {
-        self.rand_letter ~ self.rand_letter ~ self.rand_suffix;
-    }
-
-    method reset_name {
-        self.name = self.new_name;
-    }
+method reset-name {
+  $!name = ('AA'..'ZZ').roll ~ ('000'..'999').roll;
+  self.reset-name if %record{$!name}:exists;
+  %record{$!name} = True;
+  return $!name;
 }
