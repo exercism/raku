@@ -2,6 +2,7 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname; # Look for the module inside the same directory as this test file.
+use JSON::Tiny;
 
 my $exercise = 'HelloWorld'; # The name of this exercise.
 my $version = v2; # The version we will be matching against the exercise.
