@@ -1,5 +1,5 @@
-unit module HelloWorld:ver<1>;
+unit module HelloWorld:ver<2>;
 
-sub hello (Str $name? --> Str:D) is export {
-  'Hello, ' ~ ($name ?? $name !! 'World') ~ '!'
+sub hello is export {
+  'Hello, World!'
 }
