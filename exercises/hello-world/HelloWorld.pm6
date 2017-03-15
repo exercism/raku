@@ -7,9 +7,9 @@
   and test suite line up. If the test is updated, it will indicate
   to others who test your code that some tests may no longer pass.
 )
-unit module HelloWorld:ver<1>;
+unit module HelloWorld:ver<2>;
 
-sub hello ($name?) is export {
+sub hello is export {
   # Write your solution to pass the test suite here.
   # Be sure to remove all stock comments once you are done!
 }
