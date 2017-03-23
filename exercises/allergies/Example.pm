@@ -1,3 +1,5 @@
+unit module Allergies:ver<1>;
+
 our @allergens = <
     eggs
     peanuts
@@ -10,7 +12,7 @@ our @allergens = <
 >;
 
 sub allergic-to($code,$substance) is export {
-    return so $code +& ( 2 ** @allergens.first({ $_ eq $substance},:k) ) 
+    return so $code +& ( 2 ** @allergens.first({ $_ eq $substance},:k) )
 }
 
 sub list-allergies($code) is export {
