@@ -1,17 +1,113 @@
 #!/usr/bin/env perl6
 use v6;
 use Test;
-use lib IO::Path.new($?FILE).parent.path;
+use lib my $dir = $?FILE.IO.dirname;
+use JSON::Tiny;
 
-plan 7;
-my $module = %*ENV<EXERCISM> ?? 'Example' !! 'RNA_Transcription';
-use-ok $module;
-require ::($module) <RNA_Transcription>;
+my $exercise = 'RNA';
+my $version = v1;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
+plan 11;
 
-ok RNA_Transcription.can('to_rna'), 'Class RNA_Transcription has to_rna() method';
+use-ok $module or bail-out;
+require ::($module);
 
-is RNA_Transcription.to_rna('C'), 'G',  'RNA complement of cytosine is guanine';
-is RNA_Transcription.to_rna('G'), 'C',  'RNA complement of guanine is cytosine';
-is RNA_Transcription.to_rna('T'), 'A',  'RNA complement of thymine is adenine';
-is RNA_Transcription.to_rna('A'), 'U',  'RNA complement of adenine is uracil';
-is RNA_Transcription.to_rna('ACGTGGTCTTAA'), 'UGCACCAGAAUU', 'transcribes all occurences';
+if ::($exercise).^ver !~~ $version {
+  warn "\nExercise version mismatch. Further tests may fail!"
+    ~ "\n$exercise is $(::($exercise).^ver.gist). "
+    ~ "Test is $($version.gist).\n";
+  bail-out 'Example version must match test version.' if %*ENV<EXERCISM>;
+}
+
+my @subs;
+BEGIN { @subs = <&to-rna> };
+subtest 'Subroutine(s)', {
+  plan 1;
+  eval-lives-ok "use $module; ::('$_').defined or die '$_ is not defined.'", $_ for @subs;
+} or bail-out 'All subroutines must be defined and exported.';
+require ::($module) @subs.eager;
+
+for @(my $c-data.<cases>) {
+  if .<expected> {
+    is .<dna>.&to-rna, |.<expected description>;
+  } else {
+    throws-like {.<dna>.&to-rna}, Exception;
+  }
+}
+
+if %*ENV<EXERCISM> && (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.basename}/canonical-data.json".IO.resolve) ~~ :f {
+  is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data'
+} else { skip }
+
+done-testing;
+
+INIT {
+  $c-data := from-json ｢
+    {
+      "exercise": "rna-transcription",
+      "version": "1.0.0",
+      "comments": [
+        "Language implementations vary on the issue of invalid input data.",
+        "A language may elect to simplify this task by only presenting valid",
+        "test cases.  For languages handling invalid input data as",
+        "error conditions, invalid test cases are included here and are",
+        "indicated with an expected value of null.  Note however that null is",
+        "simply an indication here in the JSON.  Actually returning null from",
+        "a rna-transcription function may or may not be idiomatic in a language.",
+        "Language idioms of errors or exceptions should be followed.",
+        "Alternative interpretations such as ignoring excess length at the end",
+        "are not represented here."
+      ],
+      "cases": [
+        {
+          "description": "rna complement of cytosine is guanine",
+          "property": "toRna",
+          "dna": "C",
+          "expected": "G"
+        },
+        {
+          "description": "rna complement of guanine is cytosine",
+          "property": "toRna",
+          "dna": "G",
+          "expected": "C"
+        },
+        {
+          "description": "rna complement of thymine is adenine",
+          "property": "toRna",
+          "dna": "T",
+          "expected": "A"
+        },
+        {
+          "description": "rna complement of adenine is uracil",
+          "property": "toRna",
+          "dna": "A",
+          "expected": "U"
+        },
+        {
+          "description": "rna complement",
+          "property": "toRna",
+          "dna": "ACGTGGTCTTAA",
+          "expected": "UGCACCAGAAUU"
+        },
+        {
+          "description": "dna correctly handles invalid input",
+          "property": "toRna",
+          "dna": "U",
+          "expected": null
+        },
+        {
+          "description": "dna correctly handles completely invalid input",
+          "property": "toRna",
+          "dna": "XXX",
+          "expected": null
+        },
+        {
+          "description": "dna correctly handles partially invalid input",
+          "property": "toRna",
+          "dna": "ACGTXXXCTTAA",
+          "expected": null
+        }
+      ]
+    }
+  ｣
+}
