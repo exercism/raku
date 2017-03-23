@@ -1,12 +1,13 @@
 #!/usr/bin/env perl6
 use v6;
 use Test;
-use lib IO::Path.new($?FILE).parent.path;
+use lib my $dir = $?FILE.IO.dirname;
+use JSON::Tiny;
 
 my $exercise = 'Leap';
 my $version = v1;
 my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
-plan 6;
+plan 7;
 
 use-ok $module or bail-out;
 require ::($module);
@@ -25,36 +26,45 @@ subtest 'Subroutine(s)', {
 } or bail-out 'All subroutines must be defined and exported.';
 require ::($module) @subs.eager;
 
-is .<input>.&is-leap-year, |.<expected description> for @(my %c-data.<cases>);
+is .<input>.&is-leap-year, |.<expected description> for @(my $c-data.<cases>);
+
+if %*ENV<EXERCISM> && (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.basename}/canonical-data.json".IO.resolve) ~~ :f {
+  is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data'
+} else { skip }
 
 done-testing;
 
 INIT {
-  require JSON::Tiny <&from-json>;
-  %c-data := from-json ｢
+  $c-data := from-json ｢
     {
-       "cases": [
-          {
-             "description": "year not divisible by 4: common year",
-             "input": 2015,
-             "expected": false
-          },
-          {
-             "description": "year divisible by 4, not divisible by 100: leap year",
-             "input": 2016,
-             "expected": true
-          },
-          {
-             "description": "year divisible by 100, not divisible by 400: common year",
-             "input": 2100,
-             "expected": false
-          },
-          {
-             "description": "year divisible by 400: leap year",
-             "input": 2000,
-             "expected": true
-          }
-       ]
+      "exercise": "leap",
+      "version": "1.0.0",
+      "cases": [
+        {
+          "description": "year not divisible by 4: common year",
+          "property": "leapYear",
+          "input": 2015,
+          "expected": false
+        },
+        {
+          "description": "year divisible by 4, not divisible by 100: leap year",
+          "property": "leapYear",
+          "input": 2016,
+          "expected": true
+        },
+        {
+          "description": "year divisible by 100, not divisible by 400: common year",
+          "property": "leapYear",
+          "input": 2100,
+          "expected": false
+        },
+        {
+          "description": "year divisible by 400: leap year",
+          "property": "leapYear",
+          "input": 2000,
+          "expected": true
+        }
+      ]
     }
   ｣
 }
