@@ -1,9 +1,5 @@
-class Word_Counter is export {
-    method count_words ($text) {
-        my %word_counts;
-        for $text.comb(/\w+/) {
-            %word_counts{$_.lc}++;
-        }
-        %word_counts;
-    }
+unit module WordCount:ver<1>;
+
+sub count-words (Str:D $str --> Hash:D) is export {
+  $str.lc.comb(/ <alnum>+ (\'<alnum>+)? /).Bag.hash
 }
