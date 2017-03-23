@@ -1,3 +1,5 @@
+unit module AtbashCipher:ver<1>;
+
 sub encode($input) is export {
     decode($input.lc.trans( ['a'..'z', 0..9] => '', :complement ) )
         .comb(5)
