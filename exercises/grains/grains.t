@@ -1,21 +1,129 @@
 #!/usr/bin/env perl6
 use v6;
 use Test;
-use lib IO::Path.new($?FILE).parent.path;
+use lib my $dir = $?FILE.IO.dirname;
+use JSON::Tiny;
 
-plan 11;
-my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Grains';
-use-ok $module;
-require ::($module) <Grains>;
+my $exercise = 'Grains';
+my $version = v1;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
+plan 14;
 
-ok Grains.can('square'), 'Grains class has square method';
-ok Grains.can('total'), 'Grains class has total method';
+use-ok $module or bail-out;
+require ::($module);
+if ::($exercise).^ver !~~ $version {
+  warn "\nExercise version mismatch. Further tests may fail!"
+    ~ "\n$exercise is $(::($exercise).^ver.gist). "
+    ~ "Test is $($version.gist).\n";
+  bail-out 'Example version must match test version.' if %*ENV<EXERCISM>;
+}
 
-is Grains.square(1),  1, 'test square 1';
-is Grains.square(2),  2, 'test square 2';
-is Grains.square(3),  4, 'test square 3';
-is Grains.square(4),  8,  'test square 4';
-is Grains.square(16), 32768, 'test square 16';
-is Grains.square(32), 2147483648, 'test square 32';
-is Grains.square(64), 9223372036854775808, 'test square 64';
-is Grains.total,      18446744073709551615, 'test total';
+my @subs;
+BEGIN { @subs = <&grains-on-square &total-grains> };
+subtest 'Subroutine(s)', {
+  plan 2;
+  eval-lives-ok "use $module; ::('$_').defined or die '$_ is not defined.'", $_ for @subs;
+} or bail-out 'All subroutines must be defined and exported.';
+require ::($module) @subs.eager;
+
+for @(my $c-data.<cases>.[0].<cases>) {
+  if .<expected> == -1 {
+    throws-like { grains-on-square(.<input>) }, Exception, .<description>;
+  } else {
+    is grains-on-square(.<input>), |.<expected description>;
+  }
+}
+
+is total-grains, |$c-data.<cases>.[1].<expected description>;
+
+if %*ENV<EXERCISM> && (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.basename}/canonical-data.json".IO.resolve) ~~ :f {
+  is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data'
+} else { skip }
+
+done-testing;
+
+INIT {
+  $c-data := from-json ｢
+    {
+      "exercise": "grains",
+      "version": "1.0.0",
+      "comments": [
+        "The final tests of square test error conditions",
+        "The expection for these tests is -1, indicating an error",
+        "In these cases you should expect an error as is idiomatic for your language"
+      ],
+      "cases": [
+        {
+          "description": "returns the number of grains on the square",
+          "cases": [
+            {
+              "description": "1",
+              "property": "square",
+              "input": 1,
+              "expected": 1
+            },
+            {
+              "description": "2",
+              "property": "square",
+              "input": 2,
+              "expected": 2
+            },
+            {
+              "description": "3",
+              "property": "square",
+              "input": 3,
+              "expected": 4
+            },
+            {
+              "description": "4",
+              "property": "square",
+              "input": 4,
+              "expected": 8
+            },
+            {
+              "description": "16",
+              "property": "square",
+              "input": 16,
+              "expected": 32768
+            },
+            {
+              "description": "32",
+              "property": "square",
+              "input": 32,
+              "expected": 2147483648
+            },
+            {
+              "description": "64",
+              "property": "square",
+              "input": 64,
+              "expected": 9223372036854775808
+            },
+            {
+              "description": "square 0 raises an exception",
+              "property": "square",
+              "input": 0,
+              "expected": -1
+            },
+            {
+              "description": "negative square raises an exception",
+              "property": "square",
+              "input": -1,
+              "expected": -1
+            },
+            {
+              "description": "square greater than 64 raises an exception",
+              "property": "square",
+              "input": 65,
+              "expected": -1
+            }
+          ]
+        },
+        {
+          "description": "returns the total number of grains on the board",
+          "property": "total",
+          "expected": 18446744073709551615
+        }
+      ]
+    }
+  ｣
+}

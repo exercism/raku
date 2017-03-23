@@ -1,11 +1,12 @@
-class Grains is export {
-    method square($number) {
-        2**($number-1);
-    }
+unit module Grains:ver<1>;
 
-    method total {
-        my $total;
-        for  1..64 { $total += self.square($_) }
-        $total;
-    }
+sub grains-on-square ($number) is export {
+  die if $number < 1 or $number > 64;
+  2**($number-1);
+}
+
+sub total-grains is export {
+  my Int $total;
+  for  1..64 { $total += grains-on-square($_) }
+  $total;
 }
