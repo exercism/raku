@@ -1,12 +1,13 @@
 #!/usr/bin/env perl6
 use v6;
 use Test;
-use lib IO::Path.new($?FILE).parent.path;
+use lib my $dir = $?FILE.IO.dirname;
+use JSON::Tiny;
 
 my $exercise = 'Grains';
 my $version = v1;
 my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
-plan 13;
+plan 14;
 
 use-ok $module or bail-out;
 require ::($module);
@@ -25,7 +26,7 @@ subtest 'Subroutine(s)', {
 } or bail-out 'All subroutines must be defined and exported.';
 require ::($module) @subs.eager;
 
-for @(my %c-data.<square><cases>) {
+for @(my $c-data.<cases>.[0].<cases>) {
   if .<expected> == -1 {
     throws-like { grains-on-square(.<input>) }, Exception, .<description>;
   } else {
@@ -33,78 +34,96 @@ for @(my %c-data.<square><cases>) {
   }
 }
 
-is total-grains, |%c-data<total>.<expected description>;
+is total-grains, |$c-data.<cases>.[1].<expected description>;
+
+if %*ENV<EXERCISM> && (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.basename}/canonical-data.json".IO.resolve) ~~ :f {
+  is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data'
+} else { skip }
 
 done-testing;
 
 INIT {
-  require JSON::Tiny <&from-json>;
-  %c-data := from-json ｢
+  $c-data := from-json ｢
     {
-      "#": [
+      "exercise": "grains",
+      "version": "1.0.0",
+      "comments": [
         "The final tests of square test error conditions",
         "The expection for these tests is -1, indicating an error",
         "In these cases you should expect an error as is idiomatic for your language"
       ],
-      "square": {
-        "description": "returns the number of grains on the square",
-        "cases": [
-          {
-            "description": "1",
-            "input": 1,
-            "expected": 1
-          },
-          {
-            "description": "2",
-            "input": 2,
-            "expected": 2
-          },
-          {
-            "description": "3",
-            "input": 3,
-            "expected": 4
-          },
-          {
-            "description": "4",
-            "input": 4,
-            "expected": 8
-          },
-          {
-            "description": "16",
-            "input": 16,
-            "expected": 32768
-          },
-          {
-            "description": "32",
-            "input": 32,
-            "expected": 2147483648
-          },
-          {
-            "description": "64",
-            "input": 64,
-            "expected": 9223372036854775808
-          },
-          {
-            "description": "square 0 raises an exception",
-            "input": 0,
-            "expected": -1
-          },
-          {
-            "description": "negative square raises an exception",
-            "input": -1,
-            "expected": -1
-          },
-          {
-            "description": "square greater than 64 raises an exception",
-            "input": 65,
-            "expected": -1
-          }
-        ]
-      },
-      "total": {
-        "description": "returns the total number of grains on the board",
-        "expected": 18446744073709551615
-      }
+      "cases": [
+        {
+          "description": "returns the number of grains on the square",
+          "cases": [
+            {
+              "description": "1",
+              "property": "square",
+              "input": 1,
+              "expected": 1
+            },
+            {
+              "description": "2",
+              "property": "square",
+              "input": 2,
+              "expected": 2
+            },
+            {
+              "description": "3",
+              "property": "square",
+              "input": 3,
+              "expected": 4
+            },
+            {
+              "description": "4",
+              "property": "square",
+              "input": 4,
+              "expected": 8
+            },
+            {
+              "description": "16",
+              "property": "square",
+              "input": 16,
+              "expected": 32768
+            },
+            {
+              "description": "32",
+              "property": "square",
+              "input": 32,
+              "expected": 2147483648
+            },
+            {
+              "description": "64",
+              "property": "square",
+              "input": 64,
+              "expected": 9223372036854775808
+            },
+            {
+              "description": "square 0 raises an exception",
+              "property": "square",
+              "input": 0,
+              "expected": -1
+            },
+            {
+              "description": "negative square raises an exception",
+              "property": "square",
+              "input": -1,
+              "expected": -1
+            },
+            {
+              "description": "square greater than 64 raises an exception",
+              "property": "square",
+              "input": 65,
+              "expected": -1
+            }
+          ]
+        },
+        {
+          "description": "returns the total number of grains on the board",
+          "property": "total",
+          "expected": 18446744073709551615
+        }
+      ]
     }
   ｣
 }
