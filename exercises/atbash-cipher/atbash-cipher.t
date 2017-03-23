@@ -1,119 +1,142 @@
 #!/usr/bin/env perl6
-
+use v6;
 use Test;
+use lib my $dir = $?FILE.IO.dirname;
 use JSON::Tiny;
 
-use lib $?FILE.IO.dirname;
+my $exercise = 'AtbashCipher';
+my $version = v1;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
+plan 5;
 
-my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Cipher';
-require ::($module) <&encode &decode>;
+use-ok $module or bail-out;
+require ::($module);
+if ::($exercise).^ver !~~ $version {
+  warn "\nExercise version mismatch. Further tests may fail!"
+    ~ "\n$exercise is $(::($exercise).^ver.gist). "
+    ~ "Test is $($version.gist).\n";
+  bail-out 'Example version must match test version.' if %*ENV<EXERCISM>;
+}
 
-plan 2;
+my @subs;
+BEGIN { @subs = <&encode &decode> };
+subtest 'Subroutine(s)', {
+  plan 2;
+  eval-lives-ok "use $module; ::('$_').defined or die '$_ is not defined.'", $_ for @subs;
+} or bail-out 'All subroutines must be defined and exported.';
+require ::($module) @subs.eager;
 
-my %cases;
-subtest 'encode' => {
-    my @cases = |%cases.<encode>.<cases>;
-
+for @(my $c-data.<cases>) {
+  my $test = .<description> ~~ 'encode' ?? 'encode' !! 'decode';
+  subtest $test => {
+    my @cases = |.<cases>;
     plan +@cases;
+    is &::($test)(.<phrase>), |.<expected description> for @cases;
+  }
+}
 
-    is encode( .<phrase> ), .<expected>, .<description>
-        for @cases;
-};
-
-subtest 'decode' => {
-    my @cases = |%cases.<decode>.<cases>;
-
-    plan +@cases;
-
-    is decode( .<phrase> ), .<expected>, .<description>
-        for @cases;
-};
+if %*ENV<EXERCISM> && (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.basename}/canonical-data.json".IO.resolve) ~~ :f {
+  is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data'
+} else { skip }
 
 done-testing;
 
 INIT {
-  %cases := from-json ｢
+  $c-data := from-json ｢
     {
-      "#": [
+      "exercise": "atbash-cipher",
+      "version": "1.0.0",
+      "comments": [
         "The tests are divided into two groups: ",
         "* Encoding from English to atbash cipher",
         "* Decoding from atbash cipher to all-lowercase-mashed-together English"
       ],
-      "encode": {
-        "description": ["Test encoding from English to atbash"],
-        "cases": [
-          {
-            "description": "encode yes",
-            "phrase": "yes",
-            "expected": "bvh"
-          },
-          {
-            "description": "encode no",
-            "phrase": "no",
-            "expected": "ml"
-          },
-          {
-            "description": "encode OMG",
-            "phrase": "OMG",
-            "expected": "lnt"
-          },
-          {
-            "description": "encode spaces",
-            "phrase": "O M G",
-            "expected": "lnt"
-          },
-          {
-            "description": "encode mindblowingly",
-            "phrase": "mindblowingly",
-            "expected": "nrmwy oldrm tob"
-          },
-          {
-            "description": "encode numbers",
-            "phrase": "Testing,1 2 3, testing.",
-            "expected": "gvhgr mt123 gvhgr mt"
-          },
-          {
-            "description": "encode deep thought",
-            "phrase": "Truth is fiction.",
-            "expected": "gifgs rhurx grlm"
-          },
-          {
-            "description": "encode all the letters",
-            "phrase": "The quick brown fox jumps over the lazy dog.",
-            "expected": "gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt"
-          },
-          {
-            "description": "encode ignores non ascii",
-            "phrase": "non ascii éignored",
-            "expected": "mlmzh xrrrt mlivw"
-          }
-        ]
-      },
-      "decode": {
-        "description": ["Test decoding from atbash to English"],
-        "cases": [
-          {
+      "cases": [
+        {
+          "description": "encode",
+          "comments": [ "Test encoding from English to atbash" ],
+          "cases": [
+            {
+              "description": "encode yes",
+              "property": "encode",
+              "phrase": "yes",
+              "expected": "bvh"
+            },
+            {
+              "description": "encode no",
+              "property": "encode",
+              "phrase": "no",
+              "expected": "ml"
+            },
+            {
+              "description": "encode OMG",
+              "property": "encode",
+              "phrase": "OMG",
+              "expected": "lnt"
+            },
+            {
+              "description": "encode spaces",
+              "property": "encode",
+              "phrase": "O M G",
+              "expected": "lnt"
+            },
+            {
+              "description": "encode mindblowingly",
+              "property": "encode",
+              "phrase": "mindblowingly",
+              "expected": "nrmwy oldrm tob"
+            },
+            {
+              "description": "encode numbers",
+              "property": "encode",
+              "phrase": "Testing,1 2 3, testing.",
+              "expected": "gvhgr mt123 gvhgr mt"
+            },
+            {
+              "description": "encode deep thought",
+              "property": "encode",
+              "phrase": "Truth is fiction.",
+              "expected": "gifgs rhurx grlm"
+            },
+            {
+              "description": "encode all the letters",
+              "property": "encode",
+              "phrase": "The quick brown fox jumps over the lazy dog.",
+              "expected": "gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt"
+            }
+          ]
+        },
+        {
+          "description": "decode",
+          "comments": [ "Test decoding from atbash to English" ],
+          "cases": [
+            {
               "description": "decode exercism",
+              "property": "decode",
               "phrase": "vcvix rhn",
               "expected": "exercism"
-          },
-          {
+            },
+            {
               "description": "decode a sentence",
+              "property": "decode",
               "phrase": "zmlyh gzxov rhlug vmzhg vkkrm thglm v",
               "expected": "anobstacleisoftenasteppingstone"
-          },
-          {
+            },
+            {
               "description": "decode numbers",
+              "property": "decode",
               "phrase": "gvhgr mt123 gvhgr mt",
               "expected": "testing123testing"
-          },
-          {
+            },
+            {
               "description": "decode all the letters",
+              "property": "decode",
               "phrase": "gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt",
               "expected": "thequickbrownfoxjumpsoverthelazydog"
-          }
-        ]
-      }
+            }
+          ]
+        }
+      ]
     }
   ｣
 }
