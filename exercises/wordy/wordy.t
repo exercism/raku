@@ -1,111 +1,154 @@
 #!/usr/bin/env perl6
-
+use v6;
 use Test;
+use lib my $dir = $?FILE.IO.dirname;
 use JSON::Tiny;
 
-use lib $?FILE.IO.dirname;
+my $exercise = 'Wordy';
+my $version = v1;
+my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
+plan 19;
 
-my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Wordy';
-require ::($module) <&answer>;
+use-ok $module or bail-out;
+require ::($module);
 
-plan 16;
-
-for my @cases -> %case {
-    with %case<expected> {
-        is answer(%case<input>), |%case<expected description>
-            or diag 'input: ' ~ %case<input>;
-    }
-    without %case<expected> {
-        dies-ok { answer(%case<input>) }, %case<description>
-            or diag 'input: ' ~ %case<input>;
-    }
+if ::($exercise).^ver !~~ $version {
+  warn "\nExercise version mismatch. Further tests may fail!"
+    ~ "\n$exercise is $(::($exercise).^ver.gist). "
+    ~ "Test is $($version.gist).\n";
+  bail-out 'Example version must match test version.' if %*ENV<EXERCISM>;
 }
+
+my @subs;
+BEGIN { @subs = <&answer> };
+subtest 'Subroutine(s)', {
+  plan 1;
+  eval-lives-ok "use $module; ::('$_').defined or die '$_ is not defined.'", $_ for @subs;
+} or bail-out 'All subroutines must be defined and exported.';
+require ::($module) @subs.eager;
+
+for @(my $c-data.<cases>) {
+  if .<expected> === False {
+    throws-like {.<input>.&answer}, Exception, .<description>;
+  } else {
+    is .<input>.&answer, |.<expected description>;
+  }
+}
+
+if %*ENV<EXERCISM> && (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.basename}/canonical-data.json".IO.resolve) ~~ :f {
+  is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data'
+} else { skip }
 
 done-testing;
 
 INIT {
-  @cases := from-json ｢
-    [
-      {
-        "description": "addition",
-        "input": "What is 1 plus 1?",
-        "expected": 2
-      },
-      {
-        "description": "more addition",
-        "input": "What is 53 plus 2?",
-        "expected": 55
-      },
-      {
-        "description": "addition with negative numbers",
-        "input": "What is -1 plus -10?",
-        "expected": -11
-      },
-      {
-        "description": "large addition",
-        "input": "What is 123 plus 45678?",
-        "expected": 45801
-      },
-      {
-        "description": "subtraction",
-        "input": "What is 4 minus -12?",
-        "expected": 16
-      },
-      {
-        "description": "multiplication",
-        "input": "What is -3 multiplied by 25?",
-        "expected": -75
-      },
-      {
-        "description": "division",
-        "input": "What is 33 divided by -3?",
-        "expected": -11
-      },
-      {
-        "description": "multiple additions",
-        "input": "What is 1 plus 1 plus 1?",
-        "expected": 3
-      },
-      {
-        "description": "addition and subtraction",
-        "input": "What is 1 plus 5 minus -2?",
-        "expected": 8
-      },
-      {
-        "description": "multiple subtraction",
-        "input": "What is 20 minus 4 minus 13?",
-        "expected": 3
-      },
-      {
-        "description": "subtraction then addition",
-        "input": "What is 17 minus 6 plus 3?",
-        "expected": 14
-      },
-      {
-        "description": "multiple multiplication",
-        "input": "What is 2 multiplied by -2 multiplied by 3?",
-        "expected": -12
-      },
-      {
-        "description": "addition and multiplication",
-        "input": "What is -3 plus 7 multiplied by -2?",
-        "expected": -8
-      },
-      {
-        "description": "multiple division",
-        "input": "What is -12 divided by 2 divided by -3?",
-        "expected": 2
-      },
-      {
-        "description": "unknown operation",
-        "input": "What is 52 cubed?",
-        "expected": null
-      },
-      {
-        "description": "Non math question",
-        "input": "Who is the President of the United States?",
-        "expected": null
-      }
-    ]
+  $c-data := from-json ｢
+    {
+      "exercise": "wordy",
+      "version": "1.0.0",
+      "comments": [
+        "The tests that expect 'false' should be implemented to raise",
+        "an error, or indicate a failure. Implement this in a way that",
+        "makes sense for your language."
+      ],
+      "cases": [
+        {
+          "description": "addition",
+          "property": "answer",
+          "input": "What is 1 plus 1?",
+          "expected": 2
+        },
+        {
+          "description": "more addition",
+          "property": "answer",
+          "input": "What is 53 plus 2?",
+          "expected": 55
+        },
+        {
+          "description": "addition with negative numbers",
+          "property": "answer",
+          "input": "What is -1 plus -10?",
+          "expected": -11
+        },
+        {
+          "description": "large addition",
+          "property": "answer",
+          "input": "What is 123 plus 45678?",
+          "expected": 45801
+        },
+        {
+          "description": "subtraction",
+          "property": "answer",
+          "input": "What is 4 minus -12?",
+          "expected": 16
+        },
+        {
+          "description": "multiplication",
+          "property": "answer",
+          "input": "What is -3 multiplied by 25?",
+          "expected": -75
+        },
+        {
+          "description": "division",
+          "property": "answer",
+          "input": "What is 33 divided by -3?",
+          "expected": -11
+        },
+        {
+          "description": "multiple additions",
+          "property": "answer",
+          "input": "What is 1 plus 1 plus 1?",
+          "expected": 3
+        },
+        {
+          "description": "addition and subtraction",
+          "property": "answer",
+          "input": "What is 1 plus 5 minus -2?",
+          "expected": 8
+        },
+        {
+          "description": "multiple subtraction",
+          "property": "answer",
+          "input": "What is 20 minus 4 minus 13?",
+          "expected": 3
+        },
+        {
+          "description": "subtraction then addition",
+          "property": "answer",
+          "input": "What is 17 minus 6 plus 3?",
+          "expected": 14
+        },
+        {
+          "description": "multiple multiplication",
+          "property": "answer",
+          "input": "What is 2 multiplied by -2 multiplied by 3?",
+          "expected": -12
+        },
+        {
+          "description": "addition and multiplication",
+          "property": "answer",
+          "input": "What is -3 plus 7 multiplied by -2?",
+          "expected": -8
+        },
+        {
+          "description": "multiple division",
+          "property": "answer",
+          "input": "What is -12 divided by 2 divided by -3?",
+          "expected": 2
+        },
+        {
+          "description": "unknown operation",
+          "property": "answer",
+          "input": "What is 52 cubed?",
+          "expected": false
+        },
+        {
+          "description": "Non math question",
+          "property": "answer",
+          "input": "Who is the President of the United States?",
+          "expected": false
+        }
+      ]
+    }
   ｣
 }
