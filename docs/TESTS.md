@@ -1,5 +1,3 @@
-# Running the Tests
-
 ## Run All Tests
 
 There is a Perl 6 script with the extension `.t`, which will be used to test
@@ -10,24 +8,22 @@ your solution. You can run through the tests by using the command:
 Before you start the exercise, the output will likely look something like:
 
 ```
-./hello-world.t .. 1/6
-# Failed test 'No argument'
-# at ./hello-world.t line 28
+./hello-world.t .. 1/4 
+# Failed test 'Say Hi!'
+# at ./hello-world.t line 37
 # expected: 'Hello, World!'
 #      got: (Nil)
-
-# Failed test 'Empty string'
-# at ./hello-world.t line 29
-# expected: 'Hello, World!'
-#      got: (Nil)
-./hello-world.t .. Dubious, test returned 2 (wstat 512, 0x200)
-Failed 2/6 subtests
+# Looks like you failed 1 test of 4
+./hello-world.t .. Dubious, test returned 1 (wstat 256, 0x100)
+Failed 1/4 subtests 
 
 Test Summary Report
 -------------------
-./hello-world.t (Wstat: 512 Tests: 6 Failed: 2)
-  Failed tests:  3-4
-  Non-zero exit status: 2
+./hello-world.t (Wstat: 256 Tests: 4 Failed: 1)
+  Failed test:  3
+  Non-zero exit status: 1
+Files=1, Tests=4,  1 wallclock secs ( 0.01 usr  0.00 sys +  0.50 cusr  0.04 csys =  0.55 CPU)
+Result: FAIL
 ```
 You will either need to modify or create a module with the extension `.pm6`, and
 write a solution to pass the tests. Once the tests are passing, the output from
@@ -36,7 +32,7 @@ the command above will likely look something like:
 ```
 ./hello-world.t .. ok
 All tests successful.
-Files=1, Tests=6,  0 wallclock secs ( 0.03 usr  0.00 sys +  0.37 cusr  0.04 csys =  0.44 CPU)
+Files=1, Tests=4,  1 wallclock secs ( 0.01 usr  0.00 sys +  0.49 cusr  0.06 csys =  0.56 CPU)
 Result: PASS
 ```
 
@@ -45,34 +41,7 @@ flag `-v` (for 'verbose') to the above command, like so:
 
 `prove . --exec=perl6 -v`
 
-The output will likely look something like:
-
-```
-./hello-world.t ..
-1..6
-ok 1 - The module can be use-d ok
-    1..1
-    ok 1 - &hello
-ok 2 - Subroutine(s)
-ok 3 - No argument
-ok 4 - Empty string
-not ok 5 - Camelia # TODO optional test
-
-# Failed test 'Camelia'
-# at ./hello-world.t line 31
-# expected: 'Hello, Camelia!'
-#      got: 'Hello, World!'
-not ok 6 - Rakudo # TODO optional test
-
-# Failed test 'Rakudo'
-# at ./hello-world.t line 32
-# expected: 'Hello, 楽土!'
-#      got: 'Hello, World!'
-ok
-All tests successful.
-Files=1, Tests=6,  1 wallclock secs ( 0.03 usr  0.00 sys +  0.58 cusr  0.06 csys =  0.67 CPU)
-Result: PASS
-```
+As well as showing optional tests, it will include all of the tests that your solution currently passes.
 
 ## Stop After First Failure
 
