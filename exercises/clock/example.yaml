@@ -1,0 +1,16 @@
+exercise: Clock
+version: 1
+methods: time add-minutes
+plan: 54
+tests: |
+  is ::($exercise).new(hour => .<hour>, minute => .<minute>).?time, |.<expected description> for @($c-data<cases>[0]<cases>);
+  for @($c-data<cases>[1]<cases>) {
+    my $clock = ::($exercise).new(hour => .<hour>, minute => .<minute>);
+    $clock.?add-minutes(.<add>);
+    is $clock.?time, |.<expected description>;
+  }
+  is ::($exercise).new(hour => .<clock1><hour>, minute => .<clock1><minute>).?time eq
+     ::($exercise).new(hour => .<clock2><hour>, minute => .<clock2><minute>).?time,
+     |.<expected description> for @($c-data<cases>[2]<cases>);
+  todo 'optional test' unless %*ENV<EXERCISM>;
+  is ::($exercise).new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
