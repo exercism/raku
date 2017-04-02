@@ -11,6 +11,7 @@
   ],
   "ignored": [
     "docs",
+    "templates",
     "x-common",
     "img"
   ],
