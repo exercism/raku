@@ -1,0 +1,14 @@
+exercise: AllYourBase
+version: 2
+plan: 23
+imports: '&convert-base'
+tests: |
+  sub test ($case, $expected) { is-deeply &::('convert-base')(|$case<input_base input_digits output_base>), $expected, $case<description> }
+  for @($c-data<cases>) {
+    when .<expected> ~~ Array { test $_, .<expected> }
+    when .<description> ~~ /base|digit/ { throws-like {&::('convert-base')(|.<input_base input_digits output_base>)}, Exception, .<description> }
+    when .<description> eq 'leading zeros' { test $_, [4,2] }
+    when .<description> eq 'empty list' { test $_, [] }
+    when .<description> ~~ /zero/ { test $_, [0] }
+    default { flunk .<description> } # To ensure that no canonical-data cases are missed.
+  }
