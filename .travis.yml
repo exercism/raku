@@ -8,7 +8,6 @@ install:
   - rakudobrew build zef
   - zef install JSON::Tiny
 before_script:
-  - git submodule update --recursive --remote
   - bin/fetch-configlet
 script:
   - bin/configlet .
