@@ -8,6 +8,7 @@ install:
   - rakudobrew build zef
   - zef install JSON::Tiny
 before_script:
+  - git clone https://github.com/exercism/x-common.git
   - bin/fetch-configlet
 script:
   - bin/configlet .
