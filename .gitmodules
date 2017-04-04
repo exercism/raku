@@ -1,3 +1,0 @@
-[submodule "x-common"]
-	path = x-common
-	url = https://github.com/exercism/x-common.git
