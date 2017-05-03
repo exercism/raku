@@ -25,14 +25,16 @@ subtest 'Class methods', {
 
 my $c-data;
 is ::($exercise).new(hour => .<hour>, minute => .<minute>).?time, |.<expected description> for @($c-data<cases>[0]<cases>);
-for @($c-data<cases>[1]<cases>) {
-  my $clock = ::($exercise).new(hour => .<hour>, minute => .<minute>);
-  $clock.?add-minutes(.<add>);
-  is $clock.?time, |.<expected description>;
+for @($c-data<cases>[1,2]) {
+  for @(.<cases>) {
+    my $clock = ::($exercise).new(hour => .<hour>, minute => .<minute>);
+    $clock.?add-minutes(.<add>);
+    is $clock.?time, |.<expected description>;
+  }
 }
 is ::($exercise).new(hour => .<clock1><hour>, minute => .<clock1><minute>).?time eq
    ::($exercise).new(hour => .<clock2><hour>, minute => .<clock2><minute>).?time,
-   |.<expected description> for @($c-data<cases>[2]<cases>);
+   |.<expected description> for @($c-data<cases>[3]<cases>);
 todo 'optional test' unless %*ENV<EXERCISM>;
 is ::($exercise).new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
 
@@ -47,7 +49,7 @@ $c-data := from-json q:to/END/;
 
 {
   "exercise": "clock",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "comments": [
     "Most languages require constructing a clock with initial values,",
     "adding a positive or negative number of minutes, and testing equality",
@@ -57,7 +59,7 @@ $c-data := from-json q:to/END/;
   ],
   "cases": [
     {
-      "description": "Test creating a new clock with an initial time.",
+      "description": "Create a new clock with an initial time",
       "cases": [
         {
           "description": "on the hour",
@@ -195,7 +197,7 @@ $c-data := from-json q:to/END/;
       ]
     },
     {
-      "description": "Test adding and subtracting minutes.",
+      "description": "Add minutes",
       "cases": [
         {
           "description": "add minutes",
@@ -260,7 +262,12 @@ $c-data := from-json q:to/END/;
           "minute": 1,
           "add": 3500,
           "expected": "11:21"
-        },
+        }
+      ]
+    },
+    {
+      "description": "Subtract minutes",
+      "cases": [
         {
           "description": "subtract minutes",
           "property": "add",
@@ -328,7 +335,7 @@ $c-data := from-json q:to/END/;
       ]
     },
     {
-      "description": "Construct two separate clocks, set times, test if they are equal.",
+      "description": "Compare two clocks for equality",
       "cases": [
         {
           "description": "clocks with same time",
