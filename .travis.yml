@@ -3,7 +3,7 @@ sudo: false
 language: perl6
 perl6:
   - latest
-  - '2017.01' # Latest Rakudo Star
+  - '2017.04.3' # Latest Rakudo Star
 install:
   - rakudobrew build zef
   - zef install JSON::Tiny
