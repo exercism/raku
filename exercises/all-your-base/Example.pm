@@ -1,4 +1,4 @@
-unit module AllYourBase:ver<1>;
+unit module AllYourBase:ver<2>;
 
 class X::AllYourBase::InvalidBase is Exception {
   has $.payload;
@@ -18,7 +18,7 @@ sub convert-base (Int:D $input-base, @input-digits, Int:D $output-base --> Array
 }
 
 sub to-decimal ($input-base, @input-digits) {
-  return [] if !@input-digits;
+  return [].Slip if !@input-digits;
   my $elems = @input-digits.elems;
   for @input-digits {
     if $_ == 0 { $elems-- }
