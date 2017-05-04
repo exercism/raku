@@ -1,0 +1,12 @@
+exercise: Phone
+version: 2
+plan: 15
+imports: '&clean-number'
+tests: |
+  for @($c-data<cases>[0]<cases>) {
+    if .<expected> {
+      is clean-number(.<phrase>), |.<expected description>;
+    } else {
+      nok clean-number(.<phrase>), .<description>;
+    }
+  }
