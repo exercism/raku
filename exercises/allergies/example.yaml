@@ -1,0 +1,21 @@
+exercise: Allergies
+version: 1
+plan: 4
+imports: '&allergic-to &list-allergies'
+tests: |
+  for @($c-data<cases>) -> %cases {
+    subtest 'allergic-to' => {
+      plan 7;
+      my @cases = |%cases<cases>;
+      for @cases -> %case {
+        is allergic-to(%case<score>, .<substance>), .<result>, %case<description> for @(%case<expected>);
+      }
+    } if %cases<description> ~~ 'allergicTo';
+    subtest 'list-allergies' => {
+      plan 9;
+      my @cases = |%cases<cases>;
+      for @cases {
+        is list-allergies(.<score>), |.<expected description>;
+      }
+    } if %cases<description> ~~ 'list';
+  }
