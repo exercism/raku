@@ -1,0 +1,12 @@
+exercise: RNA
+version: 1
+plan: 10
+imports: '&to-rna'
+tests: |
+  for @($c-data<cases>) {
+    if .<expected> {
+      is .<dna>.&to-rna, |.<expected description>;
+    } else {
+      throws-like {.<dna>.&to-rna}, Exception;
+    }
+  }
