@@ -1,0 +1,6 @@
+exercise: SpaceAge
+version: 1
+plan: 10
+imports: Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune
+tests: |
+  is (age-on ::(.<planet>): .<seconds>), |.<expected description> for @($c-data<cases>);
