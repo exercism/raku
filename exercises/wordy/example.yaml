@@ -1,0 +1,12 @@
+exercise: Wordy
+version: 1
+plan: 18
+imports: '&answer'
+tests: |
+  for @($c-data<cases>) {
+    if .<expected> === False {
+      throws-like {.<input>.&answer}, Exception, .<description>;
+    } else {
+      is .<input>.&answer, |.<expected description>;
+    }
+  }
