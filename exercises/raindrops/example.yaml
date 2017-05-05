@@ -1,0 +1,12 @@
+exercise: Raindrops
+version: 1
+plan: 20
+imports: '&convert'
+tests: |
+  for @($c-data<cases>) {
+    subtest {
+      plan 2;
+      is .<number>.&convert, |.<expected description>;
+      isa-ok .<number>.&convert, Str;
+    }
+  }
