@@ -26,67 +26,12 @@
     },
     {
       "difficulty": 1,
-      "slug": "bob",
-      "topics": []
-    },
-    {
-        "difficulty" : 1, 
-        "slug" : "atbash-cipher",
-        "topics" : [] 
-    },
-    {
-      "difficulty": 1,
       "slug": "leap",
       "topics": []
     },
     {
       "difficulty": 1,
-      "slug": "grains",
-      "topics": []
-    },
-    {
-      "difficulty": 1,
-      "slug": "raindrops",
-      "topics": []
-    },
-    {
-      "difficulty": 1,
-      "slug": "clock",
-      "topics": []
-    },
-    {
-      "difficulty": 1,
-      "slug": "scrabble-score",
-      "topics": []
-    },
-    {
-      "difficulty": 1,
-      "slug": "all-your-base",
-      "topics": []
-    },
-    {
-      "difficulty": 1,
-      "slug": "word-count",
-      "topics": []
-    },
-    {
-      "difficulty": 1,
-      "slug": "anagram",
-      "topics": []
-    },
-    {
-      "difficulty": 1,
-      "slug": "grade-school",
-      "topics": []
-    },
-    {
-      "difficulty": 1,
-      "slug": "robot-name",
-      "topics": []
-    },
-    {
-      "difficulty": 1,
-      "slug": "accumulate",
+      "slug": "bob",
       "topics": []
     },
     {
@@ -101,18 +46,73 @@
     },
     {
       "difficulty": 1,
+      "slug": "clock",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
       "slug": "wordy",
       "topics": []
     },
     {
+      "difficulty": 1,
+      "slug": "raindrops",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "scrabble-score",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "word-count",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "grade-school",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "accumulate",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "grains",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "all-your-base",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "anagram",
+      "topics": []
+    },
+    {
+      "difficulty": 1,
+      "slug": "robot-name",
+      "topics": []
+    },
+    {
       "difficulty" : 1,
-      "slug" : "allergies",
-      "topics" : [] 
+      "slug" : "atbash-cipher",
+      "topics" : []
     },
     {
       "difficulty": 1,
       "slug": "space-age",
       "topics": []
+    },
+    {
+      "difficulty" : 1,
+      "slug" : "allergies",
+      "topics" : []
     },
     {
       "difficulty": 1,
