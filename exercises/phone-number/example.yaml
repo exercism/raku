@@ -1,6 +1,6 @@
 exercise: Phone
-version: 2
-plan: 15
+version: 3
+plan: 14
 imports: '&clean-number'
 tests: |
   for @($c-data<cases>[0]<cases>) {
