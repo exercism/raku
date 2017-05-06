@@ -5,6 +5,9 @@ The `exercise-gen.pl6` file can be used in the following ways:
 * With the argument `--all` to run the generator for all exercises.  
   i.e `./exercise-gen.pl6 --all`
 
+You will either need to create a symlink to or clone the
+[x-common](https://github.com/exercism/x-common) repository
+into the root directory of this repository.
 The generator will retrieve data from an `example.yaml` file within
 each exercise directory, and use the contained information to generate
 test files using `templates/test.mustache`. If it finds a
