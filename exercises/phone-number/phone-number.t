@@ -5,9 +5,9 @@ use lib my $dir = $?FILE.IO.dirname;
 use JSON::Tiny;
 
 my $exercise = 'Phone';
-my $version = v2;
+my $version = v3;
 my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
-plan 15;
+plan 14;
 
 use-ok $module or bail-out;
 require ::($module);
@@ -41,7 +41,7 @@ $c-data := from-json q:to/END/;
 
 {
   "exercise": "phone-number",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "cases": [
     {
       "description": "Cleanup user-entered phone numbers",
@@ -109,12 +109,6 @@ $c-data := from-json q:to/END/;
           "description": "invalid with punctuations",
           "property": "clean",
           "phrase": "123-@:!-7890",
-          "expected": null
-        },
-        {
-          "description": "invalid with right number of digits but letters mixed in",
-          "property": "clean",
-          "phrase": "1a2b3c4d5e6f7g8h9i0j",
           "expected": null
         },
         {
