@@ -7,10 +7,11 @@ use JSON::Tiny;
 my $exercise = 'Leap';
 my $version = v1;
 my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
-plan 7;
+plan 6;
 
 use-ok $module or bail-out;
 require ::($module);
+
 if ::($exercise).^ver !~~ $version {
   warn "\nExercise version mismatch. Further tests may fail!"
     ~ "\n$exercise is $(::($exercise).^ver.gist). "
@@ -18,53 +19,50 @@ if ::($exercise).^ver !~~ $version {
   bail-out 'Example version must match test version.' if %*ENV<EXERCISM>;
 }
 
-my @subs;
-BEGIN { @subs = <&is-leap-year> };
-subtest 'Subroutine(s)', {
-  plan 1;
-  eval-lives-ok "use $module; ::('$_').defined or die '$_ is not defined.'", $_ for @subs;
-} or bail-out 'All subroutines must be defined and exported.';
-require ::($module) @subs.eager;
+require ::($module) <&is-leap-year>;
 
-is .<input>.&is-leap-year, |.<expected description> for @(my $c-data.<cases>);
+my $c-data;
+is &::('is-leap-year')(.<input>), |.<expected description> for @($c-data<cases>);
 
-if %*ENV<EXERCISM> && (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.basename}/canonical-data.json".IO.resolve) ~~ :f {
-  is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data'
-} else { skip }
+if %*ENV<EXERCISM> && (my $c-data-file =
+  "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f
+{ is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data' } else { skip }
 
 done-testing;
 
 INIT {
-  $c-data := from-json ｢
+$c-data := from-json q:to/END/;
+
+{
+  "exercise": "leap",
+  "version": "1.0.0",
+  "cases": [
     {
-      "exercise": "leap",
-      "version": "1.0.0",
-      "cases": [
-        {
-          "description": "year not divisible by 4: common year",
-          "property": "leapYear",
-          "input": 2015,
-          "expected": false
-        },
-        {
-          "description": "year divisible by 4, not divisible by 100: leap year",
-          "property": "leapYear",
-          "input": 2016,
-          "expected": true
-        },
-        {
-          "description": "year divisible by 100, not divisible by 400: common year",
-          "property": "leapYear",
-          "input": 2100,
-          "expected": false
-        },
-        {
-          "description": "year divisible by 400: leap year",
-          "property": "leapYear",
-          "input": 2000,
-          "expected": true
-        }
-      ]
+      "description": "year not divisible by 4: common year",
+      "property": "leapYear",
+      "input": 2015,
+      "expected": false
+    },
+    {
+      "description": "year divisible by 4, not divisible by 100: leap year",
+      "property": "leapYear",
+      "input": 2016,
+      "expected": true
+    },
+    {
+      "description": "year divisible by 100, not divisible by 400: common year",
+      "property": "leapYear",
+      "input": 2100,
+      "expected": false
+    },
+    {
+      "description": "year divisible by 400: leap year",
+      "property": "leapYear",
+      "input": 2000,
+      "expected": true
     }
-  ｣
+  ]
+}
+
+END
 }
