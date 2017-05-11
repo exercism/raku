@@ -11,6 +11,7 @@ plan 7;
 
 use-ok $module or bail-out;
 require ::($module);
+
 if ::($exercise).^ver !~~ $version {
   warn "\nExercise version mismatch. Further tests may fail!"
     ~ "\n$exercise is $(::($exercise).^ver.gist). "
@@ -18,9 +19,8 @@ if ::($exercise).^ver !~~ $version {
   bail-out 'Example version must match test version.' if %*ENV<EXERCISM>;
 }
 
-subtest "Class method(s)", {
-   plan 4;
-   ok ::($exercise).can($_), $_ for <push-list pop-list shift-list unshift-list>;
+subtest 'Class methods', {
+  ok ::($exercise).can($_), $_ for <push-list pop-list shift-list unshift-list>;
 }
 
 for my @cases -> $case {
@@ -39,9 +39,6 @@ for my @cases -> $case {
     }
   }
 }
-
-done-testing;
-
 INIT {
   @cases := from-json ｢
     [
@@ -99,3 +96,5 @@ INIT {
     ]
   ｣
 }
+
+done-testing;
