@@ -1,0 +1,13 @@
+exercise: AtbashCipher
+version: 1
+plan: 4
+imports: '&encode &decode'
+tests: |
+  for @($c-data<cases>) {
+    my $test = .<description> ~~ 'encode' ?? 'encode' !! 'decode';
+    subtest $test => {
+      my @cases = |.<cases>;
+      plan +@cases;
+      is &::($test)(.<phrase>), |.<expected description> for @cases;
+    }
+  }
