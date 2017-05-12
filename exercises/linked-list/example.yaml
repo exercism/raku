@@ -21,6 +21,7 @@ tests: |
       }
     }
   }
+after_done_testing: |
   INIT {
     @cases := from-json ｢
       [
