@@ -39,6 +39,9 @@ for my @cases -> $case {
     }
   }
 }
+
+done-testing;
+
 INIT {
   @cases := from-json ｢
     [
@@ -97,4 +100,3 @@ INIT {
   ｣
 }
 
-done-testing;
