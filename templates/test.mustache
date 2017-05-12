@@ -41,7 +41,9 @@ if %*ENV<EXERCISM> && (my $c-data-file =
 { is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data' } else { skip }
 #`{{/cdata}}
 
-done-testing;#`{{#done_testing_comment}} #`[#`{{&done_testing_comment}}]#`{{/done_testing_comment}}#`{{#cdata}}
+done-testing;#`{{#done_testing_comment}} #`[#`{{&done_testing_comment}}]#`{{/done_testing_comment}}#`{{#after_done_testing}}
+
+#`{{&after_done_testing}}#`{{/after_done_testing}}#`{{#cdata}}
 #`{{#INIT_comment}}
 
 #`[#`{{&INIT_comment}}]#`{{/INIT_comment}}
