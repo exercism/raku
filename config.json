@@ -3,7 +3,7 @@
   "language": "Perl 6",
   "repository": "https://github.com/exercism/xperl6",
   "checklist_issue": 30,
-  "active": false,
+  "active": true,
   "test_pattern": ".*\\.t$",
   "deprecated": [
     "binary",
