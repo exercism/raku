@@ -4,6 +4,15 @@
 
 Exercism exercises in Perl 6
 
+## Contributing Guide
+
+Please see the [contributing guide](https://github.com/exercism/x-common/blob/master/CONTRIBUTING.md).
+
+## Code of Conduct
+
+Help us keep Exercism welcoming. Please read and abide by the
+[Code of Conduct](https://github.com/exercism/exercism.io/blob/master/CODE_OF_CONDUCT.md).
+
 ## Adding and Updating Exercises
 
 Please use `exercise-gen.pl6` in the `bin/` directory when either adding or updating an exercise.
@@ -15,10 +24,6 @@ When adding a new exercise, ensure that the exercise is included in the `exercis
 
 Set `EXERCISM` as an environment variable (e.g. `export EXERCISM=1` in bash), and run either  `prove -re perl6`
 to run all tests in all subdirectories, or `prove -e perl6 /path/to/test.t` to run an individual test file.
-
-## Contributing Guide
-
-Please see the [contributing guide](https://github.com/exercism/x-api/blob/master/CONTRIBUTING.md#the-exercise-data)
 
 ## License
 
