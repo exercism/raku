@@ -1,0 +1,6 @@
+exercise: Luhn
+version: 1
+plan: 15
+imports: '&is-luhn-valid'
+tests: |
+  is .<input>.&is-luhn-valid, |.<expected description> for @($c-data<cases>);
