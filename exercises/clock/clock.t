@@ -24,17 +24,26 @@ subtest 'Class methods', {
 }
 
 my $c-data;
-is ::($exercise).new(hour => .<hour>, minute => .<minute>).?time, |.<expected description> for @($c-data<cases>[0]<cases>);
-for @($c-data<cases>[1,2]) {
-  for @(.<cases>) {
-    my $clock = ::($exercise).new(hour => .<hour>, minute => .<minute>);
-    $clock.?add-minutes(.<add>);
-    is $clock.?time, |.<expected description>;
+for @($c-data<cases>) {
+  for @(.<cases>) -> $case {
+    given $case<property> {
+      when 'create' {
+        is ::($exercise).new(hour => $case<hour>, minute => $case<minute>).?time, |$case<expected description>;
+      }
+      when 'add' {
+        my $clock = ::($exercise).new(hour => $case<hour>, minute => $case<minute>);
+        $clock.?add-minutes($case<add>);
+        is $clock.?time, |$case<expected description>;
+      }
+      when 'equal' {
+        is ::($exercise).new(hour => $case<clock1><hour>, minute => $case<clock1><minute>).?time eq
+           ::($exercise).new(hour => $case<clock2><hour>, minute => $case<clock2><minute>).?time,
+           |$case<expected description>;
+      }
+      when %*ENV<EXERCISM>.so { bail-out "no case for property '$case<property>'" }
+    }
   }
 }
-is ::($exercise).new(hour => .<clock1><hour>, minute => .<clock1><minute>).?time eq
-   ::($exercise).new(hour => .<clock2><hour>, minute => .<clock2><minute>).?time,
-   |.<expected description> for @($c-data<cases>[3]<cases>);
 todo 'optional test' unless %*ENV<EXERCISM>;
 is ::($exercise).new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
 
