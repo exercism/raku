@@ -44,6 +44,7 @@ for @($c-data<cases>) {
     }
   }
 }
+
 todo 'optional test' unless %*ENV<EXERCISM>;
 is ::($exercise).new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
 

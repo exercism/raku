@@ -4,3 +4,12 @@ plan: 12
 imports: '&count-words'
 tests: |
   is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<cases>);
+
+unit: module
+example: |
+  sub count-words (Str:D $str --> Hash:D) is export {
+    $str.lc.comb(/ <alnum>+ (\'<alnum>+)? /).Bag.hash
+  }
+stub: |
+  sub count-words ($str) is export {
+  }

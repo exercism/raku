@@ -8,7 +8,7 @@ my @exercises;
 
 if @*ARGS {
   if @*ARGS[0] eq '--all' {
-    push @exercises, $_.basename for $base-dir.child('exercises').dir;
+    push @exercises, .basename for $base-dir.child('exercises').dir;
   } else {
     @exercises = @*ARGS;
   }
@@ -23,14 +23,29 @@ if @*ARGS {
 }
 
 for @exercises -> $exercise {
+  say "Generating $exercise...";
   my $exercise-dir = $base-dir.child("exercises/$exercise");
   next if (my $yaml = $exercise-dir.child('example.yaml')) !~~ :f;
-  my $cdata = $base-dir.child("x-common/exercises/$exercise/canonical-data.json");
-  my %data = load-yaml $yaml.slurp;
-  %data<cdata> = {:json($cdata.slurp)} if $cdata ~~ :f;
 
-  spurt (my $test = $exercise-dir.child("$exercise.t")),
-    Template::Mustache.render($base-dir.child('templates/test.mustache').slurp, %data);
-  $test.chmod(0o755);
+  my %data = load-yaml $yaml.slurp;
+  $_=.chomp when Str for @(%data.values);
+
+  my $cdata = $base-dir.child("x-common/exercises/$exercise/canonical-data.json");
+  %data<cdata> = :json($cdata.slurp) if $cdata ~~ :f;
+
+  create-file "$exercise.t", 'test';
+
+  %data<module_file> = %data<example>;
+  create-file |<Example.pm6 module>;
+
+  %data<module_file> = %data<stub>;
+  create-file "{%data<exercise>}.pm6", 'module';
+
   say "$exercise generated.";
+
+  sub create-file ($filename, $template) {
+    spurt (my $file = $exercise-dir.child($filename)),
+      Template::Mustache.render($base-dir.child("templates/$template.mustache").slurp, %data);
+    $file.chmod(0o755) if $template ~~ 'test';
+  }
 }

@@ -18,3 +18,27 @@ methods_comment: "Check that the class 'Bob' can use all of the methods\nneeded 
 cdata_test_comment: Ignore this for your exercise! Tells Exercism folks when exercise cases become out of date.
 done_testing_comment: There are no more tests after this :)
 INIT_comment: "'INIT' is a phaser, it makes sure that the test data is available before everything else\nstarts running (otherwise we'd have to shove the test data into the middle of the file!)"
+
+unit: class
+unit_comment: |
+  #`[
+    Declare class 'Bob' with version and unit-scope the class
+    i.e. everything in this file is part of 'Bob'.
+  ]
+example: |
+  method hey ($msg) {
+    given $msg.trim {
+      when !*                        { 'Fine. Be that way!' }
+      when /<:Upper>/ and $_.uc eq * { 'Whoa, chill out!'   }
+      when /'?'$/                    { 'Sure.'              }
+      default                        { 'Whatever.'          }
+    }
+  }
+stub: |
+  method hey ($msg) {
+    #`[
+      Remove the comments and write some code here to pass the test suite.
+      You can experiment with the code outside of this block,
+      but no changes are needed for the test suite to pass.
+    ]
+  }

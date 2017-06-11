@@ -18,3 +18,24 @@ imports_comment: Import '&hello' from 'HelloWorld'
 cdata_test_comment: Ignore this for your exercise! Tells Exercism folks when exercise cases become out of date.
 done_testing_comment: There are no more tests after this :)
 INIT_comment: "'INIT' is a phaser, it makes sure that the test data is available before everything else\nstarts running (otherwise we'd have to shove the test data into the middle of the file!)"
+
+unit: module
+unit_comment: |
+  #`(
+    This is a 'stub' file. It's a little start on your solution.
+    It is not a complete solution though; you will have to write some code.
+  
+    The ':ver<>' adverb defines the version of a module or class.
+    The version is checked in the test suite to ensure the exercise
+    and test suite line up. If the test is updated, it will indicate
+    to others who test your code that some tests may no longer pass.
+  )
+example: |
+  sub hello is export {
+    'Hello, World!'
+  }
+stub: |
+  sub hello is export {
+    # Write your solution to pass the test suite here.
+    # Be sure to remove all stock comments once you are done!
+  }

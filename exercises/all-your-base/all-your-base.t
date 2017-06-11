@@ -23,6 +23,7 @@ require ::($module) <&convert-base>;
 
 my $c-data;
 sub test ($case, $expected) { is-deeply &::('convert-base')(|$case<input_base input_digits output_base>), $expected, $case<description> }
+
 for @($c-data<cases>) {
   when .<expected> ~~ Array { test $_, .<expected> }
   when .<description> ~~ /base|digit/ { throws-like {&::('convert-base')(|.<input_base input_digits output_base>)}, Exception, .<description> }
