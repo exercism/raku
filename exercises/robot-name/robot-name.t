@@ -26,14 +26,18 @@ srand 1;
 my $robot = ::($exercise).?new;
 my Str $name = $robot.?name;
 like $name, /^^<[A..Z]>**2 <[0..9]>**3$$/, 'Name matches schema';
+
 srand 2;
 is $robot.?name, $name, 'Name is persistent';
 srand 1;
 isnt ::($exercise).new.?name, $name, 'New Robot cannot claim previous Robot name';
+
 srand 1;
 $robot.?reset-name;
 $robot.?reset_name; # Allows next test to still pass for older solutions
+
 isnt $robot.?name, $name, "'reset-name' cannot use previous Robot name";
+
 diag "\nCreating 100 robots...";
 push my @names, ::($exercise).new.name for 1..100;
 is @names, @names.unique, 'All names are unique';

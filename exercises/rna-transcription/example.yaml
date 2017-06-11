@@ -10,3 +10,13 @@ tests: |
       throws-like {.<dna>.&to-rna}, Exception;
     }
   }
+
+unit: module
+example: |
+  sub to-rna ($dna) is export {
+    fail if $dna ~~ /<-[AGCT]>/;
+    $dna.trans(<A G C T> => <U C G A>);
+  }
+stub: |
+  sub to-rna ($dna) is export {
+  }

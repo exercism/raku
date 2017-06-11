@@ -10,25 +10,35 @@ You will either need to create a symlink to or clone the
 into the root directory of this repository.
 The generator will retrieve data from an `example.yaml` file within
 each exercise directory, and use the contained information to generate
-test files using `templates/test.mustache`. If it finds a
-`canonical-data.json` file in `x-common` for the exercise in
-question it will be included.
+test files using `templates/test.mustache`, and Example.pm6 files using
+`templates/module.mustache`. If it finds a `canonical-data.json` file in
+`x-common` for the exercise in question it will be included.
 
 Example of a yaml file:
 ```yaml
 exercise: MyExercise
 version: 1
-plan: 10
+plan: 2
 modules:
   - use: Data::Dump
   - use: Foo::Bar
 imports: 'MyClass &my-subroutine'
 methods: 'foo bar'
 tests: |
-  ok True, 'Perl 6 code here';
+  ok my-subroutine, 'Perl 6 code here';
   pass;
+
+unit: module
+example: |
+  sub my-subroutine is export {
+    True;
+  }
+  
+  class MyClass is export {
+  }
 ```
 
 You must have `Template::Mustache` and `YAMLish` to run `exercise-gen.pl6`.
 
-Note (2017-05-22): [YAMLish](http://modules.perl6.org/dist/YAMLish) is not yet feature complete, so some valid YAML files may not parse.
+Note (2017-05-22): [YAMLish](http://modules.perl6.org/dist/YAMLish)
+is not yet feature complete, so some valid YAML files may not parse.

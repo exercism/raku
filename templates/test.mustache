@@ -34,7 +34,8 @@ subtest 'Class methods', {
 }
 #`{{/methods}}#`{{#cdata}}
 my $c-data;#`{{/cdata}}
-#`{{&tests}}#`{{#cdata}}#`{{#cdata_test_comment}}
+#`{{&tests}}
+#`{{#cdata}}#`{{#cdata_test_comment}}
 #`[#`{{&cdata_test_comment}}]#`{{/cdata_test_comment}}
 if %*ENV<EXERCISM> && (my $c-data-file =
   "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f

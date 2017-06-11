@@ -21,3 +21,25 @@ tests: |
     ok $roster.?add-student(:name($_), :3grade), "Add $_ to grade 3" for <Tom Dick Harry>;
   }
   is $roster.?list-all, ('Grade 1', <Anna Barb Charlie>, 'Grade 2', <Alex Jim Zoe>, 'Grade 3', <Dick Harry Tom>), 'List all';
+
+unit: module
+example: |
+  class Roster is export {
+    has %!roster;
+  
+    method add-student (Str:D :$name!, Int:D :$grade!) {
+      %!roster.append($grade, $name);
+    }
+  
+    method list-grade (Int:D $grade --> Seq:D) {
+      %!roster{$grade}.sort;
+    }
+  
+    method list-all {
+      my @list.append("Grade $_", %!roster{$_}.sort) for %!roster.keys.sort;
+      return @list;
+    }
+  }
+stub: |
+  class Roster is export {
+  }

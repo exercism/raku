@@ -4,3 +4,20 @@ plan: 8
 imports: '&flatten-array'
 tests: |
   is-deeply &::('flatten-array')(.<input>), |.<expected description> for @($c-data<cases>);
+
+unit: module
+example: |
+  sub flatten-array(@input --> Array) is export {
+    @input.&denest;
+    return my @result;
+  
+    sub denest(@array) {
+      for @array {
+        .&denest when Array;
+        @result.push: $_ when Int;
+      }
+    }
+  }
+stub: |
+  sub flatten-array(@input) is export {
+  }

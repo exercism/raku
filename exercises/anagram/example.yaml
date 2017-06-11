@@ -4,3 +4,22 @@ plan: 18
 imports: '&match-anagrams'
 tests: |
   is match-anagrams(|.<subject candidates>), |.<expected description> for @($c-data<cases>);
+
+unit: module
+example: |
+  sub match-anagrams ($word, @words) is export {
+    my @results;
+    my $canonical = canonize($word);
+    for @words -> $w {
+      next if $w.lc eq $word.lc;
+      my $try = canonize($w);
+      if $try eq $canonical {
+        @results.push: $w;
+      }
+    }
+    @results;
+  }
+  
+  sub canonize ($str) {
+    (($str.lc.split('')).sort).join('');
+  }

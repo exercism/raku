@@ -21,3 +21,13 @@ tests: |
   is-deeply accumulate(['the', 'quick', 'brown', 'fox'], sub { @_[0].flip }),
             ['eht', 'kciuq', 'nworb', 'xof'],
             'reverse strings';
+
+unit: module
+example: |
+  sub accumulate (@list, $function) is export {
+    my @accumulated;
+    for @list -> $element {
+      @accumulated.push: $function($element);
+    }
+    return @accumulated;
+  }
