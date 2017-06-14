@@ -23,9 +23,12 @@ if @*ARGS {
 }
 
 for @exercises -> $exercise {
-  say "Generating $exercise...";
   my $exercise-dir = $base-dir.child("exercises/$exercise");
-  next if (my $yaml = $exercise-dir.child('example.yaml')) !~~ :f;
+  if (my $yaml = $exercise-dir.child('example.yaml')) !~~ :f {
+    say "No example.yaml found for $exercise.";
+    next;
+  };
+  print "Generating $exercise... ";
 
   my %data = load-yaml $yaml.slurp;
   $_=.chomp when Str for @(%data.values);
@@ -41,7 +44,7 @@ for @exercises -> $exercise {
   %data<module_file> = %data<stub>;
   create-file "{%data<exercise>}.pm6", 'module';
 
-  say "$exercise generated.";
+  say 'Generated.';
 
   sub create-file ($filename, $template) {
     spurt (my $file = $exercise-dir.child($filename)),
