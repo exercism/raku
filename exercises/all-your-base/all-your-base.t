@@ -44,7 +44,7 @@ $c-data := from-json q:to/END/;
 
 {
   "exercise": "all-your-base",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "comments": [
     "It's up to each track do decide:",
     "",
@@ -163,6 +163,30 @@ $c-data := from-json q:to/END/;
       "expected": null
     },
     {
+      "description": "first base is one",
+      "property": "rebase",
+      "input_base": 1,
+      "input_digits": [],
+      "output_base": 10,
+      "expected": null
+    },
+    {
+      "description": "first base is zero",
+      "property": "rebase",
+      "input_base": 0,
+      "input_digits": [],
+      "output_base": 10,
+      "expected": null
+    },
+    {
+      "description": "first base is negative",
+      "property": "rebase",
+      "input_base": -2,
+      "input_digits": [1],
+      "output_base": 10,
+      "expected": null
+    },
+    {
       "description": "negative digit",
       "property": "rebase",
       "input_base": 2,
@@ -179,14 +203,6 @@ $c-data := from-json q:to/END/;
       "expected": null
     },
     {
-      "description": "first base is one",
-      "property": "rebase",
-      "input_base": 1,
-      "input_digits": [],
-      "output_base": 10,
-      "expected": null
-    },
-    {
       "description": "second base is one",
       "property": "rebase",
       "input_base": 2,
@@ -195,27 +211,11 @@ $c-data := from-json q:to/END/;
       "expected": null
     },
     {
-      "description": "first base is zero",
-      "property": "rebase",
-      "input_base": 0,
-      "input_digits": [],
-      "output_base": 10,
-      "expected": null
-    },
-    {
       "description": "second base is zero",
       "property": "rebase",
       "input_base": 10,
       "input_digits": [7],
       "output_base": 0,
-      "expected": null
-    },
-    {
-      "description": "first base is negative",
-      "property": "rebase",
-      "input_base": -2,
-      "input_digits": [1],
-      "output_base": 10,
       "expected": null
     },
     {
