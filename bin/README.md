@@ -38,7 +38,7 @@ example: |
   }
 ```
 
-You must have `Template::Mustache` and `YAMLish` to run `exercise-gen.pl6`.
+You must have `Template::Mustache`, `YAMLish`, and `Data::Dump` to run `exercise-gen.pl6`.
 
 Note (2017-05-22): [YAMLish](http://modules.perl6.org/dist/YAMLish)
 is not yet feature complete, so some valid YAML files may not parse.
