@@ -2,7 +2,6 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname;
-use JSON::Tiny;
 
 my $exercise = 'AllYourBase';
 my $version = v2;
@@ -44,209 +43,304 @@ for @($c-data<cases>) -> $case {
   sub call-convert-base { &::('convert-base')(|$case<input_base input_digits output_base>) }
 }
 
-if %*ENV<EXERCISM> && (my $c-data-file =
-  "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f
-{ is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data' } else { skip }
+if %*ENV<EXERCISM> {
+  if (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
+    is-deeply $c-data, EVAL('use JSON::Fast; from-json($c-data-file.slurp);'), 'canonical-data';
+  } else { flunk 'canonical-data' }
+} else { skip }
 
 done-testing;
 
-INIT {
-$c-data := from-json q:to/END/;
-
-{
-  "exercise": "all-your-base",
-  "version": "1.1.0",
-  "comments": [
-    "It's up to each track do decide:",
-    "",
-    "1. What's the canonical representation of zero?",
-    " - []?",
-    " - [0]?",
-    "",
-    "2. What representations of zero are allowed?",
-    " - []?",
-    " - [0]?",
-    " - [0,0]?",
-    "",
-    "3. Are leading zeroes allowed?",
-    "",
-    "4. How should invalid input be handled?",
-    "",
-    "All the undefined cases are marked as null.",
-    "",
-    "All your numeric-base are belong to [2..]. :)"
+INIT { $c-data := {
+  cases    => [
+    {
+      description  => "single bit one to decimal".Str,
+      expected     => [
+        1.Int,
+      ],
+      input_base   => 2.Int,
+      input_digits => [
+        1.Int,
+      ],
+      output_base  => 10.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "binary to single decimal".Str,
+      expected     => [
+        5.Int,
+      ],
+      input_base   => 2.Int,
+      input_digits => [
+        1.Int,
+        0.Int,
+        1.Int,
+      ],
+      output_base  => 10.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "single decimal to binary".Str,
+      expected     => [
+        1.Int,
+        0.Int,
+        1.Int,
+      ],
+      input_base   => 10.Int,
+      input_digits => [
+        5.Int,
+      ],
+      output_base  => 2.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "binary to multiple decimal".Str,
+      expected     => [
+        4.Int,
+        2.Int,
+      ],
+      input_base   => 2.Int,
+      input_digits => [
+        1.Int,
+        0.Int,
+        1.Int,
+        0.Int,
+        1.Int,
+        0.Int,
+      ],
+      output_base  => 10.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "decimal to binary".Str,
+      expected     => [
+        1.Int,
+        0.Int,
+        1.Int,
+        0.Int,
+        1.Int,
+        0.Int,
+      ],
+      input_base   => 10.Int,
+      input_digits => [
+        4.Int,
+        2.Int,
+      ],
+      output_base  => 2.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "trinary to hexadecimal".Str,
+      expected     => [
+        2.Int,
+        10.Int,
+      ],
+      input_base   => 3.Int,
+      input_digits => [
+        1.Int,
+        1.Int,
+        2.Int,
+        0.Int,
+      ],
+      output_base  => 16.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "hexadecimal to trinary".Str,
+      expected     => [
+        1.Int,
+        1.Int,
+        2.Int,
+        0.Int,
+      ],
+      input_base   => 16.Int,
+      input_digits => [
+        2.Int,
+        10.Int,
+      ],
+      output_base  => 3.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "15-bit integer".Str,
+      expected     => [
+        6.Int,
+        10.Int,
+        45.Int,
+      ],
+      input_base   => 97.Int,
+      input_digits => [
+        3.Int,
+        46.Int,
+        60.Int,
+      ],
+      output_base  => 73.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "empty list".Str,
+      expected     => (Any),
+      input_base   => 2.Int,
+      input_digits => [ ],
+      output_base  => 10.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "single zero".Str,
+      expected     => (Any),
+      input_base   => 10.Int,
+      input_digits => [
+        0.Int,
+      ],
+      output_base  => 2.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "multiple zeros".Str,
+      expected     => (Any),
+      input_base   => 10.Int,
+      input_digits => [
+        0.Int,
+        0.Int,
+        0.Int,
+      ],
+      output_base  => 2.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "leading zeros".Str,
+      expected     => (Any),
+      input_base   => 7.Int,
+      input_digits => [
+        0.Int,
+        6.Int,
+        0.Int,
+      ],
+      output_base  => 10.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "first base is one".Str,
+      expected     => (Any),
+      input_base   => 1.Int,
+      input_digits => [ ],
+      output_base  => 10.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "first base is zero".Str,
+      expected     => (Any),
+      input_base   => 0.Int,
+      input_digits => [ ],
+      output_base  => 10.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "first base is negative".Str,
+      expected     => (Any),
+      input_base   => -2.Int,
+      input_digits => [
+        1.Int,
+      ],
+      output_base  => 10.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "negative digit".Str,
+      expected     => (Any),
+      input_base   => 2.Int,
+      input_digits => [
+        1.Int,
+        -1.Int,
+        1.Int,
+        0.Int,
+        1.Int,
+        0.Int,
+      ],
+      output_base  => 10.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "invalid positive digit".Str,
+      expected     => (Any),
+      input_base   => 2.Int,
+      input_digits => [
+        1.Int,
+        2.Int,
+        1.Int,
+        0.Int,
+        1.Int,
+        0.Int,
+      ],
+      output_base  => 10.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "second base is one".Str,
+      expected     => (Any),
+      input_base   => 2.Int,
+      input_digits => [
+        1.Int,
+        0.Int,
+        1.Int,
+        0.Int,
+        1.Int,
+        0.Int,
+      ],
+      output_base  => 1.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "second base is zero".Str,
+      expected     => (Any),
+      input_base   => 10.Int,
+      input_digits => [
+        7.Int,
+      ],
+      output_base  => 0.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "second base is negative".Str,
+      expected     => (Any),
+      input_base   => 2.Int,
+      input_digits => [
+        1.Int,
+      ],
+      output_base  => -7.Int,
+      property     => "rebase".Str,
+    },
+    {
+      description  => "both bases are negative".Str,
+      expected     => (Any),
+      input_base   => -2.Int,
+      input_digits => [
+        1.Int,
+      ],
+      output_base  => -7.Int,
+      property     => "rebase".Str,
+    },
   ],
-  "cases": [
-    {
-      "description": "single bit one to decimal",
-      "property": "rebase",
-      "input_base": 2,
-      "input_digits": [1],
-      "output_base": 10,
-      "expected": [1]
-    },
-    {
-      "description": "binary to single decimal",
-      "property": "rebase",
-      "input_base": 2,
-      "input_digits": [1, 0, 1],
-      "output_base": 10,
-      "expected": [5]
-    },
-    {
-      "description": "single decimal to binary",
-      "property": "rebase",
-      "input_base": 10,
-      "input_digits": [5],
-      "output_base": 2,
-      "expected": [1, 0, 1]
-    },
-    {
-      "description": "binary to multiple decimal",
-      "property": "rebase",
-      "input_base": 2,
-      "input_digits": [1, 0, 1, 0, 1, 0],
-      "output_base": 10,
-      "expected": [4, 2]
-    },
-    {
-      "description": "decimal to binary",
-      "property": "rebase",
-      "input_base": 10,
-      "input_digits": [4, 2],
-      "output_base": 2,
-      "expected": [1, 0, 1, 0, 1, 0]
-    },
-    {
-      "description": "trinary to hexadecimal",
-      "property": "rebase",
-      "input_base": 3,
-      "input_digits": [1, 1, 2, 0],
-      "output_base": 16,
-      "expected": [2, 10]
-    },
-    {
-      "description": "hexadecimal to trinary",
-      "property": "rebase",
-      "input_base": 16,
-      "input_digits": [2, 10],
-      "output_base": 3,
-      "expected": [1, 1, 2, 0]
-    },
-    {
-      "description": "15-bit integer",
-      "property": "rebase",
-      "input_base": 97,
-      "input_digits": [3, 46, 60],
-      "output_base": 73,
-      "expected": [6, 10, 45]
-    },
-    {
-      "description": "empty list",
-      "property": "rebase",
-      "input_base": 2,
-      "input_digits": [],
-      "output_base": 10,
-      "expected": null
-    },
-    {
-      "description": "single zero",
-      "property": "rebase",
-      "input_base": 10,
-      "input_digits": [0],
-      "output_base": 2,
-      "expected": null
-    },
-    {
-      "description": "multiple zeros",
-      "property": "rebase",
-      "input_base": 10,
-      "input_digits": [0, 0, 0],
-      "output_base": 2,
-      "expected": null
-    },
-    {
-      "description": "leading zeros",
-      "property": "rebase",
-      "input_base": 7,
-      "input_digits": [0, 6, 0],
-      "output_base": 10,
-      "expected": null
-    },
-    {
-      "description": "first base is one",
-      "property": "rebase",
-      "input_base": 1,
-      "input_digits": [],
-      "output_base": 10,
-      "expected": null
-    },
-    {
-      "description": "first base is zero",
-      "property": "rebase",
-      "input_base": 0,
-      "input_digits": [],
-      "output_base": 10,
-      "expected": null
-    },
-    {
-      "description": "first base is negative",
-      "property": "rebase",
-      "input_base": -2,
-      "input_digits": [1],
-      "output_base": 10,
-      "expected": null
-    },
-    {
-      "description": "negative digit",
-      "property": "rebase",
-      "input_base": 2,
-      "input_digits": [1, -1, 1, 0, 1, 0],
-      "output_base": 10,
-      "expected": null
-    },
-    {
-      "description": "invalid positive digit",
-      "property": "rebase",
-      "input_base": 2,
-      "input_digits": [1, 2, 1, 0, 1, 0],
-      "output_base": 10,
-      "expected": null
-    },
-    {
-      "description": "second base is one",
-      "property": "rebase",
-      "input_base": 2,
-      "input_digits": [1, 0, 1, 0, 1, 0],
-      "output_base": 1,
-      "expected": null
-    },
-    {
-      "description": "second base is zero",
-      "property": "rebase",
-      "input_base": 10,
-      "input_digits": [7],
-      "output_base": 0,
-      "expected": null
-    },
-    {
-      "description": "second base is negative",
-      "property": "rebase",
-      "input_base": 2,
-      "input_digits": [1],
-      "output_base": -7,
-      "expected": null
-    },
-    {
-      "description": "both bases are negative",
-      "property": "rebase",
-      "input_base": -2,
-      "input_digits": [1],
-      "output_base": -7,
-      "expected": null
-    }
-  ]
-}
-
-END
-}
+  comments => [
+    "It's up to each track do decide:".Str,
+    "".Str,
+    "1. What's the canonical representation of zero?".Str,
+    " - []?".Str,
+    " - [0]?".Str,
+    "".Str,
+    "2. What representations of zero are allowed?".Str,
+    " - []?".Str,
+    " - [0]?".Str,
+    " - [0,0]?".Str,
+    "".Str,
+    "3. Are leading zeroes allowed?".Str,
+    "".Str,
+    "4. How should invalid input be handled?".Str,
+    "".Str,
+    "All the undefined cases are marked as null.".Str,
+    "".Str,
+    "All your numeric-base are belong to [2..]. :)".Str,
+  ],
+  exercise => "all-your-base".Str,
+  version  => "1.1.0".Str,
+} }

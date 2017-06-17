@@ -2,7 +2,6 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname;
-use JSON::Tiny;
 
 my $exercise = 'FlattenArray';
 my $version = v1;
@@ -24,57 +23,190 @@ require ::($module) <&flatten-array>;
 my $c-data;
 is-deeply &::('flatten-array')(.<input>), |.<expected description> for @($c-data<cases>);
 
-if %*ENV<EXERCISM> && (my $c-data-file =
-  "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f
-{ is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data' } else { skip }
+if %*ENV<EXERCISM> {
+  if (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
+    is-deeply $c-data, EVAL('use JSON::Fast; from-json($c-data-file.slurp);'), 'canonical-data';
+  } else { flunk 'canonical-data' }
+} else { skip }
 
 done-testing;
 
-INIT {
-$c-data := from-json q:to/END/;
-
-{
-  "exercise": "flatten-array",
-  "version": "1.1.0",
-  "cases": [
+INIT { $c-data := {
+  cases    => [
     {
-      "description": "no nesting",
-      "property": "flatten",
-      "input": [0, 1, 2],
-      "expected": [0, 1, 2]
+      description => "no nesting".Str,
+      expected    => [
+        0.Int,
+        1.Int,
+        2.Int,
+      ],
+      input       => [
+        0.Int,
+        1.Int,
+        2.Int,
+      ],
+      property    => "flatten".Str,
     },
     {
-      "description": "flattens array with just integers present",
-      "property": "flatten",
-      "input": [1, [2, 3, 4, 5, 6, 7], 8],
-      "expected": [1, 2, 3, 4, 5, 6, 7, 8]
+      description => "flattens array with just integers present".Str,
+      expected    => [
+        1.Int,
+        2.Int,
+        3.Int,
+        4.Int,
+        5.Int,
+        6.Int,
+        7.Int,
+        8.Int,
+      ],
+      input       => [
+        1.Int,
+        [
+          2.Int,
+          3.Int,
+          4.Int,
+          5.Int,
+          6.Int,
+          7.Int,
+        ],
+        8.Int,
+      ],
+      property    => "flatten".Str,
     },
     {
-      "description": "5 level nesting",
-      "property": "flatten",
-      "input": [0, 2, [[2, 3], 8, 100, 4, [[[50]]]], -2],
-      "expected": [0, 2, 2, 3, 8, 100, 4, 50, -2]
+      description => "5 level nesting".Str,
+      expected    => [
+        0.Int,
+        2.Int,
+        2.Int,
+        3.Int,
+        8.Int,
+        100.Int,
+        4.Int,
+        50.Int,
+        -2.Int,
+      ],
+      input       => [
+        0.Int,
+        2.Int,
+        [
+          [
+            2.Int,
+            3.Int,
+          ],
+          8.Int,
+          100.Int,
+          4.Int,
+          [
+            [
+              [
+                50.Int,
+              ],
+            ],
+          ],
+        ],
+        -2.Int,
+      ],
+      property    => "flatten".Str,
     },
     {
-      "description": "6 level nesting",
-      "property": "flatten",
-      "input": [1, [2, [[3]], [4, [[5]]], 6, 7], 8],
-      "expected": [1, 2, 3, 4, 5, 6, 7, 8]
+      description => "6 level nesting".Str,
+      expected    => [
+        1.Int,
+        2.Int,
+        3.Int,
+        4.Int,
+        5.Int,
+        6.Int,
+        7.Int,
+        8.Int,
+      ],
+      input       => [
+        1.Int,
+        [
+          2.Int,
+          [
+            [
+              3.Int,
+            ],
+          ],
+          [
+            4.Int,
+            [
+              [
+                5.Int,
+              ],
+            ],
+          ],
+          6.Int,
+          7.Int,
+        ],
+        8.Int,
+      ],
+      property    => "flatten".Str,
     },
     {
-      "description": "6 level nest list with null values",
-      "property": "flatten",
-      "input": [0, 2, [[2, 3], 8, [[100]], null, [[null]]], -2],
-      "expected": [0, 2, 2, 3, 8, 100, -2]
+      description => "6 level nest list with null values".Str,
+      expected    => [
+        0.Int,
+        2.Int,
+        2.Int,
+        3.Int,
+        8.Int,
+        100.Int,
+        -2.Int,
+      ],
+      input       => [
+        0.Int,
+        2.Int,
+        [
+          [
+            2.Int,
+            3.Int,
+          ],
+          8.Int,
+          [
+            [
+              100.Int,
+            ],
+          ],
+          (Any),
+          [
+            [
+              (Any),
+            ],
+          ],
+        ],
+        -2.Int,
+      ],
+      property    => "flatten".Str,
     },
     {
-      "description": "all values in nested list are null",
-      "property": "flatten",
-      "input": [null, [[[null]]], null, null, [[null, null], null], null],
-      "expected": []
-    }
-  ]
-}
-
-END
-}
+      description => "all values in nested list are null".Str,
+      expected    => [ ],
+      input       => [
+        (Any),
+        [
+          [
+            [
+              (Any),
+            ],
+          ],
+        ],
+        (Any),
+        (Any),
+        [
+          [
+            (Any),
+            (Any),
+          ],
+          (Any),
+        ],
+        (Any),
+      ],
+      property    => "flatten".Str,
+    },
+  ],
+  exercise => "flatten-array".Str,
+  version  => "1.1.0".Str,
+} }

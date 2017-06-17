@@ -2,7 +2,6 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname;
-use JSON::Tiny;
 
 my $exercise = 'Allergies';
 my $version = v1;
@@ -39,164 +38,175 @@ for @($c-data<cases>) -> %cases {
   } if %cases<description> ~~ 'list';
 }
 
-if %*ENV<EXERCISM> && (my $c-data-file =
-  "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f
-{ is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data' } else { skip }
+if %*ENV<EXERCISM> {
+  if (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
+    is-deeply $c-data, EVAL('use JSON::Fast; from-json($c-data-file.slurp);'), 'canonical-data';
+  } else { flunk 'canonical-data' }
+} else { skip }
 
 done-testing;
 
-INIT {
-$c-data := from-json q:to/END/;
-
-{
-  "exercise": "allergies",
-  "version": "1.0.0",
-  "cases": [
+INIT { $c-data := {
+  cases    => [
     {
-      "description": "allergicTo",
-      "comments": [
-        "Given a number and a substance, indicate whether Tom is allergic ",
-        "to that substance.",
-        "Test cases for this method involve more than one assertion.",
-        "Each case in 'expected' specifies what the method should return for",
-        "the given substance."
+      cases       => [
+        {
+          description => "no allergies means not allergic".Str,
+          expected    => [
+            {
+              result    => Bool::False.Bool,
+              substance => "peanuts".Str,
+            },
+            {
+              result    => Bool::False.Bool,
+              substance => "cats".Str,
+            },
+            {
+              result    => Bool::False.Bool,
+              substance => "strawberries".Str,
+            },
+          ],
+          property    => "allergicTo".Str,
+          score       => 0.Int,
+        },
+        {
+          description => "is allergic to eggs".Str,
+          expected    => [
+            {
+              result    => Bool::True.Bool,
+              substance => "eggs".Str,
+            },
+          ],
+          property    => "allergicTo".Str,
+          score       => 1.Int,
+        },
+        {
+          description => "allergic to eggs in addition to other stuff".Str,
+          expected    => [
+            {
+              result    => Bool::True.Bool,
+              substance => "eggs".Str,
+            },
+            {
+              result    => Bool::True.Bool,
+              substance => "shellfish".Str,
+            },
+            {
+              result    => Bool::False.Bool,
+              substance => "strawberries".Str,
+            },
+          ],
+          property    => "allergicTo".Str,
+          score       => 5.Int,
+        },
       ],
-      "cases": [
-        {
-          "description": "no allergies means not allergic",
-          "property": "allergicTo",
-          "score": 0,
-          "expected": [
-            {
-              "substance": "peanuts",
-              "result": false
-            },
-            {
-              "substance": "cats",
-              "result": false
-            },
-            {
-              "substance": "strawberries",
-              "result": false
-            }
-          ]
-        },
-        {
-          "description": "is allergic to eggs",
-          "property": "allergicTo",
-          "score": 1,
-          "expected": [
-            {
-              "substance": "eggs",
-              "result": true
-            }
-          ]
-        },
-        {
-          "description": "allergic to eggs in addition to other stuff",
-          "property": "allergicTo",
-          "score": 5,
-          "expected": [
-            {
-              "substance": "eggs",
-              "result": true
-            },
-            {
-              "substance": "shellfish",
-              "result": true
-            },
-            {
-              "substance": "strawberries",
-              "result": false
-            }
-          ]
-        }
-      ]
+      comments    => [
+        "Given a number and a substance, indicate whether Tom is allergic ".Str,
+        "to that substance.".Str,
+        "Test cases for this method involve more than one assertion.".Str,
+        "Each case in 'expected' specifies what the method should return for".Str,
+        "the given substance.".Str,
+      ],
+      description => "allergicTo".Str,
     },
     {
-      "description": "list",
-      "comments": [
-        "Given a number, list all things Tom is allergic to"
+      cases       => [
+        {
+          description => "no allergies at all".Str,
+          expected    => [ ],
+          property    => "list".Str,
+          score       => 0.Int,
+        },
+        {
+          description => "allergic to just eggs".Str,
+          expected    => [
+            "eggs".Str,
+          ],
+          property    => "list".Str,
+          score       => 1.Int,
+        },
+        {
+          description => "allergic to just peanuts".Str,
+          expected    => [
+            "peanuts".Str,
+          ],
+          property    => "list".Str,
+          score       => 2.Int,
+        },
+        {
+          description => "allergic to just strawberries".Str,
+          expected    => [
+            "strawberries".Str,
+          ],
+          property    => "list".Str,
+          score       => 8.Int,
+        },
+        {
+          description => "allergic to eggs and peanuts".Str,
+          expected    => [
+            "eggs".Str,
+            "peanuts".Str,
+          ],
+          property    => "list".Str,
+          score       => 3.Int,
+        },
+        {
+          description => "allergic to more than eggs but not peanuts".Str,
+          expected    => [
+            "eggs".Str,
+            "shellfish".Str,
+          ],
+          property    => "list".Str,
+          score       => 5.Int,
+        },
+        {
+          description => "allergic to lots of stuff".Str,
+          expected    => [
+            "strawberries".Str,
+            "tomatoes".Str,
+            "chocolate".Str,
+            "pollen".Str,
+            "cats".Str,
+          ],
+          property    => "list".Str,
+          score       => 248.Int,
+        },
+        {
+          description => "allergic to everything".Str,
+          expected    => [
+            "eggs".Str,
+            "peanuts".Str,
+            "shellfish".Str,
+            "strawberries".Str,
+            "tomatoes".Str,
+            "chocolate".Str,
+            "pollen".Str,
+            "cats".Str,
+          ],
+          property    => "list".Str,
+          score       => 255.Int,
+        },
+        {
+          description => "ignore non allergen score parts".Str,
+          expected    => [
+            "eggs".Str,
+            "shellfish".Str,
+            "strawberries".Str,
+            "tomatoes".Str,
+            "chocolate".Str,
+            "pollen".Str,
+            "cats".Str,
+          ],
+          property    => "list".Str,
+          score       => 509.Int,
+        },
       ],
-      "cases": [
-        {
-          "description": "no allergies at all",
-          "property": "list",
-          "score": 0,
-          "expected": []
-        },
-        {
-          "description": "allergic to just eggs",
-          "property": "list",
-          "score": 1,
-          "expected": ["eggs"]
-        },
-        {
-          "description": "allergic to just peanuts",
-          "property": "list",
-          "score": 2,
-          "expected": ["peanuts"]
-        },
-        {
-          "description": "allergic to just strawberries",
-          "property": "list",
-          "score": 8,
-          "expected": ["strawberries"]
-        },
-        {
-          "description": "allergic to eggs and peanuts",
-          "property": "list",
-          "score": 3,
-          "expected": ["eggs", "peanuts"]
-        },
-        {
-          "description": "allergic to more than eggs but not peanuts",
-          "property": "list",
-          "score": 5,
-          "expected": ["eggs", "shellfish"]
-        },
-        {
-          "description": "allergic to lots of stuff",
-          "property": "list",
-          "score": 248,
-          "expected": [ "strawberries",
-                        "tomatoes",
-                        "chocolate",
-                        "pollen",
-                        "cats"
-                      ]
-        },
-        {
-          "description": "allergic to everything",
-          "property": "list",
-          "score": 255,
-          "expected": [ "eggs",
-                        "peanuts",
-                        "shellfish",
-                        "strawberries",
-                        "tomatoes",
-                        "chocolate",
-                        "pollen",
-                        "cats"
-                      ]
-        },
-        {
-          "description": "ignore non allergen score parts",
-          "property": "list",
-          "score": 509,
-          "expected": [ "eggs",
-                        "shellfish",
-                        "strawberries",
-                        "tomatoes",
-                        "chocolate",
-                        "pollen",
-                        "cats"
-                      ]
-        }
-      ]
-    }
-  ]
-}
-
-END
-}
+      comments    => [
+        "Given a number, list all things Tom is allergic to".Str,
+      ],
+      description => "list".Str,
+    },
+  ],
+  exercise => "allergies".Str,
+  version  => "1.0.0".Str,
+} }
