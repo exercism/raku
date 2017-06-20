@@ -22,15 +22,26 @@ if ::($exercise).^ver !~~ $version {
 require ::($module) <&convert-base>;
 
 my $c-data;
-sub test ($case, $expected) { is-deeply &::('convert-base')(|$case<input_base input_digits output_base>), $expected, $case<description> }
 
-for @($c-data<cases>) {
-  when .<expected> ~~ Array { test $_, .<expected> }
-  when .<description> ~~ /base|digit/ { throws-like {&::('convert-base')(|.<input_base input_digits output_base>)}, Exception, .<description> }
-  when .<description> eq 'leading zeros' { test $_, [4,2] }
-  when .<description> eq 'empty list' { test $_, [] }
-  when .<description> ~~ /zero/ { test $_, [0] }
-  default { flunk .<description> } # To ensure that no canonical-data cases are missed.
+for @($c-data<cases>) -> $case {
+  if $case<expected> ~~ Array:D { test }
+  else {
+    given $case<description> {
+      when 'empty list' { test [] }
+      when /base|digit/ { throws-like {call-convert-base}, Exception, $_ }
+      when /zero/ {
+        when 'leading zeros' { test [4,2] }
+        default { test [0] }
+      }
+      flunk "$_; not tested" if %*ENV<EXERCISM>; # To ensure that no canonical-data cases are missed.
+    }
+  }
+
+  sub test (Array:D $expected = $case<expected>) {
+    is-deeply call-convert-base, $expected, $case<description>
+  }
+
+  sub call-convert-base { &::('convert-base')(|$case<input_base input_digits output_base>) }
 }
 
 if %*ENV<EXERCISM> && (my $c-data-file =
