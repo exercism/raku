@@ -2,7 +2,6 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname;
-use JSON::Tiny;
 
 my $exercise = 'Scrabble';
 my $version = v1;
@@ -24,87 +23,83 @@ require ::($module) <&score>;
 my $c-data;
 is .<input>.&score, |.<expected description> for @($c-data<cases>);
 
-if %*ENV<EXERCISM> && (my $c-data-file =
-  "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f
-{ is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data' } else { skip }
+if %*ENV<EXERCISM> {
+  if (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
+    is-deeply $c-data, EVAL('use JSON::Fast; from-json($c-data-file.slurp);'), 'canonical-data';
+  } else { flunk 'canonical-data' }
+} else { skip }
 
 done-testing;
 
-INIT {
-$c-data := from-json q:to/END/;
-
-{
-  "exercise": "scrabble-score",
-  "version": "1.0.0",
-  "cases": [
+INIT { $c-data := {
+  cases    => [
     {
-      "description": "lowercase letter",
-      "property": "score",
-      "input": "a",
-      "expected": 1
+      description => "lowercase letter".Str,
+      expected    => 1.Int,
+      input       => "a".Str,
+      property    => "score".Str,
     },
     {
-      "description": "uppercase letter",
-      "property": "score",
-      "input": "A",
-      "expected": 1
+      description => "uppercase letter".Str,
+      expected    => 1.Int,
+      input       => "A".Str,
+      property    => "score".Str,
     },
     {
-      "description": "valuable letter",
-      "property": "score",
-      "input": "f",
-      "expected": 4
+      description => "valuable letter".Str,
+      expected    => 4.Int,
+      input       => "f".Str,
+      property    => "score".Str,
     },
     {
-      "description": "short word",
-      "property": "score",
-      "input": "at",
-      "expected": 2
+      description => "short word".Str,
+      expected    => 2.Int,
+      input       => "at".Str,
+      property    => "score".Str,
     },
     {
-      "description": "short, valuable word",
-      "property": "score",
-      "input": "zoo",
-      "expected": 12
+      description => "short, valuable word".Str,
+      expected    => 12.Int,
+      input       => "zoo".Str,
+      property    => "score".Str,
     },
     {
-      "description": "medium word",
-      "property": "score",
-      "input": "street",
-      "expected": 6
+      description => "medium word".Str,
+      expected    => 6.Int,
+      input       => "street".Str,
+      property    => "score".Str,
     },
     {
-      "description": "medium, valuable word",
-      "property": "score",
-      "input": "quirky",
-      "expected": 22
+      description => "medium, valuable word".Str,
+      expected    => 22.Int,
+      input       => "quirky".Str,
+      property    => "score".Str,
     },
     {
-      "description": "long, mixed-case word",
-      "property": "score",
-      "input": "OxyphenButazone",
-      "expected": 41
+      description => "long, mixed-case word".Str,
+      expected    => 41.Int,
+      input       => "OxyphenButazone".Str,
+      property    => "score".Str,
     },
     {
-      "description": "english-like word",
-      "property": "score",
-      "input": "pinata",
-      "expected": 8
+      description => "english-like word".Str,
+      expected    => 8.Int,
+      input       => "pinata".Str,
+      property    => "score".Str,
     },
     {
-      "description": "empty input",
-      "property": "score",
-      "input": "",
-      "expected": 0
+      description => "empty input".Str,
+      expected    => 0.Int,
+      input       => "".Str,
+      property    => "score".Str,
     },
     {
-      "description": "entire alphabet available",
-      "property": "score",
-      "input": "abcdefghijklmnopqrstuvwxyz",
-      "expected": 87
-    }
-  ]
-}
-
-END
-}
+      description => "entire alphabet available".Str,
+      expected    => 87.Int,
+      input       => "abcdefghijklmnopqrstuvwxyz".Str,
+      property    => "score".Str,
+    },
+  ],
+  exercise => "scrabble-score".Str,
+  version  => "1.0.0".Str,
+} }
