@@ -2,8 +2,7 @@
 use v6;{{=#`{{ }}=}}#`{{! Mustache tags double up as Perl 6 embedded comments}}
 use Test;
 use lib #`{{#cdata}}my $dir = #`{{/cdata}}$?FILE.IO.dirname;#`{{#lib_comment}} #`[#`{{&lib_comment}}]#`{{/lib_comment}}
-#`{{#cdata}}use JSON::Tiny;
-#`{{/cdata}}#`{{#modules}}use #`{{&use}};
+#`{{#modules}}use #`{{&use}};
 #`{{/modules}}
 
 my $exercise#`{{#exercise}} = '#`{{&exercise}}'#`{{/exercise}};#`{{#exercise_comment}} #`[#`{{&exercise_comment}}]#`{{/exercise_comment}}
@@ -37,9 +36,11 @@ my $c-data;#`{{/cdata}}
 #`{{&tests}}
 #`{{#cdata}}#`{{#cdata_test_comment}}
 #`[#`{{&cdata_test_comment}}]#`{{/cdata_test_comment}}
-if %*ENV<EXERCISM> && (my $c-data-file =
-  "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f
-{ is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data' } else { skip }
+if %*ENV<EXERCISM> {
+  if (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
+    is-deeply $c-data, EVAL('use JSON::Fast; from-json($c-data-file.slurp);'), 'canonical-data';
+  } else { flunk 'canonical-data' }
+} else { skip }
 #`{{/cdata}}
 
 done-testing;#`{{#done_testing_comment}} #`[#`{{&done_testing_comment}}]#`{{/done_testing_comment}}#`{{#after_done_testing}}
@@ -48,9 +49,4 @@ done-testing;#`{{#done_testing_comment}} #`[#`{{&done_testing_comment}}]#`{{/don
 #`{{#INIT_comment}}
 
 #`[#`{{&INIT_comment}}]#`{{/INIT_comment}}
-INIT {
-$c-data := from-json q:to/END/;
-
-#`{{&json}}
-END
-}#`{{/cdata}}
+INIT { $c-data := #`{{&perl}} }#`{{/cdata}}
