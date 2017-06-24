@@ -31,7 +31,7 @@ for @($c-data<cases>[0]<cases>) {
 is total-grains, |$c-data<cases>[1]<expected description>;
 
 if %*ENV<EXERCISM> {
-  if (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
+  if (my $c-data-file = "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
     is-deeply $c-data, EVAL('use JSON::Fast; from-json($c-data-file.slurp);'), 'canonical-data';
   } else { flunk 'canonical-data' }
 } else { skip }

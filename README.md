@@ -6,7 +6,7 @@ Exercism exercises in Perl 6
 
 ## Contributing Guide
 
-Please see the [contributing guide](https://github.com/exercism/x-common/blob/master/CONTRIBUTING.md).
+Please see the [contributing guide](https://github.com/exercism/problem-specifications/blob/master/CONTRIBUTING.md).
 
 ## Code of Conduct
 

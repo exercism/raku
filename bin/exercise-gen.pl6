@@ -35,7 +35,7 @@ for @exercises -> $exercise {
   my %data = load-yaml $yaml.slurp;
   $_=.chomp when Str for @(%data.values);
 
-  my $cdata = $base-dir.child("x-common/exercises/$exercise/canonical-data.json");
+  my $cdata = $base-dir.child("problem-specifications/exercises/$exercise/canonical-data.json");
   if $cdata ~~ :f {
     %data<cdata><json> = $cdata.slurp;
     %data<cdata><perl> = Dump from-json(%data<cdata><json>), :!color;
