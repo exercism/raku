@@ -1,6 +1,6 @@
 The `exercise-gen.pl6` file can be used in the following ways:
 * From within the directory of the exercise you wish to generate a test for. [showterm example](http://showterm.io/cc7ddb7b23bb73e784d7d)
-* With arguments specifying which exercises you want to generate tests for
+* With arguments specifying which exercises you want to generate tests for.  
   e.g. `./exercise-gen.pl6 hello-world leap`. [showterm example](http://showterm.io/54d5cf196eb45a0e40640)
 * With the argument `--all` to run the generator for all exercises.  
   i.e `./exercise-gen.pl6 --all`
