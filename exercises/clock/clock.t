@@ -48,7 +48,7 @@ todo 'optional test' unless %*ENV<EXERCISM>;
 is ::($exercise).new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
 
 if %*ENV<EXERCISM> {
-  if (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
+  if (my $c-data-file = "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
     is-deeply $c-data, EVAL('use JSON::Fast; from-json($c-data-file.slurp);'), 'canonical-data';
   } else { flunk 'canonical-data' }
 } else { skip }

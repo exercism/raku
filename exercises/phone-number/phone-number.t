@@ -30,7 +30,7 @@ for @($c-data<cases>[0]<cases>) {
 }
 
 if %*ENV<EXERCISM> {
-  if (my $c-data-file = "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
+  if (my $c-data-file = "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
     is-deeply $c-data, EVAL('use JSON::Fast; from-json($c-data-file.slurp);'), 'canonical-data';
   } else { flunk 'canonical-data' }
 } else { skip }
