@@ -32,7 +32,7 @@ for @($c-data<cases>[0]<cases>) {
 is total-grains, |$c-data<cases>[1]<expected description>;
 
 if %*ENV<EXERCISM> && (my $c-data-file =
-  "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f
+  "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f
 { is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data' } else { skip }
 
 done-testing;

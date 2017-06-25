@@ -38,7 +38,7 @@ my $c-data;#`{{/cdata}}
 #`{{#cdata}}#`{{#cdata_test_comment}}
 #`[#`{{&cdata_test_comment}}]#`{{/cdata_test_comment}}
 if %*ENV<EXERCISM> && (my $c-data-file =
-  "$dir/../../x-common/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f
+  "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f
 { is-deeply $c-data, from-json($c-data-file.slurp), 'canonical-data' } else { skip }
 #`{{/cdata}}
 

@@ -33,7 +33,7 @@ for @exercises -> $exercise {
   my %data = load-yaml $yaml.slurp;
   $_=.chomp when Str for @(%data.values);
 
-  my $cdata = $base-dir.child("x-common/exercises/$exercise/canonical-data.json");
+  my $cdata = $base-dir.child("problem-specifications/exercises/$exercise/canonical-data.json");
   %data<cdata> = :json($cdata.slurp) if $cdata ~~ :f;
 
   create-file "$exercise.t", 'test';
