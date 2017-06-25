@@ -3,7 +3,7 @@ sudo: false
 services:
   - docker
 before_script:
-  - git clone https://github.com/exercism/x-common.git
+  - git clone https://github.com/exercism/problem-specifications.git
   - bin/fetch-configlet
   - docker pull rakudo-star:latest
 script:
