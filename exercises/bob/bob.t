@@ -2,6 +2,7 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname; #`[Look for the module inside the same directory as this test file.]
+use JSON::Fast;
 
 my $exercise = 'Bob'; #`[The name of this exercise.]
 my $version = v1; #`[The version we will be matching against the exercise.]
@@ -43,159 +44,165 @@ done-testing; #`[There are no more tests after this :)]
 
 #`['INIT' is a phaser, it makes sure that the test data is available before everything else
 starts running (otherwise we'd have to shove the test data into the middle of the file!)]
-INIT { $c-data := {
-  cases    => [
+INIT {
+$c-data := from-json q:to/END/;
+
+{
+  "exercise": "bob",
+  "version": "1.0.0",
+  "cases": [
     {
-      description => "stating something".Str,
-      expected    => "Whatever.".Str,
-      input       => "Tom-ay-to, tom-aaaah-to.".Str,
-      property    => "response".Str,
+      "description": "stating something",
+      "property": "response",
+      "input": "Tom-ay-to, tom-aaaah-to.",
+      "expected": "Whatever."
     },
     {
-      description => "shouting".Str,
-      expected    => "Whoa, chill out!".Str,
-      input       => "WATCH OUT!".Str,
-      property    => "response".Str,
+      "description": "shouting",
+      "property": "response",
+      "input": "WATCH OUT!",
+      "expected": "Whoa, chill out!"
     },
     {
-      description => "shouting gibberish".Str,
-      expected    => "Whoa, chill out!".Str,
-      input       => "FCECDFCAAB".Str,
-      property    => "response".Str,
+      "description": "shouting gibberish",
+      "property": "response",
+      "input": "FCECDFCAAB",
+      "expected": "Whoa, chill out!"
     },
     {
-      description => "asking a question".Str,
-      expected    => "Sure.".Str,
-      input       => "Does this cryogenic chamber make me look fat?".Str,
-      property    => "response".Str,
+      "description": "asking a question",
+      "property": "response",
+      "input": "Does this cryogenic chamber make me look fat?",
+      "expected": "Sure."
     },
     {
-      description => "asking a numeric question".Str,
-      expected    => "Sure.".Str,
-      input       => "You are, what, like 15?".Str,
-      property    => "response".Str,
+      "description": "asking a numeric question",
+      "property": "response",
+      "input": "You are, what, like 15?",
+      "expected": "Sure."
     },
     {
-      description => "asking gibberish".Str,
-      expected    => "Sure.".Str,
-      input       => "fffbbcbeab?".Str,
-      property    => "response".Str,
+      "description": "asking gibberish",
+      "property": "response",
+      "input": "fffbbcbeab?",
+      "expected": "Sure."
     },
     {
-      description => "talking forcefully".Str,
-      expected    => "Whatever.".Str,
-      input       => "Let's go make out behind the gym!".Str,
-      property    => "response".Str,
+      "description": "talking forcefully",
+      "property": "response",
+      "input": "Let's go make out behind the gym!",
+      "expected": "Whatever."
     },
     {
-      description => "using acronyms in regular speech".Str,
-      expected    => "Whatever.".Str,
-      input       => "It's OK if you don't want to go to the DMV.".Str,
-      property    => "response".Str,
+      "description": "using acronyms in regular speech",
+      "property": "response",
+      "input": "It's OK if you don't want to go to the DMV.",
+      "expected": "Whatever."
     },
     {
-      description => "forceful question".Str,
-      expected    => "Whoa, chill out!".Str,
-      input       => "WHAT THE HELL WERE YOU THINKING?".Str,
-      property    => "response".Str,
+      "description": "forceful question",
+      "property": "response",
+      "input": "WHAT THE HELL WERE YOU THINKING?",
+      "expected": "Whoa, chill out!"
     },
     {
-      description => "shouting numbers".Str,
-      expected    => "Whoa, chill out!".Str,
-      input       => "1, 2, 3 GO!".Str,
-      property    => "response".Str,
+      "description": "shouting numbers",
+      "property": "response",
+      "input": "1, 2, 3 GO!",
+      "expected": "Whoa, chill out!"
     },
     {
-      description => "only numbers".Str,
-      expected    => "Whatever.".Str,
-      input       => "1, 2, 3".Str,
-      property    => "response".Str,
+      "description": "only numbers",
+      "property": "response",
+      "input": "1, 2, 3",
+      "expected": "Whatever."
     },
     {
-      description => "question with only numbers".Str,
-      expected    => "Sure.".Str,
-      input       => "4?".Str,
-      property    => "response".Str,
+      "description": "question with only numbers",
+      "property": "response",
+      "input": "4?",
+      "expected": "Sure."
     },
     {
-      description => "shouting with special characters".Str,
-      expected    => "Whoa, chill out!".Str,
-      input       => "ZOMG THE \%^*\@#\$(*^ ZOMBIES ARE COMING!!11!!1!".Str,
-      property    => "response".Str,
+      "description": "shouting with special characters",
+      "property": "response",
+      "input": "ZOMG THE %^*@#$(*^ ZOMBIES ARE COMING!!11!!1!",
+      "expected": "Whoa, chill out!"
     },
     {
-      description => "shouting with no exclamation mark".Str,
-      expected    => "Whoa, chill out!".Str,
-      input       => "I HATE YOU".Str,
-      property    => "response".Str,
+      "description": "shouting with no exclamation mark",
+      "property": "response",
+      "input": "I HATE YOU",
+      "expected": "Whoa, chill out!"
     },
     {
-      description => "statement containing question mark".Str,
-      expected    => "Whatever.".Str,
-      input       => "Ending with ? means a question.".Str,
-      property    => "response".Str,
+      "description": "statement containing question mark",
+      "property": "response",
+      "input": "Ending with ? means a question.",
+      "expected": "Whatever."
     },
     {
-      description => "non-letters with question".Str,
-      expected    => "Sure.".Str,
-      input       => ":) ?".Str,
-      property    => "response".Str,
+      "description": "non-letters with question",
+      "property": "response",
+      "input": ":) ?",
+      "expected": "Sure."
     },
     {
-      description => "prattling on".Str,
-      expected    => "Sure.".Str,
-      input       => "Wait! Hang on. Are you going to be OK?".Str,
-      property    => "response".Str,
+      "description": "prattling on",
+      "property": "response",
+      "input": "Wait! Hang on. Are you going to be OK?",
+      "expected": "Sure."
     },
     {
-      description => "silence".Str,
-      expected    => "Fine. Be that way!".Str,
-      input       => "".Str,
-      property    => "response".Str,
+      "description": "silence",
+      "property": "response",
+      "input": "",
+      "expected": "Fine. Be that way!"
     },
     {
-      description => "prolonged silence".Str,
-      expected    => "Fine. Be that way!".Str,
-      input       => "          ".Str,
-      property    => "response".Str,
+      "description": "prolonged silence",
+      "property": "response",
+      "input": "          ",
+      "expected": "Fine. Be that way!"
     },
     {
-      description => "alternate silence".Str,
-      expected    => "Fine. Be that way!".Str,
-      input       => "\t\t\t\t\t\t\t\t\t\t".Str,
-      property    => "response".Str,
+      "description": "alternate silence",
+      "property": "response",
+      "input": "\t\t\t\t\t\t\t\t\t\t",
+      "expected": "Fine. Be that way!"
     },
     {
-      description => "multiple line question".Str,
-      expected    => "Whatever.".Str,
-      input       => "\nDoes this cryogenic chamber make me look fat?\nno".Str,
-      property    => "response".Str,
+      "description": "multiple line question",
+      "property": "response",
+      "input": "\nDoes this cryogenic chamber make me look fat?\nno",
+      "expected": "Whatever."
     },
     {
-      description => "starting with whitespace".Str,
-      expected    => "Whatever.".Str,
-      input       => "         hmmmmmmm...".Str,
-      property    => "response".Str,
+      "description": "starting with whitespace",
+      "property": "response",
+      "input": "         hmmmmmmm...",
+      "expected": "Whatever."
     },
     {
-      description => "ending with whitespace".Str,
-      expected    => "Sure.".Str,
-      input       => "Okay if like my  spacebar  quite a bit?   ".Str,
-      property    => "response".Str,
+      "description": "ending with whitespace",
+      "property": "response",
+      "input": "Okay if like my  spacebar  quite a bit?   ",
+      "expected": "Sure."
     },
     {
-      description => "other whitespace".Str,
-      expected    => "Fine. Be that way!".Str,
-      input       => "\n\r \t".Str,
-      property    => "response".Str,
+      "description": "other whitespace",
+      "property": "response",
+      "input": "\n\r \t",
+      "expected": "Fine. Be that way!"
     },
     {
-      description => "non-question ending with whitespace".Str,
-      expected    => "Whatever.".Str,
-      input       => "This is a statement ending with whitespace      ".Str,
-      property    => "response".Str,
-    },
-  ],
-  exercise => "bob".Str,
-  version  => "1.0.0".Str,
-} }
+      "description": "non-question ending with whitespace",
+      "property": "response",
+      "input": "This is a statement ending with whitespace      ",
+      "expected": "Whatever."
+    }
+  ]
+}
+
+END
+}

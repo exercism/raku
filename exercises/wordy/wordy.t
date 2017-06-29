@@ -2,6 +2,7 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname;
+use JSON::Fast;
 
 my $exercise = 'Wordy';
 my $version = v1;
@@ -37,110 +38,116 @@ if %*ENV<EXERCISM> {
 
 done-testing;
 
-INIT { $c-data := {
-  cases    => [
-    {
-      description => "addition".Str,
-      expected    => 2.Int,
-      input       => "What is 1 plus 1?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "more addition".Str,
-      expected    => 55.Int,
-      input       => "What is 53 plus 2?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "addition with negative numbers".Str,
-      expected    => -11.Int,
-      input       => "What is -1 plus -10?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "large addition".Str,
-      expected    => 45801.Int,
-      input       => "What is 123 plus 45678?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "subtraction".Str,
-      expected    => 16.Int,
-      input       => "What is 4 minus -12?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "multiplication".Str,
-      expected    => -75.Int,
-      input       => "What is -3 multiplied by 25?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "division".Str,
-      expected    => -11.Int,
-      input       => "What is 33 divided by -3?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "multiple additions".Str,
-      expected    => 3.Int,
-      input       => "What is 1 plus 1 plus 1?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "addition and subtraction".Str,
-      expected    => 8.Int,
-      input       => "What is 1 plus 5 minus -2?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "multiple subtraction".Str,
-      expected    => 3.Int,
-      input       => "What is 20 minus 4 minus 13?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "subtraction then addition".Str,
-      expected    => 14.Int,
-      input       => "What is 17 minus 6 plus 3?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "multiple multiplication".Str,
-      expected    => -12.Int,
-      input       => "What is 2 multiplied by -2 multiplied by 3?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "addition and multiplication".Str,
-      expected    => -8.Int,
-      input       => "What is -3 plus 7 multiplied by -2?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "multiple division".Str,
-      expected    => 2.Int,
-      input       => "What is -12 divided by 2 divided by -3?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "unknown operation".Str,
-      expected    => Bool::False.Bool,
-      input       => "What is 52 cubed?".Str,
-      property    => "answer".Str,
-    },
-    {
-      description => "Non math question".Str,
-      expected    => Bool::False.Bool,
-      input       => "Who is the President of the United States?".Str,
-      property    => "answer".Str,
-    },
+INIT {
+$c-data := from-json q:to/END/;
+
+{
+  "exercise": "wordy",
+  "version": "1.0.0",
+  "comments": [
+    "The tests that expect 'false' should be implemented to raise",
+    "an error, or indicate a failure. Implement this in a way that",
+    "makes sense for your language."
   ],
-  comments => [
-    "The tests that expect 'false' should be implemented to raise".Str,
-    "an error, or indicate a failure. Implement this in a way that".Str,
-    "makes sense for your language.".Str,
-  ],
-  exercise => "wordy".Str,
-  version  => "1.0.0".Str,
-} }
+  "cases": [
+    {
+      "description": "addition",
+      "property": "answer",
+      "input": "What is 1 plus 1?",
+      "expected": 2
+    },
+    {
+      "description": "more addition",
+      "property": "answer",
+      "input": "What is 53 plus 2?",
+      "expected": 55
+    },
+    {
+      "description": "addition with negative numbers",
+      "property": "answer",
+      "input": "What is -1 plus -10?",
+      "expected": -11
+    },
+    {
+      "description": "large addition",
+      "property": "answer",
+      "input": "What is 123 plus 45678?",
+      "expected": 45801
+    },
+    {
+      "description": "subtraction",
+      "property": "answer",
+      "input": "What is 4 minus -12?",
+      "expected": 16
+    },
+    {
+      "description": "multiplication",
+      "property": "answer",
+      "input": "What is -3 multiplied by 25?",
+      "expected": -75
+    },
+    {
+      "description": "division",
+      "property": "answer",
+      "input": "What is 33 divided by -3?",
+      "expected": -11
+    },
+    {
+      "description": "multiple additions",
+      "property": "answer",
+      "input": "What is 1 plus 1 plus 1?",
+      "expected": 3
+    },
+    {
+      "description": "addition and subtraction",
+      "property": "answer",
+      "input": "What is 1 plus 5 minus -2?",
+      "expected": 8
+    },
+    {
+      "description": "multiple subtraction",
+      "property": "answer",
+      "input": "What is 20 minus 4 minus 13?",
+      "expected": 3
+    },
+    {
+      "description": "subtraction then addition",
+      "property": "answer",
+      "input": "What is 17 minus 6 plus 3?",
+      "expected": 14
+    },
+    {
+      "description": "multiple multiplication",
+      "property": "answer",
+      "input": "What is 2 multiplied by -2 multiplied by 3?",
+      "expected": -12
+    },
+    {
+      "description": "addition and multiplication",
+      "property": "answer",
+      "input": "What is -3 plus 7 multiplied by -2?",
+      "expected": -8
+    },
+    {
+      "description": "multiple division",
+      "property": "answer",
+      "input": "What is -12 divided by 2 divided by -3?",
+      "expected": 2
+    },
+    {
+      "description": "unknown operation",
+      "property": "answer",
+      "input": "What is 52 cubed?",
+      "expected": false
+    },
+    {
+      "description": "Non math question",
+      "property": "answer",
+      "input": "Who is the President of the United States?",
+      "expected": false
+    }
+  ]
+}
+
+END
+}

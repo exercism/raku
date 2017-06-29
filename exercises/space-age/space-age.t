@@ -2,6 +2,7 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname;
+use JSON::Fast;
 
 my $exercise = 'SpaceAge';
 my $version = v1;
@@ -31,65 +32,71 @@ if %*ENV<EXERCISM> {
 
 done-testing;
 
-INIT { $c-data := {
-  cases    => [
+INIT {
+$c-data := from-json q:to/END/;
+
+{
+  "exercise": "space-age",
+  "version": "1.0.0",
+  "cases": [
     {
-      description => "age on Earth".Str,
-      expected    => 31.69.Rat,
-      planet      => "Earth".Str,
-      property    => "age".Str,
-      seconds     => 1000000000.Int,
+      "description": "age on Earth",
+      "property": "age",
+      "planet": "Earth",
+      "seconds": 1000000000,
+      "expected": 31.69
     },
     {
-      description => "age on Mercury".Str,
-      expected    => 280.88.Rat,
-      planet      => "Mercury".Str,
-      property    => "age".Str,
-      seconds     => 2134835688.Int,
+      "description": "age on Mercury",
+      "property": "age",
+      "planet": "Mercury",
+      "seconds": 2134835688,
+      "expected": 280.88
     },
     {
-      description => "age on Venus".Str,
-      expected    => 9.78.Rat,
-      planet      => "Venus".Str,
-      property    => "age".Str,
-      seconds     => 189839836.Int,
+      "description": "age on Venus",
+      "property": "age",
+      "planet": "Venus",
+      "seconds": 189839836,
+      "expected": 9.78
     },
     {
-      description => "age on Mars".Str,
-      expected    => 39.25.Rat,
-      planet      => "Mars".Str,
-      property    => "age".Str,
-      seconds     => 2329871239.Int,
+      "description": "age on Mars",
+      "property": "age",
+      "planet": "Mars",
+      "seconds": 2329871239,
+      "expected": 39.25
     },
     {
-      description => "age on Jupiter".Str,
-      expected    => 2.41.Rat,
-      planet      => "Jupiter".Str,
-      property    => "age".Str,
-      seconds     => 901876382.Int,
+      "description": "age on Jupiter",
+      "property": "age",
+      "planet": "Jupiter",
+      "seconds": 901876382,
+      "expected": 2.41
     },
     {
-      description => "age on Saturn".Str,
-      expected    => 3.23.Rat,
-      planet      => "Saturn".Str,
-      property    => "age".Str,
-      seconds     => 3000000000.Int,
+      "description": "age on Saturn",
+      "property": "age",
+      "planet": "Saturn",
+      "seconds": 3000000000,
+      "expected": 3.23
     },
     {
-      description => "age on Uranus".Str,
-      expected    => 1.21.Rat,
-      planet      => "Uranus".Str,
-      property    => "age".Str,
-      seconds     => 3210123456.Int,
+      "description": "age on Uranus",
+      "property": "age",
+      "planet": "Uranus",
+      "seconds": 3210123456,
+      "expected": 1.21
     },
     {
-      description => "age on Neptune".Str,
-      expected    => 1.58.Rat,
-      planet      => "Neptune".Str,
-      property    => "age".Str,
-      seconds     => 8210123456.Int,
-    },
-  ],
-  exercise => "space-age".Str,
-  version  => "1.0.0".Str,
-} }
+      "description": "age on Neptune",
+      "property": "age",
+      "planet": "Neptune",
+      "seconds": 8210123456,
+      "expected": 1.58
+    }
+  ]
+}
+
+END
+}
