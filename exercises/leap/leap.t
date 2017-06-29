@@ -2,6 +2,7 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname;
+use JSON::Fast;
 
 my $exercise = 'Leap';
 my $version = v1;
@@ -31,33 +32,39 @@ if %*ENV<EXERCISM> {
 
 done-testing;
 
-INIT { $c-data := {
-  cases    => [
+INIT {
+$c-data := from-json q:to/END/;
+
+{
+  "exercise": "leap",
+  "version": "1.0.0",
+  "cases": [
     {
-      description => "year not divisible by 4: common year".Str,
-      expected    => Bool::False.Bool,
-      input       => 2015.Int,
-      property    => "leapYear".Str,
+      "description": "year not divisible by 4: common year",
+      "property": "leapYear",
+      "input": 2015,
+      "expected": false
     },
     {
-      description => "year divisible by 4, not divisible by 100: leap year".Str,
-      expected    => Bool::True.Bool,
-      input       => 2016.Int,
-      property    => "leapYear".Str,
+      "description": "year divisible by 4, not divisible by 100: leap year",
+      "property": "leapYear",
+      "input": 2016,
+      "expected": true
     },
     {
-      description => "year divisible by 100, not divisible by 400: common year".Str,
-      expected    => Bool::False.Bool,
-      input       => 2100.Int,
-      property    => "leapYear".Str,
+      "description": "year divisible by 100, not divisible by 400: common year",
+      "property": "leapYear",
+      "input": 2100,
+      "expected": false
     },
     {
-      description => "year divisible by 400: leap year".Str,
-      expected    => Bool::True.Bool,
-      input       => 2000.Int,
-      property    => "leapYear".Str,
-    },
-  ],
-  exercise => "leap".Str,
-  version  => "1.0.0".Str,
-} }
+      "description": "year divisible by 400: leap year",
+      "property": "leapYear",
+      "input": 2000,
+      "expected": true
+    }
+  ]
+}
+
+END
+}

@@ -2,6 +2,7 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname;
+use JSON::Fast;
 
 my $exercise = 'Scrabble';
 my $version = v1;
@@ -31,75 +32,81 @@ if %*ENV<EXERCISM> {
 
 done-testing;
 
-INIT { $c-data := {
-  cases    => [
+INIT {
+$c-data := from-json q:to/END/;
+
+{
+  "exercise": "scrabble-score",
+  "version": "1.0.0",
+  "cases": [
     {
-      description => "lowercase letter".Str,
-      expected    => 1.Int,
-      input       => "a".Str,
-      property    => "score".Str,
+      "description": "lowercase letter",
+      "property": "score",
+      "input": "a",
+      "expected": 1
     },
     {
-      description => "uppercase letter".Str,
-      expected    => 1.Int,
-      input       => "A".Str,
-      property    => "score".Str,
+      "description": "uppercase letter",
+      "property": "score",
+      "input": "A",
+      "expected": 1
     },
     {
-      description => "valuable letter".Str,
-      expected    => 4.Int,
-      input       => "f".Str,
-      property    => "score".Str,
+      "description": "valuable letter",
+      "property": "score",
+      "input": "f",
+      "expected": 4
     },
     {
-      description => "short word".Str,
-      expected    => 2.Int,
-      input       => "at".Str,
-      property    => "score".Str,
+      "description": "short word",
+      "property": "score",
+      "input": "at",
+      "expected": 2
     },
     {
-      description => "short, valuable word".Str,
-      expected    => 12.Int,
-      input       => "zoo".Str,
-      property    => "score".Str,
+      "description": "short, valuable word",
+      "property": "score",
+      "input": "zoo",
+      "expected": 12
     },
     {
-      description => "medium word".Str,
-      expected    => 6.Int,
-      input       => "street".Str,
-      property    => "score".Str,
+      "description": "medium word",
+      "property": "score",
+      "input": "street",
+      "expected": 6
     },
     {
-      description => "medium, valuable word".Str,
-      expected    => 22.Int,
-      input       => "quirky".Str,
-      property    => "score".Str,
+      "description": "medium, valuable word",
+      "property": "score",
+      "input": "quirky",
+      "expected": 22
     },
     {
-      description => "long, mixed-case word".Str,
-      expected    => 41.Int,
-      input       => "OxyphenButazone".Str,
-      property    => "score".Str,
+      "description": "long, mixed-case word",
+      "property": "score",
+      "input": "OxyphenButazone",
+      "expected": 41
     },
     {
-      description => "english-like word".Str,
-      expected    => 8.Int,
-      input       => "pinata".Str,
-      property    => "score".Str,
+      "description": "english-like word",
+      "property": "score",
+      "input": "pinata",
+      "expected": 8
     },
     {
-      description => "empty input".Str,
-      expected    => 0.Int,
-      input       => "".Str,
-      property    => "score".Str,
+      "description": "empty input",
+      "property": "score",
+      "input": "",
+      "expected": 0
     },
     {
-      description => "entire alphabet available".Str,
-      expected    => 87.Int,
-      input       => "abcdefghijklmnopqrstuvwxyz".Str,
-      property    => "score".Str,
-    },
-  ],
-  exercise => "scrabble-score".Str,
-  version  => "1.0.0".Str,
-} }
+      "description": "entire alphabet available",
+      "property": "score",
+      "input": "abcdefghijklmnopqrstuvwxyz",
+      "expected": 87
+    }
+  ]
+}
+
+END
+}

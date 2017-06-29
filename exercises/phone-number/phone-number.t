@@ -2,6 +2,7 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname;
+use JSON::Fast;
 
 my $exercise = 'Phone';
 my $version = v3;
@@ -37,91 +38,97 @@ if %*ENV<EXERCISM> {
 
 done-testing;
 
-INIT { $c-data := {
-  cases    => [
+INIT {
+$c-data := from-json q:to/END/;
+
+{
+  "exercise": "phone-number",
+  "version": "1.2.0",
+  "cases": [
     {
-      cases       => [
-        {
-          description => "cleans the number".Str,
-          expected    => "2234567890".Str,
-          phrase      => "(223) 456-7890".Str,
-          property    => "clean".Str,
-        },
-        {
-          description => "cleans numbers with dots".Str,
-          expected    => "2234567890".Str,
-          phrase      => "223.456.7890".Str,
-          property    => "clean".Str,
-        },
-        {
-          description => "cleans numbers with multiple spaces".Str,
-          expected    => "2234567890".Str,
-          phrase      => "223 456   7890   ".Str,
-          property    => "clean".Str,
-        },
-        {
-          description => "invalid when 9 digits".Str,
-          expected    => (Any),
-          phrase      => "123456789".Str,
-          property    => "clean".Str,
-        },
-        {
-          description => "invalid when 11 digits does not start with a 1".Str,
-          expected    => (Any),
-          phrase      => "22234567890".Str,
-          property    => "clean".Str,
-        },
-        {
-          description => "valid when 11 digits and starting with 1".Str,
-          expected    => "2234567890".Str,
-          phrase      => "12234567890".Str,
-          property    => "clean".Str,
-        },
-        {
-          description => "valid when 11 digits and starting with 1 even with punctuation".Str,
-          expected    => "2234567890".Str,
-          phrase      => "+1 (223) 456-7890".Str,
-          property    => "clean".Str,
-        },
-        {
-          description => "invalid when more than 11 digits".Str,
-          expected    => (Any),
-          phrase      => "321234567890".Str,
-          property    => "clean".Str,
-        },
-        {
-          description => "invalid with letters".Str,
-          expected    => (Any),
-          phrase      => "123-abc-7890".Str,
-          property    => "clean".Str,
-        },
-        {
-          description => "invalid with punctuations".Str,
-          expected    => (Any),
-          phrase      => "123-\@:!-7890".Str,
-          property    => "clean".Str,
-        },
-        {
-          description => "invalid if area code does not start with 2-9".Str,
-          expected    => (Any),
-          phrase      => "(123) 456-7890".Str,
-          property    => "clean".Str,
-        },
-        {
-          description => "invalid if exchange code does not start with 2-9".Str,
-          expected    => (Any),
-          phrase      => "(223) 056-7890".Str,
-          property    => "clean".Str,
-        },
+      "description": "Cleanup user-entered phone numbers",
+      "comments": [
+        " Returns the cleaned phone number if given number is valid, "
+      , " else returns nil. Note that number is not formatted,       "
+      , " just a 10-digit number is returned.                        "
       ],
-      comments    => [
-        " Returns the cleaned phone number if given number is valid, ".Str,
-        " else returns nil. Note that number is not formatted,       ".Str,
-        " just a 10-digit number is returned.                        ".Str,
-      ],
-      description => "Cleanup user-entered phone numbers".Str,
-    },
-  ],
-  exercise => "phone-number".Str,
-  version  => "1.2.0".Str,
-} }
+      "cases": [
+        {
+          "description": "cleans the number",
+          "property": "clean",
+          "phrase": "(223) 456-7890",
+          "expected": "2234567890"
+        },
+        {
+          "description": "cleans numbers with dots",
+          "property": "clean",
+          "phrase": "223.456.7890",
+          "expected": "2234567890"
+        },
+        {
+          "description": "cleans numbers with multiple spaces",
+          "property": "clean",
+          "phrase": "223 456   7890   ",
+          "expected": "2234567890"
+        },
+        {
+          "description": "invalid when 9 digits",
+          "property": "clean",
+          "phrase": "123456789",
+          "expected": null
+        },
+        {
+          "description": "invalid when 11 digits does not start with a 1",
+          "property": "clean",
+          "phrase": "22234567890",
+          "expected": null
+        },
+        {
+          "description": "valid when 11 digits and starting with 1",
+          "property": "clean",
+          "phrase": "12234567890",
+          "expected": "2234567890"
+        },
+        {
+          "description": "valid when 11 digits and starting with 1 even with punctuation",
+          "property": "clean",
+          "phrase": "+1 (223) 456-7890",
+          "expected": "2234567890"
+        },
+        {
+          "description": "invalid when more than 11 digits",
+          "property": "clean",
+          "phrase": "321234567890",
+          "expected": null
+        },
+        {
+          "description": "invalid with letters",
+          "property": "clean",
+          "phrase": "123-abc-7890",
+          "expected": null
+        },
+        {
+          "description": "invalid with punctuations",
+          "property": "clean",
+          "phrase": "123-@:!-7890",
+          "expected": null
+        },
+        {
+          "description": "invalid if area code does not start with 2-9",
+          "property": "clean",
+          "phrase": "(123) 456-7890",
+          "expected": null
+        },
+        {
+          "description": "invalid if exchange code does not start with 2-9",
+          "property": "clean",
+          "phrase": "(223) 056-7890",
+          "expected": null
+        }
+      ]
+    }
+  ]
+}
+
+END
+}

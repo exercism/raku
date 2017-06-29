@@ -1,9 +1,9 @@
 #!/usr/bin/env perl6
 use v6;{{=#`{{ }}=}}#`{{! Mustache tags double up as Perl 6 embedded comments}}
 use Test;
-use lib #`{{#cdata}}my $dir = #`{{/cdata}}$?FILE.IO.dirname;#`{{#lib_comment}} #`[#`{{&lib_comment}}]#`{{/lib_comment}}
-#`{{#modules}}use #`{{&use}};
-#`{{/modules}}
+use lib #`{{#cdata}}my $dir = #`{{/cdata}}$?FILE.IO.dirname;#`{{#lib_comment}} #`[#`{{&lib_comment}}]#`{{/lib_comment}}#`{{#cdata}}
+use JSON::Fast;#`{{/cdata}}#`{{#modules}}
+use #`{{&use}};#`{{/modules}}
 
 my $exercise#`{{#exercise}} = '#`{{&exercise}}'#`{{/exercise}};#`{{#exercise_comment}} #`[#`{{&exercise_comment}}]#`{{/exercise_comment}}
 my $version#`{{#version}} = v#`{{&version}}#`{{/version}};#`{{#version_comment}} #`[#`{{&version_comment}}]#`{{/version_comment}}
@@ -49,4 +49,9 @@ done-testing;#`{{#done_testing_comment}} #`[#`{{&done_testing_comment}}]#`{{/don
 #`{{#INIT_comment}}
 
 #`[#`{{&INIT_comment}}]#`{{/INIT_comment}}
-INIT { $c-data := #`{{&perl}} }#`{{/cdata}}
+INIT {
+$c-data := from-json q:to/END/;
+
+#`{{&json}}
+END
+}#`{{/cdata}}

@@ -2,6 +2,7 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname;
+use JSON::Fast;
 
 my $exercise = 'RNA';
 my $version = v1;
@@ -37,69 +38,75 @@ if %*ENV<EXERCISM> {
 
 done-testing;
 
-INIT { $c-data := {
-  cases    => [
-    {
-      description => "RNA complement of cytosine is guanine".Str,
-      dna         => "C".Str,
-      expected    => "G".Str,
-      property    => "toRna".Str,
-    },
-    {
-      description => "RNA complement of guanine is cytosine".Str,
-      dna         => "G".Str,
-      expected    => "C".Str,
-      property    => "toRna".Str,
-    },
-    {
-      description => "RNA complement of thymine is adenine".Str,
-      dna         => "T".Str,
-      expected    => "A".Str,
-      property    => "toRna".Str,
-    },
-    {
-      description => "RNA complement of adenine is uracil".Str,
-      dna         => "A".Str,
-      expected    => "U".Str,
-      property    => "toRna".Str,
-    },
-    {
-      description => "RNA complement".Str,
-      dna         => "ACGTGGTCTTAA".Str,
-      expected    => "UGCACCAGAAUU".Str,
-      property    => "toRna".Str,
-    },
-    {
-      description => "correctly handles invalid input (RNA instead of DNA)".Str,
-      dna         => "U".Str,
-      expected    => (Any),
-      property    => "toRna".Str,
-    },
-    {
-      description => "correctly handles completely invalid DNA input".Str,
-      dna         => "XXX".Str,
-      expected    => (Any),
-      property    => "toRna".Str,
-    },
-    {
-      description => "correctly handles partially invalid DNA input".Str,
-      dna         => "ACGTXXXCTTAA".Str,
-      expected    => (Any),
-      property    => "toRna".Str,
-    },
+INIT {
+$c-data := from-json q:to/END/;
+
+{
+  "exercise": "rna-transcription",
+  "version": "1.0.1",
+  "comments": [
+    "Language implementations vary on the issue of invalid input data.",
+    "A language may elect to simplify this task by only presenting valid",
+    "test cases.  For languages handling invalid input data as",
+    "error conditions, invalid test cases are included here and are",
+    "indicated with an expected value of null.  Note however that null is",
+    "simply an indication here in the JSON.  Actually returning null from",
+    "a rna-transcription function may or may not be idiomatic in a language.",
+    "Language idioms of errors or exceptions should be followed.",
+    "Alternative interpretations such as ignoring excess length at the end",
+    "are not represented here."
   ],
-  comments => [
-    "Language implementations vary on the issue of invalid input data.".Str,
-    "A language may elect to simplify this task by only presenting valid".Str,
-    "test cases.  For languages handling invalid input data as".Str,
-    "error conditions, invalid test cases are included here and are".Str,
-    "indicated with an expected value of null.  Note however that null is".Str,
-    "simply an indication here in the JSON.  Actually returning null from".Str,
-    "a rna-transcription function may or may not be idiomatic in a language.".Str,
-    "Language idioms of errors or exceptions should be followed.".Str,
-    "Alternative interpretations such as ignoring excess length at the end".Str,
-    "are not represented here.".Str,
-  ],
-  exercise => "rna-transcription".Str,
-  version  => "1.0.1".Str,
-} }
+  "cases": [
+    {
+      "description": "RNA complement of cytosine is guanine",
+      "property": "toRna",
+      "dna": "C",
+      "expected": "G"
+    },
+    {
+      "description": "RNA complement of guanine is cytosine",
+      "property": "toRna",
+      "dna": "G",
+      "expected": "C"
+    },
+    {
+      "description": "RNA complement of thymine is adenine",
+      "property": "toRna",
+      "dna": "T",
+      "expected": "A"
+    },
+    {
+      "description": "RNA complement of adenine is uracil",
+      "property": "toRna",
+      "dna": "A",
+      "expected": "U"
+    },
+    {
+      "description": "RNA complement",
+      "property": "toRna",
+      "dna": "ACGTGGTCTTAA",
+      "expected": "UGCACCAGAAUU"
+    },
+    {
+      "description": "correctly handles invalid input (RNA instead of DNA)",
+      "property": "toRna",
+      "dna": "U",
+      "expected": null
+    },
+    {
+      "description": "correctly handles completely invalid DNA input",
+      "property": "toRna",
+      "dna": "XXX",
+      "expected": null
+    },
+    {
+      "description": "correctly handles partially invalid DNA input",
+      "property": "toRna",
+      "dna": "ACGTXXXCTTAA",
+      "expected": null
+    }
+  ]
+}
+
+END
+}

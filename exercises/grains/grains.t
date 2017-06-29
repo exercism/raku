@@ -2,6 +2,7 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname;
+use JSON::Fast;
 
 my $exercise = 'Grains';
 my $version = v1;
@@ -38,84 +39,90 @@ if %*ENV<EXERCISM> {
 
 done-testing;
 
-INIT { $c-data := {
-  cases    => [
+INIT {
+$c-data := from-json q:to/END/;
+
+{
+  "exercise": "grains",
+  "version": "1.0.0",
+  "comments": [
+    "The final tests of square test error conditions",
+    "The expection for these tests is -1, indicating an error",
+    "In these cases you should expect an error as is idiomatic for your language"
+  ],
+  "cases": [
     {
-      cases       => [
+      "description": "returns the number of grains on the square",
+      "cases": [
         {
-          description => "1".Str,
-          expected    => 1.Int,
-          input       => 1.Int,
-          property    => "square".Str,
+          "description": "1",
+          "property": "square",
+          "input": 1,
+          "expected": 1
         },
         {
-          description => "2".Str,
-          expected    => 2.Int,
-          input       => 2.Int,
-          property    => "square".Str,
+          "description": "2",
+          "property": "square",
+          "input": 2,
+          "expected": 2
         },
         {
-          description => "3".Str,
-          expected    => 4.Int,
-          input       => 3.Int,
-          property    => "square".Str,
+          "description": "3",
+          "property": "square",
+          "input": 3,
+          "expected": 4
         },
         {
-          description => "4".Str,
-          expected    => 8.Int,
-          input       => 4.Int,
-          property    => "square".Str,
+          "description": "4",
+          "property": "square",
+          "input": 4,
+          "expected": 8
         },
         {
-          description => "16".Str,
-          expected    => 32768.Int,
-          input       => 16.Int,
-          property    => "square".Str,
+          "description": "16",
+          "property": "square",
+          "input": 16,
+          "expected": 32768
         },
         {
-          description => "32".Str,
-          expected    => 2147483648.Int,
-          input       => 32.Int,
-          property    => "square".Str,
+          "description": "32",
+          "property": "square",
+          "input": 32,
+          "expected": 2147483648
         },
         {
-          description => "64".Str,
-          expected    => 9223372036854775808.Int,
-          input       => 64.Int,
-          property    => "square".Str,
+          "description": "64",
+          "property": "square",
+          "input": 64,
+          "expected": 9223372036854775808
         },
         {
-          description => "square 0 raises an exception".Str,
-          expected    => -1.Int,
-          input       => 0.Int,
-          property    => "square".Str,
+          "description": "square 0 raises an exception",
+          "property": "square",
+          "input": 0,
+          "expected": -1
         },
         {
-          description => "negative square raises an exception".Str,
-          expected    => -1.Int,
-          input       => -1.Int,
-          property    => "square".Str,
+          "description": "negative square raises an exception",
+          "property": "square",
+          "input": -1,
+          "expected": -1
         },
         {
-          description => "square greater than 64 raises an exception".Str,
-          expected    => -1.Int,
-          input       => 65.Int,
-          property    => "square".Str,
-        },
-      ],
-      description => "returns the number of grains on the square".Str,
+          "description": "square greater than 64 raises an exception",
+          "property": "square",
+          "input": 65,
+          "expected": -1
+        }
+      ]
     },
     {
-      description => "returns the total number of grains on the board".Str,
-      expected    => 18446744073709551615.Int,
-      property    => "total".Str,
-    },
-  ],
-  comments => [
-    "The final tests of square test error conditions".Str,
-    "The expection for these tests is -1, indicating an error".Str,
-    "In these cases you should expect an error as is idiomatic for your language".Str,
-  ],
-  exercise => "grains".Str,
-  version  => "1.0.0".Str,
-} }
+      "description": "returns the total number of grains on the board",
+      "property": "total",
+      "expected": 18446744073709551615
+    }
+  ]
+}
+
+END
+}

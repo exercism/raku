@@ -2,6 +2,7 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname;
+use JSON::Fast;
 
 my $exercise = 'Anagram';
 my $version = v1;
@@ -31,206 +32,139 @@ if %*ENV<EXERCISM> {
 
 done-testing;
 
-INIT { $c-data := {
-  cases    => [
-    {
-      candidates  => [
-        "hello".Str,
-        "world".Str,
-        "zombies".Str,
-        "pants".Str,
-      ],
-      description => "no matches".Str,
-      expected    => [ ],
-      property    => "anagrams".Str,
-      subject     => "diaper".Str,
-    },
-    {
-      candidates  => [
-        "tan".Str,
-        "stand".Str,
-        "at".Str,
-      ],
-      description => "detects simple anagram".Str,
-      expected    => [
-        "tan".Str,
-      ],
-      property    => "anagrams".Str,
-      subject     => "ant".Str,
-    },
-    {
-      candidates  => [
-        "eagle".Str,
-      ],
-      description => "does not detect false positives".Str,
-      expected    => [ ],
-      property    => "anagrams".Str,
-      subject     => "galea".Str,
-    },
-    {
-      candidates  => [
-        "stream".Str,
-        "pigeon".Str,
-        "maters".Str,
-      ],
-      description => "detects two anagrams".Str,
-      expected    => [
-        "stream".Str,
-        "maters".Str,
-      ],
-      property    => "anagrams".Str,
-      subject     => "master".Str,
-    },
-    {
-      candidates  => [
-        "dog".Str,
-        "goody".Str,
-      ],
-      description => "does not detect anagram subsets".Str,
-      expected    => [ ],
-      property    => "anagrams".Str,
-      subject     => "good".Str,
-    },
-    {
-      candidates  => [
-        "enlists".Str,
-        "google".Str,
-        "inlets".Str,
-        "banana".Str,
-      ],
-      description => "detects anagram".Str,
-      expected    => [
-        "inlets".Str,
-      ],
-      property    => "anagrams".Str,
-      subject     => "listen".Str,
-    },
-    {
-      candidates  => [
-        "gallery".Str,
-        "ballerina".Str,
-        "regally".Str,
-        "clergy".Str,
-        "largely".Str,
-        "leading".Str,
-      ],
-      description => "detects three anagrams".Str,
-      expected    => [
-        "gallery".Str,
-        "regally".Str,
-        "largely".Str,
-      ],
-      property    => "anagrams".Str,
-      subject     => "allergy".Str,
-    },
-    {
-      candidates  => [
-        "corn".Str,
-        "dark".Str,
-        "Corn".Str,
-        "rank".Str,
-        "CORN".Str,
-        "cron".Str,
-        "park".Str,
-      ],
-      description => "does not detect identical words".Str,
-      expected    => [
-        "cron".Str,
-      ],
-      property    => "anagrams".Str,
-      subject     => "corn".Str,
-    },
-    {
-      candidates  => [
-        "last".Str,
-      ],
-      description => "does not detect non-anagrams with identical checksum".Str,
-      expected    => [ ],
-      property    => "anagrams".Str,
-      subject     => "mass".Str,
-    },
-    {
-      candidates  => [
-        "cashregister".Str,
-        "Carthorse".Str,
-        "radishes".Str,
-      ],
-      description => "detects anagrams case-insensitively".Str,
-      expected    => [
-        "Carthorse".Str,
-      ],
-      property    => "anagrams".Str,
-      subject     => "Orchestra".Str,
-    },
-    {
-      candidates  => [
-        "cashregister".Str,
-        "carthorse".Str,
-        "radishes".Str,
-      ],
-      description => "detects anagrams using case-insensitive subject".Str,
-      expected    => [
-        "carthorse".Str,
-      ],
-      property    => "anagrams".Str,
-      subject     => "Orchestra".Str,
-    },
-    {
-      candidates  => [
-        "cashregister".Str,
-        "Carthorse".Str,
-        "radishes".Str,
-      ],
-      description => "detects anagrams using case-insensitive possible matches".Str,
-      expected    => [
-        "Carthorse".Str,
-      ],
-      property    => "anagrams".Str,
-      subject     => "orchestra".Str,
-    },
-    {
-      candidates  => [
-        "Banana".Str,
-      ],
-      description => "does not detect a word as its own anagram".Str,
-      expected    => [ ],
-      property    => "anagrams".Str,
-      subject     => "banana".Str,
-    },
-    {
-      candidates  => [
-        "go Go GO".Str,
-      ],
-      description => "does not detect a anagram if the original word is repeated".Str,
-      expected    => [ ],
-      property    => "anagrams".Str,
-      subject     => "go".Str,
-    },
-    {
-      candidates  => [
-        "patter".Str,
-      ],
-      description => "anagrams must use all letters exactly once".Str,
-      expected    => [ ],
-      property    => "anagrams".Str,
-      subject     => "tapper".Str,
-    },
-    {
-      candidates  => [
-        "Banana".Str,
-      ],
-      description => "capital word is not own anagram".Str,
-      expected    => [ ],
-      property    => "anagrams".Str,
-      subject     => "BANANA".Str,
-    },
+INIT {
+$c-data := from-json q:to/END/;
+
+{
+  "exercise": "anagram",
+  "version": "1.0.1",
+  "comments": [
+    "The string argument cases possible matches are passed in as",
+    "individual arguments rather than arrays. Languages can include",
+    "these string argument cases if passing individual arguments is",
+    "idiomatic in that language."
   ],
-  comments => [
-    "The string argument cases possible matches are passed in as".Str,
-    "individual arguments rather than arrays. Languages can include".Str,
-    "these string argument cases if passing individual arguments is".Str,
-    "idiomatic in that language.".Str,
-  ],
-  exercise => "anagram".Str,
-  version  => "1.0.1".Str,
-} }
+  "cases": [
+    {
+      "description": "no matches",
+      "property": "anagrams",
+      "subject": "diaper",
+      "candidates": ["hello", "world", "zombies", "pants"],
+      "expected": []
+    },
+    {
+      "description": "detects simple anagram",
+      "property": "anagrams",
+      "subject": "ant",
+      "candidates": ["tan", "stand", "at"],
+      "expected": ["tan"]
+    },
+    {
+      "description": "does not detect false positives",
+      "property": "anagrams",
+      "subject": "galea",
+      "candidates": ["eagle"],
+      "expected": []
+    },
+    {
+      "description": "detects two anagrams",
+      "property": "anagrams",
+      "subject": "master",
+      "candidates": ["stream", "pigeon", "maters"],
+      "expected": ["stream", "maters"]
+    },
+    {
+      "description": "does not detect anagram subsets",
+      "property": "anagrams",
+      "subject": "good",
+      "candidates": ["dog", "goody"],
+      "expected": []
+    },
+    {
+      "description": "detects anagram",
+      "property": "anagrams",
+      "subject": "listen",
+      "candidates": ["enlists", "google", "inlets", "banana"],
+      "expected": ["inlets"]
+    },
+    {
+      "description": "detects three anagrams",
+      "property": "anagrams",
+      "subject": "allergy",
+      "candidates": [ "gallery",
+                      "ballerina",
+                      "regally",
+                      "clergy",
+                      "largely",
+                      "leading"
+                    ],
+      "expected": ["gallery", "regally", "largely"]
+    },
+    {
+      "description": "does not detect identical words",
+      "property": "anagrams",
+      "subject": "corn",
+      "candidates": ["corn", "dark", "Corn", "rank", "CORN", "cron", "park"],
+      "expected": ["cron"]
+    },
+    {
+      "description": "does not detect non-anagrams with identical checksum",
+      "property": "anagrams",
+      "subject": "mass",
+      "candidates": ["last"],
+      "expected": []
+    },
+    {
+      "description": "detects anagrams case-insensitively",
+      "property": "anagrams",
+      "subject": "Orchestra",
+      "candidates": ["cashregister", "Carthorse", "radishes"],
+      "expected": ["Carthorse"]
+    },
+    {
+      "description": "detects anagrams using case-insensitive subject",
+      "property": "anagrams",
+      "subject": "Orchestra",
+      "candidates": ["cashregister", "carthorse", "radishes"],
+      "expected": ["carthorse"]
+    },
+    {
+      "description": "detects anagrams using case-insensitive possible matches",
+      "property": "anagrams",
+      "subject": "orchestra",
+      "candidates": ["cashregister", "Carthorse", "radishes"],
+      "expected": ["Carthorse"]
+    },
+    {
+      "description": "does not detect a word as its own anagram",
+      "property": "anagrams",
+      "subject": "banana",
+      "candidates": ["Banana"],
+      "expected": []
+    },
+    {
+      "description": "does not detect a anagram if the original word is repeated",
+      "property": "anagrams",
+      "subject": "go",
+      "candidates": ["go Go GO"],
+      "expected": []
+    },
+    {
+      "description": "anagrams must use all letters exactly once",
+      "property": "anagrams",
+      "subject": "tapper",
+      "candidates": ["patter"],
+      "expected": []
+    },
+    {
+      "description": "capital word is not own anagram",
+      "property": "anagrams",
+      "subject": "BANANA",
+      "candidates": ["Banana"],
+      "expected": []
+    }
+  ]
+}
+
+END
+}

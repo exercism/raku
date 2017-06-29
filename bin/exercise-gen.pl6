@@ -2,8 +2,6 @@
 use v6;
 use Template::Mustache;
 use YAMLish;
-use Data::Dump;
-use JSON::Fast;
 
 my $base-dir = $?FILE.IO.resolve.parent.parent;
 my @exercises;
@@ -36,10 +34,7 @@ for @exercises -> $exercise {
   $_=.chomp when Str for @(%data.values);
 
   my $cdata = $base-dir.child("problem-specifications/exercises/$exercise/canonical-data.json");
-  if $cdata ~~ :f {
-    %data<cdata><json> = $cdata.slurp;
-    %data<cdata><perl> = Dump from-json(%data<cdata><json>), :!color;
-  }
+  if $cdata ~~ :f {%data<cdata><json> = $cdata.slurp}
 
   create-file "$exercise.t", 'test';
 

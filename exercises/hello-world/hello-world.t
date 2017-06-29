@@ -2,6 +2,7 @@
 use v6;
 use Test;
 use lib my $dir = $?FILE.IO.dirname; #`[Look for the module inside the same directory as this test file.]
+use JSON::Fast;
 
 my $exercise = 'HelloWorld'; #`[The name of this exercise.]
 my $version = v2; #`[The version we will be matching against the exercise.]
@@ -40,14 +41,20 @@ done-testing; #`[There are no more tests after this :)]
 
 #`['INIT' is a phaser, it makes sure that the test data is available before everything else
 starts running (otherwise we'd have to shove the test data into the middle of the file!)]
-INIT { $c-data := {
-  cases    => [
+INIT {
+$c-data := from-json q:to/END/;
+
+{
+  "exercise": "hello-world",
+  "version": "1.0.0",
+  "cases": [
     {
-      description => "Say Hi!".Str,
-      expected    => "Hello, World!".Str,
-      property    => "hello".Str,
-    },
-  ],
-  exercise => "hello-world".Str,
-  version  => "1.0.0".Str,
-} }
+      "description": "Say Hi!",
+      "property": "hello",
+      "expected": "Hello, World!"
+    }
+  ]
+}
+
+END
+}
