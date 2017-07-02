@@ -17,15 +17,20 @@ if @*ARGS {
   if 'example.yaml'.IO ~~ :f {
     push @exercises, $*CWD.IO.basename;
   } else {
-    say 'example.yaml not found; exiting.';
+    say 'example.yaml not found in current directory; exiting.';
     exit;
   }
 }
 
+my @dir-not-found;
+my @yaml-not-found;
 for @exercises -> $exercise {
-  my $exercise-dir = $base-dir.child("exercises/$exercise");
+  if (my $exercise-dir = $base-dir.child("exercises/$exercise")) !~~ :d {
+    push @dir-not-found, $exercise;
+    next;
+  }
   if (my $yaml = $exercise-dir.child('example.yaml')) !~~ :f {
-    say "No example.yaml found for $exercise.";
+    push @yaml-not-found, $exercise;
     next;
   };
   print "Generating $exercise... ";
@@ -52,3 +57,6 @@ for @exercises -> $exercise {
     $file.chmod(0o755) if $template ~~ 'test';
   }
 }
+
+if @dir-not-found  {warn 'exercise directory does not exist for: ' ~ join ' ', @dir-not-found}
+if @yaml-not-found {warn 'example.yaml not found for: ' ~ join ' ', @yaml-not-found}
