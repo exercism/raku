@@ -7,5 +7,5 @@ before_script:
   - bin/fetch-configlet
   - docker pull rakudo-star:latest
 script:
-  - bin/configlet .
+  - bin/configlet lint .
   - docker run -e EXERCISM=1 -t -v $PWD:/exercism rakudo-star prove /exercism -re perl6
