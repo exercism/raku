@@ -2,7 +2,7 @@
 use v6;
 use Test;
 use lib $?FILE.IO.dirname;
-use JSON::Tiny;
+use JSON::Fast;
 
 my $exercise = 'LinkedList';
 my $version = v1;

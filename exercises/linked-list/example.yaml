@@ -2,7 +2,7 @@ exercise: LinkedList
 version: 1
 plan: 7
 modules:
-  - use: JSON::Tiny
+  - use: JSON::Fast
 methods: 'push-list pop-list shift-list unshift-list'
 tests: |
   for my @cases -> $case {
