@@ -2,6 +2,7 @@
   "language": "Perl 6",
   "checklist_issue": 30,
   "active": true,
+  "blurb": "Forget everything you know or think you know about Perl. Perl 6 is a production ready new emerging language that is highly expressive, feature-packed and optimized for fun.",
   "test_pattern": ".*\\.t$",
   "foregone": [
 
