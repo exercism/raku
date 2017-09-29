@@ -6,4 +6,10 @@ before_script:
   - docker pull rakudo-star:latest
 script:
   - bin/configlet lint .
-  - docker run -e EXERCISM=1 -t -v $PWD:/exercism rakudo-star prove /exercism -re perl6
+  - docker run
+    --env EXERCISM=1
+    --volume $PWD:/exercism
+    rakudo-star prove /exercism
+    --exec perl6
+    --recurse
+    --jobs 2
