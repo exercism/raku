@@ -1,7 +1,5 @@
 ---
 sudo: false
-services:
-  - docker
 before_script:
   - git clone https://github.com/exercism/problem-specifications.git
   - bin/fetch-configlet
