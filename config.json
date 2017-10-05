@@ -99,6 +99,16 @@
       ]
     },
     {
+      "uuid": "0313a0a8-0d35-f480-7dce-65154edf4e804d52dc1",
+      "slug": "nucleotide-count",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 3,
+      "topics": [
+
+      ]
+    },
+    {
       "uuid": "9fc9b102-185d-4f34-98d0-e3084399610a",
       "slug": "clock",
       "core": false,
