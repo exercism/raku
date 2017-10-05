@@ -29,7 +29,6 @@ allergens that score 256, 512, 1024, etc.).  Your program should
 ignore those components of the score.  For example, if the allergy
 score is 257, your program should only report the eggs (1) allergy.
 
-
 ## Resources
 
 Remember to check out the Perl 6 [documentation](https://docs.perl6.org/) and
