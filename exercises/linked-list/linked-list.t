@@ -4,9 +4,9 @@ use Test;
 use lib $?FILE.IO.dirname;
 use JSON::Fast;
 
-my $exercise = 'LinkedList';
-my $version = v1;
-my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
+my Str:D $exercise := 'LinkedList';
+my Version:D $version = v1;
+my Str $module //= $exercise;
 plan 7;
 
 use-ok $module or bail-out;
@@ -98,4 +98,10 @@ INIT {
       }
     ]
   ｣
+}
+
+INIT {
+  if %*ENV<EXERCISM> {
+    $module = 'Example';
+  }
 }

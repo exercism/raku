@@ -4,10 +4,12 @@ use Test;
 use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
 
-my $exercise = 'Clock';
-my $version = v1;
-my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
-plan 54;
+my Str:D $exercise := 'Clock';
+my Version:D $version = v1;
+my Str $module //= $exercise;
+INIT {
+  plan 54;
+}
 
 use-ok $module or bail-out;
 require ::($module);
@@ -47,12 +49,6 @@ for @($c-data<cases>) {
 
 todo 'optional test' unless %*ENV<EXERCISM>;
 is ::($exercise).new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
-
-if %*ENV<EXERCISM> {
-  if (my $c-data-file = "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
-    is-deeply $c-data, EVAL('use JSON::Fast; from-json($c-data-file.slurp);'), 'canonical-data';
-  } else { flunk 'canonical-data' }
-} else { skip }
 
 done-testing;
 
@@ -550,4 +546,20 @@ $c-data := from-json q:to/END/;
 }
 
 END
+
+  if %*ENV<EXERCISM> {
+    $module = 'Example';
+    if (my $c-data-file =
+      "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json"
+      .IO.resolve) ~~ :f
+    {
+      is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'canonical-data';
+    }
+    else {
+      flunk 'canonical-data';
+    }
+  }
+  else {
+    skip;
+  }
 }
