@@ -5,7 +5,7 @@ use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
 
 my Str:D $exercise := 'Allergies';
-my Version:D $version = v1;
+my Version:D $version = v2;
 my Str $module //= $exercise;
 INIT {
   plan 4;
@@ -24,21 +24,22 @@ if ::($exercise).^ver !~~ $version {
 require ::($module) <&allergic-to &list-allergies>;
 
 my $c-data;
-for @($c-data<cases>) -> %cases {
+for $c-data<cases>.values -> %case-set {
+
   subtest 'allergic-to' => {
     plan 7;
-    my @cases = |%cases<cases>;
-    for @cases -> %case {
-      is allergic-to(%case<score>, .<substance>), .<result>, %case<description> for @(%case<expected>);
+    for %case-set<cases>.values -> %case {
+      is allergic-to(%case<score>, .<substance>), .<result>, %case<description> ~ ': ' ~ .<substance> for %case<expected>.values;
     }
-  } if %cases<description> ~~ 'allergicTo';
+  } when %case-set<description> ~~ 'allergicTo';
+
   subtest 'list-allergies' => {
     plan 9;
-    my @cases = |%cases<cases>;
-    for @cases {
-      is list-allergies(.<score>), |.<expected description>;
+    for %case-set<cases>.values {
+      cmp-ok list-allergies(.<score>), '~~', .<expected>.Set, .<description>;
     }
-  } if %cases<description> ~~ 'list';
+  } when %case-set<description> ~~ 'list';
+
 }
 
 INIT {
