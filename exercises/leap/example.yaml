@@ -3,7 +3,7 @@ version: 1
 plan: 6
 imports: '&is-leap-year'
 tests: |
-  is &::('is-leap-year')(.<input>), |.<expected description> for @($c-data<cases>);
+  is is-leap-year(.<input>), |.<expected description> for @($c-data<cases>);
 
 unit: module
 example: |

@@ -22,7 +22,7 @@ if ::($exercise).^ver !~~ $version {
 require ::($module) <&flatten-array>;
 
 my $c-data;
-is-deeply &::('flatten-array')(.<input>), |.<expected description> for @($c-data<cases>);
+is-deeply flatten-array(.<input>), |.<expected description> for @($c-data<cases>);
 
 if %*ENV<EXERCISM> {
   if (my $c-data-file = "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {

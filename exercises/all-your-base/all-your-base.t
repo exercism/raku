@@ -41,7 +41,7 @@ for @($c-data<cases>) -> $case {
     is-deeply call-convert-base, $expected, $case<description>
   }
 
-  sub call-convert-base { &::('convert-base')(|$case<input_base input_digits output_base>) }
+  sub call-convert-base { convert-base(|$case<input_base input_digits output_base>) }
 }
 
 if %*ENV<EXERCISM> {
