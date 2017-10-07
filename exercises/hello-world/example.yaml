@@ -5,7 +5,7 @@ imports: '&hello'
 tests: |
   #`[Go through the cases (hiding at the bottom of this file)
   and check that &hello gives us the correct response.]
-  is &::('hello')(), |.<expected description> for @($c-data<cases>);
+  is hello, |.<expected description> for @($c-data<cases>);
 
 exercise_comment: The name of this exercise.
 module_comment: "%*ENV<EXERCISM> is for tests not directly for the exercise, don't worry about these :)"

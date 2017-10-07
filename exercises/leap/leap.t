@@ -22,7 +22,7 @@ if ::($exercise).^ver !~~ $version {
 require ::($module) <&is-leap-year>;
 
 my $c-data;
-is &::('is-leap-year')(.<input>), |.<expected description> for @($c-data<cases>);
+is is-leap-year(.<input>), |.<expected description> for @($c-data<cases>);
 
 if %*ENV<EXERCISM> {
   if (my $c-data-file = "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {

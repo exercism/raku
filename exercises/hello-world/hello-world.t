@@ -28,7 +28,7 @@ require ::($module) <&hello>;
 my $c-data;
 #`[Go through the cases (hiding at the bottom of this file)
 and check that &hello gives us the correct response.]
-is &::('hello')(), |.<expected description> for @($c-data<cases>);
+is hello, |.<expected description> for @($c-data<cases>);
 
 #`[Ignore this for your exercise! Tells Exercism folks when exercise cases become out of date.]
 if %*ENV<EXERCISM> {
