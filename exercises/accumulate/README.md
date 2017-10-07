@@ -25,9 +25,6 @@ Keep your hands off that collect/map/fmap/whatchamacallit functionality
 provided by your standard library!
 Solve this one yourself using other basic tools instead.
 
-Lisp specific: it's perfectly fine to use `MAPCAR` or the equivalent,
-as this is idiomatic Lisp, not a library function.
-
 ## Resources
 
 Remember to check out the Perl 6 [documentation](https://docs.perl6.org/) and
