@@ -6,6 +6,10 @@ use YAMLish;
 my $base-dir = $?FILE.IO.resolve.parent.parent;
 my @exercises;
 
+if $base-dir.child('problem-specifications') !~~ :d {
+  warn 'problem-specifications directory not found; some exercises may generate incorrectly.';
+}
+
 if @*ARGS {
   if @*ARGS[0] eq '--all' {
     push @exercises, .basename for $base-dir.child('exercises').dir;
@@ -59,4 +63,4 @@ for @exercises -> $exercise {
 }
 
 if @dir-not-found  {warn 'exercise directory does not exist for: ' ~ join ' ', @dir-not-found}
-if @yaml-not-found {warn 'example.yaml not found for: ' ~ join ' ', @yaml-not-found}
+if @yaml-not-found {note 'example.yaml not found for: ' ~ join ' ', @yaml-not-found}
