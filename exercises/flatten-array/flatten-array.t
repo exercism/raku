@@ -4,10 +4,12 @@ use Test;
 use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
 
-my $exercise = 'FlattenArray';
-my $version = v1;
-my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
-plan 8;
+my Str:D $exercise := 'FlattenArray';
+my Version:D $version = v1;
+my Str $module //= $exercise;
+INIT {
+  plan 8;
+}
 
 use-ok $module or bail-out;
 require ::($module);
@@ -23,12 +25,6 @@ require ::($module) <&flatten-array>;
 
 my $c-data;
 is-deeply flatten-array(.<input>), |.<expected description> for @($c-data<cases>);
-
-if %*ENV<EXERCISM> {
-  if (my $c-data-file = "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
-    is-deeply $c-data, EVAL('use JSON::Fast; from-json($c-data-file.slurp);'), 'canonical-data';
-  } else { flunk 'canonical-data' }
-} else { skip }
 
 done-testing;
 
@@ -79,4 +75,20 @@ $c-data := from-json q:to/END/;
 }
 
 END
+
+  if %*ENV<EXERCISM> {
+    $module = 'Example';
+    if (my $c-data-file =
+      "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json"
+      .IO.resolve) ~~ :f
+    {
+      is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'canonical-data';
+    }
+    else {
+      flunk 'canonical-data';
+    }
+  }
+  else {
+    skip;
+  }
 }

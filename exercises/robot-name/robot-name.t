@@ -3,9 +3,9 @@ use v6;
 use Test;
 use lib $?FILE.IO.dirname;
 
-my $exercise = 'Robot';
-my $version = v1;
-my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
+my Str:D $exercise := 'Robot';
+my Version:D $version = v1;
+my Str $module //= $exercise;
 plan 8;
 
 use-ok $module or bail-out;
@@ -48,3 +48,9 @@ subtest 'Randomness', {
 }
 
 done-testing;
+
+INIT {
+  if %*ENV<EXERCISM> {
+    $module = 'Example';
+  }
+}

@@ -3,9 +3,9 @@ use v6;
 use Test;
 use lib $?FILE.IO.dirname;
 
-my $exercise = 'GradeSchool';
-my $version = v1;
-my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
+my Str:D $exercise := 'GradeSchool';
+my Version:D $version = v1;
+my Str $module //= $exercise;
 plan 10;
 
 use-ok $module or bail-out;
@@ -40,3 +40,9 @@ subtest 'Additional students', {
 is $roster.?list-all, ('Grade 1', <Anna Barb Charlie>, 'Grade 2', <Alex Jim Zoe>, 'Grade 3', <Dick Harry Tom>), 'List all';
 
 done-testing;
+
+INIT {
+  if %*ENV<EXERCISM> {
+    $module = 'Example';
+  }
+}

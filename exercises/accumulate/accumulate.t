@@ -3,9 +3,9 @@ use v6;
 use Test;
 use lib $?FILE.IO.dirname;
 
-my $exercise = 'Accumulate';
-my $version = v1;
-my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
+my Str:D $exercise := 'Accumulate';
+my Version:D $version = v1;
+my Str $module //= $exercise;
 plan 7;
 
 use-ok $module or bail-out;
@@ -40,3 +40,9 @@ is-deeply accumulate(['the', 'quick', 'brown', 'fox'], sub { @_[0].flip }),
           'reverse strings';
 
 done-testing;
+
+INIT {
+  if %*ENV<EXERCISM> {
+    $module = 'Example';
+  }
+}

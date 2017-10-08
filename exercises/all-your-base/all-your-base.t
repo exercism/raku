@@ -4,10 +4,12 @@ use Test;
 use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
 
-my $exercise = 'AllYourBase';
-my $version = v2;
-my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;
-plan 23;
+my Str:D $exercise := 'AllYourBase';
+my Version:D $version = v2;
+my Str $module //= $exercise;
+INIT {
+  plan 23;
+}
 
 use-ok $module or bail-out;
 require ::($module);
@@ -43,12 +45,6 @@ for @($c-data<cases>) -> $case {
 
   sub call-convert-base { convert-base(|$case<input_base input_digits output_base>) }
 }
-
-if %*ENV<EXERCISM> {
-  if (my $c-data-file = "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
-    is-deeply $c-data, EVAL('use JSON::Fast; from-json($c-data-file.slurp);'), 'canonical-data';
-  } else { flunk 'canonical-data' }
-} else { skip }
 
 done-testing;
 
@@ -251,4 +247,20 @@ $c-data := from-json q:to/END/;
 }
 
 END
+
+  if %*ENV<EXERCISM> {
+    $module = 'Example';
+    if (my $c-data-file =
+      "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json"
+      .IO.resolve) ~~ :f
+    {
+      is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'canonical-data';
+    }
+    else {
+      flunk 'canonical-data';
+    }
+  }
+  else {
+    skip;
+  }
 }

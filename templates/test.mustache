@@ -5,10 +5,12 @@ use lib #`{{#cdata}}my $dir = #`{{/cdata}}$?FILE.IO.dirname;#`{{#lib_comment}} #
 use JSON::Fast;#`{{/cdata}}#`{{#modules}}
 use #`{{&use}};#`{{/modules}}
 
-my $exercise#`{{#exercise}} = '#`{{&exercise}}'#`{{/exercise}};#`{{#exercise_comment}} #`[#`{{&exercise_comment}}]#`{{/exercise_comment}}
-my $version#`{{#version}} = v#`{{&version}}#`{{/version}};#`{{#version_comment}} #`[#`{{&version_comment}}]#`{{/version_comment}}
-my $module = %*ENV<EXERCISM> ?? 'Example' !! $exercise;#`{{#module_comment}} #`[#`{{&module_comment}}]#`{{/module_comment}}#`{{#plan}}
-plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#`{{/plan}}
+my Str:D $exercise#`{{#exercise}} := '#`{{&exercise}}'#`{{/exercise}};#`{{#exercise_comment}} #`[#`{{&exercise_comment}}]#`{{/exercise_comment}}
+my Version:D $version#`{{#version}} = v#`{{&version}}#`{{/version}};#`{{#version_comment}} #`[#`{{&version_comment}}]#`{{/version_comment}}
+my Str $module //= $exercise;#`{{#module_comment}} #`[#`{{&module_comment}}]#`{{/module_comment}}#`{{#plan}}
+#`{{#cdata}}INIT {
+  #`{{/cdata}}plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#`{{#cdata}}
+}#`{{/cdata}}#`{{/plan}}
 #`{{#use_test_comment}}
 
 #`[#`{{&use_test_comment}}]#`{{/use_test_comment}}
@@ -34,24 +36,33 @@ subtest 'Class methods', {
 #`{{/methods}}#`{{#cdata}}
 my $c-data;#`{{/cdata}}
 #`{{&tests}}
-#`{{#cdata}}#`{{#cdata_test_comment}}
-#`[#`{{&cdata_test_comment}}]#`{{/cdata_test_comment}}
-if %*ENV<EXERCISM> {
-  if (my $c-data-file = "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json".IO.resolve) ~~ :f {
-    is-deeply $c-data, EVAL('use JSON::Fast; from-json($c-data-file.slurp);'), 'canonical-data';
-  } else { flunk 'canonical-data' }
-} else { skip }
-#`{{/cdata}}
 
 done-testing;#`{{#done_testing_comment}} #`[#`{{&done_testing_comment}}]#`{{/done_testing_comment}}#`{{#after_done_testing}}
 
-#`{{&after_done_testing}}#`{{/after_done_testing}}#`{{#cdata}}
+#`{{&after_done_testing}}#`{{/after_done_testing}}
 #`{{#INIT_comment}}
 
 #`[#`{{&INIT_comment}}]#`{{/INIT_comment}}
 INIT {
-$c-data := from-json q:to/END/;
+#`{{#cdata}}$c-data := from-json q:to/END/;
 
 #`{{&json}}
 END
-}#`{{/cdata}}
+
+#`{{/cdata}}  if %*ENV<EXERCISM> {#`{{#exercism_comment}}
+#`[#`{{&exercism_comment}}]#`{{/exercism_comment}}
+    $module = 'Example';#`{{#cdata}}
+    if (my $c-data-file =
+      "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json"
+      .IO.resolve) ~~ :f
+    {
+      is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'canonical-data';
+    }
+    else {
+      flunk 'canonical-data';
+    }
+  }
+  else {
+    skip;#`{{/cdata}}
+  }
+}
