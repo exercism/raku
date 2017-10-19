@@ -1,5 +1,5 @@
 exercise: Leap
-version: 1
+version: 2
 plan: 6
 imports: '&is-leap-year'
 tests: |

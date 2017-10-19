@@ -5,7 +5,7 @@ use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
 
 my Str:D $exercise := 'Leap';
-my Version:D $version = v1;
+my Version:D $version = v2;
 my Str $module //= $exercise;
 INIT {
   plan 6;
@@ -33,7 +33,7 @@ $c-data := from-json q:to/END/;
 
 {
   "exercise": "leap",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "cases": [
     {
       "description": "year not divisible by 4: common year",
@@ -44,7 +44,7 @@ $c-data := from-json q:to/END/;
     {
       "description": "year divisible by 4, not divisible by 100: leap year",
       "property": "leapYear",
-      "input": 2016,
+      "input": 2020,
       "expected": true
     },
     {
