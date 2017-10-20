@@ -12,8 +12,7 @@ Given an age in seconds, calculate how old someone would be on:
    - Neptune: orbital period 164.79132 Earth years
 
 So if you were told someone were 1,000,000,000 seconds old, you should
-be able to say that they're 31.69 Earth-years old. Round all ages to
-the nearest hundredth of a year.
+be able to say that they're 31.69 Earth-years old.
 
 If you're wondering why Pluto didn't make the cut, go watch [this
 youtube video](http://www.youtube.com/watch?v=Z_2gbGXzFbs).
@@ -26,11 +25,15 @@ examples if you get stuck.
 
 ## Running the tests
 
-There is a test script included with the exercise; a file with the extension
-`.t`. You can run the test script for the exercise by executing the command
-`prove . --exec=perl6` in the exercise directory. You can also add the `-v` flag
-e.g. `prove . --exec=perl6 -v` to display all tests, including any optional
-tests marked as 'TODO'.
+There is a test suite and module included with the exercise.
+The test suite (a file with the extension `.t`) will attempt to run routines
+from the module (a file with the extension `.pm6`).
+Add/modify routines in the module so that the tests will pass! You can view the
+test data by executing the command `perl6 --doc *.t` (\* being the name of the
+test suite), and run the test suite for the exercise by executing the command
+`prove . --exec=perl6` in the exercise directory.
+You can also add the `-v` flag e.g. `prove . --exec=perl6 -v` to display all
+tests, including any optional tests marked as 'TODO'.
 
 ## Source
 
