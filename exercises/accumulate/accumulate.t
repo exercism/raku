@@ -39,8 +39,6 @@ is-deeply accumulate(['the', 'quick', 'brown', 'fox'], sub { @_[0].flip }),
           ['eht', 'kciuq', 'nworb', 'xof'],
           'reverse strings';
 
-done-testing;
-
 INIT {
   if %*ENV<EXERCISM> {
     $module = 'Example';

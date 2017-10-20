@@ -41,8 +41,6 @@ for @($c-data<cases>) -> %cases {
   } if %cases<description> ~~ 'list';
 }
 
-done-testing;
-
 INIT {
 $c-data := from-json q:to/END/;
 

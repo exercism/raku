@@ -26,8 +26,6 @@ require ::($module) <Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune>;
 my $c-data;
 is (age-on ::(.<planet>): .<seconds>), |.<expected description> for @($c-data<cases>);
 
-done-testing;
-
 INIT {
 $c-data := from-json q:to/END/;
 

@@ -26,8 +26,6 @@ require ::($module) <&is-leap-year>;
 my $c-data;
 is is-leap-year(.<input>), |.<expected description> for @($c-data<cases>);
 
-done-testing;
-
 INIT {
 $c-data := from-json q:to/END/;
 

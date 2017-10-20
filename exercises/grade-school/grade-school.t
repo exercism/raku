@@ -39,8 +39,6 @@ subtest 'Additional students', {
 }
 is $roster.?list-all, ('Grade 1', <Anna Barb Charlie>, 'Grade 2', <Alex Jim Zoe>, 'Grade 3', <Dick Harry Tom>), 'List all';
 
-done-testing;
-
 INIT {
   if %*ENV<EXERCISM> {
     $module = 'Example';

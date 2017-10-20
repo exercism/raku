@@ -26,8 +26,6 @@ require ::($module) <&flatten-array>;
 my $c-data;
 is-deeply flatten-array(.<input>), |.<expected description> for @($c-data<cases>);
 
-done-testing;
-
 INIT {
 $c-data := from-json q:to/END/;
 
