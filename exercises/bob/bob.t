@@ -35,8 +35,6 @@ my $c-data;
 and check that Bob gives us the correct response for each one.]
 is ::($exercise).?hey(.<input>), |.<expected description> for @($c-data<cases>);
 
-done-testing; #`[There are no more tests after this :)]
-
 #`['INIT' is a phaser, it makes sure that the test data is available before everything else
 starts running (otherwise we'd have to shove the test data into the middle of the file!)]
 INIT {

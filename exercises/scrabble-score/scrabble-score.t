@@ -26,8 +26,6 @@ require ::($module) <&score>;
 my $c-data;
 is .<input>.&score, |.<expected description> for @($c-data<cases>);
 
-done-testing;
-
 INIT {
 $c-data := from-json q:to/END/;
 

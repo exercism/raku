@@ -33,8 +33,6 @@ for @($c-data<cases>[0]<cases>) {
 }
 is total-grains, |$c-data<cases>[1]<expected description>;
 
-done-testing;
-
 INIT {
 $c-data := from-json q:to/END/;
 

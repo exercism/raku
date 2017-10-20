@@ -26,8 +26,6 @@ require ::($module) <&is-luhn-valid>;
 my $c-data;
 is .<input>.&is-luhn-valid, |.<expected description> for @($c-data<cases>);
 
-done-testing;
-
 INIT {
 $c-data := from-json q:to/END/;
 

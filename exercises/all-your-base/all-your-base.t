@@ -46,8 +46,6 @@ for @($c-data<cases>) -> $case {
   sub call-convert-base { convert-base(|$case<input_base input_digits output_base>) }
 }
 
-done-testing;
-
 INIT {
 $c-data := from-json q:to/END/;
 

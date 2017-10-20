@@ -32,8 +32,6 @@ for @($c-data<cases>[0]<cases>) {
   }
 }
 
-done-testing;
-
 INIT {
 $c-data := from-json q:to/END/;
 

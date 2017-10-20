@@ -26,8 +26,6 @@ require ::($module) <&count-words>;
 my $c-data;
 is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<cases>);
 
-done-testing;
-
 INIT {
 $c-data := from-json q:to/END/;
 
