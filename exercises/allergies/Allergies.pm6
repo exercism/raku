@@ -1,1 +1,1 @@
-unit module Allergies:ver<1>;
+unit module Allergies:ver<2>;
