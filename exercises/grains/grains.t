@@ -43,7 +43,7 @@ $c-data := from-json q:to/END/;
   "version": "1.0.0",
   "comments": [
     "The final tests of square test error conditions",
-    "The expection for these tests is -1, indicating an error",
+    "The expectation for these tests is -1, indicating an error",
     "In these cases you should expect an error as is idiomatic for your language"
   ],
   "cases": [
