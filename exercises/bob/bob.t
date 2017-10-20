@@ -7,9 +7,7 @@ use JSON::Fast;
 my Str:D $exercise := 'Bob'; #`[The name of this exercise.]
 my Version:D $version = v1; #`[The version we will be matching against the exercise.]
 my Str $module //= $exercise; #`[The name of the module file to be loaded.]
-INIT {
-  plan 28; #`[This is how many tests we expect to run.]
-}
+plan 28; #`[This is how many tests we expect to run.]
 
 #`[Check that the module can be use-d.]
 use-ok $module or bail-out;
@@ -35,8 +33,21 @@ my $c-data;
 and check that Bob gives us the correct response for each one.]
 is ::($exercise).?hey(.<input>), |.<expected description> for @($c-data<cases>);
 
-#`['INIT' is a phaser, it makes sure that the test data is available before everything else
-starts running (otherwise we'd have to shove the test data into the middle of the file!)]
+#`[Don't worry about the stuff below here for your exercise.
+This is for Exercism folks to check that everything is in order.]
+unless %*ENV<EXERCISM> {
+  skip-rest 'exercism tests';
+  exit;
+}
+
+subtest 'canonical-data' => {
+  (my $c-data-file = "$dir/../../problem-specifications/exercises/{
+    $dir.IO.resolve.basename
+  }/canonical-data.json".IO.resolve) ~~ :f ??
+    is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'match problem-specifications' !!
+    flunk 'problem-specifications file not found';
+}
+
 INIT {
 $c-data := from-json q:to/END/;
 
@@ -199,21 +210,5 @@ $c-data := from-json q:to/END/;
 
 END
 
-  if %*ENV<EXERCISM> {
-#`[Don't worry about the stuff in here for your exercise.
-This is for Exercism folks to check that everything is in order.]
-    $module = 'Example';
-    if (my $c-data-file =
-      "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json"
-      .IO.resolve) ~~ :f
-    {
-      is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'canonical-data';
-    }
-    else {
-      flunk 'canonical-data';
-    }
-  }
-  else {
-    skip;
-  }
+  $module = 'Example' if %*ENV<EXERCISM>;
 }
