@@ -46,6 +46,5 @@ subtest 'Randomness', {
   isnt @names, @names.sort, 'Names not ordered';
   isnt @names, @names.sort.reverse, 'Names not reverse ordered';
 }
-INIT {
-  $module = 'Example' if %*ENV<EXERCISM>;
-}
+
+INIT { $module = 'Example' if %*ENV<EXERCISM> }

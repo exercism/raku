@@ -3,8 +3,7 @@ version: 2
 plan: 3
 imports: '&hello'
 tests: |
-  #`[Go through the cases (hiding at the bottom of this file)
-  and check that &hello gives us the correct response.]
+  # Go through the cases and check that &hello gives us the correct response.
   is hello, |.<expected description> for @($c-data<cases>);
 
 exercise_comment: The name of this exercise.

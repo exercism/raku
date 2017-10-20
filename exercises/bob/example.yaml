@@ -3,8 +3,7 @@ version: 1
 plan: 28
 methods: hey
 tests: |
-  #`[Go through all of the cases (hiding at the bottom of this file)
-  and check that Bob gives us the correct response for each one.]
+  # Go through the cases and check that Bob gives us the correct responses.
   is ::($exercise).?hey(.<input>), |.<expected description> for @($c-data<cases>);
 
 exercise_comment: The name of this exercise.

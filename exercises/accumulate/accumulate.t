@@ -38,6 +38,5 @@ is-deeply accumulate(['a', 'b', 'c' ], sub ($inp) { [ accumulate( [1, 2, 3], sub
 is-deeply accumulate(['the', 'quick', 'brown', 'fox'], sub { @_[0].flip }),
           ['eht', 'kciuq', 'nworb', 'xof'],
           'reverse strings';
-INIT {
-  $module = 'Example' if %*ENV<EXERCISM>;
-}
+
+INIT { $module = 'Example' if %*ENV<EXERCISM> }

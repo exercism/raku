@@ -28,28 +28,12 @@ subtest 'Class methods', {
   ok ::($exercise).can($_), $_ for <hey>;
 }
 
-my $c-data;
-#`[Go through all of the cases (hiding at the bottom of this file)
-and check that Bob gives us the correct response for each one.]
+my $c-data = from-json $=pod.pop.contents;
+# Go through the cases and check that Bob gives us the correct responses.
 is ::($exercise).?hey(.<input>), |.<expected description> for @($c-data<cases>);
 
-#`[Don't worry about the stuff below here for your exercise.
-This is for Exercism folks to check that everything is in order.]
-unless %*ENV<EXERCISM> {
-  skip-rest 'exercism tests';
-  exit;
-}
-
-subtest 'canonical-data' => {
-  (my $c-data-file = "$dir/../../problem-specifications/exercises/{
-    $dir.IO.resolve.basename
-  }/canonical-data.json".IO.resolve) ~~ :f ??
-    is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'match problem-specifications' !!
-    flunk 'problem-specifications file not found';
-}
-
-INIT {
-$c-data := from-json q:to/END/;
+=head2 Canonical Data
+=begin code
 
 {
   "exercise": "bob",
@@ -208,7 +192,21 @@ $c-data := from-json q:to/END/;
   ]
 }
 
-END
+=end code
 
-  $module = 'Example' if %*ENV<EXERCISM>;
+#`[Don't worry about the stuff below here for your exercise.
+This is for Exercism folks to check that everything is in order.]
+unless %*ENV<EXERCISM> {
+  skip-rest 'exercism tests';
+  exit;
 }
+
+subtest 'canonical-data' => {
+  (my $c-data-file = "$dir/../../problem-specifications/exercises/{
+    $dir.IO.resolve.basename
+  }/canonical-data.json".IO.resolve) ~~ :f ??
+    is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'match problem-specifications' !!
+    flunk 'problem-specifications file not found';
+}
+
+INIT { $module = 'Example' if %*ENV<EXERCISM> }

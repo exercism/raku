@@ -32,8 +32,15 @@ subtest 'Class methods', {
   ok ::($exercise).can($_), $_ for <#`{{&methods}}>;
 }
 #`{{/methods}}#`{{#cdata}}
-my $c-data;#`{{/cdata}}
+my $c-data = from-json $=pod.pop.contents;#`{{/cdata}}
 #`{{&tests}}
+#`{{#cdata}}
+
+=head2 Canonical Data
+=begin code
+
+#`{{&json}}
+=end code#`{{/cdata}}
 #`{{#exercism_comment}}
 
 #`[#`{{&exercism_comment}}]#`{{/exercism_comment}}#`{{#cdata}}
@@ -51,12 +58,4 @@ subtest 'canonical-data' => {
 }
 
 #`{{/cdata}}
-INIT {#`{{#cdata}}
-$c-data := from-json q:to/END/;
-
-#`{{&json}}
-END
-#`{{/cdata}}
-
-  $module = 'Example' if %*ENV<EXERCISM>;
-}
+INIT { $module = 'Example' if %*ENV<EXERCISM> }
