@@ -32,8 +32,6 @@ my $c-data;
 and check that &hello gives us the correct response.]
 is hello, |.<expected description> for @($c-data<cases>);
 
-#`['INIT' is a phaser, it makes sure that the test data is available before everything else
-starts running (otherwise we'd have to shove the test data into the middle of the file!)]
 INIT {
 $c-data := from-json q:to/END/;
 
