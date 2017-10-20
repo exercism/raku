@@ -5,7 +5,8 @@ modules:
   - use: JSON::Fast
 methods: 'push-list pop-list shift-list unshift-list'
 tests: |
-  for my @cases -> $case {
+  my $cases = from-json $=pod.pop.contents;
+  for $cases.values -> $case {
     subtest $case.<name>, sub {
       my $linkedlist = ::($exercise).new;
       for  |$case.<set> -> %set {
@@ -21,64 +22,63 @@ tests: |
       }
     }
   }
-after_done_testing: |
-  INIT {
-    @cases := from-json ｢
-      [
-        {
-          "set" : [
-            { "push" : 10 },
-            { "push" : 20 },
-            { "pop"  : 20 },
-            { "pop"  : 10 }
-          ],
-          "name" : "push_pop"
-        },
-        {
-          "set" : [
-            { "push" : 10  },
-            { "push" : 20  },
-            { "shift" : 10 },
-            { "shift" : 20 }
-          ],
-          "name" : "push_shift"
-        },
-        {
-          "set" : [
-            { "unshift" : 10 },
-            { "unshift" : 20 },
-            { "shift"   : 20 },
-            { "shift"   : 10 }
-          ],
-          "name" : "unshift_shift"
-        },
-        {
-          "set" : [
-            { "unshift" : 10 },
-            { "unshift" : 20 },
-            { "pop"     : 10 },
-            { "pop"     : 20 }
-          ],
-          "name" : "unshift_pop"
-        },
-        {
-          "set" : [
-            { "push"    : 10 },
-            { "push"    : 20 },
-            { "pop"     : 20 },
-            { "push"    : 30 },
-            { "shift"   : 10 },
-            { "unshift" : 40 },
-            { "push"    : 50 },
-            { "shift"   : 40 },
-            { "pop"     : 50 },
-            { "shift"   : 30 }
-          ],
-          "name" : "example"
-        }
-      ]
-    ｣
-  }
+  
+  =head2 Test Data
+  =begin code
+  [
+    {
+      "set" : [
+        { "push" : 10 },
+        { "push" : 20 },
+        { "pop"  : 20 },
+        { "pop"  : 10 }
+      ],
+      "name" : "push_pop"
+    },
+    {
+      "set" : [
+        { "push" : 10  },
+        { "push" : 20  },
+        { "shift" : 10 },
+        { "shift" : 20 }
+      ],
+      "name" : "push_shift"
+    },
+    {
+      "set" : [
+        { "unshift" : 10 },
+        { "unshift" : 20 },
+        { "shift"   : 20 },
+        { "shift"   : 10 }
+      ],
+      "name" : "unshift_shift"
+    },
+    {
+      "set" : [
+        { "unshift" : 10 },
+        { "unshift" : 20 },
+        { "pop"     : 10 },
+        { "pop"     : 20 }
+      ],
+      "name" : "unshift_pop"
+    },
+    {
+      "set" : [
+        { "push"    : 10 },
+        { "push"    : 20 },
+        { "pop"     : 20 },
+        { "push"    : 30 },
+        { "shift"   : 10 },
+        { "unshift" : 40 },
+        { "push"    : 50 },
+        { "shift"   : 40 },
+        { "pop"     : 50 },
+        { "shift"   : 30 }
+      ],
+      "name" : "example"
+    }
+  ]
+  =end code
 
 unit: class
 example: |
