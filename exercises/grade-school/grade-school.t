@@ -38,9 +38,6 @@ subtest 'Additional students', {
   ok $roster.?add-student(:name($_), :3grade), "Add $_ to grade 3" for <Tom Dick Harry>;
 }
 is $roster.?list-all, ('Grade 1', <Anna Barb Charlie>, 'Grade 2', <Alex Jim Zoe>, 'Grade 3', <Dick Harry Tom>), 'List all';
-
 INIT {
-  if %*ENV<EXERCISM> {
-    $module = 'Example';
-  }
+  $module = 'Example' if %*ENV<EXERCISM>;
 }

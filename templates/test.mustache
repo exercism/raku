@@ -8,9 +8,7 @@ use #`{{&use}};#`{{/modules}}
 my Str:D $exercise#`{{#exercise}} := '#`{{&exercise}}'#`{{/exercise}};#`{{#exercise_comment}} #`[#`{{&exercise_comment}}]#`{{/exercise_comment}}
 my Version:D $version#`{{#version}} = v#`{{&version}}#`{{/version}};#`{{#version_comment}} #`[#`{{&version_comment}}]#`{{/version_comment}}
 my Str $module //= $exercise;#`{{#module_comment}} #`[#`{{&module_comment}}]#`{{/module_comment}}#`{{#plan}}
-#`{{#cdata}}INIT {
-  #`{{/cdata}}plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#`{{#cdata}}
-}#`{{/cdata}}#`{{/plan}}
+plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#`{{/plan}}
 #`{{#use_test_comment}}
 
 #`[#`{{&use_test_comment}}]#`{{/use_test_comment}}
@@ -36,27 +34,29 @@ subtest 'Class methods', {
 #`{{/methods}}#`{{#cdata}}
 my $c-data;#`{{/cdata}}
 #`{{&tests}}
+#`{{#exercism_comment}}
 
-INIT {
-#`{{#cdata}}$c-data := from-json q:to/END/;
+#`[#`{{&exercism_comment}}]#`{{/exercism_comment}}#`{{#cdata}}
+unless %*ENV<EXERCISM> {
+  skip-rest 'exercism tests';
+  exit;
+}
+
+subtest 'canonical-data' => {
+  (my $c-data-file = "$dir/../../problem-specifications/exercises/{
+    $dir.IO.resolve.basename
+  }/canonical-data.json".IO.resolve) ~~ :f ??
+    is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'match problem-specifications' !!
+    flunk 'problem-specifications file not found';
+}
+
+#`{{/cdata}}
+INIT {#`{{#cdata}}
+$c-data := from-json q:to/END/;
 
 #`{{&json}}
 END
+#`{{/cdata}}
 
-#`{{/cdata}}  if %*ENV<EXERCISM> {#`{{#exercism_comment}}
-#`[#`{{&exercism_comment}}]#`{{/exercism_comment}}
-    $module = 'Example';#`{{#cdata}}
-    if (my $c-data-file =
-      "$dir/../../problem-specifications/exercises/{$dir.IO.resolve.basename}/canonical-data.json"
-      .IO.resolve) ~~ :f
-    {
-      is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'canonical-data';
-    }
-    else {
-      flunk 'canonical-data';
-    }
-  }
-  else {
-    skip;#`{{/cdata}}
-  }
+  $module = 'Example' if %*ENV<EXERCISM>;
 }
