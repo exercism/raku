@@ -25,10 +25,26 @@ if ::($exercise).^ver !~~ $version {
 #`[Import '&hello' from 'HelloWorld']
 require ::($module) <&hello>;
 
-my $c-data;
-#`[Go through the cases (hiding at the bottom of this file)
-and check that &hello gives us the correct response.]
+my $c-data = from-json $=pod.pop.contents;
+# Go through the cases and check that &hello gives us the correct response.
 is hello, |.<expected description> for @($c-data<cases>);
+
+=head2 Canonical Data
+=begin code
+
+{
+  "exercise": "hello-world",
+  "version": "1.0.0",
+  "cases": [
+    {
+      "description": "Say Hi!",
+      "property": "hello",
+      "expected": "Hello, World!"
+    }
+  ]
+}
+
+=end code
 
 #`[Don't worry about the stuff below here for your exercise.
 This is for Exercism folks to check that everything is in order.]
@@ -45,22 +61,4 @@ subtest 'canonical-data' => {
     flunk 'problem-specifications file not found';
 }
 
-INIT {
-$c-data := from-json q:to/END/;
-
-{
-  "exercise": "hello-world",
-  "version": "1.0.0",
-  "cases": [
-    {
-      "description": "Say Hi!",
-      "property": "hello",
-      "expected": "Hello, World!"
-    }
-  ]
-}
-
-END
-
-  $module = 'Example' if %*ENV<EXERCISM>;
-}
+INIT { $module = 'Example' if %*ENV<EXERCISM> }

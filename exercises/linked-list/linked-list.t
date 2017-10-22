@@ -97,6 +97,5 @@ for $cases.values -> $case {
   }
 ]
 =end code
-INIT {
-  $module = 'Example' if %*ENV<EXERCISM>;
-}
+
+INIT { $module = 'Example' if %*ENV<EXERCISM> }

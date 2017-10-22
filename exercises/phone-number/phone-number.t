@@ -21,7 +21,7 @@ if ::($exercise).^ver !~~ $version {
 
 require ::($module) <&clean-number>;
 
-my $c-data;
+my $c-data = from-json $=pod.pop.contents;
 for @($c-data<cases>[0]<cases>) {
   if .<expected> {
     is clean-number(.<phrase>), |.<expected description>;
@@ -30,21 +30,8 @@ for @($c-data<cases>[0]<cases>) {
   }
 }
 
-unless %*ENV<EXERCISM> {
-  skip-rest 'exercism tests';
-  exit;
-}
-
-subtest 'canonical-data' => {
-  (my $c-data-file = "$dir/../../problem-specifications/exercises/{
-    $dir.IO.resolve.basename
-  }/canonical-data.json".IO.resolve) ~~ :f ??
-    is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'match problem-specifications' !!
-    flunk 'problem-specifications file not found';
-}
-
-INIT {
-$c-data := from-json q:to/END/;
+=head2 Canonical Data
+=begin code
 
 {
   "exercise": "phone-number",
@@ -135,7 +122,19 @@ $c-data := from-json q:to/END/;
   ]
 }
 
-END
+=end code
 
-  $module = 'Example' if %*ENV<EXERCISM>;
+unless %*ENV<EXERCISM> {
+  skip-rest 'exercism tests';
+  exit;
 }
+
+subtest 'canonical-data' => {
+  (my $c-data-file = "$dir/../../problem-specifications/exercises/{
+    $dir.IO.resolve.basename
+  }/canonical-data.json".IO.resolve) ~~ :f ??
+    is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'match problem-specifications' !!
+    flunk 'problem-specifications file not found';
+}
+
+INIT { $module = 'Example' if %*ENV<EXERCISM> }
