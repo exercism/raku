@@ -39,11 +39,15 @@ examples if you get stuck.
 
 ## Running the tests
 
-There is a test script included with the exercise; a file with the extension
-`.t`. You can run the test script for the exercise by executing the command
-`prove . --exec=perl6` in the exercise directory. You can also add the `-v` flag
-e.g. `prove . --exec=perl6 -v` to display all tests, including any optional
-tests marked as 'TODO'.
+There is a test suite and module included with the exercise.
+The test suite (a file with the extension `.t`) will attempt to run routines
+from the module (a file with the extension `.pm6`).
+Add/modify routines in the module so that the tests will pass! You can view the
+test data by executing the command `perl6 --doc *.t` (\* being the name of the
+test suite), and run the test suite for the exercise by executing the command
+`prove . --exec=perl6` in the exercise directory.
+You can also add the `-v` flag e.g. `prove . --exec=perl6 -v` to display all
+tests, including any optional tests marked as 'TODO'.
 
 
 ## Submitting Incomplete Solutions
