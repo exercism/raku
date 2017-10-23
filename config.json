@@ -49,6 +49,16 @@
       ]
     },
     {
+      "uuid": "5610ea35-0bd4-e680-1696-fcbd2e21b5594ce9905",
+      "slug": "hamming",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 3,
+      "topics": [
+
+      ]
+    },
+    {
       "uuid": "378da8ed-c955-4a27-87b4-078b36479d77",
       "slug": "rna-transcription",
       "core": false,
