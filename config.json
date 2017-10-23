@@ -39,6 +39,16 @@
       ]
     },
     {
+      "uuid": "4127b836-0318-3480-52f6-d58b1bd248e0cd9c7a6",
+      "slug": "pangram",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 2,
+      "topics": [
+
+      ]
+    },
+    {
       "uuid": "e2d8034d-9e7e-4b1c-a8be-b1b333d7b3f0",
       "slug": "phone-number",
       "core": false,
