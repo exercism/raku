@@ -1,242 +1,196 @@
 {
-  "language": "Perl 6",
-  "checklist_issue": 30,
   "active": true,
   "blurb": "Forget everything you know or think you know about Perl. Perl 6 is a production ready new emerging language that is highly expressive, feature-packed and optimized for fun.",
-  "test_pattern": ".*\\.t$",
-  "foregone": [
-
-  ],
+  "checklist_issue": 30,
   "exercises": [
     {
-      "uuid": "2803dd22-3a92-4fa9-ae7c-4354e80fe423",
+      "core": false,
+      "difficulty": 1,
       "slug": "hello-world",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "2803dd22-3a92-4fa9-ae7c-4354e80fe423"
     },
     {
-      "uuid": "ace2a251-58f5-4128-bc48-f1661463974d",
+      "core": false,
+      "difficulty": 1,
       "slug": "leap",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "ace2a251-58f5-4128-bc48-f1661463974d"
     },
     {
-      "uuid": "2bd18a17-b9f3-4146-a38a-7d940ad16801",
+      "core": false,
+      "difficulty": 1,
       "slug": "bob",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "2bd18a17-b9f3-4146-a38a-7d940ad16801"
     },
     {
-      "uuid": "e2d8034d-9e7e-4b1c-a8be-b1b333d7b3f0",
+      "core": false,
+      "difficulty": 1,
       "slug": "phone-number",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "e2d8034d-9e7e-4b1c-a8be-b1b333d7b3f0"
     },
     {
-      "uuid": "378da8ed-c955-4a27-87b4-078b36479d77",
+      "core": false,
+      "difficulty": 1,
       "slug": "rna-transcription",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "378da8ed-c955-4a27-87b4-078b36479d77"
     },
     {
-      "uuid": "9fc9b102-185d-4f34-98d0-e3084399610a",
+      "core": false,
+      "difficulty": 1,
       "slug": "clock",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "9fc9b102-185d-4f34-98d0-e3084399610a"
     },
     {
-      "uuid": "a8a54ad8-0ac7-4434-aa61-5740da857293",
+      "core": false,
+      "difficulty": 1,
       "slug": "wordy",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "a8a54ad8-0ac7-4434-aa61-5740da857293"
     },
     {
-      "uuid": "9cb1a358-93af-4242-98fe-def7538f9190",
+      "core": false,
+      "difficulty": 1,
       "slug": "raindrops",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "9cb1a358-93af-4242-98fe-def7538f9190"
     },
     {
-      "uuid": "8760e564-e3af-45fb-9d30-0cf537dc60eb",
+      "core": false,
+      "difficulty": 1,
       "slug": "scrabble-score",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "8760e564-e3af-45fb-9d30-0cf537dc60eb"
     },
     {
-      "uuid": "2d0c4351-3d23-4023-942a-77fbb3a90d82",
+      "core": false,
+      "difficulty": 1,
       "slug": "luhn",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "2d0c4351-3d23-4023-942a-77fbb3a90d82"
     },
     {
-      "uuid": "23aa0f8c-e098-4d4e-8556-7c1be40726a9",
+      "core": false,
+      "difficulty": 1,
       "slug": "word-count",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "23aa0f8c-e098-4d4e-8556-7c1be40726a9"
     },
     {
-      "uuid": "f5f83c92-9a37-4601-82e0-c4430855cfc3",
+      "core": false,
+      "difficulty": 1,
       "slug": "flatten-array",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "f5f83c92-9a37-4601-82e0-c4430855cfc3"
     },
     {
-      "uuid": "cb04dab7-4907-41ff-9bb2-596e8d04e087",
+      "core": false,
+      "difficulty": 1,
       "slug": "grade-school",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "cb04dab7-4907-41ff-9bb2-596e8d04e087"
     },
     {
-      "uuid": "c4ecc2f5-849f-44fe-9151-a51e6188b4f0",
+      "core": false,
+      "difficulty": 1,
       "slug": "accumulate",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "c4ecc2f5-849f-44fe-9151-a51e6188b4f0"
     },
     {
-      "uuid": "85f171b0-4394-4f30-bbe5-9c2a96931630",
+      "core": false,
+      "difficulty": 1,
       "slug": "grains",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "85f171b0-4394-4f30-bbe5-9c2a96931630"
     },
     {
-      "uuid": "fed2a81d-724d-4ccd-bf65-c6155a2dfbea",
+      "core": false,
+      "difficulty": 1,
       "slug": "all-your-base",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "fed2a81d-724d-4ccd-bf65-c6155a2dfbea"
     },
     {
-      "uuid": "1e99ac1f-853d-446f-a567-dd2d70dce9c1",
+      "core": false,
+      "difficulty": 1,
       "slug": "anagram",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "1e99ac1f-853d-446f-a567-dd2d70dce9c1"
     },
     {
-      "uuid": "d5f7756e-9b82-4576-9f21-dff39293e015",
+      "core": false,
+      "difficulty": 1,
       "slug": "robot-name",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "d5f7756e-9b82-4576-9f21-dff39293e015"
     },
     {
-      "uuid": "be32cfd0-1653-4320-98ad-1fddb728f29b",
+      "core": false,
+      "difficulty": 1,
       "slug": "atbash-cipher",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "be32cfd0-1653-4320-98ad-1fddb728f29b"
     },
     {
-      "uuid": "5510f44a-f484-4df4-9b07-1f23f42df4d1",
+      "core": false,
+      "difficulty": 1,
       "slug": "space-age",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "5510f44a-f484-4df4-9b07-1f23f42df4d1"
     },
     {
-      "uuid": "8db9c6f1-b086-4b20-a0d2-657d5fdb2c1e",
+      "core": false,
+      "difficulty": 1,
       "slug": "allergies",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "8db9c6f1-b086-4b20-a0d2-657d5fdb2c1e"
     },
     {
-      "uuid": "1f21e5b0-e4fd-48e5-81ee-eccfb93bc349",
+      "core": false,
+      "difficulty": 1,
       "slug": "linked-list",
-      "core": false,
+      "topics": null,
       "unlocked_by": null,
-      "difficulty": 1,
-      "topics": [
-
-      ]
+      "uuid": "1f21e5b0-e4fd-48e5-81ee-eccfb93bc349"
     },
     {
-      "uuid": "1d36c4df-a1c8-454c-b4ec-7bec3c1cbca3",
+      "deprecated": true,
       "slug": "binary",
-      "deprecated": true
+      "uuid": "1d36c4df-a1c8-454c-b4ec-7bec3c1cbca3"
     },
     {
-      "uuid": "eb5415a2-1342-4dcb-ac86-34240e5dead8",
+      "deprecated": true,
       "slug": "trinary",
-      "deprecated": true
+      "uuid": "eb5415a2-1342-4dcb-ac86-34240e5dead8"
     }
-  ]
+  ],
+  "foregone": [],
+  "language": "Perl 6",
+  "test_pattern": ".*\\.t$"
 }
