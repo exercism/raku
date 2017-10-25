@@ -29,7 +29,7 @@ is is-leap-year(.<input>), |.<expected description> for @($c-data<cases>);
 
 {
   "exercise": "leap",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "cases": [
     {
       "description": "year not divisible by 4: common year",
@@ -40,7 +40,7 @@ is is-leap-year(.<input>), |.<expected description> for @($c-data<cases>);
     {
       "description": "year divisible by 4, not divisible by 100: leap year",
       "property": "leapYear",
-      "input": 2020,
+      "input": 1996,
       "expected": true
     },
     {
