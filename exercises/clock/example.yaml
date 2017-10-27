@@ -2,7 +2,7 @@ exercise: Clock
 version: 1
 methods: time add-minutes
 plan: 54
-tests: |
+tests: |-
   for @($c-data<cases>) {
     for @(.<cases>) -> $case {
       given $case<property> {
@@ -23,22 +23,22 @@ tests: |
       }
     }
   }
-  
+
   todo 'optional test' unless %*ENV<EXERCISM>;
   is ::($exercise).new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
 
 unit: class
-example: |
+example: |-
   has Int:D $.hour = 0;
   has Int:D $.minute = 0;
-  
+
   method time {
     sprintf '%02d:%02d', ($!hour + $!minute div 60) % 24, $!minute % 60;
   }
-  
+
   method add-minutes (Int:D $min) {
     $!minute += $min and return self;
   }
-stub: |
+stub: |-
   has $.hour;
   has $.minute;

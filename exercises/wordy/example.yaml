@@ -2,7 +2,7 @@ exercise: Wordy
 version: 1
 plan: 18
 imports: '&answer'
-tests: |
+tests: |-
   for @($c-data<cases>) {
     if .<expected> === False {
       throws-like {.<input>.&answer}, Exception, .<description>;
@@ -12,7 +12,7 @@ tests: |
   }
 
 unit: module
-example: |
+example: |-
   sub answer ($q is copy) is export { 
     given $q {
       s:s:g/^What is|\?$//;
@@ -27,6 +27,6 @@ example: |
     use MONKEY-SEE-NO-EVAL;
     EVAL $q or fail;
   }
-stub: |
+stub: |-
   sub answer ($question) is export { 
   }

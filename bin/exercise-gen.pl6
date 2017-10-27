@@ -1,7 +1,7 @@
 #!/usr/bin/env perl6
 use v6;
 use Template::Mustache;
-use YAMLish;
+use YAML::Parser::LibYAML;
 
 my $base-dir = $?FILE.IO.resolve.parent.parent;
 my @exercises;
@@ -33,14 +33,13 @@ for @exercises -> $exercise {
     push @dir-not-found, $exercise;
     next;
   }
-  if (my $yaml = $exercise-dir.child('example.yaml')) !~~ :f {
+  if (my $yaml-file = $exercise-dir.child('example.yaml')) !~~ :f {
     push @yaml-not-found, $exercise;
     next;
   };
   print "Generating $exercise... ";
 
-  my %data = load-yaml $yaml.slurp;
-  $_=.chomp when Str for @(%data.values);
+  my %data = yaml-parse $yaml-file.absolute;
 
   my $cdata = $base-dir.child("problem-specifications/exercises/$exercise/canonical-data.json");
   if $cdata ~~ :f {%data<cdata><json> = $cdata.slurp}

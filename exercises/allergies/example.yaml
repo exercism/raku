@@ -2,27 +2,27 @@ exercise: Allergies
 version: 2
 plan: 4
 imports: '&allergic-to &list-allergies'
-tests: |
+tests: |-
   for $c-data<cases>.values -> %case-set {
-  
+
     subtest 'allergic-to' => {
       plan 7;
       for %case-set<cases>.values -> %case {
         is allergic-to(%case<score>, .<substance>), .<result>, %case<description> ~ ': ' ~ .<substance> for %case<expected>.values;
       }
     } when %case-set<description> ~~ 'allergicTo';
-  
+
     subtest 'list-allergies' => {
       plan 9;
       for %case-set<cases>.values {
         cmp-ok list-allergies(.<score>), '~~', .<expected>.Set, .<description>;
       }
     } when %case-set<description> ~~ 'list';
-  
+
   }
 
 unit: module
-example: |
+example: |-
   our @allergens = <
       eggs
       peanuts
@@ -33,11 +33,11 @@ example: |
       pollen
       cats
   >;
-  
+
   sub allergic-to($code,$substance) is export {
       return so $code +& ( 2 ** @allergens.first({ $_ eq $substance},:k) )
   }
-  
+
   sub list-allergies($code) is export {
       return grep { allergic-to($code,$_) }, @allergens;
   }

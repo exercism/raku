@@ -2,7 +2,7 @@ exercise: GradeSchool
 version: 1
 plan: 10
 imports: Roster
-tests: |
+tests: |-
   subtest "Roster class methods", {
     plan 3;
     ok ::('Roster').can($_), $_ for <add-student list-grade list-all>;
@@ -23,23 +23,23 @@ tests: |
   is $roster.?list-all, ('Grade 1', <Anna Barb Charlie>, 'Grade 2', <Alex Jim Zoe>, 'Grade 3', <Dick Harry Tom>), 'List all';
 
 unit: module
-example: |
+example: |-
   class Roster is export {
     has %!roster;
-  
+
     method add-student (Str:D :$name!, Int:D :$grade!) {
       %!roster.append($grade, $name);
     }
-  
+
     method list-grade (Int:D $grade --> Seq:D) {
       %!roster{$grade}.sort;
     }
-  
+
     method list-all {
       my @list.append("Grade $_", %!roster{$_}.sort) for %!roster.keys.sort;
       return @list;
     }
   }
-stub: |
+stub: |-
   class Roster is export {
   }

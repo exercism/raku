@@ -2,7 +2,7 @@ exercise: Accumulate
 version: 1
 plan: 7
 imports: '&accumulate'
-tests: |
+tests: |-
   is-deeply accumulate([ ], sub {}),
             [ ],
             'test empty';
@@ -23,7 +23,7 @@ tests: |
             'reverse strings';
 
 unit: module
-example: |
+example: |-
   sub accumulate (@list, $function) is export {
     my @accumulated;
     for @list -> $element {
