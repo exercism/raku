@@ -2,11 +2,11 @@ exercise: Anagram
 version: 1
 plan: 18
 imports: '&match-anagrams'
-tests: |
+tests: |-
   is match-anagrams(|.<subject candidates>), |.<expected description> for @($c-data<cases>);
 
 unit: module
-example: |
+example: |-
   sub match-anagrams ($word, @words) is export {
     my @results;
     my $canonical = canonize($word);
@@ -19,7 +19,7 @@ example: |
     }
     @results;
   }
-  
+
   sub canonize ($str) {
     (($str.lc.split('')).sort).join('');
   }

@@ -2,8 +2,8 @@ exercise: AllYourBase
 version: 2
 plan: 23
 imports: '&convert-base'
-tests: |
-  
+tests: |-
+
   for @($c-data<cases>) -> $case {
     if $case<expected> ~~ Array:D { test }
     else {
@@ -17,33 +17,33 @@ tests: |
         flunk "$_; not tested" if %*ENV<EXERCISM>; # To ensure that no canonical-data cases are missed.
       }
     }
-  
+
     sub test (Array:D $expected = $case<expected>) {
       is-deeply call-convert-base, $expected, $case<description>
     }
-  
+
     sub call-convert-base { convert-base(|$case<input_base input_digits output_base>) }
   }
 
 unit: module
-example: |
+example: |-
   class X::AllYourBase::InvalidBase is Exception {
     has $.payload;
     method message {"$!payload is not a valid base."}
   }
-  
+
   class X::AllYourBase::InvalidDigit is Exception {
     has %.payload;
     method message {"%!payload<digit> is not a valid digit for base %!payload<base>."}
   }
-  
+
   sub convert-base (Int:D $input-base, @input-digits, Int:D $output-base --> Array:D) is export {
     for $input-base, $output-base {
       X::AllYourBase::InvalidBase.new(payload => $_).throw if $_ < 2;
     }
     from-decimal($output-base, (to-decimal $input-base, @input-digits));
   }
-  
+
   sub to-decimal ($input-base, @input-digits) {
     return [].Slip if !@input-digits;
     my $elems = @input-digits.elems;
@@ -60,7 +60,7 @@ example: |
     }
     return $dec;
   }
-  
+
   sub from-decimal ($output-base, $dec) {
     my @output-digits;
     my $num = $dec;

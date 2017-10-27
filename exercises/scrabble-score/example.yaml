@@ -2,11 +2,11 @@ exercise: Scrabble
 version: 1
 plan: 13
 imports: '&score'
-tests: |
+tests: |-
   is .<input>.&score, |.<expected description> for @($c-data<cases>);
 
 unit: module
-example: |
+example: |-
   sub score (Str:D $word --> Int:D) is export {
     my $score = 0;
     for $word.lc.split('',:skip-empty) -> $letter {
@@ -22,6 +22,6 @@ example: |
     }
     return $score;
   }
-stub: |
+stub: |-
   sub score ($word) is export {
   }

@@ -2,7 +2,7 @@ exercise: Raindrops
 version: 1
 plan: 20
 imports: '&convert'
-tests: |
+tests: |-
   for @($c-data<cases>) {
     subtest {
       plan 2;
@@ -12,7 +12,7 @@ tests: |
   }
 
 unit: module
-example: |
+example: |-
   sub convert (Int:D $num --> Str:D) is export {
     my $str = '';
     given $num {
@@ -22,6 +22,6 @@ example: |
     }
     return $str ?? $str !! $num.Str;
   }
-stub: |
+stub: |-
   sub convert ($num) is export {
   }

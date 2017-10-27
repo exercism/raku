@@ -4,7 +4,7 @@ plan: 7
 modules:
   - use: JSON::Fast
 methods: 'push-list pop-list shift-list unshift-list'
-tests: |
+tests: |-
   my $cases = from-json $=pod.pop.contents;
   for $cases.values -> $case {
     subtest $case.<name>, sub {
@@ -22,7 +22,7 @@ tests: |
       }
     }
   }
-  
+
   =head2 Test Data
   =begin code
   [
@@ -81,16 +81,16 @@ tests: |
   =end code
 
 unit: class
-example: |
+example: |-
   class ListNode {
       has $.next     is rw;
       has $.previous is rw;
       has $.value;
   }
-  
+
   has $!first;
   has $!last;
-  
+
   method push-list($value) {
       my $next = ListNode.new( value => $value, previous => $!last );
       if ( $!last ) {
@@ -100,7 +100,7 @@ example: |
           $!first = $!last = $next;
       }
   }
-  
+
   method unshift-list($value) {
       my $next = ListNode.new( value => $value, next => $!first );
       if ( $!first ) {
@@ -110,23 +110,23 @@ example: |
           $!first = $!last = $next;
       }
   }
-  
+
   method shift-list() {
       my $f = $!first;
-  
+
       $!first = $!first.next;
-  
+
       unless $!first  { $!last = $!first }
-  
+
       return $f.value;
   }
-  
+
   method pop-list() {
       my $f = $!last;
-  
+
       $!last = $!last.previous;
-  
+
       unless $!.last  { $!first = $!last }
-  
+
       return $f.value;
   }

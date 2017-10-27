@@ -2,21 +2,21 @@ exercise: SpaceAge
 version: 1
 plan: 10
 imports: Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune
-tests: |
+tests: |-
   is (age-on ::(.<planet>): .<seconds>), |.<expected description> for @($c-data<cases>);
 
 unit: module
-example: |
+example: |-
   role Planet {
     method age-on ($seconds) {
       ($seconds / self.orbital-period).round(0.01);
     }
   }
-  
+
   class Earth does Planet is export {
     my $.orbital-period = 31557600;
   }
-  
+
   my %planets = (
     :Mercury(0.2408467),
     :Venus(0.61519726),
@@ -31,20 +31,20 @@ example: |
     OUR::EXPORT::ALL::{$planet} := OUR::EXPORT::DEFAULT::{$planet} := EVAL "class $planet does Planet is export " ~
     '{ my $.orbital-period = calculate-orbital-period $relative }';
   }
-  
+
   sub calculate-orbital-period ($relative-to-earth) {
     Earth.orbital-period * $relative-to-earth;
   }
-stub: |
+stub: |-
   role Planet {
     method age-on ($seconds) {
     }
   }
-  
+
   class Earth does Planet is export {
     my $.orbital-period = 31557600; 
   }
-  
+
   =for comment
   ---
   Orbital periods relative to Earth:

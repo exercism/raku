@@ -2,7 +2,7 @@ exercise: Phone
 version: 3
 plan: 14
 imports: '&clean-number'
-tests: |
+tests: |-
   for @($c-data<cases>[0]<cases>) {
     if .<expected> {
       is clean-number(.<phrase>), |.<expected description>;
@@ -12,11 +12,11 @@ tests: |
   }
 
 unit: module
-example: |
+example: |-
   sub clean-number ($number is copy) is export {
     $number ~~ s:g/<:!Nd>//;
     $number ~~ /^ 1? ( [ <[2..9]> <:Nd> ** 2 ] ** 2 <:Nd> ** 4 ) $/ ?? ~$0 !! Nil;
   }
-stub: |
+stub: |-
   sub clean-number ($number) is export {
   }

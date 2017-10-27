@@ -2,15 +2,15 @@ exercise: FlattenArray
 version: 1
 plan: 8
 imports: '&flatten-array'
-tests: |
+tests: |-
   is-deeply flatten-array(.<input>), |.<expected description> for @($c-data<cases>);
 
 unit: module
-example: |
+example: |-
   sub flatten-array(@input --> Array) is export {
     @input.&denest;
     return my @result;
-  
+
     sub denest(@array) {
       for @array {
         .&denest when Array;
@@ -18,6 +18,6 @@ example: |
       }
     }
   }
-stub: |
+stub: |-
   sub flatten-array(@input) is export {
   }
