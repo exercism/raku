@@ -1,0 +1,17 @@
+exercise: Pangram
+version: 1
+plan: 12
+imports: '&is-pangram'
+tests: |
+  for $c-data<cases>.values -> %case-set {
+    is is-pangram(.<input>), |.<expected description> for %case-set<cases>.values;
+  }
+
+unit: module
+example: |
+  sub is-pangram (Str:D $string --> Bool:D) is export {
+    $string.lc.comb ⊇ ‘a’..‘z’
+  }
+stub: |
+  sub is-pangram ($string) is export {
+  }
