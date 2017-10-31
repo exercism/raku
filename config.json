@@ -139,6 +139,16 @@
       ]
     },
     {
+      "uuid": "9c3d44e7-0b1a-7980-7774-88af672c1795b3287ed",
+      "slug": "meetup",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 5,
+      "topics": [
+
+      ]
+    },
+    {
       "uuid": "23aa0f8c-e098-4d4e-8556-7c1be40726a9",
       "slug": "word-count",
       "core": false,
