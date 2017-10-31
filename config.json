@@ -33,7 +33,7 @@
       "slug": "leap",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 2,
       "topics": [
 
       ]
@@ -43,7 +43,7 @@
       "slug": "bob",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 3,
       "topics": [
 
       ]
@@ -63,7 +63,7 @@
       "slug": "phone-number",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 4,
       "topics": [
 
       ]
@@ -83,7 +83,7 @@
       "slug": "rna-transcription",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 2,
       "topics": [
 
       ]
@@ -103,7 +103,7 @@
       "slug": "clock",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 3,
       "topics": [
 
       ]
@@ -113,7 +113,7 @@
       "slug": "wordy",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 6,
       "topics": [
 
       ]
@@ -123,7 +123,7 @@
       "slug": "raindrops",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 3,
       "topics": [
 
       ]
@@ -133,7 +133,7 @@
       "slug": "scrabble-score",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 5,
       "topics": [
 
       ]
@@ -143,7 +143,7 @@
       "slug": "luhn",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 5,
       "topics": [
 
       ]
@@ -163,7 +163,7 @@
       "slug": "word-count",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 4,
       "topics": [
 
       ]
@@ -173,7 +173,7 @@
       "slug": "flatten-array",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 4,
       "topics": [
 
       ]
@@ -183,7 +183,7 @@
       "slug": "grade-school",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 4,
       "topics": [
 
       ]
@@ -193,7 +193,7 @@
       "slug": "accumulate",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 2,
       "topics": [
 
       ]
@@ -203,7 +203,7 @@
       "slug": "grains",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 3,
       "topics": [
 
       ]
@@ -213,7 +213,7 @@
       "slug": "all-your-base",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 6,
       "topics": [
 
       ]
@@ -223,7 +223,7 @@
       "slug": "anagram",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 5,
       "topics": [
 
       ]
@@ -233,7 +233,7 @@
       "slug": "robot-name",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 6,
       "topics": [
 
       ]
@@ -243,7 +243,7 @@
       "slug": "atbash-cipher",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 5,
       "topics": [
 
       ]
@@ -253,7 +253,7 @@
       "slug": "space-age",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 4,
       "topics": [
 
       ]
@@ -263,7 +263,7 @@
       "slug": "allergies",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 5,
       "topics": [
 
       ]
@@ -273,7 +273,7 @@
       "slug": "linked-list",
       "core": false,
       "unlocked_by": null,
-      "difficulty": 1,
+      "difficulty": 6,
       "topics": [
 
       ]
