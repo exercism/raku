@@ -1,0 +1,22 @@
+exercise: Hamming
+version: 1
+plan: 17
+imports: '&hamming-distance'
+tests: |-
+  for $c-data<cases>.values {
+    if .<expected><error> {
+      throws-like {hamming-distance(|.<strand1 strand2>)}, Exception, .<description>, message => .<expected><error>;
+    } else {
+      is hamming-distance(|.<strand1 strand2>), |.<expected description>;
+    }
+  }
+
+unit: module
+example: |-
+  sub hamming-distance ( Str:D $strand1, Str:D $strand2 --> Int:D ) is export {
+    die ‘left and right strands must be of equal length’ if $strand1.chars ≠ $strand2.chars;
+    ($strand1.comb Zne $strand2.comb).sum
+  }
+stub: |-
+  sub hamming-distance ($strand1, $strand2) is export {
+  }
