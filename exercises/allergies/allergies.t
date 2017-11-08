@@ -5,7 +5,7 @@ use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
 
 my Str:D $exercise := 'Allergies';
-my Version:D $version = v2;
+my Version:D $version = v3;
 my Str $module //= $exercise;
 plan 4;
 
@@ -27,7 +27,15 @@ for $c-data<cases>.values -> %case-set {
   subtest 'allergic-to' => {
     plan 7;
     for %case-set<cases>.values -> %case {
-      is allergic-to(%case<score>, .<substance>), .<result>, %case<description> ~ ': ' ~ .<substance> for %case<expected>.values;
+      for %case<expected>.values {
+        given allergic-to %case<score>, .<substance> -> $result {
+          subtest %case<description> ~ ': ' ~ .<substance> => {
+            plan 2;
+            isa-ok $result, Bool;
+            is-deeply $result, .<result>, 'Result matches expected';
+          }
+        }
+      }
     }
   } when %case-set<description> ~~ 'allergicTo';
 

@@ -1,9 +1,17 @@
 exercise: Luhn
-version: 1
+version: 2
 plan: 15
 imports: '&is-luhn-valid'
 tests: |-
-  is .<input>.&is-luhn-valid, |.<expected description> for @($c-data<cases>);
+  for $c-data<cases>.values {
+    given is-luhn-valid .<input> -> $result {
+      subtest .<description>, {
+        plan 2;
+        isa-ok $result, Bool;
+        is-deeply $result, .<expected>, 'Result matches expected';
+      }
+    }
+  }
 
 unit: module
 example: |-
