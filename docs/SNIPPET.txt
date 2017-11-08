@@ -1,5 +1,10 @@
-unit module HelloWorld;
+say my $candidates = all
+  (‘Alphabet’, ‘subdermatoglyphic’,
+  ‘Emily Jung Schwartzkopf’).pick: 2;
 
-sub hello is export {
-  'Hello, World!'
+say “All isograms? {$_ ?? ‘✔’ !! ‘❌’}”
+  given is-isogram($candidates).so;
+
+sub is-isogram (Str $_ --> Bool) {
+  .uc.comb(/<:L>/).Bag ⊆ 'A'..'Z';
 }
