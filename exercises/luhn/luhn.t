@@ -5,7 +5,7 @@ use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
 
 my Str:D $exercise := 'Luhn';
-my Version:D $version = v1;
+my Version:D $version = v2;
 my Str $module //= $exercise;
 plan 15;
 
@@ -22,7 +22,15 @@ if ::($exercise).^ver !~~ $version {
 require ::($module) <&is-luhn-valid>;
 
 my $c-data = from-json $=pod.pop.contents;
-is .<input>.&is-luhn-valid, |.<expected description> for @($c-data<cases>);
+for $c-data<cases>.values {
+  given is-luhn-valid .<input> -> $result {
+    subtest .<description>, {
+      plan 2;
+      isa-ok $result, Bool;
+      is-deeply $result, .<expected>, 'Result matches expected';
+    }
+  }
+}
 
 =head2 Canonical Data
 =begin code

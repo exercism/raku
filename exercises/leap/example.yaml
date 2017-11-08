@@ -1,9 +1,17 @@
 exercise: Leap
-version: 2
+version: 3
 plan: 6
 imports: '&is-leap-year'
 tests: |-
-  is is-leap-year(.<input>), |.<expected description> for @($c-data<cases>);
+  for $c-data<cases>.values {
+    given is-leap-year .<input> -> $result {
+      subtest .<description>, {
+        plan 2;
+        isa-ok $result, Bool;
+        is-deeply $result, .<expected>, 'Result matches expected';
+      }
+    }
+  }
 
 unit: module
 example: |-

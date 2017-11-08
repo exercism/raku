@@ -5,7 +5,7 @@ use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
 
 my Str:D $exercise := 'Pangram';
-my Version:D $version = v1;
+my Version:D $version = v2;
 my Str $module //= $exercise;
 plan 12;
 
@@ -22,8 +22,14 @@ if ::($exercise).^ver !~~ $version {
 require ::($module) <&is-pangram>;
 
 my $c-data = from-json $=pod.pop.contents;
-for $c-data<cases>.values -> %case-set {
-  is is-pangram(.<input>), |.<expected description> for %case-set<cases>.values;
+for $c-data<cases>».<cases>».Array.flat {
+  given is-pangram .<input> -> $result {
+    subtest .<description>, {
+      plan 2;
+      isa-ok $result, Bool;
+      is-deeply $result, .<expected>, 'Result matches expected';
+    }
+  }
 }
 
 =head2 Canonical Data

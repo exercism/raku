@@ -1,4 +1,4 @@
-unit module Luhn:ver<1>;
+unit module Luhn:ver<2>;
 
 sub is-luhn-valid ($input) is export {
 }
