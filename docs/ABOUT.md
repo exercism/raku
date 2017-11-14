@@ -1,15 +1,24 @@
-From [Perl 6 Introduction](http://perl6intro.com/):
+Perl 6 is a clean, modern, multi-paradigm language; it offers procedural,
+object-oriented AND functional programming methodologies. It is a supremely
+flexible language, adapting to your style of programming, whether that be quick
+one­liners for sysadmins, scripts to manage a database import, or the full stack
+of modules necessary to realise an entire website.
 
-## What is Perl 6
-Perl 6 is a high-level, general-purpose, gradually typed language. Perl 6 is multi-paradigmatic. It supports Procedural, Object Oriented, and Functional programming.
+Perl 6 enhances Perl’s long­term appeal with a proper object system including
+roles, threading and multi­method dispatch. It has spent a long time coming to
+fruition and has learned from other programming languages, building on their
+success and learning from the issues of the past. We believe Perl 6 is a
+language that will last for decades as it has been conceived to adapt to future
+trends and is flexible in its usage with other languages.
 
-##### Perl 6 motto:
-* TMTOWTDI (Pronounced Tim Toady): There is more than one way to do it.
-* Easy things should stay easy, hard things should get easier, and impossible things should get hard.
+Perl 6 learns from other languages. For instance: taking threading from Java
+(simplified to a handful of methods); Foreign-function interfaces from Lisp make
+accessing libraries as simple as one line of code. Regular expressions are now
+turned up to 11 with the introduction of Parser Expression Grammars, which let
+you tackle huge parsing tasks. Strictures and warnings are now automatic,
+cutting out huge swathes of potential errors.
 
-## Jargon
-* **Perl 6:** Is a language specification with a test suite. Implementations that pass the specification test suite are considered Perl 6.
-* **Rakudo:** Is a compiler for Perl 6.
-* **Rakudobrew:** Is an installation manager for Rakudo.
-* **Zef:** Is a Perl 6 module installer.
-* **Rakudo Star:** Is a bundle that includes Rakudo, Zef, a collection of Perl 6 modules, and documentation.
+Perl 6’s mottos remain the same as Perl: “Perl is different. In a nutshell,
+Perl is designed to make the easy jobs easy, without making the hard jobs
+impossible.” and “There Is More Than One Way To Do It”. Now with even more
+-Ofun (optimized for fun) added.
