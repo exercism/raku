@@ -1,0 +1,24 @@
+exercise: NucleotideCount
+version: 1
+plan: 7
+imports: '&nucleotide-count'
+tests: |-
+  for $c-data<cases>».<cases>».Array.flat {
+    if .<expected><error> {
+      throws-like {nucleotide-count(.<strand>)}, Exception, .<description>;
+    }
+    else {
+      cmp-ok nucleotide-count(.<strand>), '~~', .<expected>.Bag, .<description>;
+    }
+  }
+
+unit: module
+example: |-
+  sub nucleotide-count (
+    Str:D $_ where { .comb.Set ⊆ <A C G T> } --> Bag(Iterable:D)
+  ) is export {
+    .comb
+  }
+stub: |-
+  sub nucleotide-count ($strand) is export {
+  }

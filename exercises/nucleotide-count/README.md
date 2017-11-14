@@ -1,0 +1,38 @@
+# Nucleotide Count
+
+Given a single stranded DNA string, compute how many times each nucleotide occurs in the string.
+
+The genetic language of every living thing on the planet is DNA.
+DNA is a large molecule that is built from an extremely long sequence of individual elements called nucleotides.
+4 types exist in DNA and these differ only slightly and can be represented as the following symbols: 'A' for adenine, 'C' for cytosine, 'G' for guanine, and 'T' thymine.
+
+Here is an analogy:
+- twigs are to birds nests as
+- nucleotides are to DNA as
+- legos are to lego houses as
+- words are to sentences as...
+
+## Resources
+
+Remember to check out the Perl 6 [documentation](https://docs.perl6.org/) and
+[resources](https://perl6.org/resources/) pages for information, tips, and
+examples if you get stuck.
+
+## Running the tests
+
+There is a test suite and module included with the exercise.
+The test suite (a file with the extension `.t`) will attempt to run routines
+from the module (a file with the extension `.pm6`).
+Add/modify routines in the module so that the tests will pass! You can view the
+test data by executing the command `perl6 --doc *.t` (\* being the name of the
+test suite), and run the test suite for the exercise by executing the command
+`prove . --exec=perl6` in the exercise directory.
+You can also add the `-v` flag e.g. `prove . --exec=perl6 -v` to display all
+tests, including any optional tests marked as 'TODO'.
+
+## Source
+
+The Calculating DNA Nucleotides_problem at Rosalind [http://rosalind.info/problems/dna/](http://rosalind.info/problems/dna/)
+
+## Submitting Incomplete Solutions
+It's possible to submit an incomplete solution so you can see how others have completed the exercise.
