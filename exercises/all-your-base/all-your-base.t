@@ -5,7 +5,7 @@ use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
 
 my Str:D $exercise := 'AllYourBase';
-my Version:D $version = v2;
+my Version:D $version = v3;
 my Str $module //= $exercise;
 plan 23;
 
@@ -22,26 +22,22 @@ if ::($exercise).^ver !~~ $version {
 require ::($module) <&convert-base>;
 
 my $c-data = from-json $=pod.pop.contents;
+for $c-data<cases>.values -> $case {
+  sub call-convert-base {
+    convert-base(
+      bases  => %(<from to> Z=> .<input_base output_base>),
+      digits => .<input_digits>,
+    ) given $case;
+  }
 
-for @($c-data<cases>) -> $case {
-  if $case<expected> ~~ Array:D { test }
-  else {
-    given $case<description> {
-      when 'empty list' { test [] }
-      when /base|digit/ { throws-like {call-convert-base}, Exception, $_ }
-      when /zero/ {
-        when 'leading zeros' { test [4,2] }
-        default { test [0] }
-      }
-      flunk "$_; not tested" if %*ENV<EXERCISM>; # To ensure that no canonical-data cases are missed.
+  given $case {
+    if .<expected><error> {
+      throws-like {call-convert-base}, Exception, .<description>;
+    }
+    else {
+      cmp-ok call-convert-base, ‘~~’, |.<expected description>;
     }
   }
-
-  sub test (Array:D $expected = $case<expected>) {
-    is-deeply call-convert-base, $expected, $case<description>
-  }
-
-  sub call-convert-base { convert-base(|$case<input_base input_digits output_base>) }
 }
 
 =head2 Canonical Data
@@ -49,24 +45,15 @@ for @($c-data<cases>) -> $case {
 
 {
   "exercise": "all-your-base",
-  "version": "1.1.0",
+  "version": "2.0.1",
   "comments": [
-    "It's up to each track do decide:",
+    "This canonical data makes the following choices:",
+    "1. Zero is always represented in outputs as [0] instead of [].",
+    "2. In no other instances are leading zeroes present in any outputs.",
+    "3. Leading zeroes are accepted in inputs.",
+    "4. An empty sequence of input digits is considered zero, rather than an error.",
     "",
-    "1. What's the canonical representation of zero?",
-    " - []?",
-    " - [0]?",
-    "",
-    "2. What representations of zero are allowed?",
-    " - []?",
-    " - [0]?",
-    " - [0,0]?",
-    "",
-    "3. Are leading zeroes allowed?",
-    "",
-    "4. How should invalid input be handled?",
-    "",
-    "All the undefined cases are marked as null.",
+    "Tracks that wish to make different decisions for these choices may translate appropriately.",
     "",
     "All your numeric-base are belong to [2..]. :)"
   ],
@@ -141,7 +128,7 @@ for @($c-data<cases>) -> $case {
       "input_base": 2,
       "input_digits": [],
       "output_base": 10,
-      "expected": null
+      "expected": [0]
     },
     {
       "description": "single zero",
@@ -149,7 +136,7 @@ for @($c-data<cases>) -> $case {
       "input_base": 10,
       "input_digits": [0],
       "output_base": 2,
-      "expected": null
+      "expected": [0]
     },
     {
       "description": "multiple zeros",
@@ -157,7 +144,7 @@ for @($c-data<cases>) -> $case {
       "input_base": 10,
       "input_digits": [0, 0, 0],
       "output_base": 2,
-      "expected": null
+      "expected": [0]
     },
     {
       "description": "leading zeros",
@@ -165,31 +152,31 @@ for @($c-data<cases>) -> $case {
       "input_base": 7,
       "input_digits": [0, 6, 0],
       "output_base": 10,
-      "expected": null
+      "expected": [4, 2]
     },
     {
-      "description": "first base is one",
+      "description": "input base is one",
       "property": "rebase",
       "input_base": 1,
       "input_digits": [],
       "output_base": 10,
-      "expected": null
+      "expected": {"error": "input base must be >= 2"}
     },
     {
-      "description": "first base is zero",
+      "description": "input base is zero",
       "property": "rebase",
       "input_base": 0,
       "input_digits": [],
       "output_base": 10,
-      "expected": null
+      "expected": {"error": "input base must be >= 2"}
     },
     {
-      "description": "first base is negative",
+      "description": "input base is negative",
       "property": "rebase",
       "input_base": -2,
       "input_digits": [1],
       "output_base": 10,
-      "expected": null
+      "expected": {"error": "input base must be >= 2"}
     },
     {
       "description": "negative digit",
@@ -197,7 +184,7 @@ for @($c-data<cases>) -> $case {
       "input_base": 2,
       "input_digits": [1, -1, 1, 0, 1, 0],
       "output_base": 10,
-      "expected": null
+      "expected": {"error": "all digits must satisfy 0 <= d < input base"}
     },
     {
       "description": "invalid positive digit",
@@ -205,31 +192,31 @@ for @($c-data<cases>) -> $case {
       "input_base": 2,
       "input_digits": [1, 2, 1, 0, 1, 0],
       "output_base": 10,
-      "expected": null
+      "expected": {"error": "all digits must satisfy 0 <= d < input base"}
     },
     {
-      "description": "second base is one",
+      "description": "output base is one",
       "property": "rebase",
       "input_base": 2,
       "input_digits": [1, 0, 1, 0, 1, 0],
       "output_base": 1,
-      "expected": null
+      "expected": {"error": "output base must be >= 2"}
     },
     {
-      "description": "second base is zero",
+      "description": "output base is zero",
       "property": "rebase",
       "input_base": 10,
       "input_digits": [7],
       "output_base": 0,
-      "expected": null
+      "expected": {"error": "output base must be >= 2"}
     },
     {
-      "description": "second base is negative",
+      "description": "output base is negative",
       "property": "rebase",
       "input_base": 2,
       "input_digits": [1],
       "output_base": -7,
-      "expected": null
+      "expected": {"error": "output base must be >= 2"}
     },
     {
       "description": "both bases are negative",
@@ -237,7 +224,7 @@ for @($c-data<cases>) -> $case {
       "input_base": -2,
       "input_digits": [1],
       "output_base": -7,
-      "expected": null
+      "expected": {"error": "input base must be >= 2"}
     }
   ]
 }
