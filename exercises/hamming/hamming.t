@@ -5,7 +5,7 @@ use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
 
 my Str:D $exercise := 'Hamming';
-my Version:D $version = v1;
+my Version:D $version = v2;
 my Str $module //= $exercise;
 plan 17;
 
@@ -24,7 +24,7 @@ require ::($module) <&hamming-distance>;
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>.values {
   if .<expected><error> {
-    throws-like {hamming-distance(|.<strand1 strand2>)}, Exception, .<description>, message => .<expected><error>;
+    throws-like {hamming-distance(|.<strand1 strand2>)}, Exception, .<description>;
   } else {
     is hamming-distance(|.<strand1 strand2>), |.<expected description>;
   }
