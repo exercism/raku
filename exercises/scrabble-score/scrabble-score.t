@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use Scrabble;
 plan 11;
 
-my Version:D $version = v2;
-
-if Scrabble.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nScrabble is {Scrabble.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 is .<input><word>.&score, |.<expected description> for @($c-data<cases>);
 

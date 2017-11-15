@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use Clock;
 plan 53;
 
-my Version:D $version = v3;
-
-if Clock.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nClock is {Clock.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 subtest 'Class methods', {
   ok Clock.can($_), $_ for <time add-minutes subtract-minutes>;
 }

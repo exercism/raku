@@ -1,1 +1,1 @@
-unit module Accumulate:ver<2>;
+unit module Accumulate;

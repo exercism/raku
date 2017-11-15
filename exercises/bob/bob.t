@@ -6,16 +6,6 @@ use lib $?FILE.IO.dirname; #`[Look for the module inside the same directory as t
 use Bob;
 plan 26; #`[This is how many tests we expect to run.]
 
-my Version:D $version = v3; #`[The version we will be matching against the exercise.]
-
-#`[If the exercise is updated, we want to make sure other people testing
-your code don't think you've made a mistake if things have changed!]
-if Bob.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nBob is {Bob.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 #`[Check that the class 'Bob' can use all of the methods
 needed in the tests (only 'hey' for this one).]
 subtest 'Class methods', {

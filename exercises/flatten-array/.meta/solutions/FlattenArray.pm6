@@ -1,4 +1,4 @@
-unit module FlattenArray:ver<2>;
+unit module FlattenArray;
 
 sub flatten-array(@input --> Array) is export {
   @input.&denest;

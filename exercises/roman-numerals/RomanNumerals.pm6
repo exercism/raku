@@ -1,4 +1,4 @@
-unit module RomanNumerals:ver<3>;
+unit module RomanNumerals;
 
 sub to-roman ($number) is export {
 }

@@ -1,1 +1,1 @@
-unit module Grains:ver<2>;
+unit module Grains;

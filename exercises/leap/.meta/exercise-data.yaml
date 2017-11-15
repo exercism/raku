@@ -1,5 +1,4 @@
 exercise: Leap
-version: 4
 plan: 4
 tests: |-
   for $c-data<cases>.values {

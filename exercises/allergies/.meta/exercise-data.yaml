@@ -1,5 +1,4 @@
 exercise: Allergies
-version: 4
 plan: 2
 tests: |-
   for $c-data<cases>.values -> %case-set {

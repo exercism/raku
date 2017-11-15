@@ -1,5 +1,4 @@
 exercise: AllYourBase
-version: 4
 plan: 21
 tests: |-
   for $c-data<cases>.values -> $case {

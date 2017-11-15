@@ -1,1 +1,1 @@
-unit class LinkedList:ver<2>;
+unit class LinkedList;

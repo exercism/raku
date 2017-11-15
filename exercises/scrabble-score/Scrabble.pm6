@@ -1,4 +1,4 @@
-unit module Scrabble:ver<2>;
+unit module Scrabble;
 
 sub score ($word) is export {
 }

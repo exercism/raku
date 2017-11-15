@@ -1,4 +1,4 @@
-unit module Grains:ver<2>;
+unit module Grains;
 
 sub grains-on-square ($number) is export {
   die if $number < 1 or $number > 64;

@@ -1,5 +1,4 @@
 exercise: Wordy
-version: 2
 plan: 16
 tests: |-
   for @($c-data<cases>) {

@@ -7,7 +7,7 @@
   and test suite line up. If the test is updated, it will indicate
   to others who test your code that some tests may no longer pass.
 )
-unit module HelloWorld:ver<3>;
+unit module HelloWorld;
 
 sub hello is export {
   'Hello, World!'

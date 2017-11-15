@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use Pangram;
 plan 10;
 
-my Version:D $version = v3;
-
-if Pangram.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nPangram is {Pangram.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>».<cases>».Array.flat {
   given is-pangram .<input><sentence> -> $result {

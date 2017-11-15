@@ -1,5 +1,4 @@
 exercise: Anagram
-version: 3
 plan: 12
 tests: |-
   cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.Set, .<description> for $c-data<cases>.values;

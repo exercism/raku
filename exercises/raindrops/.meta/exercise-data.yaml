@@ -1,5 +1,4 @@
 exercise: Raindrops
-version: 3
 plan: 18
 tests: |-
   for @($c-data<cases>) {

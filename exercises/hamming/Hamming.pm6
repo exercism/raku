@@ -1,4 +1,4 @@
-unit module Hamming:ver<3>;
+unit module Hamming;
 
 sub hamming-distance ($strand1, $strand2) is export {
 }

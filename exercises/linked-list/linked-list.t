@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use LinkedList;
 plan 6;
 
-my Version:D $version = v2;
-
-if LinkedList.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nLinkedList is {LinkedList.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 subtest 'Class methods', {
   ok LinkedList.can($_), $_ for <push-list pop-list shift-list unshift-list>;
 }

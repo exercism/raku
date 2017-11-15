@@ -1,4 +1,4 @@
-unit module Phone:ver<5>;
+unit module Phone;
 
 sub clean-number ($number) is export {
 }

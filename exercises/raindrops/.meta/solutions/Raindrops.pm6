@@ -1,4 +1,4 @@
-unit module Raindrops:ver<3>;
+unit module Raindrops;
 
 sub raindrop (Int:D $num --> Str:D) is export {
   my $str = '';

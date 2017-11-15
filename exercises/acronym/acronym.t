@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use Acronym;
 plan 5;
 
-my Version:D $version = v2;
-
-if Acronym.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nAcronym is {Acronym.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 
 for $c-data<cases>»<cases>».Array.flat {

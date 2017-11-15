@@ -1,4 +1,4 @@
-unit module SpaceAge:ver<2>;
+unit module SpaceAge;
 
 role Planet {
   method age-on ($seconds) {

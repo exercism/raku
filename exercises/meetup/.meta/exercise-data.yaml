@@ -1,5 +1,4 @@
 exercise: Meetup
-version: 2
 plan: 95
 tests: |-
   is meetup-date(.<description>), Date.new(|.<year month dayofmonth>), .<description> for @($c-data<cases>);

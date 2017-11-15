@@ -1,5 +1,4 @@
 exercise: FlattenArray
-version: 2
 plan: 6
 tests: |-
   is-deeply flatten-array(.<input><array>), |.<expected description> for @($c-data<cases>);

@@ -1,4 +1,4 @@
-unit class Clock:ver<3>;
+unit class Clock;
 
 has Int:D $.hour = 0;
 has Int:D $.minute = 0;

@@ -1,5 +1,4 @@
 exercise: ETL
-version: 2
 plan: 4
 tests: |-
   =head2 Notes

@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use SpaceAge;
 plan 8;
 
-my Version:D $version = v2;
-
-if SpaceAge.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nSpaceAge is {SpaceAge.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 is (age-on ::(.<input><planet>): .<input><seconds>), |.<expected description> for @($c-data<cases>);
 

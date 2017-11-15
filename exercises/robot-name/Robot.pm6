@@ -1,1 +1,1 @@
-unit class Robot:ver<2>;
+unit class Robot;

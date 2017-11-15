@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use Allergies;
 plan 2;
 
-my Version:D $version = v4;
-
-if Allergies.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nAllergies is {Allergies.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>.values -> %case-set {
 

@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use ETL;
 plan 4;
 
-my Version:D $version = v2;
-
-if ETL.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nETL is {ETL.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 =head2 Notes
 =begin para

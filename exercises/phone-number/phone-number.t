@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use Phone;
 plan 14;
 
-my Version:D $version = v5;
-
-if Phone.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nPhone is {Phone.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 for @($c-data<cases>[0]<cases>) {
   if .<expected> {

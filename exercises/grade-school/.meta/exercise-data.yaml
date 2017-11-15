@@ -1,5 +1,4 @@
 exercise: GradeSchool
-version: 4
 plan: 7
 tests: |-
   for $c-data<cases>:v {

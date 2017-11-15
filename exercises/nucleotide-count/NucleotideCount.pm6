@@ -1,4 +1,4 @@
-unit module NucleotideCount:ver<2>;
+unit module NucleotideCount;
 
 sub nucleotide-count ($strand) is export {
 }

@@ -1,4 +1,4 @@
-unit module Acronym:ver<2>;
+unit module Acronym;
 
 sub abbreviate ($phrase) is export {
 }

@@ -1,5 +1,4 @@
 exercise: NucleotideCount
-version: 2
 plan: 5
 tests: |-
   for $c-data<cases>».<cases>».Array.flat {
