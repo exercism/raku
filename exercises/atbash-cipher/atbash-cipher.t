@@ -7,7 +7,7 @@ use JSON::Fast;
 my Str:D $exercise := 'AtbashCipher';
 my Version:D $version = v1;
 my Str $module //= $exercise;
-plan 4;
+plan 14;
 
 use-ok $module or bail-out;
 require ::($module);
@@ -22,14 +22,7 @@ if ::($exercise).^ver !~~ $version {
 require ::($module) <&encode &decode>;
 
 my $c-data = from-json $=pod.pop.contents;
-for @($c-data<cases>) {
-  my $test = .<description> ~~ 'encode' ?? 'encode' !! 'decode';
-  subtest $test => {
-    my @cases = |.<cases>;
-    plan +@cases;
-    is &::($test)(.<phrase>), |.<expected description> for @cases;
-  }
-}
+is .<phrase>.&::(.<property>), |.<expected description> for $c-data<cases>»<cases>».Array.flat;
 
 =head2 Canonical Data
 =begin code

@@ -1,16 +1,9 @@
 exercise: AtbashCipher
 version: 1
-plan: 4
+plan: 14
 imports: '&encode &decode'
 tests: |-
-  for @($c-data<cases>) {
-    my $test = .<description> ~~ 'encode' ?? 'encode' !! 'decode';
-    subtest $test => {
-      my @cases = |.<cases>;
-      plan +@cases;
-      is &::($test)(.<phrase>), |.<expected description> for @cases;
-    }
-  }
+  is .<phrase>.&::(.<property>), |.<expected description> for $c-data<cases>»<cases>».Array.flat;
 
 unit: module
 example: |-
@@ -25,4 +18,10 @@ example: |-
               .lc
               .subst( /\W/, '', :g )
               .trans( [ 'a'..'z' ] =>  ['a'..'z'].reverse );
+  }
+stub: |-
+  sub encode ($phrase) is export {
+  }
+
+  sub decode ($phrase) is export {
   }
