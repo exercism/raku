@@ -1,18 +1,7 @@
-unit module Anagram:ver<1>;
+unit module Anagram:ver<2>;
 
-sub match-anagrams ($word, @words) is export {
-  my @results;
-  my $canonical = canonize($word);
-  for @words -> $w {
-    next if $w.lc eq $word.lc;
-    my $try = canonize($w);
-    if $try eq $canonical {
-      @results.push: $w;
-    }
+sub match-anagrams ( :$subject!, :@candidates! ) is export {
+  given $subject.uc -> $ucs {
+    @candidates.grep: { given .uc {$_ ne $ucs && .comb ~~ $ucs.comb.Bag} }
   }
-  @results;
-}
-
-sub canonize ($str) {
-  (($str.lc.split('')).sort).join('');
 }
