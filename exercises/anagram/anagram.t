@@ -5,7 +5,7 @@ use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
 
 my Str:D $exercise := 'Anagram';
-my Version:D $version = v1;
+my Version:D $version = v2;
 my Str $module //= $exercise;
 plan 18;
 
@@ -22,7 +22,7 @@ if ::($exercise).^ver !~~ $version {
 require ::($module) <&match-anagrams>;
 
 my $c-data = from-json $=pod.pop.contents;
-is match-anagrams(|.<subject candidates>), |.<expected description> for @($c-data<cases>);
+cmp-ok match-anagrams( |%(.<subject candidates>:p) ), '~~', .<expected>.Set, .<description> for $c-data<cases>.values;
 
 =head2 Canonical Data
 =begin code
