@@ -289,6 +289,16 @@
       ]
     },
     {
+      "uuid": "a5d0488e-1a95-4896-8196-541d59dbcea1",
+      "slug": "acronym",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 3,
+      "topics": [
+
+      ]
+    },
+    {
       "uuid": "1d36c4df-a1c8-454c-b4ec-7bec3c1cbca3",
       "slug": "binary",
       "deprecated": true

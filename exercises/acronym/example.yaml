@@ -1,0 +1,19 @@
+exercise: Acronym
+version: 1
+plan: 8
+imports: '&abbreviate'
+tests: |-
+
+  for $c-data<cases>»<cases>».Array.flat {
+    is abbreviate(.<phrase>), |.<expected description>;
+  }
+
+unit: module
+example: |-
+  sub abbreviate ($phrase) is export {
+    [~] $phrase.uc.comb(/\w+/).map: *.substr(0, 1);
+  }
+
+stub: |-
+  sub abbreviate ($phrase) is export {
+  }
