@@ -5,9 +5,9 @@ use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
 
 my Str:D $exercise := 'WordCount';
-my Version:D $version = v1;
+my Version:D $version = v2;
 my Str $module //= $exercise;
-plan 12;
+plan 13;
 
 use-ok $module or bail-out;
 require ::($module);
@@ -139,6 +139,15 @@ is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<ca
         "between": 1,
         "large": 2,
         "and": 1
+      }
+    },
+    {
+      "description": "multiple spaces not detected as a word",
+      "property": "countwords",
+      "input": " multiple   whitespaces",
+      "expected": {
+        "multiple": 1,
+        "whitespaces": 1
       }
     }
   ]
