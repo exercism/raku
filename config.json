@@ -299,6 +299,16 @@
       ]
     },
     {
+      "uuid": "00219cdb-939f-434c-bfb4-e3d62a8542c0",
+      "slug": "roman-numerals",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 3,
+      "topics": [
+
+      ]
+    },
+    {
       "uuid": "1d36c4df-a1c8-454c-b4ec-7bec3c1cbca3",
       "slug": "binary",
       "deprecated": true
