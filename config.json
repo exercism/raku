@@ -19,7 +19,7 @@
       ]
     },
     {
-      "uuid": "87315fda-0b6c-fd80-b460-dfecec0582c65ebd717",
+      "uuid": "455dd1c8-bf10-4912-a69b-4ffada20d661",
       "slug": "two-fer",
       "core": false,
       "unlocked_by": null,
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "uuid": "4127b836-0318-3480-52f6-d58b1bd248e0cd9c7a6",
+      "uuid": "eddd942e-cb67-4ae2-b763-a11ee3640aee",
       "slug": "pangram",
       "core": false,
       "unlocked_by": null,
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "uuid": "5610ea35-0bd4-e680-1696-fcbd2e21b5594ce9905",
+      "uuid": "c18b5d07-ac1b-4411-9bd4-c6882614e8ee",
       "slug": "hamming",
       "core": false,
       "unlocked_by": null,
@@ -89,7 +89,7 @@
       ]
     },
     {
-      "uuid": "55a3094e-06b3-4880-3b57-31e5899b99548604cf6",
+      "uuid": "3bee4dc2-d747-4b4e-ac10-d7815666bbc0",
       "slug": "etl",
       "core": false,
       "unlocked_by": null,
@@ -99,7 +99,7 @@
       ]
     },
     {
-      "uuid": "0313a0a8-0d35-f480-7dce-65154edf4e804d52dc1",
+      "uuid": "30732526-f790-4182-bcc7-7713b685d90a",
       "slug": "nucleotide-count",
       "core": false,
       "unlocked_by": null,
@@ -159,7 +159,7 @@
       ]
     },
     {
-      "uuid": "9c3d44e7-0b1a-7980-7774-88af672c1795b3287ed",
+      "uuid": "b8ae569f-d0b3-44d0-a4d6-a800b20b398a",
       "slug": "meetup",
       "core": false,
       "unlocked_by": null,
