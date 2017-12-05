@@ -5,7 +5,7 @@ use lib my $dir = $?FILE.IO.dirname; #`[Look for the module inside the same dire
 use JSON::Fast;
 
 my Str:D $exercise := 'Bob'; #`[The name of this exercise.]
-my Version:D $version = v1; #`[The version we will be matching against the exercise.]
+my Version:D $version = v2; #`[The version we will be matching against the exercise.]
 my Str $module //= $exercise; #`[The name of the module file to be loaded.]
 plan 28; #`[This is how many tests we expect to run.]
 
@@ -37,7 +37,7 @@ is ::($exercise).?hey(.<input>), |.<expected description> for @($c-data<cases>);
 
 {
   "exercise": "bob",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "cases": [
     {
       "description": "stating something",
@@ -91,7 +91,7 @@ is ::($exercise).?hey(.<input>), |.<expected description> for @($c-data<cases>);
       "description": "forceful question",
       "property": "response",
       "input": "WHAT THE HELL WERE YOU THINKING?",
-      "expected": "Whoa, chill out!"
+      "expected": "Calm down, I know what I'm doing!"
     },
     {
       "description": "shouting numbers",
