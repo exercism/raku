@@ -24,29 +24,29 @@ subtest 'Class methods', {
 }
 
 my $c-data = from-json $=pod.pop.contents;
-for @($c-data<cases>) {
-  for @(.<cases>) -> $case {
-    given $case<property> {
-      when 'create' {
-        is ::($exercise).new(hour => $case<hour>, minute => $case<minute>).?time, |$case<expected description>;
-      }
-      when 'add' {
-        my $clock = ::($exercise).new(hour => $case<hour>, minute => $case<minute>);
-        $clock.?add-minutes($case<add>);
-        is $clock.?time, |$case<expected description>;
-      }
-      when 'equal' {
-        is ::($exercise).new(hour => $case<clock1><hour>, minute => $case<clock1><minute>).?time eq
-           ::($exercise).new(hour => $case<clock2><hour>, minute => $case<clock2><minute>).?time,
-           |$case<expected description>;
-      }
-      when %*ENV<EXERCISM>.so { bail-out "no case for property '$case<property>'" }
+for $c-data<cases>»<cases>».Array.flat -> %case {
+  given %case<property> {
+    when 'create' {
+      is ::($exercise).?new( |%(.<hour minute>:p) ).?time, |.<expected description> given %case;
     }
+    when 'add' {
+      given %case {
+        my $clock = ::($exercise).?new: |%(.<hour minute>:p);
+        $clock.?add-minutes: .<add>;
+        is $clock.?time, |.<expected description>;
+      }
+    }
+    when 'equal' {
+      is-deeply ([eq] gather {
+        take ::($exercise).?new( |%(.<hour minute>:p) ).?time for %case<clock1 clock2>;
+      }), |%case<expected description>;
+    }
+    when %*ENV<EXERCISM>.so { bail-out "no case for property '%case<property>'" }
   }
 }
 
 todo 'optional test' unless %*ENV<EXERCISM>;
-is ::($exercise).new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
+is ::($exercise).?new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
 
 =head2 Canonical Data
 =begin code
