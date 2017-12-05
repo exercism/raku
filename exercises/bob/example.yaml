@@ -1,5 +1,5 @@
 exercise: Bob
-version: 1
+version: 2
 plan: 28
 methods: hey
 tests: |-
@@ -23,12 +23,16 @@ unit_comment: |-
     i.e. everything in this file is part of 'Bob'.
   ]
 example: |-
-  method hey ($msg) {
-    given $msg.trim {
-      when !*                        { 'Fine. Be that way!' }
-      when /<:Upper>/ and $_.uc eq * { 'Whoa, chill out!'   }
-      when /'?'$/                    { 'Sure.'              }
-      default                        { 'Whatever.'          }
+  method hey ( Str:D $_ --> Str:D ) {
+    my \shouting = /<:L>/ ^ /<:Ll>/;
+    given .trim {
+      when .ends-with: ‘?’  {
+        when shouting { ‘Calm down, I know what I'm doing!’ }
+        default       { ‘Sure.’ }
+      }
+      when shouting { ‘Whoa, chill out!’ }
+      when .not     { ‘Fine. Be that way!’ }
+      default       { ‘Whatever.’ };
     }
   }
 stub: |-
