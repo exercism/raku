@@ -5,9 +5,9 @@ use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
 
 my Str:D $exercise := 'RNA';
-my Version:D $version = v1;
+my Version:D $version = v2;
 my Str $module //= $exercise;
-plan 10;
+plan 7;
 
 use-ok $module or bail-out;
 require ::($module);
@@ -22,32 +22,14 @@ if ::($exercise).^ver !~~ $version {
 require ::($module) <&to-rna>;
 
 my $c-data = from-json $=pod.pop.contents;
-for @($c-data<cases>) {
-  if .<expected> {
-    is .<dna>.&to-rna, |.<expected description>;
-  } else {
-    throws-like {.<dna>.&to-rna}, Exception;
-  }
-}
+is .<dna>.&to-rna, |.<expected description> for $c-data<cases>.values;
 
 =head2 Canonical Data
 =begin code
 
 {
   "exercise": "rna-transcription",
-  "version": "1.0.1",
-  "comments": [
-    "Language implementations vary on the issue of invalid input data.",
-    "A language may elect to simplify this task by only presenting valid",
-    "test cases.  For languages handling invalid input data as",
-    "error conditions, invalid test cases are included here and are",
-    "indicated with an expected value of null.  Note however that null is",
-    "simply an indication here in the JSON.  Actually returning null from",
-    "a rna-transcription function may or may not be idiomatic in a language.",
-    "Language idioms of errors or exceptions should be followed.",
-    "Alternative interpretations such as ignoring excess length at the end",
-    "are not represented here."
-  ],
+  "version": "1.1.0",
   "cases": [
     {
       "description": "RNA complement of cytosine is guanine",
@@ -78,24 +60,6 @@ for @($c-data<cases>) {
       "property": "toRna",
       "dna": "ACGTGGTCTTAA",
       "expected": "UGCACCAGAAUU"
-    },
-    {
-      "description": "correctly handles invalid input (RNA instead of DNA)",
-      "property": "toRna",
-      "dna": "U",
-      "expected": null
-    },
-    {
-      "description": "correctly handles completely invalid DNA input",
-      "property": "toRna",
-      "dna": "XXX",
-      "expected": null
-    },
-    {
-      "description": "correctly handles partially invalid DNA input",
-      "property": "toRna",
-      "dna": "ACGTXXXCTTAA",
-      "expected": null
     }
   ]
 }

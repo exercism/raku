@@ -1,20 +1,13 @@
 exercise: RNA
-version: 1
-plan: 10
+version: 2
+plan: 7
 imports: '&to-rna'
 tests: |-
-  for @($c-data<cases>) {
-    if .<expected> {
-      is .<dna>.&to-rna, |.<expected description>;
-    } else {
-      throws-like {.<dna>.&to-rna}, Exception;
-    }
-  }
+  is .<dna>.&to-rna, |.<expected description> for $c-data<cases>.values;
 
 unit: module
 example: |-
   sub to-rna ($dna) is export {
-    fail if $dna ~~ /<-[AGCT]>/;
     $dna.trans(<A G C T> => <U C G A>);
   }
 stub: |-
