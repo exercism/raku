@@ -5,7 +5,7 @@ imports: '&abbreviate'
 tests: |-
 
   for $c-data<cases>»<cases>».Array.flat {
-    is abbreviate(.<phrase>), |.<expected description>;
+    is abbreviate(.<input><phrase>), |.<expected description>;
   }
 
 unit: module
