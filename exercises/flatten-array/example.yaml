@@ -3,7 +3,7 @@ version: 1
 plan: 8
 imports: '&flatten-array'
 tests: |-
-  is-deeply flatten-array(.<input>), |.<expected description> for @($c-data<cases>);
+  is-deeply flatten-array(.<input><array>), |.<expected description> for @($c-data<cases>);
 
 unit: module
 example: |-
