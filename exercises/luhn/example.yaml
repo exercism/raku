@@ -4,7 +4,7 @@ plan: 15
 imports: '&is-luhn-valid'
 tests: |-
   for $c-data<cases>.values {
-    given is-luhn-valid .<input> -> $result {
+    given is-luhn-valid .<input><value> -> $result {
       subtest .<description>, {
         plan 2;
         isa-ok $result, Bool;
