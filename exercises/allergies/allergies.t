@@ -28,7 +28,7 @@ for $c-data<cases>.values -> %case-set {
     plan 7;
     for %case-set<cases>.values -> %case {
       for %case<expected>.values {
-        given allergic-to %case<score>, .<substance> -> $result {
+        given allergic-to %case<input><score>, .<substance> -> $result {
           subtest %case<description> ~ ': ' ~ .<substance> => {
             plan 2;
             isa-ok $result, Bool;
@@ -42,7 +42,7 @@ for $c-data<cases>.values -> %case-set {
   subtest 'list-allergies' => {
     plan 9;
     for %case-set<cases>.values {
-      cmp-ok list-allergies(.<score>), '~~', .<expected>.Set, .<description>;
+      cmp-ok list-allergies(.<input><score>), '~~', .<expected>.Set, .<description>;
     }
   } when %case-set<description> ~~ 'list';
 
@@ -53,7 +53,7 @@ for $c-data<cases>.values -> %case-set {
 
 {
   "exercise": "allergies",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "cases": [
     {
       "description": "allergicTo",
@@ -68,7 +68,9 @@ for $c-data<cases>.values -> %case-set {
         {
           "description": "no allergies means not allergic",
           "property": "allergicTo",
-          "score": 0,
+          "input": {
+            "score": 0
+          },
           "expected": [
             {
               "substance": "peanuts",
@@ -87,7 +89,9 @@ for $c-data<cases>.values -> %case-set {
         {
           "description": "is allergic to eggs",
           "property": "allergicTo",
-          "score": 1,
+          "input": {
+            "score": 1
+          },
           "expected": [
             {
               "substance": "eggs",
@@ -98,7 +102,9 @@ for $c-data<cases>.values -> %case-set {
         {
           "description": "allergic to eggs in addition to other stuff",
           "property": "allergicTo",
-          "score": 5,
+          "input": {
+            "score": 5
+          },
           "expected": [
             {
               "substance": "eggs",
@@ -125,43 +131,57 @@ for $c-data<cases>.values -> %case-set {
         {
           "description": "no allergies at all",
           "property": "list",
-          "score": 0,
+          "input": {
+            "score": 0
+          },
           "expected": []
         },
         {
           "description": "allergic to just eggs",
           "property": "list",
-          "score": 1,
+          "input": {
+            "score": 1
+          },
           "expected": ["eggs"]
         },
         {
           "description": "allergic to just peanuts",
           "property": "list",
-          "score": 2,
+          "input": {
+            "score": 2
+          },
           "expected": ["peanuts"]
         },
         {
           "description": "allergic to just strawberries",
           "property": "list",
-          "score": 8,
+          "input": {
+            "score": 8
+          },
           "expected": ["strawberries"]
         },
         {
           "description": "allergic to eggs and peanuts",
           "property": "list",
-          "score": 3,
+          "input": {
+            "score": 3
+          },
           "expected": ["eggs", "peanuts"]
         },
         {
           "description": "allergic to more than eggs but not peanuts",
           "property": "list",
-          "score": 5,
+          "input": {
+            "score": 5
+          },
           "expected": ["eggs", "shellfish"]
         },
         {
           "description": "allergic to lots of stuff",
           "property": "list",
-          "score": 248,
+          "input": {
+            "score": 248
+          },
           "expected": [ "strawberries",
                         "tomatoes",
                         "chocolate",
@@ -172,7 +192,9 @@ for $c-data<cases>.values -> %case-set {
         {
           "description": "allergic to everything",
           "property": "list",
-          "score": 255,
+          "input": {
+            "score": 255
+          },
           "expected": [ "eggs",
                         "peanuts",
                         "shellfish",
@@ -186,7 +208,9 @@ for $c-data<cases>.values -> %case-set {
         {
           "description": "ignore non allergen score parts",
           "property": "list",
-          "score": 509,
+          "input": {
+            "score": 509
+          },
           "expected": [ "eggs",
                         "shellfish",
                         "strawberries",

@@ -9,7 +9,7 @@ tests: |-
       plan 7;
       for %case-set<cases>.values -> %case {
         for %case<expected>.values {
-          given allergic-to %case<score>, .<substance> -> $result {
+          given allergic-to %case<input><score>, .<substance> -> $result {
             subtest %case<description> ~ ': ' ~ .<substance> => {
               plan 2;
               isa-ok $result, Bool;
@@ -23,7 +23,7 @@ tests: |-
     subtest 'list-allergies' => {
       plan 9;
       for %case-set<cases>.values {
-        cmp-ok list-allergies(.<score>), '~~', .<expected>.Set, .<description>;
+        cmp-ok list-allergies(.<input><score>), '~~', .<expected>.Set, .<description>;
       }
     } when %case-set<description> ~~ 'list';
 
