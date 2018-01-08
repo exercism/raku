@@ -22,14 +22,14 @@ if ::($exercise).^ver !~~ $version {
 require ::($module) <&encode &decode>;
 
 my $c-data = from-json $=pod.pop.contents;
-is .<phrase>.&::(.<property>), |.<expected description> for $c-data<cases>»<cases>».Array.flat;
+is .<input><phrase>.&::(.<property>), |.<expected description> for $c-data<cases>»<cases>».Array.flat;
 
 =head2 Canonical Data
 =begin code
 
 {
   "exercise": "atbash-cipher",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "comments": [
     "The tests are divided into two groups: ",
     "* Encoding from English to atbash cipher",
@@ -43,49 +43,65 @@ is .<phrase>.&::(.<property>), |.<expected description> for $c-data<cases>»<cas
         {
           "description": "encode yes",
           "property": "encode",
-          "phrase": "yes",
+          "input": {
+            "phrase": "yes"
+          },
           "expected": "bvh"
         },
         {
           "description": "encode no",
           "property": "encode",
-          "phrase": "no",
+          "input": {
+            "phrase": "no"
+          },
           "expected": "ml"
         },
         {
           "description": "encode OMG",
           "property": "encode",
-          "phrase": "OMG",
+          "input": {
+            "phrase": "OMG"
+          },
           "expected": "lnt"
         },
         {
           "description": "encode spaces",
           "property": "encode",
-          "phrase": "O M G",
+          "input": {
+            "phrase": "O M G"
+          },
           "expected": "lnt"
         },
         {
           "description": "encode mindblowingly",
           "property": "encode",
-          "phrase": "mindblowingly",
+          "input": {
+            "phrase": "mindblowingly"
+          },
           "expected": "nrmwy oldrm tob"
         },
         {
           "description": "encode numbers",
           "property": "encode",
-          "phrase": "Testing,1 2 3, testing.",
+          "input": {
+            "phrase": "Testing,1 2 3, testing."
+          },
           "expected": "gvhgr mt123 gvhgr mt"
         },
         {
           "description": "encode deep thought",
           "property": "encode",
-          "phrase": "Truth is fiction.",
+          "input": {
+            "phrase": "Truth is fiction."
+          },
           "expected": "gifgs rhurx grlm"
         },
         {
           "description": "encode all the letters",
           "property": "encode",
-          "phrase": "The quick brown fox jumps over the lazy dog.",
+          "input": {
+            "phrase": "The quick brown fox jumps over the lazy dog."
+          },
           "expected": "gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt"
         }
       ]
@@ -97,32 +113,39 @@ is .<phrase>.&::(.<property>), |.<expected description> for $c-data<cases>»<cas
         {
           "description": "decode exercism",
           "property": "decode",
-          "phrase": "vcvix rhn",
+          "input": {
+            "phrase": "vcvix rhn"
+          },
           "expected": "exercism"
         },
         {
           "description": "decode a sentence",
           "property": "decode",
-          "phrase": "zmlyh gzxov rhlug vmzhg vkkrm thglm v",
+          "input": {
+            "phrase": "zmlyh gzxov rhlug vmzhg vkkrm thglm v"
+          },
           "expected": "anobstacleisoftenasteppingstone"
         },
         {
           "description": "decode numbers",
           "property": "decode",
-          "phrase": "gvhgr mt123 gvhgr mt",
+          "input": {
+            "phrase": "gvhgr mt123 gvhgr mt"
+          },
           "expected": "testing123testing"
         },
         {
           "description": "decode all the letters",
           "property": "decode",
-          "phrase": "gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt",
+          "input": {
+            "phrase": "gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt"
+          },
           "expected": "thequickbrownfoxjumpsoverthelazydog"
         }
       ]
     }
   ]
 }
-
 =end code
 
 unless %*ENV<EXERCISM> {
