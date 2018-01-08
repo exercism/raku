@@ -3,7 +3,7 @@ version: 2
 plan: 18
 imports: '&match-anagrams'
 tests: |-
-  cmp-ok match-anagrams( |%(.<subject candidates>:p) ), '~~', .<expected>.Set, .<description> for $c-data<cases>.values;
+  cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.Set, .<description> for $c-data<cases>.values;
 
 unit: module
 example: |-
