@@ -6,8 +6,8 @@ tests: |-
   for $c-data<cases>.values -> $case {
     sub call-convert-base {
       convert-base(
-        bases  => %(<from to> Z=> .<input_base output_base>),
-        digits => .<input_digits>,
+        bases  => %(<from to> Z=> .<input><input_base output_base>),
+        digits => .<input><digits>,
       ) given $case;
     }
 
