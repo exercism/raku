@@ -1,11 +1,8 @@
 #!/usr/bin/env perl6
 
 use Test;
-
-use lib ( my $dir = IO::Path.new($?FILE).parent ).path;
-
-my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Trinary';
-require ::($module) <&to-decimal>;
+use lib $?FILE.IO.dirname;
+use Trinary;
 
 my @cases = (
     {
