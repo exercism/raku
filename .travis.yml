@@ -3,13 +3,13 @@ sudo: false
 before_script:
   - git clone https://github.com/exercism/problem-specifications.git
   - bin/fetch-configlet
-  - docker pull rakudo-star:latest
+  - docker build -t exercism-rakudo-star .
 script:
   - bin/configlet lint .
   - docker run
     --env EXERCISM=1
     --volume $PWD:/exercism
-    rakudo-star prove /exercism
+    exercism-rakudo-star prove /exercism
     --exec perl6
     --recurse
     --jobs 2
