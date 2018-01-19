@@ -16,4 +16,5 @@ script:
     exercism-rakudo-star prove /exercism
     --exec perl6
     --recurse
+    --directives
     --jobs 2
