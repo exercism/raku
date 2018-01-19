@@ -1,7 +1,6 @@
 exercise: Accumulate
-version: 1
-plan: 7
-imports: '&accumulate'
+version: 2
+plan: 6
 tests: |-
   is-deeply accumulate([ ], sub {}),
             [ ],

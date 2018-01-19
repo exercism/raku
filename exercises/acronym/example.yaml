@@ -1,7 +1,6 @@
 exercise: Acronym
-version: 1
-plan: 8
-imports: '&abbreviate'
+version: 2
+plan: 6
 tests: |-
 
   for $c-data<cases>»<cases>».Array.flat {

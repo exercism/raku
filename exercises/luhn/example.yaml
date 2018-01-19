@@ -1,7 +1,6 @@
 exercise: Luhn
-version: 2
-plan: 15
-imports: '&is-luhn-valid'
+version: 3
+plan: 13
 tests: |-
   for $c-data<cases>.values {
     given is-luhn-valid .<input><value> -> $result {

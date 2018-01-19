@@ -1,7 +1,6 @@
 exercise: Anagram
-version: 2
-plan: 18
-imports: '&match-anagrams'
+version: 3
+plan: 16
 tests: |-
   cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.Set, .<description> for $c-data<cases>.values;
 

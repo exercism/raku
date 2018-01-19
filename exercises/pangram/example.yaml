@@ -1,7 +1,6 @@
 exercise: Pangram
-version: 2
-plan: 12
-imports: '&is-pangram'
+version: 3
+plan: 10
 tests: |-
   for $c-data<cases>».<cases>».Array.flat {
     given is-pangram .<input> -> $result {

@@ -1,7 +1,6 @@
 exercise: Wordy
-version: 1
-plan: 18
-imports: '&answer'
+version: 2
+plan: 16
 tests: |-
   for @($c-data<cases>) {
     if .<expected> === False {

@@ -1,6 +1,6 @@
 exercise: LinkedList
-version: 1
-plan: 7
+version: 2
+plan: 6
 modules:
   - use: JSON::Fast
 methods: 'push-list pop-list shift-list unshift-list'
@@ -8,7 +8,7 @@ tests: |-
   my $cases = from-json $=pod.pop.contents;
   for $cases.values -> $case {
     subtest $case.<name>, sub {
-      my $linkedlist = ::($exercise).new;
+      my $linkedlist = LinkedList.new;
       for  |$case.<set> -> %set {
         for %set {
           my $value = $_.value;

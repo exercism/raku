@@ -1,7 +1,6 @@
 exercise: NucleotideCount
-version: 1
-plan: 7
-imports: '&nucleotide-count'
+version: 2
+plan: 5
 tests: |-
   for $c-data<cases>».<cases>».Array.flat {
     if .<expected><error> {

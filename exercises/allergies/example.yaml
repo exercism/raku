@@ -1,7 +1,6 @@
 exercise: Allergies
-version: 3
-plan: 4
-imports: '&allergic-to &list-allergies'
+version: 4
+plan: 2
 tests: |-
   for $c-data<cases>.values -> %case-set {
 

@@ -1,7 +1,6 @@
 exercise: GradeSchool
-version: 2
-plan: 19
-imports: Roster
+version: 3
+plan: 18
 tests: |-
   subtest "Roster class methods", {
     plan 3;

@@ -1,7 +1,6 @@
 exercise: Raindrops
-version: 1
-plan: 20
-imports: '&convert'
+version: 2
+plan: 18
 tests: |-
   for @($c-data<cases>) {
     subtest {

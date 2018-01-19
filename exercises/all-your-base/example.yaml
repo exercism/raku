@@ -1,7 +1,6 @@
 exercise: AllYourBase
-version: 3
-plan: 23
-imports: '&convert-base'
+version: 4
+plan: 21
 tests: |-
   for $c-data<cases>.values -> $case {
     sub call-convert-base {

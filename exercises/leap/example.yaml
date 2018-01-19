@@ -1,7 +1,6 @@
 exercise: Leap
-version: 3
-plan: 6
-imports: '&is-leap-year'
+version: 4
+plan: 4
 tests: |-
   for $c-data<cases>.values {
     given is-leap-year .<input> -> $result {
