@@ -1,7 +1,6 @@
 exercise: AtbashCipher
-version: 1
-plan: 14
-imports: '&encode &decode'
+version: 2
+plan: 12
 tests: |-
   is .<input><phrase>.&::(.<property>), |.<expected description> for $c-data<cases>»<cases>».Array.flat;
 

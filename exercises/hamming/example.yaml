@@ -1,7 +1,6 @@
 exercise: Hamming
-version: 2
-plan: 17
-imports: '&hamming-distance'
+version: 3
+plan: 15
 tests: |-
   for $c-data<cases>.values {
     if .<expected><error> {

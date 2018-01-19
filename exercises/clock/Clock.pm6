@@ -1,4 +1,4 @@
-unit class Clock:ver<1>;
+unit class Clock:ver<2>;
 
 has $.hour;
 has $.minute;

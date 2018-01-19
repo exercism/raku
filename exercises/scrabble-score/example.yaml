@@ -1,7 +1,6 @@
 exercise: Scrabble
-version: 1
-plan: 13
-imports: '&score'
+version: 2
+plan: 11
 tests: |-
   is .<input>.&score, |.<expected description> for @($c-data<cases>);
 

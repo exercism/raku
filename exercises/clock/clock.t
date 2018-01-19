@@ -1,44 +1,39 @@
 #!/usr/bin/env perl6
 use v6;
 use Test;
-use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
+use lib $?FILE.IO.dirname;
+use Clock;
+plan 52;
 
-my Str:D $exercise := 'Clock';
-my Version:D $version = v1;
-my Str $module //= $exercise;
-plan 54;
+my Version:D $version = v2;
 
-use-ok $module or bail-out;
-require ::($module);
-
-if ::($exercise).^ver !~~ $version {
+if Clock.^ver !~~ $version {
   warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\n$exercise is $(::($exercise).^ver.gist). "
-    ~ "Test is $($version.gist).\n";
-  bail-out 'Example version must match test version.' if %*ENV<EXERCISM>;
+    ~ "\nClock is {Clock.^ver.gist}. "
+    ~ "Test is {$version.gist}.\n";
 }
 
 subtest 'Class methods', {
-  ok ::($exercise).can($_), $_ for <time add-minutes>;
+  ok Clock.can($_), $_ for <time add-minutes>;
 }
 
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>»<cases>».Array.flat -> %case {
   given %case<property> {
     when 'create' {
-      is ::($exercise).?new( |%(.<hour minute>:p) ).?time, |.<expected description> given %case;
+      is Clock.?new( |%(.<hour minute>:p) ).?time, |.<expected description> given %case;
     }
     when 'add' {
       given %case {
-        my $clock = ::($exercise).?new: |%(.<hour minute>:p);
+        my $clock = Clock.?new: |%(.<hour minute>:p);
         $clock.?add-minutes: .<add>;
         is $clock.?time, |.<expected description>;
       }
     }
     when 'equal' {
       is-deeply ([eq] gather {
-        take ::($exercise).?new( |%(.<hour minute>:p) ).?time for %case<clock1 clock2>;
+        take Clock.?new( |%(.<hour minute>:p) ).?time for %case<clock1 clock2>;
       }), |%case<expected description>;
     }
     when %*ENV<EXERCISM>.so { bail-out "no case for property '%case<property>'" }
@@ -46,7 +41,7 @@ for $c-data<cases>»<cases>».Array.flat -> %case {
 }
 
 todo 'optional test' unless %*ENV<EXERCISM>;
-is ::($exercise).?new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
+is Clock.?new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
 
 =head2 Canonical Data
 =begin code
@@ -542,18 +537,3 @@ is ::($exercise).?new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-min
 }
 
 =end code
-
-unless %*ENV<EXERCISM> {
-  skip-rest 'exercism tests';
-  exit;
-}
-
-subtest 'canonical-data' => {
-  (my $c-data-file = "$dir/../../problem-specifications/exercises/{
-    $dir.IO.resolve.basename
-  }/canonical-data.json".IO.resolve) ~~ :f ??
-    is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'match problem-specifications' !!
-    flunk 'problem-specifications file not found';
-}
-
-INIT { $module = 'Example' if %*ENV<EXERCISM> }

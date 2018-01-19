@@ -2,23 +2,16 @@
 use v6;
 use Test;
 use lib $?FILE.IO.dirname;
+use Accumulate;
+plan 6;
 
-my Str:D $exercise := 'Accumulate';
-my Version:D $version = v1;
-my Str $module //= $exercise;
-plan 7;
+my Version:D $version = v2;
 
-use-ok $module or bail-out;
-require ::($module);
-
-if ::($exercise).^ver !~~ $version {
+if Accumulate.^ver !~~ $version {
   warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\n$exercise is $(::($exercise).^ver.gist). "
-    ~ "Test is $($version.gist).\n";
-  bail-out 'Example version must match test version.' if %*ENV<EXERCISM>;
+    ~ "\nAccumulate is {Accumulate.^ver.gist}. "
+    ~ "Test is {$version.gist}.\n";
 }
-
-require ::($module) <&accumulate>;
 
 is-deeply accumulate([ ], sub {}),
           [ ],
@@ -38,5 +31,3 @@ is-deeply accumulate(['a', 'b', 'c' ], sub ($inp) { [ accumulate( [1, 2, 3], sub
 is-deeply accumulate(['the', 'quick', 'brown', 'fox'], sub { @_[0].flip }),
           ['eht', 'kciuq', 'nworb', 'xof'],
           'reverse strings';
-
-INIT { $module = 'Example' if %*ENV<EXERCISM> }

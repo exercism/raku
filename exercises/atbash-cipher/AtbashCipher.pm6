@@ -1,4 +1,4 @@
-unit module AtbashCipher:ver<1>;
+unit module AtbashCipher:ver<2>;
 
 sub encode ($phrase) is export {
 }

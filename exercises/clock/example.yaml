@@ -1,23 +1,23 @@
 exercise: Clock
-version: 1
+version: 2
 methods: time add-minutes
-plan: 54
+plan: 52
 tests: |-
   for $c-data<cases>»<cases>».Array.flat -> %case {
     given %case<property> {
       when 'create' {
-        is ::($exercise).?new( |%(.<hour minute>:p) ).?time, |.<expected description> given %case;
+        is Clock.?new( |%(.<hour minute>:p) ).?time, |.<expected description> given %case;
       }
       when 'add' {
         given %case {
-          my $clock = ::($exercise).?new: |%(.<hour minute>:p);
+          my $clock = Clock.?new: |%(.<hour minute>:p);
           $clock.?add-minutes: .<add>;
           is $clock.?time, |.<expected description>;
         }
       }
       when 'equal' {
         is-deeply ([eq] gather {
-          take ::($exercise).?new( |%(.<hour minute>:p) ).?time for %case<clock1 clock2>;
+          take Clock.?new( |%(.<hour minute>:p) ).?time for %case<clock1 clock2>;
         }), |%case<expected description>;
       }
       when %*ENV<EXERCISM>.so { bail-out "no case for property '%case<property>'" }
@@ -25,7 +25,7 @@ tests: |-
   }
 
   todo 'optional test' unless %*ENV<EXERCISM>;
-  is ::($exercise).?new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
+  is Clock.?new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
 
 unit: class
 example: |-

@@ -1,4 +1,4 @@
-unit class LinkedList:ver<1>;
+unit class LinkedList:ver<2>;
 
 class ListNode {
     has $.next     is rw;

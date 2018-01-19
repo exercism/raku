@@ -1,7 +1,6 @@
 exercise: ETL
-version: 1
-plan: 6
-imports: '&transform'
+version: 2
+plan: 4
 tests: |-
   =head2 Notes
   =begin para

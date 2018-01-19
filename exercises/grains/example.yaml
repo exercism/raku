@@ -1,7 +1,6 @@
 exercise: Grains
-version: 1
-plan: 13
-imports: '&grains-on-square &total-grains'
+version: 2
+plan: 11
 tests: |-
   for @($c-data<cases>[0]<cases>) {
     if .<expected> == -1 {

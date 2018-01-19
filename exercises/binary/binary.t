@@ -1,12 +1,10 @@
 #!/usr/bin/env perl6
 use v6;
 use Test;
-use lib IO::Path.new($?FILE).parent.path;
+use lib $?FILE.IO.dirname;
+use Binary;
 
-plan 10;
-my $module = %*ENV<EXERCISM> ?? 'Example' !! 'Binary';
-use-ok $module;
-require ::($module) <Binary>;
+plan 9;
 
 ok Binary.can('to_decimal'), 'Class Binary has to_decimal method';
 

@@ -1,7 +1,6 @@
 exercise: RomanNumerals
-version: 1
-plan: 20
-imports: '&to-roman'
+version: 2
+plan: 18
 tests: |-
   for $c-data<cases>.values {
     is to-roman(.<number>), |.<expected description>;

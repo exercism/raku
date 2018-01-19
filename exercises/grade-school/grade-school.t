@@ -2,23 +2,16 @@
 use v6;
 use Test;
 use lib $?FILE.IO.dirname;
+use GradeSchool;
+plan 18;
 
-my Str:D $exercise := 'GradeSchool';
-my Version:D $version = v2;
-my Str $module //= $exercise;
-plan 19;
+my Version:D $version = v3;
 
-use-ok $module or bail-out;
-require ::($module);
-
-if ::($exercise).^ver !~~ $version {
+if GradeSchool.^ver !~~ $version {
   warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\n$exercise is $(::($exercise).^ver.gist). "
-    ~ "Test is $($version.gist).\n";
-  bail-out 'Example version must match test version.' if %*ENV<EXERCISM>;
+    ~ "\nGradeSchool is {GradeSchool.^ver.gist}. "
+    ~ "Test is {$version.gist}.\n";
 }
-
-require ::($module) <Roster>;
 
 subtest "Roster class methods", {
   plan 3;
@@ -45,5 +38,3 @@ cmp-ok $roster.?list-grade(1), '~~', <Anna Barb Charlie>, 'List grade 1';
 cmp-ok $roster.?list-grade(2), '~~', <Alex Jim Zoe>, 'List grade 2';
 cmp-ok $roster.?list-grade(3), '~~', <Dick Harry Tom>, 'List grade 3';
 cmp-ok $roster.?list-all, '~~', ('Grade 1', <Anna Barb Charlie>, 'Grade 2', <Alex Jim Zoe>, 'Grade 3', <Dick Harry Tom>), 'List all';
-
-INIT { $module = 'Example' if %*ENV<EXERCISM> }

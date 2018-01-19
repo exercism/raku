@@ -7,7 +7,7 @@
   and test suite line up. If the test is updated, it will indicate
   to others who test your code that some tests may no longer pass.
 )
-unit module TwoFer:ver<1>;
+unit module TwoFer:ver<2>;
 
 sub two-fer ($name = ‘you’) is export {
   “One for $name, one for me.”
