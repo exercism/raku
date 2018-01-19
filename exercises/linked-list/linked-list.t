@@ -1,32 +1,27 @@
 #!/usr/bin/env perl6
 use v6;
 use Test;
-use lib $?FILE.IO.dirname;
 use JSON::Fast;
+use lib $?FILE.IO.dirname;
+use LinkedList;
+plan 6;
 
-my Str:D $exercise := 'LinkedList';
-my Version:D $version = v1;
-my Str $module //= $exercise;
-plan 7;
+my Version:D $version = v2;
 
-use-ok $module or bail-out;
-require ::($module);
-
-if ::($exercise).^ver !~~ $version {
+if LinkedList.^ver !~~ $version {
   warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\n$exercise is $(::($exercise).^ver.gist). "
-    ~ "Test is $($version.gist).\n";
-  bail-out 'Example version must match test version.' if %*ENV<EXERCISM>;
+    ~ "\nLinkedList is {LinkedList.^ver.gist}. "
+    ~ "Test is {$version.gist}.\n";
 }
 
 subtest 'Class methods', {
-  ok ::($exercise).can($_), $_ for <push-list pop-list shift-list unshift-list>;
+  ok LinkedList.can($_), $_ for <push-list pop-list shift-list unshift-list>;
 }
 
 my $cases = from-json $=pod.pop.contents;
 for $cases.values -> $case {
   subtest $case.<name>, sub {
-    my $linkedlist = ::($exercise).new;
+    my $linkedlist = LinkedList.new;
     for  |$case.<set> -> %set {
       for %set {
         my $value = $_.value;
@@ -97,5 +92,3 @@ for $cases.values -> $case {
   }
 ]
 =end code
-
-INIT { $module = 'Example' if %*ENV<EXERCISM> }

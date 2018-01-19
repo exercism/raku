@@ -2,35 +2,30 @@
 use v6;
 use Test;
 use lib $?FILE.IO.dirname;
+use Robot;
+plan 7;
 
-my Str:D $exercise := 'Robot';
-my Version:D $version = v1;
-my Str $module //= $exercise;
-plan 8;
+my Version:D $version = v2;
 
-use-ok $module or bail-out;
-require ::($module);
-
-if ::($exercise).^ver !~~ $version {
+if Robot.^ver !~~ $version {
   warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\n$exercise is $(::($exercise).^ver.gist). "
-    ~ "Test is $($version.gist).\n";
-  bail-out 'Example version must match test version.' if %*ENV<EXERCISM>;
+    ~ "\nRobot is {Robot.^ver.gist}. "
+    ~ "Test is {$version.gist}.\n";
 }
 
 subtest 'Class methods', {
-  ok ::($exercise).can($_), $_ for <name reset-name>;
+  ok Robot.can($_), $_ for <name reset-name>;
 }
 
 srand 1;
-my $robot = ::($exercise).?new;
+my $robot = Robot.?new;
 my Str $name = $robot.?name;
 like $name, /^^<[A..Z]>**2 <[0..9]>**3$$/, 'Name matches schema';
 
 srand 2;
 is $robot.?name, $name, 'Name is persistent';
 srand 1;
-isnt ::($exercise).new.?name, $name, 'New Robot cannot claim previous Robot name';
+isnt Robot.new.?name, $name, 'New Robot cannot claim previous Robot name';
 
 srand 1;
 $robot.?reset-name;
@@ -39,12 +34,10 @@ $robot.?reset_name; # Allows next test to still pass for older solutions
 isnt $robot.?name, $name, "'reset-name' cannot use previous Robot name";
 
 diag "\nCreating 100 robots...";
-push my @names, ::($exercise).new.name for 1..100;
+push my @names, Robot.new.name for 1..100;
 is @names, @names.unique, 'All names are unique';
 subtest 'Randomness', {
   plan 2;
   isnt @names, @names.sort, 'Names not ordered';
   isnt @names, @names.sort.reverse, 'Names not reverse ordered';
 }
-
-INIT { $module = 'Example' if %*ENV<EXERCISM> }

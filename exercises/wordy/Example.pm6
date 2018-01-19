@@ -1,4 +1,4 @@
-unit module Wordy:ver<1>;
+unit module Wordy:ver<2>;
 
 sub answer ($q is copy) is export { 
   given $q {

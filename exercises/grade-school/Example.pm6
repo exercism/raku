@@ -1,4 +1,4 @@
-unit module GradeSchool:ver<2>;
+unit module GradeSchool:ver<3>;
 
 class Roster is export {
   has %!roster;

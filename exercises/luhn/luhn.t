@@ -1,25 +1,18 @@
 #!/usr/bin/env perl6
 use v6;
 use Test;
-use lib my $dir = $?FILE.IO.dirname;
 use JSON::Fast;
+use lib $?FILE.IO.dirname;
+use Luhn;
+plan 13;
 
-my Str:D $exercise := 'Luhn';
-my Version:D $version = v2;
-my Str $module //= $exercise;
-plan 15;
+my Version:D $version = v3;
 
-use-ok $module or bail-out;
-require ::($module);
-
-if ::($exercise).^ver !~~ $version {
+if Luhn.^ver !~~ $version {
   warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\n$exercise is $(::($exercise).^ver.gist). "
-    ~ "Test is $($version.gist).\n";
-  bail-out 'Example version must match test version.' if %*ENV<EXERCISM>;
+    ~ "\nLuhn is {Luhn.^ver.gist}. "
+    ~ "Test is {$version.gist}.\n";
 }
-
-require ::($module) <&is-luhn-valid>;
 
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>.values {
@@ -147,18 +140,3 @@ for $c-data<cases>.values {
 }
 
 =end code
-
-unless %*ENV<EXERCISM> {
-  skip-rest 'exercism tests';
-  exit;
-}
-
-subtest 'canonical-data' => {
-  (my $c-data-file = "$dir/../../problem-specifications/exercises/{
-    $dir.IO.resolve.basename
-  }/canonical-data.json".IO.resolve) ~~ :f ??
-    is-deeply $c-data, EVAL('from-json $c-data-file.slurp'), 'match problem-specifications' !!
-    flunk 'problem-specifications file not found';
-}
-
-INIT { $module = 'Example' if %*ENV<EXERCISM> }

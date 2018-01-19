@@ -1,4 +1,4 @@
-unit module Anagram:ver<2>;
+unit module Anagram:ver<3>;
 
 sub match-anagrams ( :$subject!, :@candidates! ) is export {
   given $subject.uc -> $ucs {
