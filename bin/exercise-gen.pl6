@@ -1,25 +1,33 @@
 #!/usr/bin/env perl6
 use v6;
-use Template::Mustache;
 use YAML::Parser::LibYAML;
+use lib (my $base-dir = $?FILE.IO.resolve.parent.parent).add('lib');
+use Exercism::Generator;
 
-my $base-dir = $?FILE.IO.resolve.parent.parent;
-my @exercises;
+my %*SUB-MAIN-OPTS = :named-anywhere;
 
-if $base-dir.child('problem-specifications') !~~ :d {
-  warn 'problem-specifications directory not found; some exercises may generate incorrectly.';
+proto sub MAIN (|) {
+  if $base-dir.add('problem-specifications') !~~ :d {
+    note 'problem-specifications directory not found; some exercises may generate incorrectly.';
+  }
+  if $base-dir.add('bin/configlet') !~~ :f {
+    note 'configlet not found; README.md file(s) will not be generated.';
+  }
+  {*}
 }
 
-if @*ARGS {
-  if @*ARGS[0] eq '--all' {
-    push @exercises, .basename for $base-dir.child('exercises').dir;
-  } else {
-    @exercises = @*ARGS;
-  }
-} else {
+multi sub MAIN (Bool:D :$all where *.so) {
+  generate .basename for $base-dir.add('exercises').dir;
+}
+
+multi sub MAIN (*@exercises) {
+  @exercises».&generate;
+}
+
+multi sub MAIN {
   say 'No args given; working in current directory.';
   if 'example.yaml'.IO ~~ :f {
-    push @exercises, $*CWD.IO.basename;
+    generate $*CWD.IO.basename;
   } else {
     say 'example.yaml not found in current directory; exiting.';
     exit;
@@ -28,37 +36,34 @@ if @*ARGS {
 
 my @dir-not-found;
 my @yaml-not-found;
-for @exercises -> $exercise {
-  if (my $exercise-dir = $base-dir.child("exercises/$exercise")) !~~ :d {
+
+sub generate ($exercise) {
+  if (my $exercise-dir = $base-dir.add("exercises/$exercise")) !~~ :d {
     push @dir-not-found, $exercise;
     next;
   }
-  if (my $yaml-file = $exercise-dir.child('example.yaml')) !~~ :f {
+  if (my $yaml-file = $exercise-dir.add('example.yaml')) !~~ :f {
     push @yaml-not-found, $exercise;
     next;
   };
   print "Generating $exercise... ";
 
-  my %data = yaml-parse $yaml-file.absolute;
+  given Exercism::Generator.new: :$exercise, data => yaml-parse $yaml-file.absolute {
+    given $exercise-dir.add("$exercise.t") -> $testfile {
+      $testfile.spurt: .test;
+      $testfile.chmod: 0o755;
+    }
+    $exercise-dir.add('Example.pm6').spurt: .example;
+    $exercise-dir.add("{.data<exercise>}.pm6").spurt: .stub;
+  }
 
-  my $cdata = $base-dir.child("problem-specifications/exercises/$exercise/canonical-data.json");
-  if $cdata ~~ :f {%data<cdata><json> = $cdata.slurp}
-
-  create-file "$exercise.t", 'test';
-
-  %data<module_file> = %data<example>;
-  create-file |<Example.pm6 module>;
-
-  %data<module_file> = %data<stub>;
-  create-file "{%data<exercise>}.pm6", 'module';
+  given $base-dir.add('bin/configlet') {
+    if $_ ~~ :f {
+      run .absolute, 'generate', $base-dir, '--only', $exercise;
+    }
+  }
 
   say 'Generated.';
-
-  sub create-file ($filename, $template) {
-    spurt (my $file = $exercise-dir.child($filename)),
-      Template::Mustache.render($base-dir.child("templates/$template.mustache").slurp, %data);
-    $file.chmod(0o755) if $template ~~ 'test';
-  }
 }
 
 if @dir-not-found  {warn 'exercise directory does not exist for: ' ~ join ' ', @dir-not-found}
