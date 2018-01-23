@@ -7,10 +7,10 @@ use Exercism::Generator;
 
 bail-out if $base-dir.add('problem-specifications') !~~ :d;
 for $base-dir.add('exercises').dir {
-  if .add('example.yaml') ~~ :f {
+  if .add('.meta/exercise-data.yaml') ~~ :f {
     todo '';
     is .add("{.basename}.t").slurp,
-      Exercism::Generator.new(data => yaml-parse(~.add: 'example.yaml'), exercise => .basename).test,
+      Exercism::Generator.new(data => yaml-parse(~.add: '.meta/exercise-data.yaml'), exercise => .basename).test,
       "{.basename}: test suite matches generated";
   }
 }

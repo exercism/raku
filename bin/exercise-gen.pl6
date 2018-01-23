@@ -26,10 +26,10 @@ multi sub MAIN (*@exercises) {
 
 multi sub MAIN {
   say 'No args given; working in current directory.';
-  if 'example.yaml'.IO ~~ :f {
+  if '.meta/exercise-data.yaml'.IO ~~ :f {
     generate $*CWD.IO.basename;
   } else {
-    say 'example.yaml not found in current directory; exiting.';
+    say 'exercise-data.yaml not found in .meta of current directory; exiting.';
     exit;
   }
 }
@@ -42,7 +42,7 @@ sub generate ($exercise) {
     push @dir-not-found, $exercise;
     next;
   }
-  if (my $yaml-file = $exercise-dir.add('example.yaml')) !~~ :f {
+  if (my $yaml-file = $exercise-dir.add('.meta/exercise-data.yaml')) !~~ :f {
     push @yaml-not-found, $exercise;
     next;
   };
@@ -67,4 +67,4 @@ sub generate ($exercise) {
 }
 
 if @dir-not-found  {warn 'exercise directory does not exist for: ' ~ join ' ', @dir-not-found}
-if @yaml-not-found {note 'example.yaml not found for: ' ~ join ' ', @yaml-not-found}
+if @yaml-not-found {note '.meta/exercise-data.yaml not found for: ' ~ join ' ', @yaml-not-found}
