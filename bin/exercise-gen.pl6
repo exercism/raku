@@ -4,8 +4,6 @@ use YAML::Parser::LibYAML;
 use lib (my $base-dir = $?FILE.IO.resolve.parent.parent).add('lib');
 use Exercism::Generator;
 
-my %*SUB-MAIN-OPTS = :named-anywhere;
-
 given $base-dir {
   if .add('problem-specifications') !~~ :d {
     note 'problem-specifications directory not found; exercise(s) may generate incorrectly.';
@@ -15,56 +13,62 @@ given $base-dir {
   }
 }
 
-multi sub MAIN (Bool:D :$all where *.so) {
-  generate .basename for $base-dir.add('exercises').dir;
+my $yaml-filename := '.meta/exercise-data.yaml';
+
+my %*SUB-MAIN-OPTS = :named-anywhere;
+
+multi MAIN (Bool:D :$all where *.so) {
+  samewith $base-dir.add('exercises').dir».basename;
 }
 
-multi sub MAIN (*@exercises) {
-  @exercises».&generate;
+multi MAIN (*@exercises) {
+  await @exercises.unique.map: {start .&generate};
 }
 
-multi sub MAIN {
-  say 'No args given; working in current directory.';
-  if '.meta/exercise-data.yaml'.IO ~~ :f {
-    generate $*CWD.IO.basename;
-  } else {
-    say 'exercise-data.yaml not found in .meta of current directory; exiting.';
-    exit;
+multi MAIN {
+  given $*CWD {
+    say "No args given; looking for '$yaml-filename' in '$_'";
+    if $yaml-filename.IO ~~ :f {
+      generate .IO.basename;
+    } else {
+      say "'$yaml-filename' not found in '$_'; exiting.";
+      exit;
+    }
   }
 }
 
-sub generate ($exercise) {
+sub generate (Str:D $exercise --> Nil) {
   state (@dir-not-found, @yaml-not-found);
   END {
     if @dir-not-found  {note 'exercise directory does not exist for: ' ~ join ' ', @dir-not-found}
-    if @yaml-not-found {note '.meta/exercise-data.yaml not found for: ' ~ join ' ', @yaml-not-found}
+    if @yaml-not-found {note "$yaml-filename not found for: " ~ join ' ', @yaml-not-found}
   }
-  if (my $exercise-dir = $base-dir.add("exercises/$exercise")) !~~ :d {
+  if (my $exercise-dir := $base-dir.add("exercises/$exercise")) !~~ :d {
     push @dir-not-found, $exercise;
     return;
   }
-  if (my $yaml-file = $exercise-dir.add('.meta/exercise-data.yaml')) !~~ :f {
+  if (my $yaml-file := $exercise-dir.add: $yaml-filename) !~~ :f {
     push @yaml-not-found, $exercise;
     return;
   }
 
-  print "Generating $exercise... ";
-
-  given Exercism::Generator.new: :$exercise, data => yaml-parse $yaml-file.absolute {
-    given $exercise-dir.add("$exercise.t") -> $testfile {
-      $testfile.spurt: .test;
-      $testfile.chmod: 0o755;
+  given Exercism::Generator.new(:$exercise, data => yaml-parse $yaml-file.absolute) -> $generated {
+    given $exercise-dir {
+      .add(my $module := "{$generated.data<exercise>}.pm6").spurt: $generated.stub;
+      given .add('.meta/solutions') {
+        .mkdir;
+        .add($module).spurt: $generated.example;
+      }
+      given .add("$exercise.t") {
+        .spurt: $generated.test;
+        .chmod: 0o755;
+      }
     }
-    $exercise-dir.add("{.data<exercise>}.pm6").spurt: .stub;
-    $exercise-dir.add('.meta/solutions').mkdir;
-    $exercise-dir.add(".meta/solutions/{.data<exercise>}.pm6").spurt: .example;
   }
 
   given $base-dir.add('bin/configlet') {
-    if $_ ~~ :f {
-      run .absolute, 'generate', $base-dir, '--only', $exercise;
-    }
+    run .absolute, 'generate', $base-dir, '--only', $exercise when :f;
   }
 
-  say 'Generated.';
+  say "generated $exercise";
 }
