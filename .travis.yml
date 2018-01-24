@@ -7,7 +7,7 @@ before_script:
   - docker run
     --volume $PWD:/exercism
     exercism-rakudo-star perl6 -e
-    '.add(‘Example.pm6’).copy(.dir.first({.extension eq ‘pm6’ && .basename ne ‘Example.pm6’}))
+    '.add(‘.meta/solutions’).dir.first({.extension eq ‘pm6’}).copy(.dir.first({.extension eq ‘pm6’}))
     for $*CWD.add(‘exercism/exercises’).dir' # replace stub files with complete solutions from Example.pm6
 script:
   - bin/configlet lint .
