@@ -6,14 +6,13 @@ use Exercism::Generator;
 
 my %*SUB-MAIN-OPTS = :named-anywhere;
 
-proto sub MAIN (|) {
-  if $base-dir.add('problem-specifications') !~~ :d {
-    note 'problem-specifications directory not found; some exercises may generate incorrectly.';
+given $base-dir {
+  if .add('problem-specifications') !~~ :d {
+    note 'problem-specifications directory not found; exercise(s) may generate incorrectly.';
   }
-  if $base-dir.add('bin/configlet') !~~ :f {
+  if .add('bin/configlet') !~~ :f {
     note 'configlet not found; README.md file(s) will not be generated.';
   }
-  {*}
 }
 
 multi sub MAIN (Bool:D :$all where *.so) {
@@ -34,18 +33,21 @@ multi sub MAIN {
   }
 }
 
-my @dir-not-found;
-my @yaml-not-found;
-
 sub generate ($exercise) {
+  state (@dir-not-found, @yaml-not-found);
+  END {
+    if @dir-not-found  {note 'exercise directory does not exist for: ' ~ join ' ', @dir-not-found}
+    if @yaml-not-found {note '.meta/exercise-data.yaml not found for: ' ~ join ' ', @yaml-not-found}
+  }
   if (my $exercise-dir = $base-dir.add("exercises/$exercise")) !~~ :d {
     push @dir-not-found, $exercise;
-    next;
+    return;
   }
   if (my $yaml-file = $exercise-dir.add('.meta/exercise-data.yaml')) !~~ :f {
     push @yaml-not-found, $exercise;
-    next;
-  };
+    return;
+  }
+
   print "Generating $exercise... ";
 
   given Exercism::Generator.new: :$exercise, data => yaml-parse $yaml-file.absolute {
@@ -65,6 +67,3 @@ sub generate ($exercise) {
 
   say 'Generated.';
 }
-
-if @dir-not-found  {warn 'exercise directory does not exist for: ' ~ join ' ', @dir-not-found}
-if @yaml-not-found {note '.meta/exercise-data.yaml not found for: ' ~ join ' ', @yaml-not-found}
