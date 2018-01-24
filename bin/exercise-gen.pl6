@@ -53,8 +53,9 @@ sub generate ($exercise) {
       $testfile.spurt: .test;
       $testfile.chmod: 0o755;
     }
-    $exercise-dir.add('Example.pm6').spurt: .example;
     $exercise-dir.add("{.data<exercise>}.pm6").spurt: .stub;
+    $exercise-dir.add('.meta/solutions').mkdir;
+    $exercise-dir.add(".meta/solutions/{.data<exercise>}.pm6").spurt: .example;
   }
 
   given $base-dir.add('bin/configlet') {
