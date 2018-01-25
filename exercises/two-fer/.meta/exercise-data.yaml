@@ -4,8 +4,8 @@ plan: 3
 tests: |-
   # Go through the cases and check that &two-fer gives us the correct response.
   for $c-data<cases>.values {
-    is .<input> ??
-      two-fer(.<input>) !!
+    is .<input><name> ??
+      two-fer(.<input><name>) !!
       two-fer,
       |.<expected description>;
   }
