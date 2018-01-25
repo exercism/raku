@@ -4,7 +4,7 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Anagram;
-plan 16;
+plan 12;
 
 my Version:D $version = v3;
 
@@ -22,7 +22,7 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
 
 {
   "exercise": "anagram",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "comments": [
     "The string argument cases possible matches are passed in as",
     "individual arguments rather than arrays. Languages can include",
@@ -36,24 +36,6 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
       "input": {
         "subject": "diaper",
         "candidates": ["hello", "world", "zombies", "pants"]
-      },
-      "expected": []
-    },
-    {
-      "description": "detects simple anagram",
-      "property": "anagrams",
-      "input": {
-        "subject": "ant",
-        "candidates": ["tan", "stand", "at"]
-      },
-      "expected": ["tan"]
-    },
-    {
-      "description": "does not detect false positives",
-      "property": "anagrams",
-      "input": {
-        "subject": "galea",
-        "candidates": ["eagle"]
       },
       "expected": []
     },
@@ -101,15 +83,6 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
       "expected": ["gallery", "regally", "largely"]
     },
     {
-      "description": "does not detect identical words",
-      "property": "anagrams",
-      "input": {
-        "subject": "corn",
-        "candidates": ["corn", "dark", "Corn", "rank", "CORN", "cron", "park"]
-      },
-      "expected": ["cron"]
-    },
-    {
       "description": "does not detect non-anagrams with identical checksum",
       "property": "anagrams",
       "input": {
@@ -144,15 +117,6 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
         "candidates": ["cashregister", "Carthorse", "radishes"]
       },
       "expected": ["Carthorse"]
-    },
-    {
-      "description": "does not detect a word as its own anagram",
-      "property": "anagrams",
-      "input": {
-        "subject": "banana",
-        "candidates": ["Banana"]
-      },
-      "expected": []
     },
     {
       "description": "does not detect a anagram if the original word is repeated",
