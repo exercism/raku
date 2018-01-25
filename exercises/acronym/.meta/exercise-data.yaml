@@ -1,6 +1,6 @@
 exercise: Acronym
 version: 2
-plan: 6
+plan: 5
 tests: |-
 
   for $c-data<cases>»<cases>».Array.flat {
