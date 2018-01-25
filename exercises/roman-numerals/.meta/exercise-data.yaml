@@ -1,9 +1,9 @@
 exercise: RomanNumerals
-version: 2
-plan: 18
+version: 3
+plan: 19
 tests: |-
   for $c-data<cases>.values {
-    is to-roman(.<number>), |.<expected description>;
+    is to-roman(.<input><number>), |.<expected description>;
   }
 
 unit: module
