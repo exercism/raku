@@ -15,46 +15,55 @@ if RNA.^ver !~~ $version {
 }
 
 my $c-data = from-json $=pod.pop.contents;
-is .<dna>.&to-rna, |.<expected description> for $c-data<cases>.values;
+is .<input><dna>.&to-rna, |.<expected description> for $c-data<cases>.values;
 
 =head2 Canonical Data
 =begin code
 
 {
   "exercise": "rna-transcription",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "cases": [
     {
       "description": "RNA complement of cytosine is guanine",
       "property": "toRna",
-      "dna": "C",
+      "input": {
+        "dna": "C"
+      },
       "expected": "G"
     },
     {
       "description": "RNA complement of guanine is cytosine",
       "property": "toRna",
-      "dna": "G",
+      "input": {
+        "dna": "G"
+      },
       "expected": "C"
     },
     {
       "description": "RNA complement of thymine is adenine",
       "property": "toRna",
-      "dna": "T",
+      "input": {
+        "dna": "T"
+      },
       "expected": "A"
     },
     {
       "description": "RNA complement of adenine is uracil",
       "property": "toRna",
-      "dna": "A",
+      "input": {
+        "dna": "A"
+      },
       "expected": "U"
     },
     {
       "description": "RNA complement",
       "property": "toRna",
-      "dna": "ACGTGGTCTTAA",
+      "input": {
+        "dna": "ACGTGGTCTTAA"
+      },
       "expected": "UGCACCAGAAUU"
     }
   ]
 }
-
 =end code
