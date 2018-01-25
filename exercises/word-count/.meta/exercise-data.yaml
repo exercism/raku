@@ -2,7 +2,7 @@ exercise: WordCount
 version: 3
 plan: 11
 tests: |-
-  is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<cases>);
+  is-deeply (% = .<input><sentence>.&count-words), |.<expected description> for @($c-data<cases>);
 
 unit: module
 example: |-
