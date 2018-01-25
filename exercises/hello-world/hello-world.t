@@ -25,11 +25,12 @@ is hello, |.<expected description> for @($c-data<cases>);
 
 {
   "exercise": "hello-world",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "cases": [
     {
       "description": "Say Hi!",
       "property": "hello",
+      "input": {},
       "expected": "Hello, World!"
     }
   ]
