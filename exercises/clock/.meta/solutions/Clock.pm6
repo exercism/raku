@@ -1,4 +1,4 @@
-unit class Clock:ver<2>;
+unit class Clock:ver<3>;
 
 has Int:D $.hour = 0;
 has Int:D $.minute = 0;
@@ -9,4 +9,8 @@ method time {
 
 method add-minutes (Int:D $min) {
   $!minute += $min and return self;
+}
+
+method subtract-minutes (Int:D $min) {
+  self.add-minutes(-$min);
 }
