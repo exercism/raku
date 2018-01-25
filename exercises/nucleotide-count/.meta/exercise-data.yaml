@@ -4,10 +4,10 @@ plan: 5
 tests: |-
   for $c-data<cases>».<cases>».Array.flat {
     if .<expected><error> {
-      throws-like {nucleotide-count(.<strand>)}, Exception, .<description>;
+      throws-like {nucleotide-count(.<input><strand>)}, Exception, .<description>;
     }
     else {
-      cmp-ok nucleotide-count(.<strand>), '~~', .<expected>.Bag, .<description>;
+      cmp-ok nucleotide-count(.<input><strand>), '~~', .<expected>.Bag, .<description>;
     }
   }
 
