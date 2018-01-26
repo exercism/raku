@@ -17,10 +17,10 @@ if NucleotideCount.^ver !~~ $version {
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>».<cases>».Array.flat {
   if .<expected><error> {
-    throws-like {nucleotide-count(.<strand>)}, Exception, .<description>;
+    throws-like {nucleotide-count(.<input><strand>)}, Exception, .<description>;
   }
   else {
-    cmp-ok nucleotide-count(.<strand>), '~~', .<expected>.Bag, .<description>;
+    cmp-ok nucleotide-count(.<input><strand>), '~~', .<expected>.Bag, .<description>;
   }
 }
 
@@ -29,7 +29,7 @@ for $c-data<cases>».<cases>».Array.flat {
 
 {
   "exercise": "nucleotide-count",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "cases": [
     {
       "description": "count all nucleotides in a strand",
@@ -37,7 +37,9 @@ for $c-data<cases>».<cases>».Array.flat {
         {
           "description": "empty strand",
           "property": "nucleotideCounts",
-          "strand": "",
+          "input": {
+            "strand": ""
+          },
           "expected": {
             "A": 0,
             "C": 0,
@@ -48,7 +50,9 @@ for $c-data<cases>».<cases>».Array.flat {
         {
           "description": "can count one nucleotide in single-character input",
           "property": "nucleotideCounts",
-          "strand": "G",
+          "input": {
+            "strand": "G"
+          },
           "expected": {
             "A": 0,
             "C": 0,
@@ -59,7 +63,9 @@ for $c-data<cases>».<cases>».Array.flat {
         {
           "description": "strand with repeated nucleotide",
           "property": "nucleotideCounts",
-          "strand": "GGGGGGG",
+          "input": {
+            "strand": "GGGGGGG"
+          },
           "expected": {
             "A": 0,
             "C": 0,
@@ -70,7 +76,9 @@ for $c-data<cases>».<cases>».Array.flat {
         {
           "description": "strand with multiple nucleotides",
           "property": "nucleotideCounts",
-          "strand": "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC",
+          "input": {
+            "strand": "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"
+          },
           "expected": {
             "A": 20,
             "C": 12,
@@ -81,7 +89,9 @@ for $c-data<cases>».<cases>».Array.flat {
         {
           "description": "strand with invalid nucleotides",
           "property": "nucleotideCounts",
-          "strand": "AGXXACT",
+          "input": {
+            "strand": "AGXXACT"
+          },
           "expected": {
             "error": "Invalid nucleotide in strand"
           }
@@ -90,5 +100,4 @@ for $c-data<cases>».<cases>».Array.flat {
     }
   ]
 }
-
 =end code
