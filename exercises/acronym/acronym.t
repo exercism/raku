@@ -4,7 +4,7 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Acronym;
-plan 6;
+plan 5;
 
 my Version:D $version = v2;
 
@@ -25,7 +25,7 @@ for $c-data<cases>»<cases>».Array.flat {
 
 {
   "exercise": "acronym",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "cases": [
     {
       "description": "Abbreviate a phrase",
@@ -55,15 +55,7 @@ for $c-data<cases>»<cases>».Array.flat {
           "expected": "FIFO"
         },
         {
-          "description": "all caps words",
-          "property": "abbreviate",
-          "input": {
-            "phrase": "PHP: Hypertext Preprocessor"
-          },
-          "expected": "PHP"
-        },
-        {
-          "description": "non-acronym all caps word",
+          "description": "all caps word",
           "property": "abbreviate",
           "input": {
             "phrase": "GNU Image Manipulation Program"
@@ -71,7 +63,7 @@ for $c-data<cases>»<cases>».Array.flat {
           "expected": "GIMP"
         },
         {
-          "description": "hyphenated",
+          "description": "punctuation without whitespace",
           "property": "abbreviate",
           "input": {
             "phrase": "Complementary metal-oxide semiconductor"
