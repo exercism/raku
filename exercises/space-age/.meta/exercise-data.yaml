@@ -2,7 +2,7 @@ exercise: SpaceAge
 version: 2
 plan: 8
 tests: |-
-  is (age-on ::(.<planet>): .<seconds>), |.<expected description> for @($c-data<cases>);
+  is (age-on ::(.<input><planet>): .<input><seconds>), |.<expected description> for @($c-data<cases>);
 
 unit: module
 example: |-
