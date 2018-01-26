@@ -3,7 +3,7 @@ version: 3
 plan: 10
 tests: |-
   for $c-data<cases>».<cases>».Array.flat {
-    given is-pangram .<input> -> $result {
+    given is-pangram .<input><sentence> -> $result {
       subtest .<description>, {
         plan 2;
         isa-ok $result, Bool;
