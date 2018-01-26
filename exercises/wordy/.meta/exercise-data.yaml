@@ -4,9 +4,9 @@ plan: 16
 tests: |-
   for @($c-data<cases>) {
     if .<expected> === False {
-      throws-like {.<input>.&answer}, Exception, .<description>;
+      throws-like {.<input><question>.&answer}, Exception, .<description>;
     } else {
-      is .<input>.&answer, |.<expected description>;
+      is .<input><question>.&answer, |.<expected description>;
     }
   }
 
