@@ -1,12 +1,12 @@
 exercise: Phone
-version: 4
-plan: 12
+version: 5
+plan: 14
 tests: |-
   for @($c-data<cases>[0]<cases>) {
     if .<expected> {
-      is clean-number(.<phrase>), |.<expected description>;
+      is clean-number(.<input><phrase>), |.<expected description>;
     } else {
-      nok clean-number(.<phrase>), .<description>;
+      nok clean-number(.<input><phrase>), .<description>;
     }
   }
 
