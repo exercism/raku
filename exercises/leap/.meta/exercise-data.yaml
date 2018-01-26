@@ -3,7 +3,7 @@ version: 4
 plan: 4
 tests: |-
   for $c-data<cases>.values {
-    given is-leap-year .<input> -> $result {
+    given is-leap-year .<input><year> -> $result {
       subtest .<description>, {
         plan 2;
         isa-ok $result, Bool;

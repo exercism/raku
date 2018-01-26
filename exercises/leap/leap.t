@@ -16,7 +16,7 @@ if Leap.^ver !~~ $version {
 
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>.values {
-  given is-leap-year .<input> -> $result {
+  given is-leap-year .<input><year> -> $result {
     subtest .<description>, {
       plan 2;
       isa-ok $result, Bool;
@@ -30,33 +30,40 @@ for $c-data<cases>.values {
 
 {
   "exercise": "leap",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "cases": [
     {
       "description": "year not divisible by 4: common year",
       "property": "leapYear",
-      "input": 2015,
+      "input": {
+        "year": 2015
+      },
       "expected": false
     },
     {
       "description": "year divisible by 4, not divisible by 100: leap year",
       "property": "leapYear",
-      "input": 1996,
+      "input": {
+        "year": 1996
+      },
       "expected": true
     },
     {
       "description": "year divisible by 100, not divisible by 400: common year",
       "property": "leapYear",
-      "input": 2100,
+      "input": {
+        "year": 2100
+      },
       "expected": false
     },
     {
       "description": "year divisible by 400: leap year",
       "property": "leapYear",
-      "input": 2000,
+      "input": {
+        "year": 2000
+      },
       "expected": true
     }
   ]
 }
-
 =end code
