@@ -2,7 +2,7 @@ exercise: RNA
 version: 3
 plan: 5
 tests: |-
-  is .<dna>.&to-rna, |.<expected description> for $c-data<cases>.values;
+  is .<input><dna>.&to-rna, |.<expected description> for $c-data<cases>.values;
 
 unit: module
 example: |-
