@@ -15,14 +15,14 @@ if WordCount.^ver !~~ $version {
 }
 
 my $c-data = from-json $=pod.pop.contents;
-is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<cases>);
+is-deeply (% = .<input><sentence>.&count-words), |.<expected description> for @($c-data<cases>);
 
 =head2 Canonical Data
 =begin code
 
 {
   "exercise": "word-count",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "comments": [
     "For each word in the input, count the number of times it appears in the",
     "entire sentence."
@@ -30,16 +30,20 @@ is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<ca
   "cases": [
     {
       "description": "count one word",
-      "property": "countwords",
-      "input": "word",
+      "property": "countWords",
+      "input": {
+        "sentence": "word"
+      },
       "expected": {
         "word": 1
       }
     },
     {
       "description": "count one of each word",
-      "property": "countwords",
-      "input": "one of each",
+      "property": "countWords",
+      "input": {
+        "sentence": "one of each"
+      },
       "expected": {
         "one": 1,
         "of": 1,
@@ -48,8 +52,10 @@ is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<ca
     },
     {
       "description": "multiple occurrences of a word",
-      "property": "countwords",
-      "input": "one fish two fish red fish blue fish",
+      "property": "countWords",
+      "input": {
+        "sentence": "one fish two fish red fish blue fish"
+      },
       "expected": {
         "one": 1,
         "fish": 4,
@@ -60,8 +66,10 @@ is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<ca
     },
     {
       "description": "handles cramped lists",
-      "property": "countwords",
-      "input": "one,two,three",
+      "property": "countWords",
+      "input": {
+        "sentence": "one,two,three"
+      },
       "expected": {
         "one": 1,
         "two": 1,
@@ -70,8 +78,10 @@ is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<ca
     },
     {
       "description": "handles expanded lists",
-      "property": "countwords",
-      "input": "one,\ntwo,\nthree",
+      "property": "countWords",
+      "input": {
+        "sentence": "one,\ntwo,\nthree"
+      },
       "expected": {
         "one": 1,
         "two": 1,
@@ -80,8 +90,10 @@ is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<ca
     },
     {
       "description": "ignore punctuation",
-      "property": "countwords",
-      "input": "car: carpet as java: javascript!!&@$%^&",
+      "property": "countWords",
+      "input": {
+        "sentence": "car: carpet as java: javascript!!&@$%^&"
+      },
       "expected": {
         "car": 1,
         "carpet": 1,
@@ -92,8 +104,10 @@ is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<ca
     },
     {
       "description": "include numbers",
-      "property": "countwords",
-      "input": "testing, 1, 2 testing",
+      "property": "countWords",
+      "input": {
+        "sentence": "testing, 1, 2 testing"
+      },
       "expected": {
         "testing": 2,
         "1": 1,
@@ -102,8 +116,10 @@ is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<ca
     },
     {
       "description": "normalize case",
-      "property": "countwords",
-      "input": "go Go GO Stop stop",
+      "property": "countWords",
+      "input": {
+        "sentence": "go Go GO Stop stop"
+      },
       "expected": {
         "go": 3,
         "stop": 2
@@ -111,8 +127,10 @@ is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<ca
     },
     {
       "description": "with apostrophes",
-      "property": "countwords",
-      "input": "First: don't laugh. Then: don't cry.",
+      "property": "countWords",
+      "input": {
+        "sentence": "First: don't laugh. Then: don't cry."
+      },
       "expected": {
         "first": 1,
         "don't": 2,
@@ -123,8 +141,10 @@ is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<ca
     },
     {
       "description": "with quotations",
-      "property": "countwords",
-      "input": "Joe can't tell between 'large' and large.",
+      "property": "countWords",
+      "input": {
+        "sentence": "Joe can't tell between 'large' and large."
+      },
       "expected": {
         "joe": 1,
         "can't": 1,
@@ -136,8 +156,10 @@ is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<ca
     },
     {
       "description": "multiple spaces not detected as a word",
-      "property": "countwords",
-      "input": " multiple   whitespaces",
+      "property": "countWords",
+      "input": {
+        "sentence": " multiple   whitespaces"
+      },
       "expected": {
         "multiple": 1,
         "whitespaces": 1
@@ -145,5 +167,4 @@ is-deeply (% = .<input>.&count-words), |.<expected description> for @($c-data<ca
     }
   ]
 }
-
 =end code
