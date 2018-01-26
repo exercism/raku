@@ -1,31 +1,31 @@
 exercise: Clock
-version: 2
-methods: time add-minutes
-plan: 52
+version: 3
+methods: time add-minutes subtract-minutes
+plan: 53
 tests: |-
-  for $c-data<cases>»<cases>».Array.flat -> %case {
+  for $c-data<cases>»<cases>»<>.flat -> %case {
     given %case<property> {
       when 'create' {
-        is Clock.?new( |%(.<hour minute>:p) ).?time, |.<expected description> given %case;
+        is Clock.?new( |%(.<input><hour minute>:p) ).?time, |.<expected description> given %case;
       }
-      when 'add' {
+      when 'add'|'subtract' {
         given %case {
-          my $clock = Clock.?new: |%(.<hour minute>:p);
-          $clock.?add-minutes: .<add>;
+          my $clock = Clock.?new: |%(.<input><hour minute>:p);
+          $clock.?add-minutes: .<input><value> if .<property> eq 'add';
+          $clock.?subtract-minutes: .<input><value> if .<property> eq 'subtract';
           is $clock.?time, |.<expected description>;
         }
       }
       when 'equal' {
         is-deeply ([eq] gather {
-          take Clock.?new( |%(.<hour minute>:p) ).?time for %case<clock1 clock2>;
+          take Clock.?new( |%(.<hour minute>:p) ).?time for %case<input><clock1 clock2>;
         }), |%case<expected description>;
       }
-      when %*ENV<EXERCISM>.so { bail-out "no case for property '%case<property>'" }
     }
   }
 
-  todo 'optional test' unless %*ENV<EXERCISM>;
   is Clock.?new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
+  is Clock.?new(:0hour,:0minute).?subtract-minutes(65).?time, '22:55', 'subtract-minutes method can be chained';
 
 unit: class
 example: |-
@@ -38,6 +38,10 @@ example: |-
 
   method add-minutes (Int:D $min) {
     $!minute += $min and return self;
+  }
+
+  method subtract-minutes (Int:D $min) {
+    self.add-minutes(-$min);
   }
 stub: |-
   has $.hour;
