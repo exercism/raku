@@ -10,7 +10,7 @@ submethod TWEAK {
   if $!exercise && (my $cdata =
     $base-dir.add: "problem-specifications/exercises/$!exercise/canonical-data.json") ~~ :f
   {
-    %!data<cdata><json> = $cdata.slurp;
+    %!data<cdata><json> = $cdata.slurp.trim;
   }
 }
 

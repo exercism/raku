@@ -25,7 +25,6 @@ for @($c-data<cases>[0]<cases>) {
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "phone-number",
   "version": "1.4.0",

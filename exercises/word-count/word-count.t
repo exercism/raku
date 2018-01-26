@@ -19,7 +19,6 @@ is-deeply (% = .<input><sentence>.&count-words), |.<expected description> for @(
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "word-count",
   "version": "1.2.0",

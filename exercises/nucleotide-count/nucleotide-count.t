@@ -26,7 +26,6 @@ for $c-data<cases>».<cases>».Array.flat {
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "nucleotide-count",
   "version": "1.3.0",

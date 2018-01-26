@@ -19,7 +19,6 @@ is (age-on ::(.<input><planet>): .<input><seconds>), |.<expected description> fo
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "space-age",
   "version": "1.1.0",

@@ -27,7 +27,6 @@ for $c-data<cases>».<cases>».Array.flat {
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "pangram",
   "comments": [

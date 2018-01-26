@@ -35,7 +35,6 @@ for $c-data<cases>.values -> %case-set {
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "etl",
   "version": "1.0.0",
@@ -113,5 +112,4 @@ for $c-data<cases>.values -> %case-set {
     }
   ]
 }
-
 =end code

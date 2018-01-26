@@ -19,7 +19,6 @@ is .<input><phrase>.&::(.<property>), |.<expected description> for $c-data<cases
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "atbash-cipher",
   "version": "1.1.0",

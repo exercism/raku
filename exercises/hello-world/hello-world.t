@@ -22,7 +22,6 @@ is hello, |.<expected description> for @($c-data<cases>);
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "hello-world",
   "version": "1.1.0",
@@ -35,5 +34,4 @@ is hello, |.<expected description> for @($c-data<cases>);
     }
   ]
 }
-
 =end code

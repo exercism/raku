@@ -19,7 +19,6 @@ is-deeply flatten-array(.<input><array>), |.<expected description> for @($c-data
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "flatten-array",
   "version": "1.2.0",
@@ -74,5 +73,4 @@ is-deeply flatten-array(.<input><array>), |.<expected description> for @($c-data
     }
   ]
 }
-
 =end code

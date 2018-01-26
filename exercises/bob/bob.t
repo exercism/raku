@@ -28,7 +28,6 @@ is Bob.?hey(.<input><heyBob>), |.<expected description> for @($c-data<cases>);
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "bob",
   "version": "1.2.0",
@@ -235,5 +234,4 @@ is Bob.?hey(.<input><heyBob>), |.<expected description> for @($c-data<cases>);
     }
   ]
 }
-
 =end code

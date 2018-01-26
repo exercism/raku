@@ -35,7 +35,6 @@ for $c-data<cases>.values -> $case {
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "all-your-base",
   "version": "2.1.0",
@@ -263,5 +262,4 @@ for $c-data<cases>.values -> $case {
     }
   ]
 }
-
 =end code
