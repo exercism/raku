@@ -19,8 +19,8 @@ if TwoFer.^ver !~~ $version {
 my $c-data = from-json $=pod.pop.contents;
 # Go through the cases and check that &two-fer gives us the correct response.
 for $c-data<cases>.values {
-  is .<input> ??
-    two-fer(.<input>) !!
+  is .<input><name> ??
+    two-fer(.<input><name>) !!
     two-fer,
     |.<expected description>;
 }
@@ -30,27 +30,32 @@ for $c-data<cases>.values {
 
 {
   "exercise": "two-fer",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "cases": [
     {
       "description": "no name given",
-      "property": "name",
-      "input": null,
+      "property": "twoFer",
+      "input": {
+        "name": null
+      },
       "expected": "One for you, one for me."
     },
     {
       "description": "a name given",
-      "property": "name",
-      "input": "Alice",
+      "property": "twoFer",
+      "input": {
+        "name": "Alice"
+      },
       "expected": "One for Alice, one for me."
     },
     {
       "description": "another name given",
-      "property": "name",
-      "input": "Bob",
+      "property": "twoFer",
+      "input": {
+        "name": "Bob"
+      },
       "expected": "One for Bob, one for me."
     }
   ]
 }
-
 =end code
