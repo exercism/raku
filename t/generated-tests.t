@@ -6,7 +6,7 @@ use lib (my $base-dir = $?FILE.IO.resolve.parent.parent).add('lib');
 use Exercism::Generator;
 
 bail-out if $base-dir.add('problem-specifications') !~~ :d;
-for $base-dir.add('exercises').dir {
+for $base-dir.add('exercises').dir.sort {
   if .add('.meta/exercise-data.yaml') ~~ :f {
     todo '';
     is .add("{.basename}.t").slurp,
