@@ -4,9 +4,9 @@ plan: 15
 tests: |-
   for $c-data<cases>.values {
     if .<expected><error> {
-      throws-like {hamming-distance(|.<strand1 strand2>)}, Exception, .<description>;
+      throws-like {hamming-distance(|.<input><strand1 strand2>)}, Exception, .<description>;
     } else {
-      is hamming-distance(|.<strand1 strand2>), |.<expected description>;
+      is hamming-distance(|.<input><strand1 strand2>), |.<expected description>;
     }
   }
 
