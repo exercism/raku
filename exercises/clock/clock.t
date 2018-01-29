@@ -45,7 +45,6 @@ is Clock.?new(:0hour,:0minute).?subtract-minutes(65).?time, '22:55', 'subtract-m
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "clock",
   "version": "2.2.1",
@@ -634,5 +633,4 @@ is Clock.?new(:0hour,:0minute).?subtract-minutes(65).?time, '22:55', 'subtract-m
     }
   ]
 }
-
 =end code

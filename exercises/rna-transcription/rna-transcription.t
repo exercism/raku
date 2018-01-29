@@ -19,7 +19,6 @@ is .<input><dna>.&to-rna, |.<expected description> for $c-data<cases>.values;
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "rna-transcription",
   "version": "1.2.0",

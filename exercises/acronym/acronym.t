@@ -22,7 +22,6 @@ for $c-data<cases>»<cases>».Array.flat {
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "acronym",
   "version": "1.3.0",
@@ -74,5 +73,4 @@ for $c-data<cases>»<cases>».Array.flat {
     }
   ]
 }
-
 =end code

@@ -19,7 +19,6 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "anagram",
   "version": "1.2.0",
@@ -147,5 +146,4 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
     }
   ]
 }
-
 =end code

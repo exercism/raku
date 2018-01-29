@@ -26,7 +26,6 @@ is total-grains, |$c-data<cases>[1]<expected description>;
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "grains",
   "version": "1.0.0",
@@ -108,5 +107,4 @@ is total-grains, |$c-data<cases>[1]<expected description>;
     }
   ]
 }
-
 =end code

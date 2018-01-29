@@ -25,7 +25,6 @@ for @($c-data<cases>) {
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "wordy",
   "version": "1.1.0",

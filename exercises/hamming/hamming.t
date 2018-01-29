@@ -25,7 +25,6 @@ for $c-data<cases>.values {
 
 =head2 Canonical Data
 =begin code
-
 {
 "exercise": "hamming",
 "version": "2.1.0",
@@ -179,5 +178,4 @@ for $c-data<cases>.values {
     }
   ]
 }
-
 =end code

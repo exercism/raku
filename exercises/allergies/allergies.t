@@ -43,7 +43,6 @@ for $c-data<cases>.values -> %case-set {
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "allergies",
   "version": "1.1.0",
@@ -217,5 +216,4 @@ for $c-data<cases>.values -> %case-set {
     }
   ]
 }
-
 =end code

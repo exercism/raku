@@ -19,7 +19,6 @@ is .<input><word>.&score, |.<expected description> for @($c-data<cases>);
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "scrabble-score",
   "version": "1.1.0",
