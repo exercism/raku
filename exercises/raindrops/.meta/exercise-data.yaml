@@ -5,8 +5,8 @@ tests: |-
   for @($c-data<cases>) {
     subtest {
       plan 2;
-      is .<number>.&convert, |.<expected description>;
-      isa-ok .<number>.&convert, Str;
+      is .<input><number>.&convert, |.<expected description>;
+      isa-ok .<input><number>.&convert, Str;
     }
   }
 
