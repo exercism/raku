@@ -15,20 +15,30 @@ given $base-dir {
   }
 }
 
-multi sub MAIN (Bool:D :$all where *.so) {
+#| Displays this message.
+multi MAIN ( Bool:D :h(:help(:$man)) ) {
+  say $*USAGE;
+}
+
+#| Runs the generator for everything in the exercises directory.
+multi sub MAIN (Bool:D :a(:$all) where *.so) {
   generate .basename for $base-dir.add('exercises').dir;
 }
 
+#| The generator will run for each exercise given as an argument.
 multi sub MAIN (*@exercises) {
   @exercises».&generate;
 }
 
+#|[The generator will attempt to run using the current directory.
+Exits if a '.meta/exercise-data.yaml' file is not found.]
 multi sub MAIN {
   say 'No args given; working in current directory.';
   if '.meta/exercise-data.yaml'.IO ~~ :f {
     generate $*CWD.IO.basename;
   } else {
-    say 'exercise-data.yaml not found in .meta of current directory; exiting.';
+    say "exercise-data.yaml not found in .meta of current directory; exiting.\n";
+    say $*USAGE;
     exit;
   }
 }
