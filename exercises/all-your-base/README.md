@@ -49,6 +49,5 @@ test suite), and run the test suite for the exercise by executing the command
 You can also add the `-v` flag e.g. `prove . --exec=perl6 -v` to display all
 tests, including any optional tests marked as 'TODO'.
 
-
 ## Submitting Incomplete Solutions
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.
