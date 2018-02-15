@@ -18,7 +18,7 @@ my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>.values -> $case {
   sub call-convert-base {
     convert-base(
-      bases  => %(<from to> Z=> .<input><input_base output_base>),
+      bases  => %(<from to> Z=> .<input><inputBase outputBase>),
       digits => .<input><digits>,
     ) given $case;
   }
@@ -37,7 +37,7 @@ for $c-data<cases>.values -> $case {
 =begin code
 {
   "exercise": "all-your-base",
-  "version": "2.1.0",
+  "version": "2.3.0",
   "comments": [
     "This canonical data makes the following choices:",
     "1. Zero is always represented in outputs as [0] instead of [].",
@@ -54,9 +54,9 @@ for $c-data<cases>.values -> $case {
       "description": "single bit one to decimal",
       "property": "rebase",
       "input": {
-        "input_base": 2,
+        "inputBase": 2,
         "digits": [1],
-        "output_base": 10
+        "outputBase": 10
       },
       "expected": [1]
     },
@@ -64,9 +64,9 @@ for $c-data<cases>.values -> $case {
       "description": "binary to single decimal",
       "property": "rebase",
       "input": {
-        "input_base": 2,
+        "inputBase": 2,
         "digits": [1, 0, 1],
-        "output_base": 10
+        "outputBase": 10
       },
       "expected": [5]
     },
@@ -74,9 +74,9 @@ for $c-data<cases>.values -> $case {
       "description": "single decimal to binary",
       "property": "rebase",
       "input": {
-        "input_base": 10,
+        "inputBase": 10,
         "digits": [5],
-        "output_base": 2
+        "outputBase": 2
       },
       "expected": [1, 0, 1]
     },
@@ -84,9 +84,9 @@ for $c-data<cases>.values -> $case {
       "description": "binary to multiple decimal",
       "property": "rebase",
       "input": {
-        "input_base": 2,
+        "inputBase": 2,
         "digits": [1, 0, 1, 0, 1, 0],
-        "output_base": 10
+        "outputBase": 10
       },
       "expected": [4, 2]
     },
@@ -94,9 +94,9 @@ for $c-data<cases>.values -> $case {
       "description": "decimal to binary",
       "property": "rebase",
       "input": {
-        "input_base": 10,
+        "inputBase": 10,
         "digits": [4, 2],
-        "output_base": 2
+        "outputBase": 2
       },
       "expected": [1, 0, 1, 0, 1, 0]
     },
@@ -104,9 +104,9 @@ for $c-data<cases>.values -> $case {
       "description": "trinary to hexadecimal",
       "property": "rebase",
       "input": {
-        "input_base": 3,
+        "inputBase": 3,
         "digits": [1, 1, 2, 0],
-        "output_base": 16
+        "outputBase": 16
       },
       "expected": [2, 10]
     },
@@ -114,9 +114,9 @@ for $c-data<cases>.values -> $case {
       "description": "hexadecimal to trinary",
       "property": "rebase",
       "input": {
-        "input_base": 16,
+        "inputBase": 16,
         "digits": [2, 10],
-        "output_base": 3
+        "outputBase": 3
       },
       "expected": [1, 1, 2, 0]
     },
@@ -124,9 +124,9 @@ for $c-data<cases>.values -> $case {
       "description": "15-bit integer",
       "property": "rebase",
       "input": {
-        "input_base": 97,
+        "inputBase": 97,
         "digits": [3, 46, 60],
-        "output_base": 73
+        "outputBase": 73
       },
       "expected": [6, 10, 45]
     },
@@ -134,9 +134,9 @@ for $c-data<cases>.values -> $case {
       "description": "empty list",
       "property": "rebase",
       "input": {
-        "input_base": 2,
+        "inputBase": 2,
         "digits": [],
-        "output_base": 10
+        "outputBase": 10
       },
       "expected": [0]
     },
@@ -144,9 +144,9 @@ for $c-data<cases>.values -> $case {
       "description": "single zero",
       "property": "rebase",
       "input": {
-        "input_base": 10,
+        "inputBase": 10,
         "digits": [0],
-        "output_base": 2
+        "outputBase": 2
       },
       "expected": [0]
     },
@@ -154,9 +154,9 @@ for $c-data<cases>.values -> $case {
       "description": "multiple zeros",
       "property": "rebase",
       "input": {
-        "input_base": 10,
+        "inputBase": 10,
         "digits": [0, 0, 0],
-        "output_base": 2
+        "outputBase": 2
       },
       "expected": [0]
     },
@@ -164,9 +164,9 @@ for $c-data<cases>.values -> $case {
       "description": "leading zeros",
       "property": "rebase",
       "input": {
-        "input_base": 7,
+        "inputBase": 7,
         "digits": [0, 6, 0],
-        "output_base": 10
+        "outputBase": 10
       },
       "expected": [4, 2]
     },
@@ -174,9 +174,9 @@ for $c-data<cases>.values -> $case {
       "description": "input base is one",
       "property": "rebase",
       "input": {
-        "input_base": 1,
-        "digits": [],
-        "output_base": 10
+        "inputBase": 1,
+        "digits": [0],
+        "outputBase": 10
       },
       "expected": {"error": "input base must be >= 2"}
     },
@@ -184,9 +184,9 @@ for $c-data<cases>.values -> $case {
       "description": "input base is zero",
       "property": "rebase",
       "input": {
-        "input_base": 0,
+        "inputBase": 0,
         "digits": [],
-        "output_base": 10
+        "outputBase": 10
       },
       "expected": {"error": "input base must be >= 2"}
     },
@@ -194,9 +194,9 @@ for $c-data<cases>.values -> $case {
       "description": "input base is negative",
       "property": "rebase",
       "input": {
-        "input_base": -2,
+        "inputBase": -2,
         "digits": [1],
-        "output_base": 10
+        "outputBase": 10
       },
       "expected": {"error": "input base must be >= 2"}
     },
@@ -204,9 +204,9 @@ for $c-data<cases>.values -> $case {
       "description": "negative digit",
       "property": "rebase",
       "input": {
-        "input_base": 2,
+        "inputBase": 2,
         "digits": [1, -1, 1, 0, 1, 0],
-        "output_base": 10
+        "outputBase": 10
       },
       "expected": {"error": "all digits must satisfy 0 <= d < input base"}
     },
@@ -214,9 +214,9 @@ for $c-data<cases>.values -> $case {
       "description": "invalid positive digit",
       "property": "rebase",
       "input": {
-        "input_base": 2,
+        "inputBase": 2,
         "digits": [1, 2, 1, 0, 1, 0],
-        "output_base": 10
+        "outputBase": 10
       },
       "expected": {"error": "all digits must satisfy 0 <= d < input base"}
     },
@@ -224,9 +224,9 @@ for $c-data<cases>.values -> $case {
       "description": "output base is one",
       "property": "rebase",
       "input": {
-        "input_base": 2,
+        "inputBase": 2,
         "digits": [1, 0, 1, 0, 1, 0],
-        "output_base": 1
+        "outputBase": 1
       },
       "expected": {"error": "output base must be >= 2"}
     },
@@ -234,9 +234,9 @@ for $c-data<cases>.values -> $case {
       "description": "output base is zero",
       "property": "rebase",
       "input": {
-        "input_base": 10,
+        "inputBase": 10,
         "digits": [7],
-        "output_base": 0
+        "outputBase": 0
       },
       "expected": {"error": "output base must be >= 2"}
     },
@@ -244,9 +244,9 @@ for $c-data<cases>.values -> $case {
       "description": "output base is negative",
       "property": "rebase",
       "input": {
-        "input_base": 2,
+        "inputBase": 2,
         "digits": [1],
-        "output_base": -7
+        "outputBase": -7
       },
       "expected": {"error": "output base must be >= 2"}
     },
@@ -254,9 +254,9 @@ for $c-data<cases>.values -> $case {
       "description": "both bases are negative",
       "property": "rebase",
       "input": {
-        "input_base": -2,
+        "inputBase": -2,
         "digits": [1],
-        "output_base": -7
+        "outputBase": -7
       },
       "expected": {"error": "input base must be >= 2"}
     }
