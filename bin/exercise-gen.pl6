@@ -1,6 +1,7 @@
 #!/usr/bin/env perl6
 use v6;
 use YAML::Parser::LibYAML;
+use nqp;
 use lib (my $base-dir = $?FILE.IO.resolve.parent.parent).add('lib');
 use Exercism::Generator;
 
@@ -64,6 +65,7 @@ sub generate ($exercise) {
     given $exercise-dir.add("$exercise.t") -> $testfile {
       $testfile.spurt: .test;
       $testfile.chmod: 0o755;
+      try nqp::symlink("../../$_", ~$exercise-dir.add(".meta/solutions/$_")) given $testfile.basename;
     }
     $exercise-dir.add("{.data<exercise>}.pm6").spurt: .stub;
     $exercise-dir.add('.meta/solutions').mkdir;

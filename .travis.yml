@@ -4,17 +4,13 @@ before_script:
   - git clone https://github.com/exercism/problem-specifications.git
   - bin/fetch-configlet
   - docker build -t exercism-rakudo-star .
-  - docker run
-    --volume $PWD:/exercism
-    exercism-rakudo-star perl6 -e
-    '.add(‘.meta/solutions’).dir.first({.extension eq ‘pm6’}).copy(.dir.first({.extension eq ‘pm6’}))
-    for $*CWD.add(‘exercism/exercises’).dir' # replace stub files with complete solutions from Example.pm6
 script:
   - bin/configlet lint .
   - docker run
     --volume $PWD:/exercism
-    exercism-rakudo-star prove /exercism
-    --exec perl6
-    --recurse
-    --directives
-    --jobs 2
+    exercism-rakudo-star /bin/bash -c 'cd /exercism
+    && prove exercises/*/.meta/solutions/
+      --recurse
+      --jobs 2
+    && prove t/
+      --directives'
