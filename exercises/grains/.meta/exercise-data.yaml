@@ -4,9 +4,9 @@ plan: 11
 tests: |-
   for @($c-data<cases>[0]<cases>) {
     if .<expected> == -1 {
-      throws-like { grains-on-square(.<input>) }, Exception, .<description>;
+      throws-like { grains-on-square(.<input><square>) }, Exception, .<description>;
     } else {
-      is grains-on-square(.<input>), |.<expected description>;
+      is grains-on-square(.<input><square>), |.<expected description>;
     }
   }
   is total-grains, |$c-data<cases>[1]<expected description>;
