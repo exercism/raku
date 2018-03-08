@@ -14,24 +14,26 @@ submethod TWEAK {
   }
 }
 
-method cdata {
+method cdata (--> Str:D) {
   %!data<cdata><json> ?? %!data<cdata><json> !! '';
 }
 
-method test {
-  self!render(template => 'test');
+method test (--> Str:D) {
+  self!render;
 }
 
-method stub {
-  self!render(template => 'module', file => 'stub');
+method stub (--> Str:D) {
+  self!render: %!data<stub> || '';
 }
 
-method example {
-  self!render(template => 'module', file => 'example');
+method examples (--> Hash()) {
+  return %!data<examples>
+    ?? %!data<examples>.map: {.key => self!render: .value}
+    !! base => self!render: %!data<example>;
 }
 
-method !render (:$template!, :$file) {
-  my $data = %!data;
-  if $file { $data<module_file> = $data{$file} };
-  Template::Mustache.render($base-dir.add("templates/$template.mustache").slurp, $data);
+method !render (Str $module_file? --> Str:D) {
+  Template::Mustache.render(
+    $base-dir.add("templates/{$module_file.defined ?? 'module' !! 'test'}.mustache").slurp, %(|%!data, :$module_file)
+  );
 }

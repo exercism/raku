@@ -23,18 +23,19 @@ modules:
   - use: Data::Dump
   - use: Foo::Bar
 methods: 'foo bar'
-tests: |
+tests: |-
   ok my-subroutine, 'Perl 6 code here';
   pass;
 
 unit: module
-example: |
-  sub my-subroutine is export {
-    True;
-  }
-  
-  class MyClass is export {
-  }
+examples:
+  base: |-
+    sub my-subroutine is export {
+      True;
+    }
+
+    class MyClass is export {
+    }
 ```
 
 You must have `Template::Mustache` and `YAML::Parser::LibYAML` to run `exercise-gen.pl6`.
