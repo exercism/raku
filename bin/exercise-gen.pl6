@@ -62,14 +62,24 @@ sub generate ($exercise) {
   print "Generating $exercise... ";
 
   given Exercism::Generator.new: :$exercise, data => yaml-parse $yaml-file.absolute {
-    given $exercise-dir.add("$exercise.t") -> $testfile {
-      $testfile.spurt: .test;
-      $testfile.chmod: 0o755;
-      try nqp::symlink("../../$_", ~$exercise-dir.add(".meta/solutions/$_")) given $testfile.basename;
-    }
+    my $testfile = $exercise-dir.add("$exercise.t");
+    $testfile.spurt: .test;
+    $testfile.chmod: 0o755;
+
     $exercise-dir.add("{.data<exercise>}.pm6").spurt: .stub;
+
     $exercise-dir.add('.meta/solutions').mkdir;
-    $exercise-dir.add(".meta/solutions/{.data<exercise>}.pm6").spurt: .example;
+    for .examples.pairs -> $example {
+      if $example.key ~~ 'base' {
+        $exercise-dir.add(".meta/solutions/{.data<exercise>}.pm6").spurt: $example.value;
+        try nqp::symlink("../../$_", ~$exercise-dir.add(".meta/solutions/$_")) given $testfile.basename;
+      }
+      else {
+        $exercise-dir.add(".meta/solutions/{$example.key}").mkdir;
+        $exercise-dir.add(".meta/solutions/{$example.key}/{.data<exercise>}.pm6").spurt: $example.value;
+        try nqp::symlink("../../../$_", ~$exercise-dir.add(".meta/solutions/{$example.key}/$_")) given $testfile.basename;
+      }
+    }
   }
 
   given $base-dir.add('bin/configlet') {
