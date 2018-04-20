@@ -6,7 +6,7 @@ use lib $?FILE.IO.dirname;
 use Raindrops;
 plan 18;
 
-my Version:D $version = v2;
+my Version:D $version = v3;
 
 if Raindrops.^ver !~~ $version {
   warn "\nExercise version mismatch. Further tests may fail!"
@@ -18,8 +18,8 @@ my $c-data = from-json $=pod.pop.contents;
 for @($c-data<cases>) {
   subtest {
     plan 2;
-    is .<input><number>.&convert, |.<expected description>;
-    isa-ok .<input><number>.&convert, Str;
+    is .<input><number>.&raindrop, |.<expected description>;
+    isa-ok .<input><number>.&raindrop, Str;
   }
 }
 

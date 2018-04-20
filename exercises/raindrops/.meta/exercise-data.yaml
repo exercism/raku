@@ -1,18 +1,18 @@
 exercise: Raindrops
-version: 2
+version: 3
 plan: 18
 tests: |-
   for @($c-data<cases>) {
     subtest {
       plan 2;
-      is .<input><number>.&convert, |.<expected description>;
-      isa-ok .<input><number>.&convert, Str;
+      is .<input><number>.&raindrop, |.<expected description>;
+      isa-ok .<input><number>.&raindrop, Str;
     }
   }
 
 unit: module
 example: |-
-  sub convert (Int:D $num --> Str:D) is export {
+  sub raindrop (Int:D $num --> Str:D) is export {
     my $str = '';
     given $num {
       when * %% 3 {$str ~= 'Pling'; proceed}
@@ -22,5 +22,5 @@ example: |-
     return $str ?? $str !! $num.Str;
   }
 stub: |-
-  sub convert ($num) is export {
+  sub raindrop ($num) is export {
   }
