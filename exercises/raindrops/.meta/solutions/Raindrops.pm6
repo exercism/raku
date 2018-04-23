@@ -1,6 +1,6 @@
-unit module Raindrops:ver<2>;
+unit module Raindrops:ver<3>;
 
-sub convert (Int:D $num --> Str:D) is export {
+sub raindrop (Int:D $num --> Str:D) is export {
   my $str = '';
   given $num {
     when * %% 3 {$str ~= 'Pling'; proceed}

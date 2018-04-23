@@ -1,4 +1,4 @@
-unit module Raindrops:ver<2>;
+unit module Raindrops:ver<3>;
 
-sub convert ($num) is export {
+sub raindrop ($num) is export {
 }
