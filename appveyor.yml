@@ -1,0 +1,39 @@
+version: '{build}'
+pull_requests:
+  do_not_increment_build_number: true
+image:
+  - Ubuntu
+  - Visual Studio 2017
+before_build:
+  - git config core.symlinks true
+  - git reset --hard
+  - git clone https://github.com/exercism/problem-specifications.git
+for:
+  - matrix:
+      only:
+        - image: Ubuntu
+    build_script:
+      - docker build -t exercism-rakudo-star .
+    before_test:
+      - bin/fetch-configlet
+    test_script:
+      - bin/configlet lint . --track-id=perl6
+      - docker run
+          --mount "type=bind,src=$(pwd),dst=/exercism"
+          exercism-rakudo-star /bin/bash -c 'cd /exercism
+          && prove exercises/*/.meta/solutions/
+            --recurse
+            --jobs 2
+          && prove t/
+            --directives'
+  - matrix:
+      only:
+        - image: Visual Studio 2017
+    build_script:
+      - choco install rakudostar -y
+      - refreshenv
+    test_script:
+      - prove exercises/*/.meta/solutions/
+          --exec perl6
+          --recurse
+          --jobs 2
