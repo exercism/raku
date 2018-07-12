@@ -9,7 +9,7 @@
     {
       "slug": "hello-world",
       "uuid": "2803dd22-3a92-4fa9-ae7c-4354e80fe423",
-      "core": false,
+      "core": true,
       "auto_approve": true,
       "unlocked_by": null,
       "difficulty": 1,
@@ -19,14 +19,14 @@
       "slug": "two-fer",
       "uuid": "455dd1c8-bf10-4912-a69b-4ffada20d661",
       "core": false,
-      "unlocked_by": null,
+      "unlocked_by": "hello-world",
       "difficulty": 1,
       "topics": []
     },
     {
       "slug": "leap",
       "uuid": "ace2a251-58f5-4128-bc48-f1661463974d",
-      "core": false,
+      "core": true,
       "unlocked_by": null,
       "difficulty": 2,
       "topics": []
@@ -34,47 +34,7 @@
     {
       "slug": "bob",
       "uuid": "2bd18a17-b9f3-4146-a38a-7d940ad16801",
-      "core": false,
-      "unlocked_by": null,
-      "difficulty": 3,
-      "topics": []
-    },
-    {
-      "slug": "pangram",
-      "uuid": "eddd942e-cb67-4ae2-b763-a11ee3640aee",
-      "core": false,
-      "unlocked_by": null,
-      "difficulty": 2,
-      "topics": []
-    },
-    {
-      "slug": "phone-number",
-      "uuid": "e2d8034d-9e7e-4b1c-a8be-b1b333d7b3f0",
-      "core": false,
-      "unlocked_by": null,
-      "difficulty": 4,
-      "topics": []
-    },
-    {
-      "slug": "hamming",
-      "uuid": "c18b5d07-ac1b-4411-9bd4-c6882614e8ee",
-      "core": false,
-      "unlocked_by": null,
-      "difficulty": 3,
-      "topics": []
-    },
-    {
-      "slug": "rna-transcription",
-      "uuid": "378da8ed-c955-4a27-87b4-078b36479d77",
-      "core": false,
-      "unlocked_by": null,
-      "difficulty": 2,
-      "topics": []
-    },
-    {
-      "slug": "etl",
-      "uuid": "3bee4dc2-d747-4b4e-ac10-d7815666bbc0",
-      "core": false,
+      "core": true,
       "unlocked_by": null,
       "difficulty": 3,
       "topics": []
@@ -82,16 +42,72 @@
     {
       "slug": "nucleotide-count",
       "uuid": "30732526-f790-4182-bcc7-7713b685d90a",
-      "core": false,
+      "core": true,
       "unlocked_by": null,
       "difficulty": 3,
       "topics": []
     },
     {
+      "slug": "pangram",
+      "uuid": "eddd942e-cb67-4ae2-b763-a11ee3640aee",
+      "core": true,
+      "unlocked_by": null,
+      "difficulty": 2,
+      "topics": []
+    },
+    {
       "slug": "clock",
       "uuid": "9fc9b102-185d-4f34-98d0-e3084399610a",
-      "core": false,
+      "core": true,
       "unlocked_by": null,
+      "difficulty": 3,
+      "topics": []
+    },
+    {
+      "slug": "raindrops",
+      "uuid": "9cb1a358-93af-4242-98fe-def7538f9190",
+      "core": true,
+      "unlocked_by": null,
+      "difficulty": 3,
+      "topics": []
+    },
+    {
+      "slug": "phone-number",
+      "uuid": "e2d8034d-9e7e-4b1c-a8be-b1b333d7b3f0",
+      "core": true,
+      "unlocked_by": null,
+      "difficulty": 4,
+      "topics": []
+    },
+    {
+      "slug": "allergies",
+      "uuid": "8db9c6f1-b086-4b20-a0d2-657d5fdb2c1e",
+      "core": true,
+      "unlocked_by": null,
+      "difficulty": 5,
+      "topics": []
+    },
+    {
+      "slug": "hamming",
+      "uuid": "c18b5d07-ac1b-4411-9bd4-c6882614e8ee",
+      "core": false,
+      "unlocked_by": "nucleotide-count",
+      "difficulty": 3,
+      "topics": []
+    },
+    {
+      "slug": "rna-transcription",
+      "uuid": "378da8ed-c955-4a27-87b4-078b36479d77",
+      "core": false,
+      "unlocked_by": "nucleotide-count",
+      "difficulty": 2,
+      "topics": []
+    },
+    {
+      "slug": "etl",
+      "uuid": "3bee4dc2-d747-4b4e-ac10-d7815666bbc0",
+      "core": false,
+      "unlocked_by": "raindrops",
       "difficulty": 3,
       "topics": []
     },
@@ -101,14 +117,6 @@
       "core": false,
       "unlocked_by": null,
       "difficulty": 6,
-      "topics": []
-    },
-    {
-      "slug": "raindrops",
-      "uuid": "9cb1a358-93af-4242-98fe-def7538f9190",
-      "core": false,
-      "unlocked_by": null,
-      "difficulty": 3,
       "topics": []
     },
     {
@@ -123,7 +131,7 @@
       "slug": "luhn",
       "uuid": "2d0c4351-3d23-4023-942a-77fbb3a90d82",
       "core": false,
-      "unlocked_by": null,
+      "unlocked_by": "leap",
       "difficulty": 5,
       "topics": []
     },
@@ -131,7 +139,7 @@
       "slug": "meetup",
       "uuid": "b8ae569f-d0b3-44d0-a4d6-a800b20b398a",
       "core": false,
-      "unlocked_by": null,
+      "unlocked_by": "phone-number",
       "difficulty": 5,
       "topics": []
     },
@@ -139,7 +147,7 @@
       "slug": "word-count",
       "uuid": "23aa0f8c-e098-4d4e-8556-7c1be40726a9",
       "core": false,
-      "unlocked_by": null,
+      "unlocked_by": "pangram",
       "difficulty": 4,
       "topics": []
     },
@@ -178,7 +186,7 @@
     {
       "slug": "all-your-base",
       "uuid": "fed2a81d-724d-4ccd-bf65-c6155a2dfbea",
-      "core": false,
+      "core": true,
       "unlocked_by": null,
       "difficulty": 6,
       "topics": []
@@ -187,14 +195,14 @@
       "slug": "anagram",
       "uuid": "1e99ac1f-853d-446f-a567-dd2d70dce9c1",
       "core": false,
-      "unlocked_by": null,
+      "unlocked_by": "pangram",
       "difficulty": 4,
       "topics": []
     },
     {
       "slug": "robot-name",
       "uuid": "d5f7756e-9b82-4576-9f21-dff39293e015",
-      "core": false,
+      "core": true,
       "unlocked_by": null,
       "difficulty": 6,
       "topics": []
@@ -213,14 +221,6 @@
       "core": false,
       "unlocked_by": null,
       "difficulty": 4,
-      "topics": []
-    },
-    {
-      "slug": "allergies",
-      "uuid": "8db9c6f1-b086-4b20-a0d2-657d5fdb2c1e",
-      "core": false,
-      "unlocked_by": null,
-      "difficulty": 5,
       "topics": []
     },
     {
