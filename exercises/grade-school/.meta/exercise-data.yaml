@@ -1,51 +1,19 @@
 exercise: GradeSchool
-version: 3
-plan: 18
+version: 4
+plan: 7
 tests: |-
-  subtest "Roster class methods", {
-    plan 3;
-    ok ::('Roster').can($_), $_ for <add-student list-grade list-all>;
+  for $c-data<cases>:v {
+    cmp-ok roster(|%(<students grade> Z=> .<input><students desiredGrade>:v)), '~~', |.<expected description>;
   }
-
-  my $roster = ::('Roster').new;
-
-  ok $roster.?add-student(:name('Jim'), :2grade), 'Add Jim to grade 2';
-  cmp-ok $roster.?list-grade(2), '~~', <Jim>, 'List grade 2';
-
-  ok $roster.?add-student(:name('Zoe'), :2grade), 'Add Zoe to grade 2';
-  ok $roster.?add-student(:name('Barb'), :1grade), 'Add Barb to grade 1';
-  cmp-ok $roster.?list-grade(2), '~~', <Jim Zoe>, 'List grade 2';
-  cmp-ok $roster.?list-grade(1), '~~', <Barb>, 'List grade 1';
-
-  cmp-ok $roster.?list-all, '~~', ('Grade 1', <Barb>, 'Grade 2', <Jim Zoe>), 'List all';
-
-  ok $roster.?add-student(:name($_), :1grade), "Add $_ to grade 1" for <Charlie Anna>;
-  ok $roster.?add-student(:name('Alex'), :2grade), 'Add Alex to grade 2';
-  ok $roster.?add-student(:name($_), :3grade), "Add $_ to grade 3" for <Tom Dick Harry>;
-
-  cmp-ok $roster.?list-grade(1), '~~', <Anna Barb Charlie>, 'List grade 1';
-  cmp-ok $roster.?list-grade(2), '~~', <Alex Jim Zoe>, 'List grade 2';
-  cmp-ok $roster.?list-grade(3), '~~', <Dick Harry Tom>, 'List grade 3';
-  cmp-ok $roster.?list-all, '~~', ('Grade 1', <Anna Barb Charlie>, 'Grade 2', <Alex Jim Zoe>, 'Grade 3', <Dick Harry Tom>), 'List all';
 
 unit: module
 example: |-
-  class Roster is export {
-    has %!roster;
-
-    method add-student (Str:D :$name!, Int:D :$grade!) {
-      %!roster.append($grade, $name);
-    }
-
-    method list-grade (Int:D $grade --> Seq:D) {
-      %!roster{$grade}.sort;
-    }
-
-    method list-all {
-      my @list.append("Grade $_", %!roster{$_}.sort) for %!roster.keys.sort;
-      return @list;
-    }
+  sub roster (List:D :$students!, UInt :$grade --> List) is export {
+    my %roster;
+    $students.map({%roster{.[1]}.push: .[0] andthen .=sort});
+    return %roster{$grade} || List if $grade;
+    .{.keys.sort}.map(*<>).flat.List given %roster;
   }
 stub: |-
-  class Roster is export {
+  sub roster (:$students, :$grade) is export {
   }

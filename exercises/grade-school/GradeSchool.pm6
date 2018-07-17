@@ -1,4 +1,4 @@
-unit module GradeSchool:ver<3>;
+unit module GradeSchool:ver<4>;
 
-class Roster is export {
+sub roster (:$students, :$grade) is export {
 }
