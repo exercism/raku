@@ -1,11 +1,12 @@
 #!/usr/bin/env perl6
 use v6;
 use Test;
+use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use GradeSchool;
-plan 18;
+plan 7;
 
-my Version:D $version = v3;
+my Version:D $version = v4;
 
 if GradeSchool.^ver !~~ $version {
   warn "\nExercise version mismatch. Further tests may fail!"
@@ -13,28 +14,79 @@ if GradeSchool.^ver !~~ $version {
     ~ "Test is {$version.gist}.\n";
 }
 
-subtest "Roster class methods", {
-  plan 3;
-  ok ::('Roster').can($_), $_ for <add-student list-grade list-all>;
+my $c-data = from-json $=pod.pop.contents;
+for $c-data<cases>:v {
+  cmp-ok roster(|%(<students grade> Z=> .<input><students desiredGrade>:v)), '~~', |.<expected description>;
 }
 
-my $roster = ::('Roster').new;
-
-ok $roster.?add-student(:name('Jim'), :2grade), 'Add Jim to grade 2';
-cmp-ok $roster.?list-grade(2), '~~', <Jim>, 'List grade 2';
-
-ok $roster.?add-student(:name('Zoe'), :2grade), 'Add Zoe to grade 2';
-ok $roster.?add-student(:name('Barb'), :1grade), 'Add Barb to grade 1';
-cmp-ok $roster.?list-grade(2), '~~', <Jim Zoe>, 'List grade 2';
-cmp-ok $roster.?list-grade(1), '~~', <Barb>, 'List grade 1';
-
-cmp-ok $roster.?list-all, '~~', ('Grade 1', <Barb>, 'Grade 2', <Jim Zoe>), 'List all';
-
-ok $roster.?add-student(:name($_), :1grade), "Add $_ to grade 1" for <Charlie Anna>;
-ok $roster.?add-student(:name('Alex'), :2grade), 'Add Alex to grade 2';
-ok $roster.?add-student(:name($_), :3grade), "Add $_ to grade 3" for <Tom Dick Harry>;
-
-cmp-ok $roster.?list-grade(1), '~~', <Anna Barb Charlie>, 'List grade 1';
-cmp-ok $roster.?list-grade(2), '~~', <Alex Jim Zoe>, 'List grade 2';
-cmp-ok $roster.?list-grade(3), '~~', <Dick Harry Tom>, 'List grade 3';
-cmp-ok $roster.?list-all, '~~', ('Grade 1', <Anna Barb Charlie>, 'Grade 2', <Alex Jim Zoe>, 'Grade 3', <Dick Harry Tom>), 'List all';
+=head2 Canonical Data
+=begin code
+{
+    "exercise": "grade-school",
+    "version": "1.0.0",
+    "comments": [
+        "Given students' names along with the grade that they are in, ",
+        "create a roster for the school."
+    ],
+    "cases": [
+        {
+            "description": "Adding a student adds them to the sorted roster",
+            "property": "roster",
+            "input": {
+              "students": [["Aimee", 2]]
+            },
+            "expected": ["Aimee"]
+        },
+        {
+            "description": "Adding more student adds them to the sorted roster",
+            "property": "roster",
+            "input": {
+              "students": [["Blair", 2], ["James", 2], ["Paul", 2]]
+            },
+            "expected": ["Blair", "James", "Paul"]
+        },
+        {
+            "description": "Adding students to different grades adds them to the same sorted roster",
+            "property": "roster",
+            "input": {
+              "students": [["Chelsea", 3], ["Logan", 7]]
+            },
+            "expected": ["Chelsea", "Logan"]
+        },
+        {
+            "description": "Roster returns an empty list if there are no students enrolled",
+            "property": "roster",
+            "input": {
+              "students": []
+            },
+            "expected": []
+        },
+        {
+            "description": "Student names with grades are displayed in the same sorted roster",
+            "property": "roster",
+            "input": {
+              "students": [["Peter", 2], ["Anna", 1], ["Barb", 1], ["Zoe", 2], ["Alex", 2], ["Jim", 3], ["Charlie", 1]]
+            },
+            "expected": ["Anna", "Barb", "Charlie", "Alex", "Peter", "Zoe", "Jim"]
+        },
+        {
+            "description": "Grade returns the students in that grade in alphabetical order",
+            "property": "grade",
+            "input": {
+              "students": [["Franklin", 5], ["Bradley", 5], ["Jeff", 1]],
+              "desiredGrade": 5
+            },
+            "expected": ["Bradley", "Franklin"]
+        },
+        {
+            "description": "Grade returns an empty list if there are no students in that grade",
+            "property": "grade",
+            "input": {
+              "students": [],
+              "desiredGrade": 1
+            },
+            "expected": []
+        }
+    ]
+}
+=end code

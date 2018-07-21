@@ -1,18 +1,8 @@
-unit module GradeSchool:ver<3>;
+unit module GradeSchool:ver<4>;
 
-class Roster is export {
-  has %!roster;
-
-  method add-student (Str:D :$name!, Int:D :$grade!) {
-    %!roster.append($grade, $name);
-  }
-
-  method list-grade (Int:D $grade --> Seq:D) {
-    %!roster{$grade}.sort;
-  }
-
-  method list-all {
-    my @list.append("Grade $_", %!roster{$_}.sort) for %!roster.keys.sort;
-    return @list;
-  }
+sub roster (List:D :$students!, UInt :$grade --> List) is export {
+  my %roster;
+  $students.map({%roster{.[1]}.push: .[0] andthen .=sort});
+  return %roster{$grade} || List if $grade;
+  .{.keys.sort}.map(*<>).flat.List given %roster;
 }
