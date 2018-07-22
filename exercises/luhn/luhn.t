@@ -4,7 +4,7 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Luhn;
-plan 13;
+plan 14;
 
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>.values {
@@ -21,7 +21,7 @@ for $c-data<cases>.values {
 =begin code
 {
   "exercise": "luhn",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "cases": [
     {
       "description": "single digit strings can not be valid",
@@ -126,6 +126,14 @@ for $c-data<cases>.values {
         "value": "091"
       },
       "expected": true
+    },
+    {
+      "description": "strings with non-digits is invalid",
+      "property": "valid",
+      "input": {
+        "value": ":9"
+      },
+      "expected": false
     }
   ]
 }
