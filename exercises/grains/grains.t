@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use Grains;
 plan 11;
 
-my Version:D $version = v2;
-
-if Grains.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nGrains is {Grains.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 for @($c-data<cases>[0]<cases>) {
   if .<expected> == -1 {

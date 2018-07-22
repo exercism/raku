@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use Hamming;
 plan 15;
 
-my Version:D $version = v3;
-
-if Hamming.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nHamming is {Hamming.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>.values {
   if .<expected><error> {

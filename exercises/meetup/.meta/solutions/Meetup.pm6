@@ -1,4 +1,4 @@
-unit module Meetup:ver<2>;
+unit module Meetup;
 
 sub meetup-date (Str:D $desc --> Date:D) is export {
   my (Date $date, Str $day-of-week);

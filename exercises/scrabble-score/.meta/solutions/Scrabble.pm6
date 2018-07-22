@@ -1,4 +1,4 @@
-unit module Scrabble:ver<2>;
+unit module Scrabble;
 
 sub score (Str:D $word --> Int:D) is export {
   my $score = 0;

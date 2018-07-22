@@ -1,8 +1,8 @@
 #`[
-  Declare class 'Bob' with version and unit-scope the class
+  Declare class 'Bob' and unit-scope the class
   i.e. everything in this file is part of 'Bob'.
 ]
-unit class Bob:ver<3>;
+unit class Bob;
 
 method hey ( Str:D $_ --> Str:D ) {
   my \shouting = /<:L>/ ^ /<:Ll>/;

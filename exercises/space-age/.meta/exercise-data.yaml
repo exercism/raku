@@ -1,5 +1,4 @@
 exercise: SpaceAge
-version: 2
 plan: 8
 tests: |-
   is (age-on ::(.<input><planet>): .<input><seconds>), |.<expected description> for @($c-data<cases>);

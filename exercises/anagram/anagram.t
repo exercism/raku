@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use Anagram;
 plan 12;
 
-my Version:D $version = v3;
-
-if Anagram.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nAnagram is {Anagram.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.Set, .<description> for $c-data<cases>.values;
 

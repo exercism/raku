@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use FlattenArray;
 plan 6;
 
-my Version:D $version = v2;
-
-if FlattenArray.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nFlattenArray is {FlattenArray.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 is-deeply flatten-array(.<input><array>), |.<expected description> for @($c-data<cases>);
 

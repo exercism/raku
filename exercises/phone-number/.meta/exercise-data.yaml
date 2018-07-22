@@ -1,5 +1,4 @@
 exercise: Phone
-version: 5
 plan: 14
 tests: |-
   for @($c-data<cases>[0]<cases>) {

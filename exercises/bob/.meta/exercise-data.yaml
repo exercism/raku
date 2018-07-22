@@ -1,21 +1,18 @@
 exercise: Bob
-version: 3
 plan: 26
 methods: hey
 tests: |-
   # Go through the cases and check that Bob gives us the correct responses.
   is Bob.?hey(.<input><heyBob>), |.<expected description> for @($c-data<cases>);
 
-version_comment: The version we will be matching against the exercise.
 lib_comment: Look for the module inside the same directory as this test file.
 plan_comment: This is how many tests we expect to run.
-version_test_comment: "If the exercise is updated, we want to make sure other people testing\nyour code don't think you've made a mistake if things have changed!"
 methods_comment: "Check that the class 'Bob' can use all of the methods\nneeded in the tests (only 'hey' for this one)."
 
 unit: class
 unit_comment: |-
   #`[
-    Declare class 'Bob' with version and unit-scope the class
+    Declare class 'Bob' and unit-scope the class
     i.e. everything in this file is part of 'Bob'.
   ]
 example: |-

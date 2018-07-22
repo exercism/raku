@@ -1,5 +1,4 @@
 exercise: Grains
-version: 2
 plan: 11
 tests: |-
   for @($c-data<cases>[0]<cases>) {

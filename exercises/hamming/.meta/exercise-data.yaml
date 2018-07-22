@@ -1,5 +1,4 @@
 exercise: Hamming
-version: 3
 plan: 15
 tests: |-
   for $c-data<cases>.values {

@@ -6,16 +6,6 @@ use #`{{&use}};#`{{/modules}}
 use lib $?FILE.IO.dirname;#`{{#lib_comment}} #`[#`{{&lib_comment}}]#`{{/lib_comment}}
 use #`{{&exercise}};#`{{#plan}}
 plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#`{{/plan}}
-
-my Version:D $version#`{{#version}} = v#`{{&version}}#`{{/version}};#`{{#version_comment}} #`[#`{{&version_comment}}]#`{{/version_comment}}
-#`{{#version_test_comment}}
-
-#`[#`{{&version_test_comment}}]#`{{/version_test_comment}}
-if #`{{&exercise}}.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\n#`{{&exercise}} is {#`{{exercise}}.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
 #`{{#methods}}#`{{#methods_comment}}
 #`[#`{{&methods_comment}}]#`{{/methods_comment}}
 subtest 'Class methods', {

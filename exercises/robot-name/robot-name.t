@@ -5,14 +5,6 @@ use lib $?FILE.IO.dirname;
 use Robot;
 plan 7;
 
-my Version:D $version = v2;
-
-if Robot.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nRobot is {Robot.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 subtest 'Class methods', {
   ok Robot.can($_), $_ for <name reset-name>;
 }

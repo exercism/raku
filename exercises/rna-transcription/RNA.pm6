@@ -1,4 +1,4 @@
-unit module RNA:ver<3>;
+unit module RNA;
 
 sub to-rna ($dna) is export {
 }

@@ -1,4 +1,4 @@
-unit module Hamming:ver<3>;
+unit module Hamming;
 
 sub hamming-distance (
   +@strands where { .elems == 2 && [==] $_».chars } --> Int:D

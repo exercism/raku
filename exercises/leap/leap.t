@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use Leap;
 plan 4;
 
-my Version:D $version = v4;
-
-if Leap.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nLeap is {Leap.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>.values {
   given is-leap-year .<input><year> -> $result {

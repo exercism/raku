@@ -1,4 +1,4 @@
-unit module Pangram:ver<3>;
+unit module Pangram;
 
 sub is-pangram ($string) is export {
 }

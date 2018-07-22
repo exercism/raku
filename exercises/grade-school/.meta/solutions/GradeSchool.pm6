@@ -1,4 +1,4 @@
-unit module GradeSchool:ver<4>;
+unit module GradeSchool;
 
 sub roster (List:D :$students!, UInt :$grade --> List) is export {
   my %roster;

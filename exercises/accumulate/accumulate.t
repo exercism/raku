@@ -5,14 +5,6 @@ use lib $?FILE.IO.dirname;
 use Accumulate;
 plan 6;
 
-my Version:D $version = v2;
-
-if Accumulate.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nAccumulate is {Accumulate.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 is-deeply accumulate([ ], sub {}),
           [ ],
           'test empty';

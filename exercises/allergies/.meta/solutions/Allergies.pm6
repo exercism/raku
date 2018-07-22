@@ -1,4 +1,4 @@
-unit module Allergies:ver<4>;
+unit module Allergies;
 
 our @allergens = <
     eggs

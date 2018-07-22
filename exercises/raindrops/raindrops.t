@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use Raindrops;
 plan 18;
 
-my Version:D $version = v3;
-
-if Raindrops.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nRaindrops is {Raindrops.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 for @($c-data<cases>) {
   subtest {

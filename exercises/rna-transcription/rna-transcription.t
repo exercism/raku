@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use RNA;
 plan 5;
 
-my Version:D $version = v3;
-
-if RNA.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nRNA is {RNA.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 is .<input><dna>.&to-rna, |.<expected description> for $c-data<cases>.values;
 

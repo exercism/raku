@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use AtbashCipher;
 plan 12;
 
-my Version:D $version = v2;
-
-if AtbashCipher.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nAtbashCipher is {AtbashCipher.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 is .<input><phrase>.&::(.<property>), |.<expected description> for $c-data<cases>»<cases>».Array.flat;
 

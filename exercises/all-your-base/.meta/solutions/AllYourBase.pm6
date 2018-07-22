@@ -1,4 +1,4 @@
-unit module AllYourBase:ver<4>;
+unit module AllYourBase;
 
 sub convert-base (
   :%bases! where all(.keys ~~ <from to>.Set, .values.all > 1),

@@ -1,4 +1,4 @@
-unit module Wordy:ver<2>;
+unit module Wordy;
 
 sub answer ($question) is export { 
 }

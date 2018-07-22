@@ -1,5 +1,4 @@
 exercise: RomanNumerals
-version: 3
 plan: 19
 tests: |-
   for $c-data<cases>.values {

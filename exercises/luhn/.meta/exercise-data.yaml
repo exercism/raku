@@ -1,5 +1,4 @@
 exercise: Luhn
-version: 3
 plan: 13
 tests: |-
   for $c-data<cases>.values {

@@ -1,4 +1,4 @@
-unit module AllYourBase:ver<4>;
+unit module AllYourBase;
 
 sub convert-base (:%bases!, :@digits!) is export {
 }

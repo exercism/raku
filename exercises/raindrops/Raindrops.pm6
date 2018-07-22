@@ -1,4 +1,4 @@
-unit module Raindrops:ver<3>;
+unit module Raindrops;
 
 sub raindrop ($num) is export {
 }

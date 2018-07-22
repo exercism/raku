@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use WordCount;
 plan 11;
 
-my Version:D $version = v3;
-
-if WordCount.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nWordCount is {WordCount.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 is-deeply (% = .<input><sentence>.&count-words), |.<expected description> for @($c-data<cases>);
 

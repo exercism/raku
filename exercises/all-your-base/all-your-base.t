@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use AllYourBase;
 plan 21;
 
-my Version:D $version = v4;
-
-if AllYourBase.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nAllYourBase is {AllYourBase.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>.values -> $case {
   sub call-convert-base {

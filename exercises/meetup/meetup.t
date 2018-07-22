@@ -6,20 +6,11 @@ use lib $?FILE.IO.dirname;
 use Meetup;
 plan 95;
 
-my Version:D $version = v2;
-
-if Meetup.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nMeetup is {Meetup.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 is meetup-date(.<description>), Date.new(|.<year month dayofmonth>), .<description> for @($c-data<cases>);
 
 =head2 Canonical Data
 =begin code
-
 {
   "exercise": "meetup",
   "version": "1.0.0",
@@ -881,5 +872,4 @@ is meetup-date(.<description>), Date.new(|.<year month dayofmonth>), .<descripti
     }
   ]
 }
-
 =end code

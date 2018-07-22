@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use NucleotideCount;
 plan 5;
 
-my Version:D $version = v2;
-
-if NucleotideCount.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nNucleotideCount is {NucleotideCount.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>».<cases>».Array.flat {
   if .<expected><error> {

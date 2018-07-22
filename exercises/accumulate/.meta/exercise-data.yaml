@@ -1,5 +1,4 @@
 exercise: Accumulate
-version: 2
 plan: 6
 tests: |-
   is-deeply accumulate([ ], sub {}),

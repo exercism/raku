@@ -1,5 +1,4 @@
 exercise: Scrabble
-version: 2
 plan: 11
 tests: |-
   is .<input><word>.&score, |.<expected description> for @($c-data<cases>);

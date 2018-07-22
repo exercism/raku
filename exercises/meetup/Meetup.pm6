@@ -1,4 +1,4 @@
-unit module Meetup:ver<2>;
+unit module Meetup;
 
 sub meetup-date ($desc) is export {
 }

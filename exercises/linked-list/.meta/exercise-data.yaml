@@ -1,5 +1,4 @@
 exercise: LinkedList
-version: 2
 plan: 6
 modules:
   - use: JSON::Fast

@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use GradeSchool;
 plan 7;
 
-my Version:D $version = v4;
-
-if GradeSchool.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nGradeSchool is {GradeSchool.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>:v {
   cmp-ok roster(|%(<students grade> Z=> .<input><students desiredGrade>:v)), '~~', |.<expected description>;

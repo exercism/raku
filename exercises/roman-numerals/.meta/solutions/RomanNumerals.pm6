@@ -1,4 +1,4 @@
-unit module RomanNumerals:ver<3>;
+unit module RomanNumerals;
 
 
 my %table{Int} = <1000 900 500 400 100 90 50 40 10 9 5 4 1>

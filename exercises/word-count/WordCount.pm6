@@ -1,4 +1,4 @@
-unit module WordCount:ver<3>;
+unit module WordCount;
 
 sub count-words ($str) is export {
 }

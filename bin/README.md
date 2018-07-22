@@ -17,7 +17,6 @@ test files using `templates/test.mustache`, and Example.pm6 files using
 Example of a yaml file:
 ```yaml
 exercise: MyExercise
-version: 1
 plan: 2
 modules:
   - use: Data::Dump

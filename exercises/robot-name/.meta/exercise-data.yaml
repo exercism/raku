@@ -1,5 +1,4 @@
 exercise: Robot
-version: 2
 methods: name reset-name
 plan: 7
 tests: |-

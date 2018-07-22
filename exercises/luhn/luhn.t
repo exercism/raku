@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use Luhn;
 plan 13;
 
-my Version:D $version = v3;
-
-if Luhn.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nLuhn is {Luhn.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>.values {
   given is-luhn-valid .<input><value> -> $result {

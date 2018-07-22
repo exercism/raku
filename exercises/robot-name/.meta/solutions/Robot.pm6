@@ -1,4 +1,4 @@
-unit class Robot:ver<2>;
+unit class Robot;
 
 subset Name of Str where * ~~ /^<[A..Z]>**2 <[0..9]>**3$/;
 has Name $.name = self.reset-name;

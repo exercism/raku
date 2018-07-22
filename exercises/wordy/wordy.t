@@ -6,14 +6,6 @@ use lib $?FILE.IO.dirname;
 use Wordy;
 plan 16;
 
-my Version:D $version = v2;
-
-if Wordy.^ver !~~ $version {
-  warn "\nExercise version mismatch. Further tests may fail!"
-    ~ "\nWordy is {Wordy.^ver.gist}. "
-    ~ "Test is {$version.gist}.\n";
-}
-
 my $c-data = from-json $=pod.pop.contents;
 for @($c-data<cases>) {
   if .<expected> === False {

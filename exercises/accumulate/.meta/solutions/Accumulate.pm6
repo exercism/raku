@@ -1,4 +1,4 @@
-unit module Accumulate:ver<2>;
+unit module Accumulate;
 
 sub accumulate (@list, $function) is export {
   my @accumulated;
