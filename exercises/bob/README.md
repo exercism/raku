@@ -13,6 +13,8 @@ anything.
 
 He answers 'Whatever.' to anything else.
 
+Bob's conversational partner is a purist when it comes to written communication and always follows normal rules regarding sentence punctuation in English.
+
 ## Resources
 
 Remember to check out the Perl 6 [documentation](https://docs.perl6.org/) and
