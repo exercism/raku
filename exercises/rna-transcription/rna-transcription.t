@@ -4,7 +4,7 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use RNA;
-plan 5;
+plan 6;
 
 my $c-data = from-json $=pod.pop.contents;
 is .<input><dna>.&to-rna, |.<expected description> for $c-data<cases>.values;
@@ -13,8 +13,16 @@ is .<input><dna>.&to-rna, |.<expected description> for $c-data<cases>.values;
 =begin code
 {
   "exercise": "rna-transcription",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "cases": [
+    {
+      "description": "Empty RNA sequence",
+      "property": "toRna",
+      "input": {
+        "dna": ""
+      },
+      "expected": ""
+    },
     {
       "description": "RNA complement of cytosine is guanine",
       "property": "toRna",
