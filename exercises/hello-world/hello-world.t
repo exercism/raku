@@ -7,8 +7,15 @@ use HelloWorld;
 plan 1; #`[This is how many tests we expect to run.]
 
 my $c-data = from-json $=pod.pop.contents;
-# Go through the cases and check that &hello gives us the correct response.
-is hello, |.<expected description> for @($c-data<cases>);
+# Loop over the cases array taken from the canonical data JSON below.
+for @($c-data<cases>) -> %case {
+  # Run the 'is' subroutine from the 'Test' module, with three arguments.
+  is(
+    hello,             # Run the 'hello' subroutine, which is imported from your module.
+    %case<expected>,   # The expected result from canonical data to compare with 'hello'.
+    %case<description> # The test description from canonical data.
+  );
+}
 
 =head2 Canonical Data
 =begin code
