@@ -1,5 +1,5 @@
 exercise: RNA
-plan: 5
+plan: 6
 tests: |-
   is .<input><dna>.&to-rna, |.<expected description> for $c-data<cases>.values;
 
