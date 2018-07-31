@@ -5,17 +5,14 @@ my $base-dir = $?FILE.IO.parent.add("../..");
 
 has %.data;
 has Str $.exercise;
+has Str:D $.cdata = '';
 
 submethod TWEAK {
-  if $!exercise && (my $cdata =
+  if $!exercise && %!data<ignore_cdata>.not && (my $cdata-file =
     $base-dir.add: "problem-specifications/exercises/$!exercise/canonical-data.json") ~~ :f
   {
-    %!data<cdata><json> = $cdata.slurp.trim;
+    %!data<cdata><json> := $!cdata = $cdata-file.slurp.trim;
   }
-}
-
-method cdata (--> Str:D) {
-  %!data<cdata><json> ?? %!data<cdata><json> !! '';
 }
 
 method test (--> Str:D) {
