@@ -72,3 +72,17 @@ set PERL6_TEST_DIE_ON_FAIL=
 
 For more information see the
 [Testing chapter of the Perl 6 Documentation](https://docs.perl6.org/language/testing.html).
+
+## Troubleshooting
+
+```
+===SORRY!===
+Could not find JSON::Fast
+```
+
+All modules used in the Perl 6 track are included with Rakudo Star. If you get an
+error message such as the above when attempting to run a test, then you will either
+need to make sure you have the latest distribution of Rakudo Star, or install the
+module yourself using a package manager. See the
+[Perl 6 documentation on modules](https://docs.perl6.org/language/modules#Looking_for_and_installing_modules.)
+for information on how to install modules.
