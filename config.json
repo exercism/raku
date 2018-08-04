@@ -189,7 +189,9 @@
       "core": true,
       "unlocked_by": null,
       "difficulty": 6,
-      "topics": []
+      "topics": [
+        "math"
+      ]
     },
     {
       "slug": "anagram",
