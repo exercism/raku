@@ -7,7 +7,7 @@ use WordCount;
 plan 11;
 
 my $c-data = from-json $=pod.pop.contents;
-is-deeply (% = .<input><sentence>.&count-words), |.<expected description> for @($c-data<cases>);
+cmp-ok .<input><sentence>.&count-words, '~~', .<expected>.Bag, .<description> for $c-data<cases>.values;
 
 =head2 Canonical Data
 =begin code

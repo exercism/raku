@@ -1,13 +1,13 @@
 exercise: WordCount
 plan: 11
 tests: |-
-  is-deeply (% = .<input><sentence>.&count-words), |.<expected description> for @($c-data<cases>);
+  cmp-ok .<input><sentence>.&count-words, '~~', .<expected>.Bag, .<description> for $c-data<cases>.values;
 
 unit: module
 example: |-
-  sub count-words (Str:D $str --> Hash:D) is export {
-    $str.lc.comb(/ <alnum>+ (\'<alnum>+)? /).Bag.hash
+  sub count-words (Str:D $str --> Bag:D) is export {
+    $str.lc.comb(/ <alnum>+ (\'<alnum>+)? /).Bag;
   }
 stub: |-
-  sub count-words ($str) is export {
+  sub count-words ($sentence) is export {
   }
