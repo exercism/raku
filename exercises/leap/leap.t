@@ -7,6 +7,13 @@ use Leap;
 plan 4;
 
 my $c-data = from-json $=pod.pop.contents;
+for Date, DateTime {
+  .^method_table<is-leap-year>.wrap: {
+    warn 'built-in `is-leap-year` method is not allowed for this exercise.';
+    Nil;
+  };
+}
+
 for $c-data<cases>.values {
   given is-leap-year .<input><year> -> $result {
     subtest .<description>, {
