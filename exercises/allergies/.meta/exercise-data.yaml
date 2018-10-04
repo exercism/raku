@@ -4,7 +4,7 @@ tests: |-
   for $c-data<cases>.values -> %case-set {
 
     subtest 'allergic-to' => {
-      plan 7;
+      plan 11;
       for %case-set<cases>.values -> %case {
         for %case<expected>.values {
           given allergic-to %case<input><score>, .<substance> -> $result {

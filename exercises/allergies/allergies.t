@@ -10,7 +10,7 @@ my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>.values -> %case-set {
 
   subtest 'allergic-to' => {
-    plan 7;
+    plan 11;
     for %case-set<cases>.values -> %case {
       for %case<expected>.values {
         given allergic-to %case<input><score>, .<substance> -> $result {
@@ -37,7 +37,7 @@ for $c-data<cases>.values -> %case-set {
 =begin code
 {
   "exercise": "allergies",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "cases": [
     {
       "description": "allergicTo",
@@ -101,6 +101,31 @@ for $c-data<cases>.values -> %case-set {
             {
               "substance": "strawberries",
               "result": false
+            }
+          ]
+        },
+        {
+          "description": "allergic to strawberries but not peanuts",
+          "property": "allergicTo",
+          "input": {
+            "score": 9
+          },
+          "expected": [
+            {
+              "substance": "eggs",
+              "result": true
+            },
+            {
+              "substance": "peanuts",
+              "result": false
+            },  
+            {
+              "substance": "shellfish",
+              "result": false
+            },
+            {
+              "substance": "strawberries",
+              "result": true
             }
           ]
         }
