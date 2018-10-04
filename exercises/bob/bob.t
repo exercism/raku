@@ -20,7 +20,7 @@ is Bob.?hey(.<input><heyBob>), |.<expected description> for @($c-data<cases>);
 =begin code
 {
   "exercise": "bob",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "cases": [
     {
       "description": "stating something",
@@ -103,7 +103,7 @@ is Bob.?hey(.<input><heyBob>), |.<expected description> for @($c-data<cases>);
       "expected": "Whoa, chill out!"
     },
     {
-      "description": "only numbers",
+      "description": "no letters",
       "property": "response",
       "input": {
         "heyBob": "1, 2, 3"
@@ -111,7 +111,7 @@ is Bob.?hey(.<input><heyBob>), |.<expected description> for @($c-data<cases>);
       "expected": "Whatever."
     },
     {
-      "description": "question with only numbers",
+      "description": "question with no letters",
       "property": "response",
       "input": {
         "heyBob": "4?"
@@ -130,7 +130,7 @@ is Bob.?hey(.<input><heyBob>), |.<expected description> for @($c-data<cases>);
       "description": "shouting with no exclamation mark",
       "property": "response",
       "input": {
-        "heyBob": "I HATE YOU"
+        "heyBob": "I HATE THE DMV"
       },
       "expected": "Whoa, chill out!"
     },
@@ -186,7 +186,7 @@ is Bob.?hey(.<input><heyBob>), |.<expected description> for @($c-data<cases>);
       "description": "multiple line question",
       "property": "response",
       "input": {
-        "heyBob": "\nDoes this cryogenic chamber make me look fat?\nno"
+        "heyBob": "\nDoes this cryogenic chamber make me look fat?\nNo."
       },
       "expected": "Whatever."
     },
