@@ -1,48 +1,88 @@
 exercise: Robot
 methods: name reset-name
-plan: 7
+plan: 8
 tests: |-
   srand 1;
-  my $robot = Robot.?new;
-  my Str $name = $robot.?name;
-  like $name, /^^<[A..Z]>**2 <[0..9]>**3$$/, 'Name matches schema';
+  my Robot:D $robot := Robot.new;
+  my Str:D @robot-names = $robot.name;
+  like @robot-names[0], /^^<[A..Z]>**2 <[0..9]>**3$$/, 'Name matches schema';
 
   srand 2;
-  is $robot.?name, $name, 'Name is persistent';
+  is $robot.name, @robot-names[0], 'Name is persistent';
   srand 1;
-  isnt Robot.new.?name, $name, 'New Robot cannot claim previous Robot name';
+  @robot-names.push(Robot.new.name);
+  isnt @robot-names[1], @robot-names[0], 'New Robot cannot claim previous Robot name';
 
   srand 1;
-  $robot.?reset-name;
-  $robot.?reset_name; # Allows next test to still pass for older solutions
+  $robot.reset-name;
+  isnt $robot.name, @robot-names[0], "'reset-name' cannot use previous Robot name";
 
-  isnt $robot.?name, $name, "'reset-name' cannot use previous Robot name";
-
-  diag "\nCreating 100 robots...";
-  push my @names, Robot.new.name for 1..100;
-  is @names, @names.unique, 'All names are unique';
+  diag "\nCreating additional robots...";
+  my Promise:D $promise := start {until @robot-names.elems == ($Robot::test-all-names ?? 676000 !! 100) {
+    @robot-names.push(Robot.new.name);
+  }};
+  loop {
+    if $promise.Bool { last }
+    else { sleep 1 }
+    diag "@robot-names.elems.fmt() robots";
+  }
+  is @robot-names, @robot-names.unique, 'All names are unique';
   subtest 'Randomness', {
     plan 2;
-    isnt @names, @names.sort, 'Names not ordered';
-    isnt @names, @names.sort.reverse, 'Names not reverse ordered';
+    isnt @robot-names[^100], @robot-names[^100].sort, 'Names not ordered';
+    isnt @robot-names[^100], @robot-names[^100].sort.reverse, 'Names not reverse ordered';
   }
+  if $Robot::test-all-names {
+    throws-like {Robot.new}, Exception, 'Throw exception when out of names', message => /'All names used.'/;
+  }
+  else { skip 'All names test' }
 
 unit: class
-example: |-
-  subset Name of Str where * ~~ /^<[A..Z]>**2 <[0..9]>**3$/;
-  has Name $.name = self.reset-name;
+examples:
+  promise: |-
+    our $test-all-names = True;
 
-  method reset-name {
-    state Promise:D $promise = start ('AA000'..'ZZ999').pick: *;
-    state Bool:D %record{Name:D};
-    state Int:D $i = 0;
+    my $promised-names = start [pick ([X~] |(("A".."Z") xx 2), |(^10 xx 3)): *];
 
-    if $promise.status ~~ 'Kept' {
-      ($!name = $promise.result[$i++]) or die 'All names used.';
-    } else {
-      $!name = ('A'..'Z').roll(2).join ~ (^10).roll(3).join;
+    subset Name of Str where * ~~ /^<[A..Z]>**2 <[0..9]>**3$/;
+    has Name:D $!name = self.reset-name;
+
+    method name { $!name }
+
+    method reset-name {
+      await $promised-names;
+      given $promised-names.result[$++] {
+        when Str {
+          return $!name = $_;
+        }
+      }
+      die 'All names used.';
     }
-    self.reset-name if %record{$!name}:exists;
-    %record{$!name} = True;
-    return $!name;
-  }
+
+  random: |-
+    our $test-all-names = False;
+
+    subset Name of Str where * ~~ /^<[A..Z]>**2 <[0..9]>**3$/;
+    has Name:D $!name = self.reset-name;
+
+    method name { $!name }
+
+    method reset-name {
+      state Bool:D %record{Name:D};
+      given self!random-name {
+        when %record{$_} {
+          return self.reset-name;
+        }
+        default {
+          %record{$_} = True;
+          return $!name = $_;
+        }
+      }
+    }
+
+    method !random-name {
+      ( ('A'..'Z').roll(2), (^10).roll(3) ).flat.join;
+    }
+
+stub: |-
+  our $test-all-names = False;
