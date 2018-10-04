@@ -4,16 +4,16 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use AtbashCipher;
-plan 12;
+plan 14;
 
 my $c-data = from-json $=pod.pop.contents;
-is .<input><phrase>.&::(.<property>), |.<expected description> for $c-data<cases>»<cases>».Array.flat;
+is .<input><phrase>.&::(.<property>), |.<expected description> for $c-data<cases>»<cases>»<>.flat;
 
 =head2 Canonical Data
 =begin code
 {
   "exercise": "atbash-cipher",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "comments": [
     "The tests are divided into two groups: ",
     "* Encoding from English to atbash cipher",
@@ -125,6 +125,22 @@ is .<input><phrase>.&::(.<property>), |.<expected description> for $c-data<cases
             "phrase": "gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt"
           },
           "expected": "thequickbrownfoxjumpsoverthelazydog"
+        },
+        {
+          "description": "decode with too many spaces",
+          "property": "decode",
+          "input": {
+            "phrase": "vc vix    r hn"
+          },
+          "expected": "exercism"
+        },
+        {
+          "description": "decode with no spaces",
+          "property": "decode",
+          "input": {
+            "phrase": "zmlyhgzxovrhlugvmzhgvkkrmthglmv"
+          },
+          "expected": "anobstacleisoftenasteppingstone"
         }
       ]
     }
