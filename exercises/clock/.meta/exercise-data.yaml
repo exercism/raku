@@ -1,6 +1,6 @@
 exercise: Clock
 methods: time add-minutes subtract-minutes
-plan: 53
+plan: 54
 tests: |-
   for $c-data<cases>»<cases>»<>.flat -> %case {
     given %case<property> {

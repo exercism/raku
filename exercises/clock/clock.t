@@ -4,7 +4,7 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Clock;
-plan 53;
+plan 54;
 
 subtest 'Class methods', {
   can-ok Clock, $_ for <time add-minutes subtract-minutes>;
@@ -39,7 +39,7 @@ is Clock.?new(:0hour,:0minute).?subtract-minutes(65).?time, '22:55', 'subtract-m
 =begin code
 {
   "exercise": "clock",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "comments": [
     "Most languages require constructing a clock with initial values,",
     "adding or subtracting some number of minutes, and testing equality",
@@ -617,6 +617,21 @@ is Clock.?new(:0hour,:0minute).?subtract-minutes(65).?time, '22:55', 'subtract-m
             "clock2": {
               "hour": -54,
               "minute": -11513
+            }
+          },
+          "expected": true
+        },
+        {
+          "description": "full clock and zeroed clock",
+          "property": "equal",
+          "input": {
+            "clock1": {
+              "hour": 24,
+              "minute": 0
+            },
+            "clock2": {
+              "hour": 0,
+              "minute": 0
             }
           },
           "expected": true
