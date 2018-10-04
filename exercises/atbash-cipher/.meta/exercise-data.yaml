@@ -1,7 +1,7 @@
 exercise: AtbashCipher
-plan: 12
+plan: 14
 tests: |-
-  is .<input><phrase>.&::(.<property>), |.<expected description> for $c-data<cases>»<cases>».Array.flat;
+  is .<input><phrase>.&::(.<property>), |.<expected description> for $c-data<cases>»<cases>»<>.flat;
 
 unit: module
 example: |-
