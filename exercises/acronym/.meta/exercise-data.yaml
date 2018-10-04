@@ -1,8 +1,8 @@
 exercise: Acronym
-plan: 5
+plan: 6
 tests: |-
 
-  for $c-data<cases>»<cases>».Array.flat {
+  for $c-data<cases>»<cases>»<>.flat {
     is abbreviate(.<input><phrase>), |.<expected description>;
   }
 
