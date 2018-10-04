@@ -9,7 +9,7 @@ plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#
 #`{{#methods}}#`{{#methods_comment}}
 #`[#`{{&methods_comment}}]#`{{/methods_comment}}
 subtest 'Class methods', {
-  ok #`{{&exercise}}.can($_), $_ for <#`{{&methods}}>;
+  can-ok #`{{&exercise}}, $_ for <#`{{&methods}}>;
 }
 #`{{/methods}}#`{{#cdata}}
 my $c-data = from-json $=pod.pop.contents;#`{{/cdata}}

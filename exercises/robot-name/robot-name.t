@@ -6,7 +6,7 @@ use Robot;
 plan 7;
 
 subtest 'Class methods', {
-  ok Robot.can($_), $_ for <name reset-name>;
+  can-ok Robot, $_ for <name reset-name>;
 }
 
 srand 1;

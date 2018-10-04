@@ -7,7 +7,7 @@ use LinkedList;
 plan 6;
 
 subtest 'Class methods', {
-  ok LinkedList.can($_), $_ for <push-list pop-list shift-list unshift-list>;
+  can-ok LinkedList, $_ for <push-list pop-list shift-list unshift-list>;
 }
 
 my $cases = from-json $=pod.pop.contents;
