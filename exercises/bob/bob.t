@@ -9,7 +9,7 @@ plan 26; #`[This is how many tests we expect to run.]
 #`[Check that the class 'Bob' can use all of the methods
 needed in the tests (only 'hey' for this one).]
 subtest 'Class methods', {
-  ok Bob.can($_), $_ for <hey>;
+  can-ok Bob, $_ for <hey>;
 }
 
 my $c-data = from-json $=pod.pop.contents;

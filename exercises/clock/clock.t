@@ -7,7 +7,7 @@ use Clock;
 plan 53;
 
 subtest 'Class methods', {
-  ok Clock.can($_), $_ for <time add-minutes subtract-minutes>;
+  can-ok Clock, $_ for <time add-minutes subtract-minutes>;
 }
 
 my $c-data = from-json $=pod.pop.contents;
