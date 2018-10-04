@@ -3,33 +3,43 @@ use v6;
 use Test;
 use lib $?FILE.IO.dirname;
 use Robot;
-plan 7;
+plan 8;
 
 subtest 'Class methods', {
   can-ok Robot, $_ for <name reset-name>;
 }
 
 srand 1;
-my $robot = Robot.?new;
-my Str $name = $robot.?name;
-like $name, /^^<[A..Z]>**2 <[0..9]>**3$$/, 'Name matches schema';
+my Robot:D $robot := Robot.new;
+my Str:D @robot-names = $robot.name;
+like @robot-names[0], /^^<[A..Z]>**2 <[0..9]>**3$$/, 'Name matches schema';
 
 srand 2;
-is $robot.?name, $name, 'Name is persistent';
+is $robot.name, @robot-names[0], 'Name is persistent';
 srand 1;
-isnt Robot.new.?name, $name, 'New Robot cannot claim previous Robot name';
+@robot-names.push(Robot.new.name);
+isnt @robot-names[1], @robot-names[0], 'New Robot cannot claim previous Robot name';
 
 srand 1;
-$robot.?reset-name;
-$robot.?reset_name; # Allows next test to still pass for older solutions
+$robot.reset-name;
+isnt $robot.name, @robot-names[0], "'reset-name' cannot use previous Robot name";
 
-isnt $robot.?name, $name, "'reset-name' cannot use previous Robot name";
-
-diag "\nCreating 100 robots...";
-push my @names, Robot.new.name for 1..100;
-is @names, @names.unique, 'All names are unique';
+diag "\nCreating additional robots...";
+my Promise:D $promise := start {until @robot-names.elems == ($Robot::test-all-names ?? 676000 !! 100) {
+  @robot-names.push(Robot.new.name);
+}};
+loop {
+  if $promise.Bool { last }
+  else { sleep 1 }
+  diag "@robot-names.elems.fmt() robots";
+}
+is @robot-names, @robot-names.unique, 'All names are unique';
 subtest 'Randomness', {
   plan 2;
-  isnt @names, @names.sort, 'Names not ordered';
-  isnt @names, @names.sort.reverse, 'Names not reverse ordered';
+  isnt @robot-names[^100], @robot-names[^100].sort, 'Names not ordered';
+  isnt @robot-names[^100], @robot-names[^100].sort.reverse, 'Names not reverse ordered';
 }
+if $Robot::test-all-names {
+  throws-like {Robot.new}, Exception, 'Throw exception when out of names', message => /'All names used.'/;
+}
+else { skip 'All names test' }
