@@ -24,10 +24,10 @@ for $c-data<cases>».<cases>».Array.flat {
   "comments": [
     "A pangram is a sentence using every letter of the alphabet at least once."
   ],
-  "version": "1.4.0",
+  "version": "1.4.1",
   "cases": [
     {
-      "description": "Check if the given string is an pangram",
+      "description": "Check if the given string is a pangram",
       "comments": [
         "Output should be a boolean denoting if the string is a pangram or not."
       ],
