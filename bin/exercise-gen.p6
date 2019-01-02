@@ -8,12 +8,11 @@ use Exercism::Generator;
 my %*SUB-MAIN-OPTS = :named-anywhere;
 
 given $base-dir {
-  if .add('problem-specifications') !~~ :d {
-    note 'problem-specifications directory not found; exercise(s) may generate incorrectly.';
-  }
-  if .add('bin/configlet') !~~ :f {
-    note 'configlet not found; README.md file(s) will not be generated.';
-  }
+  note 'problem-specifications directory not found; exercise(s) may generate incorrectly.'
+    unless .add('problem-specifications').d;
+
+  note 'executable configlet not found; README.md file(s) will not be generated.'
+    unless .add('bin/configlet').x;
 }
 
 #| Displays this message.
@@ -22,20 +21,20 @@ multi MAIN ( Bool:D :h(:help(:$man)) ) {
 }
 
 #| Runs the generator for everything in the exercises directory.
-multi sub MAIN (Bool:D :a(:$all) where *.so) {
+multi MAIN (Bool:D :a(:$all) where *.so) {
   generate .basename for $base-dir.add('exercises').dir;
 }
 
 #| The generator will run for each exercise given as an argument.
-multi sub MAIN (*@exercises) {
+multi MAIN (*@exercises) {
   @exercises».&generate;
 }
 
 #|[The generator will attempt to run using the current directory.
 Exits if a '.meta/exercise-data.yaml' file is not found.]
-multi sub MAIN {
+multi MAIN {
   say 'No args given; working in current directory.';
-  if '.meta/exercise-data.yaml'.IO ~~ :f {
+  if '.meta/exercise-data.yaml'.IO.f {
     generate $*CWD.IO.basename;
   } else {
     say "exercise-data.yaml not found in .meta of current directory; exiting.\n";
@@ -47,7 +46,7 @@ multi sub MAIN {
 sub generate ($exercise) {
   state (@dir-not-found, @yaml-not-found);
   END {
-    if @dir-not-found  {note 'exercise directory does not exist for: ' ~ join ' ', @dir-not-found}
+    if @dir-not-found  {note 'exercise directory does not exist for: '  ~ join ' ', @dir-not-found}
     if @yaml-not-found {note '.meta/exercise-data.yaml not found for: ' ~ join ' ', @yaml-not-found}
   }
   if (my $exercise-dir = $base-dir.add("exercises/$exercise")) !~~ :d {
@@ -83,9 +82,7 @@ sub generate ($exercise) {
   }
 
   given $base-dir.add('bin/configlet') {
-    if $_ ~~ :f {
-      run .absolute, 'generate', $base-dir, '--only', $exercise;
-    }
+    run .absolute, 'generate', $base-dir, '--only', $exercise if .x;
   }
 
   say 'Generated.';
