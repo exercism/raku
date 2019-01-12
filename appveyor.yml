@@ -10,6 +10,8 @@ for:
   - matrix:
       only:
         - image: Ubuntu
+    services:
+      - docker
     build_script:
       - docker build -t exercism-rakudo-star .
     before_test:
@@ -19,9 +21,7 @@ for:
       - docker run
           --mount "type=bind,src=$(pwd),dst=/exercism"
           exercism-rakudo-star /bin/bash -c 'cd /exercism
-          && prove exercises/*/.meta/solutions/
-            --recurse
-            --jobs 2
+          && prove6 exercises/*/.meta/solutions/*
           && prove t/
             --directives'
   - matrix:
@@ -31,7 +31,8 @@ for:
       - choco install rakudostar -y
       - refreshenv
     test_script:
+      # * doesn't work with prove6 on Windows
       - prove exercises/*/.meta/solutions/
-          --exec perl6
-          --recurse
-          --jobs 2
+        --exec perl6
+        --recurse
+        --jobs 2
