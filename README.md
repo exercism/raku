@@ -15,7 +15,7 @@ Help us keep Exercism welcoming. Please read and abide by the
 
 ## Adding and Updating Exercises
 
-Please use `exercise-gen.pl6` in the `bin/` directory when either adding or updating an exercise.
+Please use `exercise-gen.p6` in the `bin/` directory when either adding or updating an exercise.
 The `bin/` directory contains a `README.md` with information on how to use the generator.
 
 When adding a new exercise, ensure that the exercise is included in the `exercises` array in `config.json`.
