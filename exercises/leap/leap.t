@@ -4,7 +4,7 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Leap;
-plan 4;
+plan 5;
 
 my $c-data = from-json $=pod.pop.contents;
 for Date, DateTime {
@@ -28,7 +28,7 @@ for $c-data<cases>.values {
 =begin code
 {
   "exercise": "leap",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "cases": [
     {
       "description": "year not divisible by 4: common year",
@@ -61,6 +61,14 @@ for $c-data<cases>.values {
         "year": 2000
       },
       "expected": true
+    },
+    {
+      "description": "year divisible by 200, not divisible by 400: common year",
+      "property": "leapYear",
+      "input": {
+        "year": 1800
+      },
+      "expected": false
     }
   ]
 }
