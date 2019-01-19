@@ -1,24 +1,28 @@
 exercise: Grains
-plan: 11
+plan: 2
 tests: |-
-  for @($c-data<cases>[0]<cases>) {
-    if .<expected> == -1 {
-      throws-like { grains-on-square(.<input><square>) }, Exception, .<description>;
-    } else {
-      is grains-on-square(.<input><square>), |.<expected description>;
+  for $c-data<cases>.values {
+    if .<cases> {
+      subtest .<description> => {
+        plan 10;
+        for .<cases>.values {
+          .<expected><error>
+            ?? throws-like { grains-on-square(.<input><square>) }, Exception, .<description>
+            !! is grains-on-square(.<input><square>), |.<expected description> if .<property> eq 'square';
+        }
+      }
+    }
+    elsif .<property> eq 'total' {
+      is total-grains, |.<expected description>;
     }
   }
-  is total-grains, |$c-data<cases>[1]<expected description>;
 
 unit: module
 example: |-
-  sub grains-on-square ($number) is export {
-    die if $number < 1 or $number > 64;
-    2**($number-1);
+  sub grains-on-square ($number where * ∈ 1 .. 64) is export {
+    2 ** ($number - 1);
   }
 
   sub total-grains is export {
-    my Int $total;
-    for  1..64 { $total += grains-on-square($_) }
-    $total;
+    [+] map 1..64: *.&grains-on-square;
   }
