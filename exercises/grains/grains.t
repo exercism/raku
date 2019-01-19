@@ -4,26 +4,32 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Grains;
-plan 11;
+plan 2;
 
 my $c-data = from-json $=pod.pop.contents;
-for @($c-data<cases>[0]<cases>) {
-  if .<expected> == -1 {
-    throws-like { grains-on-square(.<input><square>) }, Exception, .<description>;
-  } else {
-    is grains-on-square(.<input><square>), |.<expected description>;
+for $c-data<cases>.values {
+  if .<cases> {
+    subtest .<description> => {
+      plan 10;
+      for .<cases>.values {
+        .<expected><error>
+          ?? throws-like { grains-on-square(.<input><square>) }, Exception, .<description>
+          !! is grains-on-square(.<input><square>), |.<expected description> if .<property> eq 'square';
+      }
+    }
+  }
+  elsif .<property> eq 'total' {
+    is total-grains, |.<expected description>;
   }
 }
-is total-grains, |$c-data<cases>[1]<expected description>;
 
 =head2 Canonical Data
 =begin code
 {
   "exercise": "grains",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "comments": [
     "The final tests of square test error conditions",
-    "The expectation for these tests is -1, indicating an error",
     "In these cases you should expect an error as is idiomatic for your language"
   ],
   "cases": [
@@ -92,7 +98,7 @@ is total-grains, |$c-data<cases>[1]<expected description>;
           "input": {
             "square": 0
           },
-          "expected": -1
+          "expected": {"error": "square must be between 1 and 64"}
         },
         {
           "description": "negative square raises an exception",
@@ -100,7 +106,7 @@ is total-grains, |$c-data<cases>[1]<expected description>;
           "input": {
             "square": -1
           },
-          "expected": -1
+          "expected": {"error": "square must be between 1 and 64"}
         },
         {
           "description": "square greater than 64 raises an exception",
@@ -108,7 +114,7 @@ is total-grains, |$c-data<cases>[1]<expected description>;
           "input": {
             "square": 65
           },
-          "expected": -1
+          "expected": {"error": "square must be between 1 and 64"}
         }
       ]
     },
