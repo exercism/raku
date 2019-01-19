@@ -1,5 +1,5 @@
 exercise: Leap
-plan: 4
+plan: 5
 tests: |-
   for Date, DateTime {
     .^method_table<is-leap-year>.wrap: {
@@ -21,14 +21,9 @@ tests: |-
 unit: module
 example: |-
   sub is-leap-year ($year) is export {
-    is-divisible($year, 400)
-      || is-divisible($year, 4)
-      && !is-divisible($year, 100);
+    $year %% 4 && $year !%% 100 || $year %% 400;
   }
 
-  sub is-divisible($year, $number) {
-    $year % $number == 0 ?? True !! False;
-  }
 stub: |-
   sub is-leap-year ($year) is export {
   }
