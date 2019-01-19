@@ -13,17 +13,11 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
 =begin code
 {
   "exercise": "anagram",
-  "version": "1.2.0",
-  "comments": [
-    "The string argument cases possible matches are passed in as",
-    "individual arguments rather than arrays. Languages can include",
-    "these string argument cases if passing individual arguments is",
-    "idiomatic in that language."
-  ],
+  "version": "1.4.0",
   "cases": [
     {
       "description": "no matches",
-      "property": "anagrams",
+      "property": "findAnagrams",
       "input": {
         "subject": "diaper",
         "candidates": ["hello", "world", "zombies", "pants"]
@@ -32,7 +26,7 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
     },
     {
       "description": "detects two anagrams",
-      "property": "anagrams",
+      "property": "findAnagrams",
       "input": {
         "subject": "master",
         "candidates": ["stream", "pigeon", "maters"]
@@ -41,7 +35,7 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
     },
     {
       "description": "does not detect anagram subsets",
-      "property": "anagrams",
+      "property": "findAnagrams",
       "input": {
         "subject": "good",
         "candidates": ["dog", "goody"]
@@ -50,7 +44,7 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
     },
     {
       "description": "detects anagram",
-      "property": "anagrams",
+      "property": "findAnagrams",
       "input": {
         "subject": "listen",
         "candidates": ["enlists", "google", "inlets", "banana"]
@@ -59,7 +53,7 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
     },
     {
       "description": "detects three anagrams",
-      "property": "anagrams",
+      "property": "findAnagrams",
       "input": {
         "subject": "allergy",
         "candidates": [
@@ -75,7 +69,7 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
     },
     {
       "description": "does not detect non-anagrams with identical checksum",
-      "property": "anagrams",
+      "property": "findAnagrams",
       "input": {
         "subject": "mass",
         "candidates": ["last"]
@@ -84,7 +78,7 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
     },
     {
       "description": "detects anagrams case-insensitively",
-      "property": "anagrams",
+      "property": "findAnagrams",
       "input": {
         "subject": "Orchestra",
         "candidates": ["cashregister", "Carthorse", "radishes"]
@@ -93,7 +87,7 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
     },
     {
       "description": "detects anagrams using case-insensitive subject",
-      "property": "anagrams",
+      "property": "findAnagrams",
       "input": {
         "subject": "Orchestra",
         "candidates": ["cashregister", "carthorse", "radishes"]
@@ -102,7 +96,7 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
     },
     {
       "description": "detects anagrams using case-insensitive possible matches",
-      "property": "anagrams",
+      "property": "findAnagrams",
       "input": {
         "subject": "orchestra",
         "candidates": ["cashregister", "Carthorse", "radishes"]
@@ -111,7 +105,7 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
     },
     {
       "description": "does not detect a anagram if the original word is repeated",
-      "property": "anagrams",
+      "property": "findAnagrams",
       "input": {
         "subject": "go",
         "candidates": ["go Go GO"]
@@ -120,7 +114,7 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
     },
     {
       "description": "anagrams must use all letters exactly once",
-      "property": "anagrams",
+      "property": "findAnagrams",
       "input": {
         "subject": "tapper",
         "candidates": ["patter"]
@@ -128,11 +122,11 @@ cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.S
       "expected": []
     },
     {
-      "description": "capital word is not own anagram",
-      "property": "anagrams",
+      "description": "words are not anagrams of themselves (case-insensitive)",
+      "property": "findAnagrams",
       "input": {
         "subject": "BANANA",
-        "candidates": ["Banana"]
+        "candidates": ["BANANA", "Banana", "banana"]
       },
       "expected": []
     }
