@@ -1,5 +1,5 @@
 exercise: Hamming
-plan: 15
+plan: 7
 tests: |-
   for $c-data<cases>.values {
     if .<expected><error> {
@@ -14,7 +14,7 @@ example: |-
   sub hamming-distance (
     +@strands where { .elems == 2 && [==] $_».chars } --> Int:D
   ) is export {
-    sum [Zne] @strands».comb
+    [+] [Zne] @strands».comb;
   }
 stub: |-
   sub hamming-distance ($strand1, $strand2) is export {
