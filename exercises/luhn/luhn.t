@@ -4,7 +4,7 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Luhn;
-plan 14;
+plan 16;
 
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>.values {
@@ -21,7 +21,7 @@ for $c-data<cases>.values {
 =begin code
 {
   "exercise": "luhn",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "cases": [
     {
       "description": "single digit strings can not be valid",
@@ -80,10 +80,26 @@ for $c-data<cases>.values {
       "expected": false
     },
     {
+      "description": "valid number with an even number of digits",
+      "property": "valid",
+      "input": {
+        "value": "095 245 88"
+      },
+      "expected": true
+    },
+    {
       "description": "valid strings with a non-digit included become invalid",
       "property": "valid",
       "input": {
         "value": "055a 444 285"
+      },
+      "expected": false
+    },
+    {
+      "description": "valid strings with a non-digit added at the end become invalid",
+      "property": "valid",
+      "input": {
+        "value": "059a"
       },
       "expected": false
     },
