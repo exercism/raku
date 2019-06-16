@@ -11,8 +11,8 @@ script:
   - docker run
     --volume $PWD:/exercism
     exercism-rakudo-star /bin/bash -c 'cd /exercism
-    && prove exercises/*/.meta/solutions/
-      --recurse
+    && prove6
       --jobs 2
+      exercises/*/.meta/solutions/
     && prove t/
       --directives'

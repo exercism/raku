@@ -4,7 +4,7 @@
   "blurb": "Forget everything you know or think you know about Perl. Perl 6 is a production ready new emerging language that is highly expressive, feature-packed and optimized for fun.",
   "checklist_issue": 30,
   "solution_pattern": "\\.meta/solutions/.+\\.pm6$",
-  "test_pattern": ".*\\.t$",
+  "test_pattern": ".*\\.t6$",
   "exercises": [
     {
       "slug": "hello-world",

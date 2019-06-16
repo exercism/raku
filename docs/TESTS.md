@@ -1,6 +1,6 @@
 ## Run All Tests
 
-There is a Perl 6 script with the extension `.t`, which will be used to test
+There is a Perl 6 script with the extension `.t6`, which will be used to test
 your solution. You can run through the tests by using the command:
 
 `prove6 .`
@@ -10,11 +10,11 @@ Before you start the exercise, the output will likely look something like:
 ```
 
 # Failed test 'Say Hi!'
-# at hello-world.t line 11
+# at hello-world.t6 line 11
 # expected: 'Hello, World!'
 #      got: (Nil)
 # Looks like you failed 1 test of 1
-hello-world.t .. Dubious, test returned 1
+hello-world.t6 .. Dubious, test returned 1
 Failed 1/1 subtests
 ```
 You will either need to modify or create a module with the extension `.pm6`, and
@@ -22,7 +22,7 @@ write a solution to pass the tests. Once the tests are passing, the output from
 the command above will likely look something like:
 
 ```
-hello-world.t .. ok
+hello-world.t6 .. ok
 All tests successful.
 ```
 
