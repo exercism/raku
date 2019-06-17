@@ -1,7 +1,12 @@
 exercise: Meetup
 plan: 95
 tests: |-
-  is meetup-date(.<description>), Date.new(|.<year month dayofmonth>), .<description> for @($c-data<cases>);
+  # This exercise expects you to parse the description string
+  # rather than using the input values
+  for $c-data<cases>.values -> $case {
+    is meetup-date($case<description>), Date.new($case<expected>),
+      $case<description>;
+  }
 
 unit: module
 example: |-
