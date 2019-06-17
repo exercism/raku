@@ -61,7 +61,7 @@ sub generate ($exercise) {
   print "Generating $exercise... ";
 
   given Exercism::Generator.new: :$exercise, data => yaml-parse $yaml-file.absolute {
-    my $testfile = $exercise-dir.add("$exercise.t");
+    my $testfile = $exercise-dir.add("$exercise.t6");
     $testfile.spurt: .test;
     $testfile.chmod: 0o755;
 
