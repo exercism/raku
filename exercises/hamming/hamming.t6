@@ -4,14 +4,23 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Hamming;
-plan 7;
+plan 9;
 
 my $c-data = from-json $=pod.pop.contents;
-for $c-data<cases>.values {
-  if .<expected><error> {
-    throws-like {hamming-distance(|.<input><strand1 strand2>)}, Exception, .<description>;
-  } else {
-    is hamming-distance(|.<input><strand1 strand2>), |.<expected description>;
+for $c-data<cases>.values -> $case {
+  if $case<expected><error> {
+    throws-like(
+      { hamming-distance(|$case<input><strand1 strand2>) },
+      Exception,
+      message => /
+        'left and right strands must be of equal length'
+        || 'Constraint type check failed in binding to parameter'
+      /,
+      $case<description>
+    );
+  }
+  else {
+    is hamming-distance(|$case<input><strand1 strand2>), |$case<expected description>;
   }
 }
 
@@ -19,7 +28,7 @@ for $c-data<cases>.values {
 =begin code
 {
 "exercise": "hamming",
-"version": "2.2.0",
+"version": "2.3.0",
   "comments": [
     "Language implementations vary on the issue of unequal length strands.",
     "A language may elect to simplify this task by only presenting equal",
@@ -92,6 +101,24 @@ for $c-data<cases>.values {
         "strand2": "AGTG"
       },
       "expected": {"error": "left and right strands must be of equal length"}
+    },
+    {
+      "description": "disallow left empty strand",
+      "property": "distance",
+      "input": {
+        "strand1": "",
+        "strand2": "G"
+      },
+      "expected": {"error": "left strand must not be empty"}
+    },
+    {
+      "description": "disallow right empty strand",
+      "property": "distance",
+      "input": {
+        "strand1": "G",
+        "strand2": ""
+      },
+      "expected": {"error": "right strand must not be empty"}
     }
   ]
 }
