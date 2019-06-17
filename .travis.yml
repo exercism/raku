@@ -14,5 +14,5 @@ script:
     && prove6
       --jobs 2
       exercises/*/.meta/solutions/
-    && prove t/
+    && prove t/*.t6
       --directives'
