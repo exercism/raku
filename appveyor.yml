@@ -33,4 +33,4 @@ for:
     test_script:
       - prove6
           --jobs 2
-          exercises/*/.meta/solutions/
+          .\exercises\*\.meta\solutions\
