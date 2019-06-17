@@ -31,6 +31,6 @@ for:
       - choco install rakudostar -y
       - refreshenv
     test_script:
-      - ps: prove6
+      - powershell -Command prove6
           --jobs 2
           (Get-Item exercises/*/.meta/solutions/)
