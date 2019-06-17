@@ -32,6 +32,7 @@ for:
       - refreshenv
     test_script:
       - prove
+          --exec perl6
           --jobs 2
           exercises/*/.meta/solutions/*.t6
           exercises/*/.meta/solutions/*/*.t6
