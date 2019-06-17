@@ -33,4 +33,4 @@ for:
     test_script:
       - ps: prove6
           --jobs 2
-          exercises/*/.meta/solutions/
+          (Get-Item exercises/*/.meta/solutions/)
