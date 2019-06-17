@@ -32,10 +32,10 @@ examples if you get stuck.
 ## Running the tests
 
 There is a test suite and module included with the exercise.
-The test suite (a file with the extension `.t`) will attempt to run routines
+The test suite (a file with the extension `.t6`) will attempt to run routines
 from the module (a file with the extension `.pm6`).
 Add/modify routines in the module so that the tests will pass! You can view the
-test data by executing the command `perl6 --doc *.t` (\* being the name of the
+test data by executing the command `perl6 --doc *.t6` (\* being the name of the
 test suite), and run the test suite for the exercise by executing the command
 `prove6 .` in the exercise directory.
 

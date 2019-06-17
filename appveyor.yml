@@ -19,10 +19,10 @@ for:
       - docker run
           --mount "type=bind,src=$(pwd),dst=/exercism"
           exercism-rakudo-star /bin/bash -c 'cd /exercism
-          && prove exercises/*/.meta/solutions/
-            --recurse
+          && prove6
             --jobs 2
-          && prove t/
+            exercises/*/.meta/solutions/
+          && prove t/*.t6
             --directives'
   - matrix:
       only:
@@ -31,7 +31,8 @@ for:
       - choco install rakudostar -y
       - refreshenv
     test_script:
-      - prove exercises/*/.meta/solutions/
+      - prove
           --exec perl6
-          --recurse
           --jobs 2
+          exercises/*/.meta/solutions/*.t6
+          exercises/*/.meta/solutions/*/*.t6
