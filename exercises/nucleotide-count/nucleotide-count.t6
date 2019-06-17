@@ -7,12 +7,21 @@ use NucleotideCount;
 plan 5;
 
 my $c-data = from-json $=pod.pop.contents;
-for $c-data<cases>».<cases>».Array.flat {
-  if .<expected><error> {
-    throws-like {nucleotide-count(.<input><strand>)}, Exception, .<description>;
+for $c-data<cases>»<cases>»<>.flat -> $case {
+  if $case<expected><error> {
+    throws-like(
+      { nucleotide-count( $case<input><strand> ) },
+      Exception,
+      message => /
+        $( $case<expected><error> )
+        || 'Constraint type check failed in binding to parameter'
+      /,
+      $case<description>
+    );
   }
   else {
-    cmp-ok nucleotide-count(.<input><strand>), '~~', .<expected>.Bag, .<description>;
+    cmp-ok nucleotide-count($case<input><strand>), '~~',
+      $case<expected>.Bag, $case<description>;
   }
 }
 
