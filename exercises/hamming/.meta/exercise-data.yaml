@@ -1,11 +1,20 @@
 exercise: Hamming
-plan: 7
+plan: 9
 tests: |-
-  for $c-data<cases>.values {
-    if .<expected><error> {
-      throws-like {hamming-distance(|.<input><strand1 strand2>)}, Exception, .<description>;
-    } else {
-      is hamming-distance(|.<input><strand1 strand2>), |.<expected description>;
+  for $c-data<cases>.values -> $case {
+    if $case<expected><error> {
+      throws-like(
+        { hamming-distance(|$case<input><strand1 strand2>) },
+        Exception,
+        message => /
+          'left and right strands must be of equal length'
+          || 'Constraint type check failed in binding to parameter'
+        /,
+        $case<description>
+      );
+    }
+    else {
+      is hamming-distance(|$case<input><strand1 strand2>), |$case<expected description>;
     }
   }
 
