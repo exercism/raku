@@ -31,6 +31,7 @@ for:
       - choco install rakudostar -y
       - refreshenv
     test_script:
-      - prove6
+      - prove
           --jobs 2
-          .\exercises\*\.meta\solutions\
+          exercises/*/.meta/solutions/*.t6
+          exercises/*/.meta/solutions/*/*.t6
