@@ -1,6 +1,6 @@
 #!/usr/bin/env perl6
 use v6;
-use YAML::Parser::LibYAML;
+use YAMLish;
 use nqp;
 use lib (my $base-dir = $?FILE.IO.resolve.parent.parent).add('lib');
 use Exercism::Generator;
@@ -60,7 +60,7 @@ sub generate ($exercise) {
 
   print "Generating $exercise... ";
 
-  given Exercism::Generator.new: :$exercise, data => yaml-parse $yaml-file.absolute {
+  given Exercism::Generator.new: :$exercise, data => load-yaml $yaml-file.absolute.IO.slurp {
     my $testfile = $exercise-dir.add("$exercise.t6");
     $testfile.spurt: .test;
     $testfile.chmod: 0o755;
