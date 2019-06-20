@@ -37,4 +37,4 @@ examples:
     }
 ```
 
-You must have `Template::Mustache` and `YAML::Parser::LibYAML` to run `exercise-gen.p6`.
+You must have `Template::Mustache` and `YAMLish` to run `exercise-gen.p6`.
