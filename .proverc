@@ -1,1 +1,2 @@
 --exec perl6
+--ext t6
