@@ -4,7 +4,7 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Luhn;
-plan 16;
+plan 17;
 
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>.values {
@@ -21,7 +21,7 @@ for $c-data<cases>.values {
 =begin code
 {
   "exercise": "luhn",
-  "version": "1.4.0",
+  "version": "1.6.1",
   "cases": [
     {
       "description": "single digit strings can not be valid",
@@ -88,12 +88,12 @@ for $c-data<cases>.values {
       "expected": true
     },
     {
-      "description": "valid strings with a non-digit included become invalid",
+      "description": "valid number with an odd number of spaces",
       "property": "valid",
       "input": {
-        "value": "055a 444 285"
+        "value": "234 567 891 234"
       },
-      "expected": false
+      "expected": true
     },
     {
       "description": "valid strings with a non-digit added at the end become invalid",
@@ -115,7 +115,7 @@ for $c-data<cases>.values {
       "description": "valid strings with symbols included become invalid",
       "property": "valid",
       "input": {
-        "value": "055£ 444$ 285"
+        "value": "055# 444$ 285"
       },
       "expected": false
     },
@@ -144,7 +144,23 @@ for $c-data<cases>.values {
       "expected": true
     },
     {
-      "description": "strings with non-digits is invalid",
+      "comments": [
+        "Convert non-digits to their ascii values and then offset them by 48 sometimes accidentally declare an invalid string to be valid.",
+        "This test is designed to avoid that solution."
+      ],
+      "description": "using ascii value for non-doubled non-digit isn't allowed",
+      "property": "valid",
+      "input": {
+        "value": "055b 444 285"
+      },
+      "expected": false
+    },
+    {
+      "comments": [
+        "Convert non-digits to their ascii values and then offset them by 48 sometimes accidentally declare an invalid string to be valid.",
+        "This test is designed to avoid that solution."
+      ],
+      "description": "using ascii value for doubled non-digit isn't allowed",
       "property": "valid",
       "input": {
         "value": ":9"

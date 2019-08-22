@@ -1,5 +1,5 @@
 exercise: Luhn
-plan: 16
+plan: 17
 tests: |-
   for $c-data<cases>.values {
     given is-luhn-valid .<input><value> -> $result {
