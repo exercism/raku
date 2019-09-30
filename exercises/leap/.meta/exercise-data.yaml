@@ -1,5 +1,5 @@
 exercise: Leap
-plan: 5
+plan: 6
 tests: |-
   for Date, DateTime {
     .^method_table<is-leap-year>.wrap: {
