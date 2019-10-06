@@ -5,21 +5,16 @@
   "build-depends": [
   ],
   "depends": [
-    "JSON::Fast",
-    "Template::Mustache",
-    "YAMLish"
   ],
-  "description": "Exercism exercises in Perl 6",
+  "description": "The classical introductory exercise.",
   "license": "MIT",
   "meta-version": "1",
-  "name": "exercism/perl6",
+  "name": "HelloWorld",
   "perl": "6.*",
   "provides": {
-    "Exercism::Generator": "lib/Exercism/Generator.pm6"
+    "HelloWorld": "HelloWorld.pm6"
   },
   "resources": [
-    "templates/module.mustache",
-    "templates/test.mustache"
   ],
   "source-url": null,
   "support": {
@@ -30,5 +25,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0"
+  "version": ""
 }

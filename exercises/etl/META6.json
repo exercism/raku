@@ -5,21 +5,16 @@
   "build-depends": [
   ],
   "depends": [
-    "JSON::Fast",
-    "Template::Mustache",
-    "YAMLish"
   ],
-  "description": "Exercism exercises in Perl 6",
+  "description": "We are going to do the `Transform` step of an Extract-Transform-Load.",
   "license": "MIT",
   "meta-version": "1",
-  "name": "exercism/perl6",
+  "name": "ETL",
   "perl": "6.*",
   "provides": {
-    "Exercism::Generator": "lib/Exercism/Generator.pm6"
+    "ETL": "ETL.pm6"
   },
   "resources": [
-    "templates/module.mustache",
-    "templates/test.mustache"
   ],
   "source-url": null,
   "support": {
@@ -29,6 +24,7 @@
   "tags": [
   ],
   "test-depends": [
+    "JSON::Fast"
   ],
-  "version": "0"
+  "version": "2.0.1"
 }

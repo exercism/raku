@@ -5,21 +5,16 @@
   "build-depends": [
   ],
   "depends": [
-    "JSON::Fast",
-    "Template::Mustache",
-    "YAMLish"
   ],
-  "description": "Exercism exercises in Perl 6",
+  "description": "Calculate the number of grains of wheat on a chessboard given that the number on each square doubles.",
   "license": "MIT",
   "meta-version": "1",
-  "name": "exercism/perl6",
+  "name": "Grains",
   "perl": "6.*",
   "provides": {
-    "Exercism::Generator": "lib/Exercism/Generator.pm6"
+    "Grains": "Grains.pm6"
   },
   "resources": [
-    "templates/module.mustache",
-    "templates/test.mustache"
   ],
   "source-url": null,
   "support": {
@@ -29,6 +24,7 @@
   "tags": [
   ],
   "test-depends": [
+    "JSON::Fast"
   ],
-  "version": "0"
+  "version": "1.2.0"
 }

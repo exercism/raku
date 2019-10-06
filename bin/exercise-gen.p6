@@ -61,6 +61,8 @@ sub generate ($exercise) {
   print "Generating $exercise... ";
 
   given Exercism::Generator.new: :$exercise, data => load-yaml $yaml-file.absolute.IO.slurp {
+    $exercise-dir.add('META6.json').spurt: .meta6.to-json( :sorted-keys );
+
     my $testfile = $exercise-dir.add("$exercise.t6");
     $testfile.spurt: .test;
     $testfile.chmod: 0o755;
@@ -72,11 +74,13 @@ sub generate ($exercise) {
       if $example.key ~~ 'base' {
         $exercise-dir.add(".meta/solutions/{.data<exercise>}.pm6").spurt: $example.value;
         try nqp::symlink("../../$_", ~$exercise-dir.add(".meta/solutions/$_")) given $testfile.basename;
+        try nqp::symlink("../../META6.json", ~$exercise-dir.add(".meta/solutions/META6.json"));
       }
       else {
         $exercise-dir.add(".meta/solutions/{$example.key}").mkdir;
         $exercise-dir.add(".meta/solutions/{$example.key}/{.data<exercise>}.pm6").spurt: $example.value;
         try nqp::symlink("../../../$_", ~$exercise-dir.add(".meta/solutions/{$example.key}/$_")) given $testfile.basename;
+        try nqp::symlink("../../../META6.json", ~$exercise-dir.add(".meta/solutions/META6.json"));
       }
     }
   }
