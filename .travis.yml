@@ -1,16 +1,14 @@
----
-sudo: required
-services:
-  - docker
+language: minimal
 before_script:
   - git clone https://github.com/exercism/problem-specifications.git
   - bin/fetch-configlet
-  - docker build -t exercism-rakudo-star .
 script:
   - bin/configlet lint .
   - docker run
     --volume $PWD:/exercism
-    exercism-rakudo-star /bin/bash -c 'cd /exercism
+    rakudo-star /bin/bash -c 'cd /exercism
+    && zef install .
+      --deps-only
     && prove6
       --jobs 2
       exercises/*/.meta/solutions/
