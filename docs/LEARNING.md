@@ -1,6 +1,6 @@
 ## Learning Raku
 
-The [Resources](https://raku.org/resources/) page on [perl6.org](https://raku.org/) contains a 'For Newcomers' section with a selection of useful material to get you up and running.
+The [Resources](https://raku.org/resources/) page on [raku.org](https://raku.org/) contains a 'For Newcomers' section with a selection of useful material to get you up and running.
 
 * [Raku Introduction](http://perl6intro.com/)
 * [Learn Raku in Y minutes](https://learnxinyminutes.com/docs/perl6/)
