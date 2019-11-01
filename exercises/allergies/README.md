@@ -31,7 +31,7 @@ score is 257, your program should only report the eggs (1) allergy.
 
 ## Resources
 
-Remember to check out the Raku [documentation](https://docs.perl6.org/) and
+Remember to check out the Raku [documentation](https://docs.raku.org/) and
 [resources](https://raku.org/resources/) pages for information, tips, and
 examples if you get stuck.
 

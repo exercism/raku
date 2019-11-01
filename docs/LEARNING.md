@@ -8,7 +8,7 @@ The [Resources](https://raku.org/resources/) page on [raku.org](https://raku.org
 
 ## Raku from Other Languages - Nutshell
 
-* [Perl 5](https://docs.perl6.org/language/5to6-nutshell)
-* [Haskell](https://docs.perl6.org/language/haskell-to-p6)
-* [Python](https://docs.perl6.org/language/py-nutshell)
-* [Ruby](https://docs.perl6.org/language/rb-nutshell)
+* [Perl 5](https://docs.raku.org/language/5to6-nutshell)
+* [Haskell](https://docs.raku.org/language/haskell-to-p6)
+* [Python](https://docs.raku.org/language/py-nutshell)
+* [Ruby](https://docs.raku.org/language/rb-nutshell)

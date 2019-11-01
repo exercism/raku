@@ -10,7 +10,7 @@ insensitive. Input will not contain non-ASCII symbols.
 
 ## Resources
 
-Remember to check out the Raku [documentation](https://docs.perl6.org/) and
+Remember to check out the Raku [documentation](https://docs.raku.org/) and
 [resources](https://raku.org/resources/) pages for information, tips, and
 examples if you get stuck.
 
