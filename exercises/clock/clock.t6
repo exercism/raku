@@ -7,33 +7,53 @@ use Clock;
 plan 55;
 
 subtest 'Class methods', {
-  can-ok Clock, $_ for <time add-minutes subtract-minutes>;
-}
+  for <time add-minutes subtract-minutes> -> $method {
+    can-ok Clock, $method;
+  }
+} or bail-out 'Cannot run expected method(s).';
 
 my $c-data = from-json $=pod.pop.contents;
 for $c-data<cases>»<cases>»<>.flat -> %case {
   given %case<property> {
+
     when 'create' {
-      is Clock.?new( |%(.<input><hour minute>:p) ).?time, |.<expected description> given %case;
+      is Clock.new( |%(.<input><hour minute>:p) ).time,
+        |.<expected description> given %case;
     }
-    when 'add'|'subtract' {
+
+    when <add subtract>.any {
       given %case {
-        my $clock = Clock.?new: |%(.<input><hour minute>:p);
-        $clock.?add-minutes: .<input><value> if .<property> eq 'add';
-        $clock.?subtract-minutes: .<input><value> if .<property> eq 'subtract';
-        is $clock.?time, |.<expected description>;
+        my $clock = Clock.new: |%(.<input><hour minute>:p);
+        $clock.add-minutes: .<input><value>
+          if .<property> eq 'add';
+        $clock.subtract-minutes: .<input><value>
+          if .<property> eq 'subtract';
+        is $clock.time, |.<expected description>;
       }
     }
+
     when 'equal' {
       is-deeply ([eq] gather {
-        take Clock.?new( |%(.<hour minute>:p) ).?time for %case<input><clock1 clock2>;
+        take Clock.new( |%(.<hour minute>:p) ).time
+          for %case<input><clock1 clock2>;
       }), |%case<expected description>;
     }
+
   }
 }
 
-is Clock.?new(:0hour,:0minute).?add-minutes(65).?time, '01:05', 'add-minutes method can be chained';
-is Clock.?new(:0hour,:0minute).?subtract-minutes(65).?time, '22:55', 'subtract-minutes method can be chained';
+is Clock.new(:0hour,:0minute).add-minutes(65).?time,
+  '01:05', 'add-minutes method can be chained';
+
+is Clock.new(:0hour,:0minute).subtract-minutes(65).?time,
+  '22:55', 'subtract-minutes method can be chained';
+
+CATCH {
+  when X::StubCode {
+    bail-out "{.message} (does the routine contain '!!!'?)\n"
+      ~ .backtrace.concise;
+  }
+}
 
 =head2 Canonical Data
 =begin code

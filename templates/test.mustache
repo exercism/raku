@@ -9,8 +9,10 @@ plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#
 #`{{#methods}}#`{{#methods_comment}}
 #`[#`{{&methods_comment}}]#`{{/methods_comment}}
 subtest 'Class methods', {
-  can-ok #`{{&exercise}}, $_ for <#`{{&methods}}>;
-}
+  for <#`{{&methods}}> -> $method {
+    can-ok #`{{&exercise}}, $method;
+  }
+} or bail-out 'Cannot run expected method(s).';
 #`{{/methods}}#`{{#cdata}}
 my $c-data = from-json $=pod.pop.contents;#`{{/cdata}}
 #`{{&tests}}#`{{#cdata}}
