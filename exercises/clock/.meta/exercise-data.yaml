@@ -37,12 +37,7 @@ tests: |-
   is Clock.new(:0hour,:0minute).subtract-minutes(65).?time,
     '22:55', 'subtract-minutes method can be chained';
 
-  CATCH {
-    when X::StubCode {
-      bail-out "{.message} (does the routine contain '!!!'?)\n"
-        ~ .backtrace.concise;
-    }
-  }
+catch_stub: true
 
 unit: class
 example: |-
