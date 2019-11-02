@@ -50,7 +50,8 @@ is Clock.new(:0hour,:0minute).subtract-minutes(65).?time,
 
 CATCH {
   when X::StubCode {
-    bail-out "{.message} (does the routine contain '!!!'?)\n"
+    flunk 'Caught stub';
+    note "{.message} (does the sub/method contain '!!!'?)\n"
       ~ .backtrace.concise;
   }
 }

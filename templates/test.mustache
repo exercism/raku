@@ -15,7 +15,15 @@ subtest 'Class methods', {
 } or bail-out 'Cannot run expected method(s).';
 #`{{/methods}}#`{{#cdata}}
 my $c-data = from-json $=pod.pop.contents;#`{{/cdata}}
-#`{{&tests}}#`{{#cdata}}
+#`{{&tests}}#`{{#catch_stub}}
+
+CATCH {
+  when X::StubCode {
+    flunk 'Caught stub';
+    note "{.message} (does the sub/method contain '!!!'?)\n"
+      ~ .backtrace.concise;
+  }
+}#`{{/catch_stub}}#`{{#cdata}}
 
 =head2 Canonical Data
 =begin code
