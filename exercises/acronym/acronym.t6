@@ -4,19 +4,18 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Acronym;
-plan 6;
+plan 9;
 
 my $c-data = from-json $=pod.pop.contents;
-
-for $c-data<cases>»<cases>»<>.flat {
-  is abbreviate(.<input><phrase>), |.<expected description>;
+for $c-data<cases>»<cases>»<>.flat -> %case {
+  is abbreviate(%case<input><phrase>), |%case<expected description>;
 }
 
 =head2 Canonical Data
 =begin code
 {
   "exercise": "acronym",
-  "version": "1.4.0",
+  "version": "1.7.0",
   "cases": [
     {
       "description": "Abbreviate a phrase",
@@ -68,6 +67,30 @@ for $c-data<cases>»<cases>»<>.flat {
             "phrase": "Rolling On The Floor Laughing So Hard That My Dogs Came Over And Licked Me"
           },
           "expected": "ROTFLSHTMDCOALM"
+        },
+        {
+          "description": "consecutive delimiters",
+          "property": "abbreviate",
+          "input": {
+            "phrase": "Something - I made up from thin air"
+          },
+          "expected": "SIMUFTA"
+        },
+        {
+          "description": "apostrophes",
+          "property": "abbreviate",
+          "input": {
+            "phrase": "Halley's Comet"
+          },
+          "expected": "HC"
+        },
+        {
+          "description": "underscore emphasis",
+          "property": "abbreviate",
+          "input": {
+            "phrase": "The Road _Not_ Taken"
+          },
+          "expected": "TRNT"
         }
       ]
     }
