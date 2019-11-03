@@ -1,8 +1,8 @@
 unit module AllYourBase;
 
 sub convert-base (
-  :%bases! where all(.keys ~~ <from to>.Set, .values.all > 1),
-  :@digits! where %bases<from> > .all ~~ UInt:D,
+  :%bases!  where { all(.keys ~~ <from to>.Set, .values.all > 1) },
+  :@digits! where { %bases<from> > .all ~~ UInt:D },
   --> Array[UInt:D]
 ) is export {
   from-decimal %bases<to>, to-decimal(%bases<from>, @digits);
