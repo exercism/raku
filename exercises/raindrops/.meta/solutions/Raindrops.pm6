@@ -1,11 +1,9 @@
 unit module Raindrops;
 
-sub raindrop (Int:D $num --> Str:D) is export {
-  my $str = '';
-  given $num {
-    when * %% 3 {$str ~= 'Pling'; proceed}
-    when * %% 5 {$str ~= 'Plang'; proceed}
-    when * %% 7 {$str ~= 'Plong'}
-  }
-  return $str ?? $str !! $num.Str;
+sub raindrop ( Int:D $_ --> Str(Cool) ) is export {
+  [~] gather {
+    take 'Pling' when * %% 3;
+    take 'Plang' when * %% 5;
+    take 'Plong' when * %% 7;
+  } || $_;
 }
