@@ -1,20 +1,23 @@
 exercise: Hamming
 plan: 9
 tests: |-
-  for $c-data<cases>.values -> $case {
-    if $case<expected><error> {
-      throws-like(
-        { hamming-distance(|$case<input><strand1 strand2>) },
-        Exception,
-        message => /
-          'left and right strands must be of equal length'
-          || 'Constraint type check failed in binding to parameter'
-        /,
-        $case<description>
-      );
-    }
-    else {
-      is hamming-distance(|$case<input><strand1 strand2>), |$case<expected description>;
+  for $c-data<cases>.values -> %case {
+    given %case<expected> {
+      when .<error>.so {
+        throws-like
+          { hamming-distance |%case<input><strand1 strand2> },
+          Exception,
+          message => /
+            'left and right strands must be of equal length'
+            || 'Constraint type check failed in binding to parameter'
+          /,
+          %case<description>;
+      }
+
+      default {
+        is hamming-distance(|%case<input><strand1 strand2>),
+          |%case<expected description>;
+      }
     }
   }
 
@@ -26,5 +29,5 @@ example: |-
     [+] [Zne] @strands».comb;
   }
 stub: |-
-  sub hamming-distance ($strand1, $strand2) is export {
+  sub hamming-distance ( $strand1, $strand2 ) is export {
   }
