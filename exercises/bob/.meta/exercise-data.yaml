@@ -3,7 +3,9 @@ plan: 26
 methods: hey
 tests: |-
   # Go through the cases and check that Bob gives us the correct responses.
-  is Bob.?hey(.<input><heyBob>), |.<expected description> for @($c-data<cases>);
+  for $c-data<cases>.values -> %case {
+    is Bob.hey(%case<input><heyBob>), |%case<expected description>;
+  }
 
 lib_comment: Look for the module inside the same directory as this test file.
 plan_comment: This is how many tests we expect to run.
