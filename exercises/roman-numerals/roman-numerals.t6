@@ -7,8 +7,8 @@ use RomanNumerals;
 plan 19;
 
 my $c-data = from-json $=pod.pop.contents;
-for $c-data<cases>.values {
-  is to-roman(.<input><number>), |.<expected description>;
+for $c-data<cases>.values -> %case {
+  is to-roman(%case<input><number>), |%case<expected description>;
 }
 
 =head2 Canonical Data
