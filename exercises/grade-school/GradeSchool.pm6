@@ -1,4 +1,4 @@
 unit module GradeSchool;
 
-sub roster (:$students, :$grade) is export {
+sub roster ( :@students, :$grade ) is export {
 }

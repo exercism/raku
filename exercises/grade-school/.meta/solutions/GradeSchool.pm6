@@ -1,8 +1,11 @@
 unit module GradeSchool;
 
-sub roster (List:D :$students!, UInt :$grade --> List) is export {
+sub roster ( :@students!, :$grade ) is export {
   my %roster;
-  $students.map({%roster{.[1]}.push: .[0] andthen .=sort});
-  return %roster{$grade} || List if $grade;
-  .{.keys.sort}.map(*<>).flat.List given %roster;
+  for @students {
+    %roster{.[1]} = %roster{.[1]}.push(.[0]).sort.Array;
+  }
+  return $grade
+    ?? %roster{$grade} || []
+    !! %roster.pairs.sort.map(|*.value);
 }
