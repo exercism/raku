@@ -3,9 +3,7 @@ unit class Robot;
 our $test-all-names = False;
 
 subset Name of Str where * ~~ /^<[A..Z]>**2 <[0..9]>**3$/;
-has Name:D $!name = self.reset-name;
-
-method name { $!name }
+has Name:D $.name = self.reset-name;
 
 method reset-name {
   state Bool:D %record{Name:D};
