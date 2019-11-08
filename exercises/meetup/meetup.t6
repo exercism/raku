@@ -7,11 +7,15 @@ use Meetup;
 plan 95;
 
 my $c-data = from-json $=pod.pop.contents;
-# This exercise expects you to parse the description string
-# rather than using the input values
-for $c-data<cases>.values -> $case {
-  is meetup-date($case<description>), Date.new($case<expected>),
-    $case<description>;
+=head2 Notes
+=begin para
+This exercise expects you to parse the description string
+rather than using the input values
+=end para
+for $c-data<cases>.values -> %case {
+  is meetup-date(%case<description>),
+    Date.new(%case<expected>),
+    %case<description>;
 }
 
 =head2 Canonical Data
