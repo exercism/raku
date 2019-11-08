@@ -23,7 +23,7 @@ modules:
   - use: Foo::Bar
 methods: 'foo bar'
 tests: |-
-  ok my-subroutine, 'Perl 6 code here';
+  ok my-subroutine, 'Raku code here';
   pass;
 
 unit: module

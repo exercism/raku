@@ -4,7 +4,7 @@ tests: |-
   =head2 Notes
   =begin para
   The test expects your returned C<Hash> to have
-  L<type constraints|https://docs.perl6.org/type/Hash#Constraint_value_types>.
+  L<type constraints|https://docs.raku.org/type/Hash#Constraint_value_types>.
   Defined C<Str>s for the values, and defined C<Int>s for the keys.
   =end para
 
