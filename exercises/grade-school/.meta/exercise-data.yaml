@@ -1,18 +1,24 @@
 exercise: GradeSchool
 plan: 7
 tests: |-
-  for $c-data<cases>:v {
-    cmp-ok roster(|%(<students grade> Z=> .<input><students desiredGrade>:v)), '~~', |.<expected description>;
+  for $c-data<cases>.values -> %case {
+    cmp-ok
+      roster( |%(<students grade> Z=> %case<input><students desiredGrade>:v) ),
+      '~~', |%case<expected description>;
   }
 
 unit: module
 example: |-
-  sub roster (List:D :$students!, UInt :$grade --> List) is export {
+  sub roster ( :@students!, :$grade ) is export {
     my %roster;
-    $students.map({%roster{.[1]}.push: .[0] andthen .=sort});
-    return %roster{$grade} || List if $grade;
-    .{.keys.sort}.map(*<>).flat.List given %roster;
+    for @students {
+      %roster{.[1]} = %roster{.[1]}.push(.[0]).sort.Array;
+    }
+    return $grade
+      ?? %roster{$grade} || []
+      !! %roster.pairs.sort.map(|*.value);
   }
+
 stub: |-
-  sub roster (:$students, :$grade) is export {
+  sub roster ( :@students, :$grade ) is export {
   }
