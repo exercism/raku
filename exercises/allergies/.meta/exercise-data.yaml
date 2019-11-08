@@ -1,49 +1,64 @@
 exercise: Allergies
-plan: 2
+plan: 49
 tests: |-
-  for $c-data<cases>.values -> %case-set {
-
-    subtest 'allergic-to' => {
-      plan 11;
-      for %case-set<cases>.values -> %case {
-        for %case<expected>.values {
-          given allergic-to %case<input><score>, .<substance> -> $result {
-            subtest %case<description> ~ ': ' ~ .<substance> => {
-              plan 2;
-              isa-ok $result, Bool;
-              is-deeply $result, .<result>, 'Result matches expected';
-            }
-          }
+  for $c-data<cases>»<cases>»<>.flat -> %case {
+    given %case<property> {
+      when 'allergicTo' {
+        subtest %case<description>, {
+          plan 2;
+          isa-ok ( my $result := allergic-to |%case<input>:p ), Bool;
+          is-deeply $result, %case<expected>, 'Result matches expected';
         }
       }
-    } when %case-set<description> ~~ 'allergicTo';
 
-    subtest 'list-allergies' => {
-      plan 9;
-      for %case-set<cases>.values {
-        cmp-ok list-allergies(.<input><score>), '~~', .<expected>.Set, .<description>;
+      when 'list' {
+        cmp-ok list-allergies(%case<input><score>),
+          '~~', %case<expected>.Set, %case<description>;
       }
-    } when %case-set<description> ~~ 'list';
-
+    }
   }
 
 unit: module
 example: |-
-  our @allergens = <
-      eggs
-      peanuts
-      shellfish
-      strawberries
-      tomatoes
-      chocolate
-      pollen
-      cats
-  >;
+  enum Allergens (
+      <
+        eggs
+        peanuts
+        shellfish
+        strawberries
+        tomatoes
+        chocolate
+        pollen
+        cats
+      > Z=> ( 1, 2, 4 … ∞ )
+  );
 
-  sub allergic-to($code,$substance) is export {
-      return so $code +& ( 2 ** @allergens.first({ $_ eq $substance},:k) )
+  sub allergic-to(
+    Str:D  :$item where * ∈ Allergens.enums.keys,
+    UInt:D :$score,
+    --> Bool
+  ) is export {
+    so Allergens::{$item}.value +& $score;
   }
 
-  sub list-allergies($code) is export {
-      return grep { allergic-to($code,$_) }, @allergens;
+  sub list-allergies( UInt:D $score ) is export {
+    Allergens.enums.keys.grep( { allergic-to :$score, :$^item } );
+  }
+
+stub: |-
+  enum Allergens (
+      eggs         => 0b1,
+      peanuts      => 0b10,
+      shellfish    => 0b100,
+      strawberries => 0b1000,
+      tomatoes     => 0b10000,
+      chocolate    => 0b100000,
+      pollen       => 0b1000000,
+      cats         => 0b10000000,
+  );
+
+  sub allergic-to( :$item, :$score ) is export {
+  }
+
+  sub list-allergies($score) is export {
   }
