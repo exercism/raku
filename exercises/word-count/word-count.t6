@@ -4,16 +4,19 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use WordCount;
-plan 11;
+plan 13;
 
 my $c-data = from-json $=pod.pop.contents;
-cmp-ok .<input><sentence>.&count-words, '~~', .<expected>.Bag, .<description> for $c-data<cases>.values;
+for $c-data<cases>.values -> %case {
+  cmp-ok count-words(%case<input><sentence>),
+    '~~', %case<expected>.Bag, %case<description>;
+}
 
 =head2 Canonical Data
 =begin code
 {
   "exercise": "word-count",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "comments": [
     "For each word in the input, count the number of times it appears in the",
     "entire sentence."
@@ -146,6 +149,23 @@ cmp-ok .<input><sentence>.&count-words, '~~', .<expected>.Bag, .<description> fo
       }
     },
     {
+      "description": "substrings from the beginning",
+      "property": "countWords",
+      "input": {
+        "sentence": "Joe can't tell between app, apple and a."
+      },
+      "expected": {
+        "joe": 1,
+        "can't": 1,
+        "tell": 1,
+        "between": 1,
+        "app": 1,
+        "apple": 1,
+        "and": 1,
+        "a": 1
+      }
+    },
+    {
       "description": "multiple spaces not detected as a word",
       "property": "countWords",
       "input": {
@@ -154,6 +174,18 @@ cmp-ok .<input><sentence>.&count-words, '~~', .<expected>.Bag, .<description> fo
       "expected": {
         "multiple": 1,
         "whitespaces": 1
+      }
+    },
+    {
+      "description": "alternating word separators not detected as a word",
+      "property": "countWords",
+      "input": {
+        "sentence": ",\n,one,\n ,two \n 'three'"
+      },
+      "expected": {
+        "one": 1,
+        "two": 1,
+        "three": 1
       }
     }
   ]
