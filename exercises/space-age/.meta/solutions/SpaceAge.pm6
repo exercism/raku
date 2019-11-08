@@ -21,8 +21,10 @@ my %planets = (
 );
 for %planets.kv -> $planet, $relative {
   use MONKEY-SEE-NO-EVAL;
-  OUR::EXPORT::ALL::{$planet} := OUR::EXPORT::DEFAULT::{$planet} := EVAL "class $planet does Planet is export " ~
-  '{ my $.orbital-period = calculate-orbital-period $relative }';
+  OUR::EXPORT::ALL::{$planet}
+    := OUR::EXPORT::DEFAULT::{$planet}
+    := EVAL "class $planet does Planet is export "
+    ~ '{ my $.orbital-period = calculate-orbital-period $relative }';
 }
 
 sub calculate-orbital-period ($relative-to-earth) {

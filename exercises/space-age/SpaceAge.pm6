@@ -6,7 +6,7 @@ role Planet {
 }
 
 class Earth does Planet is export {
-  my $.orbital-period = 31557600; 
+  my $.orbital-period = 31557600;
 }
 
 =for comment

@@ -1,7 +1,10 @@
 exercise: SpaceAge
 plan: 8
 tests: |-
-  is (age-on ::(.<input><planet>): .<input><seconds>), |.<expected description> for @($c-data<cases>);
+  for $c-data<cases>.values -> %case {
+    is ::(%case<input><planet>).age-on(%case<input><seconds>),
+      |%case<expected description>;
+  }
 
 unit: module
 example: |-
@@ -26,8 +29,10 @@ example: |-
   );
   for %planets.kv -> $planet, $relative {
     use MONKEY-SEE-NO-EVAL;
-    OUR::EXPORT::ALL::{$planet} := OUR::EXPORT::DEFAULT::{$planet} := EVAL "class $planet does Planet is export " ~
-    '{ my $.orbital-period = calculate-orbital-period $relative }';
+    OUR::EXPORT::ALL::{$planet}
+      := OUR::EXPORT::DEFAULT::{$planet}
+      := EVAL "class $planet does Planet is export "
+      ~ '{ my $.orbital-period = calculate-orbital-period $relative }';
   }
 
   sub calculate-orbital-period ($relative-to-earth) {
@@ -40,7 +45,7 @@ stub: |-
   }
 
   class Earth does Planet is export {
-    my $.orbital-period = 31557600; 
+    my $.orbital-period = 31557600;
   }
 
   =for comment
