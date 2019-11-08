@@ -1,15 +1,21 @@
 unit module Luhn;
 
-sub is-luhn-valid ($input is copy) is export {
-  $input ~~ s:g/\s+//;
-  return False if $input.chars < 2 || $input ~~ /\D/;
-  my @num = $input.split('', :skip-empty);
-  @num.unshift: 0 if @num % 2;
-  my $sum;
-  for @num -> $a, $b {
-    $sum += $a * 2;
-    $sum -= 9 if $a * 2 > 9;
-    $sum += $b;
+sub is-luhn-valid ($input) is export {
+  my @digits = $input.comb(/\S/).map(*.Int);
+  return False if @digits.elems < 2;
+  @digits.unshift(0) unless @digits %% 2;
+
+  return (gather {
+    for @digits {
+      take $^a * 2;
+      take -9 if $a * 2 > 9;
+      take $^b;
+    }
+  }).sum %% 10;
+
+  CATCH {
+    when X::Str::Numeric {
+      return False;
+    }
   }
-  return ($sum %% 10).so;
 }
