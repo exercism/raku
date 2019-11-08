@@ -7,22 +7,26 @@ tests: |-
   L<type constraints|https://docs.perl6.org/type/Hash#Constraint_value_types>.
   Defined C<Str>s for the values, and defined C<Int>s for the keys.
   =end para
-  for $c-data<cases>.values -> %case-set {
-    is-deeply(
-      transform(Hash[Array[Str:D], Int:D].new(
-        .<input>.pairs».&{
-          .key.Int => Array[Str:D](.value.Slip)
-        }
-      )),
-      Hash[Int:D, Str:D].new(.<expected>.pairs),
-      .<description>
-    ) for %case-set<cases>.values;
+
+  for $c-data<cases>»<cases>»<>.flat -> %case {
+    my Array[Str:D] %input{Int:D} =
+      %case<input><legacy>.pairs.map: {
+        .key.Int => Array[Str:D].new( |.value )
+      };
+
+    is-deeply
+      transform(%input),
+      Hash[ Int:D, Str:D ].new( %case<expected>.pairs ),
+      %case<description>;
   }
 
 unit: module
 example: |-
-  sub transform ( Hash[Array[Str:D], Int:D] $_ --> Hash[Int:D, Str:D] ) is export {
-    Hash[Int:D, Str:D].new: .invert».&{ .key.lc => .value }
+  sub transform (
+    Array[Str:D] %input where { .keys.all ~~ Int:D },
+    --> Hash[ Int:D, Str:D ]
+  ) is export {
+    Hash[ Int:D, Str:D ].new( %input.invert.map: { .key.lc => .value } );
   }
 stub: |-
   sub transform (%input) is export {
