@@ -1,4 +1,4 @@
-## Learning Raku
+## Learning Raku (formerly Perl 6)
 
 The [Resources](https://raku.org/resources/) page on [raku.org](https://raku.org/) contains a 'For Newcomers' section with a selection of useful material to get you up and running.
 
