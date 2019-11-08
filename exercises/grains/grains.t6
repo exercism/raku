@@ -11,13 +11,28 @@ for $c-data<cases>.values {
   if .<cases> {
     subtest .<description> => {
       plan 10;
-      for .<cases>.values {
-        .<expected><error>
-          ?? throws-like { grains-on-square(.<input><square>) }, Exception, .<description>
-          !! is grains-on-square(.<input><square>), |.<expected description> if .<property> eq 'square';
+      for .<cases>.values -> %case {
+        given %case<expected> {
+          when .<error>.so {
+            throws-like
+              { grains-on-square %case<input><square> },
+              Exception,
+              message => /
+                $( %case<expected><error> )
+                || 'Constraint type check failed in binding to parameter'
+              /,
+              %case<description>;
+          }
+
+          default {
+            is grains-on-square(%case<input><square>),
+              |%case<expected description>;
+          }
+        }
       }
     }
   }
+
   elsif .<property> eq 'total' {
     is total-grains, |.<expected description>;
   }
