@@ -1,15 +1,14 @@
 exercise: Acronym
-plan: 6
+plan: 9
 tests: |-
-
-  for $c-data<cases>»<cases>»<>.flat {
-    is abbreviate(.<input><phrase>), |.<expected description>;
+  for $c-data<cases>»<cases>»<>.flat -> %case {
+    is abbreviate(%case<input><phrase>), |%case<expected description>;
   }
 
 unit: module
 example: |-
   sub abbreviate ($phrase) is export {
-    [~] $phrase.uc.comb(/\w+/).map: *.substr(0, 1);
+    [~] $phrase.uc.comb(/<[A..Z']>+/).map: *.substr(0, 1);
   }
 
 stub: |-
