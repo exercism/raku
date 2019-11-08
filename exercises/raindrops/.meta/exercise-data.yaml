@@ -1,25 +1,24 @@
 exercise: Raindrops
 plan: 18
 tests: |-
-  for @($c-data<cases>) {
-    subtest {
+  for $c-data<cases>.values -> %case {
+    subtest %case<description>, {
       plan 2;
-      is .<input><number>.&raindrop, |.<expected description>;
-      isa-ok .<input><number>.&raindrop, Str;
+      isa-ok ( my $result := raindrop %case<input><number> ), Str;
+      is $result, %case<expected>, 'Result matches expected';
     }
   }
 
 unit: module
 example: |-
-  sub raindrop (Int:D $num --> Str:D) is export {
-    my $str = '';
-    given $num {
-      when * %% 3 {$str ~= 'Pling'; proceed}
-      when * %% 5 {$str ~= 'Plang'; proceed}
-      when * %% 7 {$str ~= 'Plong'}
-    }
-    return $str ?? $str !! $num.Str;
+  sub raindrop ( Int:D $_ --> Str(Cool) ) is export {
+    [~] gather {
+      take 'Pling' when * %% 3;
+      take 'Plang' when * %% 5;
+      take 'Plong' when * %% 7;
+    } || $_;
   }
+
 stub: |-
   sub raindrop ($num) is export {
   }

@@ -7,11 +7,11 @@ use Raindrops;
 plan 18;
 
 my $c-data = from-json $=pod.pop.contents;
-for @($c-data<cases>) {
-  subtest {
+for $c-data<cases>.values -> %case {
+  subtest %case<description>, {
     plan 2;
-    is .<input><number>.&raindrop, |.<expected description>;
-    isa-ok .<input><number>.&raindrop, Str;
+    isa-ok ( my $result := raindrop %case<input><number> ), Str;
+    is $result, %case<expected>, 'Result matches expected';
   }
 }
 
