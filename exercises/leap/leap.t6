@@ -4,23 +4,20 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Leap;
-plan 6;
+plan 9;
 
 my $c-data = from-json $=pod.pop.contents;
 for Date, DateTime {
-  .^method_table<is-leap-year>.wrap: {
-    warn 'built-in `is-leap-year` method is not allowed for this exercise.';
-    Nil;
+  .^method_table<is-leap-year>.wrap: sub (|) {
+    bail-out 'Built-in `is-leap-year` method is not allowed for this exercise.';
   };
 }
 
-for $c-data<cases>.values {
-  given is-leap-year .<input><year> -> $result {
-    subtest .<description>, {
-      plan 2;
-      isa-ok $result, Bool;
-      is-deeply $result, .<expected>, 'Result matches expected';
-    }
+for $c-data<cases>.values -> %case {
+  subtest %case<description>, {
+    plan 2;
+    isa-ok ( my $result := is-leap-year %case<input><year> ), Bool;
+    is-deeply $result, %case<expected>, 'Result matches expected';
   }
 }
 
@@ -28,7 +25,7 @@ for $c-data<cases>.values {
 =begin code
 {
   "exercise": "leap",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "cases": [
     {
       "description": "year not divisible by 4 in common year",
@@ -55,6 +52,14 @@ for $c-data<cases>.values {
       "expected": true
     },
     {
+      "description": "year divisible by 4 and 5 is still a leap year",
+      "property": "leapYear",
+      "input": {
+        "year": 1960
+      },
+      "expected": true
+    },
+    {
       "description": "year divisible by 100, not divisible by 400 in common year",
       "property": "leapYear",
       "input": {
@@ -63,10 +68,26 @@ for $c-data<cases>.values {
       "expected": false
     },
     {
+      "description": "year divisible by 100 but not by 3 is still not a leap year",
+      "property": "leapYear",
+      "input": {
+        "year": 1900
+      },
+      "expected": false
+    },
+    {
       "description": "year divisible by 400 in leap year",
       "property": "leapYear",
       "input": {
         "year": 2000
+      },
+      "expected": true
+    },
+    {
+      "description": "year divisible by 400 but not by 125 is still a leap year",
+      "property": "leapYear",
+      "input": {
+        "year": 2400
       },
       "expected": true
     },
