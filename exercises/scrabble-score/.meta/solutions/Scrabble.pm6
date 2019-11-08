@@ -1,17 +1,15 @@
 unit module Scrabble;
 
-sub score (Str:D $word --> Int:D) is export {
-  my $score = 0;
-  for $word.lc.split('',:skip-empty) -> $letter {
-    given $letter {
-      when * ~~ /<[aeioulnrst]>/ { $score += 1  }
-      when * ~~ /<[dg]>/         { $score += 2  }
-      when * ~~ /<[bcmp]>/       { $score += 3  }
-      when * ~~ /<[fhvwy]>/      { $score += 4  }
-      when * ~~ /k/              { $score += 5  }
-      when * ~~ /<[jx]>/         { $score += 8  }
-      when * ~~ /<[qz]>/         { $score += 10 }
+sub score ( Str:D $word --> UInt:D ) is export {
+  sum gather {
+    for $word.lc.comb {
+      when <q z>.any       { take 10 }
+      when <j x>.any       { take 8  }
+      when 'k'             { take 5  }
+      when <f h v w y>.any { take 4  }
+      when <b c m p>.any   { take 3  }
+      when <d g>.any       { take 2  }
+      default              { take 1  }
     }
   }
-  return $score;
 }
