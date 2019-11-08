@@ -1,13 +1,11 @@
 exercise: Pangram
 plan: 10
 tests: |-
-  for $c-data<cases>».<cases>».Array.flat {
-    given is-pangram .<input><sentence> -> $result {
-      subtest .<description>, {
-        plan 2;
-        isa-ok $result, Bool;
-        is-deeply $result, .<expected>, 'Result matches expected';
-      }
+  for $c-data<cases>.values -> %case {
+    subtest %case<description>, {
+      plan 2;
+      isa-ok ( my $result := is-pangram %case<input><sentence> ), Bool;
+      is-deeply $result, %case<expected>, 'Result matches expected';
     }
   }
 
@@ -16,6 +14,7 @@ example: |-
   sub is-pangram (Str:D $string --> Bool:D) is export {
     $string.lc.comb ⊇ ‘a’..‘z’
   }
+
 stub: |-
   sub is-pangram ($string) is export {
   }
