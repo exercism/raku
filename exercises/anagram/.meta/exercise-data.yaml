@@ -1,7 +1,10 @@
 exercise: Anagram
-plan: 12
+plan: 14
 tests: |-
-  cmp-ok match-anagrams( |%(.<input><subject candidates>:p) ), '~~', .<expected>.Set, .<description> for $c-data<cases>.values;
+  for $c-data<cases>.values -> %case {
+    cmp-ok match-anagrams( |%case<input>:p ),
+      '~~', %case<expected>.Set, %case<description>;
+  }
 
 unit: module
 example: |-
@@ -11,5 +14,5 @@ example: |-
     }
   }
 stub: |-
-  sub match-anagrams (:$subject!, :@candidates!) is export {
+  sub match-anagrams ( :$subject!, :@candidates! ) is export {
   }

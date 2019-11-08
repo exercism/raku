@@ -1,4 +1,4 @@
 unit module Anagram;
 
-sub match-anagrams (:$subject!, :@candidates!) is export {
+sub match-anagrams ( :$subject!, :@candidates! ) is export {
 }
