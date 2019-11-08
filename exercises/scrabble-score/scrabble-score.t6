@@ -7,7 +7,9 @@ use Scrabble;
 plan 11;
 
 my $c-data = from-json $=pod.pop.contents;
-is .<input><word>.&score, |.<expected description> for @($c-data<cases>);
+for $c-data<cases>.values -> %case {
+  is score(%case<input><word>), |%case<expected description>;
+}
 
 =head2 Canonical Data
 =begin code
