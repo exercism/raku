@@ -1,6 +1,6 @@
 ## Run All Tests
 
-There is a Perl 6 script with the extension `.t6`, which will be used to test
+There is a Raku script with the extension `.t6`, which will be used to test
 your solution. You can run through the tests by using the command:
 
 `prove6 .`
@@ -54,7 +54,7 @@ set PERL6_TEST_DIE_ON_FAIL=
 ```
 
 For more information see the
-[Testing chapter of the Perl 6 Documentation](https://docs.perl6.org/language/testing.html).
+[Testing chapter of the Raku Documentation](https://docs.raku.org/language/testing.html).
 
 ## Troubleshooting
 
@@ -63,9 +63,9 @@ For more information see the
 Could not find JSON::Fast
 ```
 
-All modules used in the Perl 6 track are included with Rakudo Star. If you get an
+All modules used in the Raku track are included with Rakudo Star. If you get an
 error message such as the above when attempting to run a test, then you will either
 need to make sure you have the latest distribution of Rakudo Star, or install the
 module yourself using a package manager. See the
-[Perl 6 documentation on modules](https://docs.perl6.org/language/modules#Looking_for_and_installing_modules.)
+[Raku documentation on modules](https://docs.raku.org/language/modules#Looking_for_and_installing_modules.)
 for information on how to install modules.

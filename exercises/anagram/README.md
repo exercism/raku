@@ -1,6 +1,7 @@
 # Anagram
 
-Given a word and a list of possible anagrams, select the correct sublist.
+An anagram is a rearrangement of letters to form a new word.
+Given a word and a list of candidates, select the sublist of anagrams of the given word.
 
 Given `"listen"` and a list of candidates like `"enlists" "google"
 "inlets" "banana"` the program should return a list containing
@@ -8,8 +9,8 @@ Given `"listen"` and a list of candidates like `"enlists" "google"
 
 ## Resources
 
-Remember to check out the Perl 6 [documentation](https://docs.perl6.org/) and
-[resources](https://perl6.org/resources/) pages for information, tips, and
+Remember to check out the Raku [documentation](https://docs.raku.org/) and
+[resources](https://raku.org/resources/) pages for information, tips, and
 examples if you get stuck.
 
 ## Running the tests

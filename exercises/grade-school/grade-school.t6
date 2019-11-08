@@ -7,8 +7,10 @@ use GradeSchool;
 plan 7;
 
 my $c-data = from-json $=pod.pop.contents;
-for $c-data<cases>:v {
-  cmp-ok roster(|%(<students grade> Z=> .<input><students desiredGrade>:v)), '~~', |.<expected description>;
+for $c-data<cases>.values -> %case {
+  cmp-ok
+    roster( |%(<students grade> Z=> %case<input><students desiredGrade>:v) ),
+    '~~', |%case<expected description>;
 }
 
 =head2 Canonical Data

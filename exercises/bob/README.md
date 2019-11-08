@@ -2,9 +2,9 @@
 
 Bob is a lackadaisical teenager. In conversation, his responses are very limited.
 
-Bob answers 'Sure.' if you ask him a question.
+Bob answers 'Sure.' if you ask him a question, such as "How are you?".
 
-He answers 'Whoa, chill out!' if you yell at him.
+He answers 'Whoa, chill out!' if you YELL AT HIM (in all capitals).
 
 He answers 'Calm down, I know what I'm doing!' if you yell a question at him.
 
@@ -17,8 +17,8 @@ Bob's conversational partner is a purist when it comes to written communication 
 
 ## Resources
 
-Remember to check out the Perl 6 [documentation](https://docs.perl6.org/) and
-[resources](https://perl6.org/resources/) pages for information, tips, and
+Remember to check out the Raku [documentation](https://docs.raku.org/) and
+[resources](https://raku.org/resources/) pages for information, tips, and
 examples if you get stuck.
 
 ## Running the tests

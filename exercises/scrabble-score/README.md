@@ -1,6 +1,6 @@
 # Scrabble Score
 
-Given a word, compute the scrabble score for that word.
+Given a word, compute the Scrabble score for that word.
 
 ## Letter Values
 
@@ -41,8 +41,8 @@ And to total:
 
 ## Resources
 
-Remember to check out the Perl 6 [documentation](https://docs.perl6.org/) and
-[resources](https://perl6.org/resources/) pages for information, tips, and
+Remember to check out the Raku [documentation](https://docs.raku.org/) and
+[resources](https://raku.org/resources/) pages for information, tips, and
 examples if you get stuck.
 
 ## Running the tests

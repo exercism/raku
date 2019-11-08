@@ -1,17 +1,26 @@
 unit module RomanNumerals;
 
-
-my %table{Int} = <1000 900 500 400 100 90 50 40 10 9 5 4 1>
-                 Z=>
-                 <M CM D CD C XC L XL X IX V IV I>;
-
-sub to-roman ($number is copy) is export {
-  [~] gather {
-    for %table.keys.sort.reverse -> $k {
-      if (my $repeat = $number div $k) {
-        $number -= $k * $repeat;
-        take %table{$k} x $repeat;
+enum Roman (
+  'I', |( gather {
+    for ｢IVXLCDM｣.comb.rotor(3 => -1) -> @group {
+      for 1, 2 {
+        take @group[0, $_].join;
+        take @group[$_];
       }
     }
-  }
+  } ) Z=> ( 1, |( * X* 4, 5, 9, 10 ) … ∞ )
+);
+
+sub to-roman ($number) is export {
+  [~] gather {
+    for $number.flip.comb.pairs.reverse {
+      given 10 ** .key -> $pv {
+        when .value == 4 | 9 {
+          take Roman( $pv * .value );
+        }
+        take Roman( $pv * 5 ) if .value ≥ 5;
+        take Roman( $pv ) x .value % 5;
+      }
+    }
+  };
 }

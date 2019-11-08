@@ -13,7 +13,7 @@ moaning about how stupid we could possibly be.)
 
 ### The goal
 
-We're going to extract some scrabble scores from a legacy system.
+We're going to extract some Scrabble scores from a legacy system.
 
 The old system stored a list of letters per score:
 
@@ -25,7 +25,7 @@ The old system stored a list of letters per score:
 - 8 points: "J", "X",
 - 10 points: "Q", "Z",
 
-The shiny new scrabble system instead stores the score per letter, which
+The shiny new Scrabble system instead stores the score per letter, which
 makes it much faster and easier to calculate the score for a word. It
 also stores the letters in lower-case regardless of the case of the
 input letters:
@@ -48,8 +48,8 @@ game while being scored at 4 in the Hawaiian-language version.
 
 ## Resources
 
-Remember to check out the Perl 6 [documentation](https://docs.perl6.org/) and
-[resources](https://perl6.org/resources/) pages for information, tips, and
+Remember to check out the Raku [documentation](https://docs.raku.org/) and
+[resources](https://raku.org/resources/) pages for information, tips, and
 examples if you get stuck.
 
 ## Running the tests

@@ -1,4 +1,4 @@
 bin/configlet
 bin/configlet.exe
-# dir created when a Perl 6 module is used
+# dir created when a Raku module is used
 .precomp

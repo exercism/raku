@@ -2,9 +2,9 @@
 
 Given an age in seconds, calculate how old someone would be on:
 
-   - Earth: orbital period 365.25 Earth days, or 31557600 seconds
    - Mercury: orbital period 0.2408467 Earth years
    - Venus: orbital period 0.61519726 Earth years
+   - Earth: orbital period 1.0 Earth years, 365.25 Earth days, or 31557600 seconds
    - Mars: orbital period 1.8808158 Earth years
    - Jupiter: orbital period 11.862615 Earth years
    - Saturn: orbital period 29.447498 Earth years
@@ -19,8 +19,8 @@ youtube video](http://www.youtube.com/watch?v=Z_2gbGXzFbs).
 
 ## Resources
 
-Remember to check out the Perl 6 [documentation](https://docs.perl6.org/) and
-[resources](https://perl6.org/resources/) pages for information, tips, and
+Remember to check out the Raku [documentation](https://docs.raku.org/) and
+[resources](https://raku.org/resources/) pages for information, tips, and
 examples if you get stuck.
 
 ## Running the tests

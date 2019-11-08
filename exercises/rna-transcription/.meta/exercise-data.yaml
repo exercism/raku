@@ -1,7 +1,9 @@
 exercise: RNA
 plan: 6
 tests: |-
-  is .<input><dna>.&to-rna, |.<expected description> for $c-data<cases>.values;
+  for $c-data<cases>.values -> %case {
+    is to-rna(%case<input><dna>), |%case<expected description>;
+  }
 
 unit: module
 example: |-

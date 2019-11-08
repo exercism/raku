@@ -1,7 +1,10 @@
 exercise: WordCount
-plan: 11
+plan: 13
 tests: |-
-  cmp-ok .<input><sentence>.&count-words, '~~', .<expected>.Bag, .<description> for $c-data<cases>.values;
+  for $c-data<cases>.values -> %case {
+    cmp-ok count-words(%case<input><sentence>),
+      '~~', %case<expected>.Bag, %case<description>;
+  }
 
 unit: module
 example: |-

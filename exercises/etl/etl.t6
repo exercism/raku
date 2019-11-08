@@ -10,42 +10,47 @@ my $c-data = from-json $=pod.pop.contents;
 =head2 Notes
 =begin para
 The test expects your returned C<Hash> to have
-L<type constraints|https://docs.perl6.org/type/Hash#Constraint_value_types>.
+L<type constraints|https://docs.raku.org/type/Hash#Constraint_value_types>.
 Defined C<Str>s for the values, and defined C<Int>s for the keys.
 =end para
-for $c-data<cases>.values -> %case-set {
-  is-deeply(
-    transform(Hash[Array[Str:D], Int:D].new(
-      .<input>.pairs».&{
-        .key.Int => Array[Str:D](.value.Slip)
-      }
-    )),
-    Hash[Int:D, Str:D].new(.<expected>.pairs),
-    .<description>
-  ) for %case-set<cases>.values;
+
+for $c-data<cases>»<cases>»<>.flat -> %case {
+  my Array[Str:D] %input{Int:D} =
+    %case<input><legacy>.pairs.map: {
+      .key.Int => Array[Str:D].new( |.value )
+    };
+
+  is-deeply
+    transform(%input),
+    Hash[ Int:D, Str:D ].new( %case<expected>.pairs ),
+    %case<description>;
 }
 
 =head2 Canonical Data
 =begin code
 {
   "exercise": "etl",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "cases": [
     {
       "comments": [
+        "Transforms a set of legacy Scrabble data stored as letters per score",
+        "to a set of data stored score per letter.",
         "Note:  The expected input data for these tests should have",
         "integer keys (not stringified numbers as shown in the JSON below",
         "Unless the language prohibits that, please implement these tests",
         "such that keys are integers. e.g. in JavaScript, it might look ",
         "like `transform( { 1: ['A'] } );`"
       ],
-      "description": "transforms the a set of scrabble data previously indexed by the tile score to a set of data indexed by the tile letter",
+      "description": "Transform legacy to new",
       "cases": [
         {
-          "description": "a single letter",
+          "description": "single letter",
           "property": "transform",
           "input": {
-            "1": ["A"]
+            "legacy": {
+              "1": ["A"]
+            }
           },
           "expected": {
             "a": 1
@@ -55,7 +60,9 @@ for $c-data<cases>.values -> %case-set {
           "description": "single score with multiple letters",
           "property": "transform",
           "input": {
-            "1": ["A", "E", "I", "O", "U"]
+            "legacy": {
+              "1": ["A", "E", "I", "O", "U"]
+            }
           },
           "expected": {
             "a": 1,
@@ -69,8 +76,10 @@ for $c-data<cases>.values -> %case-set {
           "description": "multiple scores with multiple letters",
           "property": "transform",
           "input": {
-            "1": ["A", "E"],
-            "2": ["D", "G"]
+            "legacy": {
+              "1": ["A", "E"],
+              "2": ["D", "G"]
+            }
           },
           "expected": {
             "a": 1,
@@ -83,13 +92,15 @@ for $c-data<cases>.values -> %case-set {
           "description": "multiple scores with differing numbers of letters",
           "property": "transform",
           "input": {
-             "1": ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
-             "2": ["D", "G"],
-             "3": ["B", "C", "M", "P"],
-             "4": ["F", "H", "V", "W", "Y"],
-             "5": ["K"],
-             "8": ["J", "X"],
-            "10": ["Q", "Z"]
+            "legacy": {
+               "1": ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
+               "2": ["D", "G"],
+               "3": ["B", "C", "M", "P"],
+               "4": ["F", "H", "V", "W", "Y"],
+               "5": ["K"],
+               "8": ["J", "X"],
+              "10": ["Q", "Z"]
+            }
           },
           "expected": {
             "a":  1, "b":  3, "c": 3, "d": 2, "e": 1,

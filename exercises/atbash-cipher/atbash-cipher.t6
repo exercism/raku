@@ -7,7 +7,10 @@ use AtbashCipher;
 plan 14;
 
 my $c-data = from-json $=pod.pop.contents;
-is .<input><phrase>.&::(.<property>), |.<expected description> for $c-data<cases>»<cases>»<>.flat;
+for $c-data<cases>»<cases>»<>.flat -> %case {
+  is &::(%case<property>)(%case<input><phrase>),
+    |%case<expected description>;
+}
 
 =head2 Canonical Data
 =begin code

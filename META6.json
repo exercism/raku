@@ -1,4 +1,4 @@
 {
-  "name": "exercism/perl6",
+  "name": "exercism/raku",
   "depends": ["YAMLish", "Template::Mustache"]
 }

@@ -7,20 +7,28 @@ use AllYourBase;
 plan 21;
 
 my $c-data = from-json $=pod.pop.contents;
-for $c-data<cases>.values -> $case {
-  sub call-convert-base {
+for $c-data<cases>.values -> %case {
+  my &call-convert-base := -> {
     convert-base(
-      bases  => %(<from to> Z=> .<input><inputBase outputBase>),
-      digits => .<input><digits>,
-    ) given $case;
-  }
+      bases  => %(<from to> Z=> %case<input><inputBase outputBase>),
+      digits => %case<input><digits>,
+    );
+  };
 
-  given $case {
-    if .<expected><error> {
-      throws-like {call-convert-base}, Exception, .<description>;
+  given %case<expected> {
+    when .<error>.so {
+      throws-like
+        {call-convert-base},
+        Exception,
+        message => /
+          $( %case<expected><error> )
+          || 'Constraint type check failed in binding to parameter'
+        /,
+        %case<description>;
     }
-    else {
-      cmp-ok call-convert-base, ‘~~’, |.<expected description>;
+
+    default {
+      cmp-ok call-convert-base, ‘~~’, |%case<expected description>;
     }
   }
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env perl6
-use v6;{{=#`{{ }}=}}#`{{! Mustache tags double up as Perl 6 embedded comments}}
+use v6;{{=#`{{ }}=}}#`{{! Mustache tags double up as Raku embedded comments}}
 use Test;#`{{#cdata}}
 use JSON::Fast;#`{{/cdata}}#`{{#modules}}
 use #`{{&use}};#`{{/modules}}
@@ -9,11 +9,21 @@ plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#
 #`{{#methods}}#`{{#methods_comment}}
 #`[#`{{&methods_comment}}]#`{{/methods_comment}}
 subtest 'Class methods', {
-  can-ok #`{{&exercise}}, $_ for <#`{{&methods}}>;
-}
+  for <#`{{&methods}}> -> $method {
+    can-ok #`{{&exercise}}, $method;
+  }
+} or bail-out 'Cannot run expected method(s).';
 #`{{/methods}}#`{{#cdata}}
 my $c-data = from-json $=pod.pop.contents;#`{{/cdata}}
-#`{{&tests}}#`{{#cdata}}
+#`{{&tests}}#`{{#catch_stub}}
+
+CATCH {
+  when X::StubCode {
+    flunk 'Caught stub';
+    note "{.message} (does the sub/method contain '!!!'?)\n"
+      ~ .backtrace.concise;
+  }
+}#`{{/catch_stub}}#`{{#cdata}}
 
 =head2 Canonical Data
 =begin code
