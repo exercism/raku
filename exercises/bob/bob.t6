@@ -9,12 +9,16 @@ plan 26; #`[This is how many tests we expect to run.]
 #`[Check that the class 'Bob' can use all of the methods
 needed in the tests (only 'hey' for this one).]
 subtest 'Class methods', {
-  can-ok Bob, $_ for <hey>;
-}
+  for <hey> -> $method {
+    can-ok Bob, $method;
+  }
+} or bail-out 'Cannot run expected method(s).';
 
 my $c-data = from-json $=pod.pop.contents;
 # Go through the cases and check that Bob gives us the correct responses.
-is Bob.?hey(.<input><heyBob>), |.<expected description> for @($c-data<cases>);
+for $c-data<cases>.values -> %case {
+  is Bob.hey(%case<input><heyBob>), |%case<expected description>;
+}
 
 =head2 Canonical Data
 =begin code
