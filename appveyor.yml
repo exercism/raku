@@ -10,15 +10,15 @@ for:
   - matrix:
       only:
         - image: Ubuntu
-    build_script:
-      - docker build -t exercism-rakudo-star .
     before_test:
       - bin/fetch-configlet
     test_script:
       - bin/configlet lint . --track-id=perl6
       - docker run
           --mount "type=bind,src=$(pwd),dst=/exercism"
-          exercism-rakudo-star /bin/bash -c 'cd /exercism
+          rakudo-star /bin/bash -c 'cd /exercism
+          && zef install .
+            --deps-only
           && prove6
             --jobs 2
             exercises/*/.meta/solutions/
