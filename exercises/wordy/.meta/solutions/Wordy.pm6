@@ -1,16 +1,43 @@
 unit module Wordy;
 
-sub answer ($q is copy) is export { 
-  given $q {
-    s:s:g/^What is|\?$//;
-    s:g/plus/+/;
-    s:g/minus/−/;
-    loop {
-      last unless
-        s:s/(.*) multiplied by/($0)×/
-        or s:s/(.*) divided by/($0)÷/;
+grammar Calculate {
+  rule TOP     { What is <problem> \? }
+  rule problem { <num> [ <operator> <num> ] * }
+  token num    { '-'? <[0..9]>+ }
+  token operator {
+    | plus
+    | minus
+    | [ multiplied | divided ] ' by'
+  }
+}
+
+class Calculation {
+  method TOP ($/) { make $<problem>.made }
+
+  method num ($/) { make $/.Numeric }
+
+  method operator ($/) {
+    given $/ {
+      when 'plus'          { make &infix:<+> }
+      when 'minus'         { make &infix:<-> }
+      when 'multiplied by' { make &infix:<×> }
+      when 'divided by'    { make &infix:<÷> }
     }
   }
-  use MONKEY-SEE-NO-EVAL;
-  EVAL $q or fail;
+
+  method problem ($/) {
+    my @nums = $<num>.map(*.made);
+    my $result = @nums.shift;
+
+    for $<operator>.map(*.made) -> &op {
+      $result = op $result, @nums.shift;
+    }
+
+    make $result;
+  }
+}
+
+sub answer ($question) is export {
+  Calculate.parse( $question, :actions(Calculation.new) ).made
+    or die 'syntax error';
 }
