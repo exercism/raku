@@ -1,30 +1,65 @@
 exercise: Wordy
-plan: 16
+plan: 23
 tests: |-
-  for @($c-data<cases>) {
-    if .<expected> === False {
-      throws-like {.<input><question>.&answer}, Exception, .<description>;
-    } else {
-      is .<input><question>.&answer, |.<expected description>;
+  for $c-data<cases>.values -> %case {
+    given %case<expected> {
+      when .<error>.so {
+        throws-like
+          { answer %case<input><question> },
+          Exception,
+          %case<description>;
+      }
+
+      default {
+        is answer(%case<input><question>), |%case<expected description>;
+      }
     }
   }
 
 unit: module
 example: |-
-  sub answer ($q is copy) is export { 
-    given $q {
-      s:s:g/^What is|\?$//;
-      s:g/plus/+/;
-      s:g/minus/−/;
-      loop {
-        last unless
-          s:s/(.*) multiplied by/($0)×/
-          or s:s/(.*) divided by/($0)÷/;
+  grammar Calculate {
+    rule TOP     { What is <problem> \? }
+    rule problem { <num> [ <operator> <num> ] * }
+    token num    { '-'? <[0..9]>+ }
+    token operator {
+      | plus
+      | minus
+      | [ multiplied | divided ] ' by'
+    }
+  }
+
+  class Calculation {
+    method TOP ($/) { make $<problem>.made }
+
+    method num ($/) { make $/.Numeric }
+
+    method operator ($/) {
+      given $/ {
+        when 'plus'          { make &infix:<+> }
+        when 'minus'         { make &infix:<-> }
+        when 'multiplied by' { make &infix:<×> }
+        when 'divided by'    { make &infix:<÷> }
       }
     }
-    use MONKEY-SEE-NO-EVAL;
-    EVAL $q or fail;
+
+    method problem ($/) {
+      my @nums = $<num>.map(*.made);
+      my $result = @nums.shift;
+
+      for $<operator>.map(*.made) -> &op {
+        $result = op $result, @nums.shift;
+      }
+
+      make $result;
+    }
   }
+
+  sub answer ($question) is export {
+    Calculate.parse( $question, :actions(Calculation.new) ).made
+      or die 'syntax error';
+  }
+
 stub: |-
-  sub answer ($question) is export { 
+  sub answer ($question) is export {
   }

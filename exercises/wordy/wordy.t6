@@ -4,14 +4,21 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Wordy;
-plan 16;
+plan 23;
 
 my $c-data = from-json $=pod.pop.contents;
-for @($c-data<cases>) {
-  if .<expected> === False {
-    throws-like {.<input><question>.&answer}, Exception, .<description>;
-  } else {
-    is .<input><question>.&answer, |.<expected description>;
+for $c-data<cases>.values -> %case {
+  given %case<expected> {
+    when .<error>.so {
+      throws-like
+        { answer %case<input><question> },
+        Exception,
+        %case<description>;
+    }
+
+    default {
+      is answer(%case<input><question>), |%case<expected description>;
+    }
   }
 }
 
@@ -19,13 +26,21 @@ for @($c-data<cases>) {
 =begin code
 {
   "exercise": "wordy",
-  "version": "1.1.0",
+  "version": "1.5.0",
   "comments": [
-    "The tests that expect 'false' should be implemented to raise",
+    "The tests that expect an 'error' should be implemented to raise",
     "an error, or indicate a failure. Implement this in a way that",
     "makes sense for your language."
   ],
   "cases": [
+    {
+      "description": "just a number",
+      "property": "answer",
+      "input": {
+        "question": "What is 5?"
+      },
+      "expected": 5
+    },
     {
       "description": "addition",
       "property": "answer",
@@ -144,7 +159,7 @@ for @($c-data<cases>) {
       "input": {
         "question": "What is 52 cubed?"
       },
-      "expected": false
+      "expected": {"error": "unknown operation"}
     },
     {
       "description": "Non math question",
@@ -152,7 +167,55 @@ for @($c-data<cases>) {
       "input": {
         "question": "Who is the President of the United States?"
       },
-      "expected": false
+      "expected": {"error": "unknown operation"}
+    },
+    {
+      "description": "reject problem missing an operand",
+      "property": "answer",
+      "input": {
+        "question": "What is 1 plus?"
+      },
+      "expected": {"error": "syntax error"}
+    },
+    {
+      "description": "reject problem with no operands or operators",
+      "property": "answer",
+      "input": {
+        "question": "What is?"
+      },
+      "expected": {"error": "syntax error"}
+    },
+    {
+      "description": "reject two operations in a row",
+      "property": "answer",
+      "input": {
+        "question": "What is 1 plus plus 2?"
+      },
+      "expected": {"error": "syntax error"}
+    },
+    {
+      "description": "reject two numbers in a row",
+      "property": "answer",
+      "input": {
+        "question": "What is 1 plus 2 1?"
+      },
+      "expected": {"error": "syntax error"}
+    },
+    {
+      "description": "reject postfix notation",
+      "property": "answer",
+      "input": {
+        "question": "What is 1 2 plus?"
+      },
+      "expected": {"error": "syntax error"}
+    },
+    {
+      "description": "reject prefix notation",
+      "property": "answer",
+      "input": {
+        "question": "What is plus 1 2?"
+      },
+      "expected": {"error": "syntax error"}
     }
   ]
 }
