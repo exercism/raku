@@ -1,6 +1,6 @@
 unit module Allergies;
 
-enum Allergens (
+constant %allergens = (
     eggs         => 0b1,
     peanuts      => 0b10,
     shellfish    => 0b100,
