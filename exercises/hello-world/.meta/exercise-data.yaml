@@ -9,6 +9,9 @@ tests: |-
     'Say Hi!'        # The test description.
   );
 
+  =finish
+  Based on canonical data v1.1.0
+
 lib_comment: Look for the module inside the same directory as this test file.
 plan_comment: This is how many tests we expect to run.
 

@@ -11,3 +11,6 @@ is(
   'Hello, World!', # The expected result to compare with 'hello'.
   'Say Hi!'        # The test description.
 );
+
+=finish
+Based on canonical data v1.1.0
