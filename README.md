@@ -26,4 +26,3 @@ Run `prove -re perl6 exercises/*/.meta/solutions/` to run all exercise tests.
 
 ### Raku icon
 The Raku "Camelia" logo is owned by Larry Wall and is released under version 2.0 of the Artistic License. We are using it to identify the Raku language itself, not any part of Exercism, which we believe to be admissible under fair use. The version of the logo that we are using is an adaptation of the logo found on <https://en.wikipedia.org/wiki/Raku_(programming_language)>.
-cgi-bin/admin/mpr/agency_info.cgi?ref=900100
