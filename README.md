@@ -1,6 +1,6 @@
 # Exercism Raku Track
 
-[![Build Status](https://travis-ci.org/exercism/rakucgi-bin/admin/mpr/agency_info.cgi?ref=900100cgi-bin/admin/mpr/agency_info.cgi?ref=900100.svg?branch=master)](https://travis-ci.org/exercism/raku) [![Build status](https://ci.appveyor.com/api/projects/status/rcmwcooqd3hw9461?svg=true)](https://ci.appveyor.com/project/mienaikage/perl6) [![Gitter](https://badges.gitter.im/exercism/perl.svg)](https://gitter.im/exercism/perl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Build Status](https://travis-ci.org/exercism/rakucgi-bin/admin/mpr/agency_info.cgi?ref=900100.svg?branch=master)](https://travis-ci.org/exercism/raku) [![Build status](https://ci.appveyor.com/api/projects/status/rcmwcooqd3hw9461?svg=true)](https://ci.appveyor.com/project/mienaikage/perl6) [![Gitter](https://badges.gitter.im/exercism/perl.svg)](https://gitter.im/exercism/perl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Exercism exercises in Raku
 
