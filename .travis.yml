@@ -12,5 +12,5 @@ script:
     && prove6
       --jobs 2
       exercises/*/.meta/solutions/
-    && prove t/*.t6
+    && prove t/*.rakutest
       --directives'

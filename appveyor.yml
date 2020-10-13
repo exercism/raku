@@ -13,7 +13,7 @@ for:
     before_test:
       - bin/fetch-configlet
     test_script:
-      - bin/configlet lint . --track-id=perl6
+      - bin/configlet lint . --track-id=raku
       - docker run
           --mount "type=bind,src=$(pwd),dst=/exercism"
           rakudo-star /bin/bash -c 'cd /exercism
@@ -22,7 +22,7 @@ for:
           && prove6
             --jobs 2
             exercises/*/.meta/solutions/
-          && prove t/*.t6
+          && prove t/*.rakutest
             --directives'
   - matrix:
       only:

@@ -1,6 +1,6 @@
 ## Run All Tests
 
-There is a Raku script with the extension `.t6`, which will be used to test
+There is a Raku script with the extension `.rakutest`, which will be used to test
 your solution. You can run through the tests by using the command:
 
 `prove6 .`
@@ -10,47 +10,47 @@ Before you start the exercise, the output will likely look something like:
 ```
 
 # Failed test 'Say Hi!'
-# at hello-world.t6 line 11
+# at hello-world.rakutest line 11
 # expected: 'Hello, World!'
 #      got: (Nil)
 # Looks like you failed 1 test of 1
-hello-world.t6 .. Dubious, test returned 1
+hello-world.rakutest .. Dubious, test returned 1
 Failed 1/1 subtests
 ```
-You will either need to modify or create a module with the extension `.pm6`, and
+You will either need to modify or create a module with the extension `.rakumod`, and
 write a solution to pass the tests. Once the tests are passing, the output from
 the command above will likely look something like:
 
 ```
-hello-world.t6 .. ok
+hello-world.rakutest .. ok
 All tests successful.
 ```
 
 ## Stop After First Failure
 
-If you have the `PERL6_TEST_DIE_ON_FAIL` environment variable set, the test
+If you have the `RAKU_TEST_DIE_ON_FAIL` environment variable set, the test
 runner will stop after the first failure. For example:
 
 In Linux / OS X:
 
 ```bash
-export PERL6_TEST_DIE_ON_FAIL=1
+export RAKU_TEST_DIE_ON_FAIL=1
 # now all the follow up runs will stop at the first failure
 prove6 .
 # until we do
-unset PERL6_TEST_DIE_ON_FAIL
+unset RAKU_TEST_DIE_ON_FAIL
 # or you can use it for one run like this:
-PERL6_TEST_DIE_ON_FAIL=1 prove6 .
+RAKU_TEST_DIE_ON_FAIL=1 prove6 .
 ```
 
 Or in Windows:
 
 ```
-SET PERL6_TEST_DIE_ON_FAIL=1
+SET RAKU_TEST_DIE_ON_FAIL=1
 REM now all the follow up runs will stop at the first failure
 prove6 .
 REM until we do
-set PERL6_TEST_DIE_ON_FAIL=
+set RAKU_TEST_DIE_ON_FAIL=
 ```
 
 For more information see the

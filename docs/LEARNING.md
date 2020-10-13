@@ -2,7 +2,7 @@
 
 The [Resources](https://raku.org/resources/) page on [raku.org](https://raku.org/) contains a 'For Newcomers' section with a selection of useful material to get you up and running.
 
-* [Raku Introduction](http://perl6intro.com/)
+* [Raku Introduction](http://raku.guide/)
 * [Learn Raku in Y minutes](https://learnxinyminutes.com/docs/perl6/)
 * [Raku Tutorials](https://github.com/perlpilot/perl6-docs)
 
