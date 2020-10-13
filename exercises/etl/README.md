@@ -55,10 +55,10 @@ examples if you get stuck.
 ## Running the tests
 
 There is a test suite and module included with the exercise.
-The test suite (a file with the extension `.t6`) will attempt to run routines
-from the module (a file with the extension `.pm6`).
+The test suite (a file with the extension `.rakutest`) will attempt to run routines
+from the module (a file with the extension `.rakumod`).
 Add/modify routines in the module so that the tests will pass! You can view the
-test data by executing the command `perl6 --doc *.t6` (\* being the name of the
+test data by executing the command `raku --doc *.rakutest` (\* being the name of the
 test suite), and run the test suite for the exercise by executing the command
 `prove6 .` in the exercise directory.
 

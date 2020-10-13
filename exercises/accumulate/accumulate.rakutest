@@ -1,0 +1,43 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use Accumulate;
+plan 6;
+
+is-deeply
+  accumulate( [], -> {} ),
+  [],
+  'test empty';
+
+is-deeply
+  accumulate( 1..5, *² ),
+  [1, 4, 9, 16, 25],
+  'raise to 2';
+
+is-deeply
+  accumulate(
+    (10, 17, 23),
+    { $^a div 7, $a % 7 }
+  ),
+  [ (1, 3), (2, 3), (3, 2) ],
+  'divmod';
+
+is-deeply
+  accumulate( <hello exercism>, *.uc ),
+  [<HELLO EXERCISM>],
+  'capitalize';
+
+is-deeply
+  accumulate(
+    <a b c>,
+    -> $letter {
+      ( accumulate 1..3, { $letter ~ $^number } )
+    }
+  ),
+  [ [<a1 a2 a3>], [<b1 b2 b3>], [<c1 c2 c3>] ],
+  'recursive';
+
+is-deeply
+  accumulate( <the quick brown fox>, *.flip ),
+  [<eht kciuq nworb xof>],
+  'reverse strings';
