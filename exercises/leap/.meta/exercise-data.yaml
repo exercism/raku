@@ -7,7 +7,7 @@ tests: |-
     };
   }
 
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     subtest %case<description>, {
       plan 2;
       isa-ok ( my $result := is-leap-year %case<input><year> ), Bool;
