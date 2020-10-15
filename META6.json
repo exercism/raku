@@ -1,4 +1,9 @@
 {
   "name": "exercism/raku",
-  "depends": ["YAMLish", "Template::Mustache"]
+  "depends": [
+    "Config::TOML",
+    "JSON::Fast",
+    "Template::Mustache",
+    "YAMLish"
+  ]
 }

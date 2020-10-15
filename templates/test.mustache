@@ -1,6 +1,6 @@
 #!/usr/bin/env raku{{=#`{{ }}=}}#`{{! Mustache tags double up as Raku embedded comments}}
-use Test;#`{{#cdata}}
-use JSON::Fast;#`{{/cdata}}#`{{#modules}}
+use Test;#`{{#cases}}
+use JSON::Fast;#`{{/cases}}#`{{#modules}}
 use #`{{&use}};#`{{/modules}}
 use lib $?FILE.IO.dirname;#`{{#lib_comment}} #`[#`{{&lib_comment}}]#`{{/lib_comment}}
 use #`{{&exercise}};#`{{#plan}}
@@ -12,8 +12,8 @@ subtest 'Class methods', {
     can-ok #`{{&exercise}}, $method;
   }
 } or bail-out 'Cannot run expected method(s).';
-#`{{/methods}}#`{{#cdata}}
-my $c-data = from-json $=pod.pop.contents;#`{{/cdata}}
+#`{{/methods}}#`{{#cases}}
+my @test-cases = from-json($=pod.pop.contents).List;#`{{/cases}}
 #`{{&tests}}#`{{#catch_stub}}
 
 CATCH {
@@ -22,9 +22,9 @@ CATCH {
     note "{.message} (does the sub/method contain '!!!'?)\n"
       ~ .backtrace.concise;
   }
-}#`{{/catch_stub}}#`{{#cdata}}
+}#`{{/catch_stub}}#`{{#cases}}
 
-=head2 Canonical Data
+=head2 Test Cases
 =begin code
-#`{{&json}}
-=end code#`{{/cdata}}
+#`{{&cases}}
+=end code#`{{/cases}}
