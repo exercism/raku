@@ -34,7 +34,10 @@ submethod TWEAK {
 method !populate-cases ( %obj, Str $description = '' --> Nil ) {
   my Str $new-desc = '';
   if %obj<cases>.defined {
-    $new-desc = $description ~ %obj<description> ~ ': ' if %obj<description>;
+    if %obj<description> {
+      $new-desc = $description ~ %obj<description>
+        ~ ( %obj<description> ~~ /':' $/ ?? ' ' !! ': ' );
+    }
     self!populate-cases( $_, $new-desc || $description ) for %obj<cases>.values;
   }
   elsif %obj<uuid> ∈ self.case-uuids {
