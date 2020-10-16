@@ -1,7 +1,7 @@
 exercise: Acronym
 plan: 9
 tests: |-
-  for $c-data<cases>»<cases>»<>.flat -> %case {
+  for @test-cases -> %case {
     is abbreviate(%case<input><phrase>), |%case<expected description>;
   }
 
