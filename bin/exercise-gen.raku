@@ -1,4 +1,6 @@
 #!/usr/bin/env raku
+use Config::TOML;
+use JSON::Fast;
 use YAMLish;
 use nqp;
 use lib (my $base-dir = $?FILE.IO.resolve.parent.parent).add('lib');
@@ -29,37 +31,42 @@ multi MAIN (*@exercises) {
   @exercises».&generate;
 }
 
-#|[The generator will attempt to run using the current directory.
-Exits if a '.meta/exercise-data.yaml' file is not found.]
+#|The generator will attempt to run using the current directory.
 multi MAIN {
   say 'No args given; working in current directory.';
-  if '.meta/exercise-data.yaml'.IO.f {
-    generate $*CWD.IO.basename;
-  } else {
-    say "exercise-data.yaml not found in .meta of current directory; exiting.\n";
-    say $*USAGE;
-    exit;
-  }
+  generate $*CWD.IO.basename;
 }
 
 sub generate ($exercise) {
-  state (@dir-not-found, @yaml-not-found);
+  state (@dir-not-found, @data-not-found);
   END {
     if @dir-not-found  {note 'exercise directory does not exist for: '  ~ join ' ', @dir-not-found}
-    if @yaml-not-found {note '.meta/exercise-data.yaml not found for: ' ~ join ' ', @yaml-not-found}
+    if @data-not-found {note '.meta/exercise-data.{toml,yaml,json} not found for: ' ~ join ' ', @data-not-found}
   }
+
   if (my $exercise-dir = $base-dir.add("exercises/$exercise")) !~~ :d {
     push @dir-not-found, $exercise;
     return;
   }
-  if (my $yaml-file = $exercise-dir.add('.meta/exercise-data.yaml')) !~~ :f {
-    push @yaml-not-found, $exercise;
+
+  my %data;
+  if (my $toml-file = $exercise-dir.add('.meta/exercise-data.toml')) ~~ :f {
+    %data = from-toml file => $toml-file.absolute;
+  }
+  elsif (my $yaml-file = $exercise-dir.add('.meta/exercise-data.yaml')) ~~ :f {
+    %data = load-yaml $yaml-file.absolute.IO.slurp;
+  }
+  elsif (my $json-file = $exercise-dir.add('.meta/exercise-data.json')) ~~ :f {
+    %data = from-json $json-file.absolute.IO.slurp;
+  }
+  else {
+    push @data-not-found, $exercise;
     return;
   }
 
   print "Generating $exercise... ";
 
-  given Exercism::Generator.new: :$exercise, data => load-yaml $yaml-file.absolute.IO.slurp {
+  given Exercism::Generator.new: :$exercise, :%data {
     my $testfile = $exercise-dir.add("$exercise.rakutest");
     $testfile.spurt: .test;
     $testfile.chmod: 0o755;
