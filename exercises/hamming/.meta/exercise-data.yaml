@@ -1,7 +1,7 @@
 exercise: Hamming
 plan: 9
 tests: |-
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     given %case<expected> {
       when .<error>.so {
         throws-like
