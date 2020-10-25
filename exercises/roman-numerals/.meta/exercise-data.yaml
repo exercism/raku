@@ -1,7 +1,7 @@
 exercise: RomanNumerals
 plan: 19
 tests: |-
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     is to-roman(%case<input><number>), |%case<expected description>;
   }
 
