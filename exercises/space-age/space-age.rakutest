@@ -5,90 +5,86 @@ use lib $?FILE.IO.dirname;
 use SpaceAge;
 plan 8;
 
-my $c-data = from-json $=pod.pop.contents;
-for $c-data<cases>.values -> %case {
+my @test-cases = from-json($=pod.pop.contents).List;
+for @test-cases -> %case {
   is ::(%case<input><planet>).age-on(%case<input><seconds>),
     |%case<expected description>;
 }
 
-=head2 Canonical Data
+=head2 Test Cases
 =begin code
-{
-  "exercise": "space-age",
-  "version": "1.2.0",
-  "cases": [
-    {
-      "description": "age on Earth",
-      "property": "age",
-      "input": {
-        "planet": "Earth",
-        "seconds": 1000000000
-      },
-      "expected": 31.69
+[
+  {
+    "description": "age on Earth",
+    "expected": 31.69,
+    "input": {
+      "planet": "Earth",
+      "seconds": 1000000000
     },
-    {
-      "description": "age on Mercury",
-      "property": "age",
-      "input": {
-        "planet": "Mercury",
-        "seconds": 2134835688
-      },
-      "expected": 280.88
+    "property": "age"
+  },
+  {
+    "description": "age on Mercury",
+    "expected": 280.88,
+    "input": {
+      "planet": "Mercury",
+      "seconds": 2134835688
     },
-    {
-      "description": "age on Venus",
-      "property": "age",
-      "input": {
-        "planet": "Venus",
-        "seconds": 189839836
-      },
-      "expected": 9.78
+    "property": "age"
+  },
+  {
+    "description": "age on Venus",
+    "expected": 9.78,
+    "input": {
+      "planet": "Venus",
+      "seconds": 189839836
     },
-    {
-      "description": "age on Mars",
-      "property": "age",
-      "input": {
-        "planet": "Mars",
-        "seconds": 2129871239
-      },
-      "expected": 35.88
+    "property": "age"
+  },
+  {
+    "description": "age on Mars",
+    "expected": 35.88,
+    "input": {
+      "planet": "Mars",
+      "seconds": 2129871239
     },
-    {
-      "description": "age on Jupiter",
-      "property": "age",
-      "input": {
-        "planet": "Jupiter",
-        "seconds": 901876382
-      },
-      "expected": 2.41
+    "property": "age"
+  },
+  {
+    "description": "age on Jupiter",
+    "expected": 2.41,
+    "input": {
+      "planet": "Jupiter",
+      "seconds": 901876382
     },
-    {
-      "description": "age on Saturn",
-      "property": "age",
-      "input": {
-        "planet": "Saturn",
-        "seconds": 2000000000
-      },
-      "expected": 2.15
+    "property": "age"
+  },
+  {
+    "description": "age on Saturn",
+    "expected": 2.15,
+    "input": {
+      "planet": "Saturn",
+      "seconds": 2000000000
     },
-    {
-      "description": "age on Uranus",
-      "property": "age",
-      "input": {
-        "planet": "Uranus",
-        "seconds": 1210123456
-      },
-      "expected": 0.46
+    "property": "age"
+  },
+  {
+    "description": "age on Uranus",
+    "expected": 0.46,
+    "input": {
+      "planet": "Uranus",
+      "seconds": 1210123456
     },
-    {
-      "description": "age on Neptune",
-      "property": "age",
-      "input": {
-        "planet": "Neptune",
-        "seconds": 1821023456
-      },
-      "expected": 0.35
-    }
-  ]
-}
+    "property": "age"
+  },
+  {
+    "description": "age on Neptune",
+    "expected": 0.35,
+    "input": {
+      "planet": "Neptune",
+      "seconds": 1821023456
+    },
+    "property": "age"
+  }
+]
 =end code
