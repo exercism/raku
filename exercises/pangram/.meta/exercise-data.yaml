@@ -1,7 +1,7 @@
 exercise: Pangram
 plan: 10
 tests: |-
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     subtest %case<description>, {
       plan 2;
       isa-ok ( my $result := is-pangram %case<input><sentence> ), Bool;
