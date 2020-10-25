@@ -3,7 +3,7 @@ plan: 26
 methods: hey
 tests: |-
   # Go through the cases and check that Bob gives us the correct responses.
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     is Bob.hey(%case<input><heyBob>), |%case<expected description>;
   }
 
