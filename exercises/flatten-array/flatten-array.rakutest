@@ -5,63 +5,199 @@ use lib $?FILE.IO.dirname;
 use FlattenArray;
 plan 6;
 
-my $c-data = from-json $=pod.pop.contents;
-is-deeply flatten-array(.<input><array>), |.<expected description> for @($c-data<cases>);
-
-=head2 Canonical Data
-=begin code
-{
-  "exercise": "flatten-array",
-  "version": "1.2.0",
-  "cases": [
-    {
-      "description": "no nesting",
-      "property": "flatten",
-      "input": {
-        "array": [0, 1, 2]
-      },
-      "expected": [0, 1, 2]
-    },
-    {
-      "description": "flattens array with just integers present",
-      "property": "flatten",
-      "input": {
-        "array": [1, [2, 3, 4, 5, 6, 7], 8]
-      },
-      "expected": [1, 2, 3, 4, 5, 6, 7, 8]
-    },
-    {
-      "description": "5 level nesting",
-      "property": "flatten",
-      "input": {
-        "array": [0, 2, [[2, 3], 8, 100, 4, [[[50]]]], -2]
-      },
-      "expected": [0, 2, 2, 3, 8, 100, 4, 50, -2]
-    },
-    {
-      "description": "6 level nesting",
-      "property": "flatten",
-      "input": {
-        "array": [1, [2, [[3]], [4, [[5]]], 6, 7], 8]
-      },
-      "expected": [1, 2, 3, 4, 5, 6, 7, 8]
-    },
-    {
-      "description": "6 level nest list with null values",
-      "property": "flatten",
-      "input": {
-        "array": [0, 2, [[2, 3], 8, [[100]], null, [[null]]], -2]
-      },
-      "expected": [0, 2, 2, 3, 8, 100, -2]
-    },
-    {
-      "description": "all values in nested list are null",
-      "property": "flatten",
-      "input": {
-        "array": [null, [[[null]]], null, null, [[null, null], null], null]
-      },
-      "expected": []
-    }
-  ]
+my @test-cases = from-json($=pod.pop.contents).List;
+for @test-cases -> %case {
+  is-deeply flatten-array(%case<input><array>), |%case<expected description>;
 }
+
+=head2 Test Cases
+=begin code
+[
+  {
+    "description": "no nesting",
+    "expected": [
+      0,
+      1,
+      2
+    ],
+    "input": {
+      "array": [
+        0,
+        1,
+        2
+      ]
+    },
+    "property": "flatten"
+  },
+  {
+    "description": "flattens array with just integers present",
+    "expected": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "input": {
+      "array": [
+        1,
+        [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        8
+      ]
+    },
+    "property": "flatten"
+  },
+  {
+    "description": "5 level nesting",
+    "expected": [
+      0,
+      2,
+      2,
+      3,
+      8,
+      100,
+      4,
+      50,
+      -2
+    ],
+    "input": {
+      "array": [
+        0,
+        2,
+        [
+          [
+            2,
+            3
+          ],
+          8,
+          100,
+          4,
+          [
+            [
+              [
+                50
+              ]
+            ]
+          ]
+        ],
+        -2
+      ]
+    },
+    "property": "flatten"
+  },
+  {
+    "description": "6 level nesting",
+    "expected": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "input": {
+      "array": [
+        1,
+        [
+          2,
+          [
+            [
+              3
+            ]
+          ],
+          [
+            4,
+            [
+              [
+                5
+              ]
+            ]
+          ],
+          6,
+          7
+        ],
+        8
+      ]
+    },
+    "property": "flatten"
+  },
+  {
+    "description": "6 level nest list with null values",
+    "expected": [
+      0,
+      2,
+      2,
+      3,
+      8,
+      100,
+      -2
+    ],
+    "input": {
+      "array": [
+        0,
+        2,
+        [
+          [
+            2,
+            3
+          ],
+          8,
+          [
+            [
+              100
+            ]
+          ],
+          null,
+          [
+            [
+              null
+            ]
+          ]
+        ],
+        -2
+      ]
+    },
+    "property": "flatten"
+  },
+  {
+    "description": "all values in nested list are null",
+    "expected": [
+    ],
+    "input": {
+      "array": [
+        null,
+        [
+          [
+            [
+              null
+            ]
+          ]
+        ],
+        null,
+        null,
+        [
+          [
+            null,
+            null
+          ],
+          null
+        ],
+        null
+      ]
+    },
+    "property": "flatten"
+  }
+]
 =end code
