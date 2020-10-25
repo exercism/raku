@@ -1,7 +1,7 @@
 exercise: Raindrops
 plan: 18
 tests: |-
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     subtest %case<description>, {
       plan 2;
       isa-ok ( my $result := raindrop %case<input><number> ), Str;
