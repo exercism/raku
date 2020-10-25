@@ -5,151 +5,219 @@ use lib $?FILE.IO.dirname;
 use Anagram;
 plan 14;
 
-my $c-data = from-json $=pod.pop.contents;
-for $c-data<cases>.values -> %case {
+my @test-cases = from-json($=pod.pop.contents).List;
+for @test-cases -> %case {
   cmp-ok match-anagrams( |%case<input>:p ),
     '~~', %case<expected>.Set, %case<description>;
 }
 
-=head2 Canonical Data
+=head2 Test Cases
 =begin code
-{
-  "exercise": "anagram",
-  "version": "1.5.0",
-  "cases": [
-    {
-      "description": "no matches",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "diaper",
-        "candidates": ["hello", "world", "zombies", "pants"]
-      },
-      "expected": []
+[
+  {
+    "description": "no matches",
+    "expected": [
+    ],
+    "input": {
+      "candidates": [
+        "hello",
+        "world",
+        "zombies",
+        "pants"
+      ],
+      "subject": "diaper"
     },
-    {
-      "description": "detects two anagrams",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "master",
-        "candidates": ["stream", "pigeon", "maters"]
-      },
-      "expected": ["stream", "maters"]
+    "property": "findAnagrams"
+  },
+  {
+    "description": "detects two anagrams",
+    "expected": [
+      "stream",
+      "maters"
+    ],
+    "input": {
+      "candidates": [
+        "stream",
+        "pigeon",
+        "maters"
+      ],
+      "subject": "master"
     },
-    {
-      "description": "does not detect anagram subsets",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "good",
-        "candidates": ["dog", "goody"]
-      },
-      "expected": []
+    "property": "findAnagrams"
+  },
+  {
+    "description": "does not detect anagram subsets",
+    "expected": [
+    ],
+    "input": {
+      "candidates": [
+        "dog",
+        "goody"
+      ],
+      "subject": "good"
     },
-    {
-      "description": "detects anagram",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "listen",
-        "candidates": ["enlists", "google", "inlets", "banana"]
-      },
-      "expected": ["inlets"]
+    "property": "findAnagrams"
+  },
+  {
+    "description": "detects anagram",
+    "expected": [
+      "inlets"
+    ],
+    "input": {
+      "candidates": [
+        "enlists",
+        "google",
+        "inlets",
+        "banana"
+      ],
+      "subject": "listen"
     },
-    {
-      "description": "detects three anagrams",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "allergy",
-        "candidates": [
-          "gallery",
-          "ballerina",
-          "regally",
-          "clergy",
-          "largely",
-          "leading"
-        ]
-      },
-      "expected": ["gallery", "regally", "largely"]
+    "property": "findAnagrams"
+  },
+  {
+    "description": "detects three anagrams",
+    "expected": [
+      "gallery",
+      "regally",
+      "largely"
+    ],
+    "input": {
+      "candidates": [
+        "gallery",
+        "ballerina",
+        "regally",
+        "clergy",
+        "largely",
+        "leading"
+      ],
+      "subject": "allergy"
     },
-    {
-      "description": "detects multiple anagrams with different case",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "nose",
-        "candidates": ["Eons", "ONES"]
-      },
-      "expected": ["Eons", "ONES"]
+    "property": "findAnagrams"
+  },
+  {
+    "description": "detects multiple anagrams with different case",
+    "expected": [
+      "Eons",
+      "ONES"
+    ],
+    "input": {
+      "candidates": [
+        "Eons",
+        "ONES"
+      ],
+      "subject": "nose"
     },
-    {
-      "description": "does not detect non-anagrams with identical checksum",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "mass",
-        "candidates": ["last"]
-      },
-      "expected": []
+    "property": "findAnagrams"
+  },
+  {
+    "description": "does not detect non-anagrams with identical checksum",
+    "expected": [
+    ],
+    "input": {
+      "candidates": [
+        "last"
+      ],
+      "subject": "mass"
     },
-    {
-      "description": "detects anagrams case-insensitively",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "Orchestra",
-        "candidates": ["cashregister", "Carthorse", "radishes"]
-      },
-      "expected": ["Carthorse"]
+    "property": "findAnagrams"
+  },
+  {
+    "description": "detects anagrams case-insensitively",
+    "expected": [
+      "Carthorse"
+    ],
+    "input": {
+      "candidates": [
+        "cashregister",
+        "Carthorse",
+        "radishes"
+      ],
+      "subject": "Orchestra"
     },
-    {
-      "description": "detects anagrams using case-insensitive subject",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "Orchestra",
-        "candidates": ["cashregister", "carthorse", "radishes"]
-      },
-      "expected": ["carthorse"]
+    "property": "findAnagrams"
+  },
+  {
+    "description": "detects anagrams using case-insensitive subject",
+    "expected": [
+      "carthorse"
+    ],
+    "input": {
+      "candidates": [
+        "cashregister",
+        "carthorse",
+        "radishes"
+      ],
+      "subject": "Orchestra"
     },
-    {
-      "description": "detects anagrams using case-insensitive possible matches",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "orchestra",
-        "candidates": ["cashregister", "Carthorse", "radishes"]
-      },
-      "expected": ["Carthorse"]
+    "property": "findAnagrams"
+  },
+  {
+    "description": "detects anagrams using case-insensitive possible matches",
+    "expected": [
+      "Carthorse"
+    ],
+    "input": {
+      "candidates": [
+        "cashregister",
+        "Carthorse",
+        "radishes"
+      ],
+      "subject": "orchestra"
     },
-    {
-      "description": "does not detect an anagram if the original word is repeated",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "go",
-        "candidates": ["go Go GO"]
-      },
-      "expected": []
+    "property": "findAnagrams"
+  },
+  {
+    "description": "does not detect an anagram if the original word is repeated",
+    "expected": [
+    ],
+    "input": {
+      "candidates": [
+        "go Go GO"
+      ],
+      "subject": "go"
     },
-    {
-      "description": "anagrams must use all letters exactly once",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "tapper",
-        "candidates": ["patter"]
-      },
-      "expected": []
+    "property": "findAnagrams"
+  },
+  {
+    "description": "anagrams must use all letters exactly once",
+    "expected": [
+    ],
+    "input": {
+      "candidates": [
+        "patter"
+      ],
+      "subject": "tapper"
     },
-    {
-      "description": "words are not anagrams of themselves (case-insensitive)",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "BANANA",
-        "candidates": ["BANANA", "Banana", "banana"]
-      },
-      "expected": []
+    "property": "findAnagrams"
+  },
+  {
+    "description": "words are not anagrams of themselves (case-insensitive)",
+    "expected": [
+    ],
+    "input": {
+      "candidates": [
+        "BANANA",
+        "Banana",
+        "banana"
+      ],
+      "subject": "BANANA"
     },
-    {
-      "description": "words other than themselves can be anagrams",
-      "property": "findAnagrams",
-      "input": {
-        "subject": "LISTEN",
-        "candidates": ["Listen", "Silent", "LISTEN"]
-      },
-      "expected": ["Silent"]
-    }
-  ]
-}
+    "property": "findAnagrams"
+  },
+  {
+    "description": "words other than themselves can be anagrams",
+    "expected": [
+      "Silent"
+    ],
+    "input": {
+      "candidates": [
+        "Listen",
+        "Silent",
+        "LISTEN"
+      ],
+      "subject": "LISTEN"
+    },
+    "property": "findAnagrams"
+  }
+]
 =end code
