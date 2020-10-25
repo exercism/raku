@@ -6,7 +6,7 @@ tests: |-
   This exercise expects you to parse the description string
   rather than using the input values
   =end para
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     is meetup-date(%case<description>),
       Date.new(%case<expected>),
       %case<description>;
