@@ -1,7 +1,7 @@
 exercise: Luhn
-plan: 17
+plan: 18
 tests: |-
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     subtest %case<description>, {
       plan 2;
       isa-ok ( my $result := is-luhn-valid %case<input><value> ), Bool;
