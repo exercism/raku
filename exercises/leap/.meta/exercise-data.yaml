@@ -1,4 +1,3 @@
-exercise: Leap
 plan: 9
 tests: |-
   for Date, DateTime {

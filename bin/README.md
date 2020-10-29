@@ -16,7 +16,7 @@ test files using `templates/test.mustache`, and Example.rakumod files using
 
 Example of a yaml file:
 ```yaml
-exercise: MyExercise
+package: MyPackage
 plan: 2
 modules:
   - use: Data::Dump

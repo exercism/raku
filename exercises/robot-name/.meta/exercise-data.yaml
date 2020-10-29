@@ -1,4 +1,4 @@
-exercise: Robot
+package: Robot
 methods: name reset-name
 plan: 8
 tests: |-

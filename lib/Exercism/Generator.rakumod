@@ -56,6 +56,11 @@ submethod build-cases ( %obj, Str $description = '' ) {
   return;
 }
 
+#| The package name
+method package ( --> Str:D ) {
+  %.data<package> // $.exercise.split('-').map(&tclc).join;
+}
+
 #| A rendered test file
 method test ( --> Str:D ) {
   self!render;
@@ -75,7 +80,8 @@ method examples ( --> Hash() ) {
 
 method !render ( Str $module_file? --> Str:D ) {
   my %data = %.data;
-  %data<cases> = $.json-tests unless %data<cases>:exists;
+  %data<cases>   //= $.json-tests;
+  %data<package> //= $.package;
 
   Template::Mustache.render(
     $base-dir.add(

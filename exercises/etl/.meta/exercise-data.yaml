@@ -1,4 +1,4 @@
-exercise: ETL
+package: ETL
 plan: 4
 tests: |-
   =head2 Notes

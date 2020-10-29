@@ -74,13 +74,13 @@ sub generate ($exercise) {
     $testfile.spurt(.test);
     $testfile.chmod(0o755);
 
-    $exercise-dir.add("{.data<exercise>}.rakumod").spurt(.stub);
+    $exercise-dir.add("{.package}.rakumod").spurt(.stub);
 
     $exercise-dir.add('.meta/solutions').mkdir;
     for .examples.pairs -> $example {
       if $example.key ~~ 'base' {
         $exercise-dir
-          .add(".meta/solutions/{.data<exercise>}.rakumod")
+          .add(".meta/solutions/{.package}.rakumod")
           .spurt($example.value);
         # This emulates Raku's symlink, which does not yet support non-absolute paths
         try nqp::symlink(
@@ -93,7 +93,7 @@ sub generate ($exercise) {
           .add(".meta/solutions/{$example.key}")
           .mkdir;
         $exercise-dir
-          .add(".meta/solutions/{$example.key}/{.data<exercise>}.rakumod")
+          .add(".meta/solutions/{$example.key}/{.package}.rakumod")
           .spurt($example.value);
         # This emulates Raku's symlink, which does not yet support non-absolute paths
         try nqp::symlink(
