@@ -1,7 +1,7 @@
 #!/usr/bin/env raku
 use YAMLish;
 use nqp;
-use lib ( my $base-dir = $?FILE.IO.resolve.parent.parent ).add('lib');
+use lib ( my $base-dir = $?FILE.IO.resolve.parent(2) ).add('lib');
 use Exercism::Generator;
 
 my %*SUB-MAIN-OPTS = :named-anywhere;
