@@ -1,4 +1,3 @@
-exercise: SpaceAge
 plan: 8
 tests: |-
   for $c-data<cases>.values -> %case {

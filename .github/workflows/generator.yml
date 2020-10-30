@@ -1,0 +1,30 @@
+name: Generator
+on:
+  - push
+  - pull_request
+
+jobs:
+  generator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - run: sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 379CE192D401AB61
+      - run: echo "deb https://dl.bintray.com/nxadm/rakudo-pkg-debs `lsb_release -cs` main"
+            | sudo tee -a /etc/apt/sources.list.d/rakudo-pkg.list
+      - run: sudo apt-get update && sudo apt-get install rakudo-pkg
+      - run: echo '~/.raku/bin:/opt/rakudo-pkg/bin:/opt/rakudo-pkg/share/perl6/site/bin' >> $GITHUB_PATH
+      - run: /opt/rakudo-pkg/bin/install-zef-as-user
+
+      - run: zef install --/test App::Prove6
+      - run: zef install --/test --deps-only .
+
+      - name: Test generator
+        run: prove6 t/generator.rakutest
+
+      - name: Generated files match generator output
+        run: prove6 t/generated-tests.rakutest
+        continue-on-error: true

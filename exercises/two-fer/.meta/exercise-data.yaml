@@ -1,4 +1,3 @@
-exercise: TwoFer
 plan: 3
 tests: |-
   # Go through the cases and check that &two-fer gives us the correct response.

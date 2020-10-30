@@ -1,0 +1,57 @@
+use Test;
+use lib ( my $base-dir = $?FILE.IO.resolve.parent(2) ).add('lib');
+use Exercism::Generator;
+
+subtest '0 case UUIDs' => {
+  plan 4;
+
+  given Exercism::Generator.new(
+    :exercise<hello-world>,
+    :case-uuids(),
+  ) {
+    is .package, 'HelloWorld', 'Default package name is UpperCamelCase';
+    ok .case-uuids ~~ ∅, 'Case UUIDs is empty set';
+    ok .cases      ~~ [], 'No cases';
+    is .json-tests, '', 'Empty JSON';
+  }
+}
+
+subtest '1 case UUID' => {
+  plan 4;
+
+  given Exercism::Generator.new(
+    :exercise<hello-world>,
+    :case-uuids(<af9ffe10-dc13-42d8-a742-e7bdafac449d>),
+    :data(:package<TEST>),
+  ) {
+    is .package, 'TEST', 'Custom package name as specified';
+
+    ok .case-uuids ~~ <af9ffe10-dc13-42d8-a742-e7bdafac449d>;
+
+    if $base-dir.add('problem-specifications') ~~ :d {
+      is-deeply .cases.Array, [%(
+        :description('Say Hi!'),
+        :property<hello>,
+        :input(Hash.new),
+        :expected('Hello, World!'),
+      ).item], 'Case taken from UUID';
+
+      is .json-tests, q:to/JSON/.trim, 'Cases converted to JSON array';
+        [
+          {
+            "description": "Say Hi!",
+            "expected": "Hello, World!",
+            "input": {
+            },
+            "property": "hello"
+          }
+        ]
+        JSON
+    }
+    else {
+      skip 'problem-specifications required', 2;
+    }
+  }
+}
+
+done-testing;

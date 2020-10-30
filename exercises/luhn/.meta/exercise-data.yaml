@@ -1,4 +1,3 @@
-exercise: Luhn
 plan: 17
 tests: |-
   for $c-data<cases>.values -> %case {

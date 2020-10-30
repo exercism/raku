@@ -1,7 +1,7 @@
 #!/usr/bin/env raku
 use YAMLish;
 use nqp;
-use lib (my $base-dir = $?FILE.IO.resolve.parent.parent).add('lib');
+use lib ( my $base-dir = $?FILE.IO.resolve.parent(2) ).add('lib');
 use Exercism::Generator;
 
 my %*SUB-MAIN-OPTS = :named-anywhere;
@@ -38,44 +38,68 @@ multi MAIN {
   } else {
     say "exercise-data.yaml not found in .meta of current directory; exiting.\n";
     say $*USAGE;
-    exit;
+    exit 1;
   }
 }
 
 sub generate ($exercise) {
-  state (@dir-not-found, @yaml-not-found);
+  state ( @dir-not-found, @yaml-not-found );
   END {
-    if @dir-not-found  {note 'exercise directory does not exist for: '  ~ join ' ', @dir-not-found}
-    if @yaml-not-found {note '.meta/exercise-data.yaml not found for: ' ~ join ' ', @yaml-not-found}
+    if @dir-not-found {
+      note 'exercise directory does not exist for: '  ~ join ' ', @dir-not-found
+    }
+    if @yaml-not-found {
+      note '.meta/exercise-data.yaml not found for: ' ~ join ' ', @yaml-not-found
+    }
   }
-  if (my $exercise-dir = $base-dir.add("exercises/$exercise")) !~~ :d {
+  if (
+    my $exercise-dir = $base-dir.add("exercises/$exercise")
+  ) !~~ :d {
     push @dir-not-found, $exercise;
     return;
   }
-  if (my $yaml-file = $exercise-dir.add('.meta/exercise-data.yaml')) !~~ :f {
+  if (
+    my $yaml-file = $exercise-dir.add('.meta/exercise-data.yaml')
+  ) !~~ :f {
     push @yaml-not-found, $exercise;
     return;
   }
 
   print "Generating $exercise... ";
 
-  given Exercism::Generator.new: :$exercise, data => load-yaml $yaml-file.absolute.IO.slurp {
+  given Exercism::Generator.new(
+    :$exercise, data => load-yaml $yaml-file.absolute.IO.slurp
+  ) {
     my $testfile = $exercise-dir.add("$exercise.rakutest");
-    $testfile.spurt: .test;
-    $testfile.chmod: 0o755;
+    $testfile.spurt(.test);
+    $testfile.chmod(0o755);
 
-    $exercise-dir.add("{.data<exercise>}.rakumod").spurt: .stub;
+    $exercise-dir.add("{.package}.rakumod").spurt(.stub);
 
     $exercise-dir.add('.meta/solutions').mkdir;
     for .examples.pairs -> $example {
       if $example.key ~~ 'base' {
-        $exercise-dir.add(".meta/solutions/{.data<exercise>}.rakumod").spurt: $example.value;
-        try nqp::symlink("../../$_", ~$exercise-dir.add(".meta/solutions/$_")) given $testfile.basename;
+        $exercise-dir
+          .add(".meta/solutions/{.package}.rakumod")
+          .spurt($example.value);
+        # This emulates Raku's symlink, which does not yet support non-absolute paths
+        try nqp::symlink(
+          "../../$_",
+          nqp::unbox_s( $exercise-dir.add(".meta/solutions/$_").absolute )
+        ) given $testfile.basename;
       }
       else {
-        $exercise-dir.add(".meta/solutions/{$example.key}").mkdir;
-        $exercise-dir.add(".meta/solutions/{$example.key}/{.data<exercise>}.rakumod").spurt: $example.value;
-        try nqp::symlink("../../../$_", ~$exercise-dir.add(".meta/solutions/{$example.key}/$_")) given $testfile.basename;
+        $exercise-dir
+          .add(".meta/solutions/{$example.key}")
+          .mkdir;
+        $exercise-dir
+          .add(".meta/solutions/{$example.key}/{.package}.rakumod")
+          .spurt($example.value);
+        # This emulates Raku's symlink, which does not yet support non-absolute paths
+        try nqp::symlink(
+          "../../../$_",
+          nqp::unbox_s( $exercise-dir.add(".meta/solutions/{$example.key}/$_").absolute )
+        ) given $testfile.basename;
       }
     }
   }
