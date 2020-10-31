@@ -72,7 +72,7 @@ for @test-cases -> %case {
     "property": "leapYear"
   },
   {
-    "description": "year divisible by 400 in leap year",
+    "description": "year divisible by 400 is leap year",
     "expected": true,
     "input": {
       "year": 2000

@@ -31,7 +31,7 @@ for @test-cases -> %case {
     "property": "roster"
   },
   {
-    "description": "Adding more student adds them to the sorted roster",
+    "description": "Adding more students adds them to the sorted roster",
     "expected": [
       "Blair",
       "James",
