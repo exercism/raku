@@ -8,7 +8,7 @@ tests: |-
   Defined C<Str>s for the values, and defined C<Int>s for the keys.
   =end para
 
-  for $c-data<cases>»<cases>»<>.flat -> %case {
+  for @test-cases -> %case {
     my Array[Str:D] %input{Int:D} =
       %case<input><legacy>.pairs.map: {
         .key.Int => Array[Str:D].new( |.value )
