@@ -1,6 +1,6 @@
 plan: 14
 tests: |-
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     cmp-ok match-anagrams( |%case<input>:p ),
       '~~', %case<expected>.Set, %case<description>;
   }
