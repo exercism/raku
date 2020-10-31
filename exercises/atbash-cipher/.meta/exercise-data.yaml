@@ -1,6 +1,6 @@
 plan: 14
 tests: |-
-  for $c-data<cases>»<cases>»<>.flat -> %case {
+  for @test-cases -> %case {
     is &::(%case<property>)(%case<input><phrase>),
       |%case<expected description>;
   }
