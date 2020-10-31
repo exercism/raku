@@ -1,7 +1,7 @@
 package: Scrabble
 plan: 11
 tests: |-
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     is score(%case<input><word>), |%case<expected description>;
   }
 
