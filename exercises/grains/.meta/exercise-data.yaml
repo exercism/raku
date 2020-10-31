@@ -1,33 +1,27 @@
-plan: 2
+plan: 11
 tests: |-
-  for $c-data<cases>.values {
-    if .<cases> {
-      subtest .<description> => {
-        plan 10;
-        for .<cases>.values -> %case {
-          given %case<expected> {
-            when .<error>.so {
-              throws-like
-                { grains-on-square %case<input><square> },
-                Exception,
-                message => /
-                  $( %case<expected><error> )
-                  || 'Constraint type check failed in binding to parameter'
-                /,
-                %case<description>;
-            }
-
-            default {
-              is grains-on-square(%case<input><square>),
-                |%case<expected description>;
-            }
-          }
+  for @test-cases -> %case {
+    given %case<property> {
+      when 'square' {
+        if %case<expected><error>:exists {
+          throws-like
+            { grains-on-square %case<input><square> },
+            Exception,
+            message => /
+              $( %case<expected><error> )
+              || 'Constraint type check failed in binding to parameter'
+            /,
+            %case<description>;
+        }
+        else {
+          is grains-on-square(%case<input><square>),
+            |%case<expected description>;
         }
       }
-    }
 
-    elsif .<property> eq 'total' {
-      is total-grains, |.<expected description>;
+      when 'total' {
+        is total-grains, |%case<expected description>;
+      }
     }
   }
 
