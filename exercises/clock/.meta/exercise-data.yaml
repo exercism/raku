@@ -1,7 +1,7 @@
 methods: time add-minutes subtract-minutes
 plan: 55
 tests: |-
-  for $c-data<cases>»<cases>»<>.flat -> %case {
+  for @test-cases -> %case {
     given %case<property> {
 
       when 'create' {
