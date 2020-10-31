@@ -1,6 +1,8 @@
 plan: 6
 tests: |-
-  is-deeply flatten-array(.<input><array>), |.<expected description> for @($c-data<cases>);
+  for @test-cases -> %case {
+    is-deeply flatten-array(%case<input><array>), |%case<expected description>;
+  }
 
 unit: module
 example: |-
