@@ -1,6 +1,6 @@
 plan: 23
 tests: |-
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     given %case<expected> {
       when .<error>.so {
         throws-like
