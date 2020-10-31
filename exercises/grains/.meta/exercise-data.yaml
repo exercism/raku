@@ -1,4 +1,3 @@
-exercise: Grains
 plan: 11
 tests: |-
   for @test-cases -> %case {
