@@ -39,7 +39,8 @@ submethod build-cases ( %obj, Str $description = '' ) {
   my Str $new-desc = '';
   if %obj<cases>.defined {
     if %obj<description> {
-      $new-desc = $description ~ %obj<description> ~ ': ';
+      $new-desc = $description ~ %obj<description>
+        ~ ( %obj<description> ~~ /':' $/ ?? ' ' !! ': ' );
     }
 
     return %obj<cases>.map({
