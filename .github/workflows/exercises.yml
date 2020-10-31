@@ -37,7 +37,6 @@ jobs:
 
       - name: Rakudo Star tests with docker run
         if: runner.os == 'Linux'
-        run: docker run
-             --volume $PWD:/exercism
-             rakudo-star /bin/bash -c 'prove6 --jobs 2
-               /exercism/exercises/*/.meta/solutions/'
+        uses: docker://rakudo-star:latest
+        with:
+          args: /bin/bash -c 'prove6 --jobs 2 /github/workspace/exercises/*/.meta/solutions/'
