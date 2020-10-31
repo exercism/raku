@@ -1,4 +1,3 @@
-exercise: WordCount
 plan: 13
 tests: |-
   for $c-data<cases>.values -> %case {

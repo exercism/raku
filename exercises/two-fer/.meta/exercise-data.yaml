@@ -1,8 +1,7 @@
-exercise: TwoFer
 plan: 3
 tests: |-
   # Go through the cases and check that &two-fer gives us the correct response.
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     is do {
       with %case<input><name> {
         .&two-fer;

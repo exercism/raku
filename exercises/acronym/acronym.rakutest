@@ -5,94 +5,85 @@ use lib $?FILE.IO.dirname;
 use Acronym;
 plan 9;
 
-my $c-data = from-json $=pod.pop.contents;
-for $c-data<cases>»<cases>»<>.flat -> %case {
+my @test-cases = from-json($=pod.pop.contents).List;
+for @test-cases -> %case {
   is abbreviate(%case<input><phrase>), |%case<expected description>;
 }
 
-=head2 Canonical Data
+=head2 Test Cases
 =begin code
-{
-  "exercise": "acronym",
-  "version": "1.7.0",
-  "cases": [
-    {
-      "description": "Abbreviate a phrase",
-      "cases": [
-        {
-          "description": "basic",
-          "property": "abbreviate",
-          "input": {
-            "phrase": "Portable Network Graphics"
-          },
-          "expected": "PNG"
-        },
-        {
-          "description": "lowercase words",
-          "property": "abbreviate",
-          "input": {
-            "phrase": "Ruby on Rails"
-          },
-          "expected": "ROR"
-        },
-        {
-          "description": "punctuation",
-          "property": "abbreviate",
-          "input": {
-            "phrase": "First In, First Out"
-          },
-          "expected": "FIFO"
-        },
-        {
-          "description": "all caps word",
-          "property": "abbreviate",
-          "input": {
-            "phrase": "GNU Image Manipulation Program"
-          },
-          "expected": "GIMP"
-        },
-        {
-          "description": "punctuation without whitespace",
-          "property": "abbreviate",
-          "input": {
-            "phrase": "Complementary metal-oxide semiconductor"
-          },
-          "expected": "CMOS"
-        },
-        {
-          "description": "very long abbreviation",
-          "property": "abbreviate",
-          "input": {
-            "phrase": "Rolling On The Floor Laughing So Hard That My Dogs Came Over And Licked Me"
-          },
-          "expected": "ROTFLSHTMDCOALM"
-        },
-        {
-          "description": "consecutive delimiters",
-          "property": "abbreviate",
-          "input": {
-            "phrase": "Something - I made up from thin air"
-          },
-          "expected": "SIMUFTA"
-        },
-        {
-          "description": "apostrophes",
-          "property": "abbreviate",
-          "input": {
-            "phrase": "Halley's Comet"
-          },
-          "expected": "HC"
-        },
-        {
-          "description": "underscore emphasis",
-          "property": "abbreviate",
-          "input": {
-            "phrase": "The Road _Not_ Taken"
-          },
-          "expected": "TRNT"
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "description": "Abbreviate a phrase: basic",
+    "expected": "PNG",
+    "input": {
+      "phrase": "Portable Network Graphics"
+    },
+    "property": "abbreviate"
+  },
+  {
+    "description": "Abbreviate a phrase: lowercase words",
+    "expected": "ROR",
+    "input": {
+      "phrase": "Ruby on Rails"
+    },
+    "property": "abbreviate"
+  },
+  {
+    "description": "Abbreviate a phrase: punctuation",
+    "expected": "FIFO",
+    "input": {
+      "phrase": "First In, First Out"
+    },
+    "property": "abbreviate"
+  },
+  {
+    "description": "Abbreviate a phrase: all caps word",
+    "expected": "GIMP",
+    "input": {
+      "phrase": "GNU Image Manipulation Program"
+    },
+    "property": "abbreviate"
+  },
+  {
+    "description": "Abbreviate a phrase: punctuation without whitespace",
+    "expected": "CMOS",
+    "input": {
+      "phrase": "Complementary metal-oxide semiconductor"
+    },
+    "property": "abbreviate"
+  },
+  {
+    "description": "Abbreviate a phrase: very long abbreviation",
+    "expected": "ROTFLSHTMDCOALM",
+    "input": {
+      "phrase": "Rolling On The Floor Laughing So Hard That My Dogs Came Over And Licked Me"
+    },
+    "property": "abbreviate"
+  },
+  {
+    "description": "Abbreviate a phrase: consecutive delimiters",
+    "expected": "SIMUFTA",
+    "input": {
+      "phrase": "Something - I made up from thin air"
+    },
+    "property": "abbreviate"
+  },
+  {
+    "description": "Abbreviate a phrase: apostrophes",
+    "expected": "HC",
+    "input": {
+      "phrase": "Halley's Comet"
+    },
+    "property": "abbreviate"
+  },
+  {
+    "description": "Abbreviate a phrase: underscore emphasis",
+    "expected": "TRNT",
+    "input": {
+      "phrase": "The Road _Not_ Taken"
+    },
+    "property": "abbreviate"
+  }
+]
 =end code

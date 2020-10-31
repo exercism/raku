@@ -1,4 +1,3 @@
-exercise: Luhn
 plan: 18
 tests: |-
   for @test-cases -> %case {

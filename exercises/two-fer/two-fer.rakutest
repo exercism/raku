@@ -5,9 +5,9 @@ use lib $?FILE.IO.dirname; #`[Look for the module inside the same directory as t
 use TwoFer;
 plan 3; #`[This is how many tests we expect to run.]
 
-my $c-data = from-json $=pod.pop.contents;
+my @test-cases = from-json($=pod.pop.contents).List;
 # Go through the cases and check that &two-fer gives us the correct response.
-for $c-data<cases>.values -> %case {
+for @test-cases -> %case {
   is do {
     with %case<input><name> {
       .&two-fer;
@@ -18,36 +18,32 @@ for $c-data<cases>.values -> %case {
   }, |%case<expected description>;
 }
 
-=head2 Canonical Data
+=head2 Test Cases
 =begin code
-{
-  "exercise": "two-fer",
-  "version": "1.2.0",
-  "cases": [
-    {
-      "description": "no name given",
-      "property": "twoFer",
-      "input": {
-        "name": null
-      },
-      "expected": "One for you, one for me."
+[
+  {
+    "description": "no name given",
+    "expected": "One for you, one for me.",
+    "input": {
+      "name": null
     },
-    {
-      "description": "a name given",
-      "property": "twoFer",
-      "input": {
-        "name": "Alice"
-      },
-      "expected": "One for Alice, one for me."
+    "property": "twoFer"
+  },
+  {
+    "description": "a name given",
+    "expected": "One for Alice, one for me.",
+    "input": {
+      "name": "Alice"
     },
-    {
-      "description": "another name given",
-      "property": "twoFer",
-      "input": {
-        "name": "Bob"
-      },
-      "expected": "One for Bob, one for me."
-    }
-  ]
-}
+    "property": "twoFer"
+  },
+  {
+    "description": "another name given",
+    "expected": "One for Bob, one for me.",
+    "input": {
+      "name": "Bob"
+    },
+    "property": "twoFer"
+  }
+]
 =end code

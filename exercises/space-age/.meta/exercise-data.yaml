@@ -1,7 +1,6 @@
-exercise: SpaceAge
 plan: 8
 tests: |-
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     is ::(%case<input><planet>).age-on(%case<input><seconds>),
       |%case<expected description>;
   }

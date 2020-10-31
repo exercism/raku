@@ -1,7 +1,6 @@
-exercise: Allergies
 plan: 49
 tests: |-
-  for $c-data<cases>»<cases>»<>.flat -> %case {
+  for @test-cases -> %case {
     given %case<property> {
       when 'allergicTo' {
         subtest %case<description>, {

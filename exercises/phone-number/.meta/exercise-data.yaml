@@ -1,7 +1,7 @@
-exercise: Phone
+package: Phone
 plan: 18
 tests: |-
-  for $c-data<cases>»<cases>»<>.flat -> %case {
+  for @test-cases -> %case {
     given %case<expected> {
       when Str {
         is clean-number(%case<input><phrase>),

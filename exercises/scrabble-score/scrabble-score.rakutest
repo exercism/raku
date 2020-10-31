@@ -5,105 +5,101 @@ use lib $?FILE.IO.dirname;
 use Scrabble;
 plan 11;
 
-my $c-data = from-json $=pod.pop.contents;
-for $c-data<cases>.values -> %case {
+my @test-cases = from-json($=pod.pop.contents).List;
+for @test-cases -> %case {
   is score(%case<input><word>), |%case<expected description>;
 }
 
-=head2 Canonical Data
+=head2 Test Cases
 =begin code
-{
-  "exercise": "scrabble-score",
-  "version": "1.1.0",
-  "cases": [
-    {
-      "description": "lowercase letter",
-      "property": "score",
-      "input": {
-        "word": "a"
-      },
-      "expected": 1
+[
+  {
+    "description": "lowercase letter",
+    "expected": 1,
+    "input": {
+      "word": "a"
     },
-    {
-      "description": "uppercase letter",
-      "property": "score",
-      "input": {
-        "word": "A"
-      },
-      "expected": 1
+    "property": "score"
+  },
+  {
+    "description": "uppercase letter",
+    "expected": 1,
+    "input": {
+      "word": "A"
     },
-    {
-      "description": "valuable letter",
-      "property": "score",
-      "input": {
-        "word": "f"
-      },
-      "expected": 4
+    "property": "score"
+  },
+  {
+    "description": "valuable letter",
+    "expected": 4,
+    "input": {
+      "word": "f"
     },
-    {
-      "description": "short word",
-      "property": "score",
-      "input": {
-        "word": "at"
-      },
-      "expected": 2
+    "property": "score"
+  },
+  {
+    "description": "short word",
+    "expected": 2,
+    "input": {
+      "word": "at"
     },
-    {
-      "description": "short, valuable word",
-      "property": "score",
-      "input": {
-        "word": "zoo"
-      },
-      "expected": 12
+    "property": "score"
+  },
+  {
+    "description": "short, valuable word",
+    "expected": 12,
+    "input": {
+      "word": "zoo"
     },
-    {
-      "description": "medium word",
-      "property": "score",
-      "input": {
-        "word": "street"
-      },
-      "expected": 6
+    "property": "score"
+  },
+  {
+    "description": "medium word",
+    "expected": 6,
+    "input": {
+      "word": "street"
     },
-    {
-      "description": "medium, valuable word",
-      "property": "score",
-      "input": {
-        "word": "quirky"
-      },
-      "expected": 22
+    "property": "score"
+  },
+  {
+    "description": "medium, valuable word",
+    "expected": 22,
+    "input": {
+      "word": "quirky"
     },
-    {
-      "description": "long, mixed-case word",
-      "property": "score",
-      "input": {
-        "word": "OxyphenButazone"
-      },
-      "expected": 41
+    "property": "score"
+  },
+  {
+    "description": "long, mixed-case word",
+    "expected": 41,
+    "input": {
+      "word": "OxyphenButazone"
     },
-    {
-      "description": "english-like word",
-      "property": "score",
-      "input": {
-        "word": "pinata"
-      },
-      "expected": 8
+    "property": "score"
+  },
+  {
+    "description": "english-like word",
+    "expected": 8,
+    "input": {
+      "word": "pinata"
     },
-    {
-      "description": "empty input",
-      "property": "score",
-      "input": {
-        "word": ""
-      },
-      "expected": 0
+    "property": "score"
+  },
+  {
+    "description": "empty input",
+    "expected": 0,
+    "input": {
+      "word": ""
     },
-    {
-      "description": "entire alphabet available",
-      "property": "score",
-      "input": {
-        "word": "abcdefghijklmnopqrstuvwxyz"
-      },
-      "expected": 87
-    }
-  ]
-}
+    "property": "score"
+  },
+  {
+    "description": "entire alphabet available",
+    "expected": 87,
+    "input": {
+      "word": "abcdefghijklmnopqrstuvwxyz"
+    },
+    "property": "score"
+  }
+]
 =end code

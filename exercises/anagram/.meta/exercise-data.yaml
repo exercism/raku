@@ -1,4 +1,3 @@
-exercise: Anagram
 plan: 14
 tests: |-
   for $c-data<cases>.values -> %case {

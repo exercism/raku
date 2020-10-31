@@ -1,4 +1,3 @@
-exercise: Wordy
 plan: 23
 tests: |-
   for $c-data<cases>.values -> %case {

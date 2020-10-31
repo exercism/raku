@@ -1,4 +1,3 @@
-exercise: LinkedList
 plan: 6
 modules:
   - use: JSON::Fast
