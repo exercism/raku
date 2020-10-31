@@ -5,8 +5,8 @@ use lib $?FILE.IO.dirname;
 use AllYourBase;
 plan 21;
 
-my $c-data = from-json $=pod.pop.contents;
-for $c-data<cases>.values -> %case {
+my @test-cases = from-json($=pod.pop.contents).List;
+for @test-cases -> %case {
   my &call-convert-base := -> {
     convert-base(
       bases  => %(<from to> Z=> %case<input><inputBase outputBase>),
@@ -32,233 +32,348 @@ for $c-data<cases>.values -> %case {
   }
 }
 
-=head2 Canonical Data
+=head2 Test Cases
 =begin code
-{
-  "exercise": "all-your-base",
-  "version": "2.3.0",
-  "comments": [
-    "This canonical data makes the following choices:",
-    "1. Zero is always represented in outputs as [0] instead of [].",
-    "2. In no other instances are leading zeroes present in any outputs.",
-    "3. Leading zeroes are accepted in inputs.",
-    "4. An empty sequence of input digits is considered zero, rather than an error.",
-    "",
-    "Tracks that wish to make different decisions for these choices may translate appropriately.",
-    "",
-    "All your numeric-base are belong to [2..]. :)"
-  ],
-  "cases": [
-    {
-      "description": "single bit one to decimal",
-      "property": "rebase",
-      "input": {
-        "inputBase": 2,
-        "digits": [1],
-        "outputBase": 10
-      },
-      "expected": [1]
+[
+  {
+    "description": "single bit one to decimal",
+    "expected": [
+      1
+    ],
+    "input": {
+      "digits": [
+        1
+      ],
+      "inputBase": 2,
+      "outputBase": 10
     },
-    {
-      "description": "binary to single decimal",
-      "property": "rebase",
-      "input": {
-        "inputBase": 2,
-        "digits": [1, 0, 1],
-        "outputBase": 10
-      },
-      "expected": [5]
+    "property": "rebase"
+  },
+  {
+    "description": "binary to single decimal",
+    "expected": [
+      5
+    ],
+    "input": {
+      "digits": [
+        1,
+        0,
+        1
+      ],
+      "inputBase": 2,
+      "outputBase": 10
     },
-    {
-      "description": "single decimal to binary",
-      "property": "rebase",
-      "input": {
-        "inputBase": 10,
-        "digits": [5],
-        "outputBase": 2
-      },
-      "expected": [1, 0, 1]
+    "property": "rebase"
+  },
+  {
+    "description": "single decimal to binary",
+    "expected": [
+      1,
+      0,
+      1
+    ],
+    "input": {
+      "digits": [
+        5
+      ],
+      "inputBase": 10,
+      "outputBase": 2
     },
-    {
-      "description": "binary to multiple decimal",
-      "property": "rebase",
-      "input": {
-        "inputBase": 2,
-        "digits": [1, 0, 1, 0, 1, 0],
-        "outputBase": 10
-      },
-      "expected": [4, 2]
+    "property": "rebase"
+  },
+  {
+    "description": "binary to multiple decimal",
+    "expected": [
+      4,
+      2
+    ],
+    "input": {
+      "digits": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "inputBase": 2,
+      "outputBase": 10
     },
-    {
-      "description": "decimal to binary",
-      "property": "rebase",
-      "input": {
-        "inputBase": 10,
-        "digits": [4, 2],
-        "outputBase": 2
-      },
-      "expected": [1, 0, 1, 0, 1, 0]
+    "property": "rebase"
+  },
+  {
+    "description": "decimal to binary",
+    "expected": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      0
+    ],
+    "input": {
+      "digits": [
+        4,
+        2
+      ],
+      "inputBase": 10,
+      "outputBase": 2
     },
-    {
-      "description": "trinary to hexadecimal",
-      "property": "rebase",
-      "input": {
-        "inputBase": 3,
-        "digits": [1, 1, 2, 0],
-        "outputBase": 16
-      },
-      "expected": [2, 10]
+    "property": "rebase"
+  },
+  {
+    "description": "trinary to hexadecimal",
+    "expected": [
+      2,
+      10
+    ],
+    "input": {
+      "digits": [
+        1,
+        1,
+        2,
+        0
+      ],
+      "inputBase": 3,
+      "outputBase": 16
     },
-    {
-      "description": "hexadecimal to trinary",
-      "property": "rebase",
-      "input": {
-        "inputBase": 16,
-        "digits": [2, 10],
-        "outputBase": 3
-      },
-      "expected": [1, 1, 2, 0]
+    "property": "rebase"
+  },
+  {
+    "description": "hexadecimal to trinary",
+    "expected": [
+      1,
+      1,
+      2,
+      0
+    ],
+    "input": {
+      "digits": [
+        2,
+        10
+      ],
+      "inputBase": 16,
+      "outputBase": 3
     },
-    {
-      "description": "15-bit integer",
-      "property": "rebase",
-      "input": {
-        "inputBase": 97,
-        "digits": [3, 46, 60],
-        "outputBase": 73
-      },
-      "expected": [6, 10, 45]
+    "property": "rebase"
+  },
+  {
+    "description": "15-bit integer",
+    "expected": [
+      6,
+      10,
+      45
+    ],
+    "input": {
+      "digits": [
+        3,
+        46,
+        60
+      ],
+      "inputBase": 97,
+      "outputBase": 73
     },
-    {
-      "description": "empty list",
-      "property": "rebase",
-      "input": {
-        "inputBase": 2,
-        "digits": [],
-        "outputBase": 10
-      },
-      "expected": [0]
+    "property": "rebase"
+  },
+  {
+    "description": "empty list",
+    "expected": [
+      0
+    ],
+    "input": {
+      "digits": [
+      ],
+      "inputBase": 2,
+      "outputBase": 10
     },
-    {
-      "description": "single zero",
-      "property": "rebase",
-      "input": {
-        "inputBase": 10,
-        "digits": [0],
-        "outputBase": 2
-      },
-      "expected": [0]
+    "property": "rebase"
+  },
+  {
+    "description": "single zero",
+    "expected": [
+      0
+    ],
+    "input": {
+      "digits": [
+        0
+      ],
+      "inputBase": 10,
+      "outputBase": 2
     },
-    {
-      "description": "multiple zeros",
-      "property": "rebase",
-      "input": {
-        "inputBase": 10,
-        "digits": [0, 0, 0],
-        "outputBase": 2
-      },
-      "expected": [0]
+    "property": "rebase"
+  },
+  {
+    "description": "multiple zeros",
+    "expected": [
+      0
+    ],
+    "input": {
+      "digits": [
+        0,
+        0,
+        0
+      ],
+      "inputBase": 10,
+      "outputBase": 2
     },
-    {
-      "description": "leading zeros",
-      "property": "rebase",
-      "input": {
-        "inputBase": 7,
-        "digits": [0, 6, 0],
-        "outputBase": 10
-      },
-      "expected": [4, 2]
+    "property": "rebase"
+  },
+  {
+    "description": "leading zeros",
+    "expected": [
+      4,
+      2
+    ],
+    "input": {
+      "digits": [
+        0,
+        6,
+        0
+      ],
+      "inputBase": 7,
+      "outputBase": 10
     },
-    {
-      "description": "input base is one",
-      "property": "rebase",
-      "input": {
-        "inputBase": 1,
-        "digits": [0],
-        "outputBase": 10
-      },
-      "expected": {"error": "input base must be >= 2"}
+    "property": "rebase"
+  },
+  {
+    "description": "input base is one",
+    "expected": {
+      "error": "input base must be >= 2"
     },
-    {
-      "description": "input base is zero",
-      "property": "rebase",
-      "input": {
-        "inputBase": 0,
-        "digits": [],
-        "outputBase": 10
-      },
-      "expected": {"error": "input base must be >= 2"}
+    "input": {
+      "digits": [
+        0
+      ],
+      "inputBase": 1,
+      "outputBase": 10
     },
-    {
-      "description": "input base is negative",
-      "property": "rebase",
-      "input": {
-        "inputBase": -2,
-        "digits": [1],
-        "outputBase": 10
-      },
-      "expected": {"error": "input base must be >= 2"}
+    "property": "rebase"
+  },
+  {
+    "description": "input base is zero",
+    "expected": {
+      "error": "input base must be >= 2"
     },
-    {
-      "description": "negative digit",
-      "property": "rebase",
-      "input": {
-        "inputBase": 2,
-        "digits": [1, -1, 1, 0, 1, 0],
-        "outputBase": 10
-      },
-      "expected": {"error": "all digits must satisfy 0 <= d < input base"}
+    "input": {
+      "digits": [
+      ],
+      "inputBase": 0,
+      "outputBase": 10
     },
-    {
-      "description": "invalid positive digit",
-      "property": "rebase",
-      "input": {
-        "inputBase": 2,
-        "digits": [1, 2, 1, 0, 1, 0],
-        "outputBase": 10
-      },
-      "expected": {"error": "all digits must satisfy 0 <= d < input base"}
+    "property": "rebase"
+  },
+  {
+    "description": "input base is negative",
+    "expected": {
+      "error": "input base must be >= 2"
     },
-    {
-      "description": "output base is one",
-      "property": "rebase",
-      "input": {
-        "inputBase": 2,
-        "digits": [1, 0, 1, 0, 1, 0],
-        "outputBase": 1
-      },
-      "expected": {"error": "output base must be >= 2"}
+    "input": {
+      "digits": [
+        1
+      ],
+      "inputBase": -2,
+      "outputBase": 10
     },
-    {
-      "description": "output base is zero",
-      "property": "rebase",
-      "input": {
-        "inputBase": 10,
-        "digits": [7],
-        "outputBase": 0
-      },
-      "expected": {"error": "output base must be >= 2"}
+    "property": "rebase"
+  },
+  {
+    "description": "negative digit",
+    "expected": {
+      "error": "all digits must satisfy 0 <= d < input base"
     },
-    {
-      "description": "output base is negative",
-      "property": "rebase",
-      "input": {
-        "inputBase": 2,
-        "digits": [1],
-        "outputBase": -7
-      },
-      "expected": {"error": "output base must be >= 2"}
+    "input": {
+      "digits": [
+        1,
+        -1,
+        1,
+        0,
+        1,
+        0
+      ],
+      "inputBase": 2,
+      "outputBase": 10
     },
-    {
-      "description": "both bases are negative",
-      "property": "rebase",
-      "input": {
-        "inputBase": -2,
-        "digits": [1],
-        "outputBase": -7
-      },
-      "expected": {"error": "input base must be >= 2"}
-    }
-  ]
-}
+    "property": "rebase"
+  },
+  {
+    "description": "invalid positive digit",
+    "expected": {
+      "error": "all digits must satisfy 0 <= d < input base"
+    },
+    "input": {
+      "digits": [
+        1,
+        2,
+        1,
+        0,
+        1,
+        0
+      ],
+      "inputBase": 2,
+      "outputBase": 10
+    },
+    "property": "rebase"
+  },
+  {
+    "description": "output base is one",
+    "expected": {
+      "error": "output base must be >= 2"
+    },
+    "input": {
+      "digits": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "inputBase": 2,
+      "outputBase": 1
+    },
+    "property": "rebase"
+  },
+  {
+    "description": "output base is zero",
+    "expected": {
+      "error": "output base must be >= 2"
+    },
+    "input": {
+      "digits": [
+        7
+      ],
+      "inputBase": 10,
+      "outputBase": 0
+    },
+    "property": "rebase"
+  },
+  {
+    "description": "output base is negative",
+    "expected": {
+      "error": "output base must be >= 2"
+    },
+    "input": {
+      "digits": [
+        1
+      ],
+      "inputBase": 2,
+      "outputBase": -7
+    },
+    "property": "rebase"
+  },
+  {
+    "description": "both bases are negative",
+    "expected": {
+      "error": "input base must be >= 2"
+    },
+    "input": {
+      "digits": [
+        1
+      ],
+      "inputBase": -2,
+      "outputBase": -7
+    },
+    "property": "rebase"
+  }
+]
 =end code

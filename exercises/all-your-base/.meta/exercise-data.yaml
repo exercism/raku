@@ -1,6 +1,6 @@
 plan: 21
 tests: |-
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     my &call-convert-base := -> {
       convert-base(
         bases  => %(<from to> Z=> %case<input><inputBase outputBase>),
