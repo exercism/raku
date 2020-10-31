@@ -1,7 +1,7 @@
 package: RNA
 plan: 6
 tests: |-
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     is to-rna(%case<input><dna>), |%case<expected description>;
   }
 
