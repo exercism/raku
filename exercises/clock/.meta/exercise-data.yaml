@@ -1,4 +1,3 @@
-exercise: Clock
 methods: time add-minutes subtract-minutes
 plan: 55
 tests: |-

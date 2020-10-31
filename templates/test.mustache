@@ -3,13 +3,13 @@ use Test;#`{{#cases}}
 use JSON::Fast;#`{{/cases}}#`{{#modules}}
 use #`{{&use}};#`{{/modules}}
 use lib $?FILE.IO.dirname;#`{{#lib_comment}} #`[#`{{&lib_comment}}]#`{{/lib_comment}}
-use #`{{&exercise}};#`{{#plan}}
+use #`{{&package}};#`{{#plan}}
 plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#`{{/plan}}
 #`{{#methods}}#`{{#methods_comment}}
 #`[#`{{&methods_comment}}]#`{{/methods_comment}}
 subtest 'Class methods', {
   for <#`{{&methods}}> -> $method {
-    can-ok #`{{&exercise}}, $method;
+    can-ok #`{{&package}}, $method;
   }
 } or bail-out 'Cannot run expected method(s).';
 #`{{/methods}}#`{{#cases}}

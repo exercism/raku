@@ -1,4 +1,3 @@
-exercise: Allergies
 plan: 49
 tests: |-
   for @test-cases -> %case {

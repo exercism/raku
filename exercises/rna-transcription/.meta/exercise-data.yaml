@@ -1,4 +1,4 @@
-exercise: RNA
+package: RNA
 plan: 6
 tests: |-
   for $c-data<cases>.values -> %case {

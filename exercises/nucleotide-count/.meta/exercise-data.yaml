@@ -1,7 +1,6 @@
-exercise: NucleotideCount
 plan: 5
 tests: |-
-  for $c-data<cases>»<cases>»<>.flat -> %case {
+  for @test-cases -> %case {
     given %case<expected> {
       when .<error>.so {
         throws-like
