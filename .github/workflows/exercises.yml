@@ -39,4 +39,4 @@ jobs:
         if: runner.os == 'Linux'
         uses: docker://rakudo-star:latest
         with:
-          args: /bin/bash -c 'prove6 --jobs 2 /github/workspace/exercises/*/.meta/solutions/'
+          args: /bin/bash -c "prove6 --jobs 2 /github/workspace/exercises/*/.meta/solutions/"
