@@ -1,6 +1,6 @@
 plan: 7
 tests: |-
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     cmp-ok
       roster( |%(<students grade> Z=> %case<input><students desiredGrade>:v) ),
       '~~', |%case<expected description>;
