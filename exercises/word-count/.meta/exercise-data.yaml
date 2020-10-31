@@ -1,6 +1,6 @@
 plan: 13
 tests: |-
-  for $c-data<cases>.values -> %case {
+  for @test-cases -> %case {
     cmp-ok count-words(%case<input><sentence>),
       '~~', %case<expected>.Bag, %case<description>;
   }
