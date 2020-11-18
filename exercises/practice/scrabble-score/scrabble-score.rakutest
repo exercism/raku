@@ -5,7 +5,7 @@ use lib $?FILE.IO.dirname;
 use Scrabble;
 plan 11;
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 for @test-cases -> %case {
   is score(%case<input><word>), |%case<expected description>;
 }

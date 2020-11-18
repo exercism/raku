@@ -5,7 +5,7 @@ use lib $?FILE.IO.dirname;
 use WordCount;
 plan 13;
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 for @test-cases -> %case {
   cmp-ok count-words(%case<input><sentence>),
     '~~', %case<expected>.Bag, %case<description>;

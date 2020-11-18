@@ -5,7 +5,7 @@ use lib $?FILE.IO.dirname;
 use FlattenArray;
 plan 6;
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 for @test-cases -> %case {
   is-deeply flatten-array(%case<input><array>), |%case<expected description>;
 }

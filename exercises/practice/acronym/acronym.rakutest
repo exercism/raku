@@ -5,7 +5,7 @@ use lib $?FILE.IO.dirname;
 use Acronym;
 plan 9;
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 for @test-cases -> %case {
   is abbreviate(%case<input><phrase>), |%case<expected description>;
 }

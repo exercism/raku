@@ -5,7 +5,7 @@ use lib $?FILE.IO.dirname;
 use RomanNumerals;
 plan 19;
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 for @test-cases -> %case {
   is to-roman(%case<input><number>), |%case<expected description>;
 }

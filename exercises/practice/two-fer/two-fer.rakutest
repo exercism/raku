@@ -5,7 +5,7 @@ use lib $?FILE.IO.dirname; #`[Look for the module inside the same directory as t
 use TwoFer;
 plan 3; #`[This is how many tests we expect to run.]
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 # Go through the cases and check that &two-fer gives us the correct response.
 for @test-cases -> %case {
   is do {

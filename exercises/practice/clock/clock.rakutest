@@ -11,7 +11,7 @@ subtest 'Class methods', {
   }
 } or bail-out 'Cannot run expected method(s).';
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 for @test-cases -> %case {
   given %case<property> {
 
