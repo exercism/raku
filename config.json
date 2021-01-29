@@ -18,6 +18,7 @@
   "solution_pattern": "\\.meta/solutions/.+\\.rakumod$",
   "test_pattern": ".*\\.rakutest$",
   "exercises": {
+    "concept": [],
     "practice": [
       {
         "slug": "hello-world",
