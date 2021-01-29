@@ -17,266 +17,268 @@
   "checklist_issue": 30,
   "solution_pattern": "\\.meta/solutions/.+\\.rakumod$",
   "test_pattern": ".*\\.rakutest$",
-  "exercises": [
-    {
-      "slug": "hello-world",
-      "name": "Hello World",
-      "uuid": "2803dd22-3a92-4fa9-ae7c-4354e80fe423",
-      "prerequisites": [],
-      "difficulty": 1,
-      "topics": []
-    },
-    {
-      "slug": "leap",
-      "name": "Leap",
-      "uuid": "ace2a251-58f5-4128-bc48-f1661463974d",
-      "prerequisites": [],
-      "difficulty": 2,
-      "topics": []
-    },
-    {
-      "slug": "bob",
-      "name": "Bob",
-      "uuid": "2bd18a17-b9f3-4146-a38a-7d940ad16801",
-      "prerequisites": [],
-      "difficulty": 3,
-      "topics": []
-    },
-    {
-      "slug": "nucleotide-count",
-      "name": "Nucleotide Count",
-      "uuid": "30732526-f790-4182-bcc7-7713b685d90a",
-      "prerequisites": [],
-      "difficulty": 3,
-      "topics": []
-    },
-    {
-      "slug": "pangram",
-      "name": "Pangram",
-      "uuid": "eddd942e-cb67-4ae2-b763-a11ee3640aee",
-      "prerequisites": [],
-      "difficulty": 2,
-      "topics": []
-    },
-    {
-      "slug": "clock",
-      "name": "Clock",
-      "uuid": "9fc9b102-185d-4f34-98d0-e3084399610a",
-      "prerequisites": [],
-      "difficulty": 3,
-      "topics": []
-    },
-    {
-      "slug": "raindrops",
-      "name": "Raindrops",
-      "uuid": "9cb1a358-93af-4242-98fe-def7538f9190",
-      "prerequisites": [],
-      "difficulty": 3,
-      "topics": []
-    },
-    {
-      "slug": "phone-number",
-      "name": "Phone Number",
-      "uuid": "e2d8034d-9e7e-4b1c-a8be-b1b333d7b3f0",
-      "prerequisites": [],
-      "difficulty": 4,
-      "topics": []
-    },
-    {
-      "slug": "allergies",
-      "name": "Allergies",
-      "uuid": "8db9c6f1-b086-4b20-a0d2-657d5fdb2c1e",
-      "prerequisites": [],
-      "difficulty": 5,
-      "topics": []
-    },
-    {
-      "slug": "all-your-base",
-      "name": "All Your Base",
-      "uuid": "fed2a81d-724d-4ccd-bf65-c6155a2dfbea",
-      "prerequisites": [],
-      "difficulty": 6,
-      "topics": [
-        "math"
-      ]
-    },
-    {
-      "slug": "robot-name",
-      "name": "Robot Name",
-      "uuid": "d5f7756e-9b82-4576-9f21-dff39293e015",
-      "prerequisites": [],
-      "difficulty": 6,
-      "topics": []
-    },
-    {
-      "slug": "two-fer",
-      "name": "Two Fer",
-      "uuid": "455dd1c8-bf10-4912-a69b-4ffada20d661",
-      "prerequisites": [],
-      "difficulty": 1,
-      "topics": []
-    },
-    {
-      "slug": "luhn",
-      "name": "Luhn",
-      "uuid": "2d0c4351-3d23-4023-942a-77fbb3a90d82",
-      "prerequisites": [],
-      "difficulty": 5,
-      "topics": []
-    },
-    {
-      "slug": "rna-transcription",
-      "name": "Rna Transcription",
-      "uuid": "378da8ed-c955-4a27-87b4-078b36479d77",
-      "prerequisites": [],
-      "difficulty": 2,
-      "topics": []
-    },
-    {
-      "slug": "hamming",
-      "name": "Hamming",
-      "uuid": "c18b5d07-ac1b-4411-9bd4-c6882614e8ee",
-      "prerequisites": [],
-      "difficulty": 3,
-      "topics": []
-    },
-    {
-      "slug": "anagram",
-      "name": "Anagram",
-      "uuid": "1e99ac1f-853d-446f-a567-dd2d70dce9c1",
-      "prerequisites": [],
-      "difficulty": 4,
-      "topics": []
-    },
-    {
-      "slug": "word-count",
-      "name": "Word Count",
-      "uuid": "23aa0f8c-e098-4d4e-8556-7c1be40726a9",
-      "prerequisites": [],
-      "difficulty": 4,
-      "topics": []
-    },
-    {
-      "slug": "etl",
-      "name": "Etl",
-      "uuid": "3bee4dc2-d747-4b4e-ac10-d7815666bbc0",
-      "prerequisites": [],
-      "difficulty": 3,
-      "topics": []
-    },
-    {
-      "slug": "meetup",
-      "name": "Meetup",
-      "uuid": "b8ae569f-d0b3-44d0-a4d6-a800b20b398a",
-      "prerequisites": [],
-      "difficulty": 5,
-      "topics": []
-    },
-    {
-      "slug": "binary",
-      "name": "Binary",
-      "uuid": "1d36c4df-a1c8-454c-b4ec-7bec3c1cbca3",
-      "prerequisites": [],
-      "difficulty": 0,
-      "topics": null,
-      "status": "deprecated"
-    },
-    {
-      "slug": "trinary",
-      "name": "Trinary",
-      "uuid": "eb5415a2-1342-4dcb-ac86-34240e5dead8",
-      "prerequisites": [],
-      "difficulty": 0,
-      "topics": null,
-      "status": "deprecated"
-    },
-    {
-      "slug": "accumulate",
-      "name": "Accumulate",
-      "uuid": "c4ecc2f5-849f-44fe-9151-a51e6188b4f0",
-      "prerequisites": [],
-      "difficulty": 2,
-      "topics": []
-    },
-    {
-      "slug": "acronym",
-      "name": "Acronym",
-      "uuid": "a5d0488e-1a95-4896-8196-541d59dbcea1",
-      "prerequisites": [],
-      "difficulty": 3,
-      "topics": []
-    },
-    {
-      "slug": "grains",
-      "name": "Grains",
-      "uuid": "85f171b0-4394-4f30-bbe5-9c2a96931630",
-      "prerequisites": [],
-      "difficulty": 3,
-      "topics": []
-    },
-    {
-      "slug": "flatten-array",
-      "name": "Flatten Array",
-      "uuid": "f5f83c92-9a37-4601-82e0-c4430855cfc3",
-      "prerequisites": [],
-      "difficulty": 4,
-      "topics": []
-    },
-    {
-      "slug": "grade-school",
-      "name": "Grade School",
-      "uuid": "cb04dab7-4907-41ff-9bb2-596e8d04e087",
-      "prerequisites": [],
-      "difficulty": 4,
-      "topics": []
-    },
-    {
-      "slug": "space-age",
-      "name": "Space Age",
-      "uuid": "5510f44a-f484-4df4-9b07-1f23f42df4d1",
-      "prerequisites": [],
-      "difficulty": 4,
-      "topics": []
-    },
-    {
-      "slug": "atbash-cipher",
-      "name": "Atbash Cipher",
-      "uuid": "be32cfd0-1653-4320-98ad-1fddb728f29b",
-      "prerequisites": [],
-      "difficulty": 5,
-      "topics": []
-    },
-    {
-      "slug": "roman-numerals",
-      "name": "Roman Numerals",
-      "uuid": "00219cdb-939f-434c-bfb4-e3d62a8542c0",
-      "prerequisites": [],
-      "difficulty": 5,
-      "topics": []
-    },
-    {
-      "slug": "scrabble-score",
-      "name": "Scrabble Score",
-      "uuid": "8760e564-e3af-45fb-9d30-0cf537dc60eb",
-      "prerequisites": [],
-      "difficulty": 5,
-      "topics": []
-    },
-    {
-      "slug": "linked-list",
-      "name": "Linked List",
-      "uuid": "1f21e5b0-e4fd-48e5-81ee-eccfb93bc349",
-      "prerequisites": [],
-      "difficulty": 6,
-      "topics": []
-    },
-    {
-      "slug": "wordy",
-      "name": "Wordy",
-      "uuid": "a8a54ad8-0ac7-4434-aa61-5740da857293",
-      "prerequisites": [],
-      "difficulty": 6,
-      "topics": []
-    }
-  ]
+  "exercises": {
+    "practice": [
+      {
+        "slug": "hello-world",
+        "name": "Hello World",
+        "uuid": "2803dd22-3a92-4fa9-ae7c-4354e80fe423",
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "leap",
+        "name": "Leap",
+        "uuid": "ace2a251-58f5-4128-bc48-f1661463974d",
+        "prerequisites": [],
+        "difficulty": 2,
+        "topics": []
+      },
+      {
+        "slug": "bob",
+        "name": "Bob",
+        "uuid": "2bd18a17-b9f3-4146-a38a-7d940ad16801",
+        "prerequisites": [],
+        "difficulty": 3,
+        "topics": []
+      },
+      {
+        "slug": "nucleotide-count",
+        "name": "Nucleotide Count",
+        "uuid": "30732526-f790-4182-bcc7-7713b685d90a",
+        "prerequisites": [],
+        "difficulty": 3,
+        "topics": []
+      },
+      {
+        "slug": "pangram",
+        "name": "Pangram",
+        "uuid": "eddd942e-cb67-4ae2-b763-a11ee3640aee",
+        "prerequisites": [],
+        "difficulty": 2,
+        "topics": []
+      },
+      {
+        "slug": "clock",
+        "name": "Clock",
+        "uuid": "9fc9b102-185d-4f34-98d0-e3084399610a",
+        "prerequisites": [],
+        "difficulty": 3,
+        "topics": []
+      },
+      {
+        "slug": "raindrops",
+        "name": "Raindrops",
+        "uuid": "9cb1a358-93af-4242-98fe-def7538f9190",
+        "prerequisites": [],
+        "difficulty": 3,
+        "topics": []
+      },
+      {
+        "slug": "phone-number",
+        "name": "Phone Number",
+        "uuid": "e2d8034d-9e7e-4b1c-a8be-b1b333d7b3f0",
+        "prerequisites": [],
+        "difficulty": 4,
+        "topics": []
+      },
+      {
+        "slug": "allergies",
+        "name": "Allergies",
+        "uuid": "8db9c6f1-b086-4b20-a0d2-657d5fdb2c1e",
+        "prerequisites": [],
+        "difficulty": 5,
+        "topics": []
+      },
+      {
+        "slug": "all-your-base",
+        "name": "All Your Base",
+        "uuid": "fed2a81d-724d-4ccd-bf65-c6155a2dfbea",
+        "prerequisites": [],
+        "difficulty": 6,
+        "topics": [
+          "math"
+        ]
+      },
+      {
+        "slug": "robot-name",
+        "name": "Robot Name",
+        "uuid": "d5f7756e-9b82-4576-9f21-dff39293e015",
+        "prerequisites": [],
+        "difficulty": 6,
+        "topics": []
+      },
+      {
+        "slug": "two-fer",
+        "name": "Two Fer",
+        "uuid": "455dd1c8-bf10-4912-a69b-4ffada20d661",
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "luhn",
+        "name": "Luhn",
+        "uuid": "2d0c4351-3d23-4023-942a-77fbb3a90d82",
+        "prerequisites": [],
+        "difficulty": 5,
+        "topics": []
+      },
+      {
+        "slug": "rna-transcription",
+        "name": "Rna Transcription",
+        "uuid": "378da8ed-c955-4a27-87b4-078b36479d77",
+        "prerequisites": [],
+        "difficulty": 2,
+        "topics": []
+      },
+      {
+        "slug": "hamming",
+        "name": "Hamming",
+        "uuid": "c18b5d07-ac1b-4411-9bd4-c6882614e8ee",
+        "prerequisites": [],
+        "difficulty": 3,
+        "topics": []
+      },
+      {
+        "slug": "anagram",
+        "name": "Anagram",
+        "uuid": "1e99ac1f-853d-446f-a567-dd2d70dce9c1",
+        "prerequisites": [],
+        "difficulty": 4,
+        "topics": []
+      },
+      {
+        "slug": "word-count",
+        "name": "Word Count",
+        "uuid": "23aa0f8c-e098-4d4e-8556-7c1be40726a9",
+        "prerequisites": [],
+        "difficulty": 4,
+        "topics": []
+      },
+      {
+        "slug": "etl",
+        "name": "Etl",
+        "uuid": "3bee4dc2-d747-4b4e-ac10-d7815666bbc0",
+        "prerequisites": [],
+        "difficulty": 3,
+        "topics": []
+      },
+      {
+        "slug": "meetup",
+        "name": "Meetup",
+        "uuid": "b8ae569f-d0b3-44d0-a4d6-a800b20b398a",
+        "prerequisites": [],
+        "difficulty": 5,
+        "topics": []
+      },
+      {
+        "slug": "binary",
+        "name": "Binary",
+        "uuid": "1d36c4df-a1c8-454c-b4ec-7bec3c1cbca3",
+        "prerequisites": [],
+        "difficulty": 0,
+        "topics": null,
+        "status": "deprecated"
+      },
+      {
+        "slug": "trinary",
+        "name": "Trinary",
+        "uuid": "eb5415a2-1342-4dcb-ac86-34240e5dead8",
+        "prerequisites": [],
+        "difficulty": 0,
+        "topics": null,
+        "status": "deprecated"
+      },
+      {
+        "slug": "accumulate",
+        "name": "Accumulate",
+        "uuid": "c4ecc2f5-849f-44fe-9151-a51e6188b4f0",
+        "prerequisites": [],
+        "difficulty": 2,
+        "topics": []
+      },
+      {
+        "slug": "acronym",
+        "name": "Acronym",
+        "uuid": "a5d0488e-1a95-4896-8196-541d59dbcea1",
+        "prerequisites": [],
+        "difficulty": 3,
+        "topics": []
+      },
+      {
+        "slug": "grains",
+        "name": "Grains",
+        "uuid": "85f171b0-4394-4f30-bbe5-9c2a96931630",
+        "prerequisites": [],
+        "difficulty": 3,
+        "topics": []
+      },
+      {
+        "slug": "flatten-array",
+        "name": "Flatten Array",
+        "uuid": "f5f83c92-9a37-4601-82e0-c4430855cfc3",
+        "prerequisites": [],
+        "difficulty": 4,
+        "topics": []
+      },
+      {
+        "slug": "grade-school",
+        "name": "Grade School",
+        "uuid": "cb04dab7-4907-41ff-9bb2-596e8d04e087",
+        "prerequisites": [],
+        "difficulty": 4,
+        "topics": []
+      },
+      {
+        "slug": "space-age",
+        "name": "Space Age",
+        "uuid": "5510f44a-f484-4df4-9b07-1f23f42df4d1",
+        "prerequisites": [],
+        "difficulty": 4,
+        "topics": []
+      },
+      {
+        "slug": "atbash-cipher",
+        "name": "Atbash Cipher",
+        "uuid": "be32cfd0-1653-4320-98ad-1fddb728f29b",
+        "prerequisites": [],
+        "difficulty": 5,
+        "topics": []
+      },
+      {
+        "slug": "roman-numerals",
+        "name": "Roman Numerals",
+        "uuid": "00219cdb-939f-434c-bfb4-e3d62a8542c0",
+        "prerequisites": [],
+        "difficulty": 5,
+        "topics": []
+      },
+      {
+        "slug": "scrabble-score",
+        "name": "Scrabble Score",
+        "uuid": "8760e564-e3af-45fb-9d30-0cf537dc60eb",
+        "prerequisites": [],
+        "difficulty": 5,
+        "topics": []
+      },
+      {
+        "slug": "linked-list",
+        "name": "Linked List",
+        "uuid": "1f21e5b0-e4fd-48e5-81ee-eccfb93bc349",
+        "prerequisites": [],
+        "difficulty": 6,
+        "topics": []
+      },
+      {
+        "slug": "wordy",
+        "name": "Wordy",
+        "uuid": "a8a54ad8-0ac7-4434-aa61-5740da857293",
+        "prerequisites": [],
+        "difficulty": 6,
+        "topics": []
+      }
+    ]
+  }
 }
