@@ -1,5 +1,6 @@
 {
   "language": "Raku",
+  "slug": "raku",
   "active": true,
   "status": {
     "concept_exercises": false,
