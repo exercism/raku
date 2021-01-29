@@ -28,14 +28,6 @@
       "topics": []
     },
     {
-      "slug": "two-fer",
-      "uuid": "455dd1c8-bf10-4912-a69b-4ffada20d661",
-      "core": false,
-      "unlocked_by": "hello-world",
-      "difficulty": 1,
-      "topics": []
-    },
-    {
       "slug": "leap",
       "uuid": "ace2a251-58f5-4128-bc48-f1661463974d",
       "core": true,
@@ -100,43 +92,29 @@
       "topics": []
     },
     {
-      "slug": "hamming",
-      "uuid": "c18b5d07-ac1b-4411-9bd4-c6882614e8ee",
-      "core": false,
-      "unlocked_by": "nucleotide-count",
-      "difficulty": 3,
-      "topics": []
+      "slug": "all-your-base",
+      "uuid": "fed2a81d-724d-4ccd-bf65-c6155a2dfbea",
+      "core": true,
+      "unlocked_by": null,
+      "difficulty": 6,
+      "topics": [
+        "math"
+      ]
     },
     {
-      "slug": "rna-transcription",
-      "uuid": "378da8ed-c955-4a27-87b4-078b36479d77",
-      "core": false,
-      "unlocked_by": "nucleotide-count",
-      "difficulty": 2,
-      "topics": []
-    },
-    {
-      "slug": "etl",
-      "uuid": "3bee4dc2-d747-4b4e-ac10-d7815666bbc0",
-      "core": false,
-      "unlocked_by": "raindrops",
-      "difficulty": 3,
-      "topics": []
-    },
-    {
-      "slug": "wordy",
-      "uuid": "a8a54ad8-0ac7-4434-aa61-5740da857293",
-      "core": false,
+      "slug": "robot-name",
+      "uuid": "d5f7756e-9b82-4576-9f21-dff39293e015",
+      "core": true,
       "unlocked_by": null,
       "difficulty": 6,
       "topics": []
     },
     {
-      "slug": "scrabble-score",
-      "uuid": "8760e564-e3af-45fb-9d30-0cf537dc60eb",
+      "slug": "two-fer",
+      "uuid": "455dd1c8-bf10-4912-a69b-4ffada20d661",
       "core": false,
-      "unlocked_by": null,
-      "difficulty": 5,
+      "unlocked_by": "hello-world",
+      "difficulty": 1,
       "topics": []
     },
     {
@@ -148,11 +126,27 @@
       "topics": []
     },
     {
-      "slug": "meetup",
-      "uuid": "b8ae569f-d0b3-44d0-a4d6-a800b20b398a",
+      "slug": "rna-transcription",
+      "uuid": "378da8ed-c955-4a27-87b4-078b36479d77",
       "core": false,
-      "unlocked_by": "phone-number",
-      "difficulty": 5,
+      "unlocked_by": "nucleotide-count",
+      "difficulty": 2,
+      "topics": []
+    },
+    {
+      "slug": "hamming",
+      "uuid": "c18b5d07-ac1b-4411-9bd4-c6882614e8ee",
+      "core": false,
+      "unlocked_by": "nucleotide-count",
+      "difficulty": 3,
+      "topics": []
+    },
+    {
+      "slug": "anagram",
+      "uuid": "1e99ac1f-853d-446f-a567-dd2d70dce9c1",
+      "core": false,
+      "unlocked_by": "pangram",
+      "difficulty": 4,
       "topics": []
     },
     {
@@ -164,100 +158,18 @@
       "topics": []
     },
     {
-      "slug": "flatten-array",
-      "uuid": "f5f83c92-9a37-4601-82e0-c4430855cfc3",
+      "slug": "etl",
+      "uuid": "3bee4dc2-d747-4b4e-ac10-d7815666bbc0",
       "core": false,
-      "unlocked_by": null,
-      "difficulty": 4,
-      "topics": []
-    },
-    {
-      "slug": "grade-school",
-      "uuid": "cb04dab7-4907-41ff-9bb2-596e8d04e087",
-      "core": false,
-      "unlocked_by": null,
-      "difficulty": 4,
-      "topics": []
-    },
-    {
-      "slug": "accumulate",
-      "uuid": "c4ecc2f5-849f-44fe-9151-a51e6188b4f0",
-      "core": false,
-      "unlocked_by": null,
-      "difficulty": 2,
-      "topics": []
-    },
-    {
-      "slug": "grains",
-      "uuid": "85f171b0-4394-4f30-bbe5-9c2a96931630",
-      "core": false,
-      "unlocked_by": null,
+      "unlocked_by": "raindrops",
       "difficulty": 3,
       "topics": []
     },
     {
-      "slug": "all-your-base",
-      "uuid": "fed2a81d-724d-4ccd-bf65-c6155a2dfbea",
-      "core": true,
-      "unlocked_by": null,
-      "difficulty": 6,
-      "topics": [
-        "math"
-      ]
-    },
-    {
-      "slug": "anagram",
-      "uuid": "1e99ac1f-853d-446f-a567-dd2d70dce9c1",
+      "slug": "meetup",
+      "uuid": "b8ae569f-d0b3-44d0-a4d6-a800b20b398a",
       "core": false,
-      "unlocked_by": "pangram",
-      "difficulty": 4,
-      "topics": []
-    },
-    {
-      "slug": "robot-name",
-      "uuid": "d5f7756e-9b82-4576-9f21-dff39293e015",
-      "core": true,
-      "unlocked_by": null,
-      "difficulty": 6,
-      "topics": []
-    },
-    {
-      "slug": "atbash-cipher",
-      "uuid": "be32cfd0-1653-4320-98ad-1fddb728f29b",
-      "core": false,
-      "unlocked_by": null,
-      "difficulty": 5,
-      "topics": []
-    },
-    {
-      "slug": "space-age",
-      "uuid": "5510f44a-f484-4df4-9b07-1f23f42df4d1",
-      "core": false,
-      "unlocked_by": null,
-      "difficulty": 4,
-      "topics": []
-    },
-    {
-      "slug": "linked-list",
-      "uuid": "1f21e5b0-e4fd-48e5-81ee-eccfb93bc349",
-      "core": false,
-      "unlocked_by": null,
-      "difficulty": 6,
-      "topics": []
-    },
-    {
-      "slug": "acronym",
-      "uuid": "a5d0488e-1a95-4896-8196-541d59dbcea1",
-      "core": false,
-      "unlocked_by": null,
-      "difficulty": 3,
-      "topics": []
-    },
-    {
-      "slug": "roman-numerals",
-      "uuid": "00219cdb-939f-434c-bfb4-e3d62a8542c0",
-      "core": false,
-      "unlocked_by": null,
+      "unlocked_by": "phone-number",
       "difficulty": 5,
       "topics": []
     },
@@ -280,6 +192,94 @@
       "topics": null,
       "deprecated": true,
       "status": "deprecated"
+    },
+    {
+      "slug": "accumulate",
+      "uuid": "c4ecc2f5-849f-44fe-9151-a51e6188b4f0",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 2,
+      "topics": []
+    },
+    {
+      "slug": "acronym",
+      "uuid": "a5d0488e-1a95-4896-8196-541d59dbcea1",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 3,
+      "topics": []
+    },
+    {
+      "slug": "grains",
+      "uuid": "85f171b0-4394-4f30-bbe5-9c2a96931630",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 3,
+      "topics": []
+    },
+    {
+      "slug": "flatten-array",
+      "uuid": "f5f83c92-9a37-4601-82e0-c4430855cfc3",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 4,
+      "topics": []
+    },
+    {
+      "slug": "grade-school",
+      "uuid": "cb04dab7-4907-41ff-9bb2-596e8d04e087",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 4,
+      "topics": []
+    },
+    {
+      "slug": "space-age",
+      "uuid": "5510f44a-f484-4df4-9b07-1f23f42df4d1",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 4,
+      "topics": []
+    },
+    {
+      "slug": "atbash-cipher",
+      "uuid": "be32cfd0-1653-4320-98ad-1fddb728f29b",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 5,
+      "topics": []
+    },
+    {
+      "slug": "roman-numerals",
+      "uuid": "00219cdb-939f-434c-bfb4-e3d62a8542c0",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 5,
+      "topics": []
+    },
+    {
+      "slug": "scrabble-score",
+      "uuid": "8760e564-e3af-45fb-9d30-0cf537dc60eb",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 5,
+      "topics": []
+    },
+    {
+      "slug": "linked-list",
+      "uuid": "1f21e5b0-e4fd-48e5-81ee-eccfb93bc349",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 6,
+      "topics": []
+    },
+    {
+      "slug": "wordy",
+      "uuid": "a8a54ad8-0ac7-4434-aa61-5740da857293",
+      "core": false,
+      "unlocked_by": null,
+      "difficulty": 6,
+      "topics": []
     }
   ]
 }
