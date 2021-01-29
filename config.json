@@ -1,6 +1,12 @@
 {
   "language": "Raku",
   "active": true,
+  "status": {
+    "concept_exercises": false,
+    "test_runner": false,
+    "representer": false,
+    "analyzer": false
+  },
   "blurb": "Raku is a production ready new emerging language that is highly expressive, feature-packed and optimized for fun.",
   "version": 3,
   "checklist_issue": 30,
