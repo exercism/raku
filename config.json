@@ -10,6 +10,10 @@
   },
   "blurb": "Raku is a production ready new emerging language that is highly expressive, feature-packed and optimized for fun.",
   "version": 3,
+  "online_editor": {
+    "indent_style": "space",
+    "indent_size": 4
+  },
   "checklist_issue": 30,
   "solution_pattern": "\\.meta/solutions/.+\\.rakumod$",
   "test_pattern": ".*\\.rakutest$",
