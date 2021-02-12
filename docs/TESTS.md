@@ -1,3 +1,5 @@
+# Tests
+
 ## Run All Tests
 
 There is a Raku script with the extension `.rakutest`, which will be used to test
