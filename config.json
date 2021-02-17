@@ -17,6 +17,20 @@
   "checklist_issue": 30,
   "solution_pattern": "\\.meta/solutions/.+\\.rakumod$",
   "test_pattern": ".*\\.rakutest$",
+  "files": {
+    "solution": [
+      "path/to/%{kebab_slug}.ext"
+    ],
+    "test": [
+      "path/to/%{kebab_slug}.ext"
+    ],
+    "example": [
+      "path/to/%{kebab_slug}.ext"
+    ],
+    "exemplar": [
+      "path/to/%{kebab_slug}.ext"
+    ]
+  },
   "exercises": {
     "concept": [],
     "practice": [
