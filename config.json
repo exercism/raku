@@ -19,16 +19,16 @@
   "test_pattern": ".*\\.rakutest$",
   "files": {
     "solution": [
-      "path/to/%{kebab_slug}.ext"
+      "%{kebab_slug}.rakumod"
     ],
     "test": [
-      "path/to/%{kebab_slug}.ext"
+      "%{kebab_slug}.rakutest"
     ],
     "example": [
-      "path/to/%{kebab_slug}.ext"
+      "%{kebab_slug}.rakumod"
     ],
     "exemplar": [
-      "path/to/%{kebab_slug}.ext"
+      "%{kebab_slug}.rakutest"
     ]
   },
   "exercises": {
