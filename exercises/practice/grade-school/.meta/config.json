@@ -1,9 +1,15 @@
 {
   "authors": [],
   "files": {
-    "solution": [],
-    "test": [],
-    "example": []
+    "solution": [
+      "grade-school.rakumod"
+    ],
+    "test": [
+      "grade-school.rakutest"
+    ],
+    "example": [
+      "grade-school.rakumod"
+    ]
   },
   "source": "A pairing session with Phil Battos at gSchool",
   "source_url": "http://gschool.it"

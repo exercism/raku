@@ -1,9 +1,15 @@
 {
   "authors": [],
   "files": {
-    "solution": [],
-    "test": [],
-    "example": []
+    "solution": [
+      "scrabble-score.rakumod"
+    ],
+    "test": [
+      "scrabble-score.rakutest"
+    ],
+    "example": [
+      "scrabble-score.rakumod"
+    ]
   },
   "source": "Inspired by the Extreme Startup game",
   "source_url": "https://github.com/rchatley/extreme_startup"

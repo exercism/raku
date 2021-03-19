@@ -1,9 +1,15 @@
 {
   "authors": [],
   "files": {
-    "solution": [],
-    "test": [],
-    "example": []
+    "solution": [
+      "atbash-cipher.rakumod"
+    ],
+    "test": [
+      "atbash-cipher.rakutest"
+    ],
+    "example": [
+      "atbash-cipher.rakumod"
+    ]
   },
   "source": "Wikipedia",
   "source_url": "http://en.wikipedia.org/wiki/Atbash"

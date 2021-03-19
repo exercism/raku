@@ -1,9 +1,15 @@
 {
   "authors": [],
   "files": {
-    "solution": [],
-    "test": [],
-    "example": []
+    "solution": [
+      "rna-transcription.rakumod"
+    ],
+    "test": [
+      "rna-transcription.rakutest"
+    ],
+    "example": [
+      "rna-transcription.rakumod"
+    ]
   },
   "source": "Hyperphysics",
   "source_url": "http://hyperphysics.phy-astr.gsu.edu/hbase/Organic/transcription.html"

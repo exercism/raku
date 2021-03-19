@@ -1,9 +1,15 @@
 {
   "authors": [],
   "files": {
-    "solution": [],
-    "test": [],
-    "example": []
+    "solution": [
+      "meetup.rakumod"
+    ],
+    "test": [
+      "meetup.rakutest"
+    ],
+    "example": [
+      "meetup.rakumod"
+    ]
   },
   "source": "Jeremy Hinegardner mentioned a Boulder meetup that happens on the Wednesteenth of every month",
   "source_url": "https://twitter.com/copiousfreetime"
