@@ -1,9 +1,15 @@
 {
   "authors": [],
   "files": {
-    "solution": [],
-    "test": [],
-    "example": []
+    "solution": [
+      "wordy.rakumod"
+    ],
+    "test": [
+      "wordy.rakutest"
+    ],
+    "example": [
+      "wordy.rakumod"
+    ]
   },
   "source": "Inspired by one of the generated questions in the Extreme Startup game.",
   "source_url": "https://github.com/rchatley/extreme_startup"

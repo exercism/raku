@@ -1,9 +1,15 @@
 {
   "authors": [],
   "files": {
-    "solution": [],
-    "test": [],
-    "example": []
+    "solution": [
+      "phone-number.rakumod"
+    ],
+    "test": [
+      "phone-number.rakutest"
+    ],
+    "example": [
+      "phone-number.rakumod"
+    ]
   },
   "source": "Event Manager by JumpstartLab",
   "source_url": "http://tutorials.jumpstartlab.com/projects/eventmanager.html"

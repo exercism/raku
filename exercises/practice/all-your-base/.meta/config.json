@@ -1,8 +1,14 @@
 {
   "authors": [],
   "files": {
-    "solution": [],
-    "test": [],
-    "example": []
+    "solution": [
+      "all-your-base.rakumod"
+    ],
+    "test": [
+      "all-your-base.rakutest"
+    ],
+    "example": [
+      "all-your-base.rakumod"
+    ]
   }
 }

@@ -1,9 +1,15 @@
 {
   "authors": [],
   "files": {
-    "solution": [],
-    "test": [],
-    "example": []
+    "solution": [
+      "robot-name.rakumod"
+    ],
+    "test": [
+      "robot-name.rakutest"
+    ],
+    "example": [
+      "robot-name.rakumod"
+    ]
   },
   "source": "A debugging session with Paul Blackwell at gSchool."
 }

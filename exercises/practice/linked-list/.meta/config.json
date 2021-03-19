@@ -1,9 +1,15 @@
 {
   "authors": [],
   "files": {
-    "solution": [],
-    "test": [],
-    "example": []
+    "solution": [
+      "linked-list.rakumod"
+    ],
+    "test": [
+      "linked-list.rakutest"
+    ],
+    "example": [
+      "linked-list.rakumod"
+    ]
   },
   "source": "Classic computer science topic"
 }

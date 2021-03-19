@@ -1,9 +1,15 @@
 {
   "authors": [],
   "files": {
-    "solution": [],
-    "test": [],
-    "example": []
+    "solution": [
+      "anagram.rakumod"
+    ],
+    "test": [
+      "anagram.rakutest"
+    ],
+    "example": [
+      "anagram.rakumod"
+    ]
   },
   "source": "Inspired by the Extreme Startup game",
   "source_url": "https://github.com/rchatley/extreme_startup"
