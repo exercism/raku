@@ -1,6 +1,15 @@
 {
   "blurb": "Given a phrase, count the occurrences of each word in that phrase.",
-  "authors": [],
+  "authors": [
+    "dnmfarrell"
+  ],
+  "contributors": [
+    "dcampos",
+    "kotp",
+    "kytrinyx",
+    "m-dango",
+    "yanick"
+  ],
   "files": {
     "solution": [
       "word-count.rakumod"

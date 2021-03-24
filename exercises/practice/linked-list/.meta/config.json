@@ -1,6 +1,12 @@
 {
   "blurb": "Implement a doubly linked list",
-  "authors": [],
+  "authors": [
+    "yanick"
+  ],
+  "contributors": [
+    "kotp",
+    "m-dango"
+  ],
   "files": {
     "solution": [
       "linked-list.rakumod"

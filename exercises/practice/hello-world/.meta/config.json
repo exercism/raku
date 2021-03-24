@@ -1,6 +1,12 @@
 {
   "blurb": "The classical introductory exercise. Just say \"Hello, World!\"",
-  "authors": [],
+  "authors": [
+    "m-dango"
+  ],
+  "contributors": [
+    "kotp",
+    "kytrinyx"
+  ],
   "files": {
     "solution": [
       "hello-world.rakumod"

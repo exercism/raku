@@ -1,6 +1,15 @@
 {
   "blurb": "Bob is a lackadaisical teenager. In conversation, his responses are very limited.",
-  "authors": [],
+  "authors": [
+    "dnmfarrell"
+  ],
+  "contributors": [
+    "austinlyons",
+    "kotp",
+    "kytrinyx",
+    "m-dango",
+    "yanick"
+  ],
   "files": {
     "solution": [
       "bob.rakumod"
