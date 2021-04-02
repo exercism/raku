@@ -1,5 +1,6 @@
 unit class Exercism::Generator;
 
+use nqp;
 use Config::TOML;
 use JSON::Fast;
 use Template::Mustache;
@@ -89,4 +90,44 @@ method !render ( Str $module_file? --> Str:D ) {
     ).slurp,
     %( |%data, :$module_file )
   );
+}
+
+method create-files ( --> Nil ) {
+  my $exercise-dir = $base-dir.add("exercises/$.exercise").mkdir;
+
+  # Test
+  my $testfile = $exercise-dir.add("$.exercise.rakutest");
+  $testfile.spurt($.test);
+  $testfile.chmod(0o755);
+
+  # Stub
+  $exercise-dir.add("$.package.rakumod").spurt($.stub);
+
+  # Examples
+  for $.examples.pairs -> $example {
+    if $example.key eq 'base' {
+      ( my $solution-dir = $exercise-dir
+        .add('.meta/solutions') )
+        .mkdir
+        .add("$.package.rakumod")
+        .spurt($example.value);
+      # This emulates Raku's symlink, which does not yet support non-absolute paths
+      try nqp::symlink(
+        "../../$_",
+        nqp::unbox_s( $solution-dir.add($_).absolute )
+      ) given $testfile.basename;
+    }
+    else {
+      ( my $solution-dir = $exercise-dir
+        .add(".meta/solutions/{$example.key}") )
+        .mkdir
+        .add("$.package.rakumod")
+        .spurt($example.value);
+      # This emulates Raku's symlink, which does not yet support non-absolute paths
+      try nqp::symlink(
+        "../../../$_",
+        nqp::unbox_s( $solution-dir.add($_).absolute )
+      ) given $testfile.basename;
+    }
+  }
 }
