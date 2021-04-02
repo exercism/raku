@@ -14,7 +14,7 @@ for @test-cases -> %case {
 =begin code
 [
   {
-    "description": "1 is a single I",
+    "description": "1 is I",
     "expected": "I",
     "input": {
       "number": 1
@@ -22,7 +22,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "2 is two I's",
+    "description": "2 is II",
     "expected": "II",
     "input": {
       "number": 2
@@ -30,7 +30,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "3 is three I's",
+    "description": "3 is III",
     "expected": "III",
     "input": {
       "number": 3
@@ -38,7 +38,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "4, being 5 - 1, is IV",
+    "description": "4 is IV",
     "expected": "IV",
     "input": {
       "number": 4
@@ -46,7 +46,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "5 is a single V",
+    "description": "5 is V",
     "expected": "V",
     "input": {
       "number": 5
@@ -54,7 +54,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "6, being 5 + 1, is VI",
+    "description": "6 is VI",
     "expected": "VI",
     "input": {
       "number": 6
@@ -62,7 +62,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "9, being 10 - 1, is IX",
+    "description": "9 is IX",
     "expected": "IX",
     "input": {
       "number": 9
@@ -70,7 +70,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "20 is two X's",
+    "description": "27 is XXVII",
     "expected": "XXVII",
     "input": {
       "number": 27
@@ -78,7 +78,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "48 is not 50 - 2 but rather 40 + 8",
+    "description": "48 is XLVIII",
     "expected": "XLVIII",
     "input": {
       "number": 48
@@ -86,7 +86,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "49 is not 40 + 5 + 4 but rather 50 - 10 + 10 - 1",
+    "description": "49 is XLIX",
     "expected": "XLIX",
     "input": {
       "number": 49
@@ -94,7 +94,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "50 is a single L",
+    "description": "59 is LIX",
     "expected": "LIX",
     "input": {
       "number": 59
@@ -102,7 +102,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "90, being 100 - 10, is XC",
+    "description": "93 is XCIII",
     "expected": "XCIII",
     "input": {
       "number": 93
@@ -110,7 +110,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "100 is a single C",
+    "description": "141 is CXLI",
     "expected": "CXLI",
     "input": {
       "number": 141
@@ -118,7 +118,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "60, being 50 + 10, is LX",
+    "description": "163 is CLXIII",
     "expected": "CLXIII",
     "input": {
       "number": 163
@@ -126,7 +126,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "400, being 500 - 100, is CD",
+    "description": "402 is CDII",
     "expected": "CDII",
     "input": {
       "number": 402
@@ -134,7 +134,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "500 is a single D",
+    "description": "575 is DLXXV",
     "expected": "DLXXV",
     "input": {
       "number": 575
@@ -142,7 +142,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "900, being 1000 - 100, is CM",
+    "description": "911 is CMXI",
     "expected": "CMXI",
     "input": {
       "number": 911
@@ -150,7 +150,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "1000 is a single M",
+    "description": "1024 is MXXIV",
     "expected": "MXXIV",
     "input": {
       "number": 1024
@@ -158,7 +158,7 @@ for @test-cases -> %case {
     "property": "roman"
   },
   {
-    "description": "3000 is three M's",
+    "description": "3000 is MMM",
     "expected": "MMM",
     "input": {
       "number": 3000
