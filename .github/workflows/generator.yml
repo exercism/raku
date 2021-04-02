@@ -9,15 +9,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          submodules: true
 
-      - run: sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 379CE192D401AB61
-      - run: echo "deb https://dl.bintray.com/nxadm/rakudo-pkg-debs `lsb_release -cs` main"
-            | sudo tee -a /etc/apt/sources.list.d/rakudo-pkg.list
-      - run: sudo apt-get update && sudo apt-get install rakudo-pkg
-      - run: echo '~/.raku/bin:/opt/rakudo-pkg/bin:/opt/rakudo-pkg/share/perl6/site/bin' >> $GITHUB_PATH
-      - run: /opt/rakudo-pkg/bin/install-zef-as-user
+      - name: Checkout problem-specifications
+        uses: actions/checkout@v2
+        with:
+          repository: exercism/problem-specifications
+          path: .problem-specifications
+
+      - name: Install Raku
+        uses: Raku/setup-raku@v1
 
       - run: zef install --/test App::Prove6
       - run: zef install --/test --deps-only .
