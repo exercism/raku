@@ -27,4 +27,3 @@ jobs:
 
       - name: Generated files match generator output
         run: prove6 t/files
-        continue-on-error: true
