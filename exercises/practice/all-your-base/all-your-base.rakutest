@@ -5,7 +5,7 @@ use lib $?FILE.IO.dirname;
 use AllYourBase;
 plan 21;
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 for @test-cases -> %case {
   my &call-convert-base := -> {
     convert-base(

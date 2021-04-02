@@ -5,7 +5,7 @@ use lib $?FILE.IO.dirname;
 use Leap;
 plan 9;
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 for Date, DateTime {
   .^method_table<is-leap-year>.wrap: sub (|) {
     bail-out 'Built-in `is-leap-year` method is not allowed for this exercise.';

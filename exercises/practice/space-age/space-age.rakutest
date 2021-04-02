@@ -5,7 +5,7 @@ use lib $?FILE.IO.dirname;
 use SpaceAge;
 plan 8;
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 for @test-cases -> %case {
   is ::(%case<input><planet>).age-on(%case<input><seconds>),
     |%case<expected description>;

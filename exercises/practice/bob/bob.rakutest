@@ -13,7 +13,7 @@ subtest 'Class methods', {
   }
 } or bail-out 'Cannot run expected method(s).';
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 # Go through the cases and check that Bob gives us the correct responses.
 for @test-cases -> %case {
   is Bob.hey(%case<input><heyBob>), |%case<expected description>;

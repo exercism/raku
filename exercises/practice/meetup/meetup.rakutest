@@ -5,7 +5,7 @@ use lib $?FILE.IO.dirname;
 use Meetup;
 plan 95;
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 =head2 Notes
 =begin para
 This exercise expects you to parse the description string

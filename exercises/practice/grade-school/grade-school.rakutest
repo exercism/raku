@@ -5,7 +5,7 @@ use lib $?FILE.IO.dirname;
 use GradeSchool;
 plan 7;
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 for @test-cases -> %case {
   cmp-ok
     roster( |%(<students grade> Z=> %case<input><students desiredGrade>:v) ),

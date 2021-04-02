@@ -5,7 +5,7 @@ use lib $?FILE.IO.dirname;
 use ETL;
 plan 4;
 
-my @test-cases = from-json($=pod.pop.contents).List;
+my @test-cases = from-json($=pod[*-1].contents).List;
 =head2 Notes
 =begin para
 The test expects your returned C<Hash> to have
