@@ -32,11 +32,11 @@ jobs:
 
       - name: Rakudo Star tests with prove6
         if: runner.os != 'Linux'
-        run: prove6 --jobs 2 (Get-Item -Path exercises/*/.meta/solutions/)
+        run: prove6 --jobs 2 (Get-Item -Path exercises/practice/*/.meta/solutions/)
         shell: pwsh
 
       - name: Rakudo Star tests with docker run
         if: runner.os == 'Linux'
         uses: docker://rakudo-star:latest
         with:
-          args: /bin/bash -c "prove6 --jobs 2 /github/workspace/exercises/*/.meta/solutions/"
+          args: /bin/bash -c "prove6 --jobs 2 /github/workspace/exercises/practice/*/.meta/solutions/"

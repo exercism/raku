@@ -7,11 +7,8 @@ use Exercism::Generator;
 my %*SUB-MAIN-OPTS = :named-anywhere;
 
 given $base-dir {
-  note 'problem-specifications directory not found; exercise(s) may generate incorrectly.'
-    unless .add('problem-specifications').d;
-
-  note 'executable configlet not found; README.md file(s) will not be generated.'
-    unless .add('bin/configlet').x;
+  note '`.problem-specifications` directory not found; exercise(s) may generate incorrectly.'
+    unless .add('.problem-specifications').d;
 }
 
 #| Displays this message.
@@ -19,9 +16,9 @@ multi MAIN ( Bool:D :h(:help(:$man)) ) {
   say $*USAGE;
 }
 
-#| Runs the generator for everything in the exercises directory.
+#| Runs the generator for everything in the exercises/practice directory.
 multi MAIN (Bool:D :a(:$all) where *.so) {
-  generate .basename for $base-dir.add('exercises').dir;
+  generate .basename for $base-dir.add('exercises/practice').dir;
 }
 
 #| The generator will run for each exercise given as an argument.
@@ -53,7 +50,7 @@ sub generate ($exercise) {
     }
   }
   if (
-    my $exercise-dir = $base-dir.add("exercises/$exercise")
+    my $exercise-dir = $base-dir.add("exercises/practice/$exercise")
   ) !~~ :d {
     push @dir-not-found, $exercise;
     return;
@@ -102,10 +99,6 @@ sub generate ($exercise) {
         ) given $testfile.basename;
       }
     }
-  }
-
-  given $base-dir.add('bin/configlet') {
-    run .absolute, 'generate', $base-dir, '--only', $exercise if .x;
   }
 
   say 'Generated.';
