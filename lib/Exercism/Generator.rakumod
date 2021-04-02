@@ -15,14 +15,14 @@ has Str:D  $.json-tests = '';
 
 submethod TWEAK {
   if @!case-uuids.not && $!exercise && ( my $toml-file =
-    $base-dir.add("exercises/$!exercise/.meta/tests.toml")
+    $base-dir.add("exercises/practice/$!exercise/.meta/tests.toml")
   ) ~~ :f {
     @!case-uuids = |from-toml($toml-file.slurp)<canonical-tests>;
   }
 
   if $!cdata.not && $!exercise && (
     my $cdata-file = $base-dir.add(
-      "problem-specifications/exercises/$!exercise/canonical-data.json"
+      ".problem-specifications/exercises/$!exercise/canonical-data.json"
     )
   ) ~~ :f {
     $!cdata = $cdata-file.slurp.trim;
