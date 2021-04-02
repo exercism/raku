@@ -8,14 +8,18 @@ use YAMLish;
 
 my $base-dir = $?FILE.IO.parent.add('../..');
 
+#| The exercise slug
 has Str:D $.exercise is required;
+#= e.g. hello-world
 
+#| The data to be used for rendering templates
 has %.data = do if ( my $yaml-file =
   $base-dir.add("exercises/practice/$!exercise/.meta/exercise-data.yaml")
 ).f {
   load-yaml($yaml-file.slurp);
 };
 
+#| The parsed canonical-data.json from problem-specifications
 has %.cdata = do if ( my $cdata-file =
   $base-dir.add(
     ".problem-specifications/exercises/$!exercise/canonical-data.json"
@@ -24,17 +28,21 @@ has %.cdata = do if ( my $cdata-file =
   from-json($cdata-file.slurp);
 };
 
-has Str:D @.case-uuids = do if ( my $toml-file =
-  $base-dir.add("exercises/practice/$!exercise/.meta/tests.toml")
+#| The case UUIDs to use from cdata
+has Str:D @.case-uuids = do if (
+  my $toml-file = $base-dir.add("exercises/practice/$!exercise/.meta/tests.toml")
 ).f {
   from-toml($toml-file.slurp)<canonical-tests>.Set.keys;
-};
+} #= e.g. [ '00000000-0000-0000-0000-000000000000' ]
+;
 
+#| An array of cases matching case-uuids
 has Hash:D @.cases = self.build-cases(%!cdata);
 
+#| The JSON of test cases to be used in the test suite
 has Str:D $.json-tests = @!cases ?? to-json( @!cases, :sorted-keys ) !! '';
 
-#| Retrieves cases from cdata which match case UUIDs
+# Retrieves cases from cdata which match case UUIDs
 submethod build-cases ( %obj, Str $description = '' ) {
   my Str $new-desc = '';
   if %obj<cases>.defined {
@@ -61,8 +69,9 @@ submethod build-cases ( %obj, Str $description = '' ) {
 method package ( --> Str:D ) {
   %.data<package> // $.exercise.split('-').map(&tclc).join;
 }
+#= e.g. HelloWorld
 
-#| A rendered test file
+#| A rendered test suite
 method test ( --> Str:D ) {
   self!render;
 }
@@ -92,6 +101,7 @@ method !render ( Str $module_file? --> Str:D ) {
   );
 }
 
+#| Renders the templates and creates the files for the exercise
 method create-files ( --> Nil ) {
   my $exercise-dir = $base-dir.add("exercises/$.exercise").mkdir;
 
