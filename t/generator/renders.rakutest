@@ -1,0 +1,89 @@
+use Test;
+use lib ( my $base-dir = $?FILE.IO.resolve.parent(3) ).add('lib');
+use Exercism::Generator;
+
+subtest 'Rendered test files' => {
+  plan 5;
+
+  given new-generator() {
+    is .test, q:to/TEST/, 'No data';
+      #!/usr/bin/env raku
+      use Test;
+      use lib $?FILE.IO.dirname;
+      use TestExercise;
+
+      done-testing;
+      TEST
+ }
+
+  given new-generator( :data(:plan(1)) ) {
+    is .test, q:to/TEST/, 'A plan';
+      #!/usr/bin/env raku
+      use Test;
+      use lib $?FILE.IO.dirname;
+      use TestExercise;
+      plan 1;
+      TEST
+ }
+
+  given new-generator( :data(:tests('ok True;')) ) {
+    is .test, q:to/TEST/, 'A test';
+      #!/usr/bin/env raku
+      use Test;
+      use lib $?FILE.IO.dirname;
+      use TestExercise;
+
+      ok True;
+
+      done-testing;
+      TEST
+  }
+
+  given new-generator( :json-tests<[]> ) {
+    is .test, q:to/TEST/, 'JSON tests';
+      #!/usr/bin/env raku
+      use Test;
+      use JSON::Fast;
+      use lib $?FILE.IO.dirname;
+      use TestExercise;
+
+      my @test-cases = from-json($=pod.pop.contents).List;
+
+      done-testing;
+
+      =head2 Test Cases
+      =begin code
+      []
+      =end code
+      TEST
+  }
+
+  given new-generator(
+    :data(:tests('ok $_ for @test-cases;')),
+    :json-tests<[true]>,
+  ) {
+    is .test, q:to/TEST/, 'Tests with JSON';
+      #!/usr/bin/env raku
+      use Test;
+      use JSON::Fast;
+      use lib $?FILE.IO.dirname;
+      use TestExercise;
+
+      my @test-cases = from-json($=pod.pop.contents).List;
+      ok $_ for @test-cases;
+
+      done-testing;
+
+      =head2 Test Cases
+      =begin code
+      [true]
+      =end code
+      TEST
+  }
+}
+
+done-testing;
+
+sub new-generator (|c) {
+  Exercism::Generator.new( :exercise<test-exercise>, |c )
+}

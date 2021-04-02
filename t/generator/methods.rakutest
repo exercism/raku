@@ -1,49 +1,11 @@
 use Test;
-use lib ( my $base-dir = $?FILE.IO.resolve.parent(2) ).add('lib');
+use lib ( my $base-dir = $?FILE.IO.resolve.parent(3) ).add('lib');
 use Exercism::Generator;
-
-subtest 'Rendered test files' => {
-  plan 3;
-
-  given new-generator() {
-    is .test, q:to/TEST/, 'No data';
-      #!/usr/bin/env raku
-      use Test;
-      use lib $?FILE.IO.dirname;
-      use TestExercise;
-
-      done-testing;
-      TEST
- }
-
-  given new-generator( :data(:plan(1)) ) {
-    is .test, q:to/TEST/, 'A plan';
-      #!/usr/bin/env raku
-      use Test;
-      use lib $?FILE.IO.dirname;
-      use TestExercise;
-      plan 1;
-      TEST
- }
-
-  given new-generator( :data(:tests('ok True;')) ) {
-    is .test, q:to/TEST/, 'A test';
-      #!/usr/bin/env raku
-      use Test;
-      use lib $?FILE.IO.dirname;
-      use TestExercise;
-
-      ok True;
-
-      done-testing;
-      TEST
-  }
-}
 
 subtest '0 case UUIDs' => {
   plan 4;
 
-  given new-generator(
+  given Exercism::Generator.new(
     :exercise<hello-world>,
     :case-uuids(),
   ) {
@@ -57,7 +19,7 @@ subtest '0 case UUIDs' => {
 subtest '1 case UUID' => {
   plan 4;
 
-  given new-generator(
+  given Exercism::Generator.new(
     :exercise<hello-world>,
     :case-uuids(<af9ffe10-dc13-42d8-a742-e7bdafac449d>),
     :data(:package<TEST>),
@@ -93,7 +55,3 @@ subtest '1 case UUID' => {
 }
 
 done-testing;
-
-sub new-generator (|c) {
-  Exercism::Generator.new( :exercise<test-exercise>, |c )
-}

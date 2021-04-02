@@ -23,8 +23,8 @@ jobs:
       - run: zef install --/test --deps-only .
 
       - name: Test generator
-        run: prove6 t/generator.rakutest
+        run: prove6 t/generator
 
       - name: Generated files match generator output
-        run: prove6 t/generated-tests.rakutest
+        run: prove6 t/files
         continue-on-error: true
