@@ -103,7 +103,7 @@ method !render ( Str $module_file? --> Str:D ) {
 
 #| Renders the templates and creates the files for the exercise
 method create-files ( --> Nil ) {
-  my $exercise-dir = $base-dir.add("exercises/$.exercise").mkdir;
+  my $exercise-dir = $base-dir.add("exercises/practice/$.exercise").mkdir;
 
   # Test
   my $testfile = $exercise-dir.add("$.exercise.rakutest");
