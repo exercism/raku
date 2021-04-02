@@ -47,7 +47,7 @@ subtest 'Rendered test files' => {
       use lib $?FILE.IO.dirname;
       use TestExercise;
 
-      my @test-cases = from-json($=pod.pop.contents).List;
+      my @test-cases = from-json($=pod[*-1].contents).List;
 
       done-testing;
 
@@ -69,7 +69,7 @@ subtest 'Rendered test files' => {
       use lib $?FILE.IO.dirname;
       use TestExercise;
 
-      my @test-cases = from-json($=pod.pop.contents).List;
+      my @test-cases = from-json($=pod[*-1].contents).List;
       ok $_ for @test-cases;
 
       done-testing;
