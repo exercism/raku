@@ -3,36 +3,35 @@ unit class Exercism::Generator;
 use Config::TOML;
 use JSON::Fast;
 use Template::Mustache;
+use YAMLish;
 
 my $base-dir = $?FILE.IO.parent.add('../..');
 
-has Str    $.exercise;
-has        %.data       is rw;
-has        @.case-uuids is SetHash;
-has Str:D  $.cdata      = '';
-has Hash:D @.cases;
-has Str:D  $.json-tests = '';
+has Str:D $.exercise is required;
 
-submethod TWEAK {
-  if @!case-uuids.not && $!exercise && ( my $toml-file =
-    $base-dir.add("exercises/practice/$!exercise/.meta/tests.toml")
-  ) ~~ :f {
-    @!case-uuids = |from-toml($toml-file.slurp)<canonical-tests>;
-  }
+has %.data = do if ( my $yaml-file =
+  $base-dir.add("exercises/practice/$!exercise/.meta/exercise-data.yaml")
+).f {
+  load-yaml($yaml-file.slurp);
+};
 
-  if $!cdata.not && $!exercise && (
-    my $cdata-file = $base-dir.add(
-      ".problem-specifications/exercises/$!exercise/canonical-data.json"
-    )
-  ) ~~ :f {
-    $!cdata = $cdata-file.slurp.trim;
-  }
+has %.cdata = do if ( my $cdata-file =
+  $base-dir.add(
+    ".problem-specifications/exercises/$!exercise/canonical-data.json"
+  )
+).f {
+  from-json($cdata-file.slurp);
+};
 
-  if @!case-uuids && $!cdata {
-    @!cases      = self.build-cases( from-json($!cdata) );
-    $!json-tests = to-json( @!cases, :sorted-keys );
-  }
-}
+has Str:D @.case-uuids = do if ( my $toml-file =
+  $base-dir.add("exercises/practice/$!exercise/.meta/tests.toml")
+).f {
+  from-toml($toml-file.slurp)<canonical-tests>.Set.keys;
+};
+
+has Hash:D @.cases = self.build-cases(%!cdata);
+
+has Str:D $.json-tests = @!cases ?? to-json( @!cases, :sorted-keys ) !! '';
 
 #| Retrieves cases from cdata which match case UUIDs
 submethod build-cases ( %obj, Str $description = '' ) {
@@ -54,7 +53,7 @@ submethod build-cases ( %obj, Str $description = '' ) {
     ).item;
   }
 
-  return;
+  return Empty;
 }
 
 #| The package name
@@ -75,8 +74,8 @@ method stub ( --> Str:D ) {
 #| A hash of rendered example solutions
 method examples ( --> Hash() ) {
   return %.data<examples>
-    ?? %.data<examples>.map({ .key => self!render(.value) })
-    !! base => self!render(%.data<example>);
+    ?? %.data<examples>.map({ .key => self!render( .value || '' ) })
+    !! base => self!render( %.data<example> || '' );
 }
 
 method !render ( Str $module_file? --> Str:D ) {
