@@ -1,5 +1,5 @@
 use Test;
-use lib ( my $base-dir = $?FILE.IO.resolve.parent(2) ).add('lib');
+use lib ( my $base-dir = $?FILE.IO.resolve.parent(3) ).add('lib');
 use Exercism::Generator;
 
 subtest '0 case UUIDs' => {

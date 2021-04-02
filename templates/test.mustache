@@ -4,17 +4,19 @@ use JSON::Fast;#`{{/cases}}#`{{#modules}}
 use #`{{&use}};#`{{/modules}}
 use lib $?FILE.IO.dirname;#`{{#lib_comment}} #`[#`{{&lib_comment}}]#`{{/lib_comment}}
 use #`{{&package}};#`{{#plan}}
-plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#`{{/plan}}
-#`{{#methods}}#`{{#methods_comment}}
-#`[#`{{&methods_comment}}]#`{{/methods_comment}}
-subtest 'Class methods', {
+plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#`{{/plan}}#`{{#methods}}
+
+#`{{#methods_comment}}#`[#`{{&methods_comment}}]
+#`{{/methods_comment}}subtest 'Class methods', {
   for <#`{{&methods}}> -> $method {
     can-ok #`{{&package}}, $method;
   }
-} or bail-out 'Cannot run expected method(s).';
-#`{{/methods}}#`{{#cases}}
-my @test-cases = from-json($=pod[*-1].contents).List;#`{{/cases}}
-#`{{&tests}}#`{{#catch_stub}}
+} or bail-out 'Cannot run expected method(s).';#`{{/methods}}#`{{#cases}}
+
+my @test-cases = from-json($=pod[*-1].contents).List;#`{{/cases}}#`{{#tests}}#`{{^cases}}
+#`{{/cases}}
+
+#`{{&tests}}#`{{/tests}}#`{{#catch_stub}}
 
 CATCH {
   when X::StubCode {
@@ -22,7 +24,9 @@ CATCH {
     note "{.message} (does the sub/method contain '!!!'?)\n"
       ~ .backtrace.concise;
   }
-}#`{{/catch_stub}}#`{{#cases}}
+}#`{{/catch_stub}}#`{{^plan}}
+
+done-testing;#`{{/plan}}#`{{#cases}}
 
 =head2 Test Cases
 =begin code

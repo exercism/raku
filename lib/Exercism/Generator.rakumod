@@ -1,40 +1,48 @@
 unit class Exercism::Generator;
 
+use nqp;
 use Config::TOML;
 use JSON::Fast;
 use Template::Mustache;
+use YAMLish;
 
 my $base-dir = $?FILE.IO.parent.add('../..');
 
-has Str    $.exercise;
-has        %.data       is rw;
-has        @.case-uuids is SetHash;
-has Str:D  $.cdata      = '';
-has Hash:D @.cases;
-has Str:D  $.json-tests = '';
+#| The exercise slug
+has Str:D $.exercise is required;
+#= e.g. hello-world
 
-submethod TWEAK {
-  if @!case-uuids.not && $!exercise && ( my $toml-file =
-    $base-dir.add("exercises/practice/$!exercise/.meta/tests.toml")
-  ) ~~ :f {
-    @!case-uuids = |from-toml($toml-file.slurp)<canonical-tests>;
-  }
+#| The data to be used for rendering templates
+has %.data = do if ( my $yaml-file =
+  $base-dir.add("exercises/practice/$!exercise/.meta/exercise-data.yaml")
+).f {
+  load-yaml($yaml-file.slurp);
+};
 
-  if $!cdata.not && $!exercise && (
-    my $cdata-file = $base-dir.add(
-      ".problem-specifications/exercises/$!exercise/canonical-data.json"
-    )
-  ) ~~ :f {
-    $!cdata = $cdata-file.slurp.trim;
-  }
+#| The parsed canonical-data.json from problem-specifications
+has %.cdata = do if ( my $cdata-file =
+  $base-dir.add(
+    ".problem-specifications/exercises/$!exercise/canonical-data.json"
+  )
+).f {
+  from-json($cdata-file.slurp);
+};
 
-  if @!case-uuids && $!cdata {
-    @!cases      = self.build-cases( from-json($!cdata) );
-    $!json-tests = to-json( @!cases, :sorted-keys );
-  }
-}
+#| The case UUIDs to use from cdata
+has Str:D @.case-uuids = do if (
+  my $toml-file = $base-dir.add("exercises/practice/$!exercise/.meta/tests.toml")
+).f {
+  from-toml($toml-file.slurp)<canonical-tests>.Set.keys;
+} #= e.g. [ '00000000-0000-0000-0000-000000000000' ]
+;
 
-#| Retrieves cases from cdata which match case UUIDs
+#| An array of cases matching case-uuids
+has Hash:D @.cases = self.build-cases(%!cdata);
+
+#| The JSON of test cases to be used in the test suite
+has Str:D $.json-tests = @!cases ?? to-json( @!cases, :sorted-keys ) !! '';
+
+# Retrieves cases from cdata which match case UUIDs
 submethod build-cases ( %obj, Str $description = '' ) {
   my Str $new-desc = '';
   if %obj<cases>.defined {
@@ -54,15 +62,16 @@ submethod build-cases ( %obj, Str $description = '' ) {
     ).item;
   }
 
-  return;
+  return Empty;
 }
 
 #| The package name
 method package ( --> Str:D ) {
   %.data<package> // $.exercise.split('-').map(&tclc).join;
 }
+#= e.g. HelloWorld
 
-#| A rendered test file
+#| A rendered test suite
 method test ( --> Str:D ) {
   self!render;
 }
@@ -75,8 +84,8 @@ method stub ( --> Str:D ) {
 #| A hash of rendered example solutions
 method examples ( --> Hash() ) {
   return %.data<examples>
-    ?? %.data<examples>.map({ .key => self!render(.value) })
-    !! base => self!render(%.data<example>);
+    ?? %.data<examples>.map({ .key => self!render( .value || '' ) })
+    !! base => self!render( %.data<example> || '' );
 }
 
 method !render ( Str $module_file? --> Str:D ) {
@@ -90,4 +99,45 @@ method !render ( Str $module_file? --> Str:D ) {
     ).slurp,
     %( |%data, :$module_file )
   );
+}
+
+#| Renders the templates and creates the files for the exercise
+method create-files ( --> Nil ) {
+  my $exercise-dir = $base-dir.add("exercises/$.exercise").mkdir;
+
+  # Test
+  my $testfile = $exercise-dir.add("$.exercise.rakutest");
+  $testfile.spurt($.test);
+  $testfile.chmod(0o755);
+
+  # Stub
+  $exercise-dir.add("$.package.rakumod").spurt($.stub);
+
+  # Examples
+  for $.examples.pairs -> $example {
+    if $example.key eq 'base' {
+      ( my $solution-dir = $exercise-dir
+        .add('.meta/solutions') )
+        .mkdir
+        .add("$.package.rakumod")
+        .spurt($example.value);
+      # This emulates Raku's symlink, which does not yet support non-absolute paths
+      try nqp::symlink(
+        "../../$_",
+        nqp::unbox_s( $solution-dir.add($_).absolute )
+      ) given $testfile.basename;
+    }
+    else {
+      ( my $solution-dir = $exercise-dir
+        .add(".meta/solutions/{$example.key}") )
+        .mkdir
+        .add("$.package.rakumod")
+        .spurt($example.value);
+      # This emulates Raku's symlink, which does not yet support non-absolute paths
+      try nqp::symlink(
+        "../../../$_",
+        nqp::unbox_s( $solution-dir.add($_).absolute )
+      ) given $testfile.basename;
+    }
+  }
 }

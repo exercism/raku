@@ -64,42 +64,7 @@ sub generate ($exercise) {
 
   print "Generating $exercise... ";
 
-  given Exercism::Generator.new(
-    :$exercise, data => load-yaml $yaml-file.absolute.IO.slurp
-  ) {
-    my $testfile = $exercise-dir.add("$exercise.rakutest");
-    $testfile.spurt(.test);
-    $testfile.chmod(0o755);
-
-    $exercise-dir.add("{.package}.rakumod").spurt(.stub);
-
-    $exercise-dir.add('.meta/solutions').mkdir;
-    for .examples.pairs -> $example {
-      if $example.key ~~ 'base' {
-        $exercise-dir
-          .add(".meta/solutions/{.package}.rakumod")
-          .spurt($example.value);
-        # This emulates Raku's symlink, which does not yet support non-absolute paths
-        try nqp::symlink(
-          "../../$_",
-          nqp::unbox_s( $exercise-dir.add(".meta/solutions/$_").absolute )
-        ) given $testfile.basename;
-      }
-      else {
-        $exercise-dir
-          .add(".meta/solutions/{$example.key}")
-          .mkdir;
-        $exercise-dir
-          .add(".meta/solutions/{$example.key}/{.package}.rakumod")
-          .spurt($example.value);
-        # This emulates Raku's symlink, which does not yet support non-absolute paths
-        try nqp::symlink(
-          "../../../$_",
-          nqp::unbox_s( $exercise-dir.add(".meta/solutions/{$example.key}/$_").absolute )
-        ) given $testfile.basename;
-      }
-    }
-  }
+  Exercism::Generator.new(:$exercise).create-files;
 
   say 'Generated.';
 }
