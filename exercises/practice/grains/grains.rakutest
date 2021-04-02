@@ -35,7 +35,7 @@ for @test-cases -> %case {
 =begin code
 [
   {
-    "description": "returns the number of grains on the square: 1",
+    "description": "returns the number of grains on the square: grains on square 1",
     "expected": 1,
     "input": {
       "square": 1
@@ -43,7 +43,7 @@ for @test-cases -> %case {
     "property": "square"
   },
   {
-    "description": "returns the number of grains on the square: 2",
+    "description": "returns the number of grains on the square: grains on square 2",
     "expected": 2,
     "input": {
       "square": 2
@@ -51,7 +51,7 @@ for @test-cases -> %case {
     "property": "square"
   },
   {
-    "description": "returns the number of grains on the square: 3",
+    "description": "returns the number of grains on the square: grains on square 3",
     "expected": 4,
     "input": {
       "square": 3
@@ -59,7 +59,7 @@ for @test-cases -> %case {
     "property": "square"
   },
   {
-    "description": "returns the number of grains on the square: 4",
+    "description": "returns the number of grains on the square: grains on square 4",
     "expected": 8,
     "input": {
       "square": 4
@@ -67,7 +67,7 @@ for @test-cases -> %case {
     "property": "square"
   },
   {
-    "description": "returns the number of grains on the square: 16",
+    "description": "returns the number of grains on the square: grains on square 16",
     "expected": 32768,
     "input": {
       "square": 16
@@ -75,7 +75,7 @@ for @test-cases -> %case {
     "property": "square"
   },
   {
-    "description": "returns the number of grains on the square: 32",
+    "description": "returns the number of grains on the square: grains on square 32",
     "expected": 2147483648,
     "input": {
       "square": 32
@@ -83,7 +83,7 @@ for @test-cases -> %case {
     "property": "square"
   },
   {
-    "description": "returns the number of grains on the square: 64",
+    "description": "returns the number of grains on the square: grains on square 64",
     "expected": 9223372036854775808,
     "input": {
       "square": 64
