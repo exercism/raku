@@ -32,7 +32,16 @@ has %.cdata = do if ( my $cdata-file =
 has Str:D @.case-uuids = do if (
   my $toml-file = $base-dir.add("exercises/practice/$!exercise/.meta/tests.toml")
 ).f {
-  from-toml($toml-file.slurp)<canonical-tests>.Set.keys;
+  given from-toml($toml-file.slurp) {
+    # TODO: Remove old toml format
+    when .<canonical-tests>:exists {
+      .<canonical-tests>.Set.keys;
+    }
+
+    default {
+      .grep({ .value.<include>:!exists || .value.<include> }).map(*.key);
+    }
+  }
 } #= e.g. [ '00000000-0000-0000-0000-000000000000' ]
 ;
 
