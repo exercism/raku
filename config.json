@@ -19,13 +19,13 @@
   "test_pattern": ".*\\.rakutest$",
   "files": {
     "solution": [
-      "%{kebab_slug}.rakumod"
+      "%{pascal_slug}.rakumod"
     ],
     "test": [
       "%{kebab_slug}.rakutest"
     ],
     "example": [
-      "%{kebab_slug}.rakumod"
+      "%{pascal_slug}.rakumod"
     ],
     "exemplar": [
       "%{kebab_slug}.rakutest"
