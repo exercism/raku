@@ -25,10 +25,10 @@
       "%{kebab_slug}.rakutest"
     ],
     "example": [
-      "%{pascal_slug}.rakumod"
+      ".meta/solutions/%{pascal_slug}.rakumod"
     ],
     "exemplar": [
-      "%{kebab_slug}.rakutest"
+      ".meta/solutions/%{kebab_slug}.rakutest"
     ]
   },
   "exercises": {
