@@ -28,7 +28,7 @@
       ".meta/solutions/%{pascal_slug}.rakumod"
     ],
     "exemplar": [
-      ".meta/solutions/%{kebab_slug}.rakutest"
+      ".meta/%{pascal_slug}.rakumod"
     ]
   },
   "exercises": {
