@@ -12,7 +12,9 @@
   "version": 3,
   "online_editor": {
     "indent_style": "space",
-    "indent_size": 4
+    "indent_size": 4,
+    "ace_editor_language": "raku",
+    "highlightjs_language": "perl"
   },
   "checklist_issue": 30,
   "solution_pattern": "\\.meta/solutions/.+\\.rakumod$",
