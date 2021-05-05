@@ -2,7 +2,9 @@
   "blurb": "Calculate the date of meetups.",
   "authors": [],
   "files": {
-    "solution": [],
+    "solution": [
+      "Meetup.rakumod"
+    ],
     "test": [
       "meetup.rakutest"
     ],

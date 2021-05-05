@@ -2,7 +2,9 @@
   "blurb": "Given a phrase, count the occurrences of each word in that phrase.",
   "authors": [],
   "files": {
-    "solution": [],
+    "solution": [
+      "WordCount.rakumod"
+    ],
     "test": [
       "word-count.rakutest"
     ],

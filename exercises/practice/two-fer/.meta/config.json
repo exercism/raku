@@ -2,7 +2,9 @@
   "blurb": "Create a sentence of the form \"One for X, one for me.\"",
   "authors": [],
   "files": {
-    "solution": [],
+    "solution": [
+      "TwoFer.rakumod"
+    ],
     "test": [
       "two-fer.rakutest"
     ],

@@ -2,7 +2,9 @@
   "blurb": "Given a year, report if it is a leap year.",
   "authors": [],
   "files": {
-    "solution": [],
+    "solution": [
+      "Leap.rakumod"
+    ],
     "test": [
       "leap.rakutest"
     ],

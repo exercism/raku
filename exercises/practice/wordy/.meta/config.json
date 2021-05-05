@@ -2,7 +2,9 @@
   "blurb": "Parse and evaluate simple math word problems returning the answer as an integer.",
   "authors": [],
   "files": {
-    "solution": [],
+    "solution": [
+      "Wordy.rakumod"
+    ],
     "test": [
       "wordy.rakutest"
     ],

@@ -2,7 +2,9 @@
   "blurb": "We are going to do the `Transform` step of an Extract-Transform-Load.",
   "authors": [],
   "files": {
-    "solution": [],
+    "solution": [
+      "Etl.rakumod"
+    ],
     "test": [
       "etl.rakutest"
     ],
