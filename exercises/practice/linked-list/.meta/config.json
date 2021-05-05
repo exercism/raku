@@ -2,9 +2,7 @@
   "blurb": "Implement a doubly linked list",
   "authors": [],
   "files": {
-    "solution": [
-      "linked-list.rakumod"
-    ],
+    "solution": [],
     "test": [
       "linked-list.rakutest"
     ],

@@ -2,9 +2,7 @@
   "blurb": "Convert a long phrase to its acronym",
   "authors": [],
   "files": {
-    "solution": [
-      "acronym.rakumod"
-    ],
+    "solution": [],
     "test": [
       "acronym.rakutest"
     ],

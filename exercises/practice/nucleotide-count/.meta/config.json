@@ -2,9 +2,7 @@
   "blurb": "Given a DNA string, compute how many times each nucleotide occurs in the string.",
   "authors": [],
   "files": {
-    "solution": [
-      "nucleotide-count.rakumod"
-    ],
+    "solution": [],
     "test": [
       "nucleotide-count.rakutest"
     ],

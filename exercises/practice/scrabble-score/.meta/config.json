@@ -2,9 +2,7 @@
   "blurb": "Given a word, compute the Scrabble score for that word.",
   "authors": [],
   "files": {
-    "solution": [
-      "scrabble-score.rakumod"
-    ],
+    "solution": [],
     "test": [
       "scrabble-score.rakutest"
     ],

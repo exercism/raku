@@ -2,9 +2,7 @@
   "blurb": "The classical introductory exercise. Just say \"Hello, World!\"",
   "authors": [],
   "files": {
-    "solution": [
-      "hello-world.rakumod"
-    ],
+    "solution": [],
     "test": [
       "hello-world.rakutest"
     ],

@@ -2,9 +2,7 @@
   "blurb": "Write a function to convert from normal numbers to Roman Numerals.",
   "authors": [],
   "files": {
-    "solution": [
-      "roman-numerals.rakumod"
-    ],
+    "solution": [],
     "test": [
       "roman-numerals.rakutest"
     ],

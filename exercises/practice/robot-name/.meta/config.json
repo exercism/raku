@@ -2,9 +2,7 @@
   "blurb": "Manage robot factory settings.",
   "authors": [],
   "files": {
-    "solution": [
-      "robot-name.rakumod"
-    ],
+    "solution": [],
     "test": [
       "robot-name.rakutest"
     ],

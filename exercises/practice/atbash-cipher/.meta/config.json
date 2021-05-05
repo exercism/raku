@@ -2,9 +2,7 @@
   "blurb": "Create an implementation of the atbash cipher, an ancient encryption system created in the Middle East.",
   "authors": [],
   "files": {
-    "solution": [
-      "atbash-cipher.rakumod"
-    ],
+    "solution": [],
     "test": [
       "atbash-cipher.rakutest"
     ],

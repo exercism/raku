@@ -2,9 +2,7 @@
   "blurb": "Implement a clock that handles times without dates.",
   "authors": [],
   "files": {
-    "solution": [
-      "clock.rakumod"
-    ],
+    "solution": [],
     "test": [
       "clock.rakutest"
     ],
