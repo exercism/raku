@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "flatten-array.rakumod"
+      "FlattenArray.rakumod"
     ],
     "test": [
       "flatten-array.rakutest"
     ],
     "example": [
-      "flatten-array.rakumod"
+      ".meta/solutions/FlattenArray.rakumod"
     ]
   },
   "source": "Interview Question",

@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "clock.rakumod"
+      "Clock.rakumod"
     ],
     "test": [
       "clock.rakutest"
     ],
     "example": [
-      "clock.rakumod"
+      ".meta/solutions/Clock.rakumod"
     ]
   },
   "source": "Pairing session with Erin Drummond",

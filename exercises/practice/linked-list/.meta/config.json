@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "linked-list.rakumod"
+      "LinkedList.rakumod"
     ],
     "test": [
       "linked-list.rakutest"
     ],
     "example": [
-      "linked-list.rakumod"
+      ".meta/solutions/LinkedList.rakumod"
     ]
   },
   "source": "Classic computer science topic"

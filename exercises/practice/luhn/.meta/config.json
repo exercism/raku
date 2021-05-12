@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "luhn.rakumod"
+      "Luhn.rakumod"
     ],
     "test": [
       "luhn.rakutest"
     ],
     "example": [
-      "luhn.rakumod"
+      ".meta/solutions/Luhn.rakumod"
     ]
   },
   "source": "The Luhn Algorithm on Wikipedia",

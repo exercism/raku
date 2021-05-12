@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "scrabble-score.rakumod"
+      "Scrabble.rakumod"
     ],
     "test": [
       "scrabble-score.rakutest"
     ],
     "example": [
-      "scrabble-score.rakumod"
+      ".meta/solutions/Scrabble.rakumod"
     ]
   },
   "source": "Inspired by the Extreme Startup game",

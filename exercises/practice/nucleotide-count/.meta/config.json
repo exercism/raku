@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "nucleotide-count.rakumod"
+      "NucleotideCount.rakumod"
     ],
     "test": [
       "nucleotide-count.rakutest"
     ],
     "example": [
-      "nucleotide-count.rakumod"
+      ".meta/solutions/NucleotideCount.rakumod"
     ]
   },
   "source": "The Calculating DNA Nucleotides_problem at Rosalind",

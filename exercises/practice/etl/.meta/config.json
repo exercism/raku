@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "etl.rakumod"
+      "ETL.rakumod"
     ],
     "test": [
       "etl.rakutest"
     ],
     "example": [
-      "etl.rakumod"
+      ".meta/solutions/ETL.rakumod"
     ]
   },
   "source": "The Jumpstart Lab team",

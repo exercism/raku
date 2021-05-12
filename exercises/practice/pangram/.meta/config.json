@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "pangram.rakumod"
+      "Pangram.rakumod"
     ],
     "test": [
       "pangram.rakutest"
     ],
     "example": [
-      "pangram.rakumod"
+      ".meta/solutions/Pangram.rakumod"
     ]
   },
   "source": "Wikipedia",

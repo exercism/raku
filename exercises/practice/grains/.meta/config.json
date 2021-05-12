@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "grains.rakumod"
+      "Grains.rakumod"
     ],
     "test": [
       "grains.rakutest"
     ],
     "example": [
-      "grains.rakumod"
+      ".meta/solutions/Grains.rakumod"
     ]
   },
   "source": "JavaRanch Cattle Drive, exercise 6",

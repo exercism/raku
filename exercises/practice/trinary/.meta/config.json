@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "trinary.rakumod"
+      "Trinary.rakumod"
     ],
     "test": [
       "trinary.rakutest"
     ],
     "example": [
-      "trinary.rakumod"
+      ".meta/solutions/Trinary.rakumod"
     ]
   },
   "source": "All of Computer Science",

@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "atbash-cipher.rakumod"
+      "AtbashCipher.rakumod"
     ],
     "test": [
       "atbash-cipher.rakutest"
     ],
     "example": [
-      "atbash-cipher.rakumod"
+      ".meta/solutions/AtbashCipher.rakumod"
     ]
   },
   "source": "Wikipedia",

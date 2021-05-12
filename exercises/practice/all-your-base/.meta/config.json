@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "all-your-base.rakumod"
+      "AllYourBase.rakumod"
     ],
     "test": [
       "all-your-base.rakutest"
     ],
     "example": [
-      "all-your-base.rakumod"
+      ".meta/solutions/AllYourBase.rakumod"
     ]
   }
 }

@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "space-age.rakumod"
+      "SpaceAge.rakumod"
     ],
     "test": [
       "space-age.rakutest"
     ],
     "example": [
-      "space-age.rakumod"
+      ".meta/solutions/SpaceAge.rakumod"
     ]
   },
   "source": "Partially inspired by Chapter 1 in Chris Pine's online Learn to Program tutorial.",
