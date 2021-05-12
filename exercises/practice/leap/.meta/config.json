@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "leap.rakumod"
+      "Leap.rakumod"
     ],
     "test": [
       "leap.rakutest"
     ],
     "example": [
-      "leap.rakumod"
+      ".meta/solutions/Leap.rakumod"
     ]
   },
   "source": "JavaRanch Cattle Drive, exercise 3",

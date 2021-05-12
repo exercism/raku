@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "meetup.rakumod"
+      "Meetup.rakumod"
     ],
     "test": [
       "meetup.rakutest"
     ],
     "example": [
-      "meetup.rakumod"
+      ".meta/solutions/Meetup.rakumod"
     ]
   },
   "source": "Jeremy Hinegardner mentioned a Boulder meetup that happens on the Wednesteenth of every month",

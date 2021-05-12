@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "acronym.rakumod"
+      "Acronym.rakumod"
     ],
     "test": [
       "acronym.rakutest"
     ],
     "example": [
-      "acronym.rakumod"
+      ".meta/solutions/Acronym.rakumod"
     ]
   },
   "source": "Julien Vanier",

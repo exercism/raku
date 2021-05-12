@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "allergies.rakumod"
+      "Allergies.rakumod"
     ],
     "test": [
       "allergies.rakutest"
     ],
     "example": [
-      "allergies.rakumod"
+      ".meta/solutions/Allergies.rakumod"
     ]
   },
   "source": "Jumpstart Lab Warm-up",

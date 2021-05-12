@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "anagram.rakumod"
+      "Anagram.rakumod"
     ],
     "test": [
       "anagram.rakutest"
     ],
     "example": [
-      "anagram.rakumod"
+      ".meta/solutions/Anagram.rakumod"
     ]
   },
   "source": "Inspired by the Extreme Startup game",

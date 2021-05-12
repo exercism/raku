@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "grade-school.rakumod"
+      "GradeSchool.rakumod"
     ],
     "test": [
       "grade-school.rakutest"
     ],
     "example": [
-      "grade-school.rakumod"
+      ".meta/solutions/GradeSchool.rakumod"
     ]
   },
   "source": "A pairing session with Phil Battos at gSchool",

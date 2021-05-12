@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "rna-transcription.rakumod"
+      "RNA.rakumod"
     ],
     "test": [
       "rna-transcription.rakutest"
     ],
     "example": [
-      "rna-transcription.rakumod"
+      ".meta/solutions/RNA.rakumod"
     ]
   },
   "source": "Hyperphysics",

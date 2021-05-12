@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "accumulate.rakumod"
+      "Accumulate.rakumod"
     ],
     "test": [
       "accumulate.rakutest"
     ],
     "example": [
-      "accumulate.rakumod"
+      ".meta/solutions/Accumulate.rakumod"
     ]
   },
   "source": "Conversation with James Edward Gray II",
