@@ -13,7 +13,7 @@ for @test-cases -> %case {
         { hamming-distance |%case<input><strand1 strand2> },
         Exception,
         message => /
-          'left and right strands must be of equal length'
+          'strands must be of equal length'
           || 'Constraint type check failed in binding to parameter'
         /,
         %case<description>;
@@ -77,7 +77,7 @@ for @test-cases -> %case {
   {
     "description": "disallow first strand longer",
     "expected": {
-      "error": "left and right strands must be of equal length"
+      "error": "strands must be of equal length"
     },
     "input": {
       "strand1": "AATG",
@@ -88,7 +88,7 @@ for @test-cases -> %case {
   {
     "description": "disallow second strand longer",
     "expected": {
-      "error": "left and right strands must be of equal length"
+      "error": "strands must be of equal length"
     },
     "input": {
       "strand1": "ATA",
@@ -97,9 +97,9 @@ for @test-cases -> %case {
     "property": "distance"
   },
   {
-    "description": "disallow left empty strand",
+    "description": "disallow empty first strand",
     "expected": {
-      "error": "left strand must not be empty"
+      "error": "strands must be of equal length"
     },
     "input": {
       "strand1": "",
@@ -108,9 +108,9 @@ for @test-cases -> %case {
     "property": "distance"
   },
   {
-    "description": "disallow right empty strand",
+    "description": "disallow empty second strand",
     "expected": {
-      "error": "right strand must not be empty"
+      "error": "strands must be of equal length"
     },
     "input": {
       "strand1": "G",

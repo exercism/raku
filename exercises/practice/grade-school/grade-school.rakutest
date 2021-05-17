@@ -3,7 +3,7 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use GradeSchool;
-plan 7;
+plan 8;
 
 my @test-cases = from-json($=pod[*-1].contents).List;
 for @test-cases -> %case {
@@ -25,6 +25,25 @@ for @test-cases -> %case {
         [
           "Aimee",
           2
+        ]
+      ]
+    },
+    "property": "roster"
+  },
+  {
+    "description": "A student can't be in two different grades",
+    "expected": [
+    ],
+    "input": {
+      "desiredGrade": 2,
+      "students": [
+        [
+          "Aimee",
+          2
+        ],
+        [
+          "Aimee",
+          1
         ]
       ]
     },

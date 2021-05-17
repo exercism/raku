@@ -14,7 +14,7 @@ for @test-cases -> %case {
 =begin code
 [
   {
-    "description": "Abbreviate a phrase: basic",
+    "description": "basic",
     "expected": "PNG",
     "input": {
       "phrase": "Portable Network Graphics"
@@ -22,7 +22,7 @@ for @test-cases -> %case {
     "property": "abbreviate"
   },
   {
-    "description": "Abbreviate a phrase: lowercase words",
+    "description": "lowercase words",
     "expected": "ROR",
     "input": {
       "phrase": "Ruby on Rails"
@@ -30,7 +30,7 @@ for @test-cases -> %case {
     "property": "abbreviate"
   },
   {
-    "description": "Abbreviate a phrase: punctuation",
+    "description": "punctuation",
     "expected": "FIFO",
     "input": {
       "phrase": "First In, First Out"
@@ -38,7 +38,7 @@ for @test-cases -> %case {
     "property": "abbreviate"
   },
   {
-    "description": "Abbreviate a phrase: all caps word",
+    "description": "all caps word",
     "expected": "GIMP",
     "input": {
       "phrase": "GNU Image Manipulation Program"
@@ -46,7 +46,7 @@ for @test-cases -> %case {
     "property": "abbreviate"
   },
   {
-    "description": "Abbreviate a phrase: punctuation without whitespace",
+    "description": "punctuation without whitespace",
     "expected": "CMOS",
     "input": {
       "phrase": "Complementary metal-oxide semiconductor"
@@ -54,7 +54,7 @@ for @test-cases -> %case {
     "property": "abbreviate"
   },
   {
-    "description": "Abbreviate a phrase: very long abbreviation",
+    "description": "very long abbreviation",
     "expected": "ROTFLSHTMDCOALM",
     "input": {
       "phrase": "Rolling On The Floor Laughing So Hard That My Dogs Came Over And Licked Me"
@@ -62,7 +62,7 @@ for @test-cases -> %case {
     "property": "abbreviate"
   },
   {
-    "description": "Abbreviate a phrase: consecutive delimiters",
+    "description": "consecutive delimiters",
     "expected": "SIMUFTA",
     "input": {
       "phrase": "Something - I made up from thin air"
@@ -70,7 +70,7 @@ for @test-cases -> %case {
     "property": "abbreviate"
   },
   {
-    "description": "Abbreviate a phrase: apostrophes",
+    "description": "apostrophes",
     "expected": "HC",
     "input": {
       "phrase": "Halley's Comet"
@@ -78,7 +78,7 @@ for @test-cases -> %case {
     "property": "abbreviate"
   },
   {
-    "description": "Abbreviate a phrase: underscore emphasis",
+    "description": "underscore emphasis",
     "expected": "TRNT",
     "input": {
       "phrase": "The Road _Not_ Taken"

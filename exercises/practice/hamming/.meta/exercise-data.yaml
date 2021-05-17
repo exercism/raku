@@ -7,7 +7,7 @@ tests: |-
           { hamming-distance |%case<input><strand1 strand2> },
           Exception,
           message => /
-            'left and right strands must be of equal length'
+            'strands must be of equal length'
             || 'Constraint type check failed in binding to parameter'
           /,
           %case<description>;
