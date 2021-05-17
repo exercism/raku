@@ -1,43 +1,123 @@
 #!/usr/bin/env raku
 use Test;
+use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Accumulate;
-plan 6;
+plan 5;
 
-is-deeply
-  accumulate( [], -> {} ),
-  [],
-  'test empty';
-
-is-deeply
-  accumulate( 1..5, *² ),
-  [1, 4, 9, 16, 25],
-  'raise to 2';
-
-is-deeply
-  accumulate(
-    (10, 17, 23),
-    { $^a div 7, $a % 7 }
-  ),
-  [ (1, 3), (2, 3), (3, 2) ],
-  'divmod';
-
-is-deeply
-  accumulate( <hello exercism>, *.uc ),
-  [<HELLO EXERCISM>],
-  'capitalize';
-
-is-deeply
-  accumulate(
-    <a b c>,
-    -> $letter {
-      ( accumulate 1..3, { $letter ~ $^number } )
+my @test-cases = from-json($=pod[*-1].contents).List;
+for @test-cases -> %case {
+  my &func = do given %case<input><accumulator> {
+    when '(x) => x * x'      { -> $x { $x * $x } }
+    when '(x) => upcase(x)'  { &uc }
+    when '(x) => reverse(x)' { &flip }
+    when '(x) => accumulate(["1", "2", "3"], (y) => x + y))' {
+      -> $x { accumulate [1..3], -> $y { $x ~ $y } };
     }
-  ),
-  [ [<a1 a2 a3>], [<b1 b2 b3>], [<c1 c2 c3>] ],
-  'recursive';
+    default { -> { die } }
+  };
 
-is-deeply
-  accumulate( <the quick brown fox>, *.flip ),
-  [<eht kciuq nworb xof>],
-  'reverse strings';
+  is-deeply(
+    accumulate( %case<input><list>, &func ),
+    |%case<expected description>
+  );
+}
+
+=head2 Test Cases
+=begin code
+[
+  {
+    "description": "accumulate empty",
+    "expected": [
+    ],
+    "input": {
+      "accumulator": "(x) => x * x",
+      "list": [
+      ]
+    },
+    "property": "accumulate"
+  },
+  {
+    "description": "accumulate squares",
+    "expected": [
+      1,
+      4,
+      9
+    ],
+    "input": {
+      "accumulator": "(x) => x * x",
+      "list": [
+        1,
+        2,
+        3
+      ]
+    },
+    "property": "accumulate"
+  },
+  {
+    "description": "accumulate upcases",
+    "expected": [
+      "HELLO",
+      "WORLD"
+    ],
+    "input": {
+      "accumulator": "(x) => upcase(x)",
+      "list": [
+        "Hello",
+        "world"
+      ]
+    },
+    "property": "accumulate"
+  },
+  {
+    "description": "accumulate reversed strings",
+    "expected": [
+      "eht",
+      "kciuq",
+      "nworb",
+      "xof",
+      "cte"
+    ],
+    "input": {
+      "accumulator": "(x) => reverse(x)",
+      "list": [
+        "the",
+        "quick",
+        "brown",
+        "fox",
+        "etc"
+      ]
+    },
+    "property": "accumulate"
+  },
+  {
+    "description": "accumulate recursively",
+    "expected": [
+      [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      [
+        "c1",
+        "c2",
+        "c3"
+      ]
+    ],
+    "input": {
+      "accumulator": "(x) => accumulate([\"1\", \"2\", \"3\"], (y) => x + y))",
+      "list": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    "property": "accumulate"
+  }
+]
+=end code
