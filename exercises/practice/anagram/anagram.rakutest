@@ -32,16 +32,16 @@ for @test-cases -> %case {
   {
     "description": "detects two anagrams",
     "expected": [
-      "stream",
-      "maters"
+      "lemons",
+      "melons"
     ],
     "input": {
       "candidates": [
-        "stream",
-        "pigeon",
-        "maters"
+        "lemons",
+        "cherry",
+        "melons"
       ],
-      "subject": "master"
+      "subject": "solemn"
     },
     "property": "findAnagrams"
   },

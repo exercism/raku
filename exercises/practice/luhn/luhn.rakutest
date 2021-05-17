@@ -3,7 +3,7 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Luhn;
-plan 18;
+plan 19;
 
 my @test-cases = from-json($=pod[*-1].contents).List;
 for @test-cases -> %case {
@@ -158,6 +158,14 @@ for @test-cases -> %case {
     "expected": false,
     "input": {
       "value": ":9"
+    },
+    "property": "valid"
+  },
+  {
+    "description": "non-numeric, non-space char in the middle with a sum that's divisible by 10 isn't allowed",
+    "expected": false,
+    "input": {
+      "value": "59%59"
     },
     "property": "valid"
   }
