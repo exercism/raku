@@ -9,7 +9,7 @@
       "wordy.rakutest"
     ],
     "example": [
-      "wordy.rakumod"
+      ".meta/solutions/Wordy.rakumod"
     ]
   },
   "source": "Inspired by one of the generated questions in the Extreme Startup game.",

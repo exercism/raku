@@ -9,7 +9,7 @@
       "grade-school.rakutest"
     ],
     "example": [
-      "grade-school.rakumod"
+      ".meta/solutions/GradeSchool.rakumod"
     ]
   },
   "source": "A pairing session with Phil Battos at gSchool",

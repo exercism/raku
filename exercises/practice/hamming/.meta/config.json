@@ -9,7 +9,7 @@
       "hamming.rakutest"
     ],
     "example": [
-      "hamming.rakumod"
+      ".meta/solutions/Hamming.rakumod"
     ]
   },
   "source": "The Calculating Point Mutations problem at Rosalind",

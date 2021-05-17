@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "RobotName.rakumod"
+      "Robot.rakumod"
     ],
     "test": [
       "robot-name.rakutest"
     ],
     "example": [
-      "robot-name.rakumod"
+      ".meta/solutions/random/Robot.rakumod"
     ]
   },
   "source": "A debugging session with Paul Blackwell at gSchool."

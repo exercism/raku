@@ -9,7 +9,7 @@
       "binary.rakutest"
     ],
     "example": [
-      "binary.rakumod"
+      ".meta/solutions/Binary.rakumod"
     ]
   },
   "source": "All of Computer Science",

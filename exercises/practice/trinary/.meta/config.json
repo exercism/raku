@@ -9,7 +9,7 @@
       "trinary.rakutest"
     ],
     "example": [
-      "trinary.rakumod"
+      ".meta/solutions/Trinary.rakumod"
     ]
   },
   "source": "All of Computer Science",

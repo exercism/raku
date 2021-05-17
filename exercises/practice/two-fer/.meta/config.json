@@ -9,7 +9,7 @@
       "two-fer.rakutest"
     ],
     "example": [
-      "two-fer.rakumod"
+      ".meta/solutions/TwoFer.rakumod"
     ]
   },
   "source_url": "https://github.com/exercism/problem-specifications/issues/757"

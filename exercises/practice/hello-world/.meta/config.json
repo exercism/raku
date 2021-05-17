@@ -9,7 +9,7 @@
       "hello-world.rakutest"
     ],
     "example": [
-      "hello-world.rakumod"
+      ".meta/solutions/HelloWorld.rakumod"
     ]
   },
   "source": "This is an exercise to introduce users to using Exercism",

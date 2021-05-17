@@ -9,7 +9,7 @@
       "allergies.rakutest"
     ],
     "example": [
-      "allergies.rakumod"
+      ".meta/solutions/Allergies.rakumod"
     ]
   },
   "source": "Jumpstart Lab Warm-up",

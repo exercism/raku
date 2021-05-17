@@ -9,7 +9,7 @@
       "atbash-cipher.rakutest"
     ],
     "example": [
-      "atbash-cipher.rakumod"
+      ".meta/solutions/AtbashCipher.rakumod"
     ]
   },
   "source": "Wikipedia",

@@ -9,7 +9,7 @@
       "clock.rakutest"
     ],
     "example": [
-      "clock.rakumod"
+      ".meta/solutions/Clock.rakumod"
     ]
   },
   "source": "Pairing session with Erin Drummond",

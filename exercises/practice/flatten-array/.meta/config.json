@@ -9,7 +9,7 @@
       "flatten-array.rakutest"
     ],
     "example": [
-      "flatten-array.rakumod"
+      ".meta/solutions/FlattenArray.rakumod"
     ]
   },
   "source": "Interview Question",

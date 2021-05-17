@@ -9,7 +9,7 @@
       "all-your-base.rakutest"
     ],
     "example": [
-      "all-your-base.rakumod"
+      ".meta/solutions/AllYourBase.rakumod"
     ]
   }
 }

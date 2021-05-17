@@ -9,7 +9,7 @@
       "linked-list.rakutest"
     ],
     "example": [
-      "linked-list.rakumod"
+      ".meta/solutions/LinkedList.rakumod"
     ]
   },
   "source": "Classic computer science topic"

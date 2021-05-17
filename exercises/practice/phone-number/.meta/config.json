@@ -3,13 +3,13 @@
   "authors": [],
   "files": {
     "solution": [
-      "PhoneNumber.rakumod"
+      "Phone.rakumod"
     ],
     "test": [
       "phone-number.rakutest"
     ],
     "example": [
-      "phone-number.rakumod"
+      ".meta/solutions/Phone.rakumod"
     ]
   },
   "source": "Event Manager by JumpstartLab",

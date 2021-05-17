@@ -9,7 +9,7 @@
       "acronym.rakutest"
     ],
     "example": [
-      "acronym.rakumod"
+      ".meta/solutions/Acronym.rakumod"
     ]
   },
   "source": "Julien Vanier",

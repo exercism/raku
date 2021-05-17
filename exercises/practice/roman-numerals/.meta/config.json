@@ -9,7 +9,7 @@
       "roman-numerals.rakutest"
     ],
     "example": [
-      "roman-numerals.rakumod"
+      ".meta/solutions/RomanNumerals.rakumod"
     ]
   },
   "source": "The Roman Numeral Kata",

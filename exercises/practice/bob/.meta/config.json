@@ -9,7 +9,7 @@
       "bob.rakutest"
     ],
     "example": [
-      "bob.rakumod"
+      ".meta/solutions/Bob.rakumod"
     ]
   },
   "source": "Inspired by the 'Deaf Grandma' exercise in Chris Pine's Learn to Program tutorial.",

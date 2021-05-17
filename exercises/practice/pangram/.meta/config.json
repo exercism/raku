@@ -9,7 +9,7 @@
       "pangram.rakutest"
     ],
     "example": [
-      "pangram.rakumod"
+      ".meta/solutions/Pangram.rakumod"
     ]
   },
   "source": "Wikipedia",
