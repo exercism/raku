@@ -1,7 +1,5 @@
 .problem-specifications
 bin/configlet
 bin/configlet.exe
-bin/canonical_data_syncer
-bin/canonical_data_syncer.exe
 # dir created when a Raku module is used
 .precomp
