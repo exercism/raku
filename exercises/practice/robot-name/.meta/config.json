@@ -1,6 +1,14 @@
 {
   "blurb": "Manage robot factory settings.",
-  "authors": [],
+  "authors": [
+    "dnmfarrell"
+  ],
+  "contributors": [
+    "kotp",
+    "kytrinyx",
+    "m-dango",
+    "yanick"
+  ],
   "files": {
     "solution": [
       "Robot.rakumod"

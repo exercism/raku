@@ -1,6 +1,12 @@
 {
   "blurb": "Parse and evaluate simple math word problems returning the answer as an integer.",
-  "authors": [],
+  "authors": [
+    "yanick"
+  ],
+  "contributors": [
+    "kotp",
+    "m-dango"
+  ],
   "files": {
     "solution": [
       "Wordy.rakumod"

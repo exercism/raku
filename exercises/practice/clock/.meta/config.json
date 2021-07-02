@@ -1,6 +1,11 @@
 {
   "blurb": "Implement a clock that handles times without dates.",
-  "authors": [],
+  "authors": [
+    "m-dango"
+  ],
+  "contributors": [
+    "kotp"
+  ],
   "files": {
     "solution": [
       "Clock.rakumod"
