@@ -19,8 +19,6 @@
     "average_run_time": 2.0
   },
   "checklist_issue": 30,
-  "solution_pattern": "\\.meta/solutions/.+\\.rakumod$",
-  "test_pattern": ".*\\.rakutest$",
   "files": {
     "solution": [
       "%{pascal_slug}.rakumod"
