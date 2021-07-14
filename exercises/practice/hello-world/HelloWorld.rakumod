@@ -5,6 +5,5 @@
 unit module HelloWorld;
 
 sub hello is export {
-  # Write your solution to pass the test suite here.
-  # Be sure to remove all stock comments once you are done!
+  'Goodbye, Mars!'
 }
