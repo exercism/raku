@@ -215,7 +215,7 @@
         "uuid": "1d36c4df-a1c8-454c-b4ec-7bec3c1cbca3",
         "practices": [],
         "prerequisites": [],
-        "difficulty": 0,
+        "difficulty": 1,
         "topics": null,
         "status": "deprecated"
       },
@@ -225,7 +225,7 @@
         "uuid": "eb5415a2-1342-4dcb-ac86-34240e5dead8",
         "practices": [],
         "prerequisites": [],
-        "difficulty": 0,
+        "difficulty": 1,
         "topics": null,
         "status": "deprecated"
       },
