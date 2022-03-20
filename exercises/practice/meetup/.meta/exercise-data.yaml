@@ -1,14 +1,24 @@
 plan: 95
 tests: |-
-  =head2 Notes
-  =begin para
-  This exercise expects you to parse the description string
-  rather than using the input values
-  =end para
+  constant @months = <
+    January February March     April   May      June
+    July    August   September October November December
+  >;
+
   for @test-cases -> %case {
-    is meetup-date(%case<description>),
+    is(
+      meetup-date(
+        sprintf(
+          '%s %s of %s %u',
+          %case<input><week>.tc,
+          %case<input><dayofweek>,
+          @months[%case<input><month> - 1],
+          %case<input><year>,
+        )
+      ),
       Date.new(%case<expected>),
-      %case<description>;
+      %case<description>
+    );
   }
 
 unit: module
@@ -20,21 +30,19 @@ example: |-
 
       given .[*-2] {
         $date.=later: months => %(<
-          January February March
-          April May June
-          July August September
-          October November December
+          January February March     April   May      June
+          July    August   September October November December
         >.antipairs){$_}
       }
 
       $day-of-week = S/day// given .[1].lc;
       $date.=later: days => (given .[0] {
-        when 'first'   { 0}
-        when 'second'  { 7}
-        when 'third'   {14}
-        when 'fourth'  {21}
-        when /teenth$/ {$day-of-week = S/teenth// given $_; 12}
-        when 'last'    {$date.=later(:1month); -7}
+        when 'First'   { 0}
+        when 'Second'  { 7}
+        when 'Third'   {14}
+        when 'Fourth'  {21}
+        when 'Teenth'  {12}
+        when 'Last'    {$date.=later(:1month); -7}
       });
     }
 
