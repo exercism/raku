@@ -16,7 +16,17 @@ for @test-cases -> %case {
 =begin code
 [
   {
-    "description": "Adding a student adds them to the sorted roster",
+    "description": "Roster is empty when no student is added",
+    "expected": [
+    ],
+    "input": {
+      "students": [
+      ]
+    },
+    "property": "roster"
+  },
+  {
+    "description": "Student is added to the roster",
     "expected": [
       "Aimee"
     ],
@@ -24,6 +34,31 @@ for @test-cases -> %case {
       "students": [
         [
           "Aimee",
+          2
+        ]
+      ]
+    },
+    "property": "roster"
+  },
+  {
+    "description": "Multiple students in the same grade are added to the roster",
+    "expected": [
+      "Blair",
+      "James",
+      "Paul"
+    ],
+    "input": {
+      "students": [
+        [
+          "Blair",
+          2
+        ],
+        [
+          "James",
+          2
+        ],
+        [
+          "Paul",
           2
         ]
       ]
@@ -50,32 +85,7 @@ for @test-cases -> %case {
     "property": "roster"
   },
   {
-    "description": "Adding more students adds them to the sorted roster",
-    "expected": [
-      "Blair",
-      "James",
-      "Paul"
-    ],
-    "input": {
-      "students": [
-        [
-          "Blair",
-          2
-        ],
-        [
-          "James",
-          2
-        ],
-        [
-          "Paul",
-          2
-        ]
-      ]
-    },
-    "property": "roster"
-  },
-  {
-    "description": "Adding students to different grades adds them to the same sorted roster",
+    "description": "Students in multiple grades are added to the roster",
     "expected": [
       "Chelsea",
       "Logan"
@@ -95,17 +105,7 @@ for @test-cases -> %case {
     "property": "roster"
   },
   {
-    "description": "Roster returns an empty list if there are no students enrolled",
-    "expected": [
-    ],
-    "input": {
-      "students": [
-      ]
-    },
-    "property": "roster"
-  },
-  {
-    "description": "Student names with grades are displayed in the same sorted roster",
+    "description": "Students are sorted by grades and then by name in the roster",
     "expected": [
       "Anna",
       "Barb",
@@ -150,7 +150,18 @@ for @test-cases -> %case {
     "property": "roster"
   },
   {
-    "description": "Grade returns the students in that grade in alphabetical order",
+    "description": "Grade is empty if no students in the roster",
+    "expected": [
+    ],
+    "input": {
+      "desiredGrade": 1,
+      "students": [
+      ]
+    },
+    "property": "grade"
+  },
+  {
+    "description": "Students are sorted by name in a grade",
     "expected": [
       "Bradley",
       "Franklin"
@@ -170,17 +181,6 @@ for @test-cases -> %case {
           "Jeff",
           1
         ]
-      ]
-    },
-    "property": "grade"
-  },
-  {
-    "description": "Grade returns an empty list if there are no students in that grade",
-    "expected": [
-    ],
-    "input": {
-      "desiredGrade": 1,
-      "students": [
       ]
     },
     "property": "grade"
