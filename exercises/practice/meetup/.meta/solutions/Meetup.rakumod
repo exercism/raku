@@ -7,21 +7,19 @@ sub meetup-date (Str:D $desc --> Date:D) is export {
 
     given .[*-2] {
       $date.=later: months => %(<
-        January February March
-        April May June
-        July August September
-        October November December
+        January February March     April   May      June
+        July    August   September October November December
       >.antipairs){$_}
     }
 
     $day-of-week = S/day// given .[1].lc;
     $date.=later: days => (given .[0] {
-      when 'first'   { 0}
-      when 'second'  { 7}
-      when 'third'   {14}
-      when 'fourth'  {21}
-      when /teenth$/ {$day-of-week = S/teenth// given $_; 12}
-      when 'last'    {$date.=later(:1month); -7}
+      when 'First'   { 0}
+      when 'Second'  { 7}
+      when 'Third'   {14}
+      when 'Fourth'  {21}
+      when 'Teenth'  {12}
+      when 'Last'    {$date.=later(:1month); -7}
     });
   }
 
