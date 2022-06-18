@@ -1,0 +1,45 @@
+plan: 10
+tests: |-
+  for @test-cases -> %case {
+      given %case<property> {
+          when 'data' {
+              is-deeply
+                create-binary-tree(%case<input><treeData>),
+                |%case<expected description>;
+          }
+
+          when 'sortedData' {
+              is-deeply
+                sort-binary-tree(create-binary-tree(%case<input><treeData>)),
+                |%case<expected description>;
+          }
+      }
+  }
+
+unit: module
+
+example: |-
+  use Exercism::QuickSolve;
+
+  sub create-binary-tree ($data) is export {
+      return quicksolve(
+          input => $data,
+          :input-key<treeData>,
+          :property<data>,
+      ) // $data;
+  }
+
+  sub sort-binary-tree ($tree) is export {
+      return quicksolve(
+          input => $tree,
+          :input-key<treeData>,
+          :property<sortedData>,
+      );
+  }
+
+stub: |-
+  sub create-binary-tree (@data) is export {
+  }
+
+  sub sort-binary-tree (%tree) is export {
+  }
