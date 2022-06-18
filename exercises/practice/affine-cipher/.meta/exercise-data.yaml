@@ -1,0 +1,57 @@
+plan: 16
+tests: |-
+  for @test-cases -> %case {
+      if %case<property> eq 'encode' {
+          given %case<expected> {
+              when .<error>.so {
+                  throws-like
+                    { encode-affine %case<input> },
+                    Exception,
+                    %case<description>;
+              }
+
+              default {
+                  is encode-affine(%case<input>), |%case<expected description>;
+              }
+          }
+      }
+      elsif %case<property> eq 'decode' {
+          given %case<expected> {
+              when .<error>.so {
+                  throws-like
+                    { decode-affine %case<input> },
+                    Exception,
+                    %case<description>;
+              }
+
+              default {
+                  is decode-affine(%case<input>), |%case<expected description>;
+              }
+          }
+      }
+  }
+
+unit: module
+example: |-
+  use Exercism::QuickSolve;
+
+  sub encode-affine ($input) is export {
+      quicksolve(
+          :$input,
+          :property<encode>,
+      );
+  }
+
+  sub decode-affine ($input) is export {
+      quicksolve(
+          :$input,
+          :property<decode>,
+      );
+  }
+
+stub: |-
+  sub encode-affine ($input) is export {
+  }
+
+  sub decode-affine ($input) is export {
+  }
