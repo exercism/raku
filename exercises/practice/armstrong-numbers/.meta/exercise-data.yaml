@@ -1,0 +1,24 @@
+plan: 9
+tests: |-
+  for @test-cases -> %case {
+    subtest %case<description>, {
+      plan 2;
+      isa-ok ( my $result := is-armstrong %case<input><number> ), Bool;
+      is-deeply $result, %case<expected>, 'Result matches expected';
+    }
+  }
+
+unit: module
+example: |-
+  use Exercism::QuickSolve;
+
+  sub is-armstrong ($number) is export {
+      quicksolve(
+        input => $number,
+        :input-key<number>,
+      );
+  }
+
+stub: |-
+  sub is-armstrong ($number) is export {
+  }
