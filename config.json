@@ -598,6 +598,15 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
+      },
+      {
+        "slug": "book-store",
+        "name": "Book Store",
+        "uuid": "59932471-ecee-4372-85ce-1d744507461d",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
       }
     ]
   },
