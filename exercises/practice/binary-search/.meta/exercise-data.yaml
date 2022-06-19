@@ -1,0 +1,34 @@
+plan: 11
+tests: |-
+  for @test-cases -> %case {
+      given %case<expected> {
+          when .<error>.so {
+              throws-like
+                { binary-search array => %case<input><array>, value => %case<input><value> },
+                Exception,
+                %case<description>;
+          }
+
+          default {
+              cmp-ok
+                binary-search(array => %case<input><array>, value => %case<input><value>),
+                '==',
+                |%case<expected description>;
+          }
+      }
+  }
+
+unit: module
+example: |-
+  use Exercism::QuickSolve;
+
+  sub binary-search (:@array, :$value) is export {
+      quicksolve(
+          input => {:@array, :$value},
+          property => 'find',
+      );
+  }
+
+stub: |-
+  sub binary-search (:@array, :$value) is export {
+  }
