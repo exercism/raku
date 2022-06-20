@@ -1,0 +1,248 @@
+#!/usr/bin/env raku
+use Test;
+use JSON::Fast;
+use lib $?FILE.IO.dirname;
+use Change;
+plan 12;
+
+my @test-cases = from-json($=pod[*-1].contents).List;
+for @test-cases -> %case {
+    given %case<expected> {
+        when .<error>.so {
+            throws-like { fewest-coins |%(%case<input><coins target>:p) },
+              Exception, %case<description>;
+        }
+
+        default {
+            cmp-ok fewest-coins(|%(%case<input><coins target>:p)),
+              '~~', %case<expected>.Bag, %case<description>;
+        }
+    }
+}
+
+=head2 Test Cases
+=begin code
+[
+  {
+    "description": "change for 1 cent",
+    "expected": [
+      1
+    ],
+    "input": {
+      "coins": [
+        1,
+        5,
+        10,
+        25
+      ],
+      "target": 1
+    },
+    "property": "findFewestCoins"
+  },
+  {
+    "description": "single coin change",
+    "expected": [
+      25
+    ],
+    "input": {
+      "coins": [
+        1,
+        5,
+        10,
+        25,
+        100
+      ],
+      "target": 25
+    },
+    "property": "findFewestCoins"
+  },
+  {
+    "description": "multiple coin change",
+    "expected": [
+      5,
+      10
+    ],
+    "input": {
+      "coins": [
+        1,
+        5,
+        10,
+        25,
+        100
+      ],
+      "target": 15
+    },
+    "property": "findFewestCoins"
+  },
+  {
+    "description": "change with Lilliputian Coins",
+    "expected": [
+      4,
+      4,
+      15
+    ],
+    "input": {
+      "coins": [
+        1,
+        4,
+        15,
+        20,
+        50
+      ],
+      "target": 23
+    },
+    "property": "findFewestCoins"
+  },
+  {
+    "description": "change with Lower Elbonia Coins",
+    "expected": [
+      21,
+      21,
+      21
+    ],
+    "input": {
+      "coins": [
+        1,
+        5,
+        10,
+        21,
+        25
+      ],
+      "target": 63
+    },
+    "property": "findFewestCoins"
+  },
+  {
+    "description": "large target values",
+    "expected": [
+      2,
+      2,
+      5,
+      20,
+      20,
+      50,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "input": {
+      "coins": [
+        1,
+        2,
+        5,
+        10,
+        20,
+        50,
+        100
+      ],
+      "target": 999
+    },
+    "property": "findFewestCoins"
+  },
+  {
+    "description": "possible change without unit coins available",
+    "expected": [
+      2,
+      2,
+      2,
+      5,
+      10
+    ],
+    "input": {
+      "coins": [
+        2,
+        5,
+        10,
+        20,
+        50
+      ],
+      "target": 21
+    },
+    "property": "findFewestCoins"
+  },
+  {
+    "description": "another possible change without unit coins available",
+    "expected": [
+      4,
+      4,
+      4,
+      5,
+      5,
+      5
+    ],
+    "input": {
+      "coins": [
+        4,
+        5
+      ],
+      "target": 27
+    },
+    "property": "findFewestCoins"
+  },
+  {
+    "description": "no coins make 0 change",
+    "expected": [
+    ],
+    "input": {
+      "coins": [
+        1,
+        5,
+        10,
+        21,
+        25
+      ],
+      "target": 0
+    },
+    "property": "findFewestCoins"
+  },
+  {
+    "description": "error testing for change smaller than the smallest of coins",
+    "expected": {
+      "error": "can't make target with given coins"
+    },
+    "input": {
+      "coins": [
+        5,
+        10
+      ],
+      "target": 3
+    },
+    "property": "findFewestCoins"
+  },
+  {
+    "description": "error if no combination can add up to target",
+    "expected": {
+      "error": "can't make target with given coins"
+    },
+    "input": {
+      "coins": [
+        5,
+        10
+      ],
+      "target": 94
+    },
+    "property": "findFewestCoins"
+  },
+  {
+    "description": "cannot find negative change values",
+    "expected": {
+      "error": "target can't be negative"
+    },
+    "input": {
+      "coins": [
+        1,
+        2,
+        5
+      ],
+      "target": -5
+    },
+    "property": "findFewestCoins"
+  }
+]
+=end code

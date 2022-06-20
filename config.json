@@ -345,6 +345,15 @@
         "prerequisites": [],
         "difficulty": 5,
         "topics": []
+      },
+      {
+        "slug": "change",
+        "name": "Change",
+        "uuid": "0a52f20a-331a-417e-b127-3e7b1bb21dcd",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
       }
     ]
   },

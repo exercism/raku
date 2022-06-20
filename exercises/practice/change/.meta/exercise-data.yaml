@@ -1,0 +1,30 @@
+plan: 12
+tests: |-
+  for @test-cases -> %case {
+      given %case<expected> {
+          when .<error>.so {
+              throws-like { fewest-coins |%(%case<input><coins target>:p) },
+                Exception, %case<description>;
+          }
+
+          default {
+              cmp-ok fewest-coins(|%(%case<input><coins target>:p)),
+                '~~', %case<expected>.Bag, %case<description>;
+          }
+      }
+  }
+
+unit: module
+example: |-
+  use Exercism::QuickSolve;
+
+  sub fewest-coins (:@coins, :$target) is export {
+      quicksolve(
+          input => { :@coins, :$target },
+          property => 'findFewestCoins',
+      );
+  }
+
+stub: |-
+  sub fewest-coins (:@coins, :$target) is export {
+  }
