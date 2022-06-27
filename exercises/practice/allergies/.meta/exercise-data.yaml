@@ -1,21 +1,23 @@
-plan: 49
-tests: |-
-  for @test-cases -> %case {
-    given %case<property> {
-      when 'allergicTo' {
-        subtest %case<description>, {
-          plan 2;
-          isa-ok ( my $result := allergic-to |%case<input>:p ), Bool;
-          is-deeply $result, %case<expected>, 'Result matches expected';
-        }
-      }
-
-      when 'list' {
-        cmp-ok list-allergies(%case<input><score>),
-          '~~', %case<expected>.Set, %case<description>;
-      }
-    }
-  }
+properties:
+  allergicTo:
+    test: |-
+      sprintf(q:to/END/, |%case<input><item score>, |%case<expected description>);
+      is-deeply(
+          allergic-to( :item<%s>, :score<%s> ),
+          %s,
+          '%s',
+      );
+      END
+  list:
+    test: |-
+      sprintf(q:to/END/, %case<input><score>, %case<expected>.Set.raku, %case<description>);
+      cmp-ok(
+          list-allergies(%s),
+          '~~',
+          %s,
+          '%s',
+      );
+      END
 
 unit: module
 example: |-
