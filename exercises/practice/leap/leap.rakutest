@@ -1,99 +1,66 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Leap;
 plan 9;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
 for Date, DateTime {
-  .^method_table<is-leap-year>.wrap: sub (|) {
-    bail-out 'Built-in `is-leap-year` method is not allowed for this exercise.';
-  };
+    .^method_table<is-leap-year>.wrap: sub (|) {
+        bail-out 'Built-in `is-leap-year` method is not allowed for this exercise.';
+    };
 }
 
-for @test-cases -> %case {
-  subtest %case<description>, {
-    plan 2;
-    isa-ok ( my $result := is-leap-year %case<input><year> ), Bool;
-    is-deeply $result, %case<expected>, 'Result matches expected';
-  }
-}
+is-deeply(
+    is-leap-year(2015),
+    False,
+    'year not divisible by 4 in common year',
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "year not divisible by 4 in common year",
-    "expected": false,
-    "input": {
-      "year": 2015
-    },
-    "property": "leapYear"
-  },
-  {
-    "description": "year divisible by 2, not divisible by 4 in common year",
-    "expected": false,
-    "input": {
-      "year": 1970
-    },
-    "property": "leapYear"
-  },
-  {
-    "description": "year divisible by 4, not divisible by 100 in leap year",
-    "expected": true,
-    "input": {
-      "year": 1996
-    },
-    "property": "leapYear"
-  },
-  {
-    "description": "year divisible by 4 and 5 is still a leap year",
-    "expected": true,
-    "input": {
-      "year": 1960
-    },
-    "property": "leapYear"
-  },
-  {
-    "description": "year divisible by 100, not divisible by 400 in common year",
-    "expected": false,
-    "input": {
-      "year": 2100
-    },
-    "property": "leapYear"
-  },
-  {
-    "description": "year divisible by 100 but not by 3 is still not a leap year",
-    "expected": false,
-    "input": {
-      "year": 1900
-    },
-    "property": "leapYear"
-  },
-  {
-    "description": "year divisible by 400 is leap year",
-    "expected": true,
-    "input": {
-      "year": 2000
-    },
-    "property": "leapYear"
-  },
-  {
-    "description": "year divisible by 400 but not by 125 is still a leap year",
-    "expected": true,
-    "input": {
-      "year": 2400
-    },
-    "property": "leapYear"
-  },
-  {
-    "description": "year divisible by 200, not divisible by 400 in common year",
-    "expected": false,
-    "input": {
-      "year": 1800
-    },
-    "property": "leapYear"
-  }
-]
-=end code
+is-deeply(
+    is-leap-year(1970),
+    False,
+    'year divisible by 2, not divisible by 4 in common year',
+);
+
+is-deeply(
+    is-leap-year(1996),
+    True,
+    'year divisible by 4, not divisible by 100 in leap year',
+);
+
+is-deeply(
+    is-leap-year(1960),
+    True,
+    'year divisible by 4 and 5 is still a leap year',
+);
+
+is-deeply(
+    is-leap-year(2100),
+    False,
+    'year divisible by 100, not divisible by 400 in common year',
+);
+
+is-deeply(
+    is-leap-year(1900),
+    False,
+    'year divisible by 100 but not by 3 is still not a leap year',
+);
+
+is-deeply(
+    is-leap-year(2000),
+    True,
+    'year divisible by 400 is leap year',
+);
+
+is-deeply(
+    is-leap-year(2400),
+    True,
+    'year divisible by 400 but not by 125 is still a leap year',
+);
+
+is-deeply(
+    is-leap-year(1800),
+    False,
+    'year divisible by 200, not divisible by 400 in common year',
+);
+

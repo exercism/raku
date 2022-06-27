@@ -1,23 +1,26 @@
 plan: 9
-tests: |-
+tests: |
   for Date, DateTime {
-    .^method_table<is-leap-year>.wrap: sub (|) {
-      bail-out 'Built-in `is-leap-year` method is not allowed for this exercise.';
-    };
+      .^method_table<is-leap-year>.wrap: sub (|) {
+          bail-out 'Built-in `is-leap-year` method is not allowed for this exercise.';
+      };
   }
+properties:
+  leapYear:
+    test: |-
+      sprintf(q:to/END/, %case<input><year>, %case<expected>, %case<description>);
+      is-deeply(
+          is-leap-year(%s),
+          %s,
+          '%s',
+      );
+      END
 
-  for @test-cases -> %case {
-    subtest %case<description>, {
-      plan 2;
-      isa-ok ( my $result := is-leap-year %case<input><year> ), Bool;
-      is-deeply $result, %case<expected>, 'Result matches expected';
-    }
-  }
 
 unit: module
 example: |-
   sub is-leap-year ($year) is export {
-    $year %% 4 && $year !%% 100 || $year %% 400;
+      $year %% 4 && $year !%% 100 || $year %% 400;
   }
 
 stub: |-
