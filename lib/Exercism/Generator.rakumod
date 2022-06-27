@@ -1,5 +1,6 @@
 unit class Exercism::Generator;
 
+use MONKEY-SEE-NO-EVAL;
 use nqp;
 use Config::TOML;
 use JSON::Fast;
@@ -51,6 +52,9 @@ has Hash:D @.cases = self.build-cases(%!cdata);
 #| The JSON of test cases to be used in the test suite
 has Str:D $.json-tests = @!cases ?? to-json( @!cases, :sorted-keys ) !! '';
 
+#| The test cases generated for individual properties
+has Str:D @.property-tests = self.build-property-tests;
+
 # Retrieves cases from cdata which match case UUIDs
 submethod build-cases ( %obj, Str $description = '' ) {
   my Str $new-desc = '';
@@ -72,6 +76,16 @@ submethod build-cases ( %obj, Str $description = '' ) {
   }
 
   return Empty;
+}
+
+submethod build-property-tests {
+  my @tests;
+  for self.cases -> %case {
+    with self.data.<properties>{%case<property>}<test> -> $eval {
+      @tests.push(EVAL $eval);
+    }
+  }
+  return @tests;
 }
 
 #| The package name
@@ -101,6 +115,10 @@ method !render ( Str $module_file? --> Str:D ) {
   my %data = %.data;
   %data<cases>   //= $.json-tests;
   %data<package> //= $.package;
+  if %data<properties> {
+    %data<tests> ~= ("\n" if %data<tests>) ~ self.property-tests.join("\n");
+    %data<cases> = Nil;
+  }
 
   Template::Mustache.render(
     $base-dir.add(
