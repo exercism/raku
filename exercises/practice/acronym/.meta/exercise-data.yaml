@@ -1,8 +1,13 @@
-plan: 9
-tests: |-
-  for @test-cases -> %case {
-    is abbreviate(%case<input><phrase>), |%case<expected description>;
-  }
+properties:
+  abbreviate:
+    test: |-
+      sprintf(q:to/END/, %case<input><phrase>, %case<expected>, %case<description>);
+      is(
+          abbreviate("%s"),
+          '%s',
+          '%s',
+      );
+      END
 
 unit: module
 example: |-
