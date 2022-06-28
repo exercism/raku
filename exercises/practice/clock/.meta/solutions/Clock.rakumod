@@ -1,16 +1,23 @@
 unit class Clock;
 
-has Int:D $.hour = 0;
+has Int:D $.hour   = 0;
 has Int:D $.minute = 0;
 
 method time {
-  sprintf '%02d:%02d', ($!hour + $!minute div 60) % 24, $!minute % 60;
+    sprintf '%02d:%02d', self.hour, self.minute;
 }
 
-method add-minutes (Int:D $min) {
-  $!minute += $min and return self;
+method add (Int:D :$minutes) {
+    $!minute += $minutes;
+    self.TWEAK;
+    return self;
 }
 
-method subtract-minutes (Int:D $min) {
-  self.add-minutes(-$min);
+method subtract (Int:D :$minutes) {
+    self.add(minutes => -$minutes);
+}
+
+submethod TWEAK {
+    $!hour = ($!hour + $!minute div 60) % 24;
+    $!minute %= 60;
 }

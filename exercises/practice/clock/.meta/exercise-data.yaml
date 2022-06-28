@@ -1,58 +1,78 @@
-methods: time add-minutes subtract-minutes
-plan: 55
-tests: |-
-  for @test-cases -> %case {
-    given %case<property> {
-
-      when 'create' {
-        is Clock.new( |%(.<input><hour minute>:p) ).time,
-          |.<expected description> given %case;
+methods: time add subtract
+properties:
+  create:
+    test: |-
+      sprintf(q:to/END/, (|(%case<input><hour minute>:p), |%case<expected description>).map(*.raku));
+      is(
+          Clock.new( %s, %s ).time,
+          %s,
+          %s,
+      );
+      END
+  add:
+    test: |-
+      sprintf(q:to/END/, (|(%case<input><hour minute>:p), :minutes(%case<input><value>), |%case<expected description>).map(*.raku));
+      is(
+          Clock.new( %s, %s ).add( %s ).time,
+          %s,
+          %s,
+      );
+      END
+  subtract:
+    test: |-
+      sprintf(q:to/END/, (|(%case<input><hour minute>:p), :minutes(%case<input><value>), |%case<expected description>).map(*.raku));
+      is(
+          Clock.new( %s, %s ).subtract( %s ).time,
+          %s,
+          %s,
+      );
+      END
+  equal:
+    test: |-
+      if %case<expected> {
+          sprintf(q:to/END/, (|%case<input><clock1 clock2>.map({|(.<hour minute>:p)}), %case<description>).map(*.raku));
+          is-deeply(
+              Clock.new( %s, %s ),
+              Clock.new( %s, %s ),
+              %s,
+          );
+          END
       }
-
-      when <add subtract>.any {
-        given %case {
-          my $clock = Clock.new: |%(.<input><hour minute>:p);
-          $clock.add-minutes: .<input><value>
-            if .<property> eq 'add';
-          $clock.subtract-minutes: .<input><value>
-            if .<property> eq 'subtract';
-          is $clock.time, |.<expected description>;
-        }
+      else {
+          sprintf(q:to/END/, (|%case<input><clock1 clock2>.map({|(.<hour minute>:p)}), %case<description>).map(*.raku));
+          cmp-ok(
+              Clock.new( %s, %s ),
+              &[!eqv],
+              Clock.new( %s, %s ),
+              %s,
+          );
+          END
       }
-
-      when 'equal' {
-        is-deeply ([eq] gather {
-          take Clock.new( |%(.<hour minute>:p) ).time
-            for %case<input><clock1 clock2>;
-        }), |%case<expected description>;
-      }
-
-    }
-  }
-
-  is Clock.new(:0hour,:0minute).add-minutes(65).?time,
-    '01:05', 'add-minutes method can be chained';
-
-  is Clock.new(:0hour,:0minute).subtract-minutes(65).?time,
-    '22:55', 'subtract-minutes method can be chained';
 
 catch_stub: true
 
 unit: class
 example: |-
-  has Int:D $.hour = 0;
+  has Int:D $.hour   = 0;
   has Int:D $.minute = 0;
 
   method time {
-    sprintf '%02d:%02d', ($!hour + $!minute div 60) % 24, $!minute % 60;
+      sprintf '%02d:%02d', self.hour, self.minute;
   }
 
-  method add-minutes (Int:D $min) {
-    $!minute += $min and return self;
+  method add (Int:D :$minutes) {
+      $!minute += $minutes;
+      self.TWEAK;
+      return self;
   }
 
-  method subtract-minutes (Int:D $min) {
-    self.add-minutes(-$min);
+  method subtract (Int:D :$minutes) {
+      self.add(minutes => -$minutes);
+  }
+
+  submethod TWEAK {
+      $!hour = ($!hour + $!minute div 60) % 24;
+      $!minute %= 60;
   }
 stub: |-
   has $.hour;
@@ -60,6 +80,10 @@ stub: |-
 
   method time {!!!}
 
-  method add-minutes ($amount) {!!!}
+  method add (:$minutes) {!!!}
 
-  method subtract-minutes ($amount) {!!!}
+  method subtract (:$minutes) {!!!}
+
+  submethod TWEAK {
+      # Can be used to modify attributes after object construction
+  }
