@@ -246,70 +246,70 @@ is-deeply(
 cmp-ok(
     list-allergies(0),
     '~~',
-    set(),
+    [].Set,
     'list when: no allergies',
 );
 
 cmp-ok(
     list-allergies(1),
     '~~',
-    Set.new("eggs"),
+    ["eggs"].Set,
     'list when: just eggs',
 );
 
 cmp-ok(
     list-allergies(2),
     '~~',
-    Set.new("peanuts"),
+    ["peanuts"].Set,
     'list when: just peanuts',
 );
 
 cmp-ok(
     list-allergies(8),
     '~~',
-    Set.new("strawberries"),
+    ["strawberries"].Set,
     'list when: just strawberries',
 );
 
 cmp-ok(
     list-allergies(3),
     '~~',
-    Set.new("peanuts","eggs"),
+    ["eggs", "peanuts"].Set,
     'list when: eggs and peanuts',
 );
 
 cmp-ok(
     list-allergies(5),
     '~~',
-    Set.new("eggs","shellfish"),
+    ["eggs", "shellfish"].Set,
     'list when: more than eggs but not peanuts',
 );
 
 cmp-ok(
     list-allergies(248),
     '~~',
-    Set.new("chocolate","cats","tomatoes","strawberries","pollen"),
+    ["strawberries", "tomatoes", "chocolate", "pollen", "cats"].Set,
     'list when: lots of stuff',
 );
 
 cmp-ok(
     list-allergies(255),
     '~~',
-    Set.new("cats","chocolate","tomatoes","shellfish","strawberries","pollen","peanuts","eggs"),
+    ["eggs", "peanuts", "shellfish", "strawberries", "tomatoes", "chocolate", "pollen", "cats"].Set,
     'list when: everything',
 );
 
 cmp-ok(
     list-allergies(509),
     '~~',
-    Set.new("cats","shellfish","strawberries","tomatoes","pollen","eggs","chocolate"),
+    ["eggs", "shellfish", "strawberries", "tomatoes", "chocolate", "pollen", "cats"].Set,
     'list when: no allergen score parts',
 );
 
 cmp-ok(
     list-allergies(257),
     '~~',
-    Set.new("eggs"),
+    ["eggs"].Set,
     'list when: no allergen score parts without highest valid score',
 );
 

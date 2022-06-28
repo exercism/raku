@@ -10,11 +10,11 @@ properties:
       END
   list:
     test: |-
-      sprintf(q:to/END/, %case<input><score>, %case<expected>.Set.raku, %case<description>);
+      sprintf(q:to/END/, %case<input><score>, %case<expected>.raku.substr(1), %case<description>);
       cmp-ok(
           list-allergies(%s),
           '~~',
-          %s,
+          %s.Set,
           '%s',
       );
       END
