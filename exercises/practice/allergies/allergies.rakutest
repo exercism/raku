@@ -4,241 +4,241 @@ use lib $?FILE.IO.dirname;
 use Allergies;
 
 is-deeply(
-    allergic-to( :item<eggs>, :score<0> ),
+    allergic-to( :item("eggs"), :score(0) ),
     False,
     "testing for eggs allergy: not allergic to anything",
 );
 
 is-deeply(
-    allergic-to( :item<eggs>, :score<1> ),
+    allergic-to( :item("eggs"), :score(1) ),
     True,
     "testing for eggs allergy: allergic only to eggs",
 );
 
 is-deeply(
-    allergic-to( :item<eggs>, :score<3> ),
+    allergic-to( :item("eggs"), :score(3) ),
     True,
     "testing for eggs allergy: allergic to eggs and something else",
 );
 
 is-deeply(
-    allergic-to( :item<eggs>, :score<2> ),
+    allergic-to( :item("eggs"), :score(2) ),
     False,
     "testing for eggs allergy: allergic to something, but not eggs",
 );
 
 is-deeply(
-    allergic-to( :item<eggs>, :score<255> ),
+    allergic-to( :item("eggs"), :score(255) ),
     True,
     "testing for eggs allergy: allergic to everything",
 );
 
 is-deeply(
-    allergic-to( :item<peanuts>, :score<0> ),
+    allergic-to( :item("peanuts"), :score(0) ),
     False,
     "testing for peanuts allergy: not allergic to anything",
 );
 
 is-deeply(
-    allergic-to( :item<peanuts>, :score<2> ),
+    allergic-to( :item("peanuts"), :score(2) ),
     True,
     "testing for peanuts allergy: allergic only to peanuts",
 );
 
 is-deeply(
-    allergic-to( :item<peanuts>, :score<7> ),
+    allergic-to( :item("peanuts"), :score(7) ),
     True,
     "testing for peanuts allergy: allergic to peanuts and something else",
 );
 
 is-deeply(
-    allergic-to( :item<peanuts>, :score<5> ),
+    allergic-to( :item("peanuts"), :score(5) ),
     False,
     "testing for peanuts allergy: allergic to something, but not peanuts",
 );
 
 is-deeply(
-    allergic-to( :item<peanuts>, :score<255> ),
+    allergic-to( :item("peanuts"), :score(255) ),
     True,
     "testing for peanuts allergy: allergic to everything",
 );
 
 is-deeply(
-    allergic-to( :item<shellfish>, :score<0> ),
+    allergic-to( :item("shellfish"), :score(0) ),
     False,
     "testing for shellfish allergy: not allergic to anything",
 );
 
 is-deeply(
-    allergic-to( :item<shellfish>, :score<4> ),
+    allergic-to( :item("shellfish"), :score(4) ),
     True,
     "testing for shellfish allergy: allergic only to shellfish",
 );
 
 is-deeply(
-    allergic-to( :item<shellfish>, :score<14> ),
+    allergic-to( :item("shellfish"), :score(14) ),
     True,
     "testing for shellfish allergy: allergic to shellfish and something else",
 );
 
 is-deeply(
-    allergic-to( :item<shellfish>, :score<10> ),
+    allergic-to( :item("shellfish"), :score(10) ),
     False,
     "testing for shellfish allergy: allergic to something, but not shellfish",
 );
 
 is-deeply(
-    allergic-to( :item<shellfish>, :score<255> ),
+    allergic-to( :item("shellfish"), :score(255) ),
     True,
     "testing for shellfish allergy: allergic to everything",
 );
 
 is-deeply(
-    allergic-to( :item<strawberries>, :score<0> ),
+    allergic-to( :item("strawberries"), :score(0) ),
     False,
     "testing for strawberries allergy: not allergic to anything",
 );
 
 is-deeply(
-    allergic-to( :item<strawberries>, :score<8> ),
+    allergic-to( :item("strawberries"), :score(8) ),
     True,
     "testing for strawberries allergy: allergic only to strawberries",
 );
 
 is-deeply(
-    allergic-to( :item<strawberries>, :score<28> ),
+    allergic-to( :item("strawberries"), :score(28) ),
     True,
     "testing for strawberries allergy: allergic to strawberries and something else",
 );
 
 is-deeply(
-    allergic-to( :item<strawberries>, :score<20> ),
+    allergic-to( :item("strawberries"), :score(20) ),
     False,
     "testing for strawberries allergy: allergic to something, but not strawberries",
 );
 
 is-deeply(
-    allergic-to( :item<strawberries>, :score<255> ),
+    allergic-to( :item("strawberries"), :score(255) ),
     True,
     "testing for strawberries allergy: allergic to everything",
 );
 
 is-deeply(
-    allergic-to( :item<tomatoes>, :score<0> ),
+    allergic-to( :item("tomatoes"), :score(0) ),
     False,
     "testing for tomatoes allergy: not allergic to anything",
 );
 
 is-deeply(
-    allergic-to( :item<tomatoes>, :score<16> ),
+    allergic-to( :item("tomatoes"), :score(16) ),
     True,
     "testing for tomatoes allergy: allergic only to tomatoes",
 );
 
 is-deeply(
-    allergic-to( :item<tomatoes>, :score<56> ),
+    allergic-to( :item("tomatoes"), :score(56) ),
     True,
     "testing for tomatoes allergy: allergic to tomatoes and something else",
 );
 
 is-deeply(
-    allergic-to( :item<tomatoes>, :score<40> ),
+    allergic-to( :item("tomatoes"), :score(40) ),
     False,
     "testing for tomatoes allergy: allergic to something, but not tomatoes",
 );
 
 is-deeply(
-    allergic-to( :item<tomatoes>, :score<255> ),
+    allergic-to( :item("tomatoes"), :score(255) ),
     True,
     "testing for tomatoes allergy: allergic to everything",
 );
 
 is-deeply(
-    allergic-to( :item<chocolate>, :score<0> ),
+    allergic-to( :item("chocolate"), :score(0) ),
     False,
     "testing for chocolate allergy: not allergic to anything",
 );
 
 is-deeply(
-    allergic-to( :item<chocolate>, :score<32> ),
+    allergic-to( :item("chocolate"), :score(32) ),
     True,
     "testing for chocolate allergy: allergic only to chocolate",
 );
 
 is-deeply(
-    allergic-to( :item<chocolate>, :score<112> ),
+    allergic-to( :item("chocolate"), :score(112) ),
     True,
     "testing for chocolate allergy: allergic to chocolate and something else",
 );
 
 is-deeply(
-    allergic-to( :item<chocolate>, :score<80> ),
+    allergic-to( :item("chocolate"), :score(80) ),
     False,
     "testing for chocolate allergy: allergic to something, but not chocolate",
 );
 
 is-deeply(
-    allergic-to( :item<chocolate>, :score<255> ),
+    allergic-to( :item("chocolate"), :score(255) ),
     True,
     "testing for chocolate allergy: allergic to everything",
 );
 
 is-deeply(
-    allergic-to( :item<pollen>, :score<0> ),
+    allergic-to( :item("pollen"), :score(0) ),
     False,
     "testing for pollen allergy: not allergic to anything",
 );
 
 is-deeply(
-    allergic-to( :item<pollen>, :score<64> ),
+    allergic-to( :item("pollen"), :score(64) ),
     True,
     "testing for pollen allergy: allergic only to pollen",
 );
 
 is-deeply(
-    allergic-to( :item<pollen>, :score<224> ),
+    allergic-to( :item("pollen"), :score(224) ),
     True,
     "testing for pollen allergy: allergic to pollen and something else",
 );
 
 is-deeply(
-    allergic-to( :item<pollen>, :score<160> ),
+    allergic-to( :item("pollen"), :score(160) ),
     False,
     "testing for pollen allergy: allergic to something, but not pollen",
 );
 
 is-deeply(
-    allergic-to( :item<pollen>, :score<255> ),
+    allergic-to( :item("pollen"), :score(255) ),
     True,
     "testing for pollen allergy: allergic to everything",
 );
 
 is-deeply(
-    allergic-to( :item<cats>, :score<0> ),
+    allergic-to( :item("cats"), :score(0) ),
     False,
     "testing for cats allergy: not allergic to anything",
 );
 
 is-deeply(
-    allergic-to( :item<cats>, :score<128> ),
+    allergic-to( :item("cats"), :score(128) ),
     True,
     "testing for cats allergy: allergic only to cats",
 );
 
 is-deeply(
-    allergic-to( :item<cats>, :score<192> ),
+    allergic-to( :item("cats"), :score(192) ),
     True,
     "testing for cats allergy: allergic to cats and something else",
 );
 
 is-deeply(
-    allergic-to( :item<cats>, :score<64> ),
+    allergic-to( :item("cats"), :score(64) ),
     False,
     "testing for cats allergy: allergic to something, but not cats",
 );
 
 is-deeply(
-    allergic-to( :item<cats>, :score<255> ),
+    allergic-to( :item("cats"), :score(255) ),
     True,
     "testing for cats allergy: allergic to everything",
 );

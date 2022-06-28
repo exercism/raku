@@ -1,9 +1,9 @@
 properties:
   allergicTo:
     test: |-
-      sprintf(q:to/END/, |%case<input><item score>, %case<expected>, %case<description>.raku);
+      sprintf(q:to/END/, |(%case<input><item score>:p).map(*.raku), %case<expected>, %case<description>.raku);
       is-deeply(
-          allergic-to( :item<%s>, :score<%s> ),
+          allergic-to( %s, %s ),
           %s,
           %s,
       );
