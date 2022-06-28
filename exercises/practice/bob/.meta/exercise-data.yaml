@@ -1,13 +1,16 @@
-plan: 26
 methods: hey
-tests: |-
-  # Go through the cases and check that Bob gives us the correct responses.
-  for @test-cases -> %case {
-    is Bob.hey(%case<input><heyBob>), |%case<expected description>;
-  }
+properties:
+  response:
+    test: |-
+      sprintf(q:to/END/, (%case<input><heyBob>, |%case<expected description>).map(*.raku));
+      is(
+          Bob.hey(%s),
+          %s,
+          %s,
+      );
+      END
 
 lib_comment: Look for the module inside the same directory as this test file.
-plan_comment: This is how many tests we expect to run.
 methods_comment: "Check that the class 'Bob' can use all of the methods\nneeded in the tests (only 'hey' for this one)."
 
 unit: class
@@ -31,9 +34,9 @@ example: |-
   }
 stub: |-
   method hey ($msg) {
-    #`[
-      Remove the comments and write some code here to pass the test suite.
-      You can experiment with the code outside of this block,
-      but no changes are needed for the test suite to pass.
-    ]
+      #`[
+        Remove the comments and write some code here to pass the test suite.
+        You can experiment with the code outside of this block,
+        but no changes are needed for the test suite to pass.
+      ]
   }

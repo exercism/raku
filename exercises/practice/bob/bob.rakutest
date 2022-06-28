@@ -1,9 +1,7 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname; #`[Look for the module inside the same directory as this test file.]
 use Bob;
-plan 26; #`[This is how many tests we expect to run.]
 
 #`[Check that the class 'Bob' can use all of the methods
 needed in the tests (only 'hey' for this one).]
@@ -13,214 +11,154 @@ subtest 'Class methods', {
   }
 } or bail-out 'Cannot run expected method(s).';
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-# Go through the cases and check that Bob gives us the correct responses.
-for @test-cases -> %case {
-  is Bob.hey(%case<input><heyBob>), |%case<expected description>;
-}
+is(
+    Bob.hey("Tom-ay-to, tom-aaaah-to."),
+    "Whatever.",
+    "stating something",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "stating something",
-    "expected": "Whatever.",
-    "input": {
-      "heyBob": "Tom-ay-to, tom-aaaah-to."
-    },
-    "property": "response"
-  },
-  {
-    "description": "shouting",
-    "expected": "Whoa, chill out!",
-    "input": {
-      "heyBob": "WATCH OUT!"
-    },
-    "property": "response"
-  },
-  {
-    "description": "shouting gibberish",
-    "expected": "Whoa, chill out!",
-    "input": {
-      "heyBob": "FCECDFCAAB"
-    },
-    "property": "response"
-  },
-  {
-    "description": "asking a question",
-    "expected": "Sure.",
-    "input": {
-      "heyBob": "Does this cryogenic chamber make me look fat?"
-    },
-    "property": "response"
-  },
-  {
-    "description": "asking a numeric question",
-    "expected": "Sure.",
-    "input": {
-      "heyBob": "You are, what, like 15?"
-    },
-    "property": "response"
-  },
-  {
-    "description": "asking gibberish",
-    "expected": "Sure.",
-    "input": {
-      "heyBob": "fffbbcbeab?"
-    },
-    "property": "response"
-  },
-  {
-    "description": "talking forcefully",
-    "expected": "Whatever.",
-    "input": {
-      "heyBob": "Hi there!"
-    },
-    "property": "response"
-  },
-  {
-    "description": "using acronyms in regular speech",
-    "expected": "Whatever.",
-    "input": {
-      "heyBob": "It's OK if you don't want to go work for NASA."
-    },
-    "property": "response"
-  },
-  {
-    "description": "forceful question",
-    "expected": "Calm down, I know what I'm doing!",
-    "input": {
-      "heyBob": "WHAT'S GOING ON?"
-    },
-    "property": "response"
-  },
-  {
-    "description": "shouting numbers",
-    "expected": "Whoa, chill out!",
-    "input": {
-      "heyBob": "1, 2, 3 GO!"
-    },
-    "property": "response"
-  },
-  {
-    "description": "no letters",
-    "expected": "Whatever.",
-    "input": {
-      "heyBob": "1, 2, 3"
-    },
-    "property": "response"
-  },
-  {
-    "description": "question with no letters",
-    "expected": "Sure.",
-    "input": {
-      "heyBob": "4?"
-    },
-    "property": "response"
-  },
-  {
-    "description": "shouting with special characters",
-    "expected": "Whoa, chill out!",
-    "input": {
-      "heyBob": "ZOMG THE %^*@#$(*^ ZOMBIES ARE COMING!!11!!1!"
-    },
-    "property": "response"
-  },
-  {
-    "description": "shouting with no exclamation mark",
-    "expected": "Whoa, chill out!",
-    "input": {
-      "heyBob": "I HATE THE DENTIST"
-    },
-    "property": "response"
-  },
-  {
-    "description": "statement containing question mark",
-    "expected": "Whatever.",
-    "input": {
-      "heyBob": "Ending with ? means a question."
-    },
-    "property": "response"
-  },
-  {
-    "description": "non-letters with question",
-    "expected": "Sure.",
-    "input": {
-      "heyBob": ":) ?"
-    },
-    "property": "response"
-  },
-  {
-    "description": "prattling on",
-    "expected": "Sure.",
-    "input": {
-      "heyBob": "Wait! Hang on. Are you going to be OK?"
-    },
-    "property": "response"
-  },
-  {
-    "description": "silence",
-    "expected": "Fine. Be that way!",
-    "input": {
-      "heyBob": ""
-    },
-    "property": "response"
-  },
-  {
-    "description": "prolonged silence",
-    "expected": "Fine. Be that way!",
-    "input": {
-      "heyBob": "          "
-    },
-    "property": "response"
-  },
-  {
-    "description": "alternate silence",
-    "expected": "Fine. Be that way!",
-    "input": {
-      "heyBob": "\t\t\t\t\t\t\t\t\t\t"
-    },
-    "property": "response"
-  },
-  {
-    "description": "multiple line question",
-    "expected": "Whatever.",
-    "input": {
-      "heyBob": "\nDoes this cryogenic chamber make me look fat?\nNo."
-    },
-    "property": "response"
-  },
-  {
-    "description": "starting with whitespace",
-    "expected": "Whatever.",
-    "input": {
-      "heyBob": "         hmmmmmmm..."
-    },
-    "property": "response"
-  },
-  {
-    "description": "ending with whitespace",
-    "expected": "Sure.",
-    "input": {
-      "heyBob": "Okay if like my  spacebar  quite a bit?   "
-    },
-    "property": "response"
-  },
-  {
-    "description": "other whitespace",
-    "expected": "Fine. Be that way!",
-    "input": {
-      "heyBob": "\n\r \t"
-    },
-    "property": "response"
-  },
-  {
-    "description": "non-question ending with whitespace",
-    "expected": "Whatever.",
-    "input": {
-      "heyBob": "This is a statement ending with whitespace      "
-    },
-    "property": "response"
-  }
-]
-=end code
+is(
+    Bob.hey("WATCH OUT!"),
+    "Whoa, chill out!",
+    "shouting",
+);
+
+is(
+    Bob.hey("FCECDFCAAB"),
+    "Whoa, chill out!",
+    "shouting gibberish",
+);
+
+is(
+    Bob.hey("Does this cryogenic chamber make me look fat?"),
+    "Sure.",
+    "asking a question",
+);
+
+is(
+    Bob.hey("You are, what, like 15?"),
+    "Sure.",
+    "asking a numeric question",
+);
+
+is(
+    Bob.hey("fffbbcbeab?"),
+    "Sure.",
+    "asking gibberish",
+);
+
+is(
+    Bob.hey("Hi there!"),
+    "Whatever.",
+    "talking forcefully",
+);
+
+is(
+    Bob.hey("It's OK if you don't want to go work for NASA."),
+    "Whatever.",
+    "using acronyms in regular speech",
+);
+
+is(
+    Bob.hey("WHAT'S GOING ON?"),
+    "Calm down, I know what I'm doing!",
+    "forceful question",
+);
+
+is(
+    Bob.hey("1, 2, 3 GO!"),
+    "Whoa, chill out!",
+    "shouting numbers",
+);
+
+is(
+    Bob.hey("1, 2, 3"),
+    "Whatever.",
+    "no letters",
+);
+
+is(
+    Bob.hey("4?"),
+    "Sure.",
+    "question with no letters",
+);
+
+is(
+    Bob.hey("ZOMG THE \%^*\@#\$(*^ ZOMBIES ARE COMING!!11!!1!"),
+    "Whoa, chill out!",
+    "shouting with special characters",
+);
+
+is(
+    Bob.hey("I HATE THE DENTIST"),
+    "Whoa, chill out!",
+    "shouting with no exclamation mark",
+);
+
+is(
+    Bob.hey("Ending with ? means a question."),
+    "Whatever.",
+    "statement containing question mark",
+);
+
+is(
+    Bob.hey(":) ?"),
+    "Sure.",
+    "non-letters with question",
+);
+
+is(
+    Bob.hey("Wait! Hang on. Are you going to be OK?"),
+    "Sure.",
+    "prattling on",
+);
+
+is(
+    Bob.hey(""),
+    "Fine. Be that way!",
+    "silence",
+);
+
+is(
+    Bob.hey("          "),
+    "Fine. Be that way!",
+    "prolonged silence",
+);
+
+is(
+    Bob.hey("\t\t\t\t\t\t\t\t\t\t"),
+    "Fine. Be that way!",
+    "alternate silence",
+);
+
+is(
+    Bob.hey("\nDoes this cryogenic chamber make me look fat?\nNo."),
+    "Whatever.",
+    "multiple line question",
+);
+
+is(
+    Bob.hey("         hmmmmmmm..."),
+    "Whatever.",
+    "starting with whitespace",
+);
+
+is(
+    Bob.hey("Okay if like my  spacebar  quite a bit?   "),
+    "Sure.",
+    "ending with whitespace",
+);
+
+is(
+    Bob.hey("\n\r \t"),
+    "Fine. Be that way!",
+    "other whitespace",
+);
+
+is(
+    Bob.hey("This is a statement ending with whitespace      "),
+    "Whatever.",
+    "non-question ending with whitespace",
+);
+
+done-testing;

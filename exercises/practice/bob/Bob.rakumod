@@ -5,9 +5,9 @@
 unit class Bob;
 
 method hey ($msg) {
-  #`[
-    Remove the comments and write some code here to pass the test suite.
-    You can experiment with the code outside of this block,
-    but no changes are needed for the test suite to pass.
-  ]
+    #`[
+      Remove the comments and write some code here to pass the test suite.
+      You can experiment with the code outside of this block,
+      but no changes are needed for the test suite to pass.
+    ]
 }
