@@ -1,9 +1,22 @@
-plan: 14
-tests: |-
-  for @test-cases -> %case {
-    is &::(%case<property>)(%case<input><phrase>),
-      |%case<expected description>;
-  }
+properties:
+  encode:
+    test: |-
+      sprintf(q:to/END/, (%case<input><phrase>, |%case<expected description>).map(*.raku));
+      is(
+          encode(%s),
+          %s,
+          %s,
+      );
+      END
+  decode:
+    test: |-
+      sprintf(q:to/END/, (%case<input><phrase>, |%case<expected description>).map(*.raku));
+      is(
+          decode(%s),
+          %s,
+          %s,
+      );
+      END
 
 unit: module
 example: |-
