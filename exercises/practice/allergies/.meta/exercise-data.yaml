@@ -1,21 +1,21 @@
 properties:
   allergicTo:
     test: |-
-      sprintf(q:to/END/, |%case<input><item score>, |%case<expected description>);
+      sprintf(q:to/END/, |%case<input><item score>, %case<expected>, %case<description>.raku);
       is-deeply(
           allergic-to( :item<%s>, :score<%s> ),
           %s,
-          '%s',
+          %s,
       );
       END
   list:
     test: |-
-      sprintf(q:to/END/, %case<input><score>, %case<expected>.raku.substr(1), %case<description>);
+      sprintf(q:to/END/, %case<input><score>, (if %case<expected> { "<%case<expected>>" } else { 'set()' }), %case<description>.raku);
       cmp-ok(
           list-allergies(%s),
-          '~~',
-          %s.Set,
-          '%s',
+          &infix:<(==)>,
+          %s,
+          %s,
       );
       END
 
