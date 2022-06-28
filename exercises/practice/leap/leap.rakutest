@@ -63,4 +63,3 @@ is-deeply(
     False,
     'year divisible by 200, not divisible by 400 in common year',
 );
-
