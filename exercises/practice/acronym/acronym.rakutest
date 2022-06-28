@@ -5,56 +5,56 @@ use Acronym;
 
 is(
     abbreviate("Portable Network Graphics"),
-    'PNG',
-    'basic',
+    "PNG",
+    "basic",
 );
 
 is(
     abbreviate("Ruby on Rails"),
-    'ROR',
-    'lowercase words',
+    "ROR",
+    "lowercase words",
 );
 
 is(
     abbreviate("First In, First Out"),
-    'FIFO',
-    'punctuation',
+    "FIFO",
+    "punctuation",
 );
 
 is(
     abbreviate("GNU Image Manipulation Program"),
-    'GIMP',
-    'all caps word',
+    "GIMP",
+    "all caps word",
 );
 
 is(
     abbreviate("Complementary metal-oxide semiconductor"),
-    'CMOS',
-    'punctuation without whitespace',
+    "CMOS",
+    "punctuation without whitespace",
 );
 
 is(
     abbreviate("Rolling On The Floor Laughing So Hard That My Dogs Came Over And Licked Me"),
-    'ROTFLSHTMDCOALM',
-    'very long abbreviation',
+    "ROTFLSHTMDCOALM",
+    "very long abbreviation",
 );
 
 is(
     abbreviate("Something - I made up from thin air"),
-    'SIMUFTA',
-    'consecutive delimiters',
+    "SIMUFTA",
+    "consecutive delimiters",
 );
 
 is(
     abbreviate("Halley's Comet"),
-    'HC',
-    'apostrophes',
+    "HC",
+    "apostrophes",
 );
 
 is(
     abbreviate("The Road _Not_ Taken"),
-    'TRNT',
-    'underscore emphasis',
+    "TRNT",
+    "underscore emphasis",
 );
 
 done-testing;

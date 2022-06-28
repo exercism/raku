@@ -1,11 +1,11 @@
 properties:
   abbreviate:
     test: |-
-      sprintf(q:to/END/, %case<input><phrase>, %case<expected>, %case<description>);
+      sprintf(q:to/END/, (%case<input><phrase>, |%case<expected description>).map(*.raku));
       is(
-          abbreviate("%s"),
-          '%s',
-          '%s',
+          abbreviate(%s),
+          %s,
+          %s,
       );
       END
 
