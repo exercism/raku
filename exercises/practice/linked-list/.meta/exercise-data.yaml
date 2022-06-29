@@ -1,4 +1,4 @@
-plan: 6
+plan: 5
 modules:
   - use: JSON::Fast
 methods: 'push-list pop-list shift-list unshift-list'

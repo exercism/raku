@@ -7,13 +7,13 @@ method time {
     sprintf '%02d:%02d', self.hour, self.minute;
 }
 
-method add (Int:D :$minutes) {
+method add (Int:D :$minutes --> Clock) {
     $!minute += $minutes;
     self.TWEAK;
     return self;
 }
 
-method subtract (Int:D :$minutes) {
+method subtract (Int:D :$minutes --> Clock) {
     self.add(minutes => -$minutes);
 }
 

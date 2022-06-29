@@ -1,6 +1,6 @@
 package: Robot
 methods: name reset-name
-plan: 8
+plan: 7
 tests: |-
   srand 1;
   my Robot:D $robot := Robot.new;

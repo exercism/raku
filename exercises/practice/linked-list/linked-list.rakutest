@@ -3,13 +3,11 @@ use Test;
 use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use LinkedList;
-plan 6;
+plan 5;
 
-subtest 'Class methods', {
-  for <push-list pop-list shift-list unshift-list> -> $method {
-    can-ok LinkedList, $method;
-  }
-} or bail-out 'Cannot run expected method(s).';
+for <push-list pop-list shift-list unshift-list> -> $method {
+  LinkedList.^can($method) or bail-out "Cannot run expected method `$method`.";
+}
 
 my $cases = from-json $=pod.pop.contents;
 for $cases.values -> $case {

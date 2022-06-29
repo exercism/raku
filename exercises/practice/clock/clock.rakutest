@@ -3,11 +3,9 @@ use Test;
 use lib $?FILE.IO.dirname;
 use Clock;
 
-subtest 'Class methods', {
-  for <time add subtract> -> $method {
-    can-ok Clock, $method;
-  }
-} or bail-out 'Cannot run expected method(s).';
+for <time add subtract> -> $method {
+  Clock.^can($method) or bail-out "Cannot run expected method `$method`.";
+}
 
 is(
     Clock.new( :hour(8), :minute(0) ).time,
@@ -322,13 +320,5 @@ is-deeply(
     Clock.new( :hour(0), :minute(0) ),
     "Compare two clocks for equality: full clock and zeroed clock",
 );
-
-CATCH {
-  when X::StubCode {
-    flunk 'Caught stub';
-    note "{.message} (does the sub/method contain '!!!'?)\n"
-      ~ .backtrace.concise;
-  }
-}
 
 done-testing;

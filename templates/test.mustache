@@ -7,11 +7,9 @@ use #`{{&package}};#`{{#plan}}
 plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#`{{/plan}}#`{{#methods}}
 
 #`{{#methods_comment}}#`[#`{{&methods_comment}}]
-#`{{/methods_comment}}subtest 'Class methods', {
-  for <#`{{&methods}}> -> $method {
-    can-ok #`{{&package}}, $method;
-  }
-} or bail-out 'Cannot run expected method(s).';#`{{/methods}}#`{{#cases}}
+#`{{/methods_comment}}for <#`{{&methods}}> -> $method {
+  #`{{&package}}.^can($method) or bail-out "Cannot run expected method `$method`.";
+}#`{{/methods}}#`{{#cases}}
 
 my @test-cases = from-json($=pod[*-1].contents).List;#`{{/cases}}#`{{#tests}}#`{{^cases}}
 #`{{/cases}}
