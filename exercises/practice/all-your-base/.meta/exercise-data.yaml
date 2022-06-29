@@ -1,30 +1,24 @@
-plan: 21
-tests: |-
-  for @test-cases -> %case {
-    my &call-convert-base := -> {
-      convert-base(
-        bases  => %(<from to> Z=> %case<input><inputBase outputBase>),
-        digits => %case<input><digits>,
-      );
-    };
-
-    given %case<expected> {
-      when .<error>.so {
-        throws-like
-          {call-convert-base},
-          Exception,
-          message => /
-            $( %case<expected><error> )
-            || 'Constraint type check failed in binding to parameter'
-          /,
-          %case<description>;
+properties:
+  rebase:
+    test: |-
+      if %case<expected><error>:exists {
+          sprintf(q:to/END/, (|(<from to> Z=> %case<input><inputBase outputBase>), %case<input><digits><>, %case<description>).map(*.raku));
+          dies-ok(
+              { convert-base bases => { %s, %s }, digits => %s },
+              %s,
+          );
+          END
       }
-
-      default {
-        cmp-ok call-convert-base, ‘~~’, |%case<expected description>;
+      else {
+          sprintf(q:to/END/, (|(<from to> Z=> %case<input><inputBase outputBase>), %case<input><digits><>, %case<expected><>, %case<description>).map(*.raku));
+          cmp-ok(
+              convert-base( bases => { %s, %s }, digits => %s ),
+              '~~',
+              %s,
+              %s,
+          );
+          END
       }
-    }
-  }
 
 unit: module
 example: |-
