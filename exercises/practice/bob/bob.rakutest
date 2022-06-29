@@ -5,11 +5,9 @@ use Bob;
 
 #`[Check that the class 'Bob' can use all of the methods
 needed in the tests (only 'hey' for this one).]
-subtest 'Class methods', {
-  for <hey> -> $method {
-    can-ok Bob, $method;
-  }
-} or bail-out 'Cannot run expected method(s).';
+for <hey> -> $method {
+  Bob.^can($method) or bail-out "Cannot run expected method `$method`.";
+}
 
 is(
     Bob.hey("Tom-ay-to, tom-aaaah-to."),

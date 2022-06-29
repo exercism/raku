@@ -2,13 +2,11 @@
 use Test;
 use lib $?FILE.IO.dirname;
 use Robot;
-plan 8;
+plan 7;
 
-subtest 'Class methods', {
-  for <name reset-name> -> $method {
-    can-ok Robot, $method;
-  }
-} or bail-out 'Cannot run expected method(s).';
+for <name reset-name> -> $method {
+  Robot.^can($method) or bail-out "Cannot run expected method `$method`.";
+}
 
 srand 1;
 my Robot:D $robot := Robot.new;
