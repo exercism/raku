@@ -1,17 +1,20 @@
-unit module AffineCipher;
+unit class AffineCipher;
 
-use Exercism::QuickSolve;
+has $.a;
+has $.b;
+has @!letters = ('a'..'z');
+has $!m       = @!letters.elems;
 
-sub encode-affine ($input) is export {
-    quicksolve(
-        :$input,
-        :property<encode>,
-    );
+method encode ($phrase) {
+    return $phrase;
 }
 
-sub decode-affine ($input) is export {
-    quicksolve(
-        :$input,
-        :property<decode>,
-    );
+method decode ($phrase) {
+    return $phrase;
+}
+
+submethod TWEAK {
+    for 2..$!a {
+        die if ($!a & $!m) %% $_;
+    }
 }

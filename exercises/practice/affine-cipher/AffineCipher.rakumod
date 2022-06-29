@@ -1,7 +1,12 @@
-unit module AffineCipher;
+unit class AffineCipher;
 
-sub encode-affine ($input) is export {
+has $.a;
+has $.b;
+has @!letters = ('a'..'z');
+has $!m       = @!letters.elems;
+
+method encode ($phrase) {
 }
 
-sub decode-affine ($input) is export {
+method decode ($phrase) {
 }

@@ -1,57 +1,67 @@
-plan: 16
-tests: |-
-  for @test-cases -> %case {
-      if %case<property> eq 'encode' {
-          given %case<expected> {
-              when .<error>.so {
-                  throws-like
-                    { encode-affine %case<input> },
-                    Exception,
-                    %case<description>;
-              }
-
-              default {
-                  is encode-affine(%case<input>), |%case<expected description>;
-              }
-          }
+methods: encode decode
+properties:
+  encode:
+    test: |-
+      if %case<expected><error>:exists {
+          sprintf(q:to/END/, (|(%case<input><key><a b>:p), %case<description>).map(*.raku));
+          dies-ok { AffineCipher.new( %s, %s ) }, %s;
+          END
       }
-      elsif %case<property> eq 'decode' {
-          given %case<expected> {
-              when .<error>.so {
-                  throws-like
-                    { decode-affine %case<input> },
-                    Exception,
-                    %case<description>;
-              }
-
-              default {
-                  is decode-affine(%case<input>), |%case<expected description>;
-              }
-          }
+      else {
+          sprintf(q:to/END/, (|(%case<input><key><a b>:p), %case<input><phrase>, |(%case<expected description>)).map(*.raku));
+          is(
+              AffineCipher.new( %s, %s ).encode(%s),
+              %s,
+              %s,
+          );
+          END
       }
-  }
+  decode:
+    test: |-
+      if %case<expected><error>:exists {
+          sprintf(q:to/END/, (|(%case<input><key><a b>:p), %case<description>).map(*.raku));
+          dies-ok { AffineCipher.new( %s, %s ) }, %s;
+          END
+      }
+      else {
+          sprintf(q:to/END/, (|(%case<input><key><a b>:p), %case<input><phrase>, |(%case<expected description>)).map(*.raku));
+          is(
+              AffineCipher.new( %s, %s ).decode(%s),
+              %s,
+              %s,
+          );
+          END
+      }
 
-unit: module
+unit: class
 example: |-
-  use Exercism::QuickSolve;
+  has $.a;
+  has $.b;
+  has @!letters = ('a'..'z');
+  has $!m       = @!letters.elems;
 
-  sub encode-affine ($input) is export {
-      quicksolve(
-          :$input,
-          :property<encode>,
-      );
+  method encode ($phrase) {
+      return $phrase;
   }
 
-  sub decode-affine ($input) is export {
-      quicksolve(
-          :$input,
-          :property<decode>,
-      );
+  method decode ($phrase) {
+      return $phrase;
+  }
+
+  submethod TWEAK {
+      for 2..$!a {
+          die if ($!a & $!m) %% $_;
+      }
   }
 
 stub: |-
-  sub encode-affine ($input) is export {
+  has $.a;
+  has $.b;
+  has @!letters = ('a'..'z');
+  has $!m       = @!letters.elems;
+
+  method encode ($phrase) {
   }
 
-  sub decode-affine ($input) is export {
+  method decode ($phrase) {
   }
