@@ -1,89 +1,60 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Acronym;
-plan 9;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  is abbreviate(%case<input><phrase>), |%case<expected description>;
-}
+is(
+    abbreviate("Portable Network Graphics"),
+    "PNG",
+    "basic",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "basic",
-    "expected": "PNG",
-    "input": {
-      "phrase": "Portable Network Graphics"
-    },
-    "property": "abbreviate"
-  },
-  {
-    "description": "lowercase words",
-    "expected": "ROR",
-    "input": {
-      "phrase": "Ruby on Rails"
-    },
-    "property": "abbreviate"
-  },
-  {
-    "description": "punctuation",
-    "expected": "FIFO",
-    "input": {
-      "phrase": "First In, First Out"
-    },
-    "property": "abbreviate"
-  },
-  {
-    "description": "all caps word",
-    "expected": "GIMP",
-    "input": {
-      "phrase": "GNU Image Manipulation Program"
-    },
-    "property": "abbreviate"
-  },
-  {
-    "description": "punctuation without whitespace",
-    "expected": "CMOS",
-    "input": {
-      "phrase": "Complementary metal-oxide semiconductor"
-    },
-    "property": "abbreviate"
-  },
-  {
-    "description": "very long abbreviation",
-    "expected": "ROTFLSHTMDCOALM",
-    "input": {
-      "phrase": "Rolling On The Floor Laughing So Hard That My Dogs Came Over And Licked Me"
-    },
-    "property": "abbreviate"
-  },
-  {
-    "description": "consecutive delimiters",
-    "expected": "SIMUFTA",
-    "input": {
-      "phrase": "Something - I made up from thin air"
-    },
-    "property": "abbreviate"
-  },
-  {
-    "description": "apostrophes",
-    "expected": "HC",
-    "input": {
-      "phrase": "Halley's Comet"
-    },
-    "property": "abbreviate"
-  },
-  {
-    "description": "underscore emphasis",
-    "expected": "TRNT",
-    "input": {
-      "phrase": "The Road _Not_ Taken"
-    },
-    "property": "abbreviate"
-  }
-]
-=end code
+is(
+    abbreviate("Ruby on Rails"),
+    "ROR",
+    "lowercase words",
+);
+
+is(
+    abbreviate("First In, First Out"),
+    "FIFO",
+    "punctuation",
+);
+
+is(
+    abbreviate("GNU Image Manipulation Program"),
+    "GIMP",
+    "all caps word",
+);
+
+is(
+    abbreviate("Complementary metal-oxide semiconductor"),
+    "CMOS",
+    "punctuation without whitespace",
+);
+
+is(
+    abbreviate("Rolling On The Floor Laughing So Hard That My Dogs Came Over And Licked Me"),
+    "ROTFLSHTMDCOALM",
+    "very long abbreviation",
+);
+
+is(
+    abbreviate("Something - I made up from thin air"),
+    "SIMUFTA",
+    "consecutive delimiters",
+);
+
+is(
+    abbreviate("Halley's Comet"),
+    "HC",
+    "apostrophes",
+);
+
+is(
+    abbreviate("The Road _Not_ Taken"),
+    "TRNT",
+    "underscore emphasis",
+);
+
+done-testing;
