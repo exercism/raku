@@ -1,130 +1,90 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use AtbashCipher;
-plan 14;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  is &::(%case<property>)(%case<input><phrase>),
-    |%case<expected description>;
-}
+is(
+    encode("yes"),
+    "bvh",
+    "encode: encode yes",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "encode: encode yes",
-    "expected": "bvh",
-    "input": {
-      "phrase": "yes"
-    },
-    "property": "encode"
-  },
-  {
-    "description": "encode: encode no",
-    "expected": "ml",
-    "input": {
-      "phrase": "no"
-    },
-    "property": "encode"
-  },
-  {
-    "description": "encode: encode OMG",
-    "expected": "lnt",
-    "input": {
-      "phrase": "OMG"
-    },
-    "property": "encode"
-  },
-  {
-    "description": "encode: encode spaces",
-    "expected": "lnt",
-    "input": {
-      "phrase": "O M G"
-    },
-    "property": "encode"
-  },
-  {
-    "description": "encode: encode mindblowingly",
-    "expected": "nrmwy oldrm tob",
-    "input": {
-      "phrase": "mindblowingly"
-    },
-    "property": "encode"
-  },
-  {
-    "description": "encode: encode numbers",
-    "expected": "gvhgr mt123 gvhgr mt",
-    "input": {
-      "phrase": "Testing,1 2 3, testing."
-    },
-    "property": "encode"
-  },
-  {
-    "description": "encode: encode deep thought",
-    "expected": "gifgs rhurx grlm",
-    "input": {
-      "phrase": "Truth is fiction."
-    },
-    "property": "encode"
-  },
-  {
-    "description": "encode: encode all the letters",
-    "expected": "gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt",
-    "input": {
-      "phrase": "The quick brown fox jumps over the lazy dog."
-    },
-    "property": "encode"
-  },
-  {
-    "description": "decode: decode exercism",
-    "expected": "exercism",
-    "input": {
-      "phrase": "vcvix rhn"
-    },
-    "property": "decode"
-  },
-  {
-    "description": "decode: decode a sentence",
-    "expected": "anobstacleisoftenasteppingstone",
-    "input": {
-      "phrase": "zmlyh gzxov rhlug vmzhg vkkrm thglm v"
-    },
-    "property": "decode"
-  },
-  {
-    "description": "decode: decode numbers",
-    "expected": "testing123testing",
-    "input": {
-      "phrase": "gvhgr mt123 gvhgr mt"
-    },
-    "property": "decode"
-  },
-  {
-    "description": "decode: decode all the letters",
-    "expected": "thequickbrownfoxjumpsoverthelazydog",
-    "input": {
-      "phrase": "gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt"
-    },
-    "property": "decode"
-  },
-  {
-    "description": "decode: decode with too many spaces",
-    "expected": "exercism",
-    "input": {
-      "phrase": "vc vix    r hn"
-    },
-    "property": "decode"
-  },
-  {
-    "description": "decode: decode with no spaces",
-    "expected": "anobstacleisoftenasteppingstone",
-    "input": {
-      "phrase": "zmlyhgzxovrhlugvmzhgvkkrmthglmv"
-    },
-    "property": "decode"
-  }
-]
-=end code
+is(
+    encode("no"),
+    "ml",
+    "encode: encode no",
+);
+
+is(
+    encode("OMG"),
+    "lnt",
+    "encode: encode OMG",
+);
+
+is(
+    encode("O M G"),
+    "lnt",
+    "encode: encode spaces",
+);
+
+is(
+    encode("mindblowingly"),
+    "nrmwy oldrm tob",
+    "encode: encode mindblowingly",
+);
+
+is(
+    encode("Testing,1 2 3, testing."),
+    "gvhgr mt123 gvhgr mt",
+    "encode: encode numbers",
+);
+
+is(
+    encode("Truth is fiction."),
+    "gifgs rhurx grlm",
+    "encode: encode deep thought",
+);
+
+is(
+    encode("The quick brown fox jumps over the lazy dog."),
+    "gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt",
+    "encode: encode all the letters",
+);
+
+is(
+    decode("vcvix rhn"),
+    "exercism",
+    "decode: decode exercism",
+);
+
+is(
+    decode("zmlyh gzxov rhlug vmzhg vkkrm thglm v"),
+    "anobstacleisoftenasteppingstone",
+    "decode: decode a sentence",
+);
+
+is(
+    decode("gvhgr mt123 gvhgr mt"),
+    "testing123testing",
+    "decode: decode numbers",
+);
+
+is(
+    decode("gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt"),
+    "thequickbrownfoxjumpsoverthelazydog",
+    "decode: decode all the letters",
+);
+
+is(
+    decode("vc vix    r hn"),
+    "exercism",
+    "decode: decode with too many spaces",
+);
+
+is(
+    decode("zmlyhgzxovrhlugvmzhgvkkrmthglmv"),
+    "anobstacleisoftenasteppingstone",
+    "decode: decode with no spaces",
+);
+
+done-testing;
