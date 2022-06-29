@@ -5,6 +5,10 @@ has $.minute;
 
 method time {!!!}
 
-method add-minutes ($amount) {!!!}
+method add (:$minutes) {!!!}
 
-method subtract-minutes ($amount) {!!!}
+method subtract (:$minutes) {!!!}
+
+submethod TWEAK {
+    # Can be used to modify attributes after object construction
+}
