@@ -1,42 +1,79 @@
+tests: |
+  my BinarySearchTree $bst;
 properties:
-  data:
-    test: |-
-      sprintf(q:to/END/, %case<input><treeData><>.raku, %case<expected>.raku.subst(/\$/, '', :g), %case<description>.raku);
-      is-deeply(
-          create-binary-tree( %s ),
-          %s,
-          %s,
-      );
-      END
   sortedData:
     test: |-
       sprintf(q:to/END/, (%case<input><treeData><>, %case<expected><>, %case<description>).map(*.raku));
-      is-deeply(
-          sort-binary-tree(
-              create-binary-tree( %s )
-          ),
+      $bst.=new;
+      for %s -> $data {
+          $bst.add($data);
+      }
+      cmp-ok(
+          $bst.sort,
+          &infix:<~~>,
           %s,
           %s,
       );
       END
 
-
-unit: module
+unit: class
 
 example: |-
-  sub create-binary-tree (@data) is export {
-      return {};
+  class Node {
+      has $.data;
+      has Node ($.left, $.right) is rw;
   }
 
-  sub sort-binary-tree (%tree) is export {
+  has Node $.root;
+
+  method add ($data) {
+      if !$!root {
+          $!root.=new(:$data);
+      }
+      else {
+          $!root.&(sub ($node) {
+              if $data > $node.data {
+                  with $node.right {
+                      .&?ROUTINE;
+                  }
+                  else {
+                      $node.right.=new(:$data);
+                  }
+              }
+              orwith $node.left {
+                  .&?ROUTINE;
+              }
+              else {
+                  $node.left.=new(:$data);
+              }
+          });
+      }
+
+      return self;
+  }
+
+  method sort {
       return [];
   }
 
 stub: |-
-  sub create-binary-tree (@data) is export {
-      return {};
+  class Node {
+      has $.data;
+      has Node ($.left, $.right) is rw;
   }
 
-  sub sort-binary-tree (%tree) is export {
+  has Node $.root;
+
+  method add ($data) {
+      if !$!root {
+          $!root.=new(:$data);
+      }
+      else {
+      }
+
+      return self;
+  }
+
+  method sort {
       return [];
   }
