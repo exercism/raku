@@ -1,10 +1,4 @@
 unit module ArmstrongNumbers;
 
-use Exercism::QuickSolve;
-
-sub is-armstrong ($number) is export {
-    quicksolve(
-      input => $number,
-      :input-key<number>,
-    );
+sub is-armstrong-number ($number) is export {
 }
