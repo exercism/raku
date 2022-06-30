@@ -1,19 +1,9 @@
 unit module BinarySearchTree;
 
-use Exercism::QuickSolve;
-
-sub create-binary-tree ($data) is export {
-    return quicksolve(
-        input => $data,
-        :input-key<treeData>,
-        :property<data>,
-    ) // $data;
+sub create-binary-tree (@data) is export {
+    return {};
 }
 
-sub sort-binary-tree ($tree) is export {
-    return quicksolve(
-        input => $tree,
-        :input-key<treeData>,
-        :property<sortedData>,
-    );
+sub sort-binary-tree (%tree) is export {
+    return [];
 }

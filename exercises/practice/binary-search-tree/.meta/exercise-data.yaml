@@ -1,45 +1,42 @@
-plan: 10
-tests: |-
-  for @test-cases -> %case {
-      given %case<property> {
-          when 'data' {
-              is-deeply
-                create-binary-tree(%case<input><treeData>),
-                |%case<expected description>;
-          }
+properties:
+  data:
+    test: |-
+      sprintf(q:to/END/, %case<input><treeData><>.raku, %case<expected>.raku.subst(/\$/, '', :g), %case<description>.raku);
+      is-deeply(
+          create-binary-tree( %s ),
+          %s,
+          %s,
+      );
+      END
+  sortedData:
+    test: |-
+      sprintf(q:to/END/, (%case<input><treeData><>, %case<expected><>, %case<description>).map(*.raku));
+      is-deeply(
+          sort-binary-tree(
+              create-binary-tree( %s )
+          ),
+          %s,
+          %s,
+      );
+      END
 
-          when 'sortedData' {
-              is-deeply
-                sort-binary-tree(create-binary-tree(%case<input><treeData>)),
-                |%case<expected description>;
-          }
-      }
-  }
 
 unit: module
 
 example: |-
-  use Exercism::QuickSolve;
-
-  sub create-binary-tree ($data) is export {
-      return quicksolve(
-          input => $data,
-          :input-key<treeData>,
-          :property<data>,
-      ) // $data;
+  sub create-binary-tree (@data) is export {
+      return {};
   }
 
-  sub sort-binary-tree ($tree) is export {
-      return quicksolve(
-          input => $tree,
-          :input-key<treeData>,
-          :property<sortedData>,
-      );
+  sub sort-binary-tree (%tree) is export {
+      return [];
   }
 
 stub: |-
   sub create-binary-tree (@data) is export {
+      return {};
   }
 
   sub sort-binary-tree (%tree) is export {
+      return [];
   }
