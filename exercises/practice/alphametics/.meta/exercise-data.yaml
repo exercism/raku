@@ -1,22 +1,17 @@
-plan: 10
-tests: |-
-  for @test-cases -> %case {
-      cmp-ok
-        solve-alphametics(%case<input><puzzle>),
-        '~~',
-        %case<expected>.Bag,
-        %case<description>;
-  }
+properties:
+  solve:
+    test: |-
+      sprintf(q:to/END/, (%case<input><puzzle>, (with %case<expected> { .<> } else { Nil }), %case<description>).map(*.raku));
+      is-deeply(
+          solve-alphametics(%s),
+          %s,
+          %s,
+      );
+      END
 
 unit: module
 example: |-
-  use Exercism::QuickSolve;
-
   sub solve-alphametics ($puzzle) is export {
-      quicksolve(
-          input => $puzzle,
-          input-key => 'puzzle',
-      ).Bag;
   }
 stub: |-
   sub solve-alphametics ($puzzle) is export {
