@@ -353,7 +353,7 @@
     {
       "title": "Concise",
       "content": "Raku programs are naturally more concise and readable, thanks to its innovative design.",
-      "icon": "powerful"
+      "icon": "small"
     },
     {
       "title": "Expressive",
@@ -373,7 +373,7 @@
     {
       "title": "Regexes and Grammars",
       "content": "Raku has powerful, extensible grammars for parsing data or code (which Raku uses to parse itself!)",
-      "icon": "easy"
+      "icon": "powerful"
     },
     {
       "title": "A Welcoming Community",
