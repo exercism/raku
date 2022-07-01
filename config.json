@@ -357,7 +357,7 @@
     },
     {
       "title": "Expressive",
-      "content": "Raku is a supremely flexible language, adaptable to your own style of programming.",
+      "content": "Raku is a supremely flexible and mutable language, adaptable to your own style of programming.",
       "icon": "fun"
     },
     {
@@ -371,9 +371,9 @@
       "icon": "concurrency"
     },
     {
-      "title": "Helpful Documentation",
-      "content": "Found at https://docs.raku.org/, including tutorials for coming from other programming languages.",
-      "icon": "documentation"
+      "title": "Regexes and Grammars",
+      "content": "Raku has extensible grammars for parsing data or code (which Raku uses to parse itself!)",
+      "icon": "easy"
     },
     {
       "title": "A Welcoming Community",
