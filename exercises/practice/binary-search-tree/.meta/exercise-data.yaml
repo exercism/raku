@@ -1,0 +1,83 @@
+tests: |
+  my BinarySearchTree $bst;
+properties:
+  sortedData:
+    test: |-
+      sprintf(q:to/END/, (%case<input><treeData><>, %case<expected><>, %case<description>).map(*.raku));
+      for %s -> $data {
+          once {
+              $bst.=new.root.=new(:$data);
+              next;
+          }
+          $bst.add($data);
+      }
+      cmp-ok(
+          $bst.sort,
+          &infix:<~~>,
+          %s,
+          %s,
+      );
+      END
+
+unit: class
+
+example: |-
+  class Node {
+      has $.data;
+      has Node ($.left, $.right) is rw;
+
+      method set ($data) {
+          if $data > self.data {
+              with self.right {
+                  .set($data);
+              }
+              else {
+                  self.right.=new(:$data);
+              }
+          }
+          orwith self.left {
+              .set($data);
+          }
+          else {
+              self.left.=new(:$data);
+          }
+      }
+  }
+
+  has Node $.root is rw;
+
+  method add ($data) {
+      $!root.set($data);
+  }
+
+  method sort (--> Iterable) {
+      return gather {
+          $!root.&(sub ($node) {
+              with $node.left {
+                  .&?ROUTINE;
+              }
+
+              take $node.data;
+
+              with $node.right {
+                  .&?ROUTINE;
+              }
+          });
+      };
+  }
+
+stub: |-
+  class Node {
+      has $.data;
+      has Node ($.left, $.right) is rw;
+  }
+
+  has Node $.root is rw;
+
+  method add ($data) {
+      # $.root contains the initial node.
+  }
+
+  method sort (--> Iterable) {
+      return [];
+  }
