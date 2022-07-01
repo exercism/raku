@@ -349,7 +349,38 @@
     ]
   },
   "concepts": [],
-  "key_features": [],
+  "key_features": [
+    {
+      "title": "Concise",
+      "content": "Raku programs are naturally more concise and readable, thanks to its innovative design.",
+      "icon": "powerful"
+    },
+    {
+      "title": "Expressive",
+      "content": "Raku is a supremely flexible language, adaptable to your own style of programming.",
+      "icon": "fun"
+    },
+    {
+      "title": "Growing",
+      "content": "Raku is developed by a team of dedicated and enthusiastic open source volunteers.",
+      "icon": "evolving"
+    },
+    {
+      "title": "Concurrency",
+      "content": "Raku has a high level concurrency model, both for implicit as well as explicit multiprocessing.",
+      "icon": "concurrency"
+    },
+    {
+      "title": "Helpful Documentation",
+      "content": "Found at https://docs.raku.org/, including tutorials for coming from other programming languages.",
+      "icon": "documentation"
+    },
+    {
+      "title": "A Welcoming Community",
+      "content": "Go to #raku (irc.libera.chat) and someone will be glad to help you get started.",
+      "icon": "community"
+    }
+  ],
   "tags": [
     "paradigm/imperative",
     "paradigm/procedural",
