@@ -22,13 +22,9 @@ class Node {
     }
 }
 
-has Node $.root;
+has Node $.root is rw;
 
 method add ($data) {
-    when !$!root {
-        $!root.=new(:$data);
-    }
-
     $!root.set($data);
 }
 

@@ -5,14 +5,10 @@ class Node {
     has Node ($.left, $.right) is rw;
 }
 
-has Node $.root;
+has Node $.root is rw;
 
 method add ($data) {
-    when !$!root {
-        $!root.=new(:$data);
-    }
-
-    # Set left/right nodes here
+    # $.root contains the initial node.
 }
 
 method sort (--> Iterable) {

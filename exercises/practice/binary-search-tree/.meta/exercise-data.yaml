@@ -4,8 +4,11 @@ properties:
   sortedData:
     test: |-
       sprintf(q:to/END/, (%case<input><treeData><>, %case<expected><>, %case<description>).map(*.raku));
-      $bst.=new;
       for %s -> $data {
+          once {
+              $bst.=new.root.=new(:$data);
+              next;
+          }
           $bst.add($data);
       }
       cmp-ok(
@@ -41,13 +44,9 @@ example: |-
       }
   }
 
-  has Node $.root;
+  has Node $.root is rw;
 
   method add ($data) {
-      when !$!root {
-          $!root.=new(:$data);
-      }
-
       $!root.set($data);
   }
 
@@ -73,14 +72,10 @@ stub: |-
       has Node ($.left, $.right) is rw;
   }
 
-  has Node $.root;
+  has Node $.root is rw;
 
   method add ($data) {
-      when !$!root {
-          $!root.=new(:$data);
-      }
-
-      # Set left/right nodes here
+      # $.root contains the initial node.
   }
 
   method sort (--> Iterable) {
