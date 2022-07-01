@@ -22,38 +22,49 @@ example: |-
   class Node {
       has $.data;
       has Node ($.left, $.right) is rw;
+
+      method set ($data) {
+          if $data > self.data {
+              with self.right {
+                  .set($data);
+              }
+              else {
+                  self.right.=new(:$data);
+              }
+          }
+          orwith self.left {
+              .set($data);
+          }
+          else {
+              self.left.=new(:$data);
+          }
+      }
   }
 
   has Node $.root;
 
   method add ($data) {
-      if !$!root {
+      when !$!root {
           $!root.=new(:$data);
       }
-      else {
-          $!root.&(sub ($node) {
-              if $data > $node.data {
-                  with $node.right {
-                      .&?ROUTINE;
-                  }
-                  else {
-                      $node.right.=new(:$data);
-                  }
-              }
-              orwith $node.left {
-                  .&?ROUTINE;
-              }
-              else {
-                  $node.left.=new(:$data);
-              }
-          });
-      }
 
-      return self;
+      $!root.set($data);
   }
 
-  method sort {
-      return [];
+  method sort (--> Iterable) {
+      return gather {
+          $!root.&(sub ($node) {
+              with $node.left {
+                  .&?ROUTINE;
+              }
+
+              take $node.data;
+
+              with $node.right {
+                  .&?ROUTINE;
+              }
+          });
+      };
   }
 
 stub: |-
@@ -65,15 +76,13 @@ stub: |-
   has Node $.root;
 
   method add ($data) {
-      if !$!root {
+      when !$!root {
           $!root.=new(:$data);
       }
-      else {
-      }
 
-      return self;
+      # Set left/right nodes here
   }
 
-  method sort {
+  method sort (--> Iterable) {
       return [];
   }

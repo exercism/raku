@@ -8,15 +8,13 @@ class Node {
 has Node $.root;
 
 method add ($data) {
-    if !$!root {
+    when !$!root {
         $!root.=new(:$data);
     }
-    else {
-    }
 
-    return self;
+    # Set left/right nodes here
 }
 
-method sort {
+method sort (--> Iterable) {
     return [];
 }
