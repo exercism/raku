@@ -353,13 +353,16 @@
   "tags": [
     "paradigm/imperative",
     "paradigm/procedural",
+    "paradigm/functional",
+    "paradigm/object_oriented",
     "typing/dynamic",
     "typing/weak",
     "execution_mode/interpreted",
     "platform/windows",
     "platform/mac",
     "platform/linux",
-    "runtime/standalone_executable",
+    "runtime/language_specific",
+    "runtime/jvm",
     "used_for/scripts"
   ]
 }
