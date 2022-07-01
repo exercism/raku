@@ -5,7 +5,7 @@ tests: |-
   srand 1;
   my Robot:D $robot := Robot.new;
   my Str:D @robot-names = $robot.name;
-  like @robot-names[0], /^^<[A..Z]>**2 <[0..9]>**3$$/, 'Name matches schema';
+  like @robot-names[0], /^^<[A..Z]> <[0..9]>**2$$/, 'Name matches schema';
 
   srand 2;
   is $robot.name, @robot-names[0], 'Name is persistent';
@@ -19,16 +19,13 @@ tests: |-
   isnt $robot.name, @robot-names[0],
     "'reset-name' cannot use previous Robot name";
 
-  diag "\nCreating additional robots...";
   my Promise:D $promise := start {
-    until @robot-names.elems == ($Robot::test-all-names ?? 676000 !! 100) {
+    until @robot-names.elems == 2600 {
       @robot-names.push(Robot.new.name);
     }
   };
   loop {
     if $promise.Bool { last }
-    else { sleep 1 }
-    diag "@robot-names.elems.fmt() robots";
   }
 
   is @robot-names, @robot-names.unique, 'All names are unique';
@@ -40,62 +37,31 @@ tests: |-
       'Names not reverse ordered';
   }
 
-  if $Robot::test-all-names {
-    throws-like
-      {Robot.new},
-      Exception,
-      message => /'All names used.'/,
-      'Throw exception when out of names';
-  }
-  else { skip 'All names test' }
+  throws-like
+    {Robot.new},
+    Exception,
+    message => /'All names used.'/,
+    'Throw exception when out of names';
 
 catch_stub: true
 unit: class
-examples:
-  promise: |-
-    our $test-all-names = True;
+example: |-
+  my $promised-names = start [pick ([X~] ("A".."Z"), |(^10 xx 2)): *];
 
-    my $promised-names = start [pick ([X~] |(("A".."Z") xx 2), |(^10 xx 3)): *];
+  subset Name of Str where * ~~ /^<[A..Z]> <[0..9]>**2$/;
+  has Name:D $.name = self.reset-name;
 
-    subset Name of Str where * ~~ /^<[A..Z]>**2 <[0..9]>**3$/;
-    has Name:D $.name = self.reset-name;
-
-    method reset-name {
-      await $promised-names;
-      given $promised-names.result[$++] {
-        when Str {
-          return $!name = $_;
-        }
-      }
-      die 'All names used.';
-    }
-
-  random: |-
-    our $test-all-names = False;
-
-    subset Name of Str where * ~~ /^<[A..Z]>**2 <[0..9]>**3$/;
-    has Name:D $.name = self.reset-name;
-
-    method reset-name {
-      state Bool:D %record{Name:D};
-      given self!random-name {
-        when %record{$_} {
-          return self.reset-name;
-        }
-        default {
-          %record{$_} = True;
-          return $!name = $_;
-        }
+  method reset-name {
+    await $promised-names;
+    given $promised-names.result[$++] {
+      when Str {
+        return $!name = $_;
       }
     }
-
-    method !random-name {
-      ( ('A'..'Z').roll(2), (^10).roll(3) ).flat.join;
-    }
+    die 'All names used.';
+  }
 
 stub: |-
-  our $test-all-names = False;
-
   has Str:D $.name = '';
 
   method reset-name {!!!}
