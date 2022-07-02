@@ -1,0 +1,121 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use Connect;
+
+is(
+    connect-winner(q:to/BOARD/.trim),
+    . . . . .
+     . . . . .
+      . . . . .
+       . . . . .
+        . . . . .
+    BOARD
+    "",
+    "an empty board has no winner",
+);
+
+is(
+    connect-winner(q:to/BOARD/.trim),
+    X
+    BOARD
+    "X",
+    "X can win on a 1x1 board",
+);
+
+is(
+    connect-winner(q:to/BOARD/.trim),
+    O
+    BOARD
+    "O",
+    "O can win on a 1x1 board",
+);
+
+is(
+    connect-winner(q:to/BOARD/.trim),
+    O O O X
+     X . . X
+      X . . X
+       X O O O
+    BOARD
+    "",
+    "only edges does not make a winner",
+);
+
+is(
+    connect-winner(q:to/BOARD/.trim),
+    X O . .
+     O X X X
+      O X O .
+       . O X .
+        X X O O
+    BOARD
+    "",
+    "illegal diagonal does not make a winner",
+);
+
+is(
+    connect-winner(q:to/BOARD/.trim),
+    X . . .
+     . X O .
+      O . X O
+       . O . X
+        . . O .
+    BOARD
+    "",
+    "nobody wins crossing adjacent angles",
+);
+
+is(
+    connect-winner(q:to/BOARD/.trim),
+    . O . .
+     O X X X
+      O X O .
+       X X O X
+        . O X .
+    BOARD
+    "X",
+    "X wins crossing from left to right",
+);
+
+is(
+    connect-winner(q:to/BOARD/.trim),
+    . O . .
+     O X X X
+      O O O .
+       X X O X
+        . O X .
+    BOARD
+    "O",
+    "O wins crossing from top to bottom",
+);
+
+is(
+    connect-winner(q:to/BOARD/.trim),
+    . X X . .
+     X . X . X
+      . X . X .
+       . X X . .
+        O O O O O
+    BOARD
+    "X",
+    "X wins using a convoluted path",
+);
+
+is(
+    connect-winner(q:to/BOARD/.trim),
+    O X X X X X X X X
+     O X O O O O O O O
+      O X O X X X X X O
+       O X O X O O O X O
+        O X O X X X O X O
+         O X O O O X O X O
+          O X X X X X O X O
+           O O O O O O O X O
+            X X X X X X X X O
+    BOARD
+    "X",
+    "X wins using a spiral path",
+);
+
+done-testing;

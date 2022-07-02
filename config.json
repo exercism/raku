@@ -345,6 +345,15 @@
         "prerequisites": [],
         "difficulty": 5,
         "topics": []
+      },
+      {
+        "slug": "connect",
+        "name": "Connect",
+        "uuid": "fa8e79d8-fa8b-46ca-a2e4-4494f0a1b0d9",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
       }
     ]
   },

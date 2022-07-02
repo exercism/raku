@@ -1,0 +1,21 @@
+properties:
+  winner:
+    test: |-
+      sprintf(q:to/END/, %case<input><board>.join("\n    "), (|%case<expected description>).map(*.raku));
+      is(
+          connect-winner(q:to/BOARD/.trim),
+          %s
+          BOARD
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub connect-winner ($board) is export {
+  }
+
+stub: |-
+  sub connect-winner ($board) is export {
+  }
