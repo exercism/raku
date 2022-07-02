@@ -1,0 +1,15 @@
+{
+  "authors": ["m-dango"],
+  "files": {
+    "solution": [
+      "Connect.rakumod"
+    ],
+    "test": [
+      "connect.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/Connect.rakumod"
+    ]
+  },
+  "blurb": "Compute the result for a game of Hex / Polygon."
+}
