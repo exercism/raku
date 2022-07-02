@@ -345,6 +345,15 @@
         "prerequisites": [],
         "difficulty": 5,
         "topics": []
+      },
+      {
+        "slug": "collatz-conjecture",
+        "name": "Collatz Conjecture",
+        "uuid": "af004395-69cd-4151-ad42-b9e617abc99d",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2,
+        "topics": []
       }
     ]
   },
