@@ -1,6 +1,6 @@
 package: Robot
 methods: name reset-name
-plan: 7
+plan: 8
 tests: |-
   srand 1;
   my Robot:D $robot := Robot.new;
@@ -11,29 +11,27 @@ tests: |-
   is $robot.name, @robot-names[0], 'Name is persistent';
   srand 1;
   @robot-names.push(Robot.new.name);
-  isnt @robot-names[1], @robot-names[0],
+  isnt @robot-names[*-1], @robot-names[0],
     'New Robot cannot claim previous Robot name';
 
   srand 1;
   $robot.reset-name;
-  isnt $robot.name, @robot-names[0],
-    "'reset-name' cannot use previous Robot name";
+  @robot-names.push($robot.name);
+  for 1..2 {
+    isnt @robot-names[$_], @robot-names[0],
+      "'reset-name' cannot use previous Robot name";
+  }
 
-  my Promise:D $promise := start {
-    until @robot-names.elems == 2600 {
-      @robot-names.push(Robot.new.name);
-    }
-  };
-  loop {
-    if $promise.Bool { last }
+  until @robot-names.elems == 2600 {
+    @robot-names.push(Robot.new.name);
   }
 
   is @robot-names, @robot-names.unique, 'All names are unique';
   subtest 'Randomness', {
     plan 2;
-    isnt @robot-names[^100], @robot-names[^100].sort,
+    isnt @robot-names, @robot-names.sort,
       'Names not ordered';
-    isnt @robot-names[^100], @robot-names[^100].sort.reverse,
+    isnt @robot-names, @robot-names.sort.reverse,
       'Names not reverse ordered';
   }
 
