@@ -18,10 +18,9 @@ unit_comment: |-
   )
 example: |-
   sub hello is export {
-    'Hello, World!'
+      'Hello, World!';
   }
 stub: |-
   sub hello is export {
-    # Write your solution to pass the test suite here.
-    # Be sure to remove all stock comments once you are done!
+      return 'Goodbye, Mars!';
   }
