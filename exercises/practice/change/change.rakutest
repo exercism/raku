@@ -1,0 +1,84 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use Change;
+
+cmp-ok(
+    fewest-coins( :target(1), :coins([1, 5, 10, 25]) ),
+    &infix:<(==)>,
+    [1].Bag,
+    "change for 1 cent",
+);
+
+cmp-ok(
+    fewest-coins( :target(25), :coins([1, 5, 10, 25, 100]) ),
+    &infix:<(==)>,
+    [25].Bag,
+    "single coin change",
+);
+
+cmp-ok(
+    fewest-coins( :target(15), :coins([1, 5, 10, 25, 100]) ),
+    &infix:<(==)>,
+    [5, 10].Bag,
+    "multiple coin change",
+);
+
+cmp-ok(
+    fewest-coins( :target(23), :coins([1, 4, 15, 20, 50]) ),
+    &infix:<(==)>,
+    [4, 4, 15].Bag,
+    "change with Lilliputian Coins",
+);
+
+cmp-ok(
+    fewest-coins( :target(63), :coins([1, 5, 10, 21, 25]) ),
+    &infix:<(==)>,
+    [21, 21, 21].Bag,
+    "change with Lower Elbonia Coins",
+);
+
+cmp-ok(
+    fewest-coins( :target(999), :coins([1, 2, 5, 10, 20, 50, 100]) ),
+    &infix:<(==)>,
+    [2, 2, 5, 20, 20, 50, 100, 100, 100, 100, 100, 100, 100, 100, 100].Bag,
+    "large target values",
+);
+
+cmp-ok(
+    fewest-coins( :target(21), :coins([2, 5, 10, 20, 50]) ),
+    &infix:<(==)>,
+    [2, 2, 2, 5, 10].Bag,
+    "possible change without unit coins available",
+);
+
+cmp-ok(
+    fewest-coins( :target(27), :coins([4, 5]) ),
+    &infix:<(==)>,
+    [4, 4, 4, 5, 5, 5].Bag,
+    "another possible change without unit coins available",
+);
+
+cmp-ok(
+    fewest-coins( :target(0), :coins([1, 5, 10, 21, 25]) ),
+    &infix:<(==)>,
+    [].Bag,
+    "no coins make 0 change",
+);
+
+dies-ok(
+    { fewest-coins :target(3), :coins([5, 10]) },
+    "error testing for change smaller than the smallest of coins",
+);
+
+dies-ok(
+    { fewest-coins :target(94), :coins([5, 10]) },
+    "error if no combination can add up to target",
+);
+
+dies-ok(
+    { fewest-coins :target(-5), :coins([1, 2, 5]) },
+    "cannot find negative change values",
+);
+
+done-testing;
