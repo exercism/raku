@@ -1,21 +1,19 @@
-plan: 18
-tests: |-
-  for @test-cases -> %case {
-    is-deeply best-price(%case<input><basket>),
-      Rat.new(%case<expected>, 100), %case<description>;
-  }
+properties:
+  total:
+    test: |-
+      sprintf(q:to/END/, (%case<input><basket><>, |%case<expected description>).map(*.raku));
+      is-deeply(
+          best-price(%s),
+          Rat.new(%s, 100),
+          %s,
+      );
+      END
 
 unit: module
 example: |-
-  use Exercism::QuickSolve;
-
   sub best-price (@basket) is export {
-      Rat.new(quicksolve(
-          input => @basket,
-          input-key => 'basket',
-          property => 'total',
-      ), 100);
   }
+
 stub: |-
   sub best-price (@basket) is export {
   }

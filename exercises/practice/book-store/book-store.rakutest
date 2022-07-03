@@ -1,319 +1,114 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use BookStore;
-plan 18;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  is-deeply best-price(%case<input><basket>),
-    Rat.new(%case<expected>, 100), %case<description>;
-}
+is-deeply(
+    best-price([1]),
+    Rat.new(800, 100),
+    "Only a single book",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "Only a single book",
-    "expected": 800,
-    "input": {
-      "basket": [
-        1
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Two of the same book",
-    "expected": 1600,
-    "input": {
-      "basket": [
-        2,
-        2
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Empty basket",
-    "expected": 0,
-    "input": {
-      "basket": [
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Two different books",
-    "expected": 1520,
-    "input": {
-      "basket": [
-        1,
-        2
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Three different books",
-    "expected": 2160,
-    "input": {
-      "basket": [
-        1,
-        2,
-        3
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Four different books",
-    "expected": 2560,
-    "input": {
-      "basket": [
-        1,
-        2,
-        3,
-        4
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Five different books",
-    "expected": 3000,
-    "input": {
-      "basket": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Two groups of four is cheaper than group of five plus group of three",
-    "expected": 5120,
-    "input": {
-      "basket": [
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4,
-        5
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Two groups of four is cheaper than groups of five and three",
-    "expected": 5120,
-    "input": {
-      "basket": [
-        1,
-        1,
-        2,
-        3,
-        4,
-        4,
-        5,
-        5
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Group of four plus group of two is cheaper than two groups of three",
-    "expected": 4080,
-    "input": {
-      "basket": [
-        1,
-        1,
-        2,
-        2,
-        3,
-        4
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Two each of first four books and one copy each of rest",
-    "expected": 5560,
-    "input": {
-      "basket": [
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4,
-        4,
-        5
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Two copies of each book",
-    "expected": 6000,
-    "input": {
-      "basket": [
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4,
-        4,
-        5,
-        5
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Three copies of first book and two each of remaining",
-    "expected": 6800,
-    "input": {
-      "basket": [
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4,
-        4,
-        5,
-        5,
-        1
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Three each of first two books and two each of remaining books",
-    "expected": 7520,
-    "input": {
-      "basket": [
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4,
-        4,
-        5,
-        5,
-        1,
-        2
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Four groups of four are cheaper than two groups each of five and three",
-    "expected": 10240,
-    "input": {
-      "basket": [
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4,
-        5,
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4,
-        5
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "Check that groups of four are created properly even when there are more groups of three than groups of five",
-    "expected": 14560,
-    "input": {
-      "basket": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        4,
-        4,
-        5,
-        5
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "One group of one and four is cheaper than one group of two and three",
-    "expected": 3360,
-    "input": {
-      "basket": [
-        1,
-        1,
-        2,
-        3,
-        4
-      ]
-    },
-    "property": "total"
-  },
-  {
-    "description": "One group of one and two plus three groups of four is cheaper than one group of each size",
-    "expected": 10000,
-    "input": {
-      "basket": [
-        1,
-        2,
-        2,
-        3,
-        3,
-        3,
-        4,
-        4,
-        4,
-        4,
-        5,
-        5,
-        5,
-        5,
-        5
-      ]
-    },
-    "property": "total"
-  }
-]
-=end code
+is-deeply(
+    best-price([2, 2]),
+    Rat.new(1600, 100),
+    "Two of the same book",
+);
+
+is-deeply(
+    best-price([]),
+    Rat.new(0, 100),
+    "Empty basket",
+);
+
+is-deeply(
+    best-price([1, 2]),
+    Rat.new(1520, 100),
+    "Two different books",
+);
+
+is-deeply(
+    best-price([1, 2, 3]),
+    Rat.new(2160, 100),
+    "Three different books",
+);
+
+is-deeply(
+    best-price([1, 2, 3, 4]),
+    Rat.new(2560, 100),
+    "Four different books",
+);
+
+is-deeply(
+    best-price([1, 2, 3, 4, 5]),
+    Rat.new(3000, 100),
+    "Five different books",
+);
+
+is-deeply(
+    best-price([1, 1, 2, 2, 3, 3, 4, 5]),
+    Rat.new(5120, 100),
+    "Two groups of four is cheaper than group of five plus group of three",
+);
+
+is-deeply(
+    best-price([1, 1, 2, 3, 4, 4, 5, 5]),
+    Rat.new(5120, 100),
+    "Two groups of four is cheaper than groups of five and three",
+);
+
+is-deeply(
+    best-price([1, 1, 2, 2, 3, 4]),
+    Rat.new(4080, 100),
+    "Group of four plus group of two is cheaper than two groups of three",
+);
+
+is-deeply(
+    best-price([1, 1, 2, 2, 3, 3, 4, 4, 5]),
+    Rat.new(5560, 100),
+    "Two each of first four books and one copy each of rest",
+);
+
+is-deeply(
+    best-price([1, 1, 2, 2, 3, 3, 4, 4, 5, 5]),
+    Rat.new(6000, 100),
+    "Two copies of each book",
+);
+
+is-deeply(
+    best-price([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 1]),
+    Rat.new(6800, 100),
+    "Three copies of first book and two each of remaining",
+);
+
+is-deeply(
+    best-price([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 1, 2]),
+    Rat.new(7520, 100),
+    "Three each of first two books and two each of remaining books",
+);
+
+is-deeply(
+    best-price([1, 1, 2, 2, 3, 3, 4, 5, 1, 1, 2, 2, 3, 3, 4, 5]),
+    Rat.new(10240, 100),
+    "Four groups of four are cheaper than two groups each of five and three",
+);
+
+is-deeply(
+    best-price([1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 5, 5]),
+    Rat.new(14560, 100),
+    "Check that groups of four are created properly even when there are more groups of three than groups of five",
+);
+
+is-deeply(
+    best-price([1, 1, 2, 3, 4]),
+    Rat.new(3360, 100),
+    "One group of one and four is cheaper than one group of two and three",
+);
+
+is-deeply(
+    best-price([1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5]),
+    Rat.new(10000, 100),
+    "One group of one and two plus three groups of four is cheaper than one group of each size",
+);
+
+done-testing;
