@@ -1,0 +1,48 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use CryptoSquare;
+
+is(
+    crypto-square(""),
+    "",
+    "empty plaintext results in an empty ciphertext",
+);
+
+is(
+    crypto-square("A"),
+    "a",
+    "Lowercase",
+);
+
+is(
+    crypto-square("  b "),
+    "b",
+    "Remove spaces",
+);
+
+is(
+    crypto-square("\@1,\%!"),
+    "1",
+    "Remove punctuation",
+);
+
+is(
+    crypto-square("This is fun!"),
+    "tsf hiu isn",
+    "9 character plaintext results in 3 chunks of 3 characters",
+);
+
+is(
+    crypto-square("Chill out."),
+    "clu hlt io ",
+    "8 character plaintext results in 3 chunks, the last one with a trailing space",
+);
+
+is(
+    crypto-square("If man was meant to stay on the ground, god would have given us roots."),
+    "imtgdvs fearwer mayoogo anouuio ntnnlvt wttddes aohghn  sseoau ",
+    "54 character plaintext results in 7 chunks, the last two with trailing spaces",
+);
+
+done-testing;
