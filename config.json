@@ -354,6 +354,15 @@
         "prerequisites": [],
         "difficulty": 2,
         "topics": []
+      },
+      {
+        "slug": "crypto-square",
+        "name": "Crypto Square",
+        "uuid": "d7c9f93f-de86-4f93-97d7-0f08e8aab8e8",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3,
+        "topics": []
       }
     ]
   },
