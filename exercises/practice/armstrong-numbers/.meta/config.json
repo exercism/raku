@@ -1,5 +1,10 @@
 {
-  "authors": ["m-dango"],
+  "authors": [
+    "m-dango"
+  ],
+  "contributors": [
+    "habere-et-dispertire"
+  ],
   "files": {
     "solution": [
       "ArmstrongNumbers.rakumod"
