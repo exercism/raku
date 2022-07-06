@@ -1,0 +1,101 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use Darts;
+
+for <score> -> $method {
+  Darts.^can($method) or bail-out "Cannot run expected method `$method`.";
+}
+
+cmp-ok(
+    Darts.new( :x(-9), :y(9) ).score,
+    &infix:<==>,
+    0,
+    "Missed target",
+);
+
+cmp-ok(
+    Darts.new( :x(0), :y(10) ).score,
+    &infix:<==>,
+    1,
+    "On the outer circle",
+);
+
+cmp-ok(
+    Darts.new( :x(-5), :y(0) ).score,
+    &infix:<==>,
+    5,
+    "On the middle circle",
+);
+
+cmp-ok(
+    Darts.new( :x(0), :y(-1) ).score,
+    &infix:<==>,
+    10,
+    "On the inner circle",
+);
+
+cmp-ok(
+    Darts.new( :x(0), :y(0) ).score,
+    &infix:<==>,
+    10,
+    "Exactly on centre",
+);
+
+cmp-ok(
+    Darts.new( :x(-0.1), :y(-0.1) ).score,
+    &infix:<==>,
+    10,
+    "Near the centre",
+);
+
+cmp-ok(
+    Darts.new( :x(0.7), :y(0.7) ).score,
+    &infix:<==>,
+    10,
+    "Just within the inner circle",
+);
+
+cmp-ok(
+    Darts.new( :x(0.8), :y(-0.8) ).score,
+    &infix:<==>,
+    5,
+    "Just outside the inner circle",
+);
+
+cmp-ok(
+    Darts.new( :x(-3.5), :y(3.5) ).score,
+    &infix:<==>,
+    5,
+    "Just within the middle circle",
+);
+
+cmp-ok(
+    Darts.new( :x(-3.6), :y(-3.6) ).score,
+    &infix:<==>,
+    1,
+    "Just outside the middle circle",
+);
+
+cmp-ok(
+    Darts.new( :x(-7.0), :y(7.0) ).score,
+    &infix:<==>,
+    1,
+    "Just within the outer circle",
+);
+
+cmp-ok(
+    Darts.new( :x(7.1), :y(-7.1) ).score,
+    &infix:<==>,
+    0,
+    "Just outside the outer circle",
+);
+
+cmp-ok(
+    Darts.new( :x(0.5), :y(-4) ).score,
+    &infix:<==>,
+    5,
+    "Asymmetric position between the inner and middle circles",
+);
+
+done-testing;
