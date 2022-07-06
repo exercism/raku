@@ -1,0 +1,108 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use Diamond;
+
+is(
+    diamond("A"),
+    q:to/END/.chomp,
+    A
+    END
+    "Degenerate case with a single 'A' row",
+);
+
+is(
+    diamond("B"),
+    q:to/END/.chomp,
+     A 
+    B B
+     A 
+    END
+    "Degenerate case with no row containing 3 distinct groups of spaces",
+);
+
+is(
+    diamond("C"),
+    q:to/END/.chomp,
+      A  
+     B B 
+    C   C
+     B B 
+      A  
+    END
+    "Smallest non-degenerate case with odd diamond side length",
+);
+
+is(
+    diamond("D"),
+    q:to/END/.chomp,
+       A   
+      B B  
+     C   C 
+    D     D
+     C   C 
+      B B  
+       A   
+    END
+    "Smallest non-degenerate case with even diamond side length",
+);
+
+is(
+    diamond("Z"),
+    q:to/END/.chomp,
+                             A                         
+                            B B                        
+                           C   C                       
+                          D     D                      
+                         E       E                     
+                        F         F                    
+                       G           G                   
+                      H             H                  
+                     I               I                 
+                    J                 J                
+                   K                   K               
+                  L                     L              
+                 M                       M             
+                N                         N            
+               O                           O           
+              P                             P          
+             Q                               Q         
+            R                                 R        
+           S                                   S       
+          T                                     T      
+         U                                       U     
+        V                                         V    
+       W                                           W   
+      X                                             X  
+     Y                                               Y 
+    Z                                                 Z
+     Y                                               Y 
+      X                                             X  
+       W                                           W   
+        V                                         V    
+         U                                       U     
+          T                                     T      
+           S                                   S       
+            R                                 R        
+             Q                               Q         
+              P                             P          
+               O                           O           
+                N                         N            
+                 M                       M             
+                  L                     L              
+                   K                   K               
+                    J                 J                
+                     I               I                 
+                      H             H                  
+                       G           G                   
+                        F         F                    
+                         E       E                     
+                          D     D                      
+                           C   C                       
+                            B B                        
+                             A                         
+    END
+    "Largest possible diamond",
+);
+
+done-testing;

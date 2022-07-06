@@ -1,0 +1,22 @@
+unit: module
+
+properties:
+  rows:
+    test: |-
+      sprintf(q:to/TEST/, %case<input><letter>.raku, %case<expected>.join("\n    "), %case<description>.raku);
+      is(
+          diamond(%s),
+          q:to/END/.chomp,
+          %s
+          END
+          %s,
+      );
+      TEST
+
+example: |-
+  sub diamond ($letter) is export {
+  }
+
+stub: |-
+  sub diamond ($letter) is export {
+  }

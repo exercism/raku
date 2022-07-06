@@ -598,6 +598,15 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
+      },
+      {
+        "slug": "diamond",
+        "name": "Diamond",
+        "uuid": "d79c079d-9652-42db-9002-43bc098eb16e",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
       }
     ]
   },
