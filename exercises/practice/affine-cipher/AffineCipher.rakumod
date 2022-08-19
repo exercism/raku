@@ -1,9 +1,10 @@
 unit class AffineCipher;
 
+constant @alphabet = 'a'..'z';
+constant $m        = @alphabet.elems;
+
 has $.a;
 has $.b;
-has @!letters = ('a'..'z');
-has $!m       = @!letters.elems;
 
 method encode ($phrase) {
 }
