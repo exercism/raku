@@ -1,0 +1,44 @@
+properties:
+  steps:
+    test: |-
+      if %case<expected><error>:exists {
+          sprintf(q:to/END/, %case<input><number>, %case<description>.raku);
+          dies-ok(
+              { collatz-conjecture %s },
+              %s,
+          );
+          END
+      }
+      else {
+          sprintf(q:to/END/, %case<input><number>, |(%case<expected description>.map(*.raku)));
+          cmp-ok(
+              collatz-conjecture(%s),
+              &infix:<==>,
+              %s,
+              %s,
+          );
+          END
+      }
+
+
+unit: module
+example: |-
+  sub collatz-conjecture (UInt $number is copy where * > 0) is export {
+      my $i = 0;
+      until $number == 1 {
+          $i++;
+
+          if $number %% 2 {
+              $number = ($number / 2).UInt;
+          }
+          else {
+              ($number *= 3) += 1;
+          }
+      }
+
+      return $i;
+  }
+
+stub: |-
+  sub collatz-conjecture ($number) is export {
+  }

@@ -17,24 +17,26 @@ subtest '0 case UUIDs' => {
 }
 
 subtest '1 case UUID' => {
-  plan 4;
+  plan 5;
 
   given Exercism::Generator.new(
     :exercise<hello-world>,
     :case-uuids(<af9ffe10-dc13-42d8-a742-e7bdafac449d>),
-    :data(:package<TEST>),
+    :data(:package<TEST>, properties => { hello => { test => '%case<expected>' } }),
   ) {
     is .package, 'TEST', 'Custom package name as specified';
 
     ok .case-uuids ~~ <af9ffe10-dc13-42d8-a742-e7bdafac449d>;
 
-    if $base-dir.add('.problem-specifications') ~~ :d {
+    if %*ENV<HOME>.IO.add('.cache/exercism/configlet/problem-specifications') ~~ :d {
       is-deeply .cases.Array, [%(
         :description('Say Hi!'),
         :property<hello>,
         :input(Hash.new),
         :expected('Hello, World!'),
       ).item], 'Case taken from UUID';
+
+      is-deeply .property-tests.Array, ['Hello, World!'];
 
       is .json-tests, q:to/JSON/.trim, 'Cases converted to JSON array';
         [

@@ -1,0 +1,69 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use DifferenceOfSquares;
+
+cmp-ok(
+    square-of-sum(1),
+    &infix:<==>,
+    1,
+    "Square the sum of the numbers up to the given number: square of sum 1",
+);
+
+cmp-ok(
+    square-of-sum(5),
+    &infix:<==>,
+    225,
+    "Square the sum of the numbers up to the given number: square of sum 5",
+);
+
+cmp-ok(
+    square-of-sum(100),
+    &infix:<==>,
+    25502500,
+    "Square the sum of the numbers up to the given number: square of sum 100",
+);
+
+cmp-ok(
+    sum-of-squares(1),
+    &infix:<==>,
+    1,
+    "Sum the squares of the numbers up to the given number: sum of squares 1",
+);
+
+cmp-ok(
+    sum-of-squares(5),
+    &infix:<==>,
+    55,
+    "Sum the squares of the numbers up to the given number: sum of squares 5",
+);
+
+cmp-ok(
+    sum-of-squares(100),
+    &infix:<==>,
+    338350,
+    "Sum the squares of the numbers up to the given number: sum of squares 100",
+);
+
+cmp-ok(
+    difference-of-squares(1),
+    &infix:<==>,
+    0,
+    "Subtract sum of squares from square of sums: difference of squares 1",
+);
+
+cmp-ok(
+    difference-of-squares(5),
+    &infix:<==>,
+    170,
+    "Subtract sum of squares from square of sums: difference of squares 5",
+);
+
+cmp-ok(
+    difference-of-squares(100),
+    &infix:<==>,
+    25164150,
+    "Subtract sum of squares from square of sums: difference of squares 100",
+);
+
+done-testing;

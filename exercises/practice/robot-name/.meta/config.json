@@ -17,7 +17,7 @@
       "robot-name.rakutest"
     ],
     "example": [
-      ".meta/solutions/random/Robot.rakumod"
+      ".meta/solutions/Robot.rakumod"
     ]
   },
   "source": "A debugging session with Paul Blackwell at gSchool."
