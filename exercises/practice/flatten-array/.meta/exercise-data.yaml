@@ -1,22 +1,25 @@
-plan: 6
-tests: |-
-  for @test-cases -> %case {
-    is-deeply flatten-array(%case<input><array>), |%case<expected description>;
-  }
+properties:
+  flatten:
+    test: |-
+      sprintf(q:to/END/, (%case<input><array>.deepmap({$_ eqv Any ?? Nil !! $_})<>, %case<expected><>, %case<description>).map(*.raku));
+      is-deeply(
+          flatten-array(%s),
+          %s,
+          %s,
+      );
+      END
+
 
 unit: module
 example: |-
-  sub flatten-array(@input --> Array) is export {
-    @input.&denest;
-    return my @result;
-
-    sub denest(@array) {
-      for @array {
-        .&denest when Array;
-        @result.push: $_ when Int;
-      }
-    }
+  sub flatten-array (@nested --> Array()) is export {
+      @nested.map({
+          when Positional {
+              .map(&?BLOCK).Slip;
+          }
+          $_ // Empty;
+      });
   }
 stub: |-
-  sub flatten-array(@input) is export {
+  sub flatten-array (@nested) is export {
   }

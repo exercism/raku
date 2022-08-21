@@ -1,203 +1,72 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use FlattenArray;
-plan 6;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  is-deeply flatten-array(%case<input><array>), |%case<expected description>;
-}
+is-deeply(
+    flatten-array([]),
+    [],
+    "empty",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "no nesting",
-    "expected": [
-      0,
-      1,
-      2
-    ],
-    "input": {
-      "array": [
-        0,
-        1,
-        2
-      ]
-    },
-    "property": "flatten"
-  },
-  {
-    "description": "flattens array with just integers present",
-    "expected": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8
-    ],
-    "input": {
-      "array": [
-        1,
-        [
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ],
-        8
-      ]
-    },
-    "property": "flatten"
-  },
-  {
-    "description": "5 level nesting",
-    "expected": [
-      0,
-      2,
-      2,
-      3,
-      8,
-      100,
-      4,
-      50,
-      -2
-    ],
-    "input": {
-      "array": [
-        0,
-        2,
-        [
-          [
-            2,
-            3
-          ],
-          8,
-          100,
-          4,
-          [
-            [
-              [
-                50
-              ]
-            ]
-          ]
-        ],
-        -2
-      ]
-    },
-    "property": "flatten"
-  },
-  {
-    "description": "6 level nesting",
-    "expected": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8
-    ],
-    "input": {
-      "array": [
-        1,
-        [
-          2,
-          [
-            [
-              3
-            ]
-          ],
-          [
-            4,
-            [
-              [
-                5
-              ]
-            ]
-          ],
-          6,
-          7
-        ],
-        8
-      ]
-    },
-    "property": "flatten"
-  },
-  {
-    "description": "6 level nest list with null values",
-    "expected": [
-      0,
-      2,
-      2,
-      3,
-      8,
-      100,
-      -2
-    ],
-    "input": {
-      "array": [
-        0,
-        2,
-        [
-          [
-            2,
-            3
-          ],
-          8,
-          [
-            [
-              100
-            ]
-          ],
-          null,
-          [
-            [
-              null
-            ]
-          ]
-        ],
-        -2
-      ]
-    },
-    "property": "flatten"
-  },
-  {
-    "description": "all values in nested list are null",
-    "expected": [
-    ],
-    "input": {
-      "array": [
-        null,
-        [
-          [
-            [
-              null
-            ]
-          ]
-        ],
-        null,
-        null,
-        [
-          [
-            null,
-            null
-          ],
-          null
-        ],
-        null
-      ]
-    },
-    "property": "flatten"
-  }
-]
-=end code
+is-deeply(
+    flatten-array([0, 1, 2]),
+    [0, 1, 2],
+    "no nesting",
+);
+
+is-deeply(
+    flatten-array([[[],],]),
+    [],
+    "flattens a nested array",
+);
+
+is-deeply(
+    flatten-array([1, [2, 3, 4, 5, 6, 7], 8]),
+    [1, 2, 3, 4, 5, 6, 7, 8],
+    "flattens array with just integers present",
+);
+
+is-deeply(
+    flatten-array([0, 2, [[2, 3], 8, 100, 4, [[[50],],]], -2]),
+    [0, 2, 2, 3, 8, 100, 4, 50, -2],
+    "5 level nesting",
+);
+
+is-deeply(
+    flatten-array([1, [2, [[3],], [4, [[5],]], 6, 7], 8]),
+    [1, 2, 3, 4, 5, 6, 7, 8],
+    "6 level nesting",
+);
+
+is-deeply(
+    flatten-array([1, 2, Nil]),
+    [1, 2],
+    "null values are omitted from the final result",
+);
+
+is-deeply(
+    flatten-array([Nil, Nil, 3]),
+    [3],
+    "consecutive null values at the front of the list are omitted from the final result",
+);
+
+is-deeply(
+    flatten-array([1, Nil, Nil, 4]),
+    [1, 4],
+    "consecutive null values in the middle of the list are omitted from the final result",
+);
+
+is-deeply(
+    flatten-array([0, 2, [[2, 3], 8, [[100],], Nil, [[Nil],]], -2]),
+    [0, 2, 2, 3, 8, 100, -2],
+    "6 level nest list with null values",
+);
+
+is-deeply(
+    flatten-array([Nil, [[[Nil],],], Nil, Nil, [[Nil, Nil], Nil], Nil]),
+    [],
+    "all values in nested list are null",
+);
+
+done-testing;
