@@ -1,32 +1,28 @@
-plan: 3
-tests: |-
-  # Go through the cases and check that &two-fer gives us the correct response.
-  for @test-cases -> %case {
-    is do {
-      with %case<input><name> {
-        .&two-fer;
-      }
-      else {
-        two-fer;
-      }
-    }, |%case<expected description>;
-  }
+properties:
+  twoFer:
+    test: |-
+      sprintf(q:to/END/, (with %case<input><name> { .raku } else { '' }), |%case<expected description>.map(*.raku));
+      is(
+          two-fer(%s),
+          %s,
+          %s,
+      );
+      END
 
 lib_comment: Look for the module inside the same directory as this test file.
-plan_comment: This is how many tests we expect to run.
 
 unit: module
 unit_comment: |-
   #`(
-    This is a 'stub' file. It's a little start on your solution.
-    It is not a complete solution though; you will have to write some code.
+      This is a 'stub' file. It's a little start on your solution.
+      It is not a complete solution though; you will have to write some code.
   )
 example: |-
   sub two-fer ($name = ‘you’) is export {
-    “One for $name, one for me.”
+      “One for $name, one for me.”
   }
 stub: |-
   sub two-fer ($name?) is export {
-    # Write your solution to pass the test suite here.
-    # Be sure to remove all stock comments once you are done!
+      # Write your solution to pass the test suite here.
+      # Be sure to remove all stock comments once you are done!
   }
