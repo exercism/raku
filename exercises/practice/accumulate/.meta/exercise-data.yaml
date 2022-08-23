@@ -1,26 +1,30 @@
-plan: 5
-tests: |-
-  for @test-cases -> %case {
-    my &func = do given %case<input><accumulator> {
-      when '(x) => x * x'      { -> $x { $x * $x } }
-      when '(x) => upcase(x)'  { &uc }
-      when '(x) => reverse(x)' { &flip }
-      when '(x) => accumulate(["1", "2", "3"], (y) => x + y))' {
-        -> $x { accumulate [1..3], -> $y { $x ~ $y } };
-      }
-      default { -> { die } }
-    };
-
-    is-deeply(
-      accumulate( %case<input><list>, &func ),
-      |%case<expected description>
-    );
-  }
+properties:
+  accumulate:
+    test: |-
+      my $func = do given %case<input><accumulator> {
+          when '(x) => x * x'      { '-> $x { $x * $x }' }
+          when '(x) => upcase(x)'  { '&uc' }
+          when '(x) => reverse(x)' { '&flip' }
+          when '(x) => accumulate(["1", "2", "3"], (y) => x + y)' {
+            '-> $x { accumulate 1..3, -> $y { $x ~ $y } }';
+          }
+      };
+      sprintf(q:to/END/, %case<input><list>.List<>.raku, $func, |(%case<expected>.map({$_ ~~ Array ?? .List !! $_}).List<>, %case<description>).map(*.raku));
+      cmp-ok(
+          accumulate(
+              %s,
+              %s,
+          ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
 
 unit: module
 example: |-
-  sub accumulate ( @list, &function --> Array(Iterable) ) is export {
-    do .&function for @list;
+  sub accumulate ( @list, &function --> List() ) is export {
+      do .&function for @list;
   }
 
 stub: |-
