@@ -1,184 +1,97 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use WordCount;
-plan 13;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  cmp-ok count-words(%case<input><sentence>),
-    '~~', %case<expected>.Bag, %case<description>;
-}
+cmp-ok(
+    count-words("word"),
+    "(==)",
+    {:word(1)}.Bag,
+    "count one word",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "count one word",
-    "expected": {
-      "word": 1
-    },
-    "input": {
-      "sentence": "word"
-    },
-    "property": "countWords"
-  },
-  {
-    "description": "count one of each word",
-    "expected": {
-      "each": 1,
-      "of": 1,
-      "one": 1
-    },
-    "input": {
-      "sentence": "one of each"
-    },
-    "property": "countWords"
-  },
-  {
-    "description": "multiple occurrences of a word",
-    "expected": {
-      "blue": 1,
-      "fish": 4,
-      "one": 1,
-      "red": 1,
-      "two": 1
-    },
-    "input": {
-      "sentence": "one fish two fish red fish blue fish"
-    },
-    "property": "countWords"
-  },
-  {
-    "description": "handles cramped lists",
-    "expected": {
-      "one": 1,
-      "three": 1,
-      "two": 1
-    },
-    "input": {
-      "sentence": "one,two,three"
-    },
-    "property": "countWords"
-  },
-  {
-    "description": "handles expanded lists",
-    "expected": {
-      "one": 1,
-      "three": 1,
-      "two": 1
-    },
-    "input": {
-      "sentence": "one,\ntwo,\nthree"
-    },
-    "property": "countWords"
-  },
-  {
-    "description": "ignore punctuation",
-    "expected": {
-      "as": 1,
-      "car": 1,
-      "carpet": 1,
-      "java": 1,
-      "javascript": 1
-    },
-    "input": {
-      "sentence": "car: carpet as java: javascript!!&@$%^&"
-    },
-    "property": "countWords"
-  },
-  {
-    "description": "include numbers",
-    "expected": {
-      "1": 1,
-      "2": 1,
-      "testing": 2
-    },
-    "input": {
-      "sentence": "testing, 1, 2 testing"
-    },
-    "property": "countWords"
-  },
-  {
-    "description": "normalize case",
-    "expected": {
-      "go": 3,
-      "stop": 2
-    },
-    "input": {
-      "sentence": "go Go GO Stop stop"
-    },
-    "property": "countWords"
-  },
-  {
-    "description": "with apostrophes",
-    "expected": {
-      "cry": 1,
-      "don't": 2,
-      "first": 1,
-      "laugh": 1,
-      "then": 1
-    },
-    "input": {
-      "sentence": "First: don't laugh. Then: don't cry."
-    },
-    "property": "countWords"
-  },
-  {
-    "description": "with quotations",
-    "expected": {
-      "and": 1,
-      "between": 1,
-      "can't": 1,
-      "joe": 1,
-      "large": 2,
-      "tell": 1
-    },
-    "input": {
-      "sentence": "Joe can't tell between 'large' and large."
-    },
-    "property": "countWords"
-  },
-  {
-    "description": "substrings from the beginning",
-    "expected": {
-      "a": 1,
-      "and": 1,
-      "app": 1,
-      "apple": 1,
-      "between": 1,
-      "can't": 1,
-      "joe": 1,
-      "tell": 1
-    },
-    "input": {
-      "sentence": "Joe can't tell between app, apple and a."
-    },
-    "property": "countWords"
-  },
-  {
-    "description": "multiple spaces not detected as a word",
-    "expected": {
-      "multiple": 1,
-      "whitespaces": 1
-    },
-    "input": {
-      "sentence": " multiple   whitespaces"
-    },
-    "property": "countWords"
-  },
-  {
-    "description": "alternating word separators not detected as a word",
-    "expected": {
-      "one": 1,
-      "three": 1,
-      "two": 1
-    },
-    "input": {
-      "sentence": ",\n,one,\n ,two \n 'three'"
-    },
-    "property": "countWords"
-  }
-]
-=end code
+cmp-ok(
+    count-words("one of each"),
+    "(==)",
+    {:each(1), :of(1), :one(1)}.Bag,
+    "count one of each word",
+);
+
+cmp-ok(
+    count-words("one fish two fish red fish blue fish"),
+    "(==)",
+    {:blue(1), :fish(4), :one(1), :red(1), :two(1)}.Bag,
+    "multiple occurrences of a word",
+);
+
+cmp-ok(
+    count-words("one,two,three"),
+    "(==)",
+    {:one(1), :three(1), :two(1)}.Bag,
+    "handles cramped lists",
+);
+
+cmp-ok(
+    count-words("one,\ntwo,\nthree"),
+    "(==)",
+    {:one(1), :three(1), :two(1)}.Bag,
+    "handles expanded lists",
+);
+
+cmp-ok(
+    count-words("car: carpet as java: javascript!!\&\@\$\%^\&"),
+    "(==)",
+    {:as(1), :car(1), :carpet(1), :java(1), :javascript(1)}.Bag,
+    "ignore punctuation",
+);
+
+cmp-ok(
+    count-words("testing, 1, 2 testing"),
+    "(==)",
+    {"1" => 1, "2" => 1, :testing(2)}.Bag,
+    "include numbers",
+);
+
+cmp-ok(
+    count-words("go Go GO Stop stop"),
+    "(==)",
+    {:go(3), :stop(2)}.Bag,
+    "normalize case",
+);
+
+cmp-ok(
+    count-words("'First: don't laugh. Then: don't cry. You're getting it.'"),
+    "(==)",
+    {:cry(1), :don't(2), :first(1), :getting(1), :it(1), :laugh(1), :then(1), :you're(1)}.Bag,
+    "with apostrophes",
+);
+
+cmp-ok(
+    count-words("Joe can't tell between 'large' and large."),
+    "(==)",
+    {:and(1), :between(1), :can't(1), :joe(1), :large(2), :tell(1)}.Bag,
+    "with quotations",
+);
+
+cmp-ok(
+    count-words("Joe can't tell between app, apple and a."),
+    "(==)",
+    {:a(1), :and(1), :app(1), :apple(1), :between(1), :can't(1), :joe(1), :tell(1)}.Bag,
+    "substrings from the beginning",
+);
+
+cmp-ok(
+    count-words(" multiple   whitespaces"),
+    "(==)",
+    {:multiple(1), :whitespaces(1)}.Bag,
+    "multiple spaces not detected as a word",
+);
+
+cmp-ok(
+    count-words(",\n,one,\n ,two \n 'three'"),
+    "(==)",
+    {:one(1), :three(1), :two(1)}.Bag,
+    "alternating word separators not detected as a word",
+);
+
+done-testing;
