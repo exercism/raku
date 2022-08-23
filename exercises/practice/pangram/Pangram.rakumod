@@ -1,4 +1,4 @@
 unit module Pangram;
 
-sub is-pangram ($string) is export {
+sub is-pangram ($sentence) is export {
 }

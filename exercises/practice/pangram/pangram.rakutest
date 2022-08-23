@@ -1,101 +1,76 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Pangram;
-plan 10;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  subtest %case<description>, {
-    plan 2;
-    isa-ok ( my $result := is-pangram %case<input><sentence> ), Bool;
-    is-deeply $result, %case<expected>, 'Result matches expected';
-  }
-}
+cmp-ok(
+    is-pangram(""),
+    "eqv",
+    False,
+    "empty sentence",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "empty sentence",
-    "expected": false,
-    "input": {
-      "sentence": ""
-    },
-    "property": "isPangram"
-  },
-  {
-    "description": "perfect lower case",
-    "expected": true,
-    "input": {
-      "sentence": "abcdefghijklmnopqrstuvwxyz"
-    },
-    "property": "isPangram"
-  },
-  {
-    "description": "only lower case",
-    "expected": true,
-    "input": {
-      "sentence": "the quick brown fox jumps over the lazy dog"
-    },
-    "property": "isPangram"
-  },
-  {
-    "description": "missing the letter 'x'",
-    "expected": false,
-    "input": {
-      "sentence": "a quick movement of the enemy will jeopardize five gunboats"
-    },
-    "property": "isPangram"
-  },
-  {
-    "description": "missing the letter 'h'",
-    "expected": false,
-    "input": {
-      "sentence": "five boxing wizards jump quickly at it"
-    },
-    "property": "isPangram"
-  },
-  {
-    "description": "with underscores",
-    "expected": true,
-    "input": {
-      "sentence": "the_quick_brown_fox_jumps_over_the_lazy_dog"
-    },
-    "property": "isPangram"
-  },
-  {
-    "description": "with numbers",
-    "expected": true,
-    "input": {
-      "sentence": "the 1 quick brown fox jumps over the 2 lazy dogs"
-    },
-    "property": "isPangram"
-  },
-  {
-    "description": "missing letters replaced by numbers",
-    "expected": false,
-    "input": {
-      "sentence": "7h3 qu1ck brown fox jumps ov3r 7h3 lazy dog"
-    },
-    "property": "isPangram"
-  },
-  {
-    "description": "mixed case and punctuation",
-    "expected": true,
-    "input": {
-      "sentence": "\"Five quacking Zephyrs jolt my wax bed.\""
-    },
-    "property": "isPangram"
-  },
-  {
-    "description": "case insensitive",
-    "expected": false,
-    "input": {
-      "sentence": "the quick brown fox jumps over with lazy FX"
-    },
-    "property": "isPangram"
-  }
-]
-=end code
+cmp-ok(
+    is-pangram("abcdefghijklmnopqrstuvwxyz"),
+    "eqv",
+    True,
+    "perfect lower case",
+);
+
+cmp-ok(
+    is-pangram("the quick brown fox jumps over the lazy dog"),
+    "eqv",
+    True,
+    "only lower case",
+);
+
+cmp-ok(
+    is-pangram("a quick movement of the enemy will jeopardize five gunboats"),
+    "eqv",
+    False,
+    "missing the letter 'x'",
+);
+
+cmp-ok(
+    is-pangram("five boxing wizards jump quickly at it"),
+    "eqv",
+    False,
+    "missing the letter 'h'",
+);
+
+cmp-ok(
+    is-pangram("the_quick_brown_fox_jumps_over_the_lazy_dog"),
+    "eqv",
+    True,
+    "with underscores",
+);
+
+cmp-ok(
+    is-pangram("the 1 quick brown fox jumps over the 2 lazy dogs"),
+    "eqv",
+    True,
+    "with numbers",
+);
+
+cmp-ok(
+    is-pangram("7h3 qu1ck brown fox jumps ov3r 7h3 lazy dog"),
+    "eqv",
+    False,
+    "missing letters replaced by numbers",
+);
+
+cmp-ok(
+    is-pangram("\"Five quacking Zephyrs jolt my wax bed.\""),
+    "eqv",
+    True,
+    "mixed case and punctuation",
+);
+
+cmp-ok(
+    is-pangram("abcdefghijklm ABCDEFGHIJKLM"),
+    "eqv",
+    False,
+    "a-m and A-M are 26 different characters but not a pangram",
+);
+
+done-testing;
