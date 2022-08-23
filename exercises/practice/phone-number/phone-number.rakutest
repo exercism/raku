@@ -55,24 +55,10 @@ throws-like(
 );
 
 throws-like(
-    { clean-number "123-abc-7890" },
-    Exception,
-    :message("letters not permitted"),
-    "invalid with letters",
-);
-
-throws-like(
     { clean-number "523-abc-7890" },
     Exception,
     :message("letters not permitted"),
     "invalid with letters",
-);
-
-throws-like(
-    { clean-number "123-\@:!-7890" },
-    Exception,
-    :message("punctuations not permitted"),
-    "invalid with punctuations",
 );
 
 throws-like(
