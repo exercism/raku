@@ -1,38 +1,49 @@
-plan: 11
-tests: |-
-  for @test-cases -> %case {
-    given %case<property> {
-      when 'square' {
-        if %case<expected><error>:exists {
-          throws-like
-            { grains-on-square %case<input><square> },
-            Exception,
-            message => /
-              $( %case<expected><error> )
-              || 'Constraint type check failed in binding to parameter'
-            /,
-            %case<description>;
-        }
-        else {
-          is grains-on-square(%case<input><square>),
-            |%case<expected description>;
-        }
+properties:
+  square:
+    test: |-
+      if %case<expected><error>:exists {
+          sprintf(q:to/END/, (%case<input><square>, %case<expected><error>, %case<description>).map(*.raku));
+          throws-like(
+              { grains-on-square %s },
+              Exception,
+              message => /:i
+                  %s
+                  || "type check failed"
+              /,
+              %s,
+          );
+          END
+      }
+      else {
+          sprintf(q:to/END/, (%case<input><square>, |%case<expected description>).map(*.raku));
+          cmp-ok(
+              grains-on-square(%s),
+              "==",
+              %s,
+              %s,
+          );
+          END
       }
 
-      when 'total' {
-        is total-grains, |%case<expected description>;
-      }
-    }
-  }
+  total:
+    test: |-
+      sprintf(q:to/END/, |%case<expected description>.map(*.raku));
+      cmp-ok(
+          total-grains(),
+          "==",
+          %s,
+          %s,
+      );
+      END
 
 unit: module
 example: |-
   sub grains-on-square ( $number where * ∈ 1 .. 64 ) is export {
-    2 ** ($number - 1);
+      2 ** ($number - 1);
   }
 
   sub total-grains is export {
-    [+] map 1..64: &grains-on-square;
+      [+] map 1..64: &grains-on-square;
   }
 
 stub: |-
