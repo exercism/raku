@@ -1,4 +1,4 @@
 unit module Scrabble;
 
-sub score ($word) is export {
+sub scrabble-score ($word) is export {
 }
