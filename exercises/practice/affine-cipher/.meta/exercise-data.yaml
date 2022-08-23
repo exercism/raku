@@ -1,0 +1,94 @@
+methods: encode decode
+properties:
+  encode:
+    test: |-
+      if %case<expected><error>:exists {
+          sprintf(q:to/END/, (|(%case<input><key><a b>:p), %case<description>).map(*.raku));
+          dies-ok { AffineCipher.new( %s, %s ) }, %s;
+          END
+      }
+      else {
+          sprintf(q:to/END/, (|(%case<input><key><a b>:p), %case<input><phrase>, |(%case<expected description>)).map(*.raku));
+          is(
+              AffineCipher.new( %s, %s ).encode(%s),
+              %s,
+              %s,
+          );
+          END
+      }
+  decode:
+    test: |-
+      if %case<expected><error>:exists {
+          sprintf(q:to/END/, (|(%case<input><key><a b>:p), %case<description>).map(*.raku));
+          dies-ok { AffineCipher.new( %s, %s ) }, %s;
+          END
+      }
+      else {
+          sprintf(q:to/END/, (|(%case<input><key><a b>:p), %case<input><phrase>, |(%case<expected description>)).map(*.raku));
+          is(
+              AffineCipher.new( %s, %s ).decode(%s),
+              %s,
+              %s,
+          );
+          END
+      }
+
+unit: class
+example: |-
+  constant @alphabet = 'a'..'z';
+  constant $m        = @alphabet.elems;
+
+  has $.a;
+  has $.b;
+
+  submethod TWEAK {
+      die if $!a gcd $m != 1;
+  }
+
+  submethod mmi {
+      my ($t, $newt, $r, $newr) = 0, 1, $m, $!a;
+
+      while $newr != 0 {
+          given $r div $newr -> $quotient {
+              ($t, $newt) = $newt, $t − $quotient × $newt;
+              ($r, $newr) = $newr, $r − $quotient × $newr;
+          }
+      }
+
+      return $t
+  }
+
+  method encode ($phrase) {
+      gather for $phrase.lc.comb: / <:Number> | <:Letter> / {
+          when / <:Number> / { .take }
+          when / <:Letter> / {
+              take @alphabet[
+                  ( $.a × %(@alphabet.antipairs){ $_ } + $.b ) % $m
+              ]
+          }
+      }.join.comb: 5
+  }
+
+  method decode ($phrase) {
+      gather for $phrase.lc.comb: / <:Number> | <:Letter> / {
+          when / <:Number> / { .take }
+          when / <:Letter> / {
+              take @alphabet[
+                  $.mmi × ( %(@alphabet.antipairs){ $_ } - $.b ) % $m
+              ]
+          }
+      }.join
+  }
+
+stub: |-
+  constant @alphabet = 'a'..'z';
+  constant $m        = @alphabet.elems;
+
+  has $.a;
+  has $.b;
+
+  method encode ($phrase) {
+  }
+
+  method decode ($phrase) {
+  }
