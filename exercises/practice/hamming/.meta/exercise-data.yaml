@@ -1,24 +1,30 @@
-plan: 9
-tests: |-
-  for @test-cases -> %case {
-    given %case<expected> {
-      when .<error>.so {
-        throws-like
-          { hamming-distance |%case<input><strand1 strand2> },
-          Exception,
-          message => /
-            'strands must be of equal length'
-            || 'Constraint type check failed in binding to parameter'
-          /,
-          %case<description>;
+properties:
+  distance:
+    test: |-
+      if %case<expected><error>:exists {
+         sprintf(q:to/END/, (|%case<input><strand1 strand2>, %case<expected><error>, %case<description>).map(*.raku) );
+         throws-like(
+            { hamming-distance %s, %s },
+            Exception,
+            message => /:i
+                %s
+                || "type check failed"
+            /,
+            %s,
+         );
+         END
       }
+      else {
 
-      default {
-        is hamming-distance(|%case<input><strand1 strand2>),
-          |%case<expected description>;
+         sprintf(q:to/END/, (|%case<input><strand1 strand2>, |%case<expected description>).map(*.raku) );
+         cmp-ok(
+            hamming-distance( %s, %s ),
+            "==",
+            %s,
+            %s,
+         );
+         END
       }
-    }
-  }
 
 unit: module
 example: |-
