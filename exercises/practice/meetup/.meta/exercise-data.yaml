@@ -1,25 +1,18 @@
-plan: 95
-tests: |-
-  constant @months = <
-    January February March     April   May      June
-    July    August   September October November December
-  >;
-
-  for @test-cases -> %case {
-    is(
-      meetup-date(
-        sprintf(
-          '%s %s of %s %u',
-          %case<input><week>.tc,
-          %case<input><dayofweek>,
-          @months[%case<input><month> - 1],
-          %case<input><year>,
-        )
-      ),
-      Date.new(%case<expected>),
-      %case<description>
-    );
-  }
+properties:
+  meetup:
+    test: |-
+      my @months = <
+        January February March     April   May      June
+        July    August   September October November December
+      >;
+      sprintf(q:to/END/, (sprintf('%s %s of %s %u', %case<input><week>.tc, %case<input><dayofweek>, @months[%case<input><month> - 1], %case<input><year>), |%case<expected description>).map(*.raku));
+      cmp-ok(
+          meetup-date(%s),
+          &infix:<~~>,
+          Date.new(%s),
+          %s,
+      );
+      END
 
 unit: module
 example: |-
