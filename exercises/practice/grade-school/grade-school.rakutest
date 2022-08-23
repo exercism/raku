@@ -1,189 +1,217 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use GradeSchool;
-plan 8;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  cmp-ok
-    roster( |%(<students grade> Z=> %case<input><students desiredGrade>:v) ),
-    '~~', |%case<expected description>;
+for <add roster> -> $method {
+  GradeSchool.^can($method) or bail-out "Cannot run expected method `$method`.";
 }
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "Roster is empty when no student is added",
-    "expected": [
-    ],
-    "input": {
-      "students": [
-      ]
-    },
-    "property": "roster"
-  },
-  {
-    "description": "Student is added to the roster",
-    "expected": [
-      "Aimee"
-    ],
-    "input": {
-      "students": [
-        [
-          "Aimee",
-          2
-        ]
-      ]
-    },
-    "property": "roster"
-  },
-  {
-    "description": "Multiple students in the same grade are added to the roster",
-    "expected": [
-      "Blair",
-      "James",
-      "Paul"
-    ],
-    "input": {
-      "students": [
-        [
-          "Blair",
-          2
-        ],
-        [
-          "James",
-          2
-        ],
-        [
-          "Paul",
-          2
-        ]
-      ]
-    },
-    "property": "roster"
-  },
-  {
-    "description": "A student can't be in two different grades",
-    "expected": [
-    ],
-    "input": {
-      "desiredGrade": 2,
-      "students": [
-        [
-          "Aimee",
-          2
-        ],
-        [
-          "Aimee",
-          1
-        ]
-      ]
-    },
-    "property": "roster"
-  },
-  {
-    "description": "Students in multiple grades are added to the roster",
-    "expected": [
-      "Chelsea",
-      "Logan"
-    ],
-    "input": {
-      "students": [
-        [
-          "Chelsea",
-          3
-        ],
-        [
-          "Logan",
-          7
-        ]
-      ]
-    },
-    "property": "roster"
-  },
-  {
-    "description": "Students are sorted by grades and then by name in the roster",
-    "expected": [
-      "Anna",
-      "Barb",
-      "Charlie",
-      "Alex",
-      "Peter",
-      "Zoe",
-      "Jim"
-    ],
-    "input": {
-      "students": [
-        [
-          "Peter",
-          2
-        ],
-        [
-          "Anna",
-          1
-        ],
-        [
-          "Barb",
-          1
-        ],
-        [
-          "Zoe",
-          2
-        ],
-        [
-          "Alex",
-          2
-        ],
-        [
-          "Jim",
-          3
-        ],
-        [
-          "Charlie",
-          1
-        ]
-      ]
-    },
-    "property": "roster"
-  },
-  {
-    "description": "Grade is empty if no students in the roster",
-    "expected": [
-    ],
-    "input": {
-      "desiredGrade": 1,
-      "students": [
-      ]
-    },
-    "property": "grade"
-  },
-  {
-    "description": "Students are sorted by name in a grade",
-    "expected": [
-      "Bradley",
-      "Franklin"
-    ],
-    "input": {
-      "desiredGrade": 5,
-      "students": [
-        [
-          "Franklin",
-          5
-        ],
-        [
-          "Bradley",
-          5
-        ],
-        [
-          "Jeff",
-          1
-        ]
-      ]
-    },
-    "property": "grade"
-  }
-]
-=end code
+my GradeSchool $grade-school;
+
+$grade-school.=new;
+is-deeply(
+    $grade-school.roster,
+    (),
+    "Roster is empty when no student is added",
+);
+
+$grade-school.=new;
+is-deeply(
+    (
+        $grade-school.add( :student("Aimee"), :grade(2) ),
+    ),
+    (Bool::True,),
+    "Add a student",
+);
+
+$grade-school.=new;
+$grade-school.add( :student("Aimee"), :grade(2) );
+is-deeply(
+    $grade-school.roster,
+    ("Aimee",),
+    "Student is added to the roster",
+);
+
+$grade-school.=new;
+is-deeply(
+    (
+        $grade-school.add( :student("Blair"), :grade(2) ),
+        $grade-school.add( :student("James"), :grade(2) ),
+        $grade-school.add( :student("Paul"), :grade(2) ),
+    ),
+    (Bool::True, Bool::True, Bool::True),
+    "Adding multiple students in the same grade in the roster",
+);
+
+$grade-school.=new;
+$grade-school.add( :student("Blair"), :grade(2) );
+$grade-school.add( :student("James"), :grade(2) );
+$grade-school.add( :student("Paul"), :grade(2) );
+is-deeply(
+    $grade-school.roster,
+    ("Blair", "James", "Paul"),
+    "Multiple students in the same grade are added to the roster",
+);
+
+$grade-school.=new;
+is-deeply(
+    (
+        $grade-school.add( :student("Blair"), :grade(2) ),
+        $grade-school.add( :student("James"), :grade(2) ),
+        $grade-school.add( :student("James"), :grade(2) ),
+        $grade-school.add( :student("Paul"), :grade(2) ),
+    ),
+    (Bool::True, Bool::True, Bool::False, Bool::True),
+    "Cannot add student to same grade in the roster more than once",
+);
+
+$grade-school.=new;
+$grade-school.add( :student("Blair"), :grade(2) );
+$grade-school.add( :student("James"), :grade(2) );
+$grade-school.add( :student("James"), :grade(2) );
+$grade-school.add( :student("Paul"), :grade(2) );
+is-deeply(
+    $grade-school.roster,
+    ("Blair", "James", "Paul"),
+    "Student not added to same grade in the roster more than once",
+);
+
+$grade-school.=new;
+is-deeply(
+    (
+        $grade-school.add( :student("Chelsea"), :grade(3) ),
+        $grade-school.add( :student("Logan"), :grade(7) ),
+    ),
+    (Bool::True, Bool::True),
+    "Adding students in multiple grades",
+);
+
+$grade-school.=new;
+$grade-school.add( :student("Chelsea"), :grade(3) );
+$grade-school.add( :student("Logan"), :grade(7) );
+is-deeply(
+    $grade-school.roster,
+    ("Chelsea", "Logan"),
+    "Students in multiple grades are added to the roster",
+);
+
+$grade-school.=new;
+is-deeply(
+    (
+        $grade-school.add( :student("Blair"), :grade(2) ),
+        $grade-school.add( :student("James"), :grade(2) ),
+        $grade-school.add( :student("James"), :grade(3) ),
+        $grade-school.add( :student("Paul"), :grade(3) ),
+    ),
+    (Bool::True, Bool::True, Bool::False, Bool::True),
+    "Cannot add same student to multiple grades in the roster",
+);
+
+$grade-school.=new;
+$grade-school.add( :student("Blair"), :grade(2) );
+$grade-school.add( :student("James"), :grade(2) );
+$grade-school.add( :student("James"), :grade(3) );
+$grade-school.add( :student("Paul"), :grade(3) );
+is-deeply(
+    $grade-school.roster,
+    ("Blair", "James", "Paul"),
+    "Student not added to multiple grades in the roster",
+);
+
+$grade-school.=new;
+$grade-school.add( :student("Jim"), :grade(3) );
+$grade-school.add( :student("Peter"), :grade(2) );
+$grade-school.add( :student("Anna"), :grade(1) );
+is-deeply(
+    $grade-school.roster,
+    ("Anna", "Peter", "Jim"),
+    "Students are sorted by grades in the roster",
+);
+
+$grade-school.=new;
+$grade-school.add( :student("Peter"), :grade(2) );
+$grade-school.add( :student("Zoe"), :grade(2) );
+$grade-school.add( :student("Alex"), :grade(2) );
+is-deeply(
+    $grade-school.roster,
+    ("Alex", "Peter", "Zoe"),
+    "Students are sorted by name in the roster",
+);
+
+$grade-school.=new;
+$grade-school.add( :student("Peter"), :grade(2) );
+$grade-school.add( :student("Anna"), :grade(1) );
+$grade-school.add( :student("Barb"), :grade(1) );
+$grade-school.add( :student("Zoe"), :grade(2) );
+$grade-school.add( :student("Alex"), :grade(2) );
+$grade-school.add( :student("Jim"), :grade(3) );
+$grade-school.add( :student("Charlie"), :grade(1) );
+is-deeply(
+    $grade-school.roster,
+    ("Anna", "Barb", "Charlie", "Alex", "Peter", "Zoe", "Jim"),
+    "Students are sorted by grades and then by name in the roster",
+);
+
+$grade-school.=new;
+is-deeply(
+    $grade-school.roster( :grade(1) ),
+    (),
+    "Grade is empty if no students in the roster",
+);
+
+$grade-school.=new;
+$grade-school.add( :student("Peter"), :grade(2) );
+$grade-school.add( :student("Zoe"), :grade(2) );
+$grade-school.add( :student("Alex"), :grade(2) );
+$grade-school.add( :student("Jim"), :grade(3) );
+is-deeply(
+    $grade-school.roster( :grade(1) ),
+    (),
+    "Grade is empty if no students in that grade",
+);
+
+$grade-school.=new;
+$grade-school.add( :student("Blair"), :grade(2) );
+$grade-school.add( :student("James"), :grade(2) );
+$grade-school.add( :student("James"), :grade(2) );
+$grade-school.add( :student("Paul"), :grade(2) );
+is-deeply(
+    $grade-school.roster( :grade(2) ),
+    ("Blair", "James", "Paul"),
+    "Student not added to same grade more than once",
+);
+
+$grade-school.=new;
+$grade-school.add( :student("Blair"), :grade(2) );
+$grade-school.add( :student("James"), :grade(2) );
+$grade-school.add( :student("James"), :grade(3) );
+$grade-school.add( :student("Paul"), :grade(3) );
+is-deeply(
+    $grade-school.roster( :grade(2) ),
+    ("Blair", "James"),
+    "Student not added to multiple grades",
+);
+
+$grade-school.=new;
+$grade-school.add( :student("Blair"), :grade(2) );
+$grade-school.add( :student("James"), :grade(2) );
+$grade-school.add( :student("James"), :grade(3) );
+$grade-school.add( :student("Paul"), :grade(3) );
+is-deeply(
+    $grade-school.roster( :grade(3) ),
+    ("Paul",),
+    "Student not added to other grade for multiple grades",
+);
+
+$grade-school.=new;
+$grade-school.add( :student("Franklin"), :grade(5) );
+$grade-school.add( :student("Bradley"), :grade(5) );
+$grade-school.add( :student("Jeff"), :grade(1) );
+is-deeply(
+    $grade-school.roster( :grade(5) ),
+    ("Bradley", "Franklin"),
+    "Students are sorted by name in a grade",
+);
+
+done-testing;

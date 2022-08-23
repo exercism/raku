@@ -1,16 +1,21 @@
-unit module GradeSchool;
+unit class GradeSchool;
 
-sub roster ( :@students!, :$grade ) is export {
-  my %roster;
+has %!grades;
 
-  for @students {
-    if .[0] ∉ %roster{.[1]} && .[0] ∈ %roster.values».List.flat {
-      return [];
+method add ( Str :$student, Int :$grade --> Bool ) {
+    if %(%!grades.invert){$student}:exists {
+        return False;
     }
-    %roster{.[1]} = %roster{.[1]}.push(.[0]).sort.Array;
-  }
+    %!grades{$grade}.push($student);
+    return True;
+}
 
-  return $grade
-    ?? %roster{$grade} || []
-    !! %roster.pairs.sort.map(|*.value);
+method roster ( Int :$grade --> List() ) {
+  with $grade {
+      with %!grades{$_} {
+          return .sort;
+      }
+      return ();
+  }
+  return %!grades.pairs.sort({$^a.key <=> $^b.key}).map(*.value.sort.Slip);
 }

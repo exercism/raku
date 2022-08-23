@@ -1,28 +1,68 @@
-plan: 8
-tests: |-
-  for @test-cases -> %case {
-    cmp-ok
-      roster( |%(<students grade> Z=> %case<input><students desiredGrade>:v) ),
-      '~~', |%case<expected description>;
+methods: add roster
+tests: |
+  my GradeSchool $grade-school;
+properties:
+  add:
+    test: |-
+      '$grade-school.=new;' ~ "\n" ~
+      sprintf(q:to/END/, ([~] do for @(%case<input><students>) { "\n" ~ '        $grade-school.add( ' ~ ":student({$_[0].raku}), :grade({$_[1].raku})" ~ ' ),' }), %case<expected>.List.raku, %case<description>.raku)
+      is-deeply(
+          (%s
+          ),
+          %s,
+          %s,
+      );
+      END
+
+  roster:
+    test: |-
+      '$grade-school.=new;' ~
+      sprintf(q:to/END/, ([~] do for @(%case<input><students>) { "\n" ~ '$grade-school.add( ' ~ ":student({$_[0].raku}), :grade({$_[1].raku})" ~ ' );' }), %case<expected>.List.raku, %case<description>.raku)
+      %s
+      is-deeply(
+          $grade-school.roster,
+          %s,
+          %s,
+      );
+      END
+
+  grade:
+    test: |-
+      '$grade-school.=new;' ~
+      sprintf(q:to/END/, ([~] do for @(%case<input><students>) { "\n" ~ '$grade-school.add( ' ~ ":student({$_[0].raku}), :grade({$_[1].raku})" ~ ' );' }), %case<input><desiredGrade>, %case<expected>.List.raku, %case<description>.raku)
+      %s
+      is-deeply(
+          $grade-school.roster( :grade(%s) ),
+          %s,
+          %s,
+      );
+      END
+
+unit: class
+example: |-
+  has %!grades;
+
+  method add ( Str :$student, Int :$grade --> Bool ) {
+      if %(%!grades.invert){$student}:exists {
+          return False;
+      }
+      %!grades{$grade}.push($student);
+      return True;
   }
 
-unit: module
-example: |-
-  sub roster ( :@students!, :$grade ) is export {
-    my %roster;
-
-    for @students {
-      if .[0] ∉ %roster{.[1]} && .[0] ∈ %roster.values».List.flat {
-        return [];
-      }
-      %roster{.[1]} = %roster{.[1]}.push(.[0]).sort.Array;
+  method roster ( Int :$grade --> List() ) {
+    with $grade {
+        with %!grades{$_} {
+            return .sort;
+        }
+        return ();
     }
-
-    return $grade
-      ?? %roster{$grade} || []
-      !! %roster.pairs.sort.map(|*.value);
+    return %!grades.pairs.sort({$^a.key <=> $^b.key}).map(*.value.sort.Slip);
   }
 
 stub: |-
-  sub roster ( :@students, :$grade ) is export {
+  method add ( :$student, :$grade --> Bool ) {
+  }
+
+  method roster ( :$grade ) {
   }
