@@ -1,65 +1,48 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use RNA;
-plan 6;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  is to-rna(%case<input><dna>), |%case<expected description>;
-}
+cmp-ok(
+    to-rna(""),
+    "eq",
+    "",
+    "Empty RNA sequence",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "Empty RNA sequence",
-    "expected": "",
-    "input": {
-      "dna": ""
-    },
-    "property": "toRna"
-  },
-  {
-    "description": "RNA complement of cytosine is guanine",
-    "expected": "G",
-    "input": {
-      "dna": "C"
-    },
-    "property": "toRna"
-  },
-  {
-    "description": "RNA complement of guanine is cytosine",
-    "expected": "C",
-    "input": {
-      "dna": "G"
-    },
-    "property": "toRna"
-  },
-  {
-    "description": "RNA complement of thymine is adenine",
-    "expected": "A",
-    "input": {
-      "dna": "T"
-    },
-    "property": "toRna"
-  },
-  {
-    "description": "RNA complement of adenine is uracil",
-    "expected": "U",
-    "input": {
-      "dna": "A"
-    },
-    "property": "toRna"
-  },
-  {
-    "description": "RNA complement",
-    "expected": "UGCACCAGAAUU",
-    "input": {
-      "dna": "ACGTGGTCTTAA"
-    },
-    "property": "toRna"
-  }
-]
-=end code
+cmp-ok(
+    to-rna("C"),
+    "eq",
+    "G",
+    "RNA complement of cytosine is guanine",
+);
+
+cmp-ok(
+    to-rna("G"),
+    "eq",
+    "C",
+    "RNA complement of guanine is cytosine",
+);
+
+cmp-ok(
+    to-rna("T"),
+    "eq",
+    "A",
+    "RNA complement of thymine is adenine",
+);
+
+cmp-ok(
+    to-rna("A"),
+    "eq",
+    "U",
+    "RNA complement of adenine is uracil",
+);
+
+cmp-ok(
+    to-rna("ACGTGGTCTTAA"),
+    "eq",
+    "UGCACCAGAAUU",
+    "RNA complement",
+);
+
+done-testing;
