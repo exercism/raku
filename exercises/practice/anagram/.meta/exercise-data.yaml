@@ -1,16 +1,21 @@
-plan: 14
-tests: |-
-  for @test-cases -> %case {
-    cmp-ok match-anagrams( |%case<input>:p ),
-      '~~', %case<expected>.Set, %case<description>;
-  }
+properties:
+  findAnagrams:
+    test: |-
+      sprintf(q:to/END/, (%case<input><subject>, %case<input><candidates>.List<>, %case<expected>.List<>, %case<description>).map(*.raku));
+      cmp-ok(
+          match-anagrams( :subject(%s), :candidates%s ),
+          "(==)",
+          %s,
+          %s,
+      );
+      END
 
 unit: module
 example: |-
   sub match-anagrams ( :$subject!, :@candidates! ) is export {
-    given $subject.uc -> $ucs {
-      @candidates.grep: { given .uc {$_ ne $ucs && .comb ~~ $ucs.comb.Bag} }
-    }
+      given $subject.uc -> $ucs {
+          @candidates.grep: { given .uc {$_ ne $ucs && .comb (==) $ucs.comb.Bag} }
+      }
   }
 stub: |-
   sub match-anagrams ( :$subject!, :@candidates! ) is export {
