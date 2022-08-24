@@ -1,28 +1,30 @@
 methods: push pop shift unshift count delete
-tests: |
-  my LinkedList $linked-list;
 properties:
   list:
     test: |-
-      '$linked-list.=new;' ~ "\n" ~
+      'subtest ' ~ %case<description>.raku ~ " => \{\n" ~ '    my LinkedList $linked-list.=new;' ~ "\n" ~
       %case<input><operations>.map({
           if .<value>:exists {
-              '$linked-list.' ~ .<operation> ~ "({.<value>});"
+              sprintf(q:to/END/, |((.<operation>, .<value>) xx 2)).trim-trailing;
+                  lives-ok( { $linked-list.%s(%s) }, "%s %s" );
+              END
           }
           elsif .<expected>:exists {
-              sprintf(q:to/END/, .<operation>, |(.<expected>, %case<description>).map(*.raku)).trim;
-              cmp-ok(
-                  $linked-list.%s,
-                  "==",
-                  %s,
-                  %s,
-              );
+              sprintf(q:to/END/, |((.<operation>, .<expected>) xx 2)).trim-trailing;
+                  cmp-ok(
+                      $linked-list.%s,
+                      "==",
+                      %s,
+                      "%s %s",
+                  );
               END
           }
           else {
-              '$linked-list.' ~ .<operation> ~ ";"
+              sprintf(q:to/END/, .<operation> xx 2).trim-trailing;
+                  lives-ok( { $linked-list.%s }, "%s" );
+              END
           }
-      }).join("\n") ~ "\n";
+      }).join("\n") ~ "\n};\n";
 
 unit: class
 example: |-
