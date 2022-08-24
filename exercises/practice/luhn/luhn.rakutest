@@ -1,173 +1,160 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Luhn;
-plan 19;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  subtest %case<description>, {
-    plan 2;
-    isa-ok ( my $result := is-luhn-valid %case<input><value> ), Bool;
-    is-deeply $result, %case<expected>, 'Result matches expected';
-  }
-}
+cmp-ok(
+    is-luhn-valid("1"),
+    "eqv",
+    False,
+    "single digit strings can not be valid",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "single digit strings can not be valid",
-    "expected": false,
-    "input": {
-      "value": "1"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "a single zero is invalid",
-    "expected": false,
-    "input": {
-      "value": "0"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "a simple valid SIN that remains valid if reversed",
-    "expected": true,
-    "input": {
-      "value": "059"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "a simple valid SIN that becomes invalid if reversed",
-    "expected": true,
-    "input": {
-      "value": "59"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "a valid Canadian SIN",
-    "expected": true,
-    "input": {
-      "value": "055 444 285"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "invalid Canadian SIN",
-    "expected": false,
-    "input": {
-      "value": "055 444 286"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "invalid credit card",
-    "expected": false,
-    "input": {
-      "value": "8273 1232 7352 0569"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "invalid long number with an even remainder",
-    "expected": false,
-    "input": {
-      "value": "1 2345 6789 1234 5678 9012"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "valid number with an even number of digits",
-    "expected": true,
-    "input": {
-      "value": "095 245 88"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "valid number with an odd number of spaces",
-    "expected": true,
-    "input": {
-      "value": "234 567 891 234"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "valid strings with a non-digit added at the end become invalid",
-    "expected": false,
-    "input": {
-      "value": "059a"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "valid strings with punctuation included become invalid",
-    "expected": false,
-    "input": {
-      "value": "055-444-285"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "valid strings with symbols included become invalid",
-    "expected": false,
-    "input": {
-      "value": "055# 444$ 285"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "single zero with space is invalid",
-    "expected": false,
-    "input": {
-      "value": " 0"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "more than a single zero is valid",
-    "expected": true,
-    "input": {
-      "value": "0000 0"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "input digit 9 is correctly converted to output digit 9",
-    "expected": true,
-    "input": {
-      "value": "091"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "using ascii value for non-doubled non-digit isn't allowed",
-    "expected": false,
-    "input": {
-      "value": "055b 444 285"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "using ascii value for doubled non-digit isn't allowed",
-    "expected": false,
-    "input": {
-      "value": ":9"
-    },
-    "property": "valid"
-  },
-  {
-    "description": "non-numeric, non-space char in the middle with a sum that's divisible by 10 isn't allowed",
-    "expected": false,
-    "input": {
-      "value": "59%59"
-    },
-    "property": "valid"
-  }
-]
-=end code
+cmp-ok(
+    is-luhn-valid("0"),
+    "eqv",
+    False,
+    "a single zero is invalid",
+);
+
+cmp-ok(
+    is-luhn-valid("059"),
+    "eqv",
+    True,
+    "a simple valid SIN that remains valid if reversed",
+);
+
+cmp-ok(
+    is-luhn-valid("59"),
+    "eqv",
+    True,
+    "a simple valid SIN that becomes invalid if reversed",
+);
+
+cmp-ok(
+    is-luhn-valid("055 444 285"),
+    "eqv",
+    True,
+    "a valid Canadian SIN",
+);
+
+cmp-ok(
+    is-luhn-valid("055 444 286"),
+    "eqv",
+    False,
+    "invalid Canadian SIN",
+);
+
+cmp-ok(
+    is-luhn-valid("8273 1232 7352 0569"),
+    "eqv",
+    False,
+    "invalid credit card",
+);
+
+cmp-ok(
+    is-luhn-valid("1 2345 6789 1234 5678 9012"),
+    "eqv",
+    False,
+    "invalid long number with an even remainder",
+);
+
+cmp-ok(
+    is-luhn-valid("1 2345 6789 1234 5678 9013"),
+    "eqv",
+    False,
+    "invalid long number with a remainder divisible by 5",
+);
+
+cmp-ok(
+    is-luhn-valid("095 245 88"),
+    "eqv",
+    True,
+    "valid number with an even number of digits",
+);
+
+cmp-ok(
+    is-luhn-valid("234 567 891 234"),
+    "eqv",
+    True,
+    "valid number with an odd number of spaces",
+);
+
+cmp-ok(
+    is-luhn-valid("059a"),
+    "eqv",
+    False,
+    "valid strings with a non-digit added at the end become invalid",
+);
+
+cmp-ok(
+    is-luhn-valid("055-444-285"),
+    "eqv",
+    False,
+    "valid strings with punctuation included become invalid",
+);
+
+cmp-ok(
+    is-luhn-valid("055# 444\$ 285"),
+    "eqv",
+    False,
+    "valid strings with symbols included become invalid",
+);
+
+cmp-ok(
+    is-luhn-valid(" 0"),
+    "eqv",
+    False,
+    "single zero with space is invalid",
+);
+
+cmp-ok(
+    is-luhn-valid("0000 0"),
+    "eqv",
+    True,
+    "more than a single zero is valid",
+);
+
+cmp-ok(
+    is-luhn-valid("091"),
+    "eqv",
+    True,
+    "input digit 9 is correctly converted to output digit 9",
+);
+
+cmp-ok(
+    is-luhn-valid("9999999999 9999999999 9999999999 9999999999"),
+    "eqv",
+    True,
+    "very long input is valid",
+);
+
+cmp-ok(
+    is-luhn-valid("109"),
+    "eqv",
+    True,
+    "valid luhn with an odd number of digits and non zero first digit",
+);
+
+cmp-ok(
+    is-luhn-valid("055b 444 285"),
+    "eqv",
+    False,
+    "using ascii value for non-doubled non-digit isn't allowed",
+);
+
+cmp-ok(
+    is-luhn-valid(":9"),
+    "eqv",
+    False,
+    "using ascii value for doubled non-digit isn't allowed",
+);
+
+cmp-ok(
+    is-luhn-valid("59\%59"),
+    "eqv",
+    False,
+    "non-numeric, non-space char in the middle with a sum that's divisible by 10 isn't allowed",
+);
+
+done-testing;
