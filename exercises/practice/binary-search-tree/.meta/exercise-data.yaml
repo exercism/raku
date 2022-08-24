@@ -3,7 +3,7 @@ tests: |
 properties:
   sortedData:
     test: |-
-      sprintf(q:to/END/, (%case<input><treeData><>, %case<expected><>, %case<description>).map(*.raku));
+      sprintf(q:to/END/, (%case<input><treeData>.map(*.Int).List<>, %case<expected>.map(*.Int).List<>, %case<description>).map(*.raku));
       for %s -> $data {
           once {
               $bst.=new.root.=new(:$data);
@@ -13,7 +13,7 @@ properties:
       }
       cmp-ok(
           $bst.sort,
-          &infix:<~~>,
+          "eqv",
           %s,
           %s,
       );
@@ -50,7 +50,7 @@ example: |-
       $!root.set($data);
   }
 
-  method sort (--> Iterable) {
+  method sort (--> List()) {
       return gather {
           $!root.&(sub ($node) {
               with $node.left {
@@ -78,6 +78,6 @@ stub: |-
       # $.root contains the initial node.
   }
 
-  method sort (--> Iterable) {
-      return [];
+  method sort (--> List()) {
+      return ();
   }
