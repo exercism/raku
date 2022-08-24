@@ -1,85 +1,358 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use LinkedList;
-plan 5;
 
-for <push-list pop-list shift-list unshift-list> -> $method {
+for <push pop shift unshift count delete> -> $method {
   LinkedList.^can($method) or bail-out "Cannot run expected method `$method`.";
 }
 
-my $cases = from-json $=pod.pop.contents;
-for $cases.values -> $case {
-  subtest $case.<name>, sub {
-    my $linkedlist = LinkedList.new;
-    for  |$case.<set> -> %set {
-      for %set {
-        my $value = $_.value;
-        given $_.key  {
-          when 'push'    { $linkedlist.?push-list( $value ) }
-          when 'unshift' { $linkedlist.?unshift-list( $value ) }
-          when 'pop'     { is $linkedlist.?pop-list, $value, 'pop' }
-          when 'shift'   { is $linkedlist.?shift-list, $value, 'shift' }
-        }
-      }
-    }
-  }
-}
+my LinkedList $linked-list;
 
-=head2 Test Data
-=begin code
-[
-  {
-    "set" : [
-      { "push" : 10 },
-      { "push" : 20 },
-      { "pop"  : 20 },
-      { "pop"  : 10 }
-    ],
-    "name" : "push_pop"
-  },
-  {
-    "set" : [
-      { "push" : 10  },
-      { "push" : 20  },
-      { "shift" : 10 },
-      { "shift" : 20 }
-    ],
-    "name" : "push_shift"
-  },
-  {
-    "set" : [
-      { "unshift" : 10 },
-      { "unshift" : 20 },
-      { "shift"   : 20 },
-      { "shift"   : 10 }
-    ],
-    "name" : "unshift_shift"
-  },
-  {
-    "set" : [
-      { "unshift" : 10 },
-      { "unshift" : 20 },
-      { "pop"     : 10 },
-      { "pop"     : 20 }
-    ],
-    "name" : "unshift_pop"
-  },
-  {
-    "set" : [
-      { "push"    : 10 },
-      { "push"    : 20 },
-      { "pop"     : 20 },
-      { "push"    : 30 },
-      { "shift"   : 10 },
-      { "unshift" : 40 },
-      { "push"    : 50 },
-      { "shift"   : 40 },
-      { "pop"     : 50 },
-      { "shift"   : 30 }
-    ],
-    "name" : "example"
-  }
-]
-=end code
+$linked-list.=new;
+$linked-list.push(7);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    7,
+    "pop gets element from the list",
+);
+
+$linked-list.=new;
+$linked-list.push(11);
+$linked-list.push(13);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    13,
+    "push/pop respectively add/remove at the end of the list",
+);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    11,
+    "push/pop respectively add/remove at the end of the list",
+);
+
+$linked-list.=new;
+$linked-list.push(17);
+cmp-ok(
+    $linked-list.shift,
+    "==",
+    17,
+    "shift gets an element from the list",
+);
+
+$linked-list.=new;
+$linked-list.push(23);
+$linked-list.push(5);
+cmp-ok(
+    $linked-list.shift,
+    "==",
+    23,
+    "shift gets first element from the list",
+);
+cmp-ok(
+    $linked-list.shift,
+    "==",
+    5,
+    "shift gets first element from the list",
+);
+
+$linked-list.=new;
+$linked-list.unshift(23);
+$linked-list.unshift(5);
+cmp-ok(
+    $linked-list.shift,
+    "==",
+    5,
+    "unshift adds element at start of the list",
+);
+cmp-ok(
+    $linked-list.shift,
+    "==",
+    23,
+    "unshift adds element at start of the list",
+);
+
+$linked-list.=new;
+$linked-list.push(1);
+$linked-list.push(2);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    2,
+    "pop, push, shift, and unshift can be used in any order",
+);
+$linked-list.push(3);
+cmp-ok(
+    $linked-list.shift,
+    "==",
+    1,
+    "pop, push, shift, and unshift can be used in any order",
+);
+$linked-list.unshift(4);
+$linked-list.push(5);
+cmp-ok(
+    $linked-list.shift,
+    "==",
+    4,
+    "pop, push, shift, and unshift can be used in any order",
+);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    5,
+    "pop, push, shift, and unshift can be used in any order",
+);
+cmp-ok(
+    $linked-list.shift,
+    "==",
+    3,
+    "pop, push, shift, and unshift can be used in any order",
+);
+
+$linked-list.=new;
+cmp-ok(
+    $linked-list.count,
+    "==",
+    0,
+    "count an empty list",
+);
+
+$linked-list.=new;
+$linked-list.push(37);
+$linked-list.push(1);
+cmp-ok(
+    $linked-list.count,
+    "==",
+    2,
+    "count a list with items",
+);
+
+$linked-list.=new;
+$linked-list.push(31);
+cmp-ok(
+    $linked-list.count,
+    "==",
+    1,
+    "count is correct after mutation",
+);
+$linked-list.unshift(43);
+cmp-ok(
+    $linked-list.count,
+    "==",
+    2,
+    "count is correct after mutation",
+);
+$linked-list.shift;
+cmp-ok(
+    $linked-list.count,
+    "==",
+    1,
+    "count is correct after mutation",
+);
+$linked-list.pop;
+cmp-ok(
+    $linked-list.count,
+    "==",
+    0,
+    "count is correct after mutation",
+);
+
+$linked-list.=new;
+$linked-list.push(41);
+$linked-list.push(59);
+$linked-list.pop;
+$linked-list.pop;
+$linked-list.push(47);
+cmp-ok(
+    $linked-list.count,
+    "==",
+    1,
+    "popping to empty doesn't break the list",
+);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    47,
+    "popping to empty doesn't break the list",
+);
+
+$linked-list.=new;
+$linked-list.push(41);
+$linked-list.push(59);
+$linked-list.shift;
+$linked-list.shift;
+$linked-list.push(47);
+cmp-ok(
+    $linked-list.count,
+    "==",
+    1,
+    "shifting to empty doesn't break the list",
+);
+cmp-ok(
+    $linked-list.shift,
+    "==",
+    47,
+    "shifting to empty doesn't break the list",
+);
+
+$linked-list.=new;
+$linked-list.push(61);
+$linked-list.delete(61);
+cmp-ok(
+    $linked-list.count,
+    "==",
+    0,
+    "deletes the only element",
+);
+
+$linked-list.=new;
+$linked-list.push(71);
+$linked-list.push(83);
+$linked-list.push(79);
+$linked-list.delete(83);
+cmp-ok(
+    $linked-list.count,
+    "==",
+    2,
+    "deletes the element with the specified value from the list",
+);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    79,
+    "deletes the element with the specified value from the list",
+);
+cmp-ok(
+    $linked-list.shift,
+    "==",
+    71,
+    "deletes the element with the specified value from the list",
+);
+
+$linked-list.=new;
+$linked-list.push(71);
+$linked-list.push(83);
+$linked-list.push(79);
+$linked-list.delete(83);
+cmp-ok(
+    $linked-list.count,
+    "==",
+    2,
+    "deletes the element with the specified value from the list, re-assigns tail",
+);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    79,
+    "deletes the element with the specified value from the list, re-assigns tail",
+);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    71,
+    "deletes the element with the specified value from the list, re-assigns tail",
+);
+
+$linked-list.=new;
+$linked-list.push(71);
+$linked-list.push(83);
+$linked-list.push(79);
+$linked-list.delete(83);
+cmp-ok(
+    $linked-list.count,
+    "==",
+    2,
+    "deletes the element with the specified value from the list, re-assigns head",
+);
+cmp-ok(
+    $linked-list.shift,
+    "==",
+    71,
+    "deletes the element with the specified value from the list, re-assigns head",
+);
+cmp-ok(
+    $linked-list.shift,
+    "==",
+    79,
+    "deletes the element with the specified value from the list, re-assigns head",
+);
+
+$linked-list.=new;
+$linked-list.push(97);
+$linked-list.push(101);
+$linked-list.delete(97);
+cmp-ok(
+    $linked-list.count,
+    "==",
+    1,
+    "deletes the first of two elements",
+);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    101,
+    "deletes the first of two elements",
+);
+
+$linked-list.=new;
+$linked-list.push(97);
+$linked-list.push(101);
+$linked-list.delete(101);
+cmp-ok(
+    $linked-list.count,
+    "==",
+    1,
+    "deletes the second of two elements",
+);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    97,
+    "deletes the second of two elements",
+);
+
+$linked-list.=new;
+$linked-list.push(89);
+$linked-list.delete(103);
+cmp-ok(
+    $linked-list.count,
+    "==",
+    1,
+    "delete does not modify the list if the element is not found",
+);
+
+$linked-list.=new;
+$linked-list.push(73);
+$linked-list.push(9);
+$linked-list.push(9);
+$linked-list.push(107);
+$linked-list.delete(9);
+cmp-ok(
+    $linked-list.count,
+    "==",
+    3,
+    "deletes only the first occurrence",
+);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    107,
+    "deletes only the first occurrence",
+);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    9,
+    "deletes only the first occurrence",
+);
+cmp-ok(
+    $linked-list.pop,
+    "==",
+    73,
+    "deletes only the first occurrence",
+);
+
+done-testing;
