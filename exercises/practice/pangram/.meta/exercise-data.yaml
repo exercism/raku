@@ -1,19 +1,21 @@
-plan: 10
-tests: |-
-  for @test-cases -> %case {
-    subtest %case<description>, {
-      plan 2;
-      isa-ok ( my $result := is-pangram %case<input><sentence> ), Bool;
-      is-deeply $result, %case<expected>, 'Result matches expected';
-    }
-  }
+properties:
+  isPangram:
+    test: |-
+      sprintf(q:to/END/, %case<input><sentence>.raku, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          is-pangram(%s),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
 
 unit: module
 example: |-
-  sub is-pangram (Str:D $string --> Bool:D) is export {
-    $string.lc.comb ⊇ ‘a’..‘z’
+  sub is-pangram (Str:D $_ --> Bool:D) is export {
+      .lc.comb ⊇ ‘a’..‘z’
   }
 
 stub: |-
-  sub is-pangram ($string) is export {
+  sub is-pangram ($sentence) is export {
   }

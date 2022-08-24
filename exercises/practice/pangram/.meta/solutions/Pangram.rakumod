@@ -1,5 +1,5 @@
 unit module Pangram;
 
-sub is-pangram (Str:D $string --> Bool:D) is export {
-  $string.lc.comb ⊇ ‘a’..‘z’
+sub is-pangram (Str:D $_ --> Bool:D) is export {
+    .lc.comb ⊇ ‘a’..‘z’
 }
