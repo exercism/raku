@@ -2,8 +2,9 @@ properties:
   flatten:
     test: |-
       sprintf(q:to/END/, (%case<input><array>.deepmap({$_ eqv Any ?? Nil !! $_})<>, %case<expected><>, %case<description>).map(*.raku));
-      is-deeply(
+      cmp-ok(
           flatten-array(%s),
+          "eqv",
           %s,
           %s,
       );

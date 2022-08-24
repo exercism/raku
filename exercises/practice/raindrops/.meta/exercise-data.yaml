@@ -2,13 +2,13 @@ properties:
   convert:
     test: |-
       sprintf(q:to/END/, (%case<input><number>, |%case<expected description>).map(*.raku));
-      is-deeply(
+      cmp-ok(
           raindrop(%s),
+          "eqv",
           %s,
           %s,
       );
       END
-
 
 unit: module
 example: |-

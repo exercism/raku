@@ -6,9 +6,10 @@ properties:
     test: |-
       '$grade-school.=new;' ~ "\n" ~
       sprintf(q:to/END/, ([~] do for @(%case<input><students>) { "\n" ~ '        $grade-school.add( ' ~ ":student({$_[0].raku}), :grade({$_[1].raku})" ~ ' ),' }), %case<expected>.List.raku, %case<description>.raku)
-      is-deeply(
+      cmp-ok(
           (%s
           ),
+          "eqv",
           %s,
           %s,
       );
@@ -19,8 +20,9 @@ properties:
       '$grade-school.=new;' ~
       sprintf(q:to/END/, ([~] do for @(%case<input><students>) { "\n" ~ '$grade-school.add( ' ~ ":student({$_[0].raku}), :grade({$_[1].raku})" ~ ' );' }), %case<expected>.List.raku, %case<description>.raku)
       %s
-      is-deeply(
+      cmp-ok(
           $grade-school.roster,
+          "eqv",
           %s,
           %s,
       );
@@ -31,8 +33,9 @@ properties:
       '$grade-school.=new;' ~
       sprintf(q:to/END/, ([~] do for @(%case<input><students>) { "\n" ~ '$grade-school.add( ' ~ ":student({$_[0].raku}), :grade({$_[1].raku})" ~ ' );' }), %case<input><desiredGrade>, %case<expected>.List.raku, %case<description>.raku)
       %s
-      is-deeply(
+      cmp-ok(
           $grade-school.roster( :grade(%s) ),
+          "eqv",
           %s,
           %s,
       );

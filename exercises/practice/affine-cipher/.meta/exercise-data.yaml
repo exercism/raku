@@ -9,8 +9,9 @@ properties:
       }
       else {
           sprintf(q:to/END/, (|(%case<input><key><a b>:p), %case<input><phrase>, |(%case<expected description>)).map(*.raku));
-          is(
+          cmp-ok(
               AffineCipher.new( %s, %s ).encode(%s),
+              "eq",
               %s,
               %s,
           );
@@ -25,8 +26,9 @@ properties:
       }
       else {
           sprintf(q:to/END/, (|(%case<input><key><a b>:p), %case<input><phrase>, |(%case<expected description>)).map(*.raku));
-          is(
+          cmp-ok(
               AffineCipher.new( %s, %s ).decode(%s),
+              "eq",
               %s,
               %s,
           );

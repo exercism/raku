@@ -9,8 +9,9 @@ properties:
   leapYear:
     test: |-
       sprintf(q:to/END/, %case<input><year>, %case<expected>, %case<description>);
-      is-deeply(
+      cmp-ok(
           is-leap-year(%s),
+          "eqv",
           %s,
           '%s',
       );

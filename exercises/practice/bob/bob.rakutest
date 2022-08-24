@@ -9,152 +9,177 @@ for <hey> -> $method {
   Bob.^can($method) or bail-out "Cannot run expected method `$method`.";
 }
 
-is(
+cmp-ok(
     Bob.hey("Tom-ay-to, tom-aaaah-to."),
+    "eq",
     "Whatever.",
     "stating something",
 );
 
-is(
+cmp-ok(
     Bob.hey("WATCH OUT!"),
+    "eq",
     "Whoa, chill out!",
     "shouting",
 );
 
-is(
+cmp-ok(
     Bob.hey("FCECDFCAAB"),
+    "eq",
     "Whoa, chill out!",
     "shouting gibberish",
 );
 
-is(
+cmp-ok(
     Bob.hey("Does this cryogenic chamber make me look fat?"),
+    "eq",
     "Sure.",
     "asking a question",
 );
 
-is(
+cmp-ok(
     Bob.hey("You are, what, like 15?"),
+    "eq",
     "Sure.",
     "asking a numeric question",
 );
 
-is(
+cmp-ok(
     Bob.hey("fffbbcbeab?"),
+    "eq",
     "Sure.",
     "asking gibberish",
 );
 
-is(
+cmp-ok(
     Bob.hey("Hi there!"),
+    "eq",
     "Whatever.",
     "talking forcefully",
 );
 
-is(
+cmp-ok(
     Bob.hey("It's OK if you don't want to go work for NASA."),
+    "eq",
     "Whatever.",
     "using acronyms in regular speech",
 );
 
-is(
+cmp-ok(
     Bob.hey("WHAT'S GOING ON?"),
+    "eq",
     "Calm down, I know what I'm doing!",
     "forceful question",
 );
 
-is(
+cmp-ok(
     Bob.hey("1, 2, 3 GO!"),
+    "eq",
     "Whoa, chill out!",
     "shouting numbers",
 );
 
-is(
+cmp-ok(
     Bob.hey("1, 2, 3"),
+    "eq",
     "Whatever.",
     "no letters",
 );
 
-is(
+cmp-ok(
     Bob.hey("4?"),
+    "eq",
     "Sure.",
     "question with no letters",
 );
 
-is(
+cmp-ok(
     Bob.hey("ZOMG THE \%^*\@#\$(*^ ZOMBIES ARE COMING!!11!!1!"),
+    "eq",
     "Whoa, chill out!",
     "shouting with special characters",
 );
 
-is(
+cmp-ok(
     Bob.hey("I HATE THE DENTIST"),
+    "eq",
     "Whoa, chill out!",
     "shouting with no exclamation mark",
 );
 
-is(
+cmp-ok(
     Bob.hey("Ending with ? means a question."),
+    "eq",
     "Whatever.",
     "statement containing question mark",
 );
 
-is(
+cmp-ok(
     Bob.hey(":) ?"),
+    "eq",
     "Sure.",
     "non-letters with question",
 );
 
-is(
+cmp-ok(
     Bob.hey("Wait! Hang on. Are you going to be OK?"),
+    "eq",
     "Sure.",
     "prattling on",
 );
 
-is(
+cmp-ok(
     Bob.hey(""),
+    "eq",
     "Fine. Be that way!",
     "silence",
 );
 
-is(
+cmp-ok(
     Bob.hey("          "),
+    "eq",
     "Fine. Be that way!",
     "prolonged silence",
 );
 
-is(
+cmp-ok(
     Bob.hey("\t\t\t\t\t\t\t\t\t\t"),
+    "eq",
     "Fine. Be that way!",
     "alternate silence",
 );
 
-is(
+cmp-ok(
     Bob.hey("\nDoes this cryogenic chamber make me look fat?\nNo."),
+    "eq",
     "Whatever.",
     "multiple line question",
 );
 
-is(
+cmp-ok(
     Bob.hey("         hmmmmmmm..."),
+    "eq",
     "Whatever.",
     "starting with whitespace",
 );
 
-is(
+cmp-ok(
     Bob.hey("Okay if like my  spacebar  quite a bit?   "),
+    "eq",
     "Sure.",
     "ending with whitespace",
 );
 
-is(
+cmp-ok(
     Bob.hey("\n\r \t"),
+    "eq",
     "Fine. Be that way!",
     "other whitespace",
 );
 
-is(
+cmp-ok(
     Bob.hey("This is a statement ending with whitespace      "),
+    "eq",
     "Whatever.",
     "non-question ending with whitespace",
 );

@@ -3,146 +3,170 @@ use Test;
 use lib $?FILE.IO.dirname;
 use RomanNumerals;
 
-is(
+cmp-ok(
     to-roman(1),
+    "eq",
     "I",
     "1 is I",
 );
 
-is(
+cmp-ok(
     to-roman(2),
+    "eq",
     "II",
     "2 is II",
 );
 
-is(
+cmp-ok(
     to-roman(3),
+    "eq",
     "III",
     "3 is III",
 );
 
-is(
+cmp-ok(
     to-roman(4),
+    "eq",
     "IV",
     "4 is IV",
 );
 
-is(
+cmp-ok(
     to-roman(5),
+    "eq",
     "V",
     "5 is V",
 );
 
-is(
+cmp-ok(
     to-roman(6),
+    "eq",
     "VI",
     "6 is VI",
 );
 
-is(
+cmp-ok(
     to-roman(9),
+    "eq",
     "IX",
     "9 is IX",
 );
 
-is(
+cmp-ok(
     to-roman(27),
+    "eq",
     "XXVII",
     "27 is XXVII",
 );
 
-is(
+cmp-ok(
     to-roman(48),
+    "eq",
     "XLVIII",
     "48 is XLVIII",
 );
 
-is(
+cmp-ok(
     to-roman(49),
+    "eq",
     "XLIX",
     "49 is XLIX",
 );
 
-is(
+cmp-ok(
     to-roman(59),
+    "eq",
     "LIX",
     "59 is LIX",
 );
 
-is(
+cmp-ok(
     to-roman(93),
+    "eq",
     "XCIII",
     "93 is XCIII",
 );
 
-is(
+cmp-ok(
     to-roman(141),
+    "eq",
     "CXLI",
     "141 is CXLI",
 );
 
-is(
+cmp-ok(
     to-roman(163),
+    "eq",
     "CLXIII",
     "163 is CLXIII",
 );
 
-is(
+cmp-ok(
     to-roman(402),
+    "eq",
     "CDII",
     "402 is CDII",
 );
 
-is(
+cmp-ok(
     to-roman(575),
+    "eq",
     "DLXXV",
     "575 is DLXXV",
 );
 
-is(
+cmp-ok(
     to-roman(911),
+    "eq",
     "CMXI",
     "911 is CMXI",
 );
 
-is(
+cmp-ok(
     to-roman(1024),
+    "eq",
     "MXXIV",
     "1024 is MXXIV",
 );
 
-is(
+cmp-ok(
     to-roman(3000),
+    "eq",
     "MMM",
     "3000 is MMM",
 );
 
-is(
+cmp-ok(
     to-roman(16),
+    "eq",
     "XVI",
     "16 is XVI",
 );
 
-is(
+cmp-ok(
     to-roman(66),
+    "eq",
     "LXVI",
     "66 is LXVI",
 );
 
-is(
+cmp-ok(
     to-roman(166),
+    "eq",
     "CLXVI",
     "166 is CLXVI",
 );
 
-is(
+cmp-ok(
     to-roman(666),
+    "eq",
     "DCLXVI",
     "666 is DCLXVI",
 );
 
-is(
+cmp-ok(
     to-roman(1666),
+    "eq",
     "MDCLXVI",
     "1666 is MDCLXVI",
 );

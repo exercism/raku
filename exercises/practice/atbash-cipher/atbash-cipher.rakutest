@@ -3,86 +3,100 @@ use Test;
 use lib $?FILE.IO.dirname;
 use AtbashCipher;
 
-is(
+cmp-ok(
     encode("yes"),
+    "eq",
     "bvh",
     "encode: encode yes",
 );
 
-is(
+cmp-ok(
     encode("no"),
+    "eq",
     "ml",
     "encode: encode no",
 );
 
-is(
+cmp-ok(
     encode("OMG"),
+    "eq",
     "lnt",
     "encode: encode OMG",
 );
 
-is(
+cmp-ok(
     encode("O M G"),
+    "eq",
     "lnt",
     "encode: encode spaces",
 );
 
-is(
+cmp-ok(
     encode("mindblowingly"),
+    "eq",
     "nrmwy oldrm tob",
     "encode: encode mindblowingly",
 );
 
-is(
+cmp-ok(
     encode("Testing,1 2 3, testing."),
+    "eq",
     "gvhgr mt123 gvhgr mt",
     "encode: encode numbers",
 );
 
-is(
+cmp-ok(
     encode("Truth is fiction."),
+    "eq",
     "gifgs rhurx grlm",
     "encode: encode deep thought",
 );
 
-is(
+cmp-ok(
     encode("The quick brown fox jumps over the lazy dog."),
+    "eq",
     "gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt",
     "encode: encode all the letters",
 );
 
-is(
+cmp-ok(
     decode("vcvix rhn"),
+    "eq",
     "exercism",
     "decode: decode exercism",
 );
 
-is(
+cmp-ok(
     decode("zmlyh gzxov rhlug vmzhg vkkrm thglm v"),
+    "eq",
     "anobstacleisoftenasteppingstone",
     "decode: decode a sentence",
 );
 
-is(
+cmp-ok(
     decode("gvhgr mt123 gvhgr mt"),
+    "eq",
     "testing123testing",
     "decode: decode numbers",
 );
 
-is(
+cmp-ok(
     decode("gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt"),
+    "eq",
     "thequickbrownfoxjumpsoverthelazydog",
     "decode: decode all the letters",
 );
 
-is(
+cmp-ok(
     decode("vc vix    r hn"),
+    "eq",
     "exercism",
     "decode: decode with too many spaces",
 );
 
-is(
+cmp-ok(
     decode("zmlyhgzxovrhlugvmzhgvkkrmthglmv"),
+    "eq",
     "anobstacleisoftenasteppingstone",
     "decode: decode with no spaces",
 );

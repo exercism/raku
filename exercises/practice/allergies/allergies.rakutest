@@ -3,312 +3,352 @@ use Test;
 use lib $?FILE.IO.dirname;
 use Allergies;
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("eggs"), :score(0) ),
+    "eqv",
     False,
     "testing for eggs allergy: not allergic to anything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("eggs"), :score(1) ),
+    "eqv",
     True,
     "testing for eggs allergy: allergic only to eggs",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("eggs"), :score(3) ),
+    "eqv",
     True,
     "testing for eggs allergy: allergic to eggs and something else",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("eggs"), :score(2) ),
+    "eqv",
     False,
     "testing for eggs allergy: allergic to something, but not eggs",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("eggs"), :score(255) ),
+    "eqv",
     True,
     "testing for eggs allergy: allergic to everything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("peanuts"), :score(0) ),
+    "eqv",
     False,
     "testing for peanuts allergy: not allergic to anything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("peanuts"), :score(2) ),
+    "eqv",
     True,
     "testing for peanuts allergy: allergic only to peanuts",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("peanuts"), :score(7) ),
+    "eqv",
     True,
     "testing for peanuts allergy: allergic to peanuts and something else",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("peanuts"), :score(5) ),
+    "eqv",
     False,
     "testing for peanuts allergy: allergic to something, but not peanuts",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("peanuts"), :score(255) ),
+    "eqv",
     True,
     "testing for peanuts allergy: allergic to everything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("shellfish"), :score(0) ),
+    "eqv",
     False,
     "testing for shellfish allergy: not allergic to anything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("shellfish"), :score(4) ),
+    "eqv",
     True,
     "testing for shellfish allergy: allergic only to shellfish",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("shellfish"), :score(14) ),
+    "eqv",
     True,
     "testing for shellfish allergy: allergic to shellfish and something else",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("shellfish"), :score(10) ),
+    "eqv",
     False,
     "testing for shellfish allergy: allergic to something, but not shellfish",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("shellfish"), :score(255) ),
+    "eqv",
     True,
     "testing for shellfish allergy: allergic to everything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("strawberries"), :score(0) ),
+    "eqv",
     False,
     "testing for strawberries allergy: not allergic to anything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("strawberries"), :score(8) ),
+    "eqv",
     True,
     "testing for strawberries allergy: allergic only to strawberries",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("strawberries"), :score(28) ),
+    "eqv",
     True,
     "testing for strawberries allergy: allergic to strawberries and something else",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("strawberries"), :score(20) ),
+    "eqv",
     False,
     "testing for strawberries allergy: allergic to something, but not strawberries",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("strawberries"), :score(255) ),
+    "eqv",
     True,
     "testing for strawberries allergy: allergic to everything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("tomatoes"), :score(0) ),
+    "eqv",
     False,
     "testing for tomatoes allergy: not allergic to anything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("tomatoes"), :score(16) ),
+    "eqv",
     True,
     "testing for tomatoes allergy: allergic only to tomatoes",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("tomatoes"), :score(56) ),
+    "eqv",
     True,
     "testing for tomatoes allergy: allergic to tomatoes and something else",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("tomatoes"), :score(40) ),
+    "eqv",
     False,
     "testing for tomatoes allergy: allergic to something, but not tomatoes",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("tomatoes"), :score(255) ),
+    "eqv",
     True,
     "testing for tomatoes allergy: allergic to everything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("chocolate"), :score(0) ),
+    "eqv",
     False,
     "testing for chocolate allergy: not allergic to anything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("chocolate"), :score(32) ),
+    "eqv",
     True,
     "testing for chocolate allergy: allergic only to chocolate",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("chocolate"), :score(112) ),
+    "eqv",
     True,
     "testing for chocolate allergy: allergic to chocolate and something else",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("chocolate"), :score(80) ),
+    "eqv",
     False,
     "testing for chocolate allergy: allergic to something, but not chocolate",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("chocolate"), :score(255) ),
+    "eqv",
     True,
     "testing for chocolate allergy: allergic to everything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("pollen"), :score(0) ),
+    "eqv",
     False,
     "testing for pollen allergy: not allergic to anything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("pollen"), :score(64) ),
+    "eqv",
     True,
     "testing for pollen allergy: allergic only to pollen",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("pollen"), :score(224) ),
+    "eqv",
     True,
     "testing for pollen allergy: allergic to pollen and something else",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("pollen"), :score(160) ),
+    "eqv",
     False,
     "testing for pollen allergy: allergic to something, but not pollen",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("pollen"), :score(255) ),
+    "eqv",
     True,
     "testing for pollen allergy: allergic to everything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("cats"), :score(0) ),
+    "eqv",
     False,
     "testing for cats allergy: not allergic to anything",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("cats"), :score(128) ),
+    "eqv",
     True,
     "testing for cats allergy: allergic only to cats",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("cats"), :score(192) ),
+    "eqv",
     True,
     "testing for cats allergy: allergic to cats and something else",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("cats"), :score(64) ),
+    "eqv",
     False,
     "testing for cats allergy: allergic to something, but not cats",
 );
 
-is-deeply(
+cmp-ok(
     allergic-to( :item("cats"), :score(255) ),
+    "eqv",
     True,
     "testing for cats allergy: allergic to everything",
 );
 
 cmp-ok(
     list-allergies(0),
-    &infix:<(==)>,
+    "(==)",
     set(),
     "list when: no allergies",
 );
 
 cmp-ok(
     list-allergies(1),
-    &infix:<(==)>,
+    "(==)",
     <eggs>,
     "list when: just eggs",
 );
 
 cmp-ok(
     list-allergies(2),
-    &infix:<(==)>,
+    "(==)",
     <peanuts>,
     "list when: just peanuts",
 );
 
 cmp-ok(
     list-allergies(8),
-    &infix:<(==)>,
+    "(==)",
     <strawberries>,
     "list when: just strawberries",
 );
 
 cmp-ok(
     list-allergies(3),
-    &infix:<(==)>,
+    "(==)",
     <eggs peanuts>,
     "list when: eggs and peanuts",
 );
 
 cmp-ok(
     list-allergies(5),
-    &infix:<(==)>,
+    "(==)",
     <eggs shellfish>,
     "list when: more than eggs but not peanuts",
 );
 
 cmp-ok(
     list-allergies(248),
-    &infix:<(==)>,
+    "(==)",
     <strawberries tomatoes chocolate pollen cats>,
     "list when: lots of stuff",
 );
 
 cmp-ok(
     list-allergies(255),
-    &infix:<(==)>,
+    "(==)",
     <eggs peanuts shellfish strawberries tomatoes chocolate pollen cats>,
     "list when: everything",
 );
 
 cmp-ok(
     list-allergies(509),
-    &infix:<(==)>,
+    "(==)",
     <eggs shellfish strawberries tomatoes chocolate pollen cats>,
     "list when: no allergen score parts",
 );
 
 cmp-ok(
     list-allergies(257),
-    &infix:<(==)>,
+    "(==)",
     <eggs>,
     "list when: no allergen score parts without highest valid score",
 );

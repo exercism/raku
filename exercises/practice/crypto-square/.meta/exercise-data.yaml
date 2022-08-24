@@ -2,8 +2,9 @@ properties:
   ciphertext:
     test: |-
       sprintf(q:to/END/, (%case<input><plaintext>, |%case<expected description>).map(*.raku));
-      is(
+      cmp-ok(
           crypto-square(%s),
+          "eq",
           %s,
           %s,
       );
