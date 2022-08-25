@@ -28,7 +28,7 @@ method add ($data) {
     $!root.set($data);
 }
 
-method sort (--> Iterable) {
+method sort (--> List()) {
     return gather {
         $!root.&(sub ($node) {
             with $node.left {
