@@ -1,50 +1,90 @@
 unit class LinkedList;
 
-class ListNode {
-    has $.next     is rw;
-    has $.previous is rw;
+class Node {
+    has Node ( $.head, $.tail ) is rw;
     has $.value;
 }
 
-has $!first;
-has $!last;
+has Node $.head-node is rw;
 
-method push-list($value) {
-    my $next = ListNode.new( value => $value, previous => $!last );
-    if ( $!last ) {
-        $!last = $!last.next= $next ;
+method push ($value) {
+    if !$.head-node {
+        $!head-node.=new( :$value )
     }
     else {
-        $!first = $!last = $next;
+        my Node $current-node = $!head-node;
+        while $current-node.tail {
+            $current-node.=tail;
+        }
+        $current-node.tail.=new( :head($current-node) :$value );
     }
 }
 
-method unshift-list($value) {
-    my $next = ListNode.new( value => $value, next => $!first );
-    if ( $!first ) {
-        $!first = $!first.previous = $next ;
+method pop {
+    my Node $current-node = $!head-node;
+    while $current-node.tail {
+        $current-node.=tail;
+    }
+    if $current-node.head {
+        $current-node.head.tail = Nil;
     }
     else {
-        $!first = $!last = $next;
+        $!head-node = Nil;
+    }
+    return $current-node.value;
+}
+
+method shift {
+    my $value = $.head-node.value;
+    $!head-node.=tail;
+    if $.head-node {
+        $.head-node.head = Nil;
+    }
+    return $value;
+}
+
+method unshift ($value) {
+    if !$.head-node {
+        $!head-node.=new( :$value );
+    }
+    else {
+        $.head-node.head.=new( :tail($.head-node), :$value );
+        $!head-node.=head;
     }
 }
 
-method shift-list() {
-    my $f = $!first;
+method count {
+    my Int $i = 0;
+    if $.head-node {
+        $i++;
+        my Node $current-node = $.head-node;
+        while $current-node.tail {
+            $current-node.=tail;
+            $i++;
+        }
+    }
 
-    $!first = $!first.next;
-
-    unless $!first  { $!last = $!first }
-
-    return $f.value;
+    return $i;
 }
 
-method pop-list() {
-    my $f = $!last;
-
-    $!last = $!last.previous;
-
-    unless $!.last  { $!first = $!last }
-
-    return $f.value;
+method delete ($value) {
+    if $.head-node.value == $value {
+        self.shift;
+        return;
+    }
+    my Node $current-node = $.head-node;
+    until $current-node.value == $value {
+        if $current-node {
+            $current-node.=tail;
+        }
+        if !$current-node {
+            return;
+        }
+    }
+    if $current-node.head {
+        $current-node.head.tail = $current-node.tail;
+    }
+    if $current-node.tail {
+        $current-node.tail.head = $current-node.head;
+    }
 }

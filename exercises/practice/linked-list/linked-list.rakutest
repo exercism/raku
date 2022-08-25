@@ -1,85 +1,394 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use LinkedList;
-plan 5;
 
-for <push-list pop-list shift-list unshift-list> -> $method {
+for <push pop shift unshift count delete> -> $method {
   LinkedList.^can($method) or bail-out "Cannot run expected method `$method`.";
 }
 
-my $cases = from-json $=pod.pop.contents;
-for $cases.values -> $case {
-  subtest $case.<name>, sub {
-    my $linkedlist = LinkedList.new;
-    for  |$case.<set> -> %set {
-      for %set {
-        my $value = $_.value;
-        given $_.key  {
-          when 'push'    { $linkedlist.?push-list( $value ) }
-          when 'unshift' { $linkedlist.?unshift-list( $value ) }
-          when 'pop'     { is $linkedlist.?pop-list, $value, 'pop' }
-          when 'shift'   { is $linkedlist.?shift-list, $value, 'shift' }
-        }
-      }
-    }
-  }
-}
+subtest "pop gets element from the list" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(7) }, "push 7" );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        7,
+        "pop 7",
+    );
+};
 
-=head2 Test Data
-=begin code
-[
-  {
-    "set" : [
-      { "push" : 10 },
-      { "push" : 20 },
-      { "pop"  : 20 },
-      { "pop"  : 10 }
-    ],
-    "name" : "push_pop"
-  },
-  {
-    "set" : [
-      { "push" : 10  },
-      { "push" : 20  },
-      { "shift" : 10 },
-      { "shift" : 20 }
-    ],
-    "name" : "push_shift"
-  },
-  {
-    "set" : [
-      { "unshift" : 10 },
-      { "unshift" : 20 },
-      { "shift"   : 20 },
-      { "shift"   : 10 }
-    ],
-    "name" : "unshift_shift"
-  },
-  {
-    "set" : [
-      { "unshift" : 10 },
-      { "unshift" : 20 },
-      { "pop"     : 10 },
-      { "pop"     : 20 }
-    ],
-    "name" : "unshift_pop"
-  },
-  {
-    "set" : [
-      { "push"    : 10 },
-      { "push"    : 20 },
-      { "pop"     : 20 },
-      { "push"    : 30 },
-      { "shift"   : 10 },
-      { "unshift" : 40 },
-      { "push"    : 50 },
-      { "shift"   : 40 },
-      { "pop"     : 50 },
-      { "shift"   : 30 }
-    ],
-    "name" : "example"
-  }
-]
-=end code
+subtest "push/pop respectively add/remove at the end of the list" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(11) }, "push 11" );
+    lives-ok( { $linked-list.push(13) }, "push 13" );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        13,
+        "pop 13",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        11,
+        "pop 11",
+    );
+};
+
+subtest "shift gets an element from the list" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(17) }, "push 17" );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        17,
+        "shift 17",
+    );
+};
+
+subtest "shift gets first element from the list" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(23) }, "push 23" );
+    lives-ok( { $linked-list.push(5) }, "push 5" );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        23,
+        "shift 23",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        5,
+        "shift 5",
+    );
+};
+
+subtest "unshift adds element at start of the list" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.unshift(23) }, "unshift 23" );
+    lives-ok( { $linked-list.unshift(5) }, "unshift 5" );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        5,
+        "shift 5",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        23,
+        "shift 23",
+    );
+};
+
+subtest "pop, push, shift, and unshift can be used in any order" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(1) }, "push 1" );
+    lives-ok( { $linked-list.push(2) }, "push 2" );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        2,
+        "pop 2",
+    );
+    lives-ok( { $linked-list.push(3) }, "push 3" );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        1,
+        "shift 1",
+    );
+    lives-ok( { $linked-list.unshift(4) }, "unshift 4" );
+    lives-ok( { $linked-list.push(5) }, "push 5" );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        4,
+        "shift 4",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        5,
+        "pop 5",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        3,
+        "shift 3",
+    );
+};
+
+subtest "count an empty list" => {
+    my LinkedList $linked-list.=new;
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        0,
+        "count 0",
+    );
+};
+
+subtest "count a list with items" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(37) }, "push 37" );
+    lives-ok( { $linked-list.push(1) }, "push 1" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        2,
+        "count 2",
+    );
+};
+
+subtest "count is correct after mutation" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(31) }, "push 31" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+    lives-ok( { $linked-list.unshift(43) }, "unshift 43" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        2,
+        "count 2",
+    );
+    lives-ok( { $linked-list.shift }, "shift" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+    lives-ok( { $linked-list.pop }, "pop" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        0,
+        "count 0",
+    );
+};
+
+subtest "popping to empty doesn't break the list" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(41) }, "push 41" );
+    lives-ok( { $linked-list.push(59) }, "push 59" );
+    lives-ok( { $linked-list.pop }, "pop" );
+    lives-ok( { $linked-list.pop }, "pop" );
+    lives-ok( { $linked-list.push(47) }, "push 47" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        47,
+        "pop 47",
+    );
+};
+
+subtest "shifting to empty doesn't break the list" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(41) }, "push 41" );
+    lives-ok( { $linked-list.push(59) }, "push 59" );
+    lives-ok( { $linked-list.shift }, "shift" );
+    lives-ok( { $linked-list.shift }, "shift" );
+    lives-ok( { $linked-list.push(47) }, "push 47" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        47,
+        "shift 47",
+    );
+};
+
+subtest "deletes the only element" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(61) }, "push 61" );
+    lives-ok( { $linked-list.delete(61) }, "delete 61" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        0,
+        "count 0",
+    );
+};
+
+subtest "deletes the element with the specified value from the list" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(71) }, "push 71" );
+    lives-ok( { $linked-list.push(83) }, "push 83" );
+    lives-ok( { $linked-list.push(79) }, "push 79" );
+    lives-ok( { $linked-list.delete(83) }, "delete 83" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        2,
+        "count 2",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        79,
+        "pop 79",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        71,
+        "shift 71",
+    );
+};
+
+subtest "deletes the element with the specified value from the list, re-assigns tail" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(71) }, "push 71" );
+    lives-ok( { $linked-list.push(83) }, "push 83" );
+    lives-ok( { $linked-list.push(79) }, "push 79" );
+    lives-ok( { $linked-list.delete(83) }, "delete 83" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        2,
+        "count 2",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        79,
+        "pop 79",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        71,
+        "pop 71",
+    );
+};
+
+subtest "deletes the element with the specified value from the list, re-assigns head" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(71) }, "push 71" );
+    lives-ok( { $linked-list.push(83) }, "push 83" );
+    lives-ok( { $linked-list.push(79) }, "push 79" );
+    lives-ok( { $linked-list.delete(83) }, "delete 83" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        2,
+        "count 2",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        71,
+        "shift 71",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        79,
+        "shift 79",
+    );
+};
+
+subtest "deletes the first of two elements" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(97) }, "push 97" );
+    lives-ok( { $linked-list.push(101) }, "push 101" );
+    lives-ok( { $linked-list.delete(97) }, "delete 97" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        101,
+        "pop 101",
+    );
+};
+
+subtest "deletes the second of two elements" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(97) }, "push 97" );
+    lives-ok( { $linked-list.push(101) }, "push 101" );
+    lives-ok( { $linked-list.delete(101) }, "delete 101" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        97,
+        "pop 97",
+    );
+};
+
+subtest "delete does not modify the list if the element is not found" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(89) }, "push 89" );
+    lives-ok( { $linked-list.delete(103) }, "delete 103" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+};
+
+subtest "deletes only the first occurrence" => {
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(73) }, "push 73" );
+    lives-ok( { $linked-list.push(9) }, "push 9" );
+    lives-ok( { $linked-list.push(9) }, "push 9" );
+    lives-ok( { $linked-list.push(107) }, "push 107" );
+    lives-ok( { $linked-list.delete(9) }, "delete 9" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        3,
+        "count 3",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        107,
+        "pop 107",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        9,
+        "pop 9",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        73,
+        "pop 73",
+    );
+};
+
+done-testing;

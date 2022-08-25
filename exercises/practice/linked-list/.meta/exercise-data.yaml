@@ -1,130 +1,137 @@
-plan: 5
-modules:
-  - use: JSON::Fast
-methods: 'push-list pop-list shift-list unshift-list'
-tests: |-
-  my $cases = from-json $=pod.pop.contents;
-  for $cases.values -> $case {
-    subtest $case.<name>, sub {
-      my $linkedlist = LinkedList.new;
-      for  |$case.<set> -> %set {
-        for %set {
-          my $value = $_.value;
-          given $_.key  {
-            when 'push'    { $linkedlist.?push-list( $value ) }
-            when 'unshift' { $linkedlist.?unshift-list( $value ) }
-            when 'pop'     { is $linkedlist.?pop-list, $value, 'pop' }
-            when 'shift'   { is $linkedlist.?shift-list, $value, 'shift' }
+methods: push pop shift unshift count delete
+properties:
+  list:
+    test: |-
+      'subtest ' ~ %case<description>.raku ~ " => \{\n" ~ '    my LinkedList $linked-list.=new;' ~ "\n" ~
+      %case<input><operations>.map({
+          if .<value>:exists {
+              sprintf(q:to/END/, |((.<operation>, .<value>) xx 2)).trim-trailing;
+                  lives-ok( { $linked-list.%s(%s) }, "%s %s" );
+              END
           }
-        }
-      }
-    }
-  }
-
-  =head2 Test Data
-  =begin code
-  [
-    {
-      "set" : [
-        { "push" : 10 },
-        { "push" : 20 },
-        { "pop"  : 20 },
-        { "pop"  : 10 }
-      ],
-      "name" : "push_pop"
-    },
-    {
-      "set" : [
-        { "push" : 10  },
-        { "push" : 20  },
-        { "shift" : 10 },
-        { "shift" : 20 }
-      ],
-      "name" : "push_shift"
-    },
-    {
-      "set" : [
-        { "unshift" : 10 },
-        { "unshift" : 20 },
-        { "shift"   : 20 },
-        { "shift"   : 10 }
-      ],
-      "name" : "unshift_shift"
-    },
-    {
-      "set" : [
-        { "unshift" : 10 },
-        { "unshift" : 20 },
-        { "pop"     : 10 },
-        { "pop"     : 20 }
-      ],
-      "name" : "unshift_pop"
-    },
-    {
-      "set" : [
-        { "push"    : 10 },
-        { "push"    : 20 },
-        { "pop"     : 20 },
-        { "push"    : 30 },
-        { "shift"   : 10 },
-        { "unshift" : 40 },
-        { "push"    : 50 },
-        { "shift"   : 40 },
-        { "pop"     : 50 },
-        { "shift"   : 30 }
-      ],
-      "name" : "example"
-    }
-  ]
-  =end code
+          elsif .<expected>:exists {
+              sprintf(q:to/END/, |((.<operation>, .<expected>) xx 2)).trim-trailing;
+                  cmp-ok(
+                      $linked-list.%s,
+                      "==",
+                      %s,
+                      "%s %s",
+                  );
+              END
+          }
+          else {
+              sprintf(q:to/END/, .<operation> xx 2).trim-trailing;
+                  lives-ok( { $linked-list.%s }, "%s" );
+              END
+          }
+      }).join("\n") ~ "\n};\n";
 
 unit: class
 example: |-
-  class ListNode {
-      has $.next     is rw;
-      has $.previous is rw;
+  class Node {
+      has Node ( $.head, $.tail ) is rw;
       has $.value;
   }
 
-  has $!first;
-  has $!last;
+  has Node $.head-node is rw;
 
-  method push-list($value) {
-      my $next = ListNode.new( value => $value, previous => $!last );
-      if ( $!last ) {
-          $!last = $!last.next= $next ;
+  method push ($value) {
+      if !$.head-node {
+          $!head-node.=new( :$value )
       }
       else {
-          $!first = $!last = $next;
+          my Node $current-node = $!head-node;
+          while $current-node.tail {
+              $current-node.=tail;
+          }
+          $current-node.tail.=new( :head($current-node) :$value );
       }
   }
 
-  method unshift-list($value) {
-      my $next = ListNode.new( value => $value, next => $!first );
-      if ( $!first ) {
-          $!first = $!first.previous = $next ;
+  method pop {
+      my Node $current-node = $!head-node;
+      while $current-node.tail {
+          $current-node.=tail;
+      }
+      if $current-node.head {
+          $current-node.head.tail = Nil;
       }
       else {
-          $!first = $!last = $next;
+          $!head-node = Nil;
+      }
+      return $current-node.value;
+  }
+
+  method shift {
+      my $value = $.head-node.value;
+      $!head-node.=tail;
+      if $.head-node {
+          $.head-node.head = Nil;
+      }
+      return $value;
+  }
+
+  method unshift ($value) {
+      if !$.head-node {
+          $!head-node.=new( :$value );
+      }
+      else {
+          $.head-node.head.=new( :tail($.head-node), :$value );
+          $!head-node.=head;
       }
   }
 
-  method shift-list() {
-      my $f = $!first;
+  method count {
+      my Int $i = 0;
+      if $.head-node {
+          $i++;
+          my Node $current-node = $.head-node;
+          while $current-node.tail {
+              $current-node.=tail;
+              $i++;
+          }
+      }
 
-      $!first = $!first.next;
-
-      unless $!first  { $!last = $!first }
-
-      return $f.value;
+      return $i;
   }
 
-  method pop-list() {
-      my $f = $!last;
+  method delete ($value) {
+      if $.head-node.value == $value {
+          self.shift;
+          return;
+      }
+      my Node $current-node = $.head-node;
+      until $current-node.value == $value {
+          if $current-node {
+              $current-node.=tail;
+          }
+          if !$current-node {
+              return;
+          }
+      }
+      if $current-node.head {
+          $current-node.head.tail = $current-node.tail;
+      }
+      if $current-node.tail {
+          $current-node.tail.head = $current-node.head;
+      }
+  }
 
-      $!last = $!last.previous;
+stub: |-
+  method push ($value) {
+  }
 
-      unless $!.last  { $!first = $!last }
+  method pop {
+  }
 
-      return $f.value;
+  method shift {
+  }
+
+  method unshift ($value) {
+  }
+
+  method count {
+  }
+
+  method delete ($value) {
   }
