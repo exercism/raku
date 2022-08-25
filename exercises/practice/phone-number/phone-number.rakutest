@@ -3,20 +3,23 @@ use Test;
 use lib $?FILE.IO.dirname;
 use Phone;
 
-is(
+cmp-ok(
     clean-number("(223) 456-7890"),
+    "eq",
     "2234567890",
     "cleans the number",
 );
 
-is(
+cmp-ok(
     clean-number("223.456.7890"),
+    "eq",
     "2234567890",
     "cleans numbers with dots",
 );
 
-is(
+cmp-ok(
     clean-number("223 456   7890   "),
+    "eq",
     "2234567890",
     "cleans numbers with multiple spaces",
 );
@@ -35,14 +38,16 @@ throws-like(
     "invalid when 11 digits does not start with a 1",
 );
 
-is(
+cmp-ok(
     clean-number("12234567890"),
+    "eq",
     "2234567890",
     "valid when 11 digits and starting with 1",
 );
 
-is(
+cmp-ok(
     clean-number("+1 (223) 456-7890"),
+    "eq",
     "2234567890",
     "valid when 11 digits and starting with 1 even with punctuation",
 );

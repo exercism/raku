@@ -13,7 +13,7 @@ properties:
           sprintf(q:to/END/, %case<input><number>, |(%case<expected description>.map(*.raku)));
           cmp-ok(
               collatz-conjecture(%s),
-              &infix:<==>,
+              "==",
               %s,
               %s,
           );

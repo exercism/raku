@@ -2,8 +2,9 @@ properties:
   abbreviate:
     test: |-
       sprintf(q:to/END/, (%case<input><phrase>, |%case<expected description>).map(*.raku));
-      is(
+      cmp-ok(
           abbreviate(%s),
+          "eq",
           %s,
           %s,
       );

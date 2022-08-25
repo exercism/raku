@@ -4,8 +4,9 @@ properties:
   recite:
     test: |-
       sprintf(q:to/END/, |(<bottles verses> Z=> %case<input><startBottles takeDown>).map(*.raku), %case<expected>.join("\n").trim, %case<description>.raku);
-      is(
+      cmp-ok(
           sing( %s, %s ),
+          "eq",
           q:to/SONG/.trim,
       %s
       SONG

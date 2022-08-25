@@ -3,7 +3,7 @@ unit module AllYourBase;
 sub convert-base (
   :%bases!  where { all(.keys ~~ <from to>.Set, .values.all > 1) },
   :@digits! where { %bases<from> > .all ~~ UInt:D },
-  --> Array[UInt:D]
+  --> List()
 ) is export {
   from-decimal %bases<to>, to-decimal(%bases<from>, @digits);
 }
@@ -22,5 +22,5 @@ sub from-decimal ($output-base, $num is copy) {
     unshift @output-digits, $num % $output-base;
     $num div= $output-base;
   }
-  @output-digits.unshift: $num;
+  @output-digits.unshift($num).List;
 }

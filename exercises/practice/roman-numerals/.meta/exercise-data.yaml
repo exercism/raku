@@ -2,8 +2,9 @@ properties:
   roman:
     test: |-
       sprintf(q:to/END/, (%case<input><number>, |%case<expected description>).map(*.raku));
-      is(
+      cmp-ok(
           to-roman(%s),
+          "eq",
           %s,
           %s,
       );

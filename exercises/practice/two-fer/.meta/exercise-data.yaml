@@ -2,8 +2,9 @@ properties:
   twoFer:
     test: |-
       sprintf(q:to/END/, (with %case<input><name> { .raku } else { '' }), |%case<expected description>.map(*.raku));
-      is(
+      cmp-ok(
           two-fer(%s),
+          "eq",
           %s,
           %s,
       );

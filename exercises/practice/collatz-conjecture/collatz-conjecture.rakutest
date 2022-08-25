@@ -5,28 +5,28 @@ use CollatzConjecture;
 
 cmp-ok(
     collatz-conjecture(1),
-    &infix:<==>,
+    "==",
     0,
     "zero steps for one",
 );
 
 cmp-ok(
     collatz-conjecture(16),
-    &infix:<==>,
+    "==",
     4,
     "divide if even",
 );
 
 cmp-ok(
     collatz-conjecture(12),
-    &infix:<==>,
+    "==",
     9,
     "even and odd steps",
 );
 
 cmp-ok(
     collatz-conjecture(1000000),
-    &infix:<==>,
+    "==",
     152,
     "large number of even and odd steps",
 );

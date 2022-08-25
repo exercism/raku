@@ -10,36 +10,40 @@ for <add roster> -> $method {
 my GradeSchool $grade-school;
 
 $grade-school.=new;
-is-deeply(
+cmp-ok(
     $grade-school.roster,
+    "eqv",
     (),
     "Roster is empty when no student is added",
 );
 
 $grade-school.=new;
-is-deeply(
+cmp-ok(
     (
         $grade-school.add( :student("Aimee"), :grade(2) ),
     ),
+    "eqv",
     (Bool::True,),
     "Add a student",
 );
 
 $grade-school.=new;
 $grade-school.add( :student("Aimee"), :grade(2) );
-is-deeply(
+cmp-ok(
     $grade-school.roster,
+    "eqv",
     ("Aimee",),
     "Student is added to the roster",
 );
 
 $grade-school.=new;
-is-deeply(
+cmp-ok(
     (
         $grade-school.add( :student("Blair"), :grade(2) ),
         $grade-school.add( :student("James"), :grade(2) ),
         $grade-school.add( :student("Paul"), :grade(2) ),
     ),
+    "eqv",
     (Bool::True, Bool::True, Bool::True),
     "Adding multiple students in the same grade in the roster",
 );
@@ -48,20 +52,22 @@ $grade-school.=new;
 $grade-school.add( :student("Blair"), :grade(2) );
 $grade-school.add( :student("James"), :grade(2) );
 $grade-school.add( :student("Paul"), :grade(2) );
-is-deeply(
+cmp-ok(
     $grade-school.roster,
+    "eqv",
     ("Blair", "James", "Paul"),
     "Multiple students in the same grade are added to the roster",
 );
 
 $grade-school.=new;
-is-deeply(
+cmp-ok(
     (
         $grade-school.add( :student("Blair"), :grade(2) ),
         $grade-school.add( :student("James"), :grade(2) ),
         $grade-school.add( :student("James"), :grade(2) ),
         $grade-school.add( :student("Paul"), :grade(2) ),
     ),
+    "eqv",
     (Bool::True, Bool::True, Bool::False, Bool::True),
     "Cannot add student to same grade in the roster more than once",
 );
@@ -71,18 +77,20 @@ $grade-school.add( :student("Blair"), :grade(2) );
 $grade-school.add( :student("James"), :grade(2) );
 $grade-school.add( :student("James"), :grade(2) );
 $grade-school.add( :student("Paul"), :grade(2) );
-is-deeply(
+cmp-ok(
     $grade-school.roster,
+    "eqv",
     ("Blair", "James", "Paul"),
     "Student not added to same grade in the roster more than once",
 );
 
 $grade-school.=new;
-is-deeply(
+cmp-ok(
     (
         $grade-school.add( :student("Chelsea"), :grade(3) ),
         $grade-school.add( :student("Logan"), :grade(7) ),
     ),
+    "eqv",
     (Bool::True, Bool::True),
     "Adding students in multiple grades",
 );
@@ -90,20 +98,22 @@ is-deeply(
 $grade-school.=new;
 $grade-school.add( :student("Chelsea"), :grade(3) );
 $grade-school.add( :student("Logan"), :grade(7) );
-is-deeply(
+cmp-ok(
     $grade-school.roster,
+    "eqv",
     ("Chelsea", "Logan"),
     "Students in multiple grades are added to the roster",
 );
 
 $grade-school.=new;
-is-deeply(
+cmp-ok(
     (
         $grade-school.add( :student("Blair"), :grade(2) ),
         $grade-school.add( :student("James"), :grade(2) ),
         $grade-school.add( :student("James"), :grade(3) ),
         $grade-school.add( :student("Paul"), :grade(3) ),
     ),
+    "eqv",
     (Bool::True, Bool::True, Bool::False, Bool::True),
     "Cannot add same student to multiple grades in the roster",
 );
@@ -113,8 +123,9 @@ $grade-school.add( :student("Blair"), :grade(2) );
 $grade-school.add( :student("James"), :grade(2) );
 $grade-school.add( :student("James"), :grade(3) );
 $grade-school.add( :student("Paul"), :grade(3) );
-is-deeply(
+cmp-ok(
     $grade-school.roster,
+    "eqv",
     ("Blair", "James", "Paul"),
     "Student not added to multiple grades in the roster",
 );
@@ -123,8 +134,9 @@ $grade-school.=new;
 $grade-school.add( :student("Jim"), :grade(3) );
 $grade-school.add( :student("Peter"), :grade(2) );
 $grade-school.add( :student("Anna"), :grade(1) );
-is-deeply(
+cmp-ok(
     $grade-school.roster,
+    "eqv",
     ("Anna", "Peter", "Jim"),
     "Students are sorted by grades in the roster",
 );
@@ -133,8 +145,9 @@ $grade-school.=new;
 $grade-school.add( :student("Peter"), :grade(2) );
 $grade-school.add( :student("Zoe"), :grade(2) );
 $grade-school.add( :student("Alex"), :grade(2) );
-is-deeply(
+cmp-ok(
     $grade-school.roster,
+    "eqv",
     ("Alex", "Peter", "Zoe"),
     "Students are sorted by name in the roster",
 );
@@ -147,15 +160,17 @@ $grade-school.add( :student("Zoe"), :grade(2) );
 $grade-school.add( :student("Alex"), :grade(2) );
 $grade-school.add( :student("Jim"), :grade(3) );
 $grade-school.add( :student("Charlie"), :grade(1) );
-is-deeply(
+cmp-ok(
     $grade-school.roster,
+    "eqv",
     ("Anna", "Barb", "Charlie", "Alex", "Peter", "Zoe", "Jim"),
     "Students are sorted by grades and then by name in the roster",
 );
 
 $grade-school.=new;
-is-deeply(
+cmp-ok(
     $grade-school.roster( :grade(1) ),
+    "eqv",
     (),
     "Grade is empty if no students in the roster",
 );
@@ -165,8 +180,9 @@ $grade-school.add( :student("Peter"), :grade(2) );
 $grade-school.add( :student("Zoe"), :grade(2) );
 $grade-school.add( :student("Alex"), :grade(2) );
 $grade-school.add( :student("Jim"), :grade(3) );
-is-deeply(
+cmp-ok(
     $grade-school.roster( :grade(1) ),
+    "eqv",
     (),
     "Grade is empty if no students in that grade",
 );
@@ -176,8 +192,9 @@ $grade-school.add( :student("Blair"), :grade(2) );
 $grade-school.add( :student("James"), :grade(2) );
 $grade-school.add( :student("James"), :grade(2) );
 $grade-school.add( :student("Paul"), :grade(2) );
-is-deeply(
+cmp-ok(
     $grade-school.roster( :grade(2) ),
+    "eqv",
     ("Blair", "James", "Paul"),
     "Student not added to same grade more than once",
 );
@@ -187,8 +204,9 @@ $grade-school.add( :student("Blair"), :grade(2) );
 $grade-school.add( :student("James"), :grade(2) );
 $grade-school.add( :student("James"), :grade(3) );
 $grade-school.add( :student("Paul"), :grade(3) );
-is-deeply(
+cmp-ok(
     $grade-school.roster( :grade(2) ),
+    "eqv",
     ("Blair", "James"),
     "Student not added to multiple grades",
 );
@@ -198,8 +216,9 @@ $grade-school.add( :student("Blair"), :grade(2) );
 $grade-school.add( :student("James"), :grade(2) );
 $grade-school.add( :student("James"), :grade(3) );
 $grade-school.add( :student("Paul"), :grade(3) );
-is-deeply(
+cmp-ok(
     $grade-school.roster( :grade(3) ),
+    "eqv",
     ("Paul",),
     "Student not added to other grade for multiple grades",
 );
@@ -208,8 +227,9 @@ $grade-school.=new;
 $grade-school.add( :student("Franklin"), :grade(5) );
 $grade-school.add( :student("Bradley"), :grade(5) );
 $grade-school.add( :student("Jeff"), :grade(1) );
-is-deeply(
+cmp-ok(
     $grade-school.roster( :grade(5) ),
+    "eqv",
     ("Bradley", "Franklin"),
     "Students are sorted by name in a grade",
 );

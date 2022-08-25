@@ -3,8 +3,9 @@ properties:
   response:
     test: |-
       sprintf(q:to/END/, (%case<input><heyBob>, |%case<expected description>).map(*.raku));
-      is(
+      cmp-ok(
           Bob.hey(%s),
+          "eq",
           %s,
           %s,
       );

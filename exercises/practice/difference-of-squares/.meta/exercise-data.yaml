@@ -4,7 +4,7 @@ properties:
       sprintf(q:to/END/, %case<input><number>, %case<expected>, %case<description>.raku);
       cmp-ok(
           difference-of-squares(%s),
-          &infix:<==>,
+          "==",
           %s,
           %s,
       );
@@ -14,7 +14,7 @@ properties:
       sprintf(q:to/END/, %case<input><number>, %case<expected>, %case<description>.raku);
       cmp-ok(
           sum-of-squares(%s),
-          &infix:<==>,
+          "==",
           %s,
           %s,
       );
@@ -24,7 +24,7 @@ properties:
       sprintf(q:to/END/, %case<input><number>, %case<expected>, %case<description>.raku);
       cmp-ok(
           square-of-sum(%s),
-          &infix:<==>,
+          "==",
           %s,
           %s,
       );

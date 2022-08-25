@@ -3,56 +3,65 @@ use Test;
 use lib $?FILE.IO.dirname;
 use Acronym;
 
-is(
+cmp-ok(
     abbreviate("Portable Network Graphics"),
+    "eq",
     "PNG",
     "basic",
 );
 
-is(
+cmp-ok(
     abbreviate("Ruby on Rails"),
+    "eq",
     "ROR",
     "lowercase words",
 );
 
-is(
+cmp-ok(
     abbreviate("First In, First Out"),
+    "eq",
     "FIFO",
     "punctuation",
 );
 
-is(
+cmp-ok(
     abbreviate("GNU Image Manipulation Program"),
+    "eq",
     "GIMP",
     "all caps word",
 );
 
-is(
+cmp-ok(
     abbreviate("Complementary metal-oxide semiconductor"),
+    "eq",
     "CMOS",
     "punctuation without whitespace",
 );
 
-is(
+cmp-ok(
     abbreviate("Rolling On The Floor Laughing So Hard That My Dogs Came Over And Licked Me"),
+    "eq",
     "ROTFLSHTMDCOALM",
     "very long abbreviation",
 );
 
-is(
+cmp-ok(
     abbreviate("Something - I made up from thin air"),
+    "eq",
     "SIMUFTA",
     "consecutive delimiters",
 );
 
-is(
+cmp-ok(
     abbreviate("Halley's Comet"),
+    "eq",
     "HC",
     "apostrophes",
 );
 
-is(
+cmp-ok(
     abbreviate("The Road _Not_ Taken"),
+    "eq",
     "TRNT",
     "underscore emphasis",
 );

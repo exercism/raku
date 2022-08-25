@@ -2,8 +2,9 @@ properties:
   isArmstrongNumber:
     test: |-
       sprintf(q:to/END/, %case<input><number>, %case<expected>, %case<description>.raku);
-      is-deeply(
+      cmp-ok(
           is-armstrong-number(%s),
+          "eqv",
           %s,
           %s,
       );

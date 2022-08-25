@@ -14,8 +14,9 @@ properties:
       }
       else {
           sprintf(q:to/END/, (%case<input><phrase>, |%case<expected description>).map(*.raku));
-          is(
+          cmp-ok(
               clean-number(%s),
+              "eq",
               %s,
               %s,
           );

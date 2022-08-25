@@ -3,56 +3,65 @@ use Test;
 use lib $?FILE.IO.dirname;
 use ArmstrongNumbers;
 
-is-deeply(
+cmp-ok(
     is-armstrong-number(0),
+    "eqv",
     True,
     "Zero is an Armstrong number",
 );
 
-is-deeply(
+cmp-ok(
     is-armstrong-number(5),
+    "eqv",
     True,
     "Single-digit numbers are Armstrong numbers",
 );
 
-is-deeply(
+cmp-ok(
     is-armstrong-number(10),
+    "eqv",
     False,
     "There are no two-digit Armstrong numbers",
 );
 
-is-deeply(
+cmp-ok(
     is-armstrong-number(153),
+    "eqv",
     True,
     "Three-digit number that is an Armstrong number",
 );
 
-is-deeply(
+cmp-ok(
     is-armstrong-number(100),
+    "eqv",
     False,
     "Three-digit number that is not an Armstrong number",
 );
 
-is-deeply(
+cmp-ok(
     is-armstrong-number(9474),
+    "eqv",
     True,
     "Four-digit number that is an Armstrong number",
 );
 
-is-deeply(
+cmp-ok(
     is-armstrong-number(9475),
+    "eqv",
     False,
     "Four-digit number that is not an Armstrong number",
 );
 
-is-deeply(
+cmp-ok(
     is-armstrong-number(9926315),
+    "eqv",
     True,
     "Seven-digit number that is an Armstrong number",
 );
 
-is-deeply(
+cmp-ok(
     is-armstrong-number(9926314),
+    "eqv",
     False,
     "Seven-digit number that is not an Armstrong number",
 );

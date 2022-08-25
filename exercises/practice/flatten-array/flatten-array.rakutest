@@ -3,68 +3,79 @@ use Test;
 use lib $?FILE.IO.dirname;
 use FlattenArray;
 
-is-deeply(
+cmp-ok(
     flatten-array([]),
+    "eqv",
     [],
     "empty",
 );
 
-is-deeply(
+cmp-ok(
     flatten-array([0, 1, 2]),
+    "eqv",
     [0, 1, 2],
     "no nesting",
 );
 
-is-deeply(
+cmp-ok(
     flatten-array([[[],],]),
+    "eqv",
     [],
     "flattens a nested array",
 );
 
-is-deeply(
+cmp-ok(
     flatten-array([1, [2, 3, 4, 5, 6, 7], 8]),
+    "eqv",
     [1, 2, 3, 4, 5, 6, 7, 8],
     "flattens array with just integers present",
 );
 
-is-deeply(
+cmp-ok(
     flatten-array([0, 2, [[2, 3], 8, 100, 4, [[[50],],]], -2]),
+    "eqv",
     [0, 2, 2, 3, 8, 100, 4, 50, -2],
     "5 level nesting",
 );
 
-is-deeply(
+cmp-ok(
     flatten-array([1, [2, [[3],], [4, [[5],]], 6, 7], 8]),
+    "eqv",
     [1, 2, 3, 4, 5, 6, 7, 8],
     "6 level nesting",
 );
 
-is-deeply(
+cmp-ok(
     flatten-array([1, 2, Nil]),
+    "eqv",
     [1, 2],
     "null values are omitted from the final result",
 );
 
-is-deeply(
+cmp-ok(
     flatten-array([Nil, Nil, 3]),
+    "eqv",
     [3],
     "consecutive null values at the front of the list are omitted from the final result",
 );
 
-is-deeply(
+cmp-ok(
     flatten-array([1, Nil, Nil, 4]),
+    "eqv",
     [1, 4],
     "consecutive null values in the middle of the list are omitted from the final result",
 );
 
-is-deeply(
+cmp-ok(
     flatten-array([0, 2, [[2, 3], 8, [[100],], Nil, [[Nil],]], -2]),
+    "eqv",
     [0, 2, 2, 3, 8, 100, -2],
     "6 level nest list with null values",
 );
 
-is-deeply(
+cmp-ok(
     flatten-array([Nil, [[[Nil],],], Nil, Nil, [[Nil, Nil], Nil], Nil]),
+    "eqv",
     [],
     "all values in nested list are null",
 );

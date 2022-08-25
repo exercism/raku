@@ -2,8 +2,9 @@ properties:
   allergicTo:
     test: |-
       sprintf(q:to/END/, |(%case<input><item score>:p).map(*.raku), %case<expected>, %case<description>.raku);
-      is-deeply(
+      cmp-ok(
           allergic-to( %s, %s ),
+          "eqv",
           %s,
           %s,
       );
@@ -13,7 +14,7 @@ properties:
       sprintf(q:to/END/, %case<input><score>, (if %case<expected> { "<%case<expected>>" } else { 'set()' }), %case<description>.raku);
       cmp-ok(
           list-allergies(%s),
-          &infix:<(==)>,
+          "(==)",
           %s,
           %s,
       );

@@ -2,8 +2,9 @@ properties:
   encode:
     test: |-
       sprintf(q:to/END/, (%case<input><phrase>, |%case<expected description>).map(*.raku));
-      is(
+      cmp-ok(
           encode(%s),
+          "eq",
           %s,
           %s,
       );
@@ -11,8 +12,9 @@ properties:
   decode:
     test: |-
       sprintf(q:to/END/, (%case<input><phrase>, |%case<expected description>).map(*.raku));
-      is(
+      cmp-ok(
           decode(%s),
+          "eq",
           %s,
           %s,
       );

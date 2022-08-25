@@ -4,131 +4,131 @@ use lib $?FILE.IO.dirname;
 use AllYourBase;
 
 cmp-ok(
-    convert-base( bases => { :from(2), :to(10) }, digits => [1] ),
-    '~~',
-    [1],
+    convert-base( bases => { :from(2), :to(10) }, digits => (1,) ),
+    "eqv",
+    (1,),
     "single bit one to decimal",
 );
 
 cmp-ok(
-    convert-base( bases => { :from(2), :to(10) }, digits => [1, 0, 1] ),
-    '~~',
-    [5],
+    convert-base( bases => { :from(2), :to(10) }, digits => (1, 0, 1) ),
+    "eqv",
+    (5,),
     "binary to single decimal",
 );
 
 cmp-ok(
-    convert-base( bases => { :from(10), :to(2) }, digits => [5] ),
-    '~~',
-    [1, 0, 1],
+    convert-base( bases => { :from(10), :to(2) }, digits => (5,) ),
+    "eqv",
+    (1, 0, 1),
     "single decimal to binary",
 );
 
 cmp-ok(
-    convert-base( bases => { :from(2), :to(10) }, digits => [1, 0, 1, 0, 1, 0] ),
-    '~~',
-    [4, 2],
+    convert-base( bases => { :from(2), :to(10) }, digits => (1, 0, 1, 0, 1, 0) ),
+    "eqv",
+    (4, 2),
     "binary to multiple decimal",
 );
 
 cmp-ok(
-    convert-base( bases => { :from(10), :to(2) }, digits => [4, 2] ),
-    '~~',
-    [1, 0, 1, 0, 1, 0],
+    convert-base( bases => { :from(10), :to(2) }, digits => (4, 2) ),
+    "eqv",
+    (1, 0, 1, 0, 1, 0),
     "decimal to binary",
 );
 
 cmp-ok(
-    convert-base( bases => { :from(3), :to(16) }, digits => [1, 1, 2, 0] ),
-    '~~',
-    [2, 10],
+    convert-base( bases => { :from(3), :to(16) }, digits => (1, 1, 2, 0) ),
+    "eqv",
+    (2, 10),
     "trinary to hexadecimal",
 );
 
 cmp-ok(
-    convert-base( bases => { :from(16), :to(3) }, digits => [2, 10] ),
-    '~~',
-    [1, 1, 2, 0],
+    convert-base( bases => { :from(16), :to(3) }, digits => (2, 10) ),
+    "eqv",
+    (1, 1, 2, 0),
     "hexadecimal to trinary",
 );
 
 cmp-ok(
-    convert-base( bases => { :from(97), :to(73) }, digits => [3, 46, 60] ),
-    '~~',
-    [6, 10, 45],
+    convert-base( bases => { :from(97), :to(73) }, digits => (3, 46, 60) ),
+    "eqv",
+    (6, 10, 45),
     "15-bit integer",
 );
 
 cmp-ok(
-    convert-base( bases => { :from(2), :to(10) }, digits => [] ),
-    '~~',
-    [0],
+    convert-base( bases => { :from(2), :to(10) }, digits => () ),
+    "eqv",
+    (0,),
     "empty list",
 );
 
 cmp-ok(
-    convert-base( bases => { :from(10), :to(2) }, digits => [0] ),
-    '~~',
-    [0],
+    convert-base( bases => { :from(10), :to(2) }, digits => (0,) ),
+    "eqv",
+    (0,),
     "single zero",
 );
 
 cmp-ok(
-    convert-base( bases => { :from(10), :to(2) }, digits => [0, 0, 0] ),
-    '~~',
-    [0],
+    convert-base( bases => { :from(10), :to(2) }, digits => (0, 0, 0) ),
+    "eqv",
+    (0,),
     "multiple zeros",
 );
 
 cmp-ok(
-    convert-base( bases => { :from(7), :to(10) }, digits => [0, 6, 0] ),
-    '~~',
-    [4, 2],
+    convert-base( bases => { :from(7), :to(10) }, digits => (0, 6, 0) ),
+    "eqv",
+    (4, 2),
     "leading zeros",
 );
 
 dies-ok(
-    { convert-base bases => { :from(1), :to(10) }, digits => [0] },
+    { convert-base bases => { :from(1), :to(10) }, digits => (0,) },
     "input base is one",
 );
 
 dies-ok(
-    { convert-base bases => { :from(0), :to(10) }, digits => [] },
+    { convert-base bases => { :from(0), :to(10) }, digits => () },
     "input base is zero",
 );
 
 dies-ok(
-    { convert-base bases => { :from(-2), :to(10) }, digits => [1] },
+    { convert-base bases => { :from(-2), :to(10) }, digits => (1,) },
     "input base is negative",
 );
 
 dies-ok(
-    { convert-base bases => { :from(2), :to(10) }, digits => [1, -1, 1, 0, 1, 0] },
+    { convert-base bases => { :from(2), :to(10) }, digits => (1, -1, 1, 0, 1, 0) },
     "negative digit",
 );
 
 dies-ok(
-    { convert-base bases => { :from(2), :to(10) }, digits => [1, 2, 1, 0, 1, 0] },
+    { convert-base bases => { :from(2), :to(10) }, digits => (1, 2, 1, 0, 1, 0) },
     "invalid positive digit",
 );
 
 dies-ok(
-    { convert-base bases => { :from(2), :to(1) }, digits => [1, 0, 1, 0, 1, 0] },
+    { convert-base bases => { :from(2), :to(1) }, digits => (1, 0, 1, 0, 1, 0) },
     "output base is one",
 );
 
 dies-ok(
-    { convert-base bases => { :from(10), :to(0) }, digits => [7] },
+    { convert-base bases => { :from(10), :to(0) }, digits => (7,) },
     "output base is zero",
 );
 
 dies-ok(
-    { convert-base bases => { :from(2), :to(-7) }, digits => [1] },
+    { convert-base bases => { :from(2), :to(-7) }, digits => (1,) },
     "output base is negative",
 );
 
 dies-ok(
-    { convert-base bases => { :from(-2), :to(-7) }, digits => [1] },
+    { convert-base bases => { :from(-2), :to(-7) }, digits => (1,) },
     "both bases are negative",
 );
 
