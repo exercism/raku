@@ -19,7 +19,7 @@
       "leap.rakutest"
     ],
     "example": [
-      ".meta/solutions/Leap.rakumod"
+      ".meta/solutions/standard/Leap.rakumod"
     ]
   },
   "source": "JavaRanch Cattle Drive, exercise 3",
