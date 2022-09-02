@@ -2,11 +2,10 @@
 use Test;
 use lib $?FILE.IO.dirname;
 use Leap;
-plan 9;
 
 for Date, DateTime {
-    .^method_table<is-leap-year>.wrap: sub (|) {
-        bail-out 'Built-in `is-leap-year` method is not allowed for this exercise.';
+    .^method_table<new>.wrap: sub (|) {
+        bail-out 'Creating a Date(Time) object is not allowed for this exercise.';
     };
 }
 
@@ -14,61 +13,63 @@ cmp-ok(
     is-leap-year(2015),
     "eqv",
     False,
-    'year not divisible by 4 in common year',
+    "year not divisible by 4 in common year",
 );
 
 cmp-ok(
     is-leap-year(1970),
     "eqv",
     False,
-    'year divisible by 2, not divisible by 4 in common year',
+    "year divisible by 2, not divisible by 4 in common year",
 );
 
 cmp-ok(
     is-leap-year(1996),
     "eqv",
     True,
-    'year divisible by 4, not divisible by 100 in leap year',
+    "year divisible by 4, not divisible by 100 in leap year",
 );
 
 cmp-ok(
     is-leap-year(1960),
     "eqv",
     True,
-    'year divisible by 4 and 5 is still a leap year',
+    "year divisible by 4 and 5 is still a leap year",
 );
 
 cmp-ok(
     is-leap-year(2100),
     "eqv",
     False,
-    'year divisible by 100, not divisible by 400 in common year',
+    "year divisible by 100, not divisible by 400 in common year",
 );
 
 cmp-ok(
     is-leap-year(1900),
     "eqv",
     False,
-    'year divisible by 100 but not by 3 is still not a leap year',
+    "year divisible by 100 but not by 3 is still not a leap year",
 );
 
 cmp-ok(
     is-leap-year(2000),
     "eqv",
     True,
-    'year divisible by 400 is leap year',
+    "year divisible by 400 is leap year",
 );
 
 cmp-ok(
     is-leap-year(2400),
     "eqv",
     True,
-    'year divisible by 400 but not by 125 is still a leap year',
+    "year divisible by 400 but not by 125 is still a leap year",
 );
 
 cmp-ok(
     is-leap-year(1800),
     "eqv",
     False,
-    'year divisible by 200, not divisible by 400 in common year',
+    "year divisible by 200, not divisible by 400 in common year",
 );
+
+done-testing;
