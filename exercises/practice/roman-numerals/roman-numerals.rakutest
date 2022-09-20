@@ -171,4 +171,18 @@ cmp-ok(
     "1666 is MDCLXVI",
 );
 
+cmp-ok(
+    to-roman(3001),
+    "eq",
+    "MMMI",
+    "3001 is MMMI",
+);
+
+cmp-ok(
+    to-roman(3999),
+    "eq",
+    "MMMCMXCIX",
+    "3999 is MMMCMXCIX",
+);
+
 done-testing;
