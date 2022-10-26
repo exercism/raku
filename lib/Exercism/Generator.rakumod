@@ -22,9 +22,7 @@ has %.data = do if ( my $yaml-file =
 
 #| The parsed canonical-data.json from problem-specifications
 has %.cdata = do if ( my $cdata-file =
-  $base-dir.add(
-    ".problem-specifications/exercises/$!exercise/canonical-data.json"
-  )
+  %*ENV<HOME>.IO.add(".cache/exercism/configlet/problem-specifications/exercises/$!exercise/canonical-data.json")
 ).f {
   from-json($cdata-file.slurp);
 };

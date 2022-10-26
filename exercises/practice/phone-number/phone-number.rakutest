@@ -1,200 +1,132 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Phone;
-plan 18;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  given %case<expected> {
-    when Str {
-      is clean-number(%case<input><phrase>),
-        |%case<expected description>;
-    }
+cmp-ok(
+    clean-number("(223) 456-7890"),
+    "eq",
+    "2234567890",
+    "cleans the number",
+);
 
-    when .<error>.so {
-      throws-like
-        { clean-number %case<input><phrase> },
-        Exception,
-        :message(%case<expected><error>),
-        %case<description>;
-    }
-  }
-}
+cmp-ok(
+    clean-number("223.456.7890"),
+    "eq",
+    "2234567890",
+    "cleans numbers with dots",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "cleans the number",
-    "expected": "2234567890",
-    "input": {
-      "phrase": "(223) 456-7890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "cleans numbers with dots",
-    "expected": "2234567890",
-    "input": {
-      "phrase": "223.456.7890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "cleans numbers with multiple spaces",
-    "expected": "2234567890",
-    "input": {
-      "phrase": "223 456   7890   "
-    },
-    "property": "clean"
-  },
-  {
-    "description": "invalid when 9 digits",
-    "expected": {
-      "error": "incorrect number of digits"
-    },
-    "input": {
-      "phrase": "123456789"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "invalid when 11 digits does not start with a 1",
-    "expected": {
-      "error": "11 digits must start with 1"
-    },
-    "input": {
-      "phrase": "22234567890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "valid when 11 digits and starting with 1",
-    "expected": "2234567890",
-    "input": {
-      "phrase": "12234567890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "valid when 11 digits and starting with 1 even with punctuation",
-    "expected": "2234567890",
-    "input": {
-      "phrase": "+1 (223) 456-7890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "invalid when more than 11 digits",
-    "expected": {
-      "error": "more than 11 digits"
-    },
-    "input": {
-      "phrase": "321234567890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "invalid with letters",
-    "expected": {
-      "error": "letters not permitted"
-    },
-    "input": {
-      "phrase": "123-abc-7890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "invalid with punctuations",
-    "expected": {
-      "error": "punctuations not permitted"
-    },
-    "input": {
-      "phrase": "123-@:!-7890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "invalid if area code starts with 0",
-    "expected": {
-      "error": "area code cannot start with zero"
-    },
-    "input": {
-      "phrase": "(023) 456-7890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "invalid if area code starts with 1",
-    "expected": {
-      "error": "area code cannot start with one"
-    },
-    "input": {
-      "phrase": "(123) 456-7890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "invalid if exchange code starts with 0",
-    "expected": {
-      "error": "exchange code cannot start with zero"
-    },
-    "input": {
-      "phrase": "(223) 056-7890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "invalid if exchange code starts with 1",
-    "expected": {
-      "error": "exchange code cannot start with one"
-    },
-    "input": {
-      "phrase": "(223) 156-7890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "invalid if area code starts with 0 on valid 11-digit number",
-    "expected": {
-      "error": "area code cannot start with zero"
-    },
-    "input": {
-      "phrase": "1 (023) 456-7890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "invalid if area code starts with 1 on valid 11-digit number",
-    "expected": {
-      "error": "area code cannot start with one"
-    },
-    "input": {
-      "phrase": "1 (123) 456-7890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "invalid if exchange code starts with 0 on valid 11-digit number",
-    "expected": {
-      "error": "exchange code cannot start with zero"
-    },
-    "input": {
-      "phrase": "1 (223) 056-7890"
-    },
-    "property": "clean"
-  },
-  {
-    "description": "invalid if exchange code starts with 1 on valid 11-digit number",
-    "expected": {
-      "error": "exchange code cannot start with one"
-    },
-    "input": {
-      "phrase": "1 (223) 156-7890"
-    },
-    "property": "clean"
-  }
-]
-=end code
+cmp-ok(
+    clean-number("223 456   7890   "),
+    "eq",
+    "2234567890",
+    "cleans numbers with multiple spaces",
+);
+
+throws-like(
+    { clean-number "123456789" },
+    Exception,
+    :message("incorrect number of digits"),
+    "invalid when 9 digits",
+);
+
+throws-like(
+    { clean-number "22234567890" },
+    Exception,
+    :message("11 digits must start with 1"),
+    "invalid when 11 digits does not start with a 1",
+);
+
+cmp-ok(
+    clean-number("12234567890"),
+    "eq",
+    "2234567890",
+    "valid when 11 digits and starting with 1",
+);
+
+cmp-ok(
+    clean-number("+1 (223) 456-7890"),
+    "eq",
+    "2234567890",
+    "valid when 11 digits and starting with 1 even with punctuation",
+);
+
+throws-like(
+    { clean-number "321234567890" },
+    Exception,
+    :message("more than 11 digits"),
+    "invalid when more than 11 digits",
+);
+
+throws-like(
+    { clean-number "523-abc-7890" },
+    Exception,
+    :message("letters not permitted"),
+    "invalid with letters",
+);
+
+throws-like(
+    { clean-number "523-\@:!-7890" },
+    Exception,
+    :message("punctuations not permitted"),
+    "invalid with punctuations",
+);
+
+throws-like(
+    { clean-number "(023) 456-7890" },
+    Exception,
+    :message("area code cannot start with zero"),
+    "invalid if area code starts with 0",
+);
+
+throws-like(
+    { clean-number "(123) 456-7890" },
+    Exception,
+    :message("area code cannot start with one"),
+    "invalid if area code starts with 1",
+);
+
+throws-like(
+    { clean-number "(223) 056-7890" },
+    Exception,
+    :message("exchange code cannot start with zero"),
+    "invalid if exchange code starts with 0",
+);
+
+throws-like(
+    { clean-number "(223) 156-7890" },
+    Exception,
+    :message("exchange code cannot start with one"),
+    "invalid if exchange code starts with 1",
+);
+
+throws-like(
+    { clean-number "1 (023) 456-7890" },
+    Exception,
+    :message("area code cannot start with zero"),
+    "invalid if area code starts with 0 on valid 11-digit number",
+);
+
+throws-like(
+    { clean-number "1 (123) 456-7890" },
+    Exception,
+    :message("area code cannot start with one"),
+    "invalid if area code starts with 1 on valid 11-digit number",
+);
+
+throws-like(
+    { clean-number "1 (223) 056-7890" },
+    Exception,
+    :message("exchange code cannot start with zero"),
+    "invalid if exchange code starts with 0 on valid 11-digit number",
+);
+
+throws-like(
+    { clean-number "1 (223) 156-7890" },
+    Exception,
+    :message("exchange code cannot start with one"),
+    "invalid if exchange code starts with 1 on valid 11-digit number",
+);
+
+done-testing;

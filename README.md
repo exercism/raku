@@ -4,12 +4,12 @@ Exercism exercises in Raku
 
 ## Contributing Guide
 
-Please see the [contributing guide](https://github.com/exercism/docs/blob/master/contributing-to-language-tracks/README.md).
+Please see the [contributing guide](https://exercism.org/docs/building).
 
 ## Code of Conduct
 
 Help us keep Exercism welcoming. Please read and abide by the
-[Code of Conduct](https://exercism.io/code-of-conduct).
+[Code of Conduct](https://exercism.org/code-of-conduct).
 
 ## Adding and Updating Exercises
 

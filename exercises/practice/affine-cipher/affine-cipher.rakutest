@@ -1,0 +1,112 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use AffineCipher;
+
+for <encode decode> -> $method {
+  AffineCipher.^can($method) or bail-out "Cannot run expected method `$method`.";
+}
+
+cmp-ok(
+    AffineCipher.new( :a(5), :b(7) ).encode("yes"),
+    "eq",
+    "xbt",
+    "encode: encode yes",
+);
+
+cmp-ok(
+    AffineCipher.new( :a(15), :b(18) ).encode("no"),
+    "eq",
+    "fu",
+    "encode: encode no",
+);
+
+cmp-ok(
+    AffineCipher.new( :a(21), :b(3) ).encode("OMG"),
+    "eq",
+    "lvz",
+    "encode: encode OMG",
+);
+
+cmp-ok(
+    AffineCipher.new( :a(25), :b(47) ).encode("O M G"),
+    "eq",
+    "hjp",
+    "encode: encode O M G",
+);
+
+cmp-ok(
+    AffineCipher.new( :a(11), :b(15) ).encode("mindblowingly"),
+    "eq",
+    "rzcwa gnxzc dgt",
+    "encode: encode mindblowingly",
+);
+
+cmp-ok(
+    AffineCipher.new( :a(3), :b(4) ).encode("Testing,1 2 3, testing."),
+    "eq",
+    "jqgjc rw123 jqgjc rw",
+    "encode: encode numbers",
+);
+
+cmp-ok(
+    AffineCipher.new( :a(5), :b(17) ).encode("Truth is fiction."),
+    "eq",
+    "iynia fdqfb ifje",
+    "encode: encode deep thought",
+);
+
+cmp-ok(
+    AffineCipher.new( :a(17), :b(33) ).encode("The quick brown fox jumps over the lazy dog."),
+    "eq",
+    "swxtj npvyk lruol iejdc blaxk swxmh qzglf",
+    "encode: encode all the letters",
+);
+
+dies-ok { AffineCipher.new( :a(6), :b(17) ) }, "encode: encode with a not coprime to m";
+
+cmp-ok(
+    AffineCipher.new( :a(3), :b(7) ).decode("tytgn fjr"),
+    "eq",
+    "exercism",
+    "decode: decode exercism",
+);
+
+cmp-ok(
+    AffineCipher.new( :a(19), :b(16) ).decode("qdwju nqcro muwhn odqun oppmd aunwd o"),
+    "eq",
+    "anobstacleisoftenasteppingstone",
+    "decode: decode a sentence",
+);
+
+cmp-ok(
+    AffineCipher.new( :a(25), :b(7) ).decode("odpoz ub123 odpoz ub"),
+    "eq",
+    "testing123testing",
+    "decode: decode numbers",
+);
+
+cmp-ok(
+    AffineCipher.new( :a(17), :b(33) ).decode("swxtj npvyk lruol iejdc blaxk swxmh qzglf"),
+    "eq",
+    "thequickbrownfoxjumpsoverthelazydog",
+    "decode: decode all the letters",
+);
+
+cmp-ok(
+    AffineCipher.new( :a(17), :b(33) ).decode("swxtjnpvyklruoliejdcblaxkswxmhqzglf"),
+    "eq",
+    "thequickbrownfoxjumpsoverthelazydog",
+    "decode: decode with no spaces in input",
+);
+
+cmp-ok(
+    AffineCipher.new( :a(15), :b(16) ).decode("vszzm    cly   yd cg    qdp"),
+    "eq",
+    "jollygreengiant",
+    "decode: decode with too many spaces",
+);
+
+dies-ok { AffineCipher.new( :a(13), :b(5) ) }, "decode: decode with a not coprime to m";
+
+done-testing;

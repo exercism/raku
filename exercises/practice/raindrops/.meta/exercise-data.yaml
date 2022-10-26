@@ -1,12 +1,14 @@
-plan: 18
-tests: |-
-  for @test-cases -> %case {
-    subtest %case<description>, {
-      plan 2;
-      isa-ok ( my $result := raindrop %case<input><number> ), Str;
-      is $result, %case<expected>, 'Result matches expected';
-    }
-  }
+properties:
+  convert:
+    test: |-
+      sprintf(q:to/END/, (%case<input><number>, |%case<expected description>).map(*.raku));
+      cmp-ok(
+          raindrop(%s),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
 
 unit: module
 example: |-

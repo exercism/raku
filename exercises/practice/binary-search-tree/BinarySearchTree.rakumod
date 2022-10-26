@@ -11,6 +11,6 @@ method add ($data) {
     # $.root contains the initial node.
 }
 
-method sort (--> Iterable) {
-    return [];
+method sort (--> List()) {
+    return ();
 }

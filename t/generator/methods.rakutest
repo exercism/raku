@@ -10,8 +10,8 @@ subtest '0 case UUIDs' => {
     :case-uuids(),
   ) {
     is .package, 'HelloWorld', 'Default package name is UpperCamelCase';
-    ok .case-uuids ~~ ∅, 'Case UUIDs is empty set';
-    ok .cases      ~~ [], 'No cases';
+    cmp-ok .case-uuids, &infix:<≡>, ∅, 'Case UUIDs is empty set';
+    cmp-ok .cases.elems, &infix:<==>, 0, 'No cases';
     is .json-tests, '', 'Empty JSON';
   }
 }
@@ -26,9 +26,9 @@ subtest '1 case UUID' => {
   ) {
     is .package, 'TEST', 'Custom package name as specified';
 
-    ok .case-uuids ~~ <af9ffe10-dc13-42d8-a742-e7bdafac449d>;
+    cmp-ok .case-uuids, &infix:<≡>, <af9ffe10-dc13-42d8-a742-e7bdafac449d>;
 
-    if $base-dir.add('.problem-specifications') ~~ :d {
+    if %*ENV<HOME>.IO.add('.cache/exercism/configlet/problem-specifications') ~~ :d {
       is-deeply .cases.Array, [%(
         :description('Say Hi!'),
         :property<hello>,

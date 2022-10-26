@@ -2,10 +2,10 @@
 
 ## Run All Tests
 
-There is a Raku script with the extension `.rakutest`, which will be used to test
-your solution. You can run through the tests by using the command:
+There is a Raku script with the extension `.rakutest`, which will be used to test your solution.
+You can run through the tests by using the command (replacing the exercise name where relevant):
 
-`prove6 .`
+`prove6 hello-world.rakutest`
 
 Before you start the exercise, the output will likely look something like:
 
@@ -38,11 +38,11 @@ In Linux / OS X:
 ```bash
 export RAKU_TEST_DIE_ON_FAIL=1
 # now all the follow up runs will stop at the first failure
-prove6 .
+prove6 hello-world.rakutest
 # until we do
 unset RAKU_TEST_DIE_ON_FAIL
 # or you can use it for one run like this:
-RAKU_TEST_DIE_ON_FAIL=1 prove6 .
+RAKU_TEST_DIE_ON_FAIL=1 prove6 hello-world.rakutest
 ```
 
 Or in Windows:
@@ -50,7 +50,7 @@ Or in Windows:
 ```
 SET RAKU_TEST_DIE_ON_FAIL=1
 REM now all the follow up runs will stop at the first failure
-prove6 .
+prove6 hello-world.rakutest
 REM until we do
 set RAKU_TEST_DIE_ON_FAIL=
 ```

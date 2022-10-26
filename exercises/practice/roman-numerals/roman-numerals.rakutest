@@ -1,169 +1,188 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use RomanNumerals;
-plan 19;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  is to-roman(%case<input><number>), |%case<expected description>;
-}
+cmp-ok(
+    to-roman(1),
+    "eq",
+    "I",
+    "1 is I",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "1 is I",
-    "expected": "I",
-    "input": {
-      "number": 1
-    },
-    "property": "roman"
-  },
-  {
-    "description": "2 is II",
-    "expected": "II",
-    "input": {
-      "number": 2
-    },
-    "property": "roman"
-  },
-  {
-    "description": "3 is III",
-    "expected": "III",
-    "input": {
-      "number": 3
-    },
-    "property": "roman"
-  },
-  {
-    "description": "4 is IV",
-    "expected": "IV",
-    "input": {
-      "number": 4
-    },
-    "property": "roman"
-  },
-  {
-    "description": "5 is V",
-    "expected": "V",
-    "input": {
-      "number": 5
-    },
-    "property": "roman"
-  },
-  {
-    "description": "6 is VI",
-    "expected": "VI",
-    "input": {
-      "number": 6
-    },
-    "property": "roman"
-  },
-  {
-    "description": "9 is IX",
-    "expected": "IX",
-    "input": {
-      "number": 9
-    },
-    "property": "roman"
-  },
-  {
-    "description": "27 is XXVII",
-    "expected": "XXVII",
-    "input": {
-      "number": 27
-    },
-    "property": "roman"
-  },
-  {
-    "description": "48 is XLVIII",
-    "expected": "XLVIII",
-    "input": {
-      "number": 48
-    },
-    "property": "roman"
-  },
-  {
-    "description": "49 is XLIX",
-    "expected": "XLIX",
-    "input": {
-      "number": 49
-    },
-    "property": "roman"
-  },
-  {
-    "description": "59 is LIX",
-    "expected": "LIX",
-    "input": {
-      "number": 59
-    },
-    "property": "roman"
-  },
-  {
-    "description": "93 is XCIII",
-    "expected": "XCIII",
-    "input": {
-      "number": 93
-    },
-    "property": "roman"
-  },
-  {
-    "description": "141 is CXLI",
-    "expected": "CXLI",
-    "input": {
-      "number": 141
-    },
-    "property": "roman"
-  },
-  {
-    "description": "163 is CLXIII",
-    "expected": "CLXIII",
-    "input": {
-      "number": 163
-    },
-    "property": "roman"
-  },
-  {
-    "description": "402 is CDII",
-    "expected": "CDII",
-    "input": {
-      "number": 402
-    },
-    "property": "roman"
-  },
-  {
-    "description": "575 is DLXXV",
-    "expected": "DLXXV",
-    "input": {
-      "number": 575
-    },
-    "property": "roman"
-  },
-  {
-    "description": "911 is CMXI",
-    "expected": "CMXI",
-    "input": {
-      "number": 911
-    },
-    "property": "roman"
-  },
-  {
-    "description": "1024 is MXXIV",
-    "expected": "MXXIV",
-    "input": {
-      "number": 1024
-    },
-    "property": "roman"
-  },
-  {
-    "description": "3000 is MMM",
-    "expected": "MMM",
-    "input": {
-      "number": 3000
-    },
-    "property": "roman"
-  }
-]
-=end code
+cmp-ok(
+    to-roman(2),
+    "eq",
+    "II",
+    "2 is II",
+);
+
+cmp-ok(
+    to-roman(3),
+    "eq",
+    "III",
+    "3 is III",
+);
+
+cmp-ok(
+    to-roman(4),
+    "eq",
+    "IV",
+    "4 is IV",
+);
+
+cmp-ok(
+    to-roman(5),
+    "eq",
+    "V",
+    "5 is V",
+);
+
+cmp-ok(
+    to-roman(6),
+    "eq",
+    "VI",
+    "6 is VI",
+);
+
+cmp-ok(
+    to-roman(9),
+    "eq",
+    "IX",
+    "9 is IX",
+);
+
+cmp-ok(
+    to-roman(27),
+    "eq",
+    "XXVII",
+    "27 is XXVII",
+);
+
+cmp-ok(
+    to-roman(48),
+    "eq",
+    "XLVIII",
+    "48 is XLVIII",
+);
+
+cmp-ok(
+    to-roman(49),
+    "eq",
+    "XLIX",
+    "49 is XLIX",
+);
+
+cmp-ok(
+    to-roman(59),
+    "eq",
+    "LIX",
+    "59 is LIX",
+);
+
+cmp-ok(
+    to-roman(93),
+    "eq",
+    "XCIII",
+    "93 is XCIII",
+);
+
+cmp-ok(
+    to-roman(141),
+    "eq",
+    "CXLI",
+    "141 is CXLI",
+);
+
+cmp-ok(
+    to-roman(163),
+    "eq",
+    "CLXIII",
+    "163 is CLXIII",
+);
+
+cmp-ok(
+    to-roman(402),
+    "eq",
+    "CDII",
+    "402 is CDII",
+);
+
+cmp-ok(
+    to-roman(575),
+    "eq",
+    "DLXXV",
+    "575 is DLXXV",
+);
+
+cmp-ok(
+    to-roman(911),
+    "eq",
+    "CMXI",
+    "911 is CMXI",
+);
+
+cmp-ok(
+    to-roman(1024),
+    "eq",
+    "MXXIV",
+    "1024 is MXXIV",
+);
+
+cmp-ok(
+    to-roman(3000),
+    "eq",
+    "MMM",
+    "3000 is MMM",
+);
+
+cmp-ok(
+    to-roman(16),
+    "eq",
+    "XVI",
+    "16 is XVI",
+);
+
+cmp-ok(
+    to-roman(66),
+    "eq",
+    "LXVI",
+    "66 is LXVI",
+);
+
+cmp-ok(
+    to-roman(166),
+    "eq",
+    "CLXVI",
+    "166 is CLXVI",
+);
+
+cmp-ok(
+    to-roman(666),
+    "eq",
+    "DCLXVI",
+    "666 is DCLXVI",
+);
+
+cmp-ok(
+    to-roman(1666),
+    "eq",
+    "MDCLXVI",
+    "1666 is MDCLXVI",
+);
+
+cmp-ok(
+    to-roman(3001),
+    "eq",
+    "MMMI",
+    "3001 is MMMI",
+);
+
+cmp-ok(
+    to-roman(3999),
+    "eq",
+    "MMMCMXCIX",
+    "3999 is MMMCMXCIX",
+);
+
+done-testing;

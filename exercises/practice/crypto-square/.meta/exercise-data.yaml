@@ -1,0 +1,34 @@
+properties:
+  ciphertext:
+    test: |-
+      sprintf(q:to/END/, (%case<input><plaintext>, |%case<expected description>).map(*.raku));
+      cmp-ok(
+          crypto-square(%s),
+          "eq",
+          %s,
+          %s,
+      );
+      END
+
+
+unit: module
+example: |-
+  sub crypto-square ($text is copy) is export {
+      $text.=lc.=subst(/<:!Ll + :!Nd>/, :g);
+      return '' unless $text;
+      my $c = 1;
+      $c++ while $c² < $text.chars;
+      my $r = $c;
+      $r -= 1 if $c * ($r - 1) ≥ $text.chars;
+      $text ~= ' ' x ( ($c * $r) - $text.chars);
+      my @square = $text.comb($c).map(*.comb);
+      my @result;
+      for ^$c {
+          @result.push(@square[*;$_].join);
+      }
+      return @result.join(' ');
+  }
+
+stub: |-
+  sub crypto-square ($text) is export {
+  }

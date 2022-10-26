@@ -3,8 +3,9 @@ properties:
   create:
     test: |-
       sprintf(q:to/END/, (|(%case<input><hour minute>:p), |%case<expected description>).map(*.raku));
-      is(
+      cmp-ok(
           Clock.new( %s, %s ).time,
+          "eq",
           %s,
           %s,
       );
@@ -12,8 +13,9 @@ properties:
   add:
     test: |-
       sprintf(q:to/END/, (|(%case<input><hour minute>:p), :minutes(%case<input><value>), |%case<expected description>).map(*.raku));
-      is(
+      cmp-ok(
           Clock.new( %s, %s ).add( %s ).time,
+          "eq",
           %s,
           %s,
       );
@@ -21,8 +23,9 @@ properties:
   subtract:
     test: |-
       sprintf(q:to/END/, (|(%case<input><hour minute>:p), :minutes(%case<input><value>), |%case<expected description>).map(*.raku));
-      is(
+      cmp-ok(
           Clock.new( %s, %s ).subtract( %s ).time,
+          "eq",
           %s,
           %s,
       );
@@ -31,8 +34,9 @@ properties:
     test: |-
       if %case<expected> {
           sprintf(q:to/END/, (|%case<input><clock1 clock2>.map({|(.<hour minute>:p)}), %case<description>).map(*.raku));
-          is-deeply(
+          cmp-ok(
               Clock.new( %s, %s ),
+              "eqv",
               Clock.new( %s, %s ),
               %s,
           );

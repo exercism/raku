@@ -1,4 +1,4 @@
 unit module FlattenArray;
 
-sub flatten-array(@input) is export {
+sub flatten-array (@nested) is export {
 }

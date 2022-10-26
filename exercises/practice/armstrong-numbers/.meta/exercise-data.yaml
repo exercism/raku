@@ -1,0 +1,21 @@
+properties:
+  isArmstrongNumber:
+    test: |-
+      sprintf(q:to/END/, %case<input><number>, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          is-armstrong-number(%s),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub is-armstrong-number ($number) is export {
+      $number == sum $number.comb.map: * ** $number.chars
+  }
+
+stub: |-
+  sub is-armstrong-number ($number) is export {
+  }

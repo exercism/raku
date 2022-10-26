@@ -1,8 +1,15 @@
-plan: 19
-tests: |-
-  for @test-cases -> %case {
-    is to-roman(%case<input><number>), |%case<expected description>;
-  }
+properties:
+  roman:
+    test: |-
+      sprintf(q:to/END/, (%case<input><number>, |%case<expected description>).map(*.raku));
+      cmp-ok(
+          to-roman(%s),
+          "eq",
+          %s,
+          %s,
+      );
+      END
+
 
 unit: module
 example: |-

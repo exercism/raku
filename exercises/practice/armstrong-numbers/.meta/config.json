@@ -1,0 +1,22 @@
+{
+  "authors": [
+    "m-dango"
+  ],
+  "contributors": [
+    "habere-et-dispertire"
+  ],
+  "files": {
+    "solution": [
+      "ArmstrongNumbers.rakumod"
+    ],
+    "test": [
+      "armstrong-numbers.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/ArmstrongNumbers.rakumod"
+    ]
+  },
+  "blurb": "Determine if a number is an Armstrong number.",
+  "source": "Wikipedia",
+  "source_url": "https://en.wikipedia.org/wiki/Narcissistic_number"
+}

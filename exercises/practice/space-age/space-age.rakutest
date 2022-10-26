@@ -1,90 +1,69 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use SpaceAge;
-plan 8;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  is ::(%case<input><planet>).age-on(%case<input><seconds>),
-    |%case<expected description>;
-}
+cmp-ok(
+    age-on(:planet("Earth"), :seconds(1000000000)),
+    "==",
+    31.69,
+    "age on Earth",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "age on Earth",
-    "expected": 31.69,
-    "input": {
-      "planet": "Earth",
-      "seconds": 1000000000
-    },
-    "property": "age"
-  },
-  {
-    "description": "age on Mercury",
-    "expected": 280.88,
-    "input": {
-      "planet": "Mercury",
-      "seconds": 2134835688
-    },
-    "property": "age"
-  },
-  {
-    "description": "age on Venus",
-    "expected": 9.78,
-    "input": {
-      "planet": "Venus",
-      "seconds": 189839836
-    },
-    "property": "age"
-  },
-  {
-    "description": "age on Mars",
-    "expected": 35.88,
-    "input": {
-      "planet": "Mars",
-      "seconds": 2129871239
-    },
-    "property": "age"
-  },
-  {
-    "description": "age on Jupiter",
-    "expected": 2.41,
-    "input": {
-      "planet": "Jupiter",
-      "seconds": 901876382
-    },
-    "property": "age"
-  },
-  {
-    "description": "age on Saturn",
-    "expected": 2.15,
-    "input": {
-      "planet": "Saturn",
-      "seconds": 2000000000
-    },
-    "property": "age"
-  },
-  {
-    "description": "age on Uranus",
-    "expected": 0.46,
-    "input": {
-      "planet": "Uranus",
-      "seconds": 1210123456
-    },
-    "property": "age"
-  },
-  {
-    "description": "age on Neptune",
-    "expected": 0.35,
-    "input": {
-      "planet": "Neptune",
-      "seconds": 1821023456
-    },
-    "property": "age"
-  }
-]
-=end code
+cmp-ok(
+    age-on(:planet("Mercury"), :seconds(2134835688)),
+    "==",
+    280.88,
+    "age on Mercury",
+);
+
+cmp-ok(
+    age-on(:planet("Venus"), :seconds(189839836)),
+    "==",
+    9.78,
+    "age on Venus",
+);
+
+cmp-ok(
+    age-on(:planet("Mars"), :seconds(2129871239)),
+    "==",
+    35.88,
+    "age on Mars",
+);
+
+cmp-ok(
+    age-on(:planet("Jupiter"), :seconds(901876382)),
+    "==",
+    2.41,
+    "age on Jupiter",
+);
+
+cmp-ok(
+    age-on(:planet("Saturn"), :seconds(2000000000)),
+    "==",
+    2.15,
+    "age on Saturn",
+);
+
+cmp-ok(
+    age-on(:planet("Uranus"), :seconds(1210123456)),
+    "==",
+    0.46,
+    "age on Uranus",
+);
+
+cmp-ok(
+    age-on(:planet("Neptune"), :seconds(1821023456)),
+    "==",
+    0.35,
+    "age on Neptune",
+);
+
+throws-like(
+    { age-on(:planet("Sun"), :seconds(680804807)) },
+    Exception,
+    :message("not a planet"),
+    "invalid planet causes error",
+);
+
+done-testing;

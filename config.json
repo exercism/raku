@@ -157,7 +157,7 @@
       },
       {
         "slug": "rna-transcription",
-        "name": "Rna Transcription",
+        "name": "RNA Transcription",
         "uuid": "378da8ed-c955-4a27-87b4-078b36479d77",
         "practices": [],
         "prerequisites": [],
@@ -193,7 +193,7 @@
       },
       {
         "slug": "etl",
-        "name": "Etl",
+        "name": "ETL",
         "uuid": "3bee4dc2-d747-4b4e-ac10-d7815666bbc0",
         "practices": [],
         "prerequisites": [],
@@ -280,7 +280,7 @@
         "uuid": "5510f44a-f484-4df4-9b07-1f23f42df4d1",
         "practices": [],
         "prerequisites": [],
-        "difficulty": 4,
+        "difficulty": 3,
         "topics": []
       },
       {
@@ -335,7 +335,8 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 1,
-        "topics": []
+        "topics": null,
+        "status": "deprecated"
       },
       {
         "slug": "binary-search-tree",
@@ -344,6 +345,60 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 5,
+        "topics": []
+      },
+      {
+        "slug": "collatz-conjecture",
+        "name": "Collatz Conjecture",
+        "uuid": "af004395-69cd-4151-ad42-b9e617abc99d",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2,
+        "topics": []
+      },
+      {
+        "slug": "crypto-square",
+        "name": "Crypto Square",
+        "uuid": "d7c9f93f-de86-4f93-97d7-0f08e8aab8e8",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3,
+        "topics": []
+      },
+      {
+        "slug": "armstrong-numbers",
+        "name": "Armstrong Numbers",
+        "uuid": "3626c9a2-8e4c-4fde-be0f-8234777faeed",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2,
+        "topics": []
+      },
+      {
+        "slug": "difference-of-squares",
+        "name": "Difference of Squares",
+        "uuid": "8173b8cb-e2a7-4ecf-9ee8-868db1c06b0c",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2,
+        "topics": []
+      },
+      {
+        "slug": "affine-cipher",
+        "name": "Affine Cipher",
+        "uuid": "46ef6ee5-2484-423e-b729-62d51291c725",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "bottle-song",
+        "name": "Bottle Song",
+        "uuid": "e6194ba8-ec86-4426-aa7f-2c7d5cdab9d7",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
         "topics": []
       },
       {
@@ -358,17 +413,51 @@
     ]
   },
   "concepts": [],
-  "key_features": [],
+  "key_features": [
+    {
+      "title": "Concise",
+      "content": "Raku programs are naturally more concise and readable, thanks to its innovative design.",
+      "icon": "small"
+    },
+    {
+      "title": "Expressive",
+      "content": "Raku is a supremely flexible and mutable language, adaptable to your own style of programming.",
+      "icon": "fun"
+    },
+    {
+      "title": "Growing",
+      "content": "Raku is developed by a team of dedicated and enthusiastic open source volunteers.",
+      "icon": "evolving"
+    },
+    {
+      "title": "Concurrency",
+      "content": "Raku has a high level concurrency model, both for implicit as well as explicit multiprocessing.",
+      "icon": "concurrency"
+    },
+    {
+      "title": "Regexes and Grammars",
+      "content": "Raku has powerful, extensible grammars for parsing data or code (which Raku uses to parse itself!)",
+      "icon": "powerful"
+    },
+    {
+      "title": "A Welcoming Community",
+      "content": "Go to #raku (irc.libera.chat) and someone will be glad to help you get started.",
+      "icon": "community"
+    }
+  ],
   "tags": [
     "paradigm/imperative",
     "paradigm/procedural",
+    "paradigm/functional",
+    "paradigm/object_oriented",
     "typing/dynamic",
     "typing/weak",
     "execution_mode/interpreted",
     "platform/windows",
     "platform/mac",
     "platform/linux",
-    "runtime/standalone_executable",
+    "runtime/language_specific",
+    "runtime/jvm",
     "used_for/scripts"
   ]
 }

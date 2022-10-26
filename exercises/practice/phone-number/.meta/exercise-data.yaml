@@ -1,22 +1,28 @@
 package: Phone
-plan: 18
-tests: |-
-  for @test-cases -> %case {
-    given %case<expected> {
-      when Str {
-        is clean-number(%case<input><phrase>),
-          |%case<expected description>;
+properties:
+  clean:
+    test: |-
+      if %case<expected><error>:exists {
+          sprintf(q:to/END/, (%case<input><phrase>, %case<expected><error>, %case<description>).map(*.raku));
+          throws-like(
+              { clean-number %s },
+              Exception,
+              :message(%s),
+              %s,
+          );
+          END
+      }
+      else {
+          sprintf(q:to/END/, (%case<input><phrase>, |%case<expected description>).map(*.raku));
+          cmp-ok(
+              clean-number(%s),
+              "eq",
+              %s,
+              %s,
+          );
+          END
       }
 
-      when .<error>.so {
-        throws-like
-          { clean-number %case<input><phrase> },
-          Exception,
-          :message(%case<expected><error>),
-          %case<description>;
-      }
-    }
-  }
 
 unit: module
 example: |-

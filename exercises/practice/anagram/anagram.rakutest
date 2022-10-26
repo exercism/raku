@@ -1,223 +1,118 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Anagram;
-plan 14;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  cmp-ok match-anagrams( |%case<input>:p ),
-    '~~', %case<expected>.Set, %case<description>;
-}
+cmp-ok(
+    match-anagrams( :subject("diaper"), :candidates("hello", "world", "zombies", "pants") ),
+    "(==)",
+    (),
+    "no matches",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "no matches",
-    "expected": [
-    ],
-    "input": {
-      "candidates": [
-        "hello",
-        "world",
-        "zombies",
-        "pants"
-      ],
-      "subject": "diaper"
-    },
-    "property": "findAnagrams"
-  },
-  {
-    "description": "detects two anagrams",
-    "expected": [
-      "lemons",
-      "melons"
-    ],
-    "input": {
-      "candidates": [
-        "lemons",
-        "cherry",
-        "melons"
-      ],
-      "subject": "solemn"
-    },
-    "property": "findAnagrams"
-  },
-  {
-    "description": "does not detect anagram subsets",
-    "expected": [
-    ],
-    "input": {
-      "candidates": [
-        "dog",
-        "goody"
-      ],
-      "subject": "good"
-    },
-    "property": "findAnagrams"
-  },
-  {
-    "description": "detects anagram",
-    "expected": [
-      "inlets"
-    ],
-    "input": {
-      "candidates": [
-        "enlists",
-        "google",
-        "inlets",
-        "banana"
-      ],
-      "subject": "listen"
-    },
-    "property": "findAnagrams"
-  },
-  {
-    "description": "detects three anagrams",
-    "expected": [
-      "gallery",
-      "regally",
-      "largely"
-    ],
-    "input": {
-      "candidates": [
-        "gallery",
-        "ballerina",
-        "regally",
-        "clergy",
-        "largely",
-        "leading"
-      ],
-      "subject": "allergy"
-    },
-    "property": "findAnagrams"
-  },
-  {
-    "description": "detects multiple anagrams with different case",
-    "expected": [
-      "Eons",
-      "ONES"
-    ],
-    "input": {
-      "candidates": [
-        "Eons",
-        "ONES"
-      ],
-      "subject": "nose"
-    },
-    "property": "findAnagrams"
-  },
-  {
-    "description": "does not detect non-anagrams with identical checksum",
-    "expected": [
-    ],
-    "input": {
-      "candidates": [
-        "last"
-      ],
-      "subject": "mass"
-    },
-    "property": "findAnagrams"
-  },
-  {
-    "description": "detects anagrams case-insensitively",
-    "expected": [
-      "Carthorse"
-    ],
-    "input": {
-      "candidates": [
-        "cashregister",
-        "Carthorse",
-        "radishes"
-      ],
-      "subject": "Orchestra"
-    },
-    "property": "findAnagrams"
-  },
-  {
-    "description": "detects anagrams using case-insensitive subject",
-    "expected": [
-      "carthorse"
-    ],
-    "input": {
-      "candidates": [
-        "cashregister",
-        "carthorse",
-        "radishes"
-      ],
-      "subject": "Orchestra"
-    },
-    "property": "findAnagrams"
-  },
-  {
-    "description": "detects anagrams using case-insensitive possible matches",
-    "expected": [
-      "Carthorse"
-    ],
-    "input": {
-      "candidates": [
-        "cashregister",
-        "Carthorse",
-        "radishes"
-      ],
-      "subject": "orchestra"
-    },
-    "property": "findAnagrams"
-  },
-  {
-    "description": "does not detect an anagram if the original word is repeated",
-    "expected": [
-    ],
-    "input": {
-      "candidates": [
-        "go Go GO"
-      ],
-      "subject": "go"
-    },
-    "property": "findAnagrams"
-  },
-  {
-    "description": "anagrams must use all letters exactly once",
-    "expected": [
-    ],
-    "input": {
-      "candidates": [
-        "patter"
-      ],
-      "subject": "tapper"
-    },
-    "property": "findAnagrams"
-  },
-  {
-    "description": "words are not anagrams of themselves (case-insensitive)",
-    "expected": [
-    ],
-    "input": {
-      "candidates": [
-        "BANANA",
-        "Banana",
-        "banana"
-      ],
-      "subject": "BANANA"
-    },
-    "property": "findAnagrams"
-  },
-  {
-    "description": "words other than themselves can be anagrams",
-    "expected": [
-      "Silent"
-    ],
-    "input": {
-      "candidates": [
-        "Listen",
-        "Silent",
-        "LISTEN"
-      ],
-      "subject": "LISTEN"
-    },
-    "property": "findAnagrams"
-  }
-]
-=end code
+cmp-ok(
+    match-anagrams( :subject("solemn"), :candidates("lemons", "cherry", "melons") ),
+    "(==)",
+    ("lemons", "melons"),
+    "detects two anagrams",
+);
+
+cmp-ok(
+    match-anagrams( :subject("good"), :candidates("dog", "goody") ),
+    "(==)",
+    (),
+    "does not detect anagram subsets",
+);
+
+cmp-ok(
+    match-anagrams( :subject("listen"), :candidates("enlists", "google", "inlets", "banana") ),
+    "(==)",
+    ("inlets",),
+    "detects anagram",
+);
+
+cmp-ok(
+    match-anagrams( :subject("allergy"), :candidates("gallery", "ballerina", "regally", "clergy", "largely", "leading") ),
+    "(==)",
+    ("gallery", "regally", "largely"),
+    "detects three anagrams",
+);
+
+cmp-ok(
+    match-anagrams( :subject("nose"), :candidates("Eons", "ONES") ),
+    "(==)",
+    ("Eons", "ONES"),
+    "detects multiple anagrams with different case",
+);
+
+cmp-ok(
+    match-anagrams( :subject("mass"), :candidates("last",) ),
+    "(==)",
+    (),
+    "does not detect non-anagrams with identical checksum",
+);
+
+cmp-ok(
+    match-anagrams( :subject("Orchestra"), :candidates("cashregister", "Carthorse", "radishes") ),
+    "(==)",
+    ("Carthorse",),
+    "detects anagrams case-insensitively",
+);
+
+cmp-ok(
+    match-anagrams( :subject("Orchestra"), :candidates("cashregister", "carthorse", "radishes") ),
+    "(==)",
+    ("carthorse",),
+    "detects anagrams using case-insensitive subject",
+);
+
+cmp-ok(
+    match-anagrams( :subject("orchestra"), :candidates("cashregister", "Carthorse", "radishes") ),
+    "(==)",
+    ("Carthorse",),
+    "detects anagrams using case-insensitive possible matches",
+);
+
+cmp-ok(
+    match-anagrams( :subject("go"), :candidates("go Go GO",) ),
+    "(==)",
+    (),
+    "does not detect an anagram if the original word is repeated",
+);
+
+cmp-ok(
+    match-anagrams( :subject("tapper"), :candidates("patter",) ),
+    "(==)",
+    (),
+    "anagrams must use all letters exactly once",
+);
+
+cmp-ok(
+    match-anagrams( :subject("BANANA"), :candidates("BANANA",) ),
+    "(==)",
+    (),
+    "words are not anagrams of themselves",
+);
+
+cmp-ok(
+    match-anagrams( :subject("BANANA"), :candidates("Banana",) ),
+    "(==)",
+    (),
+    "words are not anagrams of themselves even if letter case is partially different",
+);
+
+cmp-ok(
+    match-anagrams( :subject("BANANA"), :candidates("banana",) ),
+    "(==)",
+    (),
+    "words are not anagrams of themselves even if letter case is completely different",
+);
+
+cmp-ok(
+    match-anagrams( :subject("LISTEN"), :candidates("LISTEN", "Silent") ),
+    "(==)",
+    ("Silent",),
+    "words other than themselves can be anagrams",
+);
+
+done-testing;

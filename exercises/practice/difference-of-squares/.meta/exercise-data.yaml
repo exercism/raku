@@ -1,0 +1,55 @@
+properties:
+  differenceOfSquares:
+    test: |-
+      sprintf(q:to/END/, %case<input><number>, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          difference-of-squares(%s),
+          "==",
+          %s,
+          %s,
+      );
+      END
+  sumOfSquares:
+    test: |-
+      sprintf(q:to/END/, %case<input><number>, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          sum-of-squares(%s),
+          "==",
+          %s,
+          %s,
+      );
+      END
+  squareOfSum:
+    test: |-
+      sprintf(q:to/END/, %case<input><number>, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          square-of-sum(%s),
+          "==",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub square-of-sum ($number) is export {
+      (1..$number).sum²;
+  }
+
+  sub sum-of-squares ($number) is export {
+      (1..$number).map(*²).sum;
+  }
+
+  sub difference-of-squares ($number) is export {
+      square-of-sum($number) - sum-of-squares($number);
+  }
+
+stub: |-
+  sub square-of-sum ($number) is export {
+  }
+
+  sub sum-of-squares ($number) is export {
+  }
+
+  sub difference-of-squares ($number) is export {
+  }

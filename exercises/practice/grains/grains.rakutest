@@ -1,131 +1,92 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use Grains;
-plan 11;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  given %case<property> {
-    when 'square' {
-      if %case<expected><error>:exists {
-        throws-like
-          { grains-on-square %case<input><square> },
-          Exception,
-          message => /
-            $( %case<expected><error> )
-            || 'Constraint type check failed in binding to parameter'
-          /,
-          %case<description>;
-      }
-      else {
-        is grains-on-square(%case<input><square>),
-          |%case<expected description>;
-      }
-    }
+cmp-ok(
+    grains-on-square(1),
+    "==",
+    1,
+    "returns the number of grains on the square: grains on square 1",
+);
 
-    when 'total' {
-      is total-grains, |%case<expected description>;
-    }
-  }
-}
+cmp-ok(
+    grains-on-square(2),
+    "==",
+    2,
+    "returns the number of grains on the square: grains on square 2",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "returns the number of grains on the square: grains on square 1",
-    "expected": 1,
-    "input": {
-      "square": 1
-    },
-    "property": "square"
-  },
-  {
-    "description": "returns the number of grains on the square: grains on square 2",
-    "expected": 2,
-    "input": {
-      "square": 2
-    },
-    "property": "square"
-  },
-  {
-    "description": "returns the number of grains on the square: grains on square 3",
-    "expected": 4,
-    "input": {
-      "square": 3
-    },
-    "property": "square"
-  },
-  {
-    "description": "returns the number of grains on the square: grains on square 4",
-    "expected": 8,
-    "input": {
-      "square": 4
-    },
-    "property": "square"
-  },
-  {
-    "description": "returns the number of grains on the square: grains on square 16",
-    "expected": 32768,
-    "input": {
-      "square": 16
-    },
-    "property": "square"
-  },
-  {
-    "description": "returns the number of grains on the square: grains on square 32",
-    "expected": 2147483648,
-    "input": {
-      "square": 32
-    },
-    "property": "square"
-  },
-  {
-    "description": "returns the number of grains on the square: grains on square 64",
-    "expected": 9223372036854775808,
-    "input": {
-      "square": 64
-    },
-    "property": "square"
-  },
-  {
-    "description": "returns the number of grains on the square: square 0 raises an exception",
-    "expected": {
-      "error": "square must be between 1 and 64"
-    },
-    "input": {
-      "square": 0
-    },
-    "property": "square"
-  },
-  {
-    "description": "returns the number of grains on the square: negative square raises an exception",
-    "expected": {
-      "error": "square must be between 1 and 64"
-    },
-    "input": {
-      "square": -1
-    },
-    "property": "square"
-  },
-  {
-    "description": "returns the number of grains on the square: square greater than 64 raises an exception",
-    "expected": {
-      "error": "square must be between 1 and 64"
-    },
-    "input": {
-      "square": 65
-    },
-    "property": "square"
-  },
-  {
-    "description": "returns the total number of grains on the board",
-    "expected": 18446744073709551615,
-    "input": {
-    },
-    "property": "total"
-  }
-]
-=end code
+cmp-ok(
+    grains-on-square(3),
+    "==",
+    4,
+    "returns the number of grains on the square: grains on square 3",
+);
+
+cmp-ok(
+    grains-on-square(4),
+    "==",
+    8,
+    "returns the number of grains on the square: grains on square 4",
+);
+
+cmp-ok(
+    grains-on-square(16),
+    "==",
+    32768,
+    "returns the number of grains on the square: grains on square 16",
+);
+
+cmp-ok(
+    grains-on-square(32),
+    "==",
+    2147483648,
+    "returns the number of grains on the square: grains on square 32",
+);
+
+cmp-ok(
+    grains-on-square(64),
+    "==",
+    9223372036854775808,
+    "returns the number of grains on the square: grains on square 64",
+);
+
+throws-like(
+    { grains-on-square 0 },
+    Exception,
+    message => /:i
+        "square must be between 1 and 64"
+        || "type check failed"
+    /,
+    "returns the number of grains on the square: square 0 raises an exception",
+);
+
+throws-like(
+    { grains-on-square -1 },
+    Exception,
+    message => /:i
+        "square must be between 1 and 64"
+        || "type check failed"
+    /,
+    "returns the number of grains on the square: negative square raises an exception",
+);
+
+throws-like(
+    { grains-on-square 65 },
+    Exception,
+    message => /:i
+        "square must be between 1 and 64"
+        || "type check failed"
+    /,
+    "returns the number of grains on the square: square greater than 64 raises an exception",
+);
+
+cmp-ok(
+    total-grains(),
+    "==",
+    18446744073709551615,
+    "returns the total number of grains on the board",
+);
+
+done-testing;

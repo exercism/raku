@@ -1,4 +1,7 @@
-unit module GradeSchool;
+unit class GradeSchool;
 
-sub roster ( :@students, :$grade ) is export {
+method add ( :$student, :$grade --> Bool ) {
+}
+
+method roster ( :$grade ) {
 }

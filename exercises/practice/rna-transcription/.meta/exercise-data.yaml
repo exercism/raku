@@ -1,14 +1,20 @@
 package: RNA
-plan: 6
-tests: |-
-  for @test-cases -> %case {
-    is to-rna(%case<input><dna>), |%case<expected description>;
-  }
+properties:
+  toRna:
+    test: |-
+      sprintf(q:to/END/, (%case<input><dna>, |%case<expected description>).map(*.raku));
+      cmp-ok(
+          to-rna(%s),
+          "eq",
+          %s,
+          %s,
+      );
+      END
 
 unit: module
 example: |-
-  sub to-rna ($dna) is export {
-    $dna.trans(<A G C T> => <U C G A>);
+  sub to-rna ($_) is export {
+      .trans(<A G C T> => <U C G A>);
   }
 stub: |-
   sub to-rna ($dna) is export {

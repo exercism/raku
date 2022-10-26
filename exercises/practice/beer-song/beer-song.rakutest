@@ -3,8 +3,9 @@ use Test;
 use lib $?FILE.IO.dirname;
 use BeerSong;
 
-is(
+cmp-ok(
     sing( :bottles(99), :verses(1) ),
+    "eq",
     q:to/SONG/.trim,
 99 bottles of beer on the wall, 99 bottles of beer.
 Take one down and pass it around, 98 bottles of beer on the wall.
@@ -12,8 +13,9 @@ SONG
     "verse: single verse: first generic verse",
 );
 
-is(
+cmp-ok(
     sing( :bottles(3), :verses(1) ),
+    "eq",
     q:to/SONG/.trim,
 3 bottles of beer on the wall, 3 bottles of beer.
 Take one down and pass it around, 2 bottles of beer on the wall.
@@ -21,8 +23,9 @@ SONG
     "verse: single verse: last generic verse",
 );
 
-is(
+cmp-ok(
     sing( :bottles(2), :verses(1) ),
+    "eq",
     q:to/SONG/.trim,
 2 bottles of beer on the wall, 2 bottles of beer.
 Take one down and pass it around, 1 bottle of beer on the wall.
@@ -30,8 +33,9 @@ SONG
     "verse: single verse: verse with 2 bottles",
 );
 
-is(
+cmp-ok(
     sing( :bottles(1), :verses(1) ),
+    "eq",
     q:to/SONG/.trim,
 1 bottle of beer on the wall, 1 bottle of beer.
 Take it down and pass it around, no more bottles of beer on the wall.
@@ -39,8 +43,9 @@ SONG
     "verse: single verse: verse with 1 bottle",
 );
 
-is(
+cmp-ok(
     sing( :bottles(0), :verses(1) ),
+    "eq",
     q:to/SONG/.trim,
 No more bottles of beer on the wall, no more bottles of beer.
 Go to the store and buy some more, 99 bottles of beer on the wall.
@@ -48,8 +53,9 @@ SONG
     "verse: single verse: verse with 0 bottles",
 );
 
-is(
+cmp-ok(
     sing( :bottles(99), :verses(2) ),
+    "eq",
     q:to/SONG/.trim,
 99 bottles of beer on the wall, 99 bottles of beer.
 Take one down and pass it around, 98 bottles of beer on the wall.
@@ -60,8 +66,9 @@ SONG
     "lyrics: multiple verses: first two verses",
 );
 
-is(
+cmp-ok(
     sing( :bottles(2), :verses(3) ),
+    "eq",
     q:to/SONG/.trim,
 2 bottles of beer on the wall, 2 bottles of beer.
 Take one down and pass it around, 1 bottle of beer on the wall.
@@ -75,8 +82,9 @@ SONG
     "lyrics: multiple verses: last three verses",
 );
 
-is(
+cmp-ok(
     sing( :bottles(99), :verses(100) ),
+    "eq",
     q:to/SONG/.trim,
 99 bottles of beer on the wall, 99 bottles of beer.
 Take one down and pass it around, 98 bottles of beer on the wall.

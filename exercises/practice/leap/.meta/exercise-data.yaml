@@ -1,27 +1,34 @@
-plan: 9
 tests: |
   for Date, DateTime {
-      .^method_table<is-leap-year>.wrap: sub (|) {
-          bail-out 'Built-in `is-leap-year` method is not allowed for this exercise.';
+      .^method_table<new>.wrap: sub (|) {
+          bail-out 'Creating a Date(Time) object is not allowed for this exercise.';
       };
   }
+
 properties:
   leapYear:
     test: |-
-      sprintf(q:to/END/, %case<input><year>, %case<expected>, %case<description>);
-      is-deeply(
+      sprintf(q:to/END/, %case<input><year>, %case<expected>, %case<description>.raku);
+      cmp-ok(
           is-leap-year(%s),
+          "eqv",
           %s,
-          '%s',
+          %s,
       );
       END
 
 
 unit: module
-example: |-
-  sub is-leap-year ($year) is export {
-      $year %% 4 && $year !%% 100 || $year %% 400;
-  }
+examples:
+  standard: |-
+    sub is-leap-year ($year) is export {
+        $year %% 4 && $year !%% 100 || $year %% 400;
+    }
+  forbidden: |-
+    sub is-leap-year ($year) is export {
+        ? try Date.new(:$year, :month(2), :day(29));
+    }
+
 
 stub: |-
   sub is-leap-year ($year) is export {

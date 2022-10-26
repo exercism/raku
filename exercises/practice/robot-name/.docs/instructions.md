@@ -5,7 +5,7 @@ Manage robot factory settings.
 When a robot comes off the factory floor, it has no name.
 
 The first time you turn on a robot, a random name is generated in the format
-of two uppercase letters followed by three digits, such as RX837 or BC811.
+of an uppercase letter followed by two digits, such as X83 or C81.
 
 Every once in a while we need to reset a robot to its factory settings,
 which means that its name gets wiped. The next time you ask, that robot will

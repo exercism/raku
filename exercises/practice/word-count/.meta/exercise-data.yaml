@@ -1,14 +1,19 @@
-plan: 13
-tests: |-
-  for @test-cases -> %case {
-    cmp-ok count-words(%case<input><sentence>),
-      '~~', %case<expected>.Bag, %case<description>;
-  }
+properties:
+  countWords:
+    test: |-
+      sprintf(q:to/END/, (%case<input><sentence>, %case<expected><>, %case<description>).map(*.raku));
+      cmp-ok(
+          count-words(%s),
+          "(==)",
+          %s.Bag,
+          %s,
+      );
+      END
 
 unit: module
 example: |-
-  sub count-words (Str:D $str --> Bag:D) is export {
-    $str.lc.comb(/ <alnum>+ (\'<alnum>+)? /).Bag;
+  sub count-words (Str:D $_) is export {
+      .lc.comb(/ <alnum>+ (\'<alnum>+)? /);
   }
 stub: |-
   sub count-words ($sentence) is export {

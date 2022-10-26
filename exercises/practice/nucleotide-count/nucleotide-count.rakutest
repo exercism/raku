@@ -1,95 +1,44 @@
 #!/usr/bin/env raku
 use Test;
-use JSON::Fast;
 use lib $?FILE.IO.dirname;
 use NucleotideCount;
-plan 5;
 
-my @test-cases = from-json($=pod[*-1].contents).List;
-for @test-cases -> %case {
-  given %case<expected> {
-    when .<error>.so {
-      throws-like
-        { nucleotide-count %case<input><strand> },
-        Exception,
-        message => /
-          $( %case<expected><error> )
-          || 'Constraint type check failed in binding to parameter'
-        /,
-        %case<description>;
-    }
+cmp-ok(
+    nucleotide-count(""),
+    "(==)",
+    {:A(0), :C(0), :G(0), :T(0)}.Bag,
+    "empty strand",
+);
 
-    default {
-      cmp-ok nucleotide-count(%case<input><strand>),
-        '~~', %case<expected>.Bag, %case<description>;
-    }
-  }
-}
+cmp-ok(
+    nucleotide-count("G"),
+    "(==)",
+    {:A(0), :C(0), :G(1), :T(0)}.Bag,
+    "can count one nucleotide in single-character input",
+);
 
-=head2 Test Cases
-=begin code
-[
-  {
-    "description": "empty strand",
-    "expected": {
-      "A": 0,
-      "C": 0,
-      "G": 0,
-      "T": 0
-    },
-    "input": {
-      "strand": ""
-    },
-    "property": "nucleotideCounts"
-  },
-  {
-    "description": "can count one nucleotide in single-character input",
-    "expected": {
-      "A": 0,
-      "C": 0,
-      "G": 1,
-      "T": 0
-    },
-    "input": {
-      "strand": "G"
-    },
-    "property": "nucleotideCounts"
-  },
-  {
-    "description": "strand with repeated nucleotide",
-    "expected": {
-      "A": 0,
-      "C": 0,
-      "G": 7,
-      "T": 0
-    },
-    "input": {
-      "strand": "GGGGGGG"
-    },
-    "property": "nucleotideCounts"
-  },
-  {
-    "description": "strand with multiple nucleotides",
-    "expected": {
-      "A": 20,
-      "C": 12,
-      "G": 17,
-      "T": 21
-    },
-    "input": {
-      "strand": "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"
-    },
-    "property": "nucleotideCounts"
-  },
-  {
-    "description": "strand with invalid nucleotides",
-    "expected": {
-      "error": "Invalid nucleotide in strand"
-    },
-    "input": {
-      "strand": "AGXXACT"
-    },
-    "property": "nucleotideCounts"
-  }
-]
-=end code
+cmp-ok(
+    nucleotide-count("GGGGGGG"),
+    "(==)",
+    {:A(0), :C(0), :G(7), :T(0)}.Bag,
+    "strand with repeated nucleotide",
+);
+
+cmp-ok(
+    nucleotide-count("AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"),
+    "(==)",
+    {:A(20), :C(12), :G(17), :T(21)}.Bag,
+    "strand with multiple nucleotides",
+);
+
+throws-like(
+    { nucleotide-count "AGXXACT" },
+    Exception,
+    message => /:i
+        "Invalid nucleotide in strand"
+        || "type check failed"
+    /,
+    "strand with invalid nucleotides",
+);
+
+done-testing;
