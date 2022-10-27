@@ -400,6 +400,15 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
+      },
+      {
+        "slug": "binary-search",
+        "name": "Binary Search",
+        "uuid": "c149ed77-36ab-4230-bd32-23d70081fd65",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
       }
     ]
   },

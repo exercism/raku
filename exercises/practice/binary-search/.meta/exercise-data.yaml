@@ -1,0 +1,46 @@
+properties:
+  find:
+    test: |-
+      if %case<expected><error>:exists {
+        sprintf(q:to/END/, (:array(%case<input><array><>), %case<input><value>:p, %case<description>).map(*.raku));
+        dies-ok(
+            { binary-search %s, %s },
+            %s,
+        );
+        END
+      }
+      else {
+        sprintf(q:to/END/, |((:array(%case<input><array><>), %case<input><value>:p).map(*.raku)), %case<expected>, %case<description>.raku);
+        cmp-ok(
+            binary-search( %s, %s ),
+            &infix:<==>,
+            %s,
+            %s,
+        );
+        END
+      }
+
+unit: module
+example: |-
+  multi binary-search (:@array, :$value --> Int) is export {
+      binary-search(@array, $value, 0, @array.end);
+  }
+
+  multi binary-search(@array, $value, $low, $high where { $low <= $high }) {
+      my Int() $mid = ($low + $high) / 2;
+      given @array[ $mid ] {
+          when * < $value {
+              binary-search(@array, $value, $mid + 1, $high);
+          }
+          when * > $value {
+              binary-search(@array, $value, $low, $mid - 1);
+          }
+          default {
+              $mid
+          }
+      }
+  }
+
+stub: |-
+  sub binary-search (:@array, :$value) is export {
+  }

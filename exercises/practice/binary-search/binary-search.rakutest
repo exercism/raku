@@ -1,0 +1,73 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use BinarySearch;
+
+cmp-ok(
+    binary-search( :array([6]), :value(6) ),
+    &infix:<==>,
+    0,
+    "finds a value in an array with one element",
+);
+
+cmp-ok(
+    binary-search( :array([1, 3, 4, 6, 8, 9, 11]), :value(6) ),
+    &infix:<==>,
+    3,
+    "finds a value in the middle of an array",
+);
+
+cmp-ok(
+    binary-search( :array([1, 3, 4, 6, 8, 9, 11]), :value(1) ),
+    &infix:<==>,
+    0,
+    "finds a value at the beginning of an array",
+);
+
+cmp-ok(
+    binary-search( :array([1, 3, 4, 6, 8, 9, 11]), :value(11) ),
+    &infix:<==>,
+    6,
+    "finds a value at the end of an array",
+);
+
+cmp-ok(
+    binary-search( :array([1, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 634]), :value(144) ),
+    &infix:<==>,
+    9,
+    "finds a value in an array of odd length",
+);
+
+cmp-ok(
+    binary-search( :array([1, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377]), :value(21) ),
+    &infix:<==>,
+    5,
+    "finds a value in an array of even length",
+);
+
+dies-ok(
+    { binary-search :array([1, 3, 4, 6, 8, 9, 11]), :value(7) },
+    "identifies that a value is not included in the array",
+);
+
+dies-ok(
+    { binary-search :array([1, 3, 4, 6, 8, 9, 11]), :value(0) },
+    "a value smaller than the array's smallest value is not found",
+);
+
+dies-ok(
+    { binary-search :array([1, 3, 4, 6, 8, 9, 11]), :value(13) },
+    "a value larger than the array's largest value is not found",
+);
+
+dies-ok(
+    { binary-search :array([]), :value(1) },
+    "nothing is found in an empty array",
+);
+
+dies-ok(
+    { binary-search :array([1, 2]), :value(0) },
+    "nothing is found when the left and right bounds cross",
+);
+
+done-testing;

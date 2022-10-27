@@ -1,0 +1,17 @@
+{
+  "authors": ["m-dango"],
+  "files": {
+    "solution": [
+      "BinarySearch.rakumod"
+    ],
+    "test": [
+      "binary-search.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/BinarySearch.rakumod"
+    ]
+  },
+  "blurb": "Implement a binary search algorithm.",
+  "source": "Wikipedia",
+  "source_url": "http://en.wikipedia.org/wiki/Binary_search_algorithm"
+}
