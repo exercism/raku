@@ -1,0 +1,21 @@
+properties:
+  isIsogram:
+    test: |-
+      sprintf(q:to/END/, %case<input><phrase>.raku, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          is-isogram(%s),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub is-isogram (Str:D $_ --> Bool:D) is export {
+      not repeated .lc.comb: / <:Letter> /
+  }
+
+stub: |-
+  sub is-isogram ($phrase) is export {
+  }
