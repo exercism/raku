@@ -409,7 +409,16 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
-      }
+      },
+      {
+        "slug": "isogram",
+        "name": "Isogram",
+        "uuid": "0c27b09b-030b-4745-b111-00bd4db0923f",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      }      
     ]
   },
   "concepts": [],
