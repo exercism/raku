@@ -1,0 +1,104 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use Isogram;
+
+cmp-ok(
+    is-isogram(""),
+    "eqv",
+    True,
+    "empty string",
+);
+
+cmp-ok(
+    is-isogram("isogram"),
+    "eqv",
+    True,
+    "isogram with only lower case characters",
+);
+
+cmp-ok(
+    is-isogram("eleven"),
+    "eqv",
+    False,
+    "word with one duplicated character",
+);
+
+cmp-ok(
+    is-isogram("zzyzx"),
+    "eqv",
+    False,
+    "word with one duplicated character from the end of the alphabet",
+);
+
+cmp-ok(
+    is-isogram("subdermatoglyphic"),
+    "eqv",
+    True,
+    "longest reported english isogram",
+);
+
+cmp-ok(
+    is-isogram("Alphabet"),
+    "eqv",
+    False,
+    "word with duplicated character in mixed case",
+);
+
+cmp-ok(
+    is-isogram("alphAbet"),
+    "eqv",
+    False,
+    "word with duplicated character in mixed case, lowercase first",
+);
+
+cmp-ok(
+    is-isogram("thumbscrew-japingly"),
+    "eqv",
+    True,
+    "hypothetical isogrammic word with hyphen",
+);
+
+cmp-ok(
+    is-isogram("thumbscrew-jappingly"),
+    "eqv",
+    False,
+    "hypothetical word with duplicated character following hyphen",
+);
+
+cmp-ok(
+    is-isogram("six-year-old"),
+    "eqv",
+    True,
+    "isogram with duplicated hyphen",
+);
+
+cmp-ok(
+    is-isogram("Emily Jung Schwartzkopf"),
+    "eqv",
+    True,
+    "made-up name that is an isogram",
+);
+
+cmp-ok(
+    is-isogram("accentor"),
+    "eqv",
+    False,
+    "duplicated character in the middle",
+);
+
+cmp-ok(
+    is-isogram("angola"),
+    "eqv",
+    False,
+    "same first and last characters",
+);
+
+cmp-ok(
+    is-isogram("up-to-date"),
+    "eqv",
+    False,
+    "word with duplicated character and with two hyphens",
+);
+
+done-testing;
