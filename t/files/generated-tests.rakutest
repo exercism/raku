@@ -6,10 +6,10 @@ use Exercism::Generator;
 
 bail-out if %*ENV<HOME>.IO.add('.cache/exercism/configlet/problem-specifications') !~~ :d;
 for $base-dir.add('exercises/practice').dir.sort {
-  if .add('.meta/exercise-data.yaml') ~~ :f {
+  if .add('.meta/template-data.yaml') ~~ :f {
     is .add("{.basename}.rakutest").slurp,
       Exercism::Generator.new(
-        :data( load-yaml(~.add('.meta/exercise-data.yaml').IO.slurp) ),
+        :data( load-yaml(~.add('.meta/template-data.yaml').IO.slurp) ),
         :exercise(.basename),
       ).test,
       "{.basename}: test suite matches generated";
