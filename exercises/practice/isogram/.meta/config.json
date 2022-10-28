@@ -1,0 +1,17 @@
+{
+  "authors": [habere-et-dispertire],
+  "files": {
+    "solution": [
+      "Isogram.rakumod"
+    ],
+    "test": [
+      "isogram.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/Isogram.rakumod"
+    ]
+  },
+  "blurb": "Determine if a word or phrase is an isogram.",
+  "source": "Wikipedia",
+  "source_url": "https://en.wikipedia.org/wiki/Isogram"
+}
