@@ -1,5 +1,5 @@
 {
-  "authors": [habere-et-dispertire],
+  "authors": ["habere-et-dispertire"],
   "files": {
     "solution": [
       "Isogram.rakumod"
