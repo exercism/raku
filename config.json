@@ -418,6 +418,15 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
+      },
+      {
+        "slug": "isbn-verifier",
+        "name": "ISBN Verifier",
+        "uuid": "de679386-4467-42c4-9b31-d7285619580d",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2,
+        "topics": []
       }      
     ]
   },
