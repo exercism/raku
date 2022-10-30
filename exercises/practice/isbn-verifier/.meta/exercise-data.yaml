@@ -1,9 +1,9 @@
 properties:
   isValid:
     test: |-
-      sprintf(q:to/END/, %case<input><isbn>, %case<expected>, %case<description>.raku);
+      sprintf(q:to/END/, %case<input><isbn>.raku, %case<expected>, %case<description>.raku);
       cmp-ok(
-          is-isbn10('%s'),
+          is-isbn10(%s),
           "eqv",
           %s,
           %s,
