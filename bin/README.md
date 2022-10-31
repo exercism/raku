@@ -1,42 +1,75 @@
 # Readme
 
 The `exercise-gen.raku` file can be used in the following ways:
-* From within the directory of the exercise you wish to generate a test for. [showterm example](http://showterm.io/cc7ddb7b23bb73e784d7d)
-* With arguments specifying which exercises you want to generate tests for.  
-  e.g. `./exercise-gen.raku hello-world leap`. [showterm example](http://showterm.io/54d5cf196eb45a0e40640)
-* With the argument `--all` to run the generator for all exercises.  
+* From within the directory of the exercise you wish to generate a test for.
+* With arguments specifying which exercises you want to generate tests for.
+  e.g. `./exercise-gen.raku hello-world leap`.
+* With the argument `--all` to run the generator for all exercises.
   i.e `./exercise-gen.raku --all`
 
-You will either need to create a symlink to or clone the
-[problem-specifications](https://github.com/exercism/problem-specifications) repository
-into the root directory of this repository.
-The generator will retrieve data from the `.meta/exercise-data.yaml` file within
-each exercise directory, and use the contained information to generate
-test files using `templates/test.mustache`, and Example.rakumod files using
-`templates/module.mustache`. If it finds a `canonical-data.json` file in
-`problem-specifications` for the exercise in question it will be included.
+You must install the dependencies found in `META6.json`, which can be done with the command `zef install --deps-only .`.
+
+You will need to sync the exercise data using Exercism's configlet script.
+The generator will retrieve data from `.meta/exercise-data.yaml` within each exercise directory, and use the contained information to generate test files using `templates/test.mustache`, and `.pm` files using `templates/module.mustache`.
+If it finds a `canonical-data.json` file for the exercise in question (via `bin/configlet sync`), the data can be used to generate tests for each `property` found in this data.
 
 Example of a yaml file:
 ```yaml
-package: MyPackage
-plan: 2
 modules:
   - use: Data::Dump
   - use: Foo::Bar
+
+# For class methods
 methods: 'foo bar'
+
+# This is a string containing Raku code, to be inserted before any properties
 tests: |-
-  ok my-subroutine, 'Raku code here';
-  pass;
+  my $baz;
+
+# Each JSON test case is decoded and stored in variable `%case`.
+# The goal is to create a string of Raku code inserted into a template.
+properties:
+  foo:
+    test: |-
+      sprintf(q:to/END/, %case<input><data>, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          foo( %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+  bar:
+    test: |-
+      sprintf(q:to/END/, %case<input><data>, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          bar( %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
 
 unit: module
-examples:
-  base: |-
-    sub my-subroutine is export {
-      True;
+
+# The module we use to check the tests work.
+example: |-
+    sub foo is export {
+        return True;
     }
 
-    class MyClass is export {
+    sub bar is export {
+        return False;
+    }
+
+# The module the student receives to work on
+stub: |-
+    sub foo is export {
+        return Nil;
+    }
+
+    sub bar is export {
+        return Nil;
     }
 ```
-
-You must have `Template::Mustache` and `YAMLish` to run `exercise-gen.raku`.
