@@ -25,13 +25,13 @@ multi MAIN (*@exercises) {
 }
 
 #|[The generator will attempt to run using the current directory.
-Exits if a '.meta/exercise-data.yaml' file is not found.]
+Exits if a '.meta/template-data.yaml' file is not found.]
 multi MAIN {
   say 'No args given; working in current directory.';
-  if '.meta/exercise-data.yaml'.IO.f {
+  if '.meta/template-data.yaml'.IO.f {
     generate $*CWD.IO.basename;
   } else {
-    say "exercise-data.yaml not found in .meta of current directory; exiting.\n";
+    say "template-data.yaml not found in .meta of current directory; exiting.\n";
     say $*USAGE;
     exit 1;
   }
@@ -44,7 +44,7 @@ sub generate ($exercise) {
       note 'exercise directory does not exist for: '  ~ join ' ', @dir-not-found
     }
     if @yaml-not-found {
-      note '.meta/exercise-data.yaml not found for: ' ~ join ' ', @yaml-not-found
+      note '.meta/template-data.yaml not found for: ' ~ join ' ', @yaml-not-found
     }
   }
   if (
@@ -54,7 +54,7 @@ sub generate ($exercise) {
     return;
   }
   if (
-    my $yaml-file = $exercise-dir.add('.meta/exercise-data.yaml')
+    my $yaml-file = $exercise-dir.add('.meta/template-data.yaml')
   ) !~~ :f {
     push @yaml-not-found, $exercise;
     return;

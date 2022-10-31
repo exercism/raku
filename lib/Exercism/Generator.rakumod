@@ -15,7 +15,7 @@ has Str:D $.exercise is required;
 
 #| The data to be used for rendering templates
 has %.data = do if ( my $yaml-file =
-  $base-dir.add("exercises/practice/$!exercise/.meta/exercise-data.yaml")
+  $base-dir.add("exercises/practice/$!exercise/.meta/template-data.yaml")
 ).f {
   load-yaml($yaml-file.slurp);
 };
