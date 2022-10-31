@@ -1,0 +1,139 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use IsbnVerifier;
+
+cmp-ok(
+    is-isbn10("3-598-21508-8"),
+    "eqv",
+    True,
+    "valid isbn",
+);
+
+cmp-ok(
+    is-isbn10("3-598-21508-9"),
+    "eqv",
+    False,
+    "invalid isbn check digit",
+);
+
+cmp-ok(
+    is-isbn10("3-598-21507-X"),
+    "eqv",
+    True,
+    "valid isbn with a check digit of 10",
+);
+
+cmp-ok(
+    is-isbn10("3-598-21507-A"),
+    "eqv",
+    False,
+    "check digit is a character other than X",
+);
+
+cmp-ok(
+    is-isbn10("4-598-21507-B"),
+    "eqv",
+    False,
+    "invalid check digit in isbn is not treated as zero",
+);
+
+cmp-ok(
+    is-isbn10("3-598-P1581-X"),
+    "eqv",
+    False,
+    "invalid character in isbn is not treated as zero",
+);
+
+cmp-ok(
+    is-isbn10("3-598-2X507-9"),
+    "eqv",
+    False,
+    "X is only valid as a check digit",
+);
+
+cmp-ok(
+    is-isbn10("3598215088"),
+    "eqv",
+    True,
+    "valid isbn without separating dashes",
+);
+
+cmp-ok(
+    is-isbn10("359821507X"),
+    "eqv",
+    True,
+    "isbn without separating dashes and X as check digit",
+);
+
+cmp-ok(
+    is-isbn10("359821507"),
+    "eqv",
+    False,
+    "isbn without check digit and dashes",
+);
+
+cmp-ok(
+    is-isbn10("3598215078X"),
+    "eqv",
+    False,
+    "too long isbn and no dashes",
+);
+
+cmp-ok(
+    is-isbn10("00"),
+    "eqv",
+    False,
+    "too short isbn",
+);
+
+cmp-ok(
+    is-isbn10("3-598-21507"),
+    "eqv",
+    False,
+    "isbn without check digit",
+);
+
+cmp-ok(
+    is-isbn10("3-598-21515-X"),
+    "eqv",
+    False,
+    "check digit of X should not be used for 0",
+);
+
+cmp-ok(
+    is-isbn10(""),
+    "eqv",
+    False,
+    "empty isbn",
+);
+
+cmp-ok(
+    is-isbn10("134456729"),
+    "eqv",
+    False,
+    "input is 9 characters",
+);
+
+cmp-ok(
+    is-isbn10("3132P34035"),
+    "eqv",
+    False,
+    "invalid characters are not ignored after checking length",
+);
+
+cmp-ok(
+    is-isbn10("3598P215088"),
+    "eqv",
+    False,
+    "invalid characters are not ignored before checking length",
+);
+
+cmp-ok(
+    is-isbn10("98245726788"),
+    "eqv",
+    False,
+    "input is too long but contains a valid isbn",
+);
+
+done-testing;

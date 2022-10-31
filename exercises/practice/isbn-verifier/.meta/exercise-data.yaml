@@ -1,0 +1,31 @@
+properties:
+  isValid:
+    test: |-
+      sprintf(q:to/END/, %case<input><isbn>.raku, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          is-isbn10(%s),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub is-isbn10 ($number) is export {
+    my @sift = gather for $number.comb {
+           when                 '-' {       }
+           when / <:Number> / | 'X' { .take }
+        default                     { return False }
+    };
+
+    return False unless @sift.elems == 10;
+    @sift.tail = 10 if @sift.tail eq 'X';
+    return False unless @sift.all.contains: any ^10;
+
+    return sum( @sift Z× (10...1) ) %% 11
+  }
+
+stub: |-
+  sub is-isbn10 ($number) is export {
+  }
