@@ -1,5 +1,4 @@
 {
-  "blurb": "Implement a doubly linked list.",
   "authors": [
     "yanick"
   ],
@@ -18,5 +17,6 @@
       ".meta/solutions/LinkedList.rakumod"
     ]
   },
+  "blurb": "Implement a doubly linked list.",
   "source": "Classic computer science topic"
 }

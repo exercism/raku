@@ -1,5 +1,4 @@
 {
-  "blurb": "Manage robot factory settings.",
   "authors": [
     "dnmfarrell"
   ],
@@ -20,5 +19,6 @@
       ".meta/solutions/Robot.rakumod"
     ]
   },
+  "blurb": "Manage robot factory settings.",
   "source": "A debugging session with Paul Blackwell at gSchool."
 }
