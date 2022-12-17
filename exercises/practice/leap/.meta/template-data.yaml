@@ -1,3 +1,6 @@
+wrap: true
+capture:
+  - function: '&is-leap-year'
 tests: |
   for Date, DateTime {
       .^method_table<new>.wrap: sub (|) {

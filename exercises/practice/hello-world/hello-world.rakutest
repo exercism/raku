@@ -2,12 +2,33 @@
 use Test;
 use lib $?FILE.IO.dirname; #`[Look for the module inside the same directory as this test file.]
 use HelloWorld;
-plan 1; #`[This is how many tests we expect to run.]
 
 # Run the 'cmp-ok' subroutine from the 'Test' module, with four arguments.
 cmp-ok(
     hello,           # Run the 'hello' subroutine, which is imported from your module.
-    'eq',            # The comparison we're using ('eq' for comparing strings).
-    'Hello, World!', # The expected result to compare with 'hello'.
-    'Say Hi!'        # The test description.
+    "eq",            # The comparison we're using ('eq' for comparing strings).
+    "Hello, World!", # The expected result to compare with 'hello'.
+    "Say Hi!",       # The test description.
 );
+
+done-testing;
+
+# Exercism Test Runner Data
+INIT {
+    my Str:D $call is default('');
+
+    for (&hello,) -> &f {
+        &f.wrap(sub (|c) {
+            $call = &f.name ~ |c.raku.substr(1);
+            return callsame;
+        });
+    }
+
+    &cmp-ok.wrap(sub ($, |c) {
+        my $pass = callsame;
+        diag '    code: cmp-ok(' ~ $call ~ ', ' ~ |c.raku.substr(2);
+        diag 'at ' ~ callframe(1).file ~ ' line ' ~ callframe(1).line if !$pass;
+        $call = Nil;
+        return $pass;
+    });
+}

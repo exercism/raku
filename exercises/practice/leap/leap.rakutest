@@ -73,3 +73,23 @@ cmp-ok(
 );
 
 done-testing;
+
+# Exercism Test Runner Data
+INIT {
+    my Str:D $call is default('');
+
+    for (&is-leap-year,) -> &f {
+        &f.wrap(sub (|c) {
+            $call = &f.name ~ |c.raku.substr(1);
+            return callsame;
+        });
+    }
+
+    &cmp-ok.wrap(sub ($, |c) {
+        my $pass = callsame;
+        diag '    code: cmp-ok(' ~ $call ~ ', ' ~ |c.raku.substr(2);
+        diag 'at ' ~ callframe(1).file ~ ' line ' ~ callframe(1).line if !$pass;
+        $call = Nil;
+        return $pass;
+    });
+}

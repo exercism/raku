@@ -1,15 +1,20 @@
-plan: 1
-tests: |-
-  # Run the 'cmp-ok' subroutine from the 'Test' module, with four arguments.
-  cmp-ok(
-      hello,           # Run the 'hello' subroutine, which is imported from your module.
-      'eq',            # The comparison we're using ('eq' for comparing strings).
-      'Hello, World!', # The expected result to compare with 'hello'.
-      'Say Hi!'        # The test description.
-  );
+wrap: true
+capture:
+  - function: '&hello'
+properties:
+  hello:
+    test: |-
+      sprintf(q:to/END/, |%case<expected description>.map(*.raku));
+      # Run the 'cmp-ok' subroutine from the 'Test' module, with four arguments.
+      cmp-ok(
+          hello,           # Run the 'hello' subroutine, which is imported from your module.
+          "eq",            # The comparison we're using ('eq' for comparing strings).
+          %s, # The expected result to compare with 'hello'.
+          %s,       # The test description.
+      );
+      END
 
 lib_comment: Look for the module inside the same directory as this test file.
-plan_comment: This is how many tests we expect to run.
 
 unit: module
 unit_comment: |-

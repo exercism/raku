@@ -1,6 +1,5 @@
 #!/usr/bin/env raku{{=#`{{ }}=}}#`{{! Mustache tags double up as Raku embedded comments}}
-use Test;#`{{#cases}}
-use JSON::Fast;#`{{/cases}}#`{{#modules}}
+use Test;#`{{#modules}}
 use #`{{&use}};#`{{/modules}}
 use lib $?FILE.IO.dirname;#`{{#lib_comment}} #`[#`{{&lib_comment}}]#`{{/lib_comment}}
 use #`{{&package}};#`{{#plan}}
@@ -9,12 +8,31 @@ plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#
 #`{{#methods_comment}}#`[#`{{&methods_comment}}]
 #`{{/methods_comment}}for <#`{{&methods}}> -> $method {
   #`{{&package}}.^can($method) or bail-out "Cannot run expected method `$method`.";
-}#`{{/methods}}#`{{#cases}}
+}#`{{/methods}}#`{{#tests}}
 
-my @test-cases = from-json($=pod[*-1].contents).List;#`{{/cases}}#`{{#tests}}#`{{^cases}}
-#`{{/cases}}
+#`{{&tests}}#`{{/tests}}#`{{^plan}}
 
-#`{{&tests}}#`{{/tests}}#`{{#catch_stub}}
+done-testing;#`{{/plan}}#`{{#wrap}}
+
+# Exercism Test Runner Data
+INIT {
+    my Str:D $call is default('');
+
+    for (#`{{#capture}}#`{{&function}},#`{{/capture}}) -> &f {
+        &f.wrap(sub (|c) {
+            $call = &f.name ~ |c.raku.substr(1);
+            return callsame;
+        });
+    }
+
+    &cmp-ok.wrap(sub ($, |c) {
+        my $pass = callsame;
+        diag '    code: cmp-ok(' ~ $call ~ ', ' ~ |c.raku.substr(2);
+        diag 'at ' ~ callframe(1).file ~ ' line ' ~ callframe(1).line if !$pass;
+        $call = Nil;
+        return $pass;
+    });
+}#`{{/wrap}}#`{{#catch_stub}}
 
 CATCH {
   when X::StubCode {
@@ -22,11 +40,4 @@ CATCH {
     note "{.message} (does the sub/method contain '!!!'?)\n"
       ~ .backtrace.concise;
   }
-}#`{{/catch_stub}}#`{{^plan}}
-
-done-testing;#`{{/plan}}#`{{#cases}}
-
-=head2 Test Cases
-=begin code
-#`{{&cases}}
-=end code#`{{/cases}}
+}#`{{/catch_stub}}

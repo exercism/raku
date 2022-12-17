@@ -3,7 +3,7 @@ use lib ( my $base-dir = $?FILE.IO.resolve.parent(3) ).add('lib');
 use Exercism::Generator;
 
 subtest '0 case UUIDs' => {
-  plan 4;
+  plan 3;
 
   given Exercism::Generator.new(
     :exercise<hello-world>,
@@ -12,12 +12,11 @@ subtest '0 case UUIDs' => {
     is .package, 'HelloWorld', 'Default package name is UpperCamelCase';
     cmp-ok .case-uuids, &infix:<≡>, ∅, 'Case UUIDs is empty set';
     cmp-ok .cases.elems, &infix:<==>, 0, 'No cases';
-    is .json-tests, '', 'Empty JSON';
   }
 }
 
 subtest '1 case UUID' => {
-  plan 5;
+  plan 4;
 
   given Exercism::Generator.new(
     :exercise<hello-world>,
@@ -37,18 +36,6 @@ subtest '1 case UUID' => {
       ).item], 'Case taken from UUID';
 
       is-deeply .property-tests.Array, ['Hello, World!'];
-
-      is .json-tests, q:to/JSON/.trim, 'Cases converted to JSON array';
-        [
-          {
-            "description": "Say Hi!",
-            "expected": "Hello, World!",
-            "input": {
-            },
-            "property": "hello"
-          }
-        ]
-        JSON
     }
     else {
       skip 'problem-specifications required', 2;
