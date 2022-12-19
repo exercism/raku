@@ -3,185 +3,179 @@ use Test;
 use lib $?FILE.IO.dirname; #`[Look for the module inside the same directory as this test file.]
 use Bob;
 
-#`[Check that the class 'Bob' can use all of the methods
-needed in the tests (only 'hey' for this one).]
-for <hey> -> $method {
-  Bob.^can($method) or bail-out "Cannot run expected method `$method`.";
-}
-
-cmp-ok(
+cmp-ok( # begin: e162fead-606f-437a-a166-d051915cea8e
     Bob.hey("Tom-ay-to, tom-aaaah-to."),
     "eq",
     "Whatever.",
     "stating something",
-);
+); # end: e162fead-606f-437a-a166-d051915cea8e
 
-cmp-ok(
+cmp-ok( # begin: 73a966dc-8017-47d6-bb32-cf07d1a5fcd9
     Bob.hey("WATCH OUT!"),
     "eq",
     "Whoa, chill out!",
     "shouting",
-);
+); # end: 73a966dc-8017-47d6-bb32-cf07d1a5fcd9
 
-cmp-ok(
+cmp-ok( # begin: d6c98afd-df35-4806-b55e-2c457c3ab748
     Bob.hey("FCECDFCAAB"),
     "eq",
     "Whoa, chill out!",
     "shouting gibberish",
-);
+); # end: d6c98afd-df35-4806-b55e-2c457c3ab748
 
-cmp-ok(
+cmp-ok( # begin: 8a2e771d-d6f1-4e3f-b6c6-b41495556e37
     Bob.hey("Does this cryogenic chamber make me look fat?"),
     "eq",
     "Sure.",
     "asking a question",
-);
+); # end: 8a2e771d-d6f1-4e3f-b6c6-b41495556e37
 
-cmp-ok(
+cmp-ok( # begin: 81080c62-4e4d-4066-b30a-48d8d76920d9
     Bob.hey("You are, what, like 15?"),
     "eq",
     "Sure.",
     "asking a numeric question",
-);
+); # end: 81080c62-4e4d-4066-b30a-48d8d76920d9
 
-cmp-ok(
+cmp-ok( # begin: 2a02716d-685b-4e2e-a804-2adaf281c01e
     Bob.hey("fffbbcbeab?"),
     "eq",
     "Sure.",
     "asking gibberish",
-);
+); # end: 2a02716d-685b-4e2e-a804-2adaf281c01e
 
-cmp-ok(
+cmp-ok( # begin: c02f9179-ab16-4aa7-a8dc-940145c385f7
     Bob.hey("Hi there!"),
     "eq",
     "Whatever.",
     "talking forcefully",
-);
+); # end: c02f9179-ab16-4aa7-a8dc-940145c385f7
 
-cmp-ok(
+cmp-ok( # begin: 153c0e25-9bb5-4ec5-966e-598463658bcd
     Bob.hey("It's OK if you don't want to go work for NASA."),
     "eq",
     "Whatever.",
     "using acronyms in regular speech",
-);
+); # end: 153c0e25-9bb5-4ec5-966e-598463658bcd
 
-cmp-ok(
+cmp-ok( # begin: a5193c61-4a92-4f68-93e2-f554eb385ec6
     Bob.hey("WHAT'S GOING ON?"),
     "eq",
     "Calm down, I know what I'm doing!",
     "forceful question",
-);
+); # end: a5193c61-4a92-4f68-93e2-f554eb385ec6
 
-cmp-ok(
+cmp-ok( # begin: a20e0c54-2224-4dde-8b10-bd2cdd4f61bc
     Bob.hey("1, 2, 3 GO!"),
     "eq",
     "Whoa, chill out!",
     "shouting numbers",
-);
+); # end: a20e0c54-2224-4dde-8b10-bd2cdd4f61bc
 
-cmp-ok(
+cmp-ok( # begin: f7bc4b92-bdff-421e-a238-ae97f230ccac
     Bob.hey("1, 2, 3"),
     "eq",
     "Whatever.",
     "no letters",
-);
+); # end: f7bc4b92-bdff-421e-a238-ae97f230ccac
 
-cmp-ok(
+cmp-ok( # begin: bb0011c5-cd52-4a5b-8bfb-a87b6283b0e2
     Bob.hey("4?"),
     "eq",
     "Sure.",
     "question with no letters",
-);
+); # end: bb0011c5-cd52-4a5b-8bfb-a87b6283b0e2
 
-cmp-ok(
+cmp-ok( # begin: 496143c8-1c31-4c01-8a08-88427af85c66
     Bob.hey("ZOMG THE \%^*\@#\$(*^ ZOMBIES ARE COMING!!11!!1!"),
     "eq",
     "Whoa, chill out!",
     "shouting with special characters",
-);
+); # end: 496143c8-1c31-4c01-8a08-88427af85c66
 
-cmp-ok(
+cmp-ok( # begin: e6793c1c-43bd-4b8d-bc11-499aea73925f
     Bob.hey("I HATE THE DENTIST"),
     "eq",
     "Whoa, chill out!",
     "shouting with no exclamation mark",
-);
+); # end: e6793c1c-43bd-4b8d-bc11-499aea73925f
 
-cmp-ok(
+cmp-ok( # begin: aa8097cc-c548-4951-8856-14a404dd236a
     Bob.hey("Ending with ? means a question."),
     "eq",
     "Whatever.",
     "statement containing question mark",
-);
+); # end: aa8097cc-c548-4951-8856-14a404dd236a
 
-cmp-ok(
+cmp-ok( # begin: 9bfc677d-ea3a-45f2-be44-35bc8fa3753e
     Bob.hey(":) ?"),
     "eq",
     "Sure.",
     "non-letters with question",
-);
+); # end: 9bfc677d-ea3a-45f2-be44-35bc8fa3753e
 
-cmp-ok(
+cmp-ok( # begin: 8608c508-f7de-4b17-985b-811878b3cf45
     Bob.hey("Wait! Hang on. Are you going to be OK?"),
     "eq",
     "Sure.",
     "prattling on",
-);
+); # end: 8608c508-f7de-4b17-985b-811878b3cf45
 
-cmp-ok(
+cmp-ok( # begin: bc39f7c6-f543-41be-9a43-fd1c2f753fc0
     Bob.hey(""),
     "eq",
     "Fine. Be that way!",
     "silence",
-);
+); # end: bc39f7c6-f543-41be-9a43-fd1c2f753fc0
 
-cmp-ok(
+cmp-ok( # begin: d6c47565-372b-4b09-b1dd-c40552b8378b
     Bob.hey("          "),
     "eq",
     "Fine. Be that way!",
     "prolonged silence",
-);
+); # end: d6c47565-372b-4b09-b1dd-c40552b8378b
 
-cmp-ok(
+cmp-ok( # begin: 4428f28d-4100-4d85-a902-e5a78cb0ecd3
     Bob.hey("\t\t\t\t\t\t\t\t\t\t"),
     "eq",
     "Fine. Be that way!",
     "alternate silence",
-);
+); # end: 4428f28d-4100-4d85-a902-e5a78cb0ecd3
 
-cmp-ok(
+cmp-ok( # begin: 66953780-165b-4e7e-8ce3-4bcb80b6385a
     Bob.hey("\nDoes this cryogenic chamber make me look fat?\nNo."),
     "eq",
     "Whatever.",
     "multiple line question",
-);
+); # end: 66953780-165b-4e7e-8ce3-4bcb80b6385a
 
-cmp-ok(
+cmp-ok( # begin: 5371ef75-d9ea-4103-bcfa-2da973ddec1b
     Bob.hey("         hmmmmmmm..."),
     "eq",
     "Whatever.",
     "starting with whitespace",
-);
+); # end: 5371ef75-d9ea-4103-bcfa-2da973ddec1b
 
-cmp-ok(
+cmp-ok( # begin: 05b304d6-f83b-46e7-81e0-4cd3ca647900
     Bob.hey("Okay if like my  spacebar  quite a bit?   "),
     "eq",
     "Sure.",
     "ending with whitespace",
-);
+); # end: 05b304d6-f83b-46e7-81e0-4cd3ca647900
 
-cmp-ok(
+cmp-ok( # begin: 72bd5ad3-9b2f-4931-a988-dce1f5771de2
     Bob.hey("\n\r \t"),
     "eq",
     "Fine. Be that way!",
     "other whitespace",
-);
+); # end: 72bd5ad3-9b2f-4931-a988-dce1f5771de2
 
-cmp-ok(
+cmp-ok( # begin: 12983553-8601-46a8-92fa-fcaa3bc4a2a0
     Bob.hey("This is a statement ending with whitespace      "),
     "eq",
     "Whatever.",
     "non-question ending with whitespace",
-);
+); # end: 12983553-8601-46a8-92fa-fcaa3bc4a2a0
 
 done-testing;

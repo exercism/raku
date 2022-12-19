@@ -4,10 +4,6 @@ use lib $?FILE.IO.dirname;
 use Robot;
 plan 8;
 
-for <name reset-name> -> $method {
-  Robot.^can($method) or bail-out "Cannot run expected method `$method`.";
-}
-
 srand 1;
 my Robot:D $robot := Robot.new;
 my Str:D @robot-names = $robot.name;

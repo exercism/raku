@@ -68,7 +68,7 @@ submethod build-cases ( %obj, Str $description = '' ) {
   }
   elsif %obj<uuid> ∈ @!case-uuids {
     return %(
-      |( %obj<input expected property>:p ),
+      |( %obj<input expected property uuid>:p ),
       :description($description ~ %obj<description>),
     ).item;
   }
@@ -80,7 +80,10 @@ submethod build-property-tests {
   my @tests;
   for self.cases -> %case {
     with self.data.<properties>{%case<property>}<test> -> $eval {
-      @tests.push(EVAL $eval);
+      my @output = EVAL($eval).lines(:!chomp);
+      @output[0].=trim-trailing;
+      @output[0] ~= " # begin: %case<uuid>\n";
+      @tests.push(@output.join.trim-trailing ~ " # end: %case<uuid>\n");
     }
   }
   return @tests;
