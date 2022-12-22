@@ -4,12 +4,7 @@ use JSON::Fast;#`{{/cases}}#`{{#modules}}
 use #`{{&use}};#`{{/modules}}
 use lib $?FILE.IO.dirname;#`{{#lib_comment}} #`[#`{{&lib_comment}}]#`{{/lib_comment}}
 use #`{{&package}};#`{{#plan}}
-plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#`{{/plan}}#`{{#methods}}
-
-#`{{#methods_comment}}#`[#`{{&methods_comment}}]
-#`{{/methods_comment}}for <#`{{&methods}}> -> $method {
-  #`{{&package}}.^can($method) or bail-out "Cannot run expected method `$method`.";
-}#`{{/methods}}#`{{#cases}}
+plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#`{{/plan}}#`{{#cases}}
 
 my @test-cases = from-json($=pod[*-1].contents).List;#`{{/cases}}#`{{#tests}}#`{{^cases}}
 #`{{/cases}}

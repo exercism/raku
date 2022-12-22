@@ -3,116 +3,116 @@ use Test;
 use lib $?FILE.IO.dirname;
 use Anagram;
 
-cmp-ok(
+cmp-ok( # begin: dd40c4d2-3c8b-44e5-992a-f42b393ec373
     match-anagrams( :subject("diaper"), :candidates("hello", "world", "zombies", "pants") ),
     "(==)",
     (),
     "no matches",
-);
+); # end: dd40c4d2-3c8b-44e5-992a-f42b393ec373
 
-cmp-ok(
+cmp-ok( # begin: 03eb9bbe-8906-4ea0-84fa-ffe711b52c8b
     match-anagrams( :subject("solemn"), :candidates("lemons", "cherry", "melons") ),
     "(==)",
     ("lemons", "melons"),
     "detects two anagrams",
-);
+); # end: 03eb9bbe-8906-4ea0-84fa-ffe711b52c8b
 
-cmp-ok(
+cmp-ok( # begin: a27558ee-9ba0-4552-96b1-ecf665b06556
     match-anagrams( :subject("good"), :candidates("dog", "goody") ),
     "(==)",
     (),
     "does not detect anagram subsets",
-);
+); # end: a27558ee-9ba0-4552-96b1-ecf665b06556
 
-cmp-ok(
+cmp-ok( # begin: 64cd4584-fc15-4781-b633-3d814c4941a4
     match-anagrams( :subject("listen"), :candidates("enlists", "google", "inlets", "banana") ),
     "(==)",
     ("inlets",),
     "detects anagram",
-);
+); # end: 64cd4584-fc15-4781-b633-3d814c4941a4
 
-cmp-ok(
+cmp-ok( # begin: 99c91beb-838f-4ccd-b123-935139917283
     match-anagrams( :subject("allergy"), :candidates("gallery", "ballerina", "regally", "clergy", "largely", "leading") ),
     "(==)",
     ("gallery", "regally", "largely"),
     "detects three anagrams",
-);
+); # end: 99c91beb-838f-4ccd-b123-935139917283
 
-cmp-ok(
+cmp-ok( # begin: 78487770-e258-4e1f-a646-8ece10950d90
     match-anagrams( :subject("nose"), :candidates("Eons", "ONES") ),
     "(==)",
     ("Eons", "ONES"),
     "detects multiple anagrams with different case",
-);
+); # end: 78487770-e258-4e1f-a646-8ece10950d90
 
-cmp-ok(
+cmp-ok( # begin: 1d0ab8aa-362f-49b7-9902-3d0c668d557b
     match-anagrams( :subject("mass"), :candidates("last",) ),
     "(==)",
     (),
     "does not detect non-anagrams with identical checksum",
-);
+); # end: 1d0ab8aa-362f-49b7-9902-3d0c668d557b
 
-cmp-ok(
+cmp-ok( # begin: 9e632c0b-c0b1-4804-8cc1-e295dea6d8a8
     match-anagrams( :subject("Orchestra"), :candidates("cashregister", "Carthorse", "radishes") ),
     "(==)",
     ("Carthorse",),
     "detects anagrams case-insensitively",
-);
+); # end: 9e632c0b-c0b1-4804-8cc1-e295dea6d8a8
 
-cmp-ok(
+cmp-ok( # begin: b248e49f-0905-48d2-9c8d-bd02d8c3e392
     match-anagrams( :subject("Orchestra"), :candidates("cashregister", "carthorse", "radishes") ),
     "(==)",
     ("carthorse",),
     "detects anagrams using case-insensitive subject",
-);
+); # end: b248e49f-0905-48d2-9c8d-bd02d8c3e392
 
-cmp-ok(
+cmp-ok( # begin: f367325c-78ec-411c-be76-e79047f4bd54
     match-anagrams( :subject("orchestra"), :candidates("cashregister", "Carthorse", "radishes") ),
     "(==)",
     ("Carthorse",),
     "detects anagrams using case-insensitive possible matches",
-);
+); # end: f367325c-78ec-411c-be76-e79047f4bd54
 
-cmp-ok(
+cmp-ok( # begin: 7cc195ad-e3c7-44ee-9fd2-d3c344806a2c
     match-anagrams( :subject("go"), :candidates("go Go GO",) ),
     "(==)",
     (),
     "does not detect an anagram if the original word is repeated",
-);
+); # end: 7cc195ad-e3c7-44ee-9fd2-d3c344806a2c
 
-cmp-ok(
+cmp-ok( # begin: 9878a1c9-d6ea-4235-ae51-3ea2befd6842
     match-anagrams( :subject("tapper"), :candidates("patter",) ),
     "(==)",
     (),
     "anagrams must use all letters exactly once",
-);
+); # end: 9878a1c9-d6ea-4235-ae51-3ea2befd6842
 
-cmp-ok(
+cmp-ok( # begin: 68934ed0-010b-4ef9-857a-20c9012d1ebf
     match-anagrams( :subject("BANANA"), :candidates("BANANA",) ),
     "(==)",
     (),
     "words are not anagrams of themselves",
-);
+); # end: 68934ed0-010b-4ef9-857a-20c9012d1ebf
 
-cmp-ok(
+cmp-ok( # begin: 589384f3-4c8a-4e7d-9edc-51c3e5f0c90e
     match-anagrams( :subject("BANANA"), :candidates("Banana",) ),
     "(==)",
     (),
     "words are not anagrams of themselves even if letter case is partially different",
-);
+); # end: 589384f3-4c8a-4e7d-9edc-51c3e5f0c90e
 
-cmp-ok(
+cmp-ok( # begin: ba53e423-7e02-41ee-9ae2-71f91e6d18e6
     match-anagrams( :subject("BANANA"), :candidates("banana",) ),
     "(==)",
     (),
     "words are not anagrams of themselves even if letter case is completely different",
-);
+); # end: ba53e423-7e02-41ee-9ae2-71f91e6d18e6
 
-cmp-ok(
+cmp-ok( # begin: 33d3f67e-fbb9-49d3-a90e-0beb00861da7
     match-anagrams( :subject("LISTEN"), :candidates("LISTEN", "Silent") ),
     "(==)",
     ("Silent",),
     "words other than themselves can be anagrams",
-);
+); # end: 33d3f67e-fbb9-49d3-a90e-0beb00861da7
 
 done-testing;
