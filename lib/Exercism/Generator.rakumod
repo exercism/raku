@@ -81,9 +81,11 @@ submethod build-property-tests {
   for self.cases -> %case {
     with self.data.<properties>{%case<property>}<test> -> $eval {
       my @output = EVAL($eval).lines(:!chomp);
-      @output[0].=trim-trailing;
-      @output[0] ~= " # begin: %case<uuid>\n";
-      @tests.push(@output.join.trim-trailing ~ " # end: %case<uuid>\n");
+      if @output > 1 {
+        @output[0].=trim-trailing;
+        @output[0] ~= " # begin: %case<uuid>\n";
+      }
+      @tests.push(@output.join.trim-trailing ~ ' # ' ~ (@output > 1 ?? 'end' !! 'case') ~ ": %case<uuid>\n");
     }
   }
   return @tests;

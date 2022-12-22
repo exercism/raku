@@ -34,9 +34,10 @@ subtest '1 case UUID' => {
         :property<hello>,
         :input(Hash.new),
         :expected('Hello, World!'),
+        :uuid<af9ffe10-dc13-42d8-a742-e7bdafac449d>,
       ).item], 'Case taken from UUID';
 
-      is-deeply .property-tests.Array, ['Hello, World!'];
+      is-deeply .property-tests.Array, ["Hello, World! # case: af9ffe10-dc13-42d8-a742-e7bdafac449d\n"];
 
       is .json-tests, q:to/JSON/.trim, 'Cases converted to JSON array';
         [
@@ -45,7 +46,8 @@ subtest '1 case UUID' => {
             "expected": "Hello, World!",
             "input": {
             },
-            "property": "hello"
+            "property": "hello",
+            "uuid": "af9ffe10-dc13-42d8-a742-e7bdafac449d"
           }
         ]
         JSON
