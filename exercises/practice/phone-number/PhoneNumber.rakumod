@@ -1,9 +1,9 @@
-unit module Phone;
+unit module PhoneNumber;
 
 constant @errors = (
    '11 digits must start with 1',
-   'more than 11 digits',
-   'incorrect number of digits',
+   'must not be greater than 11 digits',
+   'must not be fewer than 10 digits',
    'letters not permitted',
    'punctuations not permitted',
    'area code cannot start with zero',

@@ -8,13 +8,13 @@
   ],
   "files": {
     "solution": [
-      "Phone.rakumod"
+      "PhoneNumber.rakumod"
     ],
     "test": [
       "phone-number.rakutest"
     ],
     "example": [
-      ".meta/solutions/Phone.rakumod"
+      ".meta/solutions/PhoneNumber.rakumod"
     ]
   },
   "source": "Exercise by the JumpstartLab team for students at The Turing School of Software and Design.",
