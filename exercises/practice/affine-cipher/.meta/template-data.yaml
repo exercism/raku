@@ -4,7 +4,10 @@ properties:
     test: |-
       if %case<expected><error>:exists {
           sprintf(q:to/END/, (|(%case<input><key><a b>:p), %case<description>).map(*.raku));
-          dies-ok { AffineCipher.new( %s, %s ) }, %s;
+          dies-ok(
+              { AffineCipher.new( %s, %s ) },
+              %s,
+          );
           END
       }
       else {
@@ -21,7 +24,10 @@ properties:
     test: |-
       if %case<expected><error>:exists {
           sprintf(q:to/END/, (|(%case<input><key><a b>:p), %case<description>).map(*.raku));
-          dies-ok { AffineCipher.new( %s, %s ) }, %s;
+          dies-ok(
+              { AffineCipher.new( %s, %s ) },
+              %s,
+          );
           END
       }
       else {
