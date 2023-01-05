@@ -1,7 +1,7 @@
 #!/usr/bin/env raku
 use Test;
 use lib $?FILE.IO.dirname;
-use Phone;
+use PhoneNumber;
 
 cmp-ok( # begin: 79666dce-e0f1-46de-95a1-563802913c35
     clean-number("(223) 456-7890"),
@@ -24,12 +24,12 @@ cmp-ok( # begin: 08f94c34-9a37-46a2-a123-2a8e9727395d
     "cleans numbers with multiple spaces",
 ); # end: 08f94c34-9a37-46a2-a123-2a8e9727395d
 
-throws-like( # begin: 598d8432-0659-4019-a78b-1c6a73691d21
+throws-like( # begin: 2de74156-f646-42b5-8638-0ef1d8b58bc2
     { clean-number "123456789" },
     Exception,
-    :message("incorrect number of digits"),
+    :message("must not be fewer than 10 digits"),
     "invalid when 9 digits",
-); # end: 598d8432-0659-4019-a78b-1c6a73691d21
+); # end: 2de74156-f646-42b5-8638-0ef1d8b58bc2
 
 throws-like( # begin: 57061c72-07b5-431f-9766-d97da7c4399d
     { clean-number "22234567890" },
@@ -52,12 +52,12 @@ cmp-ok( # begin: fa724fbf-054c-4d91-95da-f65ab5b6dbca
     "valid when 11 digits and starting with 1 even with punctuation",
 ); # end: fa724fbf-054c-4d91-95da-f65ab5b6dbca
 
-throws-like( # begin: c6a5f007-895a-4fc5-90bc-a7e70f9b5cad
+throws-like( # begin: 4a1509b7-8953-4eec-981b-c483358ff531
     { clean-number "321234567890" },
     Exception,
-    :message("more than 11 digits"),
+    :message("must not be greater than 11 digits"),
     "invalid when more than 11 digits",
-); # end: c6a5f007-895a-4fc5-90bc-a7e70f9b5cad
+); # end: 4a1509b7-8953-4eec-981b-c483358ff531
 
 throws-like( # begin: eb8a1fc0-64e5-46d3-b0c6-33184208e28a
     { clean-number "523-abc-7890" },
