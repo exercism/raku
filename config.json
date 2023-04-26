@@ -436,7 +436,16 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
-      }      
+      },      
+      {
+        "slug": "series",
+        "name": "Series",
+        "uuid": "84d718e2-8924-47da-a3a5-69e8e65d8345",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      }
     ]
   },
   "concepts": [],
