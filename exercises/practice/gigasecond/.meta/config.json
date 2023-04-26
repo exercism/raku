@@ -1,5 +1,10 @@
 {
-  "authors": ["habere-et-dispertire"],
+  "authors": [
+    "habere-et-dispertire"
+  ],
+  "contributors": [
+    "m-dango"
+  ],
   "files": {
     "solution": [
       "Gigasecond.rakumod"
