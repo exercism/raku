@@ -1,5 +1,4 @@
 {
-  "blurb": "Clean up user-entered phone numbers so that they can be sent SMS messages.",
   "authors": [
     "m-dango"
   ],
@@ -8,15 +7,16 @@
   ],
   "files": {
     "solution": [
-      "Phone.rakumod"
+      "PhoneNumber.rakumod"
     ],
     "test": [
       "phone-number.rakutest"
     ],
     "example": [
-      ".meta/solutions/Phone.rakumod"
+      ".meta/solutions/PhoneNumber.rakumod"
     ]
   },
-  "source": "Event Manager by JumpstartLab",
-  "source_url": "http://tutorials.jumpstartlab.com/projects/eventmanager.html"
+  "blurb": "Clean up user-entered phone numbers so that they can be sent SMS messages.",
+  "source": "Exercise by the JumpstartLab team for students at The Turing School of Software and Design.",
+  "source_url": "https://turing.edu"
 }

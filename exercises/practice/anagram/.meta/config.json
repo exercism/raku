@@ -1,5 +1,4 @@
 {
-  "blurb": "Given a word and a list of possible anagrams, select the correct sublist.",
   "authors": [
     "dnmfarrell"
   ],
@@ -21,6 +20,7 @@
       ".meta/solutions/Anagram.rakumod"
     ]
   },
+  "blurb": "Given a word and a list of possible anagrams, select the correct sublist.",
   "source": "Inspired by the Extreme Startup game",
   "source_url": "https://github.com/rchatley/extreme_startup"
 }

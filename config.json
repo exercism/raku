@@ -436,7 +436,16 @@
         "prerequisites": [],
         "difficulty": 3,
         "topics": []
-      }
+      },      
+      {
+        "slug": "gigasecond",
+        "name": "Gigasecond",
+        "uuid": "505c9042-d830-4022-9830-2678586ba73a",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      }      
     ]
   },
   "concepts": [],
