@@ -52,6 +52,13 @@ cmp-ok( # begin: ff3fb08c-4917-4aab-9f4e-d663491d083d
     "9 is IX",
 ); # end: ff3fb08c-4917-4aab-9f4e-d663491d083d
 
+cmp-ok( # begin: 6d1d82d5-bf3e-48af-9139-87d7165ed509
+    to-roman(16),
+    "eq",
+    "XVI",
+    "16 is XVI",
+); # end: 6d1d82d5-bf3e-48af-9139-87d7165ed509
+
 cmp-ok( # begin: 2bda64ca-7d28-4c56-b08d-16ce65716cf6
     to-roman(27),
     "eq",
@@ -80,6 +87,13 @@ cmp-ok( # begin: d5b283d4-455d-4e68-aacf-add6c4b51915
     "59 is LIX",
 ); # end: d5b283d4-455d-4e68-aacf-add6c4b51915
 
+cmp-ok( # begin: 4465ffd5-34dc-44f3-ada5-56f5007b6dad
+    to-roman(66),
+    "eq",
+    "LXVI",
+    "66 is LXVI",
+); # end: 4465ffd5-34dc-44f3-ada5-56f5007b6dad
+
 cmp-ok( # begin: 46b46e5b-24da-4180-bfe2-2ef30b39d0d0
     to-roman(93),
     "eq",
@@ -101,6 +115,13 @@ cmp-ok( # begin: 267f0207-3c55-459a-b81d-67cec7a46ed9
     "163 is CLXIII",
 ); # end: 267f0207-3c55-459a-b81d-67cec7a46ed9
 
+cmp-ok( # begin: 902ad132-0b4d-40e3-8597-ba5ed611dd8d
+    to-roman(166),
+    "eq",
+    "CLXVI",
+    "166 is CLXVI",
+); # end: 902ad132-0b4d-40e3-8597-ba5ed611dd8d
+
 cmp-ok( # begin: cdb06885-4485-4d71-8bfb-c9d0f496b404
     to-roman(402),
     "eq",
@@ -114,6 +135,13 @@ cmp-ok( # begin: 6b71841d-13b2-46b4-ba97-dec28133ea80
     "DLXXV",
     "575 is DLXXV",
 ); # end: 6b71841d-13b2-46b4-ba97-dec28133ea80
+
+cmp-ok( # begin: dacb84b9-ea1c-4a61-acbb-ce6b36674906
+    to-roman(666),
+    "eq",
+    "DCLXVI",
+    "666 is DCLXVI",
+); # end: dacb84b9-ea1c-4a61-acbb-ce6b36674906
 
 cmp-ok( # begin: 432de891-7fd6-4748-a7f6-156082eeca2f
     to-roman(911),
@@ -129,47 +157,19 @@ cmp-ok( # begin: e6de6d24-f668-41c0-88d7-889c0254d173
     "1024 is MXXIV",
 ); # end: e6de6d24-f668-41c0-88d7-889c0254d173
 
-cmp-ok( # begin: bb550038-d4eb-4be2-a9ce-f21961ac3bc6
-    to-roman(3000),
-    "eq",
-    "MMM",
-    "3000 is MMM",
-); # end: bb550038-d4eb-4be2-a9ce-f21961ac3bc6
-
-cmp-ok( # begin: 6d1d82d5-bf3e-48af-9139-87d7165ed509
-    to-roman(16),
-    "eq",
-    "XVI",
-    "16 is XVI",
-); # end: 6d1d82d5-bf3e-48af-9139-87d7165ed509
-
-cmp-ok( # begin: 4465ffd5-34dc-44f3-ada5-56f5007b6dad
-    to-roman(66),
-    "eq",
-    "LXVI",
-    "66 is LXVI",
-); # end: 4465ffd5-34dc-44f3-ada5-56f5007b6dad
-
-cmp-ok( # begin: 902ad132-0b4d-40e3-8597-ba5ed611dd8d
-    to-roman(166),
-    "eq",
-    "CLXVI",
-    "166 is CLXVI",
-); # end: 902ad132-0b4d-40e3-8597-ba5ed611dd8d
-
-cmp-ok( # begin: dacb84b9-ea1c-4a61-acbb-ce6b36674906
-    to-roman(666),
-    "eq",
-    "DCLXVI",
-    "666 is DCLXVI",
-); # end: dacb84b9-ea1c-4a61-acbb-ce6b36674906
-
 cmp-ok( # begin: efbe1d6a-9f98-4eb5-82bc-72753e3ac328
     to-roman(1666),
     "eq",
     "MDCLXVI",
     "1666 is MDCLXVI",
 ); # end: efbe1d6a-9f98-4eb5-82bc-72753e3ac328
+
+cmp-ok( # begin: bb550038-d4eb-4be2-a9ce-f21961ac3bc6
+    to-roman(3000),
+    "eq",
+    "MMM",
+    "3000 is MMM",
+); # end: bb550038-d4eb-4be2-a9ce-f21961ac3bc6
 
 cmp-ok( # begin: 3bc4b41c-c2e6-49d9-9142-420691504336
     to-roman(3001),
