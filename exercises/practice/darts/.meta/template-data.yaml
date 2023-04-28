@@ -1,0 +1,32 @@
+methods: score
+properties:
+  score:
+    test: |-
+      sprintf(q:to/END/, |(%case<input><x y>:p).map(*.raku), %case<expected>, %case<description>.raku);
+      cmp-ok(
+          Darts.new( %s, %s ).score,
+          &infix:<==>,
+          %s,
+          %s,
+      );
+      END
+
+
+unit: class
+example: |-
+  has Rat() ($.x, $.y);
+
+  method score {
+      given sqrt $.x² + $.y² {
+          when 0  ..  1 { 10 }
+          when 1 ^..  5 {  5 }
+          when 5 ^.. 10 {  1 }
+          default       {  0 }
+      }
+  }
+
+stub: |-
+  has Rat() ($.x, $.y);
+
+  method score {
+  }
