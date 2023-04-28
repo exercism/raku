@@ -10,7 +10,7 @@ properties:
         END
       }
       else {
-        sprintf(q:to/END/, %case<input><series>.raku, %case<input><sliceLength>.raku, %case<expected>.raku, %case<description>.raku);
+        sprintf(q:to/END/, %case<input><series>.raku, %case<input><sliceLength>.raku, %case<expected>.<>.raku, %case<description>.raku);
         cmp-ok(
             series(%s, %s),
             "eqv",
