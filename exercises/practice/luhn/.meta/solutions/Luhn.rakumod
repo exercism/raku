@@ -15,6 +15,7 @@ sub is-luhn-valid ($input) is export {
 
     CATCH {
         when X::Str::Numeric {
+            .so;
             return False;
         }
     }
