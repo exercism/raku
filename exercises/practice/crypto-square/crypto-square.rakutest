@@ -10,6 +10,13 @@ cmp-ok( # begin: 407c3837-9aa7-4111-ab63-ec54b58e8e9f
     "empty plaintext results in an empty ciphertext",
 ); # end: 407c3837-9aa7-4111-ab63-ec54b58e8e9f
 
+cmp-ok( # begin: aad04a25-b8bb-4304-888b-581bea8e0040
+    crypto-square("... --- ..."),
+    "eq",
+    "",
+    "normalization results in empty plaintext",
+); # end: aad04a25-b8bb-4304-888b-581bea8e0040
+
 cmp-ok( # begin: 64131d65-6fd9-4f58-bdd8-4a2370fb481d
     crypto-square("A"),
     "eq",
