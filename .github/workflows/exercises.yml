@@ -25,11 +25,6 @@ jobs:
         if: runner.os == 'macOS'
         run: brew install rakudo-star
 
-      # https://github.com/Leont/getopt-long6/issues/10
-      - name: Install Getopt::Long:ver<0.1.7>
-        if: runner.os != 'Linux'
-        run: zef install https://github.com/Leont/getopt-long6.git@0.1.7
-
       - name: Rakudo Star tests with prove6
         if: runner.os != 'Linux'
         run: prove6 --jobs 2 (Get-Item -Path exercises/practice/*/.meta/solutions/)
