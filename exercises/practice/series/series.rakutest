@@ -6,42 +6,42 @@ use Series;
 cmp-ok( # begin: 7ae7a46a-d992-4c2a-9c15-a112d125ebad
     series("1", 1),
     "eqv",
-    $["1"],
+    ["1"],
     "slices of one from one",
 ); # end: 7ae7a46a-d992-4c2a-9c15-a112d125ebad
 
 cmp-ok( # begin: 3143b71d-f6a5-4221-aeae-619f906244d2
     series("12", 1),
     "eqv",
-    $["1", "2"],
+    ["1", "2"],
     "slices of one from two",
 ); # end: 3143b71d-f6a5-4221-aeae-619f906244d2
 
 cmp-ok( # begin: dbb68ff5-76c5-4ccd-895a-93dbec6d5805
     series("35", 2),
     "eqv",
-    $["35"],
+    ["35"],
     "slices of two",
 ); # end: dbb68ff5-76c5-4ccd-895a-93dbec6d5805
 
 cmp-ok( # begin: 19bbea47-c987-4e11-a7d1-e103442adf86
     series("9142", 2),
     "eqv",
-    $["91", "14", "42"],
+    ["91", "14", "42"],
     "slices of two overlap",
 ); # end: 19bbea47-c987-4e11-a7d1-e103442adf86
 
 cmp-ok( # begin: 8e17148d-ba0a-4007-a07f-d7f87015d84c
     series("777777", 3),
     "eqv",
-    $["777", "777", "777", "777"],
+    ["777", "777", "777", "777"],
     "slices can include duplicates",
 ); # end: 8e17148d-ba0a-4007-a07f-d7f87015d84c
 
 cmp-ok( # begin: bd5b085e-f612-4f81-97a8-6314258278b0
     series("918493904243", 5),
     "eqv",
-    $["91849", "18493", "84939", "49390", "93904", "39042", "90424", "04243"],
+    ["91849", "18493", "84939", "49390", "93904", "39042", "90424", "04243"],
     "slices of a long series",
 ); # end: bd5b085e-f612-4f81-97a8-6314258278b0
 
