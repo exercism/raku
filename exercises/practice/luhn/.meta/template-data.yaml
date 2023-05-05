@@ -13,7 +13,7 @@ properties:
 unit: module
 example: |-
   sub is-luhn-valid ($input) is export {
-      my @digits = $input.comb(/\S/).map(*.Int);
+      my @digits = $input.comb(/\S/).map({try {.Int} orelse return False});
       return False if @digits.elems < 2;
       @digits.unshift(0) unless @digits %% 2;
 
@@ -24,12 +24,6 @@ example: |-
               take $^b;
           }
       }).sum %% 10;
-
-      CATCH {
-          when X::Str::Numeric {
-              return False;
-          }
-      }
   }
 
 stub: |-
