@@ -1,7 +1,7 @@
 unit module Luhn;
 
 sub is-luhn-valid ($input) is export {
-    my @digits = $input.comb(/\S/).map({.Int orelse return False;);
+    my @digits = $input.comb(/\S/).map({.Int orelse return False});
     return False if @digits.elems < 2;
     @digits.unshift(0) unless @digits %% 2;
 
