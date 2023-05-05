@@ -1,0 +1,29 @@
+properties:
+  slices:
+    test: |-
+      if %case<expected><error>:exists {
+        sprintf(q:to/END/, %case<input><series>.raku, %case<input><sliceLength>.raku, %case<description>.raku);
+        dies-ok(
+            { series(%s, %s) },
+            %s,
+        );
+        END
+      }
+      else {
+        sprintf(q:to/END/, (%case<input><series>, %case<input><sliceLength>, %case<expected>.<>.List, %case<description>).map(*.raku));
+        cmp-ok( 
+            series(%s, %s),
+            &infix:<~~>,
+            %s,
+            %s,
+        );
+        END        
+      }
+example: |-
+  sub series ( Str $string, Int $length where 1..$string.chars ) is export {
+      gather take .join for $string.comb.rotor: $length => -$length.pred
+  }
+
+stub: |-
+  sub series ($string, $length) is export {
+  }

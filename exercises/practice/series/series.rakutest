@@ -1,0 +1,73 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use Series;
+
+cmp-ok( # begin: 7ae7a46a-d992-4c2a-9c15-a112d125ebad
+    series("1", 1),
+    &infix:<~~>,
+    ("1",),
+    "slices of one from one",
+); # end: 7ae7a46a-d992-4c2a-9c15-a112d125ebad
+
+cmp-ok( # begin: 3143b71d-f6a5-4221-aeae-619f906244d2
+    series("12", 1),
+    &infix:<~~>,
+    ("1", "2"),
+    "slices of one from two",
+); # end: 3143b71d-f6a5-4221-aeae-619f906244d2
+
+cmp-ok( # begin: dbb68ff5-76c5-4ccd-895a-93dbec6d5805
+    series("35", 2),
+    &infix:<~~>,
+    ("35",),
+    "slices of two",
+); # end: dbb68ff5-76c5-4ccd-895a-93dbec6d5805
+
+cmp-ok( # begin: 19bbea47-c987-4e11-a7d1-e103442adf86
+    series("9142", 2),
+    &infix:<~~>,
+    ("91", "14", "42"),
+    "slices of two overlap",
+); # end: 19bbea47-c987-4e11-a7d1-e103442adf86
+
+cmp-ok( # begin: 8e17148d-ba0a-4007-a07f-d7f87015d84c
+    series("777777", 3),
+    &infix:<~~>,
+    ("777", "777", "777", "777"),
+    "slices can include duplicates",
+); # end: 8e17148d-ba0a-4007-a07f-d7f87015d84c
+
+cmp-ok( # begin: bd5b085e-f612-4f81-97a8-6314258278b0
+    series("918493904243", 5),
+    &infix:<~~>,
+    ("91849", "18493", "84939", "49390", "93904", "39042", "90424", "04243"),
+    "slices of a long series",
+); # end: bd5b085e-f612-4f81-97a8-6314258278b0
+
+dies-ok( # begin: 6d235d85-46cf-4fae-9955-14b6efef27cd
+    { series("12345", 6) },
+    "slice length is too large",
+); # end: 6d235d85-46cf-4fae-9955-14b6efef27cd
+
+dies-ok( # begin: d7957455-346d-4e47-8e4b-87ed1564c6d7
+    { series("12345", 42) },
+    "slice length is way too large",
+); # end: d7957455-346d-4e47-8e4b-87ed1564c6d7
+
+dies-ok( # begin: d34004ad-8765-4c09-8ba1-ada8ce776806
+    { series("12345", 0) },
+    "slice length cannot be zero",
+); # end: d34004ad-8765-4c09-8ba1-ada8ce776806
+
+dies-ok( # begin: 10ab822d-8410-470a-a85d-23fbeb549e54
+    { series("123", -1) },
+    "slice length cannot be negative",
+); # end: 10ab822d-8410-470a-a85d-23fbeb549e54
+
+dies-ok( # begin: c7ed0812-0e4b-4bf3-99c4-28cbbfc246a2
+    { series("", 1) },
+    "empty series is invalid",
+); # end: c7ed0812-0e4b-4bf3-99c4-28cbbfc246a2
+
+done-testing;
