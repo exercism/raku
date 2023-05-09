@@ -454,7 +454,16 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
-      }
+      },
+      {
+        "slug": "sum-of-multiples",
+        "name": "Sum of Multiples",
+        "uuid": "23ecfabb-e77d-4d28-8c7e-4c1cb131b8a7",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      }      
     ]
   },
   "concepts": [],
