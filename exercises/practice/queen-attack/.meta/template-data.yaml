@@ -1,11 +1,12 @@
-methods: is-attack
+package: Queen
+methods: can-attack
 properties:
   create:
     test: |-
       if %case<expected><error>:exists {
         sprintf(q:to/END/, (%case<input><queen><position><row>, %case<input><queen><position><column>, %case<expected><error>, %case<description>).map(*.raku));
         throws-like(
-          { QueenAttack.new( :row(%s), :column(%s) ) },
+          { Queen.new( :row(%s), :column(%s) ) },
           Exception,
           message => /:i
               %s
@@ -17,17 +18,17 @@ properties:
       } else {
         sprintf(q:to/END/, (%case<input><queen><position><row>, %case<input><queen><position><column>, %case<description>).map(*.raku));
         try {
-          my $QA = QueenAttack.new( :row(%s), :column(%s) );
+          my $QA = Queen.new( :row(%s), :column(%s) );
         } // fail %s;
         END
       }
 
   canAttack:
     test: |-
-      sprintf(q:to/END/, (%case<input><white_queen><position><row>, %case<input><white_queen><position><column>, %case<input><black_queen><position><row>, %case<input><black_queen><position><column>, %case<expected>, %case<description>).map(*.raku));
+      sprintf(q:to/END/, (%case<input><white_queen><position><row>, %case<input><white_queen><position><column>, %case<input><black_queen><position><row>, %case<input><black_queen><position><column>).map(*.raku), %case<expected>, %case<description>.map(*.raku));
       cmp-ok(
-        QueenAttack.new( :row(%s), :column(%s) ).is-attack( :row(%s), :column(%s) ),
-        &infix:<==>,
+        Queen.new( :row(%s), :column(%s) ).can-attack( :row(%s), :column(%s) ),
+        &infix:<eqv>,
         %s,
         %s,
       );
@@ -37,7 +38,7 @@ unit: class
 example: |-
   has Int() ($.row where 0..7, $.column where 0..7);
 
-  method is-attack (:$row, :$column --> Bool() ) {
+  method can-attack (:$row, :$column --> Bool() ) {
       with cache map { .head, .tail }, ($.row, $.column), ($row, $column) {
              when    [eqv]                 .list { fail  } # Same square
              when    [==] map *.head,      .list           # Same file
@@ -50,6 +51,6 @@ example: |-
 stub: |-
   has ($.row, $.column);
 
-  method is-attack (:$row, :$column) {
+  method can-attack (:$row, :$column) {
       return self;
   }
