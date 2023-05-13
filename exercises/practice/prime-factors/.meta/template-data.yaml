@@ -1,0 +1,22 @@
+properties:
+  factors:
+    test: |-
+      sprintf(q:to/END/, (%case<input><value>, %case<expected>.List<>, %case<description>).map(*.raku));
+      cmp-ok(
+          factors(%s),
+          "eq",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub factors ( $number ) is export {
+    use Prime::Factor;
+    return prime-factors( $number );
+  }
+
+stub: |-
+  sub factors ( $number ) is export {
+  }
