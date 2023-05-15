@@ -17,9 +17,10 @@ properties:
         END
       } else {
         sprintf(q:to/END/, (%case<input><queen><position><row>, %case<input><queen><position><column>, %case<description>).map(*.raku));
-        try {
-          my $QA = Queen.new( :row(%s), :column(%s) );
-        } // fail %s;
+        lives-ok(
+            { my $QA = Queen.new( :row(%s), :column(%s) ) },
+            %s,
+        );
         END
       }
 
