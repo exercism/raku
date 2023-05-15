@@ -52,5 +52,4 @@ stub: |-
   has ($.row, $.column);
 
   method can-attack (:$row, :$column) {
-      return self;
   }
