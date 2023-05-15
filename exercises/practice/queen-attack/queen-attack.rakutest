@@ -4,7 +4,7 @@ use lib $?FILE.IO.dirname;
 use Queen;
 
 lives-ok( # begin: 3ac4f735-d36c-44c4-a3e2-316f79704203
-    { my $QA = Queen.new( :row(2), :column(2) ) },
+    { Queen.new( :row(2), :column(2) ) },
     "Test creation of Queens with valid and invalid positions: queen with a valid position",
 ); # end: 3ac4f735-d36c-44c4-a3e2-316f79704203
 
