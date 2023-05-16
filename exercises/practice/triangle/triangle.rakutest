@@ -1,0 +1,41 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use Triangle;
+
+cmp-ok( # begin: 8b2c43ac-7257-43f9-b552-7631a91988af
+    is-equilateral(2, 2, 2),
+    "==",
+    True,
+    "equilateral triangle: all sides are equal",
+); # end: 8b2c43ac-7257-43f9-b552-7631a91988af
+
+cmp-ok( # begin: 33eb6f87-0498-4ccf-9573-7f8c3ce92b7b
+    is-equilateral(2, 3, 2),
+    "==",
+    False,
+    "equilateral triangle: any side is unequal",
+); # end: 33eb6f87-0498-4ccf-9573-7f8c3ce92b7b
+
+cmp-ok( # begin: c6585b7d-a8c0-4ad8-8a34-e21d36f7ad87
+    is-equilateral(5, 4, 6),
+    "==",
+    False,
+    "equilateral triangle: no sides are equal",
+); # end: c6585b7d-a8c0-4ad8-8a34-e21d36f7ad87
+
+cmp-ok( # begin: 16e8ceb0-eadb-46d1-b892-c50327479251
+    is-equilateral(0, 0, 0),
+    "==",
+    False,
+    "equilateral triangle: all zero sides is not a triangle",
+); # end: 16e8ceb0-eadb-46d1-b892-c50327479251
+
+cmp-ok( # begin: 3022f537-b8e5-4cc1-8f12-fd775827a00c
+    is-equilateral(0.5, 0.5, 0.5),
+    "==",
+    True,
+    "equilateral triangle: sides may be floats",
+); # end: 3022f537-b8e5-4cc1-8f12-fd775827a00c
+
+done-testing;

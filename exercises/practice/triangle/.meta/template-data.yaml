@@ -1,0 +1,42 @@
+properties:
+  equilateral:
+    test: |-
+      sprintf(q:to/END/, %case<input><sides>.List<>, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          is-equilateral(%s, %s, %s),
+          "==",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub is-triangle ($a, $b, $c) {
+    return False if so 0 == all $a, $b, $c;
+    return $a + $b >= $c
+        && $b + $c >= $a
+        && $a + $c >= $b;
+  }
+
+  sub is-equilateral ($a, $b, $c) is export {
+    return is-triangle $a, $b, $c && [==] $a, $b, $c;
+  }
+
+  sub is-isosceles ( *@_ ) is export {
+    return .&is-triangle && .&is-equilateral || ! .&is-scalene;
+  }
+
+  sub is-scalene ($a, $b, $c) is export {
+    return is-triangle $a, $b, $c && [!=] $a, $b, $c;
+   }
+
+stub: |-
+  sub is-equilateral ($a, $b, $c) is export {
+  }
+
+  sub is-isosceles ($a, $b, $c) is export {
+  }
+
+  sub is-scalene ($a, $b, $c) is export {
+  }
