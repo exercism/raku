@@ -1,2 +1,2 @@
-sub compare ( $a, $b ) is export {
+sub compare-lists ( $a, $b ) is export {
 }

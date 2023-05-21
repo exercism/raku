@@ -3,7 +3,7 @@ properties:
     test: |-
       sprintf(q:to/END/, %case<input><listOne>.List<>.raku, %case<input><listTwo>.List<>.raku, %case<expected>.List, %case<description>);
       cmp-ok(
-          compare(%s, %s),
+          compare-lists(%s, %s),
           "eq",
           "%s",
           "%s",
@@ -11,7 +11,7 @@ properties:
       END
 
 example: |-
-  sub compare ( $a, $b ) is export {
+  sub compare-lists ( $a, $b ) is export {
     return 'equal'     when $a eqv $b;
     return 'superlist' when $b eqv ()
       || $a.rotor( $b.elems => - $b.elems.pred ).any eqv $b;
@@ -21,5 +21,5 @@ example: |-
   }
 
 stub: |-
-  sub compare ( $a, $b ) is export {
+  sub compare-lists ( $a, $b ) is export {
   }

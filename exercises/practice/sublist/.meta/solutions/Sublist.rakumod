@@ -1,4 +1,4 @@
-sub compare ( $a, $b ) is export {
+sub compare-lists ( $a, $b ) is export {
   return 'equal'     when $a eqv $b;
   return 'superlist' when $b eqv ()
     || $a.rotor( $b.elems => - $b.elems.pred ).any eqv $b;
