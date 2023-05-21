@@ -472,6 +472,15 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
+      },
+      {
+        "slug": "sublist",
+        "name": "Sublist",
+        "uuid": "03e659a9-fd11-4e1e-8250-090acc2691ae",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
       }
     ]
   },
