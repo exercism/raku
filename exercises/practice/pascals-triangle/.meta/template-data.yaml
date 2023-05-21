@@ -1,0 +1,21 @@
+properties:
+  rows:
+    test: |-
+      sprintf(q:to/END/, (%case<input><count>, %case<expected>.map(*.List<>).List<>, %case<description>).map(*.raku));
+      cmp-ok(
+          pascals-triangle(%s),
+          &infix:<~~>,
+          %s,
+          %s,
+      );
+      END
+
+example: |-
+  sub pascals-triangle ( $rows ) is export {
+    [ 1 ], { [ 0, .Slip Z+ .Slip, 0 ] } ... * andthen
+    .[ ^ $rows ]
+  }
+
+stub: |-
+  sub pascals-triangle ( $rows ) is export {
+  }
