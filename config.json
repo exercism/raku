@@ -456,6 +456,23 @@
         "topics": []
       },
       {
+        "slug": "pascals-triangle",
+        "name": "Pascal's Triangle",
+        "uuid": "7762c375-7583-45ec-94ba-ea2a0bed72ec",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "queen-attack",
+        "name": "Queen Attack",
+        "uuid": "0ce48cac-a3ad-42d5-8903-d1e062287802",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
         "slug": "prime-factors",
         "name": "Prime Factors",
         "uuid": "042178b2-2a80-4dff-ade2-4fae71b23076",
