@@ -1,0 +1,19 @@
+properties:
+  sum:
+    test: |-
+      sprintf(q:to/END/, (%case<input><factors>.List<>, %case<input><limit>, %case<expected>, %case<description>).map(*.raku));
+      cmp-ok(
+          sum-of-multiples(factors => %s, limit => %s),
+          &infix:<==>,
+          %s,
+          %s,
+      );
+      END        
+example: |-
+  sub sum-of-multiples (:@factors, :$limit) is export {
+      sum grep * %% @factors.grep( 1 .. * ).any, 1 ..^ $limit
+  }
+
+stub: |-
+  sub sum-of-multiples (:@factors, :$limit) is export {
+  }
