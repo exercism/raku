@@ -3,9 +3,10 @@ use Test;
 use lib $?FILE.IO.dirname;
 use Queen;
 
-try { # begin: 3ac4f735-d36c-44c4-a3e2-316f79704203
-  my $QA = Queen.new( :row(2), :column(2) );
-} // fail "Test creation of Queens with valid and invalid positions: queen with a valid position"; # end: 3ac4f735-d36c-44c4-a3e2-316f79704203
+lives-ok( # begin: 3ac4f735-d36c-44c4-a3e2-316f79704203
+    { Queen.new( :row(2), :column(2) ) },
+    "Test creation of Queens with valid and invalid positions: queen with a valid position",
+); # end: 3ac4f735-d36c-44c4-a3e2-316f79704203
 
 throws-like( # begin: 4e812d5d-b974-4e38-9a6b-8e0492bfa7be
   { Queen.new( :row(-2), :column(2) ) },

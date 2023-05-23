@@ -474,6 +474,15 @@
         "topics": []
       },
       {
+        "slug": "sum-of-multiples",
+        "name": "Sum of Multiples",
+        "uuid": "23ecfabb-e77d-4d28-8c7e-4c1cb131b8a7",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "secret-handshake",
         "name": "Secret Handshake",
         "uuid": "2ba5de90-9c85-40f5-9686-919fdd6643f1",
