@@ -456,6 +456,33 @@
         "topics": []
       },
       {
+        "slug": "pascals-triangle",
+        "name": "Pascal's Triangle",
+        "uuid": "7762c375-7583-45ec-94ba-ea2a0bed72ec",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "queen-attack",
+        "name": "Queen Attack",
+        "uuid": "0ce48cac-a3ad-42d5-8903-d1e062287802",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "sum-of-multiples",
+        "name": "Sum of Multiples",
+        "uuid": "23ecfabb-e77d-4d28-8c7e-4c1cb131b8a7",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "sieve",
         "name": "Sieve",
         "uuid": "04a2cb52-8ebc-4b97-904b-f18fb9e5beda",
