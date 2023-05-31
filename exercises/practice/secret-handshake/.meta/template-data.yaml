@@ -4,7 +4,7 @@ properties:
       sprintf(q:to/END/, %case<input><number>.List<>, %case<expected>.List.raku, %case<description>.raku);
       cmp-ok(
           handshake(%s),
-          "eq",
+          "~~",
           %s,
           %s,
       );
