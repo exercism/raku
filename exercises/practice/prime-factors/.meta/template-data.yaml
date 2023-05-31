@@ -4,7 +4,7 @@ properties:
       sprintf(q:to/END/, (%case<input><value>, %case<expected>.List<>, %case<description>).map(*.raku));
       cmp-ok(
           factors(%s),
-          "eq",
+          "~~",
           %s,
           %s,
       );
@@ -12,8 +12,8 @@ properties:
 
 unit: module
 example: |-
-  multi factors ( 1, | ) is export          { Empty };
-  multi factors ( $n where $n.is-prime, | ) { $n    };
+  multi factors ( 1, | ) is export          { Empty   };
+  multi factors ( $n where $n.is-prime, | ) { $n.List };
   multi factors ( $n, @primes = ( 2 .. * ).grep: *.is-prime ) {
     given $n %% @primes.head {
       when *.so { @primes.head, factors( $n div @primes.head, @primes      ).Slip }
