@@ -4,7 +4,7 @@ properties:
       sprintf(q:to/END/, (%case<input><limit>, %case<expected>.List<>, %case<description>).map(*.raku));
       cmp-ok(
           find-primes(%s),
-          "eq",
+          "~~",
           %s,
           %s,
       );
