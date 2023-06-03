@@ -481,7 +481,16 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
-      }      
+      },
+      {
+        "slug": "killer-sudoku-helper",
+        "name": "Killer Sudoku Helper",
+        "uuid": "f7071a4d-0341-41eb-a37b-92b3c8d10b08",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      }
     ]
   },
   "concepts": [],
