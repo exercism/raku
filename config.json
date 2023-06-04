@@ -481,7 +481,16 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
-      }      
+      },
+      {
+        "slug": "reverse-string",
+        "name": "Reverse String",
+        "uuid": "cdc17b6c-ccde-4709-9bbe-a5af7a79b8ae",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      }
     ]
   },
   "concepts": [],

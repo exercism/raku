@@ -1,0 +1,27 @@
+properties:
+  reverse:
+    test: |-
+      sprintf(q:to/END/, %case<input><value>.raku, %case<expected>.raku, %case<description>.raku, %case<input><value>.raku, %case<input><value>.raku, %case<description>.raku);
+      cmp-ok(
+          switch-round(%s),
+          "eq",
+          %s,
+          %s,
+      ) &&
+      cmp-ok(
+          switch-round(switch-round(%s)),
+          "eq",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub switch-round($string) is export {
+      $string.flip
+  }
+
+stub: |-
+  sub switch-round($string) is export {
+  }

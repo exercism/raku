@@ -1,0 +1,84 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use ReverseString;
+
+cmp-ok( # begin: c3b7d806-dced-49ee-8543-933fd1719b1c
+    switch-round(""),
+    "eq",
+    "",
+    "an empty string",
+) &&
+cmp-ok(
+    switch-round(switch-round("")),
+    "eq",
+    "",
+    "an empty string",
+); # end: c3b7d806-dced-49ee-8543-933fd1719b1c
+
+cmp-ok( # begin: 01ebf55b-bebb-414e-9dec-06f7bb0bee3c
+    switch-round("robot"),
+    "eq",
+    "tobor",
+    "a word",
+) &&
+cmp-ok(
+    switch-round(switch-round("robot")),
+    "eq",
+    "robot",
+    "a word",
+); # end: 01ebf55b-bebb-414e-9dec-06f7bb0bee3c
+
+cmp-ok( # begin: 0f7c07e4-efd1-4aaa-a07a-90b49ce0b746
+    switch-round("Ramen"),
+    "eq",
+    "nemaR",
+    "a capitalized word",
+) &&
+cmp-ok(
+    switch-round(switch-round("Ramen")),
+    "eq",
+    "Ramen",
+    "a capitalized word",
+); # end: 0f7c07e4-efd1-4aaa-a07a-90b49ce0b746
+
+cmp-ok( # begin: 71854b9c-f200-4469-9f5c-1e8e5eff5614
+    switch-round("I'm hungry!"),
+    "eq",
+    "!yrgnuh m'I",
+    "a sentence with punctuation",
+) &&
+cmp-ok(
+    switch-round(switch-round("I'm hungry!")),
+    "eq",
+    "I'm hungry!",
+    "a sentence with punctuation",
+); # end: 71854b9c-f200-4469-9f5c-1e8e5eff5614
+
+cmp-ok( # begin: 1f8ed2f3-56f3-459b-8f3e-6d8d654a1f6c
+    switch-round("racecar"),
+    "eq",
+    "racecar",
+    "a palindrome",
+) &&
+cmp-ok(
+    switch-round(switch-round("racecar")),
+    "eq",
+    "racecar",
+    "a palindrome",
+); # end: 1f8ed2f3-56f3-459b-8f3e-6d8d654a1f6c
+
+cmp-ok( # begin: b9e7dec1-c6df-40bd-9fa3-cd7ded010c4c
+    switch-round("drawer"),
+    "eq",
+    "reward",
+    "an even-sized word",
+) &&
+cmp-ok(
+    switch-round(switch-round("drawer")),
+    "eq",
+    "drawer",
+    "an even-sized word",
+); # end: b9e7dec1-c6df-40bd-9fa3-cd7ded010c4c
+
+done-testing;
