@@ -474,6 +474,15 @@
         "topics": []
       },
       {
+        "slug": "sum-of-multiples",
+        "name": "Sum of Multiples",
+        "uuid": "23ecfabb-e77d-4d28-8c7e-4c1cb131b8a7",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "house",
         "name": "House",
         "uuid": "3fe034f4-5e86-4f19-ad4c-e2df231a4be8",
@@ -481,7 +490,7 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
-      }
+      }      
     ]
   },
   "concepts": [],
