@@ -474,6 +474,15 @@
         "topics": []
       },
       {
+        "slug": "sum-of-multiples",
+        "name": "Sum of Multiples",
+        "uuid": "23ecfabb-e77d-4d28-8c7e-4c1cb131b8a7",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "sublist",
         "name": "Sublist",
         "uuid": "03e659a9-fd11-4e1e-8250-090acc2691ae",
@@ -481,7 +490,7 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
-      }
+      }      
     ]
   },
   "concepts": [],

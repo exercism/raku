@@ -1,0 +1,118 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use SumOfMultiples;
+
+cmp-ok( # begin: 54aaab5a-ce86-4edc-8b40-d3ab2400a279
+    sum-of-multiples(factors => (3, 5), limit => 1),
+    &infix:<==>,
+    0,
+    "no multiples within limit",
+); # end: 54aaab5a-ce86-4edc-8b40-d3ab2400a279
+
+cmp-ok( # begin: 361e4e50-c89b-4f60-95ef-5bc5c595490a
+    sum-of-multiples(factors => (3, 5), limit => 4),
+    &infix:<==>,
+    3,
+    "one factor has multiples within limit",
+); # end: 361e4e50-c89b-4f60-95ef-5bc5c595490a
+
+cmp-ok( # begin: e644e070-040e-4ae0-9910-93c69fc3f7ce
+    sum-of-multiples(factors => (3,), limit => 7),
+    &infix:<==>,
+    9,
+    "more than one multiple within limit",
+); # end: e644e070-040e-4ae0-9910-93c69fc3f7ce
+
+cmp-ok( # begin: 607d6eb9-535c-41ce-91b5-3a61da3fa57f
+    sum-of-multiples(factors => (3, 5), limit => 10),
+    &infix:<==>,
+    23,
+    "more than one factor with multiples within limit",
+); # end: 607d6eb9-535c-41ce-91b5-3a61da3fa57f
+
+cmp-ok( # begin: f47e8209-c0c5-4786-b07b-dc273bf86b9b
+    sum-of-multiples(factors => (3, 5), limit => 100),
+    &infix:<==>,
+    2318,
+    "each multiple is only counted once",
+); # end: f47e8209-c0c5-4786-b07b-dc273bf86b9b
+
+cmp-ok( # begin: 28c4b267-c980-4054-93e9-07723db615ac
+    sum-of-multiples(factors => (3, 5), limit => 1000),
+    &infix:<==>,
+    233168,
+    "a much larger limit",
+); # end: 28c4b267-c980-4054-93e9-07723db615ac
+
+cmp-ok( # begin: 09c4494d-ff2d-4e0f-8421-f5532821ee12
+    sum-of-multiples(factors => (7, 13, 17), limit => 20),
+    &infix:<==>,
+    51,
+    "three factors",
+); # end: 09c4494d-ff2d-4e0f-8421-f5532821ee12
+
+cmp-ok( # begin: 2d0d5faa-f177-4ad6-bde9-ebb865083751
+    sum-of-multiples(factors => (4, 6), limit => 15),
+    &infix:<==>,
+    30,
+    "factors not relatively prime",
+); # end: 2d0d5faa-f177-4ad6-bde9-ebb865083751
+
+cmp-ok( # begin: ece8f2e8-96aa-4166-bbb7-6ce71261e354
+    sum-of-multiples(factors => (5, 6, 8), limit => 150),
+    &infix:<==>,
+    4419,
+    "some pairs of factors relatively prime and some not",
+); # end: ece8f2e8-96aa-4166-bbb7-6ce71261e354
+
+cmp-ok( # begin: 624fdade-6ffb-400e-8472-456a38c171c0
+    sum-of-multiples(factors => (5, 25), limit => 51),
+    &infix:<==>,
+    275,
+    "one factor is a multiple of another",
+); # end: 624fdade-6ffb-400e-8472-456a38c171c0
+
+cmp-ok( # begin: 949ee7eb-db51-479c-b5cb-4a22b40ac057
+    sum-of-multiples(factors => (43, 47), limit => 10000),
+    &infix:<==>,
+    2203160,
+    "much larger factors",
+); # end: 949ee7eb-db51-479c-b5cb-4a22b40ac057
+
+cmp-ok( # begin: 41093673-acbd-482c-ab80-d00a0cbedecd
+    sum-of-multiples(factors => (1,), limit => 100),
+    &infix:<==>,
+    4950,
+    "all numbers are multiples of 1",
+); # end: 41093673-acbd-482c-ab80-d00a0cbedecd
+
+cmp-ok( # begin: 1730453b-baaa-438e-a9c2-d754497b2a76
+    sum-of-multiples(factors => (), limit => 10000),
+    &infix:<==>,
+    0,
+    "no factors means an empty sum",
+); # end: 1730453b-baaa-438e-a9c2-d754497b2a76
+
+cmp-ok( # begin: 214a01e9-f4bf-45bb-80f1-1dce9fbb0310
+    sum-of-multiples(factors => (0,), limit => 1),
+    &infix:<==>,
+    0,
+    "the only multiple of 0 is 0",
+); # end: 214a01e9-f4bf-45bb-80f1-1dce9fbb0310
+
+cmp-ok( # begin: c423ae21-a0cb-4ec7-aeb1-32971af5b510
+    sum-of-multiples(factors => (3, 0), limit => 4),
+    &infix:<==>,
+    3,
+    "the factor 0 does not affect the sum of multiples of other factors",
+); # end: c423ae21-a0cb-4ec7-aeb1-32971af5b510
+
+cmp-ok( # begin: 17053ba9-112f-4ac0-aadb-0519dd836342
+    sum-of-multiples(factors => (2, 3, 5, 7, 11), limit => 10000),
+    &infix:<==>,
+    39614537,
+    "solutions using include-exclude must extend to cardinality greater than 3",
+); # end: 17053ba9-112f-4ac0-aadb-0519dd836342
+
+done-testing;
