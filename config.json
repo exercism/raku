@@ -481,7 +481,16 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
-      }      
+      },
+      {
+        "slug": "transpose",
+        "name": "Transpose",
+        "uuid": "1071ff62-8951-4176-bfcf-0f36b0b122a1",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      }
     ]
   },
   "concepts": [],

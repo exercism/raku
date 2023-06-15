@@ -1,0 +1,90 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use Transpose;
+
+cmp-ok( # begin: 404b7262-c050-4df0-a2a2-0cb06cd6a821
+    transpose(""),
+    "eq",
+    "",
+    "empty string",
+); # end: 404b7262-c050-4df0-a2a2-0cb06cd6a821
+
+cmp-ok( # begin: a89ce8a3-c940-4703-a688-3ea39412fbcb
+    transpose("A1"),
+    "eq",
+    "A\n1",
+    "two characters in a row",
+); # end: a89ce8a3-c940-4703-a688-3ea39412fbcb
+
+cmp-ok( # begin: 855bb6ae-4180-457c-abd0-ce489803ce98
+    transpose("A\n1"),
+    "eq",
+    "A1",
+    "two characters in a column",
+); # end: 855bb6ae-4180-457c-abd0-ce489803ce98
+
+cmp-ok( # begin: 5ceda1c0-f940-441c-a244-0ced197769c8
+    transpose("ABC\n123"),
+    "eq",
+    "A1\nB2\nC3",
+    "simple",
+); # end: 5ceda1c0-f940-441c-a244-0ced197769c8
+
+cmp-ok( # begin: a54675dd-ae7d-4a58-a9c4-0c20e99a7c1f
+    transpose("Single line."),
+    "eq",
+    "S\ni\nn\ng\nl\ne\n \nl\ni\nn\ne\n.",
+    "single line",
+); # end: a54675dd-ae7d-4a58-a9c4-0c20e99a7c1f
+
+cmp-ok( # begin: 0dc2ec0b-549d-4047-aeeb-8029fec8d5c5
+    transpose("The fourth line.\nThe fifth line."),
+    "eq",
+    "TT\nhh\nee\n  \nff\noi\nuf\nrt\nth\nh \n l\nli\nin\nne\ne.\n.",
+    "first line longer than second line",
+); # end: 0dc2ec0b-549d-4047-aeeb-8029fec8d5c5
+
+cmp-ok( # begin: 984e2ec3-b3d3-4b53-8bd6-96f5ef404102
+    transpose("The first line.\nThe second line."),
+    "eq",
+    "TT\nhh\nee\n  \nfs\nie\nrc\nso\ntn\n d\nl \nil\nni\nen\n.e\n .",
+    "second line longer than first line",
+); # end: 984e2ec3-b3d3-4b53-8bd6-96f5ef404102
+
+cmp-ok( # begin: eccd3784-45f0-4a3f-865a-360cb323d314
+    transpose("The longest line.\nA long line.\nA longer line.\nA line."),
+    "eq",
+    "TAAA\nh   \nelll\n ooi\nlnnn\nogge\nn e.\nglr\nei \nsnl\ntei\n .n\nl e\ni .\nn\ne\n.",
+    "mixed line length",
+); # end: eccd3784-45f0-4a3f-865a-360cb323d314
+
+cmp-ok( # begin: 85b96b3f-d00c-4f80-8ca2-c8a5c9216c2d
+    transpose("HEART\nEMBER\nABUSE\nRESIN\nTREND"),
+    "eq",
+    "HEART\nEMBER\nABUSE\nRESIN\nTREND",
+    "square",
+); # end: 85b96b3f-d00c-4f80-8ca2-c8a5c9216c2d
+
+cmp-ok( # begin: b9257625-7a53-4748-8863-e08e9d27071d
+    transpose("FRACTURE\nOUTLINED\nBLOOMING\nSEPTETTE"),
+    "eq",
+    "FOBS\nRULE\nATOP\nCLOT\nTIME\nUNIT\nRENT\nEDGE",
+    "rectangle",
+); # end: b9257625-7a53-4748-8863-e08e9d27071d
+
+cmp-ok( # begin: b80badc9-057e-4543-bd07-ce1296a1ea2c
+    transpose("T\nEE\nAAA\nSSSS\nEEEEE\nRRRRRR"),
+    "eq",
+    "TEASER\n EASER\n  ASER\n   SER\n    ER\n     R",
+    "triangle",
+); # end: b80badc9-057e-4543-bd07-ce1296a1ea2c
+
+cmp-ok( # begin: 76acfd50-5596-4d05-89f1-5116328a7dd9
+    transpose("11\n2\n3333\n444\n555555\n66666"),
+    "eq",
+    "123456\n1 3456\n  3456\n  3 56\n    56\n    5",
+    "jagged triangle",
+); # end: 76acfd50-5596-4d05-89f1-5116328a7dd9
+
+done-testing;
