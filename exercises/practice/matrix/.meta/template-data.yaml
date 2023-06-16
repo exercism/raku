@@ -1,0 +1,36 @@
+properties:
+  row:
+    test: |-
+      sprintf(q:to/END/, %case<input><string>.raku, %case<input><index>.raku, %case<expected>.List<>.raku, %case<description>.raku);
+      cmp-ok(
+          extract-row(string=>%s,index=>%s),
+          "~~",
+          %s,
+          %s,
+      );
+      END
+  column:
+    test: |-
+      sprintf(q:to/END/, %case<input><string>.raku, %case<input><index>.raku, %case<expected>.List<>.raku, %case<description>.raku);
+      cmp-ok(
+          extract-column(string=>%s,index=>%s),
+          "~~",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub extract-row(:$string, :$index) is export {
+    $string.lines[$index.pred].words
+  }
+  sub extract-column(:$string, :$index) is export {
+    gather for $string.lines { take .words[$index.pred] }
+  }
+
+stub: |-
+  sub extract-row(:$string, :$index) is export {
+  }
+  sub extract-column($string) is export {
+  }
