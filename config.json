@@ -483,6 +483,15 @@
         "topics": []
       },
       {
+        "slug": "largest-series-product",
+        "name": "Largest Series Product",
+        "uuid": "762a6196-6185-46d1-aa97-0c245db8e981",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "prime-factors",
         "name": "Prime Factors",
         "uuid": "042178b2-2a80-4dff-ade2-4fae71b23076",
@@ -490,7 +499,7 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
-      }      
+      }
     ]
   },
   "concepts": [],
