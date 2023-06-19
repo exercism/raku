@@ -1,0 +1,38 @@
+properties:
+  largestProduct:
+    test: |-
+      if %case<expected><error>:exists {
+        sprintf(q:to/END/, (%case<input><digits>, %case<input><span>, %case<description>).map(*.raku));
+        dies-ok(
+            { largest-product(%s, %s) },
+            %s,
+        );
+        END
+      }
+      else {
+        sprintf(q:to/END/, (%case<input><digits>, %case<input><span>, %case<expected>, %case<description>).map(*.raku));
+        cmp-ok(
+            largest-product(%s, %s),
+            &infix:<==>,
+            %s,
+            %s,
+        );
+        END
+      }
+
+example: |-
+  proto largest-product (|) is export {*}
+  multi largest-product ( $n, 0 ) { 1 }
+  multi largest-product ( $n, Int $span where 1 .. $n.chars ) {
+
+      $n
+      .comb
+      .rotor( $span => - $span.pred )
+      .map(          *.reduce: &[*] )
+      .max
+
+  }
+
+stub: |-
+  sub largest-product ($number, $span) is export {
+  }
