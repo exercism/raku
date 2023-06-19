@@ -483,6 +483,33 @@
         "topics": []
       },
       {
+        "slug": "largest-series-product",
+        "name": "Largest Series Product",
+        "uuid": "762a6196-6185-46d1-aa97-0c245db8e981",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "prime-factors",
+        "name": "Prime Factors",
+        "uuid": "042178b2-2a80-4dff-ade2-4fae71b23076",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "sieve",
+        "name": "Sieve",
+        "uuid": "04a2cb52-8ebc-4b97-904b-f18fb9e5beda",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "killer-sudoku-helper",
         "name": "Killer Sudoku Helper",
         "uuid": "f7071a4d-0341-41eb-a37b-92b3c8d10b08",
