@@ -1,0 +1,24 @@
+properties:
+  primes:
+    test: |-
+      sprintf(q:to/END/, (%case<input><limit>, %case<expected>.List<>, %case<description>).map(*.raku));
+      cmp-ok(
+          find-primes(%s),
+          "~~",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub find-primes ( $limit ) is export {
+      sort keys [(^)] gather for 2 .. $limit
+      -> $root {
+          take { $root * ++$ } ...^ * > $limit
+      }
+  }
+
+stub: |-
+  sub find-primes ( $number ) is export {
+  }
