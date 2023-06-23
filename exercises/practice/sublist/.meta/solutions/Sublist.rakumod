@@ -1,3 +1,5 @@
+unit module Sublist;
+
 sub compare-lists ( $a, $b ) is export {
   return 'equal'     when $a eqv $b;
   return 'superlist' when $b eqv ()
