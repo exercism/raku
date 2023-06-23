@@ -1,3 +1,5 @@
+unit module MatchingBrackets;
+
 grammar Balanced {
     token TOP         { <balanced> * }
     token balanced    { <parentheses> | <brackets> | <braces> | <other> }

@@ -1,3 +1,5 @@
+unit: module
+
 properties:
   isPaired:
     test: |-
