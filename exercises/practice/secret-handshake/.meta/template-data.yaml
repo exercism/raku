@@ -1,4 +1,4 @@
-unit module: SecretHandshake
+unit: module
 
 properties:
   commands:
