@@ -1,3 +1,5 @@
+unit module: SecretHandshake
+
 properties:
   commands:
     test: |-
