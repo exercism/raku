@@ -1,0 +1,97 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use KillerSudokuHelper;
+
+cmp-ok( # begin: 2aaa8f13-11b5-4054-b95c-a906e4d79fb6
+    killer-sudoku-helper( :sum(1), :size(1), :exclude() ),
+    "~~",
+    ((1,),),
+    "Trivial 1-digit cages: 1",
+); # end: 2aaa8f13-11b5-4054-b95c-a906e4d79fb6
+
+cmp-ok( # begin: 4645da19-9fdd-4087-a910-a6ed66823563
+    killer-sudoku-helper( :sum(2), :size(1), :exclude() ),
+    "~~",
+    ((2,),),
+    "Trivial 1-digit cages: 2",
+); # end: 4645da19-9fdd-4087-a910-a6ed66823563
+
+cmp-ok( # begin: 07cfc704-f8aa-41b2-8f9a-cbefb674cb48
+    killer-sudoku-helper( :sum(3), :size(1), :exclude() ),
+    "~~",
+    ((3,),),
+    "Trivial 1-digit cages: 3",
+); # end: 07cfc704-f8aa-41b2-8f9a-cbefb674cb48
+
+cmp-ok( # begin: 22b8b2ba-c4fd-40b3-b1bf-40aa5e7b5f24
+    killer-sudoku-helper( :sum(4), :size(1), :exclude() ),
+    "~~",
+    ((4,),),
+    "Trivial 1-digit cages: 4",
+); # end: 22b8b2ba-c4fd-40b3-b1bf-40aa5e7b5f24
+
+cmp-ok( # begin: b75d16e2-ff9b-464d-8578-71f73094cea7
+    killer-sudoku-helper( :sum(5), :size(1), :exclude() ),
+    "~~",
+    ((5,),),
+    "Trivial 1-digit cages: 5",
+); # end: b75d16e2-ff9b-464d-8578-71f73094cea7
+
+cmp-ok( # begin: bcbf5afc-4c89-4ff6-9357-07ab4d42788f
+    killer-sudoku-helper( :sum(6), :size(1), :exclude() ),
+    "~~",
+    ((6,),),
+    "Trivial 1-digit cages: 6",
+); # end: bcbf5afc-4c89-4ff6-9357-07ab4d42788f
+
+cmp-ok( # begin: 511b3bf8-186f-4e35-844f-c804d86f4a7a
+    killer-sudoku-helper( :sum(7), :size(1), :exclude() ),
+    "~~",
+    ((7,),),
+    "Trivial 1-digit cages: 7",
+); # end: 511b3bf8-186f-4e35-844f-c804d86f4a7a
+
+cmp-ok( # begin: bd09a60d-3aca-43bd-b6aa-6ccad01bedda
+    killer-sudoku-helper( :sum(8), :size(1), :exclude() ),
+    "~~",
+    ((8,),),
+    "Trivial 1-digit cages: 8",
+); # end: bd09a60d-3aca-43bd-b6aa-6ccad01bedda
+
+cmp-ok( # begin: 9b539f27-44ea-4ff8-bd3d-c7e136bee677
+    killer-sudoku-helper( :sum(9), :size(1), :exclude() ),
+    "~~",
+    ((9,),),
+    "Trivial 1-digit cages: 9",
+); # end: 9b539f27-44ea-4ff8-bd3d-c7e136bee677
+
+cmp-ok( # begin: 0a8b2078-b3a4-4dbd-be0d-b180f503d5c3
+    killer-sudoku-helper( :sum(45), :size(9), :exclude() ),
+    "~~",
+    ((1, 2, 3, 4, 5, 6, 7, 8, 9),),
+    "Cage with sum 45 contains all digits 1:9",
+); # end: 0a8b2078-b3a4-4dbd-be0d-b180f503d5c3
+
+cmp-ok( # begin: 2635d7c9-c716-4da1-84f1-c96e03900142
+    killer-sudoku-helper( :sum(7), :size(3), :exclude() ),
+    "~~",
+    ((1, 2, 4),),
+    "Cage with only 1 possible combination",
+); # end: 2635d7c9-c716-4da1-84f1-c96e03900142
+
+cmp-ok( # begin: a5bde743-e3a2-4a0c-8aac-e64fceea4228
+    killer-sudoku-helper( :sum(10), :size(2), :exclude() ),
+    "~~",
+    ((1, 9), (2, 8), (3, 7), (4, 6)),
+    "Cage with several combinations",
+); # end: a5bde743-e3a2-4a0c-8aac-e64fceea4228
+
+cmp-ok( # begin: dfbf411c-737d-465a-a873-ca556360c274
+    killer-sudoku-helper( :sum(10), :size(2), :exclude(1, 4) ),
+    "~~",
+    ((2, 8), (3, 7)),
+    "Cage with several combinations that is restricted",
+); # end: dfbf411c-737d-465a-a873-ca556360c274
+
+done-testing;

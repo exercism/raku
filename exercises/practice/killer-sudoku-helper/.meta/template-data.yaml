@@ -1,0 +1,21 @@
+properties:
+  combinations:
+    test: |-
+      sprintf(q:to/END/, %case<input><cage><sum>.raku, %case<input><cage><size>.raku, %case<input><cage><exclude>.List.raku, %case<expected>.map(*.List).List.raku, %case<description>.raku);
+      cmp-ok(
+          killer-sudoku-helper( :sum(%s), :size(%s), :exclude%s ),
+          "~~",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub killer-sudoku-helper ( :$sum, :$size, :$exclude ) is export {
+      ( 1..9 ).combinations( $size ).grep( *.sum == $sum ).grep( *.none (elem) $exclude )
+  }
+
+stub: |-
+  sub killer-sudoku-helper (:$sum, :$size, :$exclude) is export {
+  }
