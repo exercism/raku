@@ -8,7 +8,7 @@ use Template::Mustache;
 use YAMLish;
 
 my $base-dir = $?FILE.IO.parent.add('../..');
-our $ProblemSpecsDir = ( (.IO with %*ENV<XDG_CACHE_HOME>) // Empty, |('.cache', <Library Caches>).map({%*ENV<HOME>.IO.add: $_}) )
+our $ProblemSpecsDir = ( (.IO with %*ENV<XDG_CACHE_HOME>), |('.cache', <Library Caches>).map({%*ENV<HOME>.IO.add: $_}) )
   .map(*.add: <exercism configlet problem-specifications>)
   .first(*.d);
 
