@@ -53,7 +53,7 @@ subtest '1 case UUID' => {
         JSON
     }
     else {
-      skip 'problem-specifications required', 2;
+      skip 'problem-specifications required', 3;
     }
   }
 }

@@ -7,7 +7,8 @@ use Exercism::Generator;
 my %*SUB-MAIN-OPTS = :named-anywhere;
 
 note "`problem-specifications` directory not found; exercise(s) may generate incorrectly.\nRun `bin/configlet sync` to sync data."
-  unless %*ENV<HOME>.IO.add(any('.cache', 'Library/Caches') ~ '/exercism/configlet/problem-specifications').d;
+  unless ( (.IO with %*ENV<XDG_CACHE_HOME>) // Empty, |('.cache', <Library Caches>).map({%*ENV<HOME>.IO.add: $_}) ) 
+         .first({.add(<exercism configlet problem-specifications>).d});
 
 #| Displays this message.
 multi MAIN ( Bool:D :h(:help(:$man)) ) {
