@@ -8,6 +8,6 @@ grammar Balanced {
     token braces      { '{' ~ '}' <balanced> * }
     token other       { <-[()\[\]{}]>        + }
 }
-sub is-paired ($a) is export {
-  Balanced.parse($a).so
+sub has-matching-brackets ($string) is export {
+  Balanced.parse($string).so
 }

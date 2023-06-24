@@ -1,4 +1,4 @@
 unit module MatchingBrackets;
 
-sub is-paired ($a) is export {
+sub has-matching-brackets ($string) is export {
 }

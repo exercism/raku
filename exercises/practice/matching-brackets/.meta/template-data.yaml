@@ -3,12 +3,12 @@ unit: module
 properties:
   isPaired:
     test: |-
-      sprintf(q:to/END/, %case<input><value>.List<>, %case<expected>.List, %case<description>);
+      sprintf(q:to/END/, %case<input><value>, %case<expected>, %case<description>.raku);
       cmp-ok(
-          is-paired('%s'),
+          has-matching-brackets(｢%s｣),
           "eqv",
           %s,
-          "%s",
+          %s,
       );
       END
 
@@ -21,10 +21,10 @@ example: |-
       token braces      { '{' ~ '}' <balanced> * }
       token other       { <-[()\[\]{}]>        + }
   }
-  sub is-paired ($a) is export {
-    Balanced.parse($a).so
+  sub has-matching-brackets ($string) is export {
+    Balanced.parse($string).so
   }
 
 stub: |-
-  sub is-paired ($a) is export {
+  sub has-matching-brackets ($string) is export {
   }
