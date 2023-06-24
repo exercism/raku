@@ -1,0 +1,62 @@
+properties:
+  equilateral:
+    test: |-
+      sprintf(q:to/END/, %case<input><sides>.List<>, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          is-equilateral(%s, %s, %s),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+  isosceles:
+    test: |-
+      sprintf(q:to/END/, %case<input><sides>.List<>, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          is-isosceles(%s, %s, %s),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+  scalene:
+    test: |-
+      sprintf(q:to/END/, %case<input><sides>.List<>, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          is-scalene(%s, %s, %s),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub is-triangle ($a, $b, $c) {
+        $a + $b >= $c
+    and $b + $c >= $a
+    and $a + $c >= $b
+    and not 0 == all $a, $b, $c
+  }
+
+  sub is-equilateral ($a, $b, $c) is export {
+    is-triangle($a, $b, $c) and 1 == unique $a, $b, $c
+  }
+
+  sub is-isosceles ($a, $b, $c) is export {
+    is-triangle($a, $b, $c) and 2 >= unique $a, $b, $c
+  }
+
+  sub is-scalene ($a, $b, $c) is export {
+    is-triangle($a, $b, $c) and 3 == unique $a, $b, $c
+  }
+
+stub: |-
+  sub is-equilateral ($a, $b, $c) is export {
+  }
+
+  sub is-isosceles ($a, $b, $c) is export {
+  }
+
+  sub is-scalene ($a, $b, $c) is export {
+  }
