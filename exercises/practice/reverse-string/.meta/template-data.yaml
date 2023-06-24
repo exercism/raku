@@ -1,27 +1,29 @@
 properties:
   reverse:
     test: |-
-      sprintf(q:to/END/, %case<description>.raku, %case<input><value>.raku, %case<expected>.raku, %case<input><value>.raku, %case<input><value>.raku);
-      subtest %s => {
+      sprintf(q:to/END/, %case<description>.raku, %case<input><value>.raku, %case<expected>.raku);
+      subtest %1$s => {
         cmp-ok(
-            switch-round(%s),
+            reverse-string(%2$s),
             "eq",
-            %s,
+            %3$s,
+            "reverse once",
         );
         cmp-ok(
-            switch-round(switch-round(%s)),
+            reverse-string(reverse-string(%2$s)),
             "eq",
-            %s,
+            %2$s,
+            "reverse twice",
         );
       }
       END
 
 unit: module
 example: |-
-  sub switch-round($string) is export {
+  sub reverse-string($string) is export {
       $string.flip
   }
 
 stub: |-
-  sub switch-round($string) is export {
+  sub reverse-string($string) is export {
   }
