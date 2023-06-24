@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+  ],
+  "files": {
+    "solution": [
+      "Sublist.rakumod"
+    ],
+    "test": [
+      "sublist.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/Sublist.rakumod"
+    ]
+  },
+  "blurb": "Write a function to determine if a list is a sublist of another list."
+}
