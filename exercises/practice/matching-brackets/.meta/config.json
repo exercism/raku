@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "habere-et-dispertire",
+    "m-dango"
+  ],
+  "files": {
+    "solution": [
+      "MatchingBrackets.rakumod"
+    ],
+    "test": [
+      "matching-brackets.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/MatchingBrackets.rakumod"
+    ]
+  },
+  "blurb": "Make sure the brackets and braces all match.",
+  "source": "Ginna Baker"
+}
