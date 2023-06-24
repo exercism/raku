@@ -537,6 +537,15 @@
         "topics": []
       },
       {
+        "slug": "sublist",
+        "name": "Sublist",
+        "uuid": "03e659a9-fd11-4e1e-8250-090acc2691ae",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "matching-brackets",
         "name": "Matching Brackets",
         "uuid": "0236f51e-de30-4922-901f-4c460e8fe17f",
