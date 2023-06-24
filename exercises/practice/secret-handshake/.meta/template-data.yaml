@@ -1,0 +1,23 @@
+unit: module
+
+properties:
+  commands:
+    test: |-
+      sprintf(q:to/END/, %case<input><number>.List<>, %case<expected>.List.raku, %case<description>.raku);
+      cmp-ok(
+          handshake(%s),
+          "~~",
+          %s,
+          %s,
+      );
+      END
+
+example: |-
+  sub handshake ( $number ) is export {
+      $number +& 16 ?? .reverse !! $_ given gather take .key if $number +& .value
+      for ( 'wink', 'double blink', 'close your eyes', 'jump' ) Z=> <1 2 4 8>
+  }
+
+stub: |-
+  sub handshake ( $number ) is export {
+  }
