@@ -8,6 +8,9 @@ use Template::Mustache;
 use YAMLish;
 
 my $base-dir = $?FILE.IO.parent.add('../..');
+our $ProblemSpecsDir = ( (.IO with %*ENV<XDG_CACHE_HOME>) // Empty, |('.cache', <Library Caches>).map({%*ENV<HOME>.IO.add: $_}) )
+  .map(*.add: <exercism configlet problem-specifications>)
+  .first(*.d);
 
 #| The exercise slug
 has Str:D $.exercise is required;
@@ -21,11 +24,8 @@ has %.data = do if ( my $yaml-file =
 };
 
 #| The parsed canonical-data.json from problem-specifications
-has %.cdata = do if ( my $cdata-file =
-  ( (.IO with %*ENV<XDG_CACHE_HOME>) // Empty, |('.cache', <Library Caches>).map({%*ENV<HOME>.IO.add: $_}) )
-  .map({.add("exercism/configlet/problem-specifications/exercises/$!exercise/canonical-data.json")})
-  .first(*.f)
-) {
+has %.cdata = do if ( my $cdata-file = $ProblemSpecsDir.add("exercises/$!exercise/canonical-data.json")
+).f {
   from-json($cdata-file.slurp);
 };
 

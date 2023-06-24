@@ -28,7 +28,7 @@ subtest '1 case UUID' => {
 
     cmp-ok .case-uuids, &infix:<≡>, <af9ffe10-dc13-42d8-a742-e7bdafac449d>;
 
-    if %*ENV<HOME>.IO.add('.cache/exercism/configlet/problem-specifications') ~~ :d {
+    if $Exercism::Generator::ProblemSpecsDir.d {
       is-deeply .cases.Array, [%(
         :description('Say Hi!'),
         :property<hello>,
