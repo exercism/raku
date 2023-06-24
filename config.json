@@ -546,6 +546,15 @@
         "topics": []
       },
       {
+        "slug": "matching-brackets",
+        "name": "Matching Brackets",
+        "uuid": "0236f51e-de30-4922-901f-4c460e8fe17f",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "reverse-string",
         "name": "Reverse String",
         "uuid": "cdc17b6c-ccde-4709-9bbe-a5af7a79b8ae",
