@@ -6,7 +6,7 @@ properties:
       sprintf(q:to/END/, %case<input><value>.List<>, %case<expected>.List, %case<description>);
       cmp-ok(
           is-paired('%s'),
-          "eq",
+          "eqv",
           %s,
           "%s",
       );
