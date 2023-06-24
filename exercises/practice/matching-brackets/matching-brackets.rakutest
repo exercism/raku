@@ -1,0 +1,146 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use MatchingBrackets;
+
+cmp-ok( # begin: 81ec11da-38dd-442a-bcf9-3de7754609a5
+    has-matching-brackets(｢[]｣),
+    "eqv",
+    True,
+    "paired square brackets",
+); # end: 81ec11da-38dd-442a-bcf9-3de7754609a5
+
+cmp-ok( # begin: 287f0167-ac60-4b64-8452-a0aa8f4e5238
+    has-matching-brackets(｢｣),
+    "eqv",
+    True,
+    "empty string",
+); # end: 287f0167-ac60-4b64-8452-a0aa8f4e5238
+
+cmp-ok( # begin: 6c3615a3-df01-4130-a731-8ef5f5d78dac
+    has-matching-brackets(｢[[｣),
+    "eqv",
+    False,
+    "unpaired brackets",
+); # end: 6c3615a3-df01-4130-a731-8ef5f5d78dac
+
+cmp-ok( # begin: 9d414171-9b98-4cac-a4e5-941039a97a77
+    has-matching-brackets(｢}{｣),
+    "eqv",
+    False,
+    "wrong ordered brackets",
+); # end: 9d414171-9b98-4cac-a4e5-941039a97a77
+
+cmp-ok( # begin: f0f97c94-a149-4736-bc61-f2c5148ffb85
+    has-matching-brackets(｢{]｣),
+    "eqv",
+    False,
+    "wrong closing bracket",
+); # end: f0f97c94-a149-4736-bc61-f2c5148ffb85
+
+cmp-ok( # begin: 754468e0-4696-4582-a30e-534d47d69756
+    has-matching-brackets(｢{ }｣),
+    "eqv",
+    True,
+    "paired with whitespace",
+); # end: 754468e0-4696-4582-a30e-534d47d69756
+
+cmp-ok( # begin: ba84f6ee-8164-434a-9c3e-b02c7f8e8545
+    has-matching-brackets(｢{[])｣),
+    "eqv",
+    False,
+    "partially paired brackets",
+); # end: ba84f6ee-8164-434a-9c3e-b02c7f8e8545
+
+cmp-ok( # begin: 3c86c897-5ff3-4a2b-ad9b-47ac3a30651d
+    has-matching-brackets(｢{[]}｣),
+    "eqv",
+    True,
+    "simple nested brackets",
+); # end: 3c86c897-5ff3-4a2b-ad9b-47ac3a30651d
+
+cmp-ok( # begin: 2d137f2c-a19e-4993-9830-83967a2d4726
+    has-matching-brackets(｢{}[]｣),
+    "eqv",
+    True,
+    "several paired brackets",
+); # end: 2d137f2c-a19e-4993-9830-83967a2d4726
+
+cmp-ok( # begin: 2e1f7b56-c137-4c92-9781-958638885a44
+    has-matching-brackets(｢([{}({}[])])｣),
+    "eqv",
+    True,
+    "paired and nested brackets",
+); # end: 2e1f7b56-c137-4c92-9781-958638885a44
+
+cmp-ok( # begin: 84f6233b-e0f7-4077-8966-8085d295c19b
+    has-matching-brackets(｢{[)][]}｣),
+    "eqv",
+    False,
+    "unopened closing brackets",
+); # end: 84f6233b-e0f7-4077-8966-8085d295c19b
+
+cmp-ok( # begin: 9b18c67d-7595-4982-b2c5-4cb949745d49
+    has-matching-brackets(｢([{])｣),
+    "eqv",
+    False,
+    "unpaired and nested brackets",
+); # end: 9b18c67d-7595-4982-b2c5-4cb949745d49
+
+cmp-ok( # begin: a0205e34-c2ac-49e6-a88a-899508d7d68e
+    has-matching-brackets(｢[({]})｣),
+    "eqv",
+    False,
+    "paired and wrong nested brackets",
+); # end: a0205e34-c2ac-49e6-a88a-899508d7d68e
+
+cmp-ok( # begin: 1d5c093f-fc84-41fb-8c2a-e052f9581602
+    has-matching-brackets(｢[({}])｣),
+    "eqv",
+    False,
+    "paired and wrong nested brackets but innermost are correct",
+); # end: 1d5c093f-fc84-41fb-8c2a-e052f9581602
+
+cmp-ok( # begin: ef47c21b-bcfd-4998-844c-7ad5daad90a8
+    has-matching-brackets(｢{}[｣),
+    "eqv",
+    False,
+    "paired and incomplete brackets",
+); # end: ef47c21b-bcfd-4998-844c-7ad5daad90a8
+
+cmp-ok( # begin: a4675a40-a8be-4fc2-bc47-2a282ce6edbe
+    has-matching-brackets(｢[]]｣),
+    "eqv",
+    False,
+    "too many closing brackets",
+); # end: a4675a40-a8be-4fc2-bc47-2a282ce6edbe
+
+cmp-ok( # begin: a345a753-d889-4b7e-99ae-34ac85910d1a
+    has-matching-brackets(｢)()｣),
+    "eqv",
+    False,
+    "early unexpected brackets",
+); # end: a345a753-d889-4b7e-99ae-34ac85910d1a
+
+cmp-ok( # begin: 21f81d61-1608-465a-b850-baa44c5def83
+    has-matching-brackets(｢{)()｣),
+    "eqv",
+    False,
+    "early mismatched brackets",
+); # end: 21f81d61-1608-465a-b850-baa44c5def83
+
+cmp-ok( # begin: 99255f93-261b-4435-a352-02bdecc9bdf2
+    has-matching-brackets(｢(((185 + 223.85) * 15) - 543)/2｣),
+    "eqv",
+    True,
+    "math expression",
+); # end: 99255f93-261b-4435-a352-02bdecc9bdf2
+
+cmp-ok( # begin: 8e357d79-f302-469a-8515-2561877256a1
+    has-matching-brackets(｢\left(\begin{array}{cc} \frac{1}{3} & x\\ \mathrm{e}^{x} &... x^2 \end{array}\right)｣),
+    "eqv",
+    True,
+    "complex latex expression",
+); # end: 8e357d79-f302-469a-8515-2561877256a1
+
+done-testing;
