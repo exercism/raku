@@ -1,0 +1,29 @@
+properties:
+  reverse:
+    test: |-
+      sprintf(q:to/END/, %case<description>.raku, %case<input><value>.raku, %case<expected>.raku);
+      subtest %1$s => {
+        cmp-ok(
+            reverse-string(%2$s),
+            "eq",
+            %3$s,
+            "reverse once",
+        );
+        cmp-ok(
+            reverse-string(reverse-string(%2$s)),
+            "eq",
+            %2$s,
+            "reverse twice",
+        );
+      }
+      END
+
+unit: module
+example: |-
+  sub reverse-string($string) is export {
+      $string.flip
+  }
+
+stub: |-
+  sub reverse-string($string) is export {
+  }
