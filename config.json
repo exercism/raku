@@ -582,6 +582,15 @@
         "topics": []
       },
       {
+        "slug": "transpose",
+        "name": "Transpose",
+        "uuid": "1071ff62-8951-4176-bfcf-0f36b0b122a1",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "matrix",
         "name": "Matrix",
         "uuid": "50ba9ec3-93a7-4963-868e-0d08f7c01acd",

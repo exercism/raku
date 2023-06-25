@@ -1,0 +1,34 @@
+unit: module
+
+properties:
+  transpose:
+    test: |-
+      sprintf(q:to/END/, (given %case<input><lines> {$_ ?? .append('').join("\n    ") !! ""}) , (given %case<expected> {$_ ?? .append('').join("\n    ") !! ""}), %case<description>.raku);
+      cmp-ok(
+          transpose(q:to/---/.trim),
+          %s---
+
+          "eq",
+
+          q:to/---/.trim,
+          %s---
+
+          %s,
+      );
+      END
+
+example: |-
+  sub transpose ($text) is export {
+    my @matrix;
+
+    for $text.lines.pairs
+    -> $line {
+        @matrix[ .key ; $line.key ] = .value for $line.value.comb.pairs
+    }
+
+    return @matrix.deepmap( { .defined ?? $_ !! ' ' } ).map( *.join ).join: "\n";
+  }
+
+stub: |-
+  sub transpose ($text) is export {
+  }

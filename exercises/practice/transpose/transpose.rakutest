@@ -1,0 +1,277 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use Transpose;
+
+cmp-ok( # begin: 404b7262-c050-4df0-a2a2-0cb06cd6a821
+    transpose(q:to/---/.trim),
+    ---
+
+    "eq",
+
+    q:to/---/.trim,
+    ---
+
+    "empty string",
+); # end: 404b7262-c050-4df0-a2a2-0cb06cd6a821
+
+cmp-ok( # begin: a89ce8a3-c940-4703-a688-3ea39412fbcb
+    transpose(q:to/---/.trim),
+    A1
+    ---
+
+    "eq",
+
+    q:to/---/.trim,
+    A
+    1
+    ---
+
+    "two characters in a row",
+); # end: a89ce8a3-c940-4703-a688-3ea39412fbcb
+
+cmp-ok( # begin: 855bb6ae-4180-457c-abd0-ce489803ce98
+    transpose(q:to/---/.trim),
+    A
+    1
+    ---
+
+    "eq",
+
+    q:to/---/.trim,
+    A1
+    ---
+
+    "two characters in a column",
+); # end: 855bb6ae-4180-457c-abd0-ce489803ce98
+
+cmp-ok( # begin: 5ceda1c0-f940-441c-a244-0ced197769c8
+    transpose(q:to/---/.trim),
+    ABC
+    123
+    ---
+
+    "eq",
+
+    q:to/---/.trim,
+    A1
+    B2
+    C3
+    ---
+
+    "simple",
+); # end: 5ceda1c0-f940-441c-a244-0ced197769c8
+
+cmp-ok( # begin: a54675dd-ae7d-4a58-a9c4-0c20e99a7c1f
+    transpose(q:to/---/.trim),
+    Single line.
+    ---
+
+    "eq",
+
+    q:to/---/.trim,
+    S
+    i
+    n
+    g
+    l
+    e
+     
+    l
+    i
+    n
+    e
+    .
+    ---
+
+    "single line",
+); # end: a54675dd-ae7d-4a58-a9c4-0c20e99a7c1f
+
+cmp-ok( # begin: 0dc2ec0b-549d-4047-aeeb-8029fec8d5c5
+    transpose(q:to/---/.trim),
+    The fourth line.
+    The fifth line.
+    ---
+
+    "eq",
+
+    q:to/---/.trim,
+    TT
+    hh
+    ee
+      
+    ff
+    oi
+    uf
+    rt
+    th
+    h 
+     l
+    li
+    in
+    ne
+    e.
+    .
+    ---
+
+    "first line longer than second line",
+); # end: 0dc2ec0b-549d-4047-aeeb-8029fec8d5c5
+
+cmp-ok( # begin: 984e2ec3-b3d3-4b53-8bd6-96f5ef404102
+    transpose(q:to/---/.trim),
+    The first line.
+    The second line.
+    ---
+
+    "eq",
+
+    q:to/---/.trim,
+    TT
+    hh
+    ee
+      
+    fs
+    ie
+    rc
+    so
+    tn
+     d
+    l 
+    il
+    ni
+    en
+    .e
+     .
+    ---
+
+    "second line longer than first line",
+); # end: 984e2ec3-b3d3-4b53-8bd6-96f5ef404102
+
+cmp-ok( # begin: eccd3784-45f0-4a3f-865a-360cb323d314
+    transpose(q:to/---/.trim),
+    The longest line.
+    A long line.
+    A longer line.
+    A line.
+    ---
+
+    "eq",
+
+    q:to/---/.trim,
+    TAAA
+    h   
+    elll
+     ooi
+    lnnn
+    ogge
+    n e.
+    glr
+    ei 
+    snl
+    tei
+     .n
+    l e
+    i .
+    n
+    e
+    .
+    ---
+
+    "mixed line length",
+); # end: eccd3784-45f0-4a3f-865a-360cb323d314
+
+cmp-ok( # begin: 85b96b3f-d00c-4f80-8ca2-c8a5c9216c2d
+    transpose(q:to/---/.trim),
+    HEART
+    EMBER
+    ABUSE
+    RESIN
+    TREND
+    ---
+
+    "eq",
+
+    q:to/---/.trim,
+    HEART
+    EMBER
+    ABUSE
+    RESIN
+    TREND
+    ---
+
+    "square",
+); # end: 85b96b3f-d00c-4f80-8ca2-c8a5c9216c2d
+
+cmp-ok( # begin: b9257625-7a53-4748-8863-e08e9d27071d
+    transpose(q:to/---/.trim),
+    FRACTURE
+    OUTLINED
+    BLOOMING
+    SEPTETTE
+    ---
+
+    "eq",
+
+    q:to/---/.trim,
+    FOBS
+    RULE
+    ATOP
+    CLOT
+    TIME
+    UNIT
+    RENT
+    EDGE
+    ---
+
+    "rectangle",
+); # end: b9257625-7a53-4748-8863-e08e9d27071d
+
+cmp-ok( # begin: b80badc9-057e-4543-bd07-ce1296a1ea2c
+    transpose(q:to/---/.trim),
+    T
+    EE
+    AAA
+    SSSS
+    EEEEE
+    RRRRRR
+    ---
+
+    "eq",
+
+    q:to/---/.trim,
+    TEASER
+     EASER
+      ASER
+       SER
+        ER
+         R
+    ---
+
+    "triangle",
+); # end: b80badc9-057e-4543-bd07-ce1296a1ea2c
+
+cmp-ok( # begin: 76acfd50-5596-4d05-89f1-5116328a7dd9
+    transpose(q:to/---/.trim),
+    11
+    2
+    3333
+    444
+    555555
+    66666
+    ---
+
+    "eq",
+
+    q:to/---/.trim,
+    123456
+    1 3456
+      3456
+      3 56
+        56
+        5
+    ---
+
+    "jagged triangle",
+); # end: 76acfd50-5596-4d05-89f1-5116328a7dd9
+
+done-testing;
