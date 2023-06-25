@@ -1,4 +1,4 @@
 unit module BookStore;
 
-sub best-price (@basket) is export {
+sub best-price (%basket) is export {
 }

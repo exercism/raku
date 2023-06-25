@@ -1,10 +1,10 @@
 properties:
   total:
     test: |-
-      sprintf(q:to/END/, (%case<input><basket><>, |%case<expected description>).map(*.raku));
+      sprintf(q:to/END/, (%case<input><basket><>.Bag.pairs.sort({$^a.key <=> $^b.key}).List, |%case<expected description>).map(*.raku));
       cmp-ok(
-          best-price(%s),
-          "eqv"
+          best-price( %s.Bag ),
+          "eqv",
           Rat.new(%s, 100),
           %s,
       );
@@ -12,9 +12,9 @@ properties:
 
 unit: module
 example: |-
-  sub best-price (@basket) is export {
+  sub best-price (%basket) is export {
   }
 
 stub: |-
-  sub best-price (@basket) is export {
+  sub best-price (%basket) is export {
   }
