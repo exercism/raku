@@ -14,7 +14,7 @@ throws-like( # begin: 4e812d5d-b974-4e38-9a6b-8e0492bfa7be
   { Queen.new( :row(-2), :column(2) ) },
   Exception,
   message => /:i
-      "row not positive"
+      "row not on board"
       || "type check failed"
   /,
   "Test creation of Queens with valid and invalid positions: queen must have positive row",
@@ -34,7 +34,7 @@ throws-like( # begin: 15a10794-36d9-4907-ae6b-e5a0d4c54ebe
   { Queen.new( :row(2), :column(-2) ) },
   Exception,
   message => /:i
-      "column not positive"
+      "column not on board"
       || "type check failed"
   /,
   "Test creation of Queens with valid and invalid positions: queen must have positive column",

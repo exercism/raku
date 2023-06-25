@@ -6,7 +6,7 @@ properties:
   create:
     test: |-
       if %case<expected><error>:exists {
-        sprintf(q:to/END/, (%case<input><queen><position><row>, %case<input><queen><position><column>, %case<expected><error>, %case<description>).map(*.raku));
+        sprintf(q:to/END/, (%case<input><queen><position><row>, %case<input><queen><position><column>, %case<expected><error>.subst(/positive/, 'on board'), %case<description>).map(*.raku));
         throws-like(
           { Queen.new( :row(%s), :column(%s) ) },
           Exception,
