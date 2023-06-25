@@ -573,6 +573,15 @@
         "topics": []
       },
       {
+        "slug": "pythagorean-triplet",
+        "name": "Pythagorean Triplet",
+        "uuid": "7e517674-28b6-4b47-97ee-cf4517402430",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "transpose",
         "name": "Transpose",
         "uuid": "1071ff62-8951-4176-bfcf-0f36b0b122a1",
