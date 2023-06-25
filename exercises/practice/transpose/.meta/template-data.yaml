@@ -7,9 +7,12 @@ properties:
       cmp-ok(
           transpose(q:to/---/.trim),
           %s---
+
           "eq",
+
           q:to/---/.trim,
           %s---
+
           %s,
       );
       END
