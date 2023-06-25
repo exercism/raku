@@ -2,8 +2,9 @@ properties:
   total:
     test: |-
       sprintf(q:to/END/, (%case<input><basket><>, |%case<expected description>).map(*.raku));
-      is-deeply(
+      cmp-ok(
           best-price(%s),
+          "eqv"
           Rat.new(%s, 100),
           %s,
       );
