@@ -1,0 +1,31 @@
+properties:
+  tripletsWithSum:
+    test: |-
+      sprintf(q:to/END/, %case<input><n>.raku, %case<expected>.map(*.List).List.raku, %case<description>.raku);
+      cmp-ok(
+          triplets-sum(%s),
+          "~~",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub triplets-sum ($sum) is export {
+      gather for 1 .. $sum
+      -> $a {
+          given 2×$a² + $sum² - 2×$sum×$a, 2×( $sum - $a )
+          -> ( $numerator, $denominator ) {
+              if $numerator %% $denominator {
+                  my $c = $numerator / $denominator;
+                  my $b = $sum - $a - $c;
+                  take [ $a, $b, $c ] if $b > $a;
+              }
+          }
+      }
+  }
+
+stub: |-
+  sub triplets-sum ($sum) is export {
+  }
