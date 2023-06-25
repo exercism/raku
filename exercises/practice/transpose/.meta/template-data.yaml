@@ -3,11 +3,13 @@ unit: module
 properties:
   transpose:
     test: |-
-      sprintf(q:to/END/, %case<input><lines>.join("\n").raku, %case<expected>.join("\n").raku, %case<description>.raku);
+      sprintf(q:to/END/, (given %case<input><lines> {$_ ?? .append('').join("\n    ") !! ""}) , (given %case<expected> {$_ ?? .append('').join("\n    ") !! ""}), %case<description>.raku);
       cmp-ok(
-          transpose(%s),
+          transpose(q:to/---/.trim),
+          %s---
           "eq",
-          %s,
+          q:to/---/.trim,
+          %s---
           %s,
       );
       END
