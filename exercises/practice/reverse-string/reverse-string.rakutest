@@ -1,0 +1,96 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use ReverseString;
+
+subtest "an empty string" => { # begin: c3b7d806-dced-49ee-8543-933fd1719b1c
+  cmp-ok(
+      reverse-string(""),
+      "eq",
+      "",
+      "reverse once",
+  );
+  cmp-ok(
+      reverse-string(reverse-string("")),
+      "eq",
+      "",
+      "reverse twice",
+  );
+} # end: c3b7d806-dced-49ee-8543-933fd1719b1c
+
+subtest "a word" => { # begin: 01ebf55b-bebb-414e-9dec-06f7bb0bee3c
+  cmp-ok(
+      reverse-string("robot"),
+      "eq",
+      "tobor",
+      "reverse once",
+  );
+  cmp-ok(
+      reverse-string(reverse-string("robot")),
+      "eq",
+      "robot",
+      "reverse twice",
+  );
+} # end: 01ebf55b-bebb-414e-9dec-06f7bb0bee3c
+
+subtest "a capitalized word" => { # begin: 0f7c07e4-efd1-4aaa-a07a-90b49ce0b746
+  cmp-ok(
+      reverse-string("Ramen"),
+      "eq",
+      "nemaR",
+      "reverse once",
+  );
+  cmp-ok(
+      reverse-string(reverse-string("Ramen")),
+      "eq",
+      "Ramen",
+      "reverse twice",
+  );
+} # end: 0f7c07e4-efd1-4aaa-a07a-90b49ce0b746
+
+subtest "a sentence with punctuation" => { # begin: 71854b9c-f200-4469-9f5c-1e8e5eff5614
+  cmp-ok(
+      reverse-string("I'm hungry!"),
+      "eq",
+      "!yrgnuh m'I",
+      "reverse once",
+  );
+  cmp-ok(
+      reverse-string(reverse-string("I'm hungry!")),
+      "eq",
+      "I'm hungry!",
+      "reverse twice",
+  );
+} # end: 71854b9c-f200-4469-9f5c-1e8e5eff5614
+
+subtest "a palindrome" => { # begin: 1f8ed2f3-56f3-459b-8f3e-6d8d654a1f6c
+  cmp-ok(
+      reverse-string("racecar"),
+      "eq",
+      "racecar",
+      "reverse once",
+  );
+  cmp-ok(
+      reverse-string(reverse-string("racecar")),
+      "eq",
+      "racecar",
+      "reverse twice",
+  );
+} # end: 1f8ed2f3-56f3-459b-8f3e-6d8d654a1f6c
+
+subtest "an even-sized word" => { # begin: b9e7dec1-c6df-40bd-9fa3-cd7ded010c4c
+  cmp-ok(
+      reverse-string("drawer"),
+      "eq",
+      "reward",
+      "reverse once",
+  );
+  cmp-ok(
+      reverse-string(reverse-string("drawer")),
+      "eq",
+      "drawer",
+      "reverse twice",
+  );
+} # end: b9e7dec1-c6df-40bd-9fa3-cd7ded010c4c
+
+done-testing;

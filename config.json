@@ -546,6 +546,33 @@
         "topics": []
       },
       {
+        "slug": "matching-brackets",
+        "name": "Matching Brackets",
+        "uuid": "0236f51e-de30-4922-901f-4c460e8fe17f",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "reverse-string",
+        "name": "Reverse String",
+        "uuid": "cdc17b6c-ccde-4709-9bbe-a5af7a79b8ae",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "killer-sudoku-helper",
+        "name": "Killer Sudoku Helper",
+        "uuid": "f7071a4d-0341-41eb-a37b-92b3c8d10b08",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "matrix",
         "name": "Matrix",
         "uuid": "50ba9ec3-93a7-4963-868e-0d08f7c01acd",
