@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+  ],
+  "files": {
+    "solution": [
+      "KillerSudokuHelper.rakumod"
+    ],
+    "test": [
+      "killer-sudoku-helper.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/KillerSudokuHelper.rakumod"
+    ]
+  },
+  "blurb": "Write a tool that makes it easier to solve Killer Sudokus",
+  "source": "Created by Sascha Mann, Jeremy Walker, and BethanyG for the Julia track on Exercism.",
+  "source_url": "https://github.com/exercism/julia/pull/413"
+}

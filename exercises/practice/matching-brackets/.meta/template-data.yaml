@@ -1,0 +1,30 @@
+unit: module
+
+properties:
+  isPaired:
+    test: |-
+      sprintf(q:to/END/, %case<input><value>, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          has-matching-brackets(｢%s｣),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+example: |-
+  grammar Balanced {
+      token TOP         { <balanced> * }
+      token balanced    { <parentheses> | <brackets> | <braces> | <other> }
+      token parentheses { '(' ~ ')' <balanced> * }
+      token brackets    { '[' ~ ']' <balanced> * }
+      token braces      { '{' ~ '}' <balanced> * }
+      token other       { <-[()\[\]{}]>        + }
+  }
+  sub has-matching-brackets ($string) is export {
+    Balanced.parse($string).so
+  }
+
+stub: |-
+  sub has-matching-brackets ($string) is export {
+  }
