@@ -1,9 +1,9 @@
 properties:
   row:
     test: |-
-      sprintf(q:to/END/, %case<input><string>.raku, %case<input><index>.raku, %case<expected>.List<>.raku, %case<description>.raku);
+      sprintf(q:to/END/, %case<input><string>.raku, %case<input><index>, %case<expected>.List<>.raku, %case<description>.raku);
       cmp-ok(
-          extract-row(string=>%s,index=>%s),
+          extract-row( :string(%s), :index(%s) ),
           "~~",
           %s,
           %s,
@@ -11,9 +11,9 @@ properties:
       END
   column:
     test: |-
-      sprintf(q:to/END/, %case<input><string>.raku, %case<input><index>.raku, %case<expected>.List<>.raku, %case<description>.raku);
+      sprintf(q:to/END/, %case<input><string>.raku, %case<input><index>, %case<expected>.List<>.raku, %case<description>.raku);
       cmp-ok(
-          extract-column(string=>%s,index=>%s),
+          extract-column( :string(%s), :index(%s) ),
           "~~",
           %s,
           %s,
@@ -25,6 +25,7 @@ example: |-
   sub extract-row(:$string, :$index) is export {
     $string.lines[$index.pred].words
   }
+
   sub extract-column(:$string, :$index) is export {
     gather for $string.lines { take .words[$index.pred] }
   }
@@ -32,5 +33,6 @@ example: |-
 stub: |-
   sub extract-row(:$string, :$index) is export {
   }
-  sub extract-column($string) is export {
+
+  sub extract-column(:$string, :$index) is export {
   }
