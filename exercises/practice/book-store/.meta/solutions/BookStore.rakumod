@@ -1,6 +1,6 @@
 unit module BookStore;
 
-constant @discounts = .95, .9, .8, .75;
+constant @discounts = 1, .95, .9, .8, .75;
 
 sub best-price (%basket) is export {
     my @groups;
@@ -12,9 +12,9 @@ sub best-price (%basket) is export {
     }
     
     while @groups ∋ 5 & 3 {
-        @groups[@groups.first(* == 5, :k)]--;
-        @groups[@groups.first(* == 3, :k)]++;
+        @groups[@groups.first(5, :k)]--;
+        @groups[@groups.first(3, :k)]++;
     }
     
-    return @groups.map({ ( $_ > 1 ?? @discounts[$_ - 2] * $_ !! $_ ) * 8 }).sum.Rat;
+    return @groups.map({ $^books * 8 * @discounts[$books - 1] }).sum.Rat;
 }
