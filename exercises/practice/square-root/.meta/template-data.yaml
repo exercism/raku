@@ -3,7 +3,7 @@ unit: module
 tests: |
   for Num, Complex, FatRat, Rat, Int {
     .^find_method(<sqrt>).wrap: sub (|) {
-      bail-out 'Using the builtin sqrt is not allowed for this exercise.'
+      bail-out 'You are encouraged to not use the built-in sqrt for this exercise.'
     }
   }
 
