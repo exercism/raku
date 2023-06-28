@@ -1,0 +1,38 @@
+unit: module
+
+tests: |
+  for Num, Complex, FatRat, Rat, Int {
+    .^find_method(<sqrt>).wrap: sub (|) {
+      bail-out 'Using the builtin sqrt is not allowed for this exercise.'
+    }
+  }
+
+properties:
+  squareRoot:
+    test: |-
+      sprintf(q:to/END/, (%case<input><radicand>, %case<expected>, %case<description>).map(*.raku));
+      cmp-ok(
+          square-root(%s),
+          "==",
+          %s,
+          %s,
+      );
+      END
+
+example: |-
+  proto square-root (|) is export {*}
+  multi square-root(  0 ) { 0 }
+  multi square-root(  1 ) { 1 }
+  multi square-root( $n ) {
+    my $x0 = 2 ** ( floor( log2 $n / 2 ) + 1 );
+    my $x1 = ( $x0 + $n div $x0 ) div 2;
+    while $x1 < $x0 {
+      $x0 = $x1;
+      $x1 = ( $x0 + $n div $x0 ) div 2;
+    }
+    return $x0;
+  }
+
+stub: |-
+  sub square-root( $n ) is export {
+  }
