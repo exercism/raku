@@ -2,9 +2,9 @@ unit: module
 
 tests: |
   for Num, Complex, FatRat, Rat, Int {
-    .^find_method(<sqrt>).wrap: sub (|) {
-      bail-out 'You are encouraged to not use the built-in sqrt for this exercise.'
-    }
+      .^find_method(<sqrt>).wrap: sub (|) {
+          bail-out 'Calling the sqrt method is not allowed for this exercise.'
+      }
   }
 
 properties:
