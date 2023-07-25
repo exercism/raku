@@ -1,0 +1,43 @@
+unit: module
+
+properties:
+  colorCode:
+    test: |-
+      sprintf(q:to/END/, (%case<input><color>, %case<expected>, %case<description>).map(*.raku));
+      cmp-ok(
+          color-code(%s),
+          "==",
+          %s,
+          %s,
+      );
+      END
+  colors:
+    test: |-
+      sprintf(q:to/END/, (%case<expected>.List, %case<description>).map(*.raku));
+      cmp-ok(
+          all-colors(),
+          "~~",
+          %s,
+          %s,
+      );
+      END
+
+example: |-
+  constant %colors = <black brown red orange yellow green blue violet grey white> Z=> ^10;
+
+  sub all-colors is export {
+      %colors.sort( *.values ).map( *.key )
+  }
+
+  sub color-code ( $color ) is export {
+      %colors{ $color }
+  }
+
+stub: |-
+  constant %colors = <black brown red orange yellow green blue violet grey white> Z=> ^10;
+
+  sub all-colors is export {
+  }
+
+  sub color-code ( $text ) is export {
+  }
