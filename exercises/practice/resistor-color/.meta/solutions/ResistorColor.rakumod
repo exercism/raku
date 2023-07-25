@@ -1,11 +1,11 @@
 unit module ResistorColor;
 
-constant %colors = <black brown red orange yellow green blue violet grey white> Z=> ^10;
+constant @colors = <black brown red orange yellow green blue violet grey white>;
 
 sub all-colors is export {
-    %colors.sort( *.values ).map( *.key )
+    @colors
 }
 
 sub color-code ( $color ) is export {
-    %colors{ $color }
+    @colors.pairs.first( { .value eq $color } ).key
 }
