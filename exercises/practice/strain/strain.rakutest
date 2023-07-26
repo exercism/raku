@@ -1,0 +1,146 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use Strain;
+
+cmp-ok( # begin: 26af8c32-ba6a-4eb3-aa0a-ebd8f136e003
+    keep(
+      :list(),
+      :function( -> $x { True } ),
+    ),
+    "~~",
+    (),
+    "keep on empty list returns empty list",
+); # end: 26af8c32-ba6a-4eb3-aa0a-ebd8f136e003
+
+cmp-ok( # begin: f535cb4d-e99b-472a-bd52-9fa0ffccf454
+    keep(
+      :list(1, 3, 5),
+      :function( -> $x { True } ),
+    ),
+    "~~",
+    (1, 3, 5),
+    "keeps everything",
+); # end: f535cb4d-e99b-472a-bd52-9fa0ffccf454
+
+cmp-ok( # begin: 950b8e8e-f628-42a8-85e2-9b30f09cde38
+    keep(
+      :list(1, 3, 5),
+      :function( -> $x { False } ),
+    ),
+    "~~",
+    (),
+    "keeps nothing",
+); # end: 950b8e8e-f628-42a8-85e2-9b30f09cde38
+
+cmp-ok( # begin: 92694259-6e76-470c-af87-156bdf75018a
+    keep(
+      :list(1, 2, 3),
+      :function( -> $x { $x % 2 == 1 } ),
+    ),
+    "~~",
+    (1, 3),
+    "keeps first and last",
+); # end: 92694259-6e76-470c-af87-156bdf75018a
+
+cmp-ok( # begin: 938f7867-bfc7-449e-a21b-7b00cbb56994
+    keep(
+      :list(1, 2, 3),
+      :function( -> $x { $x %% 2 } ),
+    ),
+    "~~",
+    (2,),
+    "keeps neither first nor last",
+); # end: 938f7867-bfc7-449e-a21b-7b00cbb56994
+
+cmp-ok( # begin: 8908e351-4437-4d2b-a0f7-770811e48816
+    keep(
+      :list("apple", "zebra", "banana", "zombies", "cherimoya", "zealot"),
+      :function( -> $x { $x.starts-with('z') } ),
+    ),
+    "~~",
+    ("zebra", "zombies", "zealot"),
+    "keeps strings",
+); # end: 8908e351-4437-4d2b-a0f7-770811e48816
+
+cmp-ok( # begin: 2728036b-102a-4f1e-a3ef-eac6160d876a
+    keep(
+      :list((1, 2, 3), (5, 5, 5), (5, 1, 2), (2, 1, 2), (1, 5, 2), (2, 2, 1), (1, 2, 5)),
+      :function( -> $x { $x ∋ 5 } ),
+    ),
+    "~~",
+    ((5, 5, 5), (5, 1, 2), (1, 5, 2), (1, 2, 5)),
+    "keeps lists",
+); # end: 2728036b-102a-4f1e-a3ef-eac6160d876a
+
+cmp-ok( # begin: ef16beb9-8d84-451a-996a-14e80607fce6
+    discard(
+      :list(),
+      :function( -> $x { True } ),
+    ),
+    "~~",
+    (),
+    "discard on empty list returns empty list",
+); # end: ef16beb9-8d84-451a-996a-14e80607fce6
+
+cmp-ok( # begin: 2f42f9bc-8e06-4afe-a222-051b5d8cd12a
+    discard(
+      :list(1, 3, 5),
+      :function( -> $x { True } ),
+    ),
+    "~~",
+    (),
+    "discards everything",
+); # end: 2f42f9bc-8e06-4afe-a222-051b5d8cd12a
+
+cmp-ok( # begin: ca990fdd-08c2-4f95-aa50-e0f5e1d6802b
+    discard(
+      :list(1, 3, 5),
+      :function( -> $x { False } ),
+    ),
+    "~~",
+    (1, 3, 5),
+    "discards nothing",
+); # end: ca990fdd-08c2-4f95-aa50-e0f5e1d6802b
+
+cmp-ok( # begin: 71595dae-d283-48ca-a52b-45fa96819d2f
+    discard(
+      :list(1, 2, 3),
+      :function( -> $x { $x % 2 == 1 } ),
+    ),
+    "~~",
+    (2,),
+    "discards first and last",
+); # end: 71595dae-d283-48ca-a52b-45fa96819d2f
+
+cmp-ok( # begin: ae141f79-f86d-4567-b407-919eaca0f3dd
+    discard(
+      :list(1, 2, 3),
+      :function( -> $x { $x %% 2 } ),
+    ),
+    "~~",
+    (1, 3),
+    "discards neither first nor last",
+); # end: ae141f79-f86d-4567-b407-919eaca0f3dd
+
+cmp-ok( # begin: daf25b36-a59f-4f29-bcfe-302eb4e43609
+    discard(
+      :list("apple", "zebra", "banana", "zombies", "cherimoya", "zealot"),
+      :function( -> $x { $x.starts-with('z') } ),
+    ),
+    "~~",
+    ("apple", "banana", "cherimoya"),
+    "discards strings",
+); # end: daf25b36-a59f-4f29-bcfe-302eb4e43609
+
+cmp-ok( # begin: a38d03f9-95ad-4459-80d1-48e937e4acaf
+    discard(
+      :list((1, 2, 3), (5, 5, 5), (5, 1, 2), (2, 1, 2), (1, 5, 2), (2, 2, 1), (1, 2, 5)),
+      :function( -> $x { $x ∋ 5 } ),
+    ),
+    "~~",
+    ((1, 2, 3), (2, 1, 2), (2, 2, 1)),
+    "discards lists",
+); # end: a38d03f9-95ad-4459-80d1-48e937e4acaf
+
+done-testing;

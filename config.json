@@ -607,6 +607,15 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
+      },
+      {
+        "slug": "strain",
+        "name": "Strain",
+        "uuid": "4583115f-3d45-49db-a4cc-3c3f33baf67c",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
       }
     ]
   },
