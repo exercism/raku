@@ -9,15 +9,7 @@ plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#
 my @test-cases = from-json($=pod[*-1].contents).List;#`{{/cases}}#`{{#tests}}#`{{^cases}}
 #`{{/cases}}
 
-#`{{&tests}}#`{{/tests}}#`{{#catch_stub}}
-
-CATCH {
-  when X::StubCode {
-    flunk 'Caught stub';
-    note "{.message} (does the sub/method contain '!!!'?)\n"
-      ~ .backtrace.concise;
-  }
-}#`{{/catch_stub}}#`{{^plan}}
+#`{{&tests}}#`{{/tests}}#`{{^plan}}
 
 done-testing;#`{{/plan}}#`{{#cases}}
 

@@ -4,7 +4,7 @@ use YAMLish;
 use lib ( my $base-dir = $?FILE.IO.resolve.parent(3) ).add('lib');
 use Exercism::Generator;
 
-bail-out if %*ENV<HOME>.IO.add('.cache/exercism/configlet/problem-specifications') !~~ :d;
+bail-out unless $Exercism::Generator::ProblemSpecsDir;
 for $base-dir.add('exercises/practice').dir.sort {
   if .add('.meta/template-data.yaml') ~~ :f {
     is .add("{.basename}.rakutest").slurp,
