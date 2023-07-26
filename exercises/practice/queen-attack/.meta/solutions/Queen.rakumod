@@ -1,13 +1,11 @@
 unit class Queen;
 
-has Int() ($.row where 0..7, $.column where 0..7);
+subset Position of Int where ^8;
+has Position ( $.row, $.column );
 
-method can-attack (:$row, :$column --> Bool() ) {
-    with cache map { .head, .tail }, ($.row, $.column), ($row, $column) {
-           when    [eqv]                 .list { fail  } # Same square
-           when    [==] map *.head,      .list           # Same file
-                or [==] map *.tail,      .list           # Same rank
-                or [==] map *.abs , [Z-] .list { True  } # Same diagonal
-        default                                { False }
-    }
+method can-attack ( Queen:D \other --> Bool:D ) {
+    return
+         self.row    == other.row
+      || self.column == other.column
+      || abs(self.row - other.row) == abs(self.column - other.column);
 }
