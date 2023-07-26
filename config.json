@@ -600,6 +600,15 @@
         "topics": []
       },
       {
+        "slug": "book-store",
+        "name": "Book Store",
+        "uuid": "59932471-ecee-4372-85ce-1d744507461d",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "diamond",
         "name": "Diamond",
         "uuid": "d79c079d-9652-42db-9002-43bc098eb16e",
