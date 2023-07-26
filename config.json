@@ -600,6 +600,24 @@
         "topics": []
       },
       {
+        "slug": "book-store",
+        "name": "Book Store",
+        "uuid": "59932471-ecee-4372-85ce-1d744507461d",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "diamond",
+        "name": "Diamond",
+        "uuid": "d79c079d-9652-42db-9002-43bc098eb16e",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "square-root",
         "name": "Square Root",
         "uuid": "165e9f04-5c0e-458d-b34f-3535ae6296fd",
@@ -612,6 +630,15 @@
         "slug": "resistor-color",
         "name": "Resistor Color",
         "uuid": "0aa39072-f224-4511-b0a4-513d735fa2b2",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "strain",
+        "name": "Strain",
+        "uuid": "4583115f-3d45-49db-a4cc-3c3f33baf67c",
         "practices": [],
         "prerequisites": [],
         "difficulty": 1,
