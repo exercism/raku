@@ -1,0 +1,31 @@
+unit: module
+
+properties:
+  rows:
+    test: |-
+      sprintf(q:to/TEST/, %case<input><letter>.raku, %case<expected>.join("\n    "), %case<description>.raku);
+      is(
+          diamond(%s),
+          q:to/END/.chomp,
+          %s
+          END
+          %s,
+      );
+      TEST
+
+example: |-
+  sub diamond ( $letter where 'A' .. 'Z' ) is export {
+      my $r = 'A' .. $letter;
+      my $c = $r.elems - 1;
+
+      my @lines = map { $_  ~ .flip.substr(1) }, $r.kv.map: -> $i, $l {
+              ( ' ' x $c-$i ) ~ $l ~
+              ( ' ' x    $i )
+      };
+
+      return join "\n", flat @lines, |@lines.reverse.skip;
+  }
+
+stub: |-
+  sub diamond ($letter) is export {
+  }

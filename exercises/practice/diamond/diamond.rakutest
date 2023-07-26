@@ -1,0 +1,108 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use Diamond;
+
+is( # begin: 202fb4cc-6a38-4883-9193-a29d5cb92076
+    diamond("A"),
+    q:to/END/.chomp,
+    A
+    END
+    "Degenerate case with a single 'A' row",
+); # end: 202fb4cc-6a38-4883-9193-a29d5cb92076
+
+is( # begin: bd6a6d78-9302-42e9-8f60-ac1461e9abae
+    diamond("B"),
+    q:to/END/.chomp,
+     A 
+    B B
+     A 
+    END
+    "Degenerate case with no row containing 3 distinct groups of spaces",
+); # end: bd6a6d78-9302-42e9-8f60-ac1461e9abae
+
+is( # begin: af8efb49-14ed-447f-8944-4cc59ce3fd76
+    diamond("C"),
+    q:to/END/.chomp,
+      A  
+     B B 
+    C   C
+     B B 
+      A  
+    END
+    "Smallest non-degenerate case with odd diamond side length",
+); # end: af8efb49-14ed-447f-8944-4cc59ce3fd76
+
+is( # begin: e0c19a95-9888-4d05-86a0-fa81b9e70d1d
+    diamond("D"),
+    q:to/END/.chomp,
+       A   
+      B B  
+     C   C 
+    D     D
+     C   C 
+      B B  
+       A   
+    END
+    "Smallest non-degenerate case with even diamond side length",
+); # end: e0c19a95-9888-4d05-86a0-fa81b9e70d1d
+
+is( # begin: 82ea9aa9-4c0e-442a-b07e-40204e925944
+    diamond("Z"),
+    q:to/END/.chomp,
+                             A                         
+                            B B                        
+                           C   C                       
+                          D     D                      
+                         E       E                     
+                        F         F                    
+                       G           G                   
+                      H             H                  
+                     I               I                 
+                    J                 J                
+                   K                   K               
+                  L                     L              
+                 M                       M             
+                N                         N            
+               O                           O           
+              P                             P          
+             Q                               Q         
+            R                                 R        
+           S                                   S       
+          T                                     T      
+         U                                       U     
+        V                                         V    
+       W                                           W   
+      X                                             X  
+     Y                                               Y 
+    Z                                                 Z
+     Y                                               Y 
+      X                                             X  
+       W                                           W   
+        V                                         V    
+         U                                       U     
+          T                                     T      
+           S                                   S       
+            R                                 R        
+             Q                               Q         
+              P                             P          
+               O                           O           
+                N                         N            
+                 M                       M             
+                  L                     L              
+                   K                   K               
+                    J                 J                
+                     I               I                 
+                      H             H                  
+                       G           G                   
+                        F         F                    
+                         E       E                     
+                          D     D                      
+                           C   C                       
+                            B B                        
+                             A                         
+    END
+    "Largest possible diamond",
+); # end: 82ea9aa9-4c0e-442a-b07e-40204e925944
+
+done-testing;
