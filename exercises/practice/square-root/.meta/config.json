@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+  ],
+  "files": {
+    "solution": [
+      "SquareRoot.rakumod"
+    ],
+    "test": [
+      "square-root.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/SquareRoot.rakumod"
+    ]
+  },
+  "blurb": "Given a natural radicand, return its square root.",
+  "source": "wolf99",
+  "source_url": "https://github.com/exercism/problem-specifications/pull/1582"
+}

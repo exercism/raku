@@ -1,0 +1,88 @@
+unit: module
+
+properties:
+  keep:
+    test: |-
+      my Str:D $func = do given %case<input><predicate> {
+          when 'fn(x) -> true' {
+              '-> $x { True }';
+          }
+          when 'fn(x) -> false' {
+              '-> $x { False }';
+          }
+          when 'fn(x) -> x % 2 == 1' {
+              '-> $x { $x % 2 == 1 }';
+          }
+          when 'fn(x) -> x % 2 == 0' {
+              '-> $x { $x %% 2 }';
+          }
+          when "fn(x) -> starts_with(x, 'z')" {
+              q[-> $x { $x.starts-with('z') }]
+          }
+          when 'fn(x) -> contains(x, 5)' {
+              '-> $x { $x ∋ 5 }';
+          }
+      }
+      
+      sprintf(q:to/END/, %case<input><list><>.map({$_ ~~ Array ?? .<>.List !! $_}).List.raku, $func, %case<expected><>.map({$_ ~~ Array ?? .<>.List !! $_}).List.raku, %case<description>.raku);
+      cmp-ok(
+          keep(
+            :list%s,
+            :function( %s ),
+          ),
+          "~~",
+          %s,
+          %s,
+      );
+      END
+
+  discard:
+    test: |-
+      my Str:D $func = do given %case<input><predicate> {
+          when 'fn(x) -> true' {
+              '-> $x { True }';
+          }
+          when 'fn(x) -> false' {
+              '-> $x { False }';
+          }
+          when 'fn(x) -> x % 2 == 1' {
+              '-> $x { $x % 2 == 1 }';
+          }
+          when 'fn(x) -> x % 2 == 0' {
+              '-> $x { $x %% 2 }';
+          }
+          when "fn(x) -> starts_with(x, 'z')" {
+              q[-> $x { $x.starts-with('z') }]
+          }
+          when 'fn(x) -> contains(x, 5)' {
+              '-> $x { $x ∋ 5 }';
+          }
+      }
+      
+      sprintf(q:to/END/, %case<input><list><>.map({$_ ~~ Array ?? .<>.List !! $_}).List.raku, $func, %case<expected><>.map({$_ ~~ Array ?? .<>.List !! $_}).List.raku, %case<description>.raku);
+      cmp-ok(
+          discard(
+            :list%s,
+            :function( %s ),
+          ),
+          "~~",
+          %s,
+          %s,
+      );
+      END
+
+example: |-
+  sub keep ( :@list, :&function ) is export {
+      @list.grep(&function);
+  }
+
+  sub discard ( :@list, :&function ) is export {
+      @list.grep(&not ∘ &function);
+  }
+
+stub: |-
+  sub keep ( :@list, :&function ) is export {
+  }
+
+  sub discard ( :@list, :&function ) is export {
+  }

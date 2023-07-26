@@ -16,7 +16,7 @@
     "highlightjs_language": "perl"
   },
   "test_runner": {
-    "average_run_time": 2.0
+    "average_run_time": 2
   },
   "checklist_issue": 30,
   "files": {
@@ -603,6 +603,24 @@
         "slug": "diamond",
         "name": "Diamond",
         "uuid": "d79c079d-9652-42db-9002-43bc098eb16e",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "square-root",
+        "name": "Square Root",
+        "uuid": "165e9f04-5c0e-458d-b34f-3535ae6296fd",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "strain",
+        "name": "Strain",
+        "uuid": "4583115f-3d45-49db-a4cc-3c3f33baf67c",
         "practices": [],
         "prerequisites": [],
         "difficulty": 1,
