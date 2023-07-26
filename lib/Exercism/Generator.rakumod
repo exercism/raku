@@ -120,6 +120,7 @@ method !render ( Str $module_file? --> Str:D ) {
   my %data = %.data;
   %data<cases>   //= $.json-tests;
   %data<package> //= $.package;
+  %data<unit>    //= 'module';
   if %data<properties> {
     %data<tests> ~= ("\n" if %data<tests>) ~ self.property-tests.join("\n").trim;
     %data<cases> = Nil;
