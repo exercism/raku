@@ -1,11 +1,11 @@
 unit module ResistorColor;
 
-constant @colors = <black brown red orange yellow green blue violet grey white>;
+constant @BANDS = <black brown red orange yellow green blue violet grey white>;
 
 sub all-colors is export {
-    @colors
+    @BANDS
 }
 
 sub color-code ( $color ) is export {
-    @colors.pairs.first( { .value eq $color } ).key
+    @BANDS.antipairs.Hash{ $color }
 }
