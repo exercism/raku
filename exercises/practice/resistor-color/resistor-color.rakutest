@@ -27,7 +27,7 @@ cmp-ok( # begin: 5f81608d-f36f-4190-8084-f45116b6f380
 cmp-ok( # begin: 581d68fa-f968-4be2-9f9d-880f2fb73cf7
     all-colors(),
     "~~",
-    ("black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "grey", "white"),
+    <black brown red orange yellow green blue violet grey white>,
     "Colors",
 ); # end: 581d68fa-f968-4be2-9f9d-880f2fb73cf7
 

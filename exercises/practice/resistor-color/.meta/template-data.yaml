@@ -13,11 +13,11 @@ properties:
       END
   colors:
     test: |-
-      sprintf(q:to/END/, (%case<expected>.List, %case<description>).map(*.raku));
+      sprintf(q:to/END/, %case<expected>, %case<description>.raku);
       cmp-ok(
           all-colors(),
           "~~",
-          %s,
+          <%s>,
           %s,
       );
       END
