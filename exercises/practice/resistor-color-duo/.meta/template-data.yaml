@@ -3,9 +3,9 @@ unit: module
 properties:
   value:
     test: |-
-      sprintf(q:to/END/, (%case<input><colors>.List, %case<expected>, %case<description>).map(*.raku));
+      sprintf(q:to/END/, %case<input><colors>.List.Str, (%case<expected>, %case<description>).map(*.raku));
       cmp-ok(
-          decoded-value(%s),
+          decoded-value(<%s>),
           "==",
           %s,
           %s,
@@ -14,11 +14,11 @@ properties:
 
 example: |-
   my constant @BANDS = < black brown red orange yellow green blue violet grey white >;
-  sub decoded-value ( @colors ) is export {
+  sub decoded-value ( *@colors ) is export {
     @BANDS.antipairs.Hash{ @colors[ 0 .. 1 ] }.join.Int
   }
 
 
 stub: |-
-  sub decoded-value ( @colors ) is export {
+  sub decoded-value ( *@colors ) is export {
   }
