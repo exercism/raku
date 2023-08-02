@@ -1,0 +1,41 @@
+unit: module
+
+properties:
+  colorCode:
+    test: |-
+      sprintf(q:to/END/, (%case<input><color>, %case<expected>, %case<description>).map(*.raku));
+      cmp-ok(
+          color-code(%s),
+          "==",
+          %s,
+          %s,
+      );
+      END
+  colors:
+    test: |-
+      sprintf(q:to/END/, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          all-colors(),
+          "~~",
+          <%s>,
+          %s,
+      );
+      END
+
+example: |-
+  constant @BANDS = <black brown red orange yellow green blue violet grey white>;
+
+  sub all-colors is export {
+      @BANDS
+  }
+
+  sub color-code ( $color ) is export {
+      @BANDS.antipairs.Hash{ $color }
+  }
+
+stub: |-
+  sub all-colors is export {
+  }
+
+  sub color-code ( $color ) is export {
+  }

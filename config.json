@@ -627,6 +627,15 @@
         "topics": []
       },
       {
+        "slug": "resistor-color",
+        "name": "Resistor Color",
+        "uuid": "0aa39072-f224-4511-b0a4-513d735fa2b2",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "strain",
         "name": "Strain",
         "uuid": "4583115f-3d45-49db-a4cc-3c3f33baf67c",
