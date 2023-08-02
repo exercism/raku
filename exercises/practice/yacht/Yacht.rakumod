@@ -1,4 +1,4 @@
 unit module Yacht;
 
-sub score ( @dice, $category ) is export {
+sub score ( $dice, *%category ) is export {
 }
