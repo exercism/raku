@@ -1,0 +1,34 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use ResistorColor;
+
+cmp-ok( # begin: 49eb31c5-10a8-4180-9f7f-fea632ab87ef
+    color-code("black"),
+    "==",
+    0,
+    "Color codes: Black",
+); # end: 49eb31c5-10a8-4180-9f7f-fea632ab87ef
+
+cmp-ok( # begin: 0a4df94b-92da-4579-a907-65040ce0b3fc
+    color-code("white"),
+    "==",
+    9,
+    "Color codes: White",
+); # end: 0a4df94b-92da-4579-a907-65040ce0b3fc
+
+cmp-ok( # begin: 5f81608d-f36f-4190-8084-f45116b6f380
+    color-code("orange"),
+    "==",
+    3,
+    "Color codes: Orange",
+); # end: 5f81608d-f36f-4190-8084-f45116b6f380
+
+cmp-ok( # begin: 581d68fa-f968-4be2-9f9d-880f2fb73cf7
+    all-colors(),
+    "~~",
+    <black brown red orange yellow green blue violet grey white>,
+    "Colors",
+); # end: 581d68fa-f968-4be2-9f9d-880f2fb73cf7
+
+done-testing;
