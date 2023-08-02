@@ -6,7 +6,7 @@ properties:
       sprintf(q:to/END/, %case<input><colors>.List.Str, (%case<expected>, %case<description>).map(*.raku));
       cmp-ok(
           decoded-value(<%s>),
-          "==",
+          "eqv",
           %s,
           %s,
       );
