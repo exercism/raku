@@ -655,7 +655,73 @@
       }
     ]
   },
-  "concepts": [],
+  "concepts": [
+    {
+      "uuid": "8a6d7f5e-9b3c-4b4c-8a6e-8d9e6f7d8c9a",
+      "slug": "basics",
+      "name": "Basics"
+    },
+    {
+      "uuid": "d5c9e8f7-6b5a-4c3b-9d5c-8e7f6a5b4c3d",
+      "slug": "strings",
+      "name": "Strings"
+    },
+    {
+      "uuid": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+      "slug": "numbers",
+      "name": "numbers"
+    },
+    {
+      "uuid": "b6a7c8d9-e0f1-4b5a-8c9d-0e1f2a3b4c5d",
+      "slug": "booleans-conditionals-control-flow",
+      "name": "Booleans, Conditionals, and Control Flow"
+    },
+    {
+      "uuid": "c2d3e4f5-a6b7-4c5d-8e9f-0a1b2c3d4e5f",
+      "slug": "datetime",
+      "name": "Dates and Times"
+    },
+    {
+      "uuid": "d6e7f8a9-b0c1-4d5e-8f9a-0b1c2d3e4f5a",
+      "slug": "variables-containers-types",
+      "name": "Variables, Containers, and Types"
+    },
+    {
+      "uuid": "e7f8a9b0-c1d2-4e5f-8a9b-0c1d2e3f4a5b",
+      "slug": "arrays-lists-sequences",
+      "name": "Arrays, Lists, and Sequences"
+    },
+    {
+      "uuid": "f8a9b0c1-d2e3-4f5a-8b9c-0d1e2f3a4b5c",
+      "slug": "hashes-maps-pairs",
+      "name": "Hashes, Maps, and Pairs"
+    },
+    {
+      "uuid": "a2b3c4d5-e6f7-4a5b-8c9d-0e1f2a3b4c5d",
+      "slug": "sets-bags-mixes",
+      "name": "Sets, Bags, and Mixes"
+    },
+    {
+      "uuid": "b3c4d5e6-f7a8-4b5c-9d0e-1f2a3b4c5d6e",
+      "slug": "routines-code-blocks-signatures",
+      "name": "Routines, Code Blocks, and Signatures"
+    },
+    {
+      "uuid": "c4d5e6f7-a8b9-4c5d-9e0f-1a2b3c4d5e6f",
+      "slug": "regexes-grammars",
+      "name": "Regexes and Grammars"
+    },
+    {
+      "uuid": "d5e6f7a8-b9c0-4d5e-8f9a-0b1c2d3e4f5a",
+      "slug": "exceptions",
+      "name": "Exceptions"
+    },
+    {
+      "uuid": "e6f7a8b9-c0d1-4e5f-8a9b-0c1d2e3f4a5b",
+      "slug": "concurrency",
+      "name": "Concurrency"
+    }
+  ],
   "key_features": [
     {
       "title": "Concise",
