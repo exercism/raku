@@ -2,7 +2,7 @@
 
 ## 1. Define the expected oven time in minutes
 
-- You need to assign the correct value to the TODO.
+- You need to assign the correct value to the `EXPECTED-MINUTES-IN-OVEN` constant.
 
 ## 2. Calculate the remaining oven time in minutes
 
