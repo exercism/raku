@@ -1,0 +1,62 @@
+#!/usr/bin/env raku
+
+use Test;
+use Lasagna;
+
+cmp-ok( # begin: var task: 1
+    $Lasagna::EXPECTED-MINUTES-IN-OVEN,
+    '==',
+    40,
+    'expected minutes in oven',
+); # end: var
+
+cmp-ok( # begin: remaining1 task: 2
+    remaining-minutes-in-oven(25),
+    '==',
+    15,
+    'some remaining minutes in oven',
+); # end: remaining1
+
+cmp-ok( # begin: remaining2 task: 2
+    remaining-minutes-in-oven(40),
+    '==',
+    0,
+    'no more remaining minutes in oven',
+); # end: remaining2
+
+cmp-ok( # begin: prep1 task: 3
+    preparation-time-in-minutes(1),
+    '==',
+    2,
+    'preparation time in minutes for one layer',
+); # end: prep1
+
+cmp-ok( # begin: prep2 task: 3
+    preparation-time-in-minutes(4),
+    '==',
+    8,
+    'preparation time in minutes for multiple layers',
+); # end: prep2
+
+cmp-ok( # begin: total1 task: 4
+    total-time-in-minutes( 1, 30 ),
+    '==',
+    32,
+    'total time in minutes for one layer',
+); # end: total1
+
+cmp-ok( # begin: total2 task: 4
+    total-time-in-minutes( 4, 8 ),
+    '==',
+    16,
+    'total time in minutes for multiple layers',
+); # end: total2
+
+cmp-ok( # begin: alarm task: 5
+    oven-alarm(),
+    'eq',
+    'Ding!',
+    'notification message',
+); # end: alarm
+
+done-testing;

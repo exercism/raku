@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "m-dango"
+  ],
+  "files": {
+    "solution": [
+      "lib/Lasagna.rakumod"
+    ],
+    "test": [
+      "t/lasagna.rakutest"
+    ],
+    "exemplar": [
+      ".meta/Lasagna.rakumod"
+    ]
+  },
+  "blurb": "Learn about the basics of Raku by following a lasagna recipe."
+}
