@@ -6,10 +6,10 @@ You have five tasks, all related to cooking your recipe.
 
 ## 1. Define the expected oven time in minutes
 
-Set the `EXPECTED-MINUTES-IN-OVEN` constant with how many minutes the lasagna should be in the oven. According to the cooking book, the expected oven time in minutes is 40:
+Set the `$EXPECTED-MINUTES-IN-OVEN` constant with how many minutes the lasagna should be in the oven. According to the cooking book, the expected oven time in minutes is 40:
 
 ```raku
-EXPECTED-MINUTES-IN-OVEN
+$EXPECTED-MINUTES-IN-OVEN
 # => 40
 ```
 
@@ -47,5 +47,5 @@ Modify the `oven-alarm` subroutine, which does not take any arguments, to return
 
 ```raku
 oven-alarm()
-# => "Ding!"
+# => 'Ding!'
 ```

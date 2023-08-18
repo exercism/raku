@@ -1,6 +1,6 @@
 unit module Lasagna;
 
-constant EXPECTED-MINUTES-IN-OVEN is export = Nil;
+constant $EXPECTED-MINUTES-IN-OVEN = Nil;
 
 sub remaining-minutes-in-oven ($actual-minutes-in-oven) is export {
 }
