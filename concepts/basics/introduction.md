@@ -33,7 +33,7 @@ foo($bar); # Subroutine call
 ## Operators
 
 Raku has a wide variety of [operators][operators].
-We will be using some basic mathematical operators in Raku, such as `+` and `-`, for the exercises here.
+We will be using some basic mathematical operators in Raku, such as `+` and `-`, for the exercises in the basics concept.
 
 ```raku
 say 0.1 + 0.2 - 0.3;
