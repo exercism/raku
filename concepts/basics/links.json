@@ -1,0 +1,34 @@
+[
+    {
+        "description": "Raku Guide",
+        "url": "https://raku.guide/"
+    },
+    {
+        "description": "Raku Essentials",
+        "url": "https://course.raku.org/essentials"
+    },
+    {
+        "description": "Raku By Example 101",
+        "url": "https://docs.raku.org/language/101-basics"
+    },
+    {
+        "description": "Perl to Raku Guide",
+        "url": "https://docs.raku.org/language/5to6-nutshell"
+    },
+    {
+        "description": "Python to Raku Guide",
+        "url": "https://docs.raku.org/language/py-nutshell"
+    },
+    {
+        "description": "Ruby to Raku Guide",
+        "url": "https://docs.raku.org/language/rb-nutshell"
+    },
+    {
+        "description": "JavaScript to Raku Guide",
+        "url": "https://docs.raku.org/language/js-nutshell"
+    },
+    {
+        "description": "Haskell to Raku Guide",
+        "url": "https://docs.raku.org/language/haskell-to-p6"
+    }
+]
