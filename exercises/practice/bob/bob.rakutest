@@ -1,178 +1,303 @@
 #!/usr/bin/env raku
 use Test;
-use lib $?FILE.IO.dirname; #`[Look for the module inside the same directory as this test file.]
+use lib $?FILE.IO.dirname; #`[Look for the package inside the same directory as this test file.]
 use Bob;
 
 cmp-ok( # begin: e162fead-606f-437a-a166-d051915cea8e
-    Bob.hey("Tom-ay-to, tom-aaaah-to."),
+    (
+        # Give a string the role of `Bob`
+        "Tom-ay-to, tom-aaaah-to." does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Whatever.",
     "stating something",
 ); # end: e162fead-606f-437a-a166-d051915cea8e
 
 cmp-ok( # begin: 73a966dc-8017-47d6-bb32-cf07d1a5fcd9
-    Bob.hey("WATCH OUT!"),
+    (
+        # Give a string the role of `Bob`
+        "WATCH OUT!" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Whoa, chill out!",
     "shouting",
 ); # end: 73a966dc-8017-47d6-bb32-cf07d1a5fcd9
 
 cmp-ok( # begin: d6c98afd-df35-4806-b55e-2c457c3ab748
-    Bob.hey("FCECDFCAAB"),
+    (
+        # Give a string the role of `Bob`
+        "FCECDFCAAB" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Whoa, chill out!",
     "shouting gibberish",
 ); # end: d6c98afd-df35-4806-b55e-2c457c3ab748
 
 cmp-ok( # begin: 8a2e771d-d6f1-4e3f-b6c6-b41495556e37
-    Bob.hey("Does this cryogenic chamber make me look fat?"),
+    (
+        # Give a string the role of `Bob`
+        "Does this cryogenic chamber make me look fat?" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Sure.",
     "asking a question",
 ); # end: 8a2e771d-d6f1-4e3f-b6c6-b41495556e37
 
 cmp-ok( # begin: 81080c62-4e4d-4066-b30a-48d8d76920d9
-    Bob.hey("You are, what, like 15?"),
+    (
+        # Give a string the role of `Bob`
+        "You are, what, like 15?" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Sure.",
     "asking a numeric question",
 ); # end: 81080c62-4e4d-4066-b30a-48d8d76920d9
 
 cmp-ok( # begin: 2a02716d-685b-4e2e-a804-2adaf281c01e
-    Bob.hey("fffbbcbeab?"),
+    (
+        # Give a string the role of `Bob`
+        "fffbbcbeab?" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Sure.",
     "asking gibberish",
 ); # end: 2a02716d-685b-4e2e-a804-2adaf281c01e
 
 cmp-ok( # begin: c02f9179-ab16-4aa7-a8dc-940145c385f7
-    Bob.hey("Hi there!"),
+    (
+        # Give a string the role of `Bob`
+        "Hi there!" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Whatever.",
     "talking forcefully",
 ); # end: c02f9179-ab16-4aa7-a8dc-940145c385f7
 
 cmp-ok( # begin: 153c0e25-9bb5-4ec5-966e-598463658bcd
-    Bob.hey("It's OK if you don't want to go work for NASA."),
+    (
+        # Give a string the role of `Bob`
+        "It's OK if you don't want to go work for NASA." does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Whatever.",
     "using acronyms in regular speech",
 ); # end: 153c0e25-9bb5-4ec5-966e-598463658bcd
 
 cmp-ok( # begin: a5193c61-4a92-4f68-93e2-f554eb385ec6
-    Bob.hey("WHAT'S GOING ON?"),
+    (
+        # Give a string the role of `Bob`
+        "WHAT'S GOING ON?" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Calm down, I know what I'm doing!",
     "forceful question",
 ); # end: a5193c61-4a92-4f68-93e2-f554eb385ec6
 
 cmp-ok( # begin: a20e0c54-2224-4dde-8b10-bd2cdd4f61bc
-    Bob.hey("1, 2, 3 GO!"),
+    (
+        # Give a string the role of `Bob`
+        "1, 2, 3 GO!" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Whoa, chill out!",
     "shouting numbers",
 ); # end: a20e0c54-2224-4dde-8b10-bd2cdd4f61bc
 
 cmp-ok( # begin: f7bc4b92-bdff-421e-a238-ae97f230ccac
-    Bob.hey("1, 2, 3"),
+    (
+        # Give a string the role of `Bob`
+        "1, 2, 3" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Whatever.",
     "no letters",
 ); # end: f7bc4b92-bdff-421e-a238-ae97f230ccac
 
 cmp-ok( # begin: bb0011c5-cd52-4a5b-8bfb-a87b6283b0e2
-    Bob.hey("4?"),
+    (
+        # Give a string the role of `Bob`
+        "4?" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Sure.",
     "question with no letters",
 ); # end: bb0011c5-cd52-4a5b-8bfb-a87b6283b0e2
 
 cmp-ok( # begin: 496143c8-1c31-4c01-8a08-88427af85c66
-    Bob.hey("ZOMG THE \%^*\@#\$(*^ ZOMBIES ARE COMING!!11!!1!"),
+    (
+        # Give a string the role of `Bob`
+        "ZOMG THE \%^*\@#\$(*^ ZOMBIES ARE COMING!!11!!1!" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Whoa, chill out!",
     "shouting with special characters",
 ); # end: 496143c8-1c31-4c01-8a08-88427af85c66
 
 cmp-ok( # begin: e6793c1c-43bd-4b8d-bc11-499aea73925f
-    Bob.hey("I HATE THE DENTIST"),
+    (
+        # Give a string the role of `Bob`
+        "I HATE THE DENTIST" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Whoa, chill out!",
     "shouting with no exclamation mark",
 ); # end: e6793c1c-43bd-4b8d-bc11-499aea73925f
 
 cmp-ok( # begin: aa8097cc-c548-4951-8856-14a404dd236a
-    Bob.hey("Ending with ? means a question."),
+    (
+        # Give a string the role of `Bob`
+        "Ending with ? means a question." does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Whatever.",
     "statement containing question mark",
 ); # end: aa8097cc-c548-4951-8856-14a404dd236a
 
 cmp-ok( # begin: 9bfc677d-ea3a-45f2-be44-35bc8fa3753e
-    Bob.hey(":) ?"),
+    (
+        # Give a string the role of `Bob`
+        ":) ?" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Sure.",
     "non-letters with question",
 ); # end: 9bfc677d-ea3a-45f2-be44-35bc8fa3753e
 
 cmp-ok( # begin: 8608c508-f7de-4b17-985b-811878b3cf45
-    Bob.hey("Wait! Hang on. Are you going to be OK?"),
+    (
+        # Give a string the role of `Bob`
+        "Wait! Hang on. Are you going to be OK?" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Sure.",
     "prattling on",
 ); # end: 8608c508-f7de-4b17-985b-811878b3cf45
 
 cmp-ok( # begin: bc39f7c6-f543-41be-9a43-fd1c2f753fc0
-    Bob.hey(""),
+    (
+        # Give a string the role of `Bob`
+        "" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Fine. Be that way!",
     "silence",
 ); # end: bc39f7c6-f543-41be-9a43-fd1c2f753fc0
 
 cmp-ok( # begin: d6c47565-372b-4b09-b1dd-c40552b8378b
-    Bob.hey("          "),
+    (
+        # Give a string the role of `Bob`
+        "          " does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Fine. Be that way!",
     "prolonged silence",
 ); # end: d6c47565-372b-4b09-b1dd-c40552b8378b
 
 cmp-ok( # begin: 4428f28d-4100-4d85-a902-e5a78cb0ecd3
-    Bob.hey("\t\t\t\t\t\t\t\t\t\t"),
+    (
+        # Give a string the role of `Bob`
+        "\t\t\t\t\t\t\t\t\t\t" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Fine. Be that way!",
     "alternate silence",
 ); # end: 4428f28d-4100-4d85-a902-e5a78cb0ecd3
 
 cmp-ok( # begin: 66953780-165b-4e7e-8ce3-4bcb80b6385a
-    Bob.hey("\nDoes this cryogenic chamber make me look fat?\nNo."),
+    (
+        # Give a string the role of `Bob`
+        "\nDoes this cryogenic chamber make me look fat?\nNo." does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Whatever.",
     "multiple line question",
 ); # end: 66953780-165b-4e7e-8ce3-4bcb80b6385a
 
 cmp-ok( # begin: 5371ef75-d9ea-4103-bcfa-2da973ddec1b
-    Bob.hey("         hmmmmmmm..."),
+    (
+        # Give a string the role of `Bob`
+        "         hmmmmmmm..." does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Whatever.",
     "starting with whitespace",
 ); # end: 5371ef75-d9ea-4103-bcfa-2da973ddec1b
 
 cmp-ok( # begin: 05b304d6-f83b-46e7-81e0-4cd3ca647900
-    Bob.hey("Okay if like my  spacebar  quite a bit?   "),
+    (
+        # Give a string the role of `Bob`
+        "Okay if like my  spacebar  quite a bit?   " does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Sure.",
     "ending with whitespace",
 ); # end: 05b304d6-f83b-46e7-81e0-4cd3ca647900
 
 cmp-ok( # begin: 72bd5ad3-9b2f-4931-a988-dce1f5771de2
-    Bob.hey("\n\r \t"),
+    (
+        # Give a string the role of `Bob`
+        "\n\r \t" does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Fine. Be that way!",
     "other whitespace",
 ); # end: 72bd5ad3-9b2f-4931-a988-dce1f5771de2
 
 cmp-ok( # begin: 12983553-8601-46a8-92fa-fcaa3bc4a2a0
-    Bob.hey("This is a statement ending with whitespace      "),
+    (
+        # Give a string the role of `Bob`
+        "This is a statement ending with whitespace      " does Bob
+        # Call the `hey` method on the Bob string
+        andthen .hey
+    ),
     "eq",
     "Whatever.",
     "non-question ending with whitespace",
