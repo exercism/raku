@@ -4,10 +4,8 @@ properties:
       sprintf(q:to/END/, (%case<input><heyBob>, |%case<expected description>).map(*.raku));
       cmp-ok(
           (
-              # Give a string the role of `Bob`
-              %s does Bob
-              # Call the `hey` method on the Bob string
-              andthen .hey
+              hey %s
+              does Bob:
           ),
           "eq",
           %s,
