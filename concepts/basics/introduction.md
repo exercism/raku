@@ -1,3 +1,12 @@
+Raku is an incredibly rich, flexible, and powerful programming language.
+Its flexibility allows for programmers to write expressive code which fits their own style.
+
+Raku is a large language with plenty of depth to learn, explore, and experiment with.
+This syllabus aims to cover the fundamentals for you to get started.
+
+Object Oriented Programming is at the heart of Raku, however it does not impose object oriented programming practices.
+Because of its object oriented nature, this syllabus will often make references to [objects, classes, and methods][object-orientation].
+
 ## Variables
 
 We'll only use scalar [variables][variables] in basics to keep things simple.
@@ -94,3 +103,4 @@ Package names are styled in `PascalCase`.
 [single-line-comments]: https://docs.raku.org/language/syntax#Single-line_comments
 [multi-line-comments]: https://docs.raku.org/language/syntax#Multi-line_/_embedded_comments
 [operators]: https://docs.raku.org/language/operators
+[object-orientation]: https://docs.raku.org/language/objects
