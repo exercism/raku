@@ -7,7 +7,7 @@ If no `return` is specified, the last statement of the routine will be its impli
 
 A routine can have a [`Signature`][language/signatures] inside parentheses before the code block.
 
-`Routine` is a subclass of [`Block`][type/Block].
+[`Routine`][type/Routine] is a subclass of [`Block`][type/Block].
 
 ```raku
 sub add ($x, $y) { return $x + $y }
@@ -18,11 +18,13 @@ Methods will be covered in a later concept relating to classes and objects.
 
 ## Blocks
 
-[Blocks][type/Block] are reuseable code objects, typically used to create lambdas.
+A [`Block`][type/Block] is a reuseable code object, typically used to create lambdas.
 
 The last statement of a block is its implicit return value.
 
 A block can have a [`Signature`][language/signatures] prefixed with `->` before the code block.
+
+[`Block`][type/Block] is a subclass of [`Code`][type/Code], which is the ultimate base class of all code objects in Raku.
 
 ```raku
 my $add = -> $x, $y { $x + $y };
@@ -45,3 +47,4 @@ This will be expanded upon in later concepts.
 [type/Block]: https://docs.raku.org/type/Block
 [language/signatures]: https://docs.raku.org/language/signatures
 [type/Parameter]: https://docs.raku.org/type/Parameter
+[type/Code]: https://docs.raku.org/type/Code
