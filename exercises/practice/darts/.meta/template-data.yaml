@@ -1,9 +1,9 @@
 properties:
   score:
     test: |-
-      sprintf(q:to/END/, |(%case<input><x y>).map(*.raku), %case<expected>, %case<description>.raku);
+      sprintf(q:to/END/, |(%case<input><x y>:p).map(*.raku), %case<expected>, %case<description>.raku);
       cmp-ok(
-          score-dart( :x(%s), :y(%s) ),
+          score-dart( %s, %s ),
           &infix:<==>,
           %s,
           %s,
