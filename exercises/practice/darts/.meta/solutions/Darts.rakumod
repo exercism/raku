@@ -1,4 +1,4 @@
-unit class Darts;
+unit module Darts;
 
 sub score-dart is export {
     given sqrt $:x² + $:y² {
