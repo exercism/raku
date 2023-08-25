@@ -13,10 +13,10 @@ We'll only use scalar [variables][variables] in basics to keep things simple.
 
 Scalar variables are [identifiers][identifiers] prefixed with the `$` sigil.
 
-Scalar variables can contain virtually anything, and have a default type of [Any][Any].
+Scalar variables can contain virtually anything, and have a default type of [`Any`][Any].
 
 Most variables you use will need a [declaration][variable-declarator].
-For now, stick with [my][my] and [constant][constant].
+For now, stick with [`my`][my] and [`constant`][constant].
 
 ```raku
 my $foo;
@@ -25,13 +25,13 @@ constant $BAR;
 
 ## Subroutines
 
-A subroutine is declared with the [sub][sub-declarator] declarator.
+A subroutine is declared with the [`sub`][sub-declarator] declarator.
 
 A `sub` declaration is followed by an optional [identifier][identifiers], followed by an optional [signature][signatures], followed by a [block][blocks].
 
-Subrouties (among other things) can be exported by adding the [is export][exporting] trait.
+Subrouties (among other things) can be exported by adding the [`is export`][exporting] trait.
 
-A subroutine can be called with a [postcircumfix ( )][postcircumfix-()] operator on the identifier.
+A subroutine can be called with a [postcircumfix `( )`][postcircumfix-()] operator on the identifier.
 
 ```raku
 sub foo ($bar) is export { ... } # Subroutine definition
