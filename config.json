@@ -44,6 +44,16 @@
         ],
         "prerequisites": [],
         "status": "wip"
+      },
+      {
+        "slug": "secret-device",
+        "name": "Secret Device",
+        "uuid": "b0557c91-93ff-47ab-8a43-c774aa1f8605",
+        "concepts": [
+          "routines-code-blocks-signatures"
+        ],
+        "prerequisites": ["basics"],
+        "status": "wip"
       }
     ],
     "practice": [

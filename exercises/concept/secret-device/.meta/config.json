@@ -1,0 +1,17 @@
+{
+    "authors": [
+        "m-dango"
+    ],
+    "files": {
+        "solution": [
+            "lib/SecretDevice.rakumod"
+        ],
+        "test": [
+            "t/secret-device.rakutest"
+        ],
+        "exemplar": [
+            ".meta/SecretDevice.rakumod"
+        ]
+    },
+    "blurb": "Learn about anonymous functions by writing the software for an encryption device."
+}
