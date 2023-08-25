@@ -10,11 +10,11 @@ A routine can have a [`Signature`][language/signatures] inside parentheses befor
 [`Routine`][type/Routine] is a subclass of [`Block`][type/Block].
 
 ```raku
-sub add ($x, $y) { return $x + $y }
+sub add ($x, $y --> Int) { return $x + $y }
 say add(1, 2); # 3
 ```
 
-Methods will be covered in a later concept relating to classes and objects.
+Methods will be covered in a separate concept relating to classes and objects.
 
 ## Blocks
 
@@ -35,10 +35,12 @@ say $add(1, 2); # 3
 
 A [`Signature`][language/signatures] is made up of zero or more [`Parameters`][type/Parameter], separated by commas.
 
+At the end of a signature, a return type can be specified with a [return type arrow][signatures-return-type-arrow] `-->`.
+
 A signature can be used to specify the arguments a `Block` will accept.
 
-This concept will keep signatures simple, using only positional parameters with scalar-sigiled variables.
-This will be expanded upon in later concepts.
+This concept will keep signatures simple, using only positional parameters with scalar-sigiled variables, and a return type.
+These will be expanded upon in other concepts.
 
 [type/Sub]: https://docs.raku.org/type/Sub
 [type/Method]: https://docs.raku.org/type/Method
@@ -48,3 +50,4 @@ This will be expanded upon in later concepts.
 [language/signatures]: https://docs.raku.org/language/signatures
 [type/Parameter]: https://docs.raku.org/type/Parameter
 [type/Code]: https://docs.raku.org/type/Code
+[signatures-return-type-arrow]: https://docs.raku.org/language/signatures#Return_type_arrow:_--%3E
