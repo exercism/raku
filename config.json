@@ -44,6 +44,18 @@
         ],
         "prerequisites": [],
         "status": "wip"
+      },
+      {
+        "slug": "valentines-day",
+        "name": "Valentines Day",
+        "uuid": "50279870-abff-406c-805b-30b8b6dbf53d",
+        "concepts": [
+          "variables-containers-types"
+        ],
+        "prerequisites": [
+          "basics"
+        ],
+        "status": "wip"
       }
     ],
     "practice": [

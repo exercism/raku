@@ -1,0 +1,196 @@
+#!/usr/bin/env raku
+
+use Test;
+use ValentinesDay;
+
+cmp-ok(
+    Bool,
+    '~~',
+    ::('Answer'),
+    'A Bool is considered an Answer'
+);
+
+cmp-ok(
+    Int,
+    '!~~',
+    ::('Answer'),
+    'An Int is not considered an Answer'
+);
+
+cmp-ok(
+    ::('Chill'),
+    '~~',
+    ::('Activity'),
+    'Chill is an Activity',
+);
+
+cmp-ok(
+    ::('Game'),
+    '~~',
+    ::('Activity'),
+    'Game is an Activity',
+);
+
+cmp-ok(
+    ::('Movie'),
+    '~~',
+    ::('Activity'),
+    'Movie is an Activity',
+);
+
+cmp-ok(
+    ::('Restaurant'),
+    '~~',
+    ::('Activity'),
+    'Restaurant is an Activity',
+);
+
+cmp-ok(
+    ::('Walk')(1),
+    '~~',
+    ::('Activity'),
+    'A 1km Walk is an Activity',
+);
+
+cmp-ok(
+    ::('Walk')(10 ** 100),
+    '~~',
+    ::('Activity'),
+    'A very long Walk is an Activity',
+);
+
+
+cmp-ok(
+    0,
+    '!~~',
+    ::('Walk'),
+    'A walk cannot be 0km',
+);
+
+cmp-ok(
+    Inf,
+    '!~~',
+    ::('Walk'),
+    'A walk cannot be an infinite number of km',
+);
+
+cmp-ok(
+    ::('Korean'),
+    '~~',
+    ::('Restaurant'),
+    'Korean is a type of Restaurant',
+);
+
+cmp-ok(
+    ::('Turkish'),
+    '~~',
+    ::('Restaurant'),
+    'Turkish is a type of Restaurant',
+);
+
+cmp-ok(
+    ::('Crime'),
+    '~~',
+    ::('Movie'),
+    'Crime is a genre of Movie',
+);
+
+cmp-ok(
+    ::('Horror'),
+    '~~',
+    ::('Movie'),
+    'Horror is a genre of Movie',
+);
+
+cmp-ok(
+    ::('Romance'),
+    '~~',
+    ::('Movie'),
+    'Romance is a genre of Movie',
+);
+
+cmp-ok(
+    rate-activity(::('Chill')),
+    'eqv',
+    ::('Answer')(False),
+    'Chill gets a negative response',
+);
+
+cmp-ok(
+    rate-activity(::('Turkish')),
+    '~~',
+    ::('Answer'):U,
+    'A Turkish restaurant gets an inconclusive response',
+);
+
+cmp-ok(
+    rate-activity(::('Korean')),
+    'eqv',
+    ::('Answer')(True),
+    'A Korean restaurant gets a positive response',
+);
+
+cmp-ok(
+    rate-activity(::('Romance')),
+    'eqv',
+    ::('Answer')(True),
+    'A romance movie gets a positive response',
+);
+
+cmp-ok(
+    rate-activity(::('Crime')),
+    'eqv',
+    ::('Answer')(False),
+    'A crime movie gets a negative response',
+);
+
+cmp-ok(
+    rate-activity(::('Horror')),
+    'eqv',
+    ::('Answer')(False),
+    'A horror movie gets a negative response',
+);
+
+cmp-ok(
+    rate-activity(::('Walk')(0.5)),
+    'eqv',
+    ::('Answer')(True),
+    'A 0.5km walk gets a positive response',
+);
+
+cmp-ok(
+    rate-activity(::('Walk')(15)),
+    'eqv',
+    ::('Answer')(False),
+    'A 15km walk gets a negative response',
+);
+
+cmp-ok(
+    rate-activity(::('Walk')(π)),
+    '~~',
+    ::('Answer'):U,
+    'A πkm walk gets an inconclusive response',
+);
+
+cmp-ok(
+    rate-activity(::('TicTacToe')),
+    '~~',
+    ::('Answer'):U,
+    'A game of tic-tac-toe gets an inconclusive response',
+);
+
+cmp-ok(
+    rate-activity(::('Chess')),
+    'eqv',
+    ::('Answer')(True),
+    'A game of chess gets a positive response',
+);
+
+cmp-ok(
+    rate-activity(::('GlobalThermonuclearWar')),
+    'eqv',
+    ::('Answer')(False),
+    'A game of global thermonuclear war gets a negative response',
+);
+
+done-testing;
