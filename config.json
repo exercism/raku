@@ -46,8 +46,8 @@
         "status": "wip"
       },
       {
-        "slug": "secret-device",
-        "name": "Secret Device",
+        "slug": "secrets",
+        "name": "Secrets",
         "uuid": "b0557c91-93ff-47ab-8a43-c774aa1f8605",
         "concepts": [
           "routines-code-blocks-signatures"
