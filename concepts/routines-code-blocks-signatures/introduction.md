@@ -42,6 +42,20 @@ A signature can be used to specify the arguments a `Block` will accept.
 This concept will keep signatures simple, using only positional parameters with scalar-sigiled variables, and a return type.
 These will be expanded upon in other concepts.
 
+## Multi-Dispatch
+
+Raku allows for writing several routines with the same name but different signatures by using the `multi` keyword.
+This feature is known as [multi-dispatch][multi-dispatch].
+When the routine is called by name, the runtime environment determines the proper candidate and invokes it.
+
+This will be covered in more detail in a concept on types.
+
+```raku
+multi foo () { say 'No arguments given'}
+
+multi foo ($bar) { say "One argument given: $bar" }
+```
+
 [type/Sub]: https://docs.raku.org/type/Sub
 [type/Method]: https://docs.raku.org/type/Method
 [type/Routine]: https://docs.raku.org/type/Routine
@@ -51,3 +65,4 @@ These will be expanded upon in other concepts.
 [type/Parameter]: https://docs.raku.org/type/Parameter
 [type/Code]: https://docs.raku.org/type/Code
 [signatures-return-type-arrow]: https://docs.raku.org/language/signatures#Return_type_arrow:_--%3E
+[multi-dispatch]: https://docs.raku.org/language/functions#Multi-dispatch
