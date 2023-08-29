@@ -1,4 +1,4 @@
-unit module SecretDevice;
+unit module Secrets;
 
 sub secret-add ($secret --> Block) is export {
     return -> $x { $x + $secret };
