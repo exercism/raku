@@ -46,6 +46,16 @@
         "status": "wip"
       },
       {
+        "slug": "secrets",
+        "name": "Secrets",
+        "uuid": "b0557c91-93ff-47ab-8a43-c774aa1f8605",
+        "concepts": [
+          "routines-code-blocks-signatures"
+        ],
+        "prerequisites": ["basics"],
+        "status": "wip"
+      },
+      {
         "slug": "valentines-day",
         "name": "Valentines Day",
         "uuid": "50279870-abff-406c-805b-30b8b6dbf53d",
