@@ -1,10 +1,10 @@
 unit module ValentinesDay;
 
-enum Answer is export (Yes => True);
+enum Answer is export (Yes => True,);
 
 # You may use enums, subsets, classes, or roles as you see fit.
 class  Chill       is export {}
-enum   Restaurant  is export ('Korean');
+enum   Restaurant  is export ('Korean',);
 enum   Movie       is export ();
 enum   Game        is export ();
 subset Walk of Num is export;
