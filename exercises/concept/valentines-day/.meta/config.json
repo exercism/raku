@@ -1,0 +1,17 @@
+{
+    "blurb": "Learn about custom types by deciding which activity to suprise your partner with on Valentines Day.",
+    "authors": [
+        "m-dango"
+    ],
+    "files": {
+        "test": [
+            "t/valentines-day.rakutest"
+        ],
+        "solution": [
+            "lib/ValentinesDay.rakumod"
+        ],
+        "exemplar": [
+            ".meta/ValentinesDay.rakumod"
+        ]
+    }
+}

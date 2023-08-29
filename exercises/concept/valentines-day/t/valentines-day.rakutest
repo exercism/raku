@@ -1,0 +1,223 @@
+#!/usr/bin/env raku
+
+use Test;
+use ValentinesDay;
+
+cmp-ok( # begin: answer task: 1
+    ::('Answer'),
+    '~~',
+    Bool:U,
+    'Answer is an undefined Bool'
+); # end: answer
+
+cmp-ok( # begin: yes task: 1
+    ::('Yes'),
+    '~~',
+    Bool:D,
+    'Yes is a defined Bool'
+); # end: yes
+
+cmp-ok( # begin: no task: 1
+    ::('No'),
+    '~~',
+    Bool:D,
+    'No is a defined Bool'
+); # end: no
+
+cmp-ok( # begin: chill task: 2
+    ::('Chill'),
+    '~~',
+    ::('Activity'),
+    'Chill is an Activity',
+); # end: chill
+
+cmp-ok( # begin restaurant task: 3
+    ::('Restaurant'),
+    '~~',
+    ::('Activity'),
+    'Restaurant is an Activity',
+); # end: restaurant
+
+cmp-ok( # begin: korean task: 4
+    ::('Korean'),
+    '~~',
+    ::('Restaurant'),
+    'Korean is a type of Restaurant',
+); # end: korean
+
+cmp-ok( # begin: turkish task: 4
+    ::('Turkish'),
+    '~~',
+    ::('Restaurant'),
+    'Turkish is a type of Restaurant',
+); # end: turkish
+
+cmp-ok( # begin: movie task: 5
+    ::('Movie'),
+    '~~',
+    ::('Activity'),
+    'Movie is an Activity',
+); # end: movie
+
+cmp-ok( # begin: crime task: 6
+    ::('Crime'),
+    '~~',
+    ::('Movie'),
+    'Crime is a genre of Movie',
+); # end: crime
+
+cmp-ok( # begin: horror task: 6
+    ::('Horror'),
+    '~~',
+    ::('Movie'),
+    'Horror is a genre of Movie',
+); # end: horror
+
+cmp-ok( # begin: romance task: 6
+    ::('Romance'),
+    '~~',
+    ::('Movie'),
+    'Romance is a genre of Movie',
+); # end: romance
+
+cmp-ok( # begin: game task: 7
+    ::('Game'),
+    '~~',
+    ::('Activity'),
+    'Game is an Activity',
+); # end: game
+
+cmp-ok( # begin: chess task: 8
+    ::('Chess'),
+    '~~',
+    ::('Game'),
+    'Chess is a Game',
+); # end: chess
+
+cmp-ok( # begin: tictactoe task: 8
+    ::('TicTacToe'),
+    '~~',
+    ::('Game'),
+    'TicTacToe is a Game',
+); # end: tictactoe
+
+cmp-ok( # begin: globalthermonuclearwar task: 8
+    ::('GlobalThermonuclearWar'),
+    '~~',
+    ::('Game'),
+    'GlobalThermonuclearWar is a Game',
+); # end: globalthermonuclearwar
+
+cmp-ok( # begin: short-walk task: 9
+    ::('Walk')(1),
+    '~~',
+    ::('Activity'),
+    'A 1km Walk is an Activity',
+); # end: short-walk
+
+cmp-ok( # begin: long-walk task: 9
+    ::('Walk')(10 ** 100),
+    '~~',
+    ::('Activity'),
+    'A very long Walk is an Activity',
+); # end: long-walk
+
+cmp-ok( # begin: no-walk task: 9
+    0,
+    '!~~',
+    ::('Walk'),
+    'A walk cannot be 0km',
+); # end: no-walk
+
+cmp-ok( # begin: inf-walk task: 9
+    Inf,
+    '!~~',
+    ::('Walk'),
+    'A walk cannot be an infinite number of km',
+); # end: inf-walk
+
+cmp-ok( # begin: rate-chill task: 10
+    rate-activity(::('Chill')),
+    'eqv',
+    ::('No'),
+    'Chill gets a negative response',
+); # end: rate-chill
+
+cmp-ok( # begin: rate-turkish task: 10
+    rate-activity(::('Turkish')),
+    '~~',
+    ::('Answer'):U,
+    'A Turkish restaurant gets an inconclusive response',
+); # end: rate-turkish
+
+cmp-ok( # begin: rate-korean task: 10
+    rate-activity(::('Korean')),
+    'eqv',
+    ::('Yes'),
+    'A Korean restaurant gets a positive response',
+); # end: rate-korean
+
+cmp-ok( # begin: rate-romance task: 10
+    rate-activity(::('Romance')),
+    'eqv',
+    ::('Yes'),
+    'A romance movie gets a positive response',
+); # end: rate-romance
+
+cmp-ok( # begin: rate-crime task: 10
+    rate-activity(::('Crime')),
+    'eqv',
+    ::('No'),
+    'A crime movie gets a negative response',
+); # end: rate-crime
+
+cmp-ok( # begin: rate-horror task: 10
+    rate-activity(::('Horror')),
+    'eqv',
+    ::('No'),
+    'A horror movie gets a negative response',
+); # end: rate-horror
+
+cmp-ok( # begin: rate-tictactoe task: 10
+    rate-activity(::('TicTacToe')),
+    '~~',
+    ::('Answer'):U,
+    'A game of tic-tac-toe gets an inconclusive response',
+); # end: rate-tictactoe
+
+cmp-ok( # begin: rate-chess task: 10
+    rate-activity(::('Chess')),
+    'eqv',
+    ::('Yes'),
+    'A game of chess gets a positive response',
+); # end: rate-chess
+
+cmp-ok( # begin: rate-globalthermonuclearwar task: 10
+    rate-activity(::('GlobalThermonuclearWar')),
+    'eqv',
+    ::('No'),
+    'A game of global thermonuclear war gets a negative response',
+); # end: rate-globalthermonuclearwar
+
+cmp-ok( # begin: rate-short-walk task: 10
+    rate-activity(::('Walk')(0.5)),
+    'eqv',
+    ::('Yes'),
+    'A 0.5km walk gets a positive response',
+); # end: rate-short-walk
+
+cmp-ok( # begin: rate-long-walk task: 10
+    rate-activity(::('Walk')(15)),
+    'eqv',
+    ::('No'),
+    'A 15km walk gets a negative response',
+); # end: rate-long-walk
+
+cmp-ok( # begin: rate-mid-walk task: 10
+    rate-activity(::('Walk')(π)),
+    '~~',
+    ::('Answer'):U,
+    'A πkm walk gets an inconclusive response',
+); # end: rate-mid-walk
+
+done-testing;
