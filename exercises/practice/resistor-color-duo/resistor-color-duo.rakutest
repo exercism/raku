@@ -1,0 +1,55 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use ResistorColorDuo;
+
+cmp-ok( # begin: ce11995a-5b93-4950-a5e9-93423693b2fc
+    decoded-value(<brown black>),
+    "eqv",
+    10,
+    "Brown and black",
+); # end: ce11995a-5b93-4950-a5e9-93423693b2fc
+
+cmp-ok( # begin: 7bf82f7a-af23-48ba-a97d-38d59406a920
+    decoded-value(<blue grey>),
+    "eqv",
+    68,
+    "Blue and grey",
+); # end: 7bf82f7a-af23-48ba-a97d-38d59406a920
+
+cmp-ok( # begin: f1886361-fdfd-4693-acf8-46726fe24e0c
+    decoded-value(<yellow violet>),
+    "eqv",
+    47,
+    "Yellow and violet",
+); # end: f1886361-fdfd-4693-acf8-46726fe24e0c
+
+cmp-ok( # begin: b7a6cbd2-ae3c-470a-93eb-56670b305640
+    decoded-value(<white red>),
+    "eqv",
+    92,
+    "White and red",
+); # end: b7a6cbd2-ae3c-470a-93eb-56670b305640
+
+cmp-ok( # begin: 77a8293d-2a83-4016-b1af-991acc12b9fe
+    decoded-value(<orange orange>),
+    "eqv",
+    33,
+    "Orange and orange",
+); # end: 77a8293d-2a83-4016-b1af-991acc12b9fe
+
+cmp-ok( # begin: 0c4fb44f-db7c-4d03-afa8-054350f156a8
+    decoded-value(<green brown orange>),
+    "eqv",
+    51,
+    "Ignore additional colors",
+); # end: 0c4fb44f-db7c-4d03-afa8-054350f156a8
+
+cmp-ok( # begin: 4a8ceec5-0ab4-4904-88a4-daf953a5e818
+    decoded-value(<black brown>),
+    "eqv",
+    1,
+    "Black and brown, one-digit",
+); # end: 4a8ceec5-0ab4-4904-88a4-daf953a5e818
+
+done-testing;

@@ -1,6 +1,4 @@
-unit class Darts;
+unit module Darts;
 
-has Rat() ($.x, $.y);
-
-method score {
+sub score-dart ( :$x, :$y ) is export {
 }

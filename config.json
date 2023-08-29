@@ -54,6 +54,18 @@
         ],
         "prerequisites": ["basics"],
         "status": "wip"
+      },
+      {
+        "slug": "valentines-day",
+        "name": "Valentines Day",
+        "uuid": "50279870-abff-406c-805b-30b8b6dbf53d",
+        "concepts": [
+          "variables-containers-types"
+        ],
+        "prerequisites": [
+          "routines-code-blocks-signatures"
+        ],
+        "status": "wip"
       }
     ],
     "practice": [
@@ -669,6 +681,15 @@
         "slug": "yacht",
         "name": "Yacht",
         "uuid": "5720dc50-7437-438a-903b-2bcd1b14f309",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
+        "slug": "resistor-color-duo",
+        "name": "Resistor Color Duo",
+        "uuid": "81241181-f6a5-4f00-af8c-98bc46517f53",
         "practices": [],
         "prerequisites": [],
         "difficulty": 1,

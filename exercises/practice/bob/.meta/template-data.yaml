@@ -1,43 +1,41 @@
-methods: hey
 properties:
   response:
     test: |-
       sprintf(q:to/END/, (%case<input><heyBob>, |%case<expected description>).map(*.raku));
       cmp-ok(
-          Bob.hey(%s),
+          (
+              hey %s
+              does Bob:
+          ),
           "eq",
           %s,
           %s,
       );
       END
 
-lib_comment: Look for the module inside the same directory as this test file.
-methods_comment: "Check that the class 'Bob' can use all of the methods\nneeded in the tests (only 'hey' for this one)."
+lib_comment: Look for the package inside the same directory as this test file.
 
-unit: class
+unit: role
 unit_comment: |-
   #`[
-    Declare class 'Bob' and unit-scope the class
-    i.e. everything in this file is part of 'Bob'.
+      Declare role 'Bob' and unit-scope the role
+      i.e. everything in this file is part of 'Bob'.
   ]
 example: |-
-  method hey ( Str:D $_ --> Str:D ) {
-    my \shouting = /<:L>/ ^ /<:Ll>/;
-    given .trim {
-      when .ends-with: ‘?’  {
-        when shouting { ‘Calm down, I know what I'm doing!’ }
-        default       { ‘Sure.’ }
+  method hey () {
+      my \shouting = /<:L>/ ^ /<:Ll>/;
+      given self.trim {
+          when .ends-with: ‘?’ {
+              when shouting { ‘Calm down, I know what I'm doing!’ }
+              default       { ‘Sure.’ }
+          }
+          when shouting { ‘Whoa, chill out!’ }
+          when .not     { ‘Fine. Be that way!’ }
+          default       { ‘Whatever.’ };
       }
-      when shouting { ‘Whoa, chill out!’ }
-      when .not     { ‘Fine. Be that way!’ }
-      default       { ‘Whatever.’ };
-    }
   }
+
 stub: |-
-  method hey ($msg) {
-      #`[
-        Remove the comments and write some code here to pass the test suite.
-        You can experiment with the code outside of this block,
-        but no changes are needed for the test suite to pass.
-      ]
+  method hey () {
+      return self;
   }
