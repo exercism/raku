@@ -1,19 +1,13 @@
 unit module ValentinesDay;
 
-subset Answer of Nil is export;
+enum Answer is export (Yes => True);
 
+# You may use enums, subsets, classes, or roles as you see fit.
+class  Chill       is export {}
+enum   Restaurant  is export ('Korean');
+enum   Movie       is export ();
+enum   Game        is export ();
 subset Walk of Num is export;
-
-class Chill is export {}
-
-role Restaurant is export {}
-class Korean does Restaurant is export {}
-
-role Movie is export {}
-class Crime does Movie is export {}
-
-role Game is export {}
-class Chess does Game is export {}
 
 subset Activity is export where * ~~ any(Chill);
 
