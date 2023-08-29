@@ -31,7 +31,7 @@ cmp-ok( # begin: chill task: 2
     'Chill is an Activity',
 ); # end: chill
 
-cmp-ok( # begin restaurant task: 3
+cmp-ok( # begin: restaurant task: 3
     ::('Restaurant'),
     '~~',
     ::('Activity'),
