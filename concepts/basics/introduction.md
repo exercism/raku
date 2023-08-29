@@ -1,13 +1,22 @@
+Raku is an incredibly rich, flexible, and powerful programming language.
+Its flexibility allows for programmers to write expressive code which fits their own style.
+
+Raku is a large language with plenty of depth to learn, explore, and experiment with.
+This syllabus aims to cover the fundamentals for you to get started.
+
+Object Oriented Programming is at the heart of Raku, however it does not impose object oriented programming practices.
+Because of its object oriented nature, this syllabus will often make references to [objects, classes, and methods][object-orientation].
+
 ## Variables
 
 We'll only use scalar [variables][variables] in basics to keep things simple.
 
 Scalar variables are [identifiers][identifiers] prefixed with the `$` sigil.
 
-Scalar variables can contain virtually anything, and have a default type of [Any][Any].
+Scalar variables can contain virtually anything, and have a default type of [`Any`][Any].
 
 Most variables you use will need a [declaration][variable-declarator].
-For now, stick with [my][my] and [constant][constant].
+For now, stick with [`my`][my] and [`constant`][constant].
 
 ```raku
 my $foo;
@@ -16,13 +25,13 @@ constant $BAR;
 
 ## Subroutines
 
-A subroutine is declared with the [sub][sub-declarator] declarator.
+A subroutine is declared with the [`sub`][sub-declarator] declarator.
 
 A `sub` declaration is followed by an optional [identifier][identifiers], followed by an optional [signature][signatures], followed by a [block][blocks].
 
-Subrouties (among other things) can be exported by adding the [is export][exporting] trait.
+Subrouties (among other things) can be exported by adding the [`is export`][exporting] trait.
 
-A subroutine can be called with a [postcircumfix ( )][postcircumfix-()] operator on the identifier.
+A subroutine can be called with a [postcircumfix `( )`][postcircumfix-()] operator on the identifier.
 
 ```raku
 sub foo ($bar) is export { ... } # Subroutine definition
@@ -94,3 +103,4 @@ Package names are styled in `PascalCase`.
 [single-line-comments]: https://docs.raku.org/language/syntax#Single-line_comments
 [multi-line-comments]: https://docs.raku.org/language/syntax#Multi-line_/_embedded_comments
 [operators]: https://docs.raku.org/language/operators
+[object-orientation]: https://docs.raku.org/language/objects
