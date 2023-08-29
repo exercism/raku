@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+  ],
+  "files": {
+    "solution": [
+      "ResistorColorDuo.rakumod"
+    ],
+    "test": [
+      "resistor-color-duo.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/ResistorColorDuo.rakumod"
+    ]
+  },
+  "blurb": "Convert color codes, as used on resistors, to a numeric value.",
+  "source": "Maud de Vries, Erik Schierboom",
+  "source_url": "https://github.com/exercism/problem-specifications/issues/1464"
+}
