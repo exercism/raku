@@ -9,7 +9,7 @@ enum   Movie       is export ();
 enum   Game        is export ();
 subset Walk of Num is export;
 
-subset Activity is export where * ~~ any(Chill);
+subset Activity is export where * ~~ any(Chill,);
 
 multi rate-activity ( Chill --> Answer ) is export {
 }
