@@ -1,24 +1,24 @@
 unit module Allergies;
 
-constant %allergens = <
-      eggs
-      peanuts
-      shellfish
-      strawberries
-      tomatoes
-      chocolate
-      pollen
-      cats
-    > Z=> ( 1, 2, 4 … ∞ );
+enum Allergens is export <
+    Eggs
+    Peanuts
+    Shellfish
+    Strawberries
+    Tomatoes
+    Chocolate
+    Pollen
+    Cats
+>;
 
 sub allergic-to(
-  Str:D  :$item where * ∈ %allergens.keys,
-  UInt:D :$score,
-  --> Bool
+    Allergens(UInt) :$item,
+    UInt:D :$score,
+    --> Bool
 ) is export {
-  so %allergens{$item} +& $score;
+    so (2 ** $item) +& $score;
 }
 
-sub list-allergies( UInt:D $score ) is export {
-  %allergens.keys.grep( { allergic-to :$score, :$^item } );
+sub list-allergies( UInt:D $score --> Set() ) is export {
+    Allergens.values.map( { allergic-to(:$score, :$^item) ?? Allergens($item) !! Empty } );
 }
