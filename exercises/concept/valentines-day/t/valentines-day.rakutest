@@ -123,16 +123,16 @@ cmp-ok( # begin: long-walk task: 9
 ); # end: long-walk
 
 cmp-ok( # begin: no-walk task: 9
-    0,
-    '!~~',
-    ::('Walk'),
+    try { ::('Walk')(0) },
+    'eqv',
+    Nil,
     'A walk cannot be 0km',
 ); # end: no-walk
 
 cmp-ok( # begin: inf-walk task: 9
-    Inf,
-    '!~~',
-    ::('Walk'),
+    try { ::('Walk')(Inf) },
+    'eqv',
+    Nil,
     'A walk cannot be an infinite number of km',
 ); # end: inf-walk
 
