@@ -56,6 +56,19 @@ multi foo () { say 'No arguments given'}
 multi foo ($bar) { say "One argument given: $bar" }
 ```
 
+## WhateverCode
+
+When a `Whatever` star (`*`) is used in combination with most operators, a `WhateverCode` object is created.
+This allows you to create blocks with a simpler syntax.
+
+```raku
+# These will all increment an argument by 1:
+-> $x { $x + 1 };
+{$^x + 1};
+{$_ + 1};
+* + 1;
+```
+
 [type/Sub]: https://docs.raku.org/type/Sub
 [type/Method]: https://docs.raku.org/type/Method
 [type/Routine]: https://docs.raku.org/type/Routine
