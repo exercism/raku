@@ -1,0 +1,174 @@
+#!/usr/bin/env raku
+
+use Test;
+use LanguageList;
+
+cmp-ok( # begin: add-language-0 task: 1
+    ().&add-language('Raku'),
+    '~~',
+    ('Raku'),
+    'add-language adds Raku to the list',
+); # end: add-language-0
+
+cmp-ok( # begin: add-language-1 task: 1
+    ('Raku',).&add-language('Perl'),
+    '~~',
+    ('Raku', 'Perl'),
+    'add-language adds Perl to the list',
+); # end: add-language-1
+
+cmp-ok( # begin: add-language-2 task: 1
+    ('Raku', 'Perl').&add-language('Ruby'),
+    '~~',
+    ('Raku', 'Perl', 'Ruby'),
+    'add-language adds Ruby to the list',
+); # end: add-language-2
+
+cmp-ok( # begin: remove-language-1 task: 2
+    remove-language( ('Raku', 'Perl', 'Ruby') ),
+    '~~',
+    ('Raku', 'Perl'),
+    'remove-language removes the last language Ruby from the list',
+); # end: remove-language-1
+
+cmp-ok( # begin: remove-language-2 task: 2
+    remove-language( ('Raku', 'Perl') ),
+    '~~',
+    ('Raku',),
+    'remove-language removes the last language Perl from the list',
+); # end: remove-language-2
+
+cmp-ok( # begin: remove-language-3 task: 2
+    remove-language( ('Raku',) ),
+    '~~',
+    (),
+    'remove-language removes the last language Raku from the list',
+); # end: remove-language-3
+
+cmp-ok( # begin: first-language-0 task: 3
+    first-language( () ),
+    'eqv',
+    Nil,
+    'first-language returns Nil with an empty list',
+); # end: first-language-0
+
+cmp-ok( # begin: first-language-1 task: 3
+    first-language( ('Ruby',) ),
+    'eq',
+    'Ruby',
+    'first-language returns Ruby from the 1 element list',
+); # end: first-language-1
+
+cmp-ok( # begin: first-language-2 task: 3
+    first-language( ('Ruby', 'Perl') ),
+    'eq',
+    'Ruby',
+    'first-language returns Ruby from the 2 element list',
+); # end: first-language-2
+
+cmp-ok( # begin: first-language-3 task: 3
+    first-language( ('Perl',) ),
+    'eq',
+    'Perl',
+    'first-language returns Perl from the 1 element list',
+); # end: first-language-3
+
+cmp-ok( # begin: first-language-4 task: 3
+    first-language( ('Perl', 'Raku') ),
+    'eq',
+    'Perl',
+    'first-language returns Perl from the 2 element list',
+); # end: first-language-4
+
+cmp-ok( # begin: last-language-1 task: 4
+    last-language( ('Ruby', 'Perl', 'Raku') ),
+    'eq',
+    'Raku',
+    'last-language returns Raku from the end of the  list',
+); # end: last-language-1
+
+cmp-ok( # begin: last-language-2 task: 4
+    last-language( ('Ruby', 'Perl') ),
+    'eq',
+    'Perl',
+    'last-language returns Perl from the end of the list',
+); # end: last-language-2
+
+cmp-ok( # begin: last-language-3 task: 4
+    last-language( ('Ruby',) ),
+    'eq',
+    'Ruby',
+    'last-language returns Ruby from the end of the list',
+); # end: last-language-3
+
+cmp-ok( # begin: last-language-4 task: 4
+    last-language( () ),
+    'eqv',
+    Nil,
+    'last-language returns Nil with an empty list',
+); # end: last-language-4
+
+cmp-ok( # begin: get-languages-1 task: 5
+    ('Raku', 'Ruby', 'Perl').&get-languages( (1,) ),
+    '~~',
+    ('Raku',),
+    'Get the 1st language from the list',
+); # end: get-languages-1
+
+cmp-ok( # begin: get-languages-2 task: 5
+    ('Raku', 'Ruby', 'Perl').&get-languages( (2, 3) ),
+    '~~',
+    ('Ruby', 'Perl'),
+    'Get the 2nd and 3rd languages from the list',
+); # end: get-languages-2
+
+cmp-ok( # begin: get-languages-3 task: 5
+    ('Raku', 'Ruby', 'Perl').&get-languages( (3, 1, 2) ),
+    '~~',
+    ('Perl', 'Raku', 'Ruby'),
+    'Get reordered languages from the list',
+); # end: get-languages-3
+
+cmp-ok( # begin: get-languages-4 task: 5
+    ('Raku', 'Perl', 'Ruby').&get-languages( (1, 3) ),
+    '~~',
+    ('Raku', 'Ruby'),
+    'Get the 1st and 3rd languages from the list',
+); # end: get-languages-4
+
+cmp-ok( # begin: get-languages-5 task: 5
+    ('Raku', 'Perl', 'Ruby').&get-languages( (2, 1) ),
+    '~~',
+    ('Perl', 'Raku'),
+    'Get the 2nd and 1st languages from the list',
+); # end: get-languages-5
+
+cmp-ok( # begin: has-language-1 task: 6
+    ('Raku', 'Perl').&has-language('Perl'),
+    'eqv',
+    True,
+    'List contains Perl',
+); # end: has-language-1
+
+cmp-ok( # begin: has-language-2 task: 6
+    ('Raku', 'Perl').&has-language('Raku'),
+    'eqv',
+    True,
+    'List contains Raku',
+); # end: has-language-2
+
+cmp-ok( # begin: has-language-3 task: 6
+    ('Gleam', 'Ruby').&has-language('JavaScript'),
+    'eqv',
+    False,
+    'List does not contain JavaScript',
+); # end: has-language-3
+
+cmp-ok( # begin: has-language-4 task: 6
+    ('JavaScript', 'Go').&has-language('Gleam'),
+    'eqv',
+    False,
+    'List does not contain Gleam',
+); # end: has-language-4
+
+done-testing;

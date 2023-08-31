@@ -66,6 +66,18 @@
           "routines-code-blocks-signatures"
         ],
         "status": "beta"
+      },
+      {
+        "slug": "language-list",
+        "name": "Language List",
+        "uuid": "f719c0f3-77a4-4be2-827f-883fc9651ec3",
+        "concepts": [
+          "arrays-lists-sequences"
+        ],
+        "prerequisites": [
+          "variables-containers-types"
+        ],
+        "status": "wip"
       }
     ],
     "practice": [
