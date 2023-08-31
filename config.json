@@ -43,7 +43,7 @@
           "basics"
         ],
         "prerequisites": [],
-        "status": "wip"
+        "status": "beta"
       },
       {
         "slug": "secrets",
@@ -53,7 +53,7 @@
           "routines-code-blocks-signatures"
         ],
         "prerequisites": ["basics"],
-        "status": "wip"
+        "status": "beta"
       },
       {
         "slug": "valentines-day",
