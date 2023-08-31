@@ -213,11 +213,25 @@ cmp-ok( # begin: rate-long-walk task: 10
     'A 15km walk gets a negative response',
 ); # end: rate-long-walk
 
-cmp-ok( # begin: rate-mid-walk task: 10
+cmp-ok( # begin: rate-mid-walk-low task: 10
+    rate-activity(::('Walk')(3)),
+    '~~',
+    ::('Answer'):U,
+    'A 3km walk gets an inconclusive response',
+); # end: rate-mid-walk-high
+
+cmp-ok( # begin: rate-mid-walk-high task: 10
+    rate-activity(::('Walk')(5)),
+    '~~',
+    ::('Answer'):U,
+    'A 5km walk gets an inconclusive response',
+); # end: rate-mid-walk-high
+
+cmp-ok( # begin: rate-mid-walk-pi task: 10
     rate-activity(::('Walk')(π)),
     '~~',
     ::('Answer'):U,
     'A πkm walk gets an inconclusive response',
-); # end: rate-mid-walk
+); # end: rate-mid-walk-pi
 
 done-testing;
