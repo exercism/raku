@@ -1,3 +1,6 @@
+Code blocks are used liberally in Raku.
+Fundamental for functions, but also in tools such as `grep` and `map`, as blocks of `if`, `for`, `while`, and `given` statements, and even array subscripts.
+
 ## Routines
 
 [`Subs`][type/Sub] and [`Methods`][type/Method] are types of [`Routines`][type/Routine] in Raku.
