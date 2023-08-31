@@ -56,6 +56,19 @@ multi foo () { say 'No arguments given'}
 multi foo ($bar) { say "One argument given: $bar" }
 ```
 
+## WhateverCode
+
+When a [`Whatever`][type/Whatever] star `*` is used in combination with most operators, a [`WhateverCode`][type/WhateverCode] object is created.
+This allows you to create blocks with a simpler syntax.
+
+```raku
+# These will all give code blocks that increment a single argument by 1:
+-> $x { $x  + 1 }; # Explicit signature
+      { $^x + 1 }; # Signature via placeholder variable
+      { $_  + 1 }; # Topic variable
+          * + 1;   # WhateverCode
+```
+
 [type/Sub]: https://docs.raku.org/type/Sub
 [type/Method]: https://docs.raku.org/type/Method
 [type/Routine]: https://docs.raku.org/type/Routine
@@ -66,3 +79,5 @@ multi foo ($bar) { say "One argument given: $bar" }
 [type/Code]: https://docs.raku.org/type/Code
 [signatures-return-type-arrow]: https://docs.raku.org/language/signatures#Return_type_arrow:_--%3E
 [multi-dispatch]: https://docs.raku.org/language/functions#Multi-dispatch
+[type/Whatever]: https://docs.raku.org/type/Whatever
+[type/WhateverCode]: https://docs.raku.org/type/WhateverCode
