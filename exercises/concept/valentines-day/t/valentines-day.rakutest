@@ -218,7 +218,7 @@ cmp-ok( # begin: rate-mid-walk-low task: 10
     '~~',
     ::('Answer'):U,
     'A 3km walk gets an inconclusive response',
-); # end: rate-mid-walk-high
+); # end: rate-mid-walk-low
 
 cmp-ok( # begin: rate-mid-walk-high task: 10
     rate-activity(::('Walk')(5)),
