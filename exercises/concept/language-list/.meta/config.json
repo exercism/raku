@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "m-dango"
+  ],
+  "files": {
+    "solution": [
+      "lib/LanguageList.rakumod"
+    ],
+    "test": [
+      "t/language-list.rakutest"
+    ],
+    "exemplar": [
+      ".meta/LanguageList.rakumod"
+    ]
+  },
+  "blurb": "Learn about arrays and lists in Raku by working with a collection of languages."
+}
