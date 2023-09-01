@@ -3,8 +3,12 @@
 ## Run All Tests
 
 There is a Raku script with the extension `.rakutest`, which will be used to test your solution.
-You can run through the tests by using the command (replacing the exercise name where relevant):
+You can run through the tests by using either of these commands (replacing the exercise name where relevant):
 
+If the test is in the `t/` directory:
+`prove6 --lib`
+
+If the test is in the top-level directory:
 `prove6 hello-world.rakutest`
 
 Before you start the exercise, the output will likely look something like:
@@ -19,7 +23,7 @@ Before you start the exercise, the output will likely look something like:
 hello-world.rakutest .. Dubious, test returned 1
 Failed 1/1 subtests
 ```
-You will either need to modify or create a module with the extension `.rakumod`, and
+You will need to modify the module with the extension `.rakumod`, and
 write a solution to pass the tests. Once the tests are passing, the output from
 the command above will likely look something like:
 
