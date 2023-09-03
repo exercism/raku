@@ -1,0 +1,76 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use ResistorColorTrio;
+
+cmp-ok( # begin: d6863355-15b7-40bb-abe0-bfb1a25512ed
+    create-label(<orange orange black>),
+    "eq",
+    "33 ohms",
+    "Orange and orange and black",
+); # end: d6863355-15b7-40bb-abe0-bfb1a25512ed
+
+cmp-ok( # begin: 1224a3a9-8c8e-4032-843a-5224e04647d6
+    create-label(<blue grey brown>),
+    "eq",
+    "680 ohms",
+    "Blue and grey and brown",
+); # end: 1224a3a9-8c8e-4032-843a-5224e04647d6
+
+cmp-ok( # begin: b8bda7dc-6b95-4539-abb2-2ad51d66a207
+    create-label(<red black red>),
+    "eq",
+    "2 kiloohms",
+    "Red and black and red",
+); # end: b8bda7dc-6b95-4539-abb2-2ad51d66a207
+
+cmp-ok( # begin: 5b1e74bc-d838-4eda-bbb3-eaba988e733b
+    create-label(<green brown orange>),
+    "eq",
+    "51 kiloohms",
+    "Green and brown and orange",
+); # end: 5b1e74bc-d838-4eda-bbb3-eaba988e733b
+
+cmp-ok( # begin: f5d37ef9-1919-4719-a90d-a33c5a6934c9
+    create-label(<yellow violet yellow>),
+    "eq",
+    "470 kiloohms",
+    "Yellow and violet and yellow",
+); # end: f5d37ef9-1919-4719-a90d-a33c5a6934c9
+
+cmp-ok( # begin: 5f6404a7-5bb3-4283-877d-3d39bcc33854
+    create-label(<blue violet blue>),
+    "eq",
+    "67 megaohms",
+    "Blue and violet and blue",
+); # end: 5f6404a7-5bb3-4283-877d-3d39bcc33854
+
+cmp-ok( # begin: 7d3a6ab8-e40e-46c3-98b1-91639fff2344
+    create-label(<black black black>),
+    "eq",
+    "0 ohms",
+    "Minimum possible value",
+); # end: 7d3a6ab8-e40e-46c3-98b1-91639fff2344
+
+cmp-ok( # begin: ca0aa0ac-3825-42de-9f07-dac68cc580fd
+    create-label(<white white white>),
+    "eq",
+    "99 gigaohms",
+    "Maximum possible value",
+); # end: ca0aa0ac-3825-42de-9f07-dac68cc580fd
+
+cmp-ok( # begin: 0061a76c-903a-4714-8ce2-f26ce23b0e09
+    create-label(<black grey black>),
+    "eq",
+    "8 ohms",
+    "First two colors make an invalid octal number",
+); # end: 0061a76c-903a-4714-8ce2-f26ce23b0e09
+
+cmp-ok( # begin: 30872c92-f567-4b69-a105-8455611c10c4
+    create-label(<blue green yellow orange>),
+    "eq",
+    "650 kiloohms",
+    "Ignore extra colors",
+); # end: 30872c92-f567-4b69-a105-8455611c10c4
+
+done-testing;
