@@ -1,7 +1,6 @@
 # Instructions
 
-Determine if a number is perfect, abundant, or deficient based on
-Nicomachus' (60 - 120 CE) classification scheme for positive integers.
+Determine if a number is perfect, abundant, or deficient based on Nicomachus' (60 - 120 CE) classification scheme for positive integers.
 
 The Greek mathematician [Nicomachus][nicomachus] devised a classification scheme for positive integers, identifying each as belonging uniquely to the categories of **perfect**, **abundant**, or **deficient** based on their [aliquot sum][aliquot-sum].
 The aliquot sum is defined as the sum of the factors of a number not including the number itself.
