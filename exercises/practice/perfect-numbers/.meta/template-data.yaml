@@ -4,25 +4,31 @@ properties:
   classify:
     test: |-
       if %case<expected><error>:exists {
-        sprintf(q:to/END/, %case<input><number>.List, %case<description>.raku);
+        sprintf(q:to/END/, %case<input><number>, %case<description>.raku);
         dies-ok(
-          { aliquot-sum-type(<%s>) },
+          { aliquot-sum-type(%s) },
           %s,
         );
         END
       }
       else {
-        sprintf(q:to/END/, %case<input><number>.List, %case<expected>.List.Str, %case<description>.raku);
+        sprintf(q:to/END/, %case<input><number>, %case<expected>.tc, %case<description>.raku);
         cmp-ok(
-            aliquot-sum-type(<%s>),
-            "eq",
-            "%s",
+            aliquot-sum-type(%s),
+            "eqv",
+            %s,
             %s,
         );
         END
       }
 
 example: |-
+  enum AliquotSumType is export (
+    :Deficient(-1),
+    :Perfect(0),
+    :Abundant(1),
+  );
+
   sub prime-factors ( $n is copy ) {
     gather for grep *.is-prime, flat 2 .. $n.sqrt, $n
     -> $prime {
@@ -30,15 +36,22 @@ example: |-
       take $prime and $n div= $prime while $n %% $prime
     }
   }
-  sub aliquot-sum-type ( Int $n where 1..*, @pf = prime-factors( $n ) ) is export {
-    return 'deficient' if @pf == ();
+
+  sub aliquot-sum-type ( Int $n where 1..*, @pf = prime-factors( $n ) --> AliquotSumType ) is export {
+    return Deficient if @pf == ();
     given @pf.combinations( 1 .. @pf.elems.pred ).unique( with => &[eqv] ).map( { [*] $_ } ).sum.succ {
-      when    $_ > $n { 'abundant'  }
-      when    $n      { 'perfect'   }
-      default         { 'deficient' }
+      when    $_ > $n { Abundant  }
+      when    $n      { Perfect   }
+      default         { Deficient }
     }
   }
 
 stub: |-
-  sub aliquot-sum-type ( $n ) is export {
+  enum AliquotSumType is export (
+      :Deficient(-1),
+      :Perfect(0),
+      :Abundant(1),
+  );
+
+  sub aliquot-sum-type ( $n --> AliquotSumType ) is export {
   }
