@@ -1,9 +1,9 @@
 unit module PerfectNumbers;
 
 enum AliquotSumType is export (
-  :Deficient(-1),
-  :Perfect(0),
-  :Abundant(1),
+  :Deficient(Less),
+  :Perfect(Same),
+  :Abundant(More),
 );
 
 sub prime-factors ( $n is copy ) {
@@ -16,9 +16,5 @@ sub prime-factors ( $n is copy ) {
 
 sub aliquot-sum-type ( Int $n where 1..*, @pf = prime-factors( $n ) --> AliquotSumType ) is export {
   return Deficient if @pf == ();
-  given @pf.combinations( 1 .. @pf.elems.pred ).unique( with => &[eqv] ).map( { [*] $_ } ).sum.succ {
-    when    $_ > $n { Abundant  }
-    when    $n      { Perfect   }
-    default         { Deficient }
-  }
+  AliquotSumType( @pf.combinations( 1 .. @pf.end ).unique( with => &[eqv] ).map( { [*] $_ } ).sum.succ cmp $n )
 }
