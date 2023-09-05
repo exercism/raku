@@ -1,4 +1,4 @@
 unit module PerfectNumbers;
 
-sub aliquot-sum ( $n ) is export {
+sub aliquot-sum-type ( $n ) is export {
 }
