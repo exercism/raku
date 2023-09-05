@@ -6,7 +6,7 @@ properties:
       if %case<expected><error>:exists {
         sprintf(q:to/END/, %case<input><number>.List, %case<description>.raku);
         dies-ok(
-          { aliquot-sum(<%s>) },
+          { aliquot-sum-type(<%s>) },
           %s,
         );
         END
@@ -14,7 +14,7 @@ properties:
       else {
         sprintf(q:to/END/, %case<input><number>.List, %case<expected>.List.Str, %case<description>.raku);
         cmp-ok(
-            aliquot-sum(<%s>),
+            aliquot-sum-type(<%s>),
             "eq",
             "%s",
             %s,
@@ -30,7 +30,7 @@ example: |-
       take $prime and $n div= $prime while $n %% $prime
     }
   }
-  sub aliquot-sum ( Int $n where 1..*, @pf = prime-factors( $n ) ) is export {
+  sub aliquot-sum-type ( Int $n where 1..*, @pf = prime-factors( $n ) ) is export {
     return 'deficient' if @pf == ();
     given @pf.combinations( 1 .. @pf.elems.pred ).unique( with => &[eqv] ).map( { [*] $_ } ).sum.succ {
       when    $_ > $n { 'abundant'  }

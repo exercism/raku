@@ -7,7 +7,7 @@ sub prime-factors ( $n is copy ) {
     take $prime and $n div= $prime while $n %% $prime
   }
 }
-sub aliquot-sum ( Int $n where 1..*, @pf = prime-factors( $n ) ) is export {
+sub aliquot-sum-type ( Int $n where 1..*, @pf = prime-factors( $n ) ) is export {
   return 'deficient' if @pf == ();
   given @pf.combinations( 1 .. @pf.elems.pred ).unique( with => &[eqv] ).map( { [*] $_ } ).sum.succ {
     when    $_ > $n { 'abundant'  }
