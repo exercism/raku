@@ -6,8 +6,8 @@ properties:
       if %case<expected><error>:exists {
         sprintf(q:to/END/, %case<input><number>, %case<description>.raku);
         dies-ok(
-          { aliquot-sum-type(%s) },
-          %s,
+            { aliquot-sum-type(%s) },
+            %s,
         );
         END
       }

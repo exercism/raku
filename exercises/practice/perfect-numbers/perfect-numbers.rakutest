@@ -81,13 +81,13 @@ cmp-ok( # begin: a696dec8-6147-4d68-afad-d38de5476a56
 ); # end: a696dec8-6147-4d68-afad-d38de5476a56
 
 dies-ok( # begin: 72445cee-660c-4d75-8506-6c40089dc302
-  { aliquot-sum-type(0) },
-  "Invalid inputs: Zero is rejected (as it is not a positive integer)",
+    { aliquot-sum-type(0) },
+    "Invalid inputs: Zero is rejected (as it is not a positive integer)",
 ); # end: 72445cee-660c-4d75-8506-6c40089dc302
 
 dies-ok( # begin: 2d72ce2c-6802-49ac-8ece-c790ba3dae13
-  { aliquot-sum-type(-1) },
-  "Invalid inputs: Negative integer is rejected (as it is not a positive integer)",
+    { aliquot-sum-type(-1) },
+    "Invalid inputs: Negative integer is rejected (as it is not a positive integer)",
 ); # end: 2d72ce2c-6802-49ac-8ece-c790ba3dae13
 
 done-testing;
