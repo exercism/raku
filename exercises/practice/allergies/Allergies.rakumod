@@ -1,6 +1,6 @@
 unit module Allergies;
 
-enum Allergens is export <
+enum Allergen is export <
     Eggs
     Peanuts
     Shellfish

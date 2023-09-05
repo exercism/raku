@@ -1,6 +1,6 @@
 unit module Allergies;
 
-enum Allergens is export <
+enum Allergen is export <
     Eggs
     Peanuts
     Shellfish
@@ -12,7 +12,7 @@ enum Allergens is export <
 >;
 
 sub allergic-to(
-    Allergens(UInt) :$item,
+    Allergen(UInt) :$item,
     UInt:D :$score,
     --> Bool
 ) is export {
@@ -20,5 +20,5 @@ sub allergic-to(
 }
 
 sub list-allergies( UInt:D $score --> Set() ) is export {
-    Allergens.values.map( { allergic-to(:$score, :$^item) ?? Allergens($item) !! Empty } );
+    Allergen.values.map( { allergic-to(:$score, :$^item) ?? Allergen($item) !! Empty } );
 }
