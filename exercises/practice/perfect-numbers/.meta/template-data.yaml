@@ -1,0 +1,44 @@
+unit: module
+
+properties:
+  classify:
+    test: |-
+      if %case<expected><error>:exists {
+        sprintf(q:to/END/, %case<input><number>.List, %case<description>.raku);
+        dies-ok(
+          { aliquot-sum(<%s>) },
+          %s,
+        );
+        END
+      }
+      else {
+        sprintf(q:to/END/, %case<input><number>.List, %case<expected>.List.Str, %case<description>.raku);
+        cmp-ok(
+            aliquot-sum(<%s>),
+            "eq",
+            "%s",
+            %s,
+        );
+        END
+      }
+
+example: |-
+  sub prime-factors ( $n is copy ) {
+    gather for grep *.is-prime, flat 2 .. $n.sqrt, $n
+    -> $prime {
+      take $n     and last           if    $n.is-prime;
+      take $prime and $n div= $prime while $n %% $prime
+    }
+  }
+  sub aliquot-sum ( Int $n where 1..*, @pf = prime-factors( $n ) ) is export {
+    return 'deficient' if @pf == ();
+    given @pf.combinations( 1 .. @pf.elems.pred ).unique( with => &[eqv] ).map( { [*] $_ } ).sum.succ {
+      when    $_ > $n { 'abundant'  }
+      when    $n      { 'perfect'   }
+      default         { 'deficient' }
+    }
+  }
+
+stub: |-
+  sub aliquot-sum ( $n ) is export {
+  }
