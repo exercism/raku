@@ -1,0 +1,53 @@
+unit: module
+
+properties:
+  classify:
+    test: |-
+      if %case<expected><error>:exists {
+        sprintf(q:to/END/, %case<input><number>, %case<description>.raku);
+        dies-ok(
+            { aliquot-sum-type(%s) },
+            %s,
+        );
+        END
+      }
+      else {
+        sprintf(q:to/END/, %case<input><number>, %case<expected>.tc, %case<description>.raku);
+        cmp-ok(
+            aliquot-sum-type(%s),
+            "eqv",
+            %s,
+            %s,
+        );
+        END
+      }
+
+example: |-
+  enum AliquotSumType is export (
+    :Deficient(Less),
+    :Perfect(Same),
+    :Abundant(More),
+  );
+
+  sub prime-factors ( $n is copy ) {
+    gather for grep *.is-prime, flat 2 .. $n.sqrt, $n
+    -> $prime {
+      take $n     and last           if    $n.is-prime;
+      take $prime and $n div= $prime while $n %% $prime
+    }
+  }
+
+  sub aliquot-sum-type ( Int $n where 1..*, @pf = prime-factors( $n ) --> AliquotSumType ) is export {
+    return Deficient if @pf == ();
+    AliquotSumType( @pf.combinations( 1 .. @pf.end ).unique( with => &[eqv] ).map( { [*] $_ } ).sum.succ cmp $n )
+  }
+
+stub: |-
+  enum AliquotSumType is export (
+      :Deficient(Less),
+      :Perfect(Same),
+      :Abundant(More),
+  );
+
+  sub aliquot-sum-type ( $n --> AliquotSumType ) is export {
+  }
