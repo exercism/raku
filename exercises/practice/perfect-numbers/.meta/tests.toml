@@ -17,6 +17,8 @@ description = "Perfect numbers -> Medium perfect number is classified correctly"
 
 [ee3627c4-7b36-4245-ba7c-8727d585f402]
 description = "Perfect numbers -> Large perfect number is classified correctly"
+include = false
+comment = "too slow for basic implementations"
 
 [80ef7cf8-9ea8-49b9-8b2d-d9cb3db3ed7e]
 description = "Abundant numbers -> Smallest abundant number is classified correctly"
@@ -26,6 +28,8 @@ description = "Abundant numbers -> Medium abundant number is classified correctl
 
 [ec7792e6-8786-449c-b005-ce6dd89a772b]
 description = "Abundant numbers -> Large abundant number is classified correctly"
+include = false
+comment = "too slow for basic implementations"
 
 [e610fdc7-2b6e-43c3-a51c-b70fb37413ba]
 description = "Deficient numbers -> Smallest prime deficient number is classified correctly"
@@ -38,6 +42,8 @@ description = "Deficient numbers -> Medium deficient number is classified correc
 
 [47dd569f-9e5a-4a11-9a47-a4e91c8c28aa]
 description = "Deficient numbers -> Large deficient number is classified correctly"
+include = false
+comment = "too slow for basic implementations"
 
 [a696dec8-6147-4d68-afad-d38de5476a56]
 description = "Deficient numbers -> Edge case (no factors other than itself) is classified correctly"
