@@ -1,0 +1,23 @@
+unit: module
+
+properties:
+  rotate:
+    test: |-
+      sprintf(q:to/END/, %case<input><text>.Str, %case<input><shiftKey>.Int, %case<expected>.Str, %case<description>.raku);
+      cmp-ok(
+          caesar-cipher("%s", %s),
+          "eq",
+          "%s",
+          %s,
+      );
+      END
+
+example: |-
+  sub caesar-cipher ( Str $message, Int $shift-key --> Str ) is export {
+    $message.trans( 'A'..'Z' => rotate ( 'A'..'Z' ).Slip, $shift-key )
+            .trans: 'a'..'z' => rotate ( 'a'..'z' ).Slip, $shift-key;
+  }
+
+stub: |-
+  sub caesar-cipher ( Str $message, Int $shift-key --> Str ) is export {
+  }
