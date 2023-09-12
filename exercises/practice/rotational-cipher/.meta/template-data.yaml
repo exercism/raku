@@ -4,12 +4,22 @@ properties:
   rotate:
     test: |-
       sprintf(q:to/END/, %case<input><text>.Str, %case<input><shiftKey>.Int, %case<expected>.Str, %case<description>.raku);
-      cmp-ok(
-          caesar-cipher("%s", %s),
-          "eq",
-          "%s",
-          %s,
-      );
+      subtest "%1$s" => {
+        cmp-ok(
+            caesar-cipher("%1$s", %2$s),
+            "eq",
+            "%3$s",
+            %4$s,
+        );
+        if %2$s == 13 {
+          cmp-ok(
+            caesar-cipher(caesar-cipher("%1$s", %2$s),13),
+            "eq",
+            "%1$s",
+            %4$s,
+          );
+        }
+      }
       END
 
 example: |-
