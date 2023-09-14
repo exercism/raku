@@ -2,6 +2,9 @@
   "authors": [
     "habere-et-dispertire"
   ],
+  "contributors": [
+    "m-dango"
+  ],
   "files": {
     "solution": [
       "RotationalCipher.rakumod"

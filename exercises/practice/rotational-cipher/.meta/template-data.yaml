@@ -3,31 +3,44 @@ unit: module
 properties:
   rotate:
     test: |-
-      sprintf(q:to/END/, %case<input><text>.Str, %case<input><shiftKey>.Int, %case<expected>.Str, %case<description>.raku);
-      subtest "%1$s" => {
-        cmp-ok(
-            caesar-cipher("%1$s", %2$s),
-            "eq",
-            "%3$s",
-            %4$s,
-        );
-        if %2$s == 13 {
+      my Str:D $template.=new;
+      if %case<input><shiftKey> != 13 {
+          $template = q:to/END/;
           cmp-ok(
-            caesar-cipher(caesar-cipher("%1$s", %2$s),13),
-            "eq",
-            "%1$s",
-            %4$s,
+              caesar-cipher( :text(%s), :shift-key(%s) ),
+              "eq",
+              %s,
+              %s,
           );
-        }
+          END
       }
-      END
+      else {
+          $template = q:to/END/;
+          subtest %4$s => {
+              cmp-ok(
+                  caesar-cipher( :text(%1$s), :shift-key(%2$s) ),
+                  "eq",
+                  %3$s,
+                  "encrypt",
+              );
+
+              cmp-ok(
+                  caesar-cipher( :text(%3$s), :shift-key(%2$s) ),
+                  "eq",
+                  %1$s,
+                  "decrypt",
+              );
+          }
+          END
+      }
+      sprintf($template, %case<input><text>.raku, %case<input><shiftKey>, %case<expected>.raku, %case<description>.raku);
 
 example: |-
-  sub caesar-cipher ( Str $message, Int $shift-key --> Str ) is export {
-    $message.trans( 'A'..'Z' => rotate ( 'A'..'Z' ).Slip, $shift-key )
+  sub caesar-cipher ( Str :$text, Int :$shift-key --> Str ) is export {
+    $text.trans( 'A'..'Z' => rotate ( 'A'..'Z' ).Slip, $shift-key )
             .trans: 'a'..'z' => rotate ( 'a'..'z' ).Slip, $shift-key;
   }
 
 stub: |-
-  sub caesar-cipher ( Str $message, Int $shift-key --> Str ) is export {
+  sub caesar-cipher ( :$text, :$shift-key ) is export {
   }
