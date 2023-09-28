@@ -1,0 +1,22 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+  ],
+  "contributors": [
+    "m-dango"
+  ],
+  "files": {
+    "solution": [
+      "RotationalCipher.rakumod"
+    ],
+    "test": [
+      "rotational-cipher.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/RotationalCipher.rakumod"
+    ]
+  },
+  "blurb": "Create an implementation of the rotational cipher, also sometimes called the Caesar cipher.",
+  "source": "Wikipedia",
+  "source_url": "https://en.wikipedia.org/wiki/Caesar_cipher"
+}

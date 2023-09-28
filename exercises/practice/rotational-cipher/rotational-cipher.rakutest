@@ -1,0 +1,103 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.dirname;
+use RotationalCipher;
+
+cmp-ok( # begin: 74e58a38-e484-43f1-9466-877a7515e10f
+    caesar-cipher( :text("a"), :shift-key(0) ),
+    "eq",
+    "a",
+    "rotate a by 0, same output as input",
+); # end: 74e58a38-e484-43f1-9466-877a7515e10f
+
+cmp-ok( # begin: 7ee352c6-e6b0-4930-b903-d09943ecb8f5
+    caesar-cipher( :text("a"), :shift-key(1) ),
+    "eq",
+    "b",
+    "rotate a by 1",
+); # end: 7ee352c6-e6b0-4930-b903-d09943ecb8f5
+
+cmp-ok( # begin: edf0a733-4231-4594-a5ee-46a4009ad764
+    caesar-cipher( :text("a"), :shift-key(26) ),
+    "eq",
+    "a",
+    "rotate a by 26, same output as input",
+); # end: edf0a733-4231-4594-a5ee-46a4009ad764
+
+subtest "rotate m by 13" => { # begin: e3e82cb9-2a5b-403f-9931-e43213879300
+    cmp-ok(
+        caesar-cipher( :text("m"), :shift-key(13) ),
+        "eq",
+        "z",
+        "encrypt",
+    );
+
+    cmp-ok(
+        caesar-cipher( :text("z"), :shift-key(13) ),
+        "eq",
+        "m",
+        "decrypt",
+    );
+} # end: e3e82cb9-2a5b-403f-9931-e43213879300
+
+subtest "rotate n by 13 with wrap around alphabet" => { # begin: 19f9eb78-e2ad-4da4-8fe3-9291d47c1709
+    cmp-ok(
+        caesar-cipher( :text("n"), :shift-key(13) ),
+        "eq",
+        "a",
+        "encrypt",
+    );
+
+    cmp-ok(
+        caesar-cipher( :text("a"), :shift-key(13) ),
+        "eq",
+        "n",
+        "decrypt",
+    );
+} # end: 19f9eb78-e2ad-4da4-8fe3-9291d47c1709
+
+cmp-ok( # begin: a116aef4-225b-4da9-884f-e8023ca6408a
+    caesar-cipher( :text("OMG"), :shift-key(5) ),
+    "eq",
+    "TRL",
+    "rotate capital letters",
+); # end: a116aef4-225b-4da9-884f-e8023ca6408a
+
+cmp-ok( # begin: 71b541bb-819c-4dc6-a9c3-132ef9bb737b
+    caesar-cipher( :text("O M G"), :shift-key(5) ),
+    "eq",
+    "T R L",
+    "rotate spaces",
+); # end: 71b541bb-819c-4dc6-a9c3-132ef9bb737b
+
+cmp-ok( # begin: ef32601d-e9ef-4b29-b2b5-8971392282e6
+    caesar-cipher( :text("Testing 1 2 3 testing"), :shift-key(4) ),
+    "eq",
+    "Xiwxmrk 1 2 3 xiwxmrk",
+    "rotate numbers",
+); # end: ef32601d-e9ef-4b29-b2b5-8971392282e6
+
+cmp-ok( # begin: 32dd74f6-db2b-41a6-b02c-82eb4f93e549
+    caesar-cipher( :text("Let's eat, Grandma!"), :shift-key(21) ),
+    "eq",
+    "Gzo'n zvo, Bmviyhv!",
+    "rotate punctuation",
+); # end: 32dd74f6-db2b-41a6-b02c-82eb4f93e549
+
+subtest "rotate all letters" => { # begin: 9fb93fe6-42b0-46e6-9ec1-0bf0a062d8c9
+    cmp-ok(
+        caesar-cipher( :text("The quick brown fox jumps over the lazy dog."), :shift-key(13) ),
+        "eq",
+        "Gur dhvpx oebja sbk whzcf bire gur ynml qbt.",
+        "encrypt",
+    );
+
+    cmp-ok(
+        caesar-cipher( :text("Gur dhvpx oebja sbk whzcf bire gur ynml qbt."), :shift-key(13) ),
+        "eq",
+        "The quick brown fox jumps over the lazy dog.",
+        "decrypt",
+    );
+} # end: 9fb93fe6-42b0-46e6-9ec1-0bf0a062d8c9
+
+done-testing;
