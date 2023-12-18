@@ -2,7 +2,7 @@
 use Test;#`{{#cases}}
 use JSON::Fast;#`{{/cases}}#`{{#modules}}
 use #`{{&use}};#`{{/modules}}
-use lib $?FILE.IO.dirname;#`{{#lib_comment}} #`[#`{{&lib_comment}}]#`{{/lib_comment}}
+use lib $?FILE.IO.parent(2).add('lib');#`{{#lib_comment}} #`[#`{{&lib_comment}}]#`{{/lib_comment}}
 use #`{{&package}};#`{{#plan}}
 plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#`{{/plan}}#`{{#cases}}
 

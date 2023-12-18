@@ -1,0 +1,104 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use WordCount;
+
+cmp-ok( # begin: 61559d5f-2cad-48fb-af53-d3973a9ee9ef
+    count-words("word"),
+    "(==)",
+    {:word(1)}.Bag,
+    "count one word",
+); # end: 61559d5f-2cad-48fb-af53-d3973a9ee9ef
+
+cmp-ok( # begin: 5abd53a3-1aed-43a4-a15a-29f88c09cbbd
+    count-words("one of each"),
+    "(==)",
+    {:each(1), :of(1), :one(1)}.Bag,
+    "count one of each word",
+); # end: 5abd53a3-1aed-43a4-a15a-29f88c09cbbd
+
+cmp-ok( # begin: 2a3091e5-952e-4099-9fac-8f85d9655c0e
+    count-words("one fish two fish red fish blue fish"),
+    "(==)",
+    {:blue(1), :fish(4), :one(1), :red(1), :two(1)}.Bag,
+    "multiple occurrences of a word",
+); # end: 2a3091e5-952e-4099-9fac-8f85d9655c0e
+
+cmp-ok( # begin: e81877ae-d4da-4af4-931c-d923cd621ca6
+    count-words("one,two,three"),
+    "(==)",
+    {:one(1), :three(1), :two(1)}.Bag,
+    "handles cramped lists",
+); # end: e81877ae-d4da-4af4-931c-d923cd621ca6
+
+cmp-ok( # begin: 7349f682-9707-47c0-a9af-be56e1e7ff30
+    count-words("one,\ntwo,\nthree"),
+    "(==)",
+    {:one(1), :three(1), :two(1)}.Bag,
+    "handles expanded lists",
+); # end: 7349f682-9707-47c0-a9af-be56e1e7ff30
+
+cmp-ok( # begin: a514a0f2-8589-4279-8892-887f76a14c82
+    count-words("car: carpet as java: javascript!!\&\@\$\%^\&"),
+    "(==)",
+    {:as(1), :car(1), :carpet(1), :java(1), :javascript(1)}.Bag,
+    "ignore punctuation",
+); # end: a514a0f2-8589-4279-8892-887f76a14c82
+
+cmp-ok( # begin: d2e5cee6-d2ec-497b-bdc9-3ebe092ce55e
+    count-words("testing, 1, 2 testing"),
+    "(==)",
+    {"1" => 1, "2" => 1, :testing(2)}.Bag,
+    "include numbers",
+); # end: d2e5cee6-d2ec-497b-bdc9-3ebe092ce55e
+
+cmp-ok( # begin: dac6bc6a-21ae-4954-945d-d7f716392dbf
+    count-words("go Go GO Stop stop"),
+    "(==)",
+    {:go(3), :stop(2)}.Bag,
+    "normalize case",
+); # end: dac6bc6a-21ae-4954-945d-d7f716392dbf
+
+cmp-ok( # begin: 4ff6c7d7-fcfc-43ef-b8e7-34ff1837a2d3
+    count-words("'First: don't laugh. Then: don't cry. You're getting it.'"),
+    "(==)",
+    {:cry(1), :don't(2), :first(1), :getting(1), :it(1), :laugh(1), :then(1), :you're(1)}.Bag,
+    "with apostrophes",
+); # end: 4ff6c7d7-fcfc-43ef-b8e7-34ff1837a2d3
+
+cmp-ok( # begin: be72af2b-8afe-4337-b151-b297202e4a7b
+    count-words("Joe can't tell between 'large' and large."),
+    "(==)",
+    {:and(1), :between(1), :can't(1), :joe(1), :large(2), :tell(1)}.Bag,
+    "with quotations",
+); # end: be72af2b-8afe-4337-b151-b297202e4a7b
+
+cmp-ok( # begin: 8d6815fe-8a51-4a65-96f9-2fb3f6dc6ed6
+    count-words("Joe can't tell between app, apple and a."),
+    "(==)",
+    {:a(1), :and(1), :app(1), :apple(1), :between(1), :can't(1), :joe(1), :tell(1)}.Bag,
+    "substrings from the beginning",
+); # end: 8d6815fe-8a51-4a65-96f9-2fb3f6dc6ed6
+
+cmp-ok( # begin: c5f4ef26-f3f7-4725-b314-855c04fb4c13
+    count-words(" multiple   whitespaces"),
+    "(==)",
+    {:multiple(1), :whitespaces(1)}.Bag,
+    "multiple spaces not detected as a word",
+); # end: c5f4ef26-f3f7-4725-b314-855c04fb4c13
+
+cmp-ok( # begin: 50176e8a-fe8e-4f4c-b6b6-aa9cf8f20360
+    count-words(",\n,one,\n ,two \n 'three'"),
+    "(==)",
+    {:one(1), :three(1), :two(1)}.Bag,
+    "alternating word separators not detected as a word",
+); # end: 50176e8a-fe8e-4f4c-b6b6-aa9cf8f20360
+
+cmp-ok( # begin: 6d00f1db-901c-4bec-9829-d20eb3044557
+    count-words("can, can't, 'can't'"),
+    "(==)",
+    {:can(1), :can't(2)}.Bag,
+    "quotation for word with apostrophe",
+); # end: 6d00f1db-901c-4bec-9829-d20eb3044557
+
+done-testing;
