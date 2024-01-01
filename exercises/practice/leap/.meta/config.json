@@ -12,13 +12,13 @@
   ],
   "files": {
     "solution": [
-      "Leap.rakumod"
+      "lib/Leap.rakumod"
     ],
     "test": [
-      "leap.rakutest"
+      "t/leap.rakutest"
     ],
     "example": [
-      ".meta/solutions/standard/Leap.rakumod"
+      ".meta/solutions/standard/lib/Leap.rakumod"
     ]
   },
   "blurb": "Given a year, report if it is a leap year.",

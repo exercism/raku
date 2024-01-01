@@ -7,13 +7,13 @@
   ],
   "files": {
     "solution": [
-      "RomanNumerals.rakumod"
+      "lib/RomanNumerals.rakumod"
     ],
     "test": [
-      "roman-numerals.rakutest"
+      "t/roman-numerals.rakutest"
     ],
     "example": [
-      ".meta/solutions/RomanNumerals.rakumod"
+      ".meta/solutions/lib/RomanNumerals.rakumod"
     ]
   },
   "blurb": "Write a function to convert from normal numbers to Roman Numerals.",

@@ -8,13 +8,13 @@
   ],
   "files": {
     "solution": [
-      "AtbashCipher.rakumod"
+      "lib/AtbashCipher.rakumod"
     ],
     "test": [
-      "atbash-cipher.rakutest"
+      "t/atbash-cipher.rakutest"
     ],
     "example": [
-      ".meta/solutions/AtbashCipher.rakumod"
+      ".meta/solutions/lib/AtbashCipher.rakumod"
     ]
   },
   "blurb": "Create an implementation of the atbash cipher, an ancient encryption system created in the Middle East.",

@@ -7,13 +7,13 @@
   ],
   "files": {
     "solution": [
-      "PerfectNumbers.rakumod"
+      "lib/PerfectNumbers.rakumod"
     ],
     "test": [
-      "perfect-numbers.rakutest"
+      "t/perfect-numbers.rakutest"
     ],
     "example": [
-      ".meta/solutions/PerfectNumbers.rakumod"
+      ".meta/solutions/lib/PerfectNumbers.rakumod"
     ]
   },
   "blurb": "Determine if a number is perfect, abundant, or deficient based on Nicomachus' (60 - 120 CE) classification scheme for positive integers.",

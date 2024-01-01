@@ -2,13 +2,13 @@
   "authors": ["m-dango"],
   "files": {
     "solution": [
-      "BeerSong.rakumod"
+      "lib/BeerSong.rakumod"
     ],
     "test": [
-      "beer-song.rakutest"
+      "t/beer-song.rakutest"
     ],
     "example": [
-      ".meta/solutions/BeerSong.rakumod"
+      ".meta/solutions/lib/BeerSong.rakumod"
     ]
   },
   "blurb": "Produce the lyrics to that beloved classic, that field-trip favorite: 99 Bottles of Beer on the Wall.",

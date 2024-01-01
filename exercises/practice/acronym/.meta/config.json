@@ -7,13 +7,13 @@
   ],
   "files": {
     "solution": [
-      "Acronym.rakumod"
+      "lib/Acronym.rakumod"
     ],
     "test": [
-      "acronym.rakutest"
+      "t/acronym.rakutest"
     ],
     "example": [
-      ".meta/solutions/Acronym.rakumod"
+      ".meta/solutions/lib/Acronym.rakumod"
     ]
   },
   "blurb": "Convert a long phrase to its acronym.",

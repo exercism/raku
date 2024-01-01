@@ -7,13 +7,13 @@
   ],
   "files": {
     "solution": [
-      "Gigasecond.rakumod"
+      "lib/Gigasecond.rakumod"
     ],
     "test": [
-      "gigasecond.rakutest"
+      "t/gigasecond.rakutest"
     ],
     "example": [
-      ".meta/solutions/Gigasecond.rakumod"
+      ".meta/solutions/lib/Gigasecond.rakumod"
     ]
   },
   "blurb": "Given a moment, determine the moment that would be after a gigasecond has passed.",

@@ -8,13 +8,13 @@
   ],
   "files": {
     "solution": [
-      "HelloWorld.rakumod"
+      "lib/HelloWorld.rakumod"
     ],
     "test": [
-      "hello-world.rakutest"
+      "t/hello-world.rakutest"
     ],
     "example": [
-      ".meta/solutions/HelloWorld.rakumod"
+      ".meta/solutions/lib/HelloWorld.rakumod"
     ]
   },
   "blurb": "The classical introductory exercise. Just say \"Hello, World!\".",

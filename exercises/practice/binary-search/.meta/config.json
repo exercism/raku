@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "BinarySearch.rakumod"
+      "lib/BinarySearch.rakumod"
     ],
     "test": [
-      "binary-search.rakutest"
+      "t/binary-search.rakutest"
     ],
     "example": [
-      ".meta/solutions/BinarySearch.rakumod"
+      ".meta/solutions/lib/BinarySearch.rakumod"
     ]
   },
   "blurb": "Implement a binary search algorithm.",

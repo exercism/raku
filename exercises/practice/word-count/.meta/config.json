@@ -11,13 +11,13 @@
   ],
   "files": {
     "solution": [
-      "WordCount.rakumod"
+      "lib/WordCount.rakumod"
     ],
     "test": [
-      "word-count.rakutest"
+      "t/word-count.rakutest"
     ],
     "example": [
-      ".meta/solutions/WordCount.rakumod"
+      ".meta/solutions/lib/WordCount.rakumod"
     ]
   },
   "blurb": "Given a phrase, count the occurrences of each word in that phrase.",

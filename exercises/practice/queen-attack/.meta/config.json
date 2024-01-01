@@ -5,13 +5,13 @@
   ],
   "files": {
     "solution": [
-      "Queen.rakumod"
+      "lib/Queen.rakumod"
     ],
     "test": [
-      "queen-attack.rakutest"
+      "t/queen-attack.rakutest"
     ],
     "example": [
-      ".meta/solutions/Queen.rakumod"
+      ".meta/solutions/lib/Queen.rakumod"
     ]
   },
   "blurb": "Given the position of two queens on a chess board, indicate whether or not they are positioned so that they can attack each other.",

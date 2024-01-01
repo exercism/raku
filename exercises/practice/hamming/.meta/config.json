@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "Hamming.rakumod"
+      "lib/Hamming.rakumod"
     ],
     "test": [
-      "hamming.rakutest"
+      "t/hamming.rakutest"
     ],
     "example": [
-      ".meta/solutions/Hamming.rakumod"
+      ".meta/solutions/lib/Hamming.rakumod"
     ]
   },
   "blurb": "Calculate the Hamming difference between two DNA strands.",

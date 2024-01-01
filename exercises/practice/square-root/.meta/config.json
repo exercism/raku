@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "SquareRoot.rakumod"
+      "lib/SquareRoot.rakumod"
     ],
     "test": [
-      "square-root.rakutest"
+      "t/square-root.rakutest"
     ],
     "example": [
-      ".meta/solutions/SquareRoot.rakumod"
+      ".meta/solutions/lib/SquareRoot.rakumod"
     ]
   },
   "blurb": "Given a natural radicand, return its square root.",

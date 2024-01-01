@@ -3,13 +3,13 @@
   "contributors": ["util"],
   "files": {
     "solution": [
-      "Diamond.rakumod"
+      "lib/Diamond.rakumod"
     ],
     "test": [
-      "diamond.rakutest"
+      "t/diamond.rakutest"
     ],
     "example": [
-      ".meta/solutions/Diamond.rakumod"
+      ".meta/solutions/lib/Diamond.rakumod"
     ]
   },
   "blurb": "Given a letter, print a diamond starting with 'A' with the supplied letter at the widest point.",

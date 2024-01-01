@@ -10,13 +10,13 @@
   ],
   "files": {
     "solution": [
-      "RNA.rakumod"
+      "lib/RNA.rakumod"
     ],
     "test": [
-      "rna-transcription.rakutest"
+      "t/rna-transcription.rakutest"
     ],
     "example": [
-      ".meta/solutions/RNA.rakumod"
+      ".meta/solutions/lib/RNA.rakumod"
     ]
   },
   "blurb": "Given a DNA strand, return its RNA Complement Transcription.",

@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "PascalsTriangle.rakumod"
+      "lib/PascalsTriangle.rakumod"
     ],
     "test": [
-      "pascals-triangle.rakutest"
+      "t/pascals-triangle.rakutest"
     ],
     "example": [
-      ".meta/solutions/PascalsTriangle.rakumod"
+      ".meta/solutions/lib/PascalsTriangle.rakumod"
     ]
   },
   "blurb": "Compute Pascal's triangle up to a given number of rows.",

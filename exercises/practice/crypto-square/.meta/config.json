@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "CryptoSquare.rakumod"
+      "lib/CryptoSquare.rakumod"
     ],
     "test": [
-      "crypto-square.rakutest"
+      "t/crypto-square.rakutest"
     ],
     "example": [
-      ".meta/solutions/CryptoSquare.rakumod"
+      ".meta/solutions/lib/CryptoSquare.rakumod"
     ]
   },
   "blurb": "Implement the classic method for composing secret messages called a square code.",

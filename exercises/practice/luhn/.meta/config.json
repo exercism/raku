@@ -8,13 +8,13 @@
   ],
   "files": {
     "solution": [
-      "Luhn.rakumod"
+      "lib/Luhn.rakumod"
     ],
     "test": [
-      "luhn.rakutest"
+      "t/luhn.rakutest"
     ],
     "example": [
-      ".meta/solutions/Luhn.rakumod"
+      ".meta/solutions/lib/Luhn.rakumod"
     ]
   },
   "blurb": "Given a number determine whether or not it is valid per the Luhn formula.",

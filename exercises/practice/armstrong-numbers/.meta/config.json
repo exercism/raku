@@ -7,13 +7,13 @@
   ],
   "files": {
     "solution": [
-      "ArmstrongNumbers.rakumod"
+      "lib/ArmstrongNumbers.rakumod"
     ],
     "test": [
-      "armstrong-numbers.rakutest"
+      "t/armstrong-numbers.rakutest"
     ],
     "example": [
-      ".meta/solutions/ArmstrongNumbers.rakumod"
+      ".meta/solutions/lib/ArmstrongNumbers.rakumod"
     ]
   },
   "blurb": "Determine if a number is an Armstrong number.",

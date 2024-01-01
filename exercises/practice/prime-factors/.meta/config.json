@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "PrimeFactors.rakumod"
+      "lib/PrimeFactors.rakumod"
     ],
     "test": [
-      "prime-factors.rakutest"
+      "t/prime-factors.rakutest"
     ],
     "example": [
-      ".meta/solutions/PrimeFactors.rakumod"
+      ".meta/solutions/lib/PrimeFactors.rakumod"
     ]
   },
   "blurb": "Compute the prime factors of a given natural number.",

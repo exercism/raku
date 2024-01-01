@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "Series.rakumod"
+      "lib/Series.rakumod"
     ],
     "test": [
-      "series.rakutest"
+      "t/series.rakutest"
     ],
     "example": [
-      ".meta/solutions/Series.rakumod"
+      ".meta/solutions/lib/Series.rakumod"
     ]
   },
   "blurb": "Given a string of digits, output all the contiguous substrings of length `n` in that string.",

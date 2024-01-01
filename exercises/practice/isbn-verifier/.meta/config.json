@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "IsbnVerifier.rakumod"
+      "lib/IsbnVerifier.rakumod"
     ],
     "test": [
-      "isbn-verifier.rakutest"
+      "t/isbn-verifier.rakutest"
     ],
     "example": [
-      ".meta/solutions/IsbnVerifier.rakumod"
+      ".meta/solutions/lib/IsbnVerifier.rakumod"
     ]
   },
   "blurb": "Check if a given string is a valid ISBN-10 number.",

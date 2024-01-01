@@ -21,13 +21,13 @@
   "checklist_issue": 30,
   "files": {
     "solution": [
-      "%{pascal_slug}.rakumod"
+      "lib/%{pascal_slug}.rakumod"
     ],
     "test": [
-      "%{kebab_slug}.rakutest"
+      "t/%{kebab_slug}.rakutest"
     ],
     "example": [
-      ".meta/solutions/%{pascal_slug}.rakumod"
+      ".meta/solutions/lib/%{pascal_slug}.rakumod"
     ],
     "exemplar": [
       ".meta/%{pascal_slug}.rakumod"

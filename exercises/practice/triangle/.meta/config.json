@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "Triangle.rakumod"
+      "lib/Triangle.rakumod"
     ],
     "test": [
-      "triangle.rakutest"
+      "t/triangle.rakutest"
     ],
     "example": [
-      ".meta/solutions/Triangle.rakumod"
+      ".meta/solutions/lib/Triangle.rakumod"
     ]
   },
   "blurb": "Determine if a triangle is equilateral, isosceles, or scalene.",
