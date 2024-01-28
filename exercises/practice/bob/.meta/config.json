@@ -11,13 +11,13 @@
   ],
   "files": {
     "solution": [
-      "Bob.rakumod"
+      "lib/Bob.rakumod"
     ],
     "test": [
-      "bob.rakutest"
+      "t/bob.rakutest"
     ],
     "example": [
-      ".meta/solutions/Bob.rakumod"
+      ".meta/solutions/lib/Bob.rakumod"
     ]
   },
   "blurb": "Bob is a lackadaisical teenager. In conversation, his responses are very limited.",

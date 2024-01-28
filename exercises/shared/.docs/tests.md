@@ -1,10 +1,8 @@
 # Tests
 
-You can run the test suite for the exercise by executing the appropriate command:
+There is a Raku script with the extension `.rakutest` contained in the `t/` directory, which will be used to test your solution.
+You can run through the tests by using the command:
 
-If the `rakutest` file is contained in the `t/` directory:
-`prove6 --lib`
-
-If the `rakutest` file is in the top-level directory:
-`prove6 {exercise-name}.rakutest`
-
+```bash
+prove6
+```

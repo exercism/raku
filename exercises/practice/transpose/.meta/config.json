@@ -5,13 +5,13 @@
   ],
   "files": {
     "solution": [
-      "Transpose.rakumod"
+      "lib/Transpose.rakumod"
     ],
     "test": [
-      "transpose.rakutest"
+      "t/transpose.rakutest"
     ],
     "example": [
-      ".meta/solutions/Transpose.rakumod"
+      ".meta/solutions/lib/Transpose.rakumod"
     ]
   },
   "blurb": "Take input text and output it transposed.",

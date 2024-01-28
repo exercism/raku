@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "ResistorColorDuo.rakumod"
+      "lib/ResistorColorDuo.rakumod"
     ],
     "test": [
-      "resistor-color-duo.rakutest"
+      "t/resistor-color-duo.rakutest"
     ],
     "example": [
-      ".meta/solutions/ResistorColorDuo.rakumod"
+      ".meta/solutions/lib/ResistorColorDuo.rakumod"
     ]
   },
   "blurb": "Convert color codes, as used on resistors, to a numeric value.",

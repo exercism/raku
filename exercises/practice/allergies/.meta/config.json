@@ -8,13 +8,13 @@
   ],
   "files": {
     "solution": [
-      "Allergies.rakumod"
+      "lib/Allergies.rakumod"
     ],
     "test": [
-      "allergies.rakutest"
+      "t/allergies.rakutest"
     ],
     "example": [
-      ".meta/solutions/Allergies.rakumod"
+      ".meta/solutions/lib/Allergies.rakumod"
     ]
   },
   "blurb": "Given a person's allergy score, determine whether or not they're allergic to a given item, and their full list of allergies.",

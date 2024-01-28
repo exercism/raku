@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "ReverseString.rakumod"
+      "lib/ReverseString.rakumod"
     ],
     "test": [
-      "reverse-string.rakutest"
+      "t/reverse-string.rakutest"
     ],
     "example": [
-      ".meta/solutions/ReverseString.rakumod"
+      ".meta/solutions/lib/ReverseString.rakumod"
     ]
   },
   "blurb": "Reverse a given string.",

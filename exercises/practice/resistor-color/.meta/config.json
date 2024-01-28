@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "ResistorColor.rakumod"
+      "lib/ResistorColor.rakumod"
     ],
     "test": [
-      "resistor-color.rakutest"
+      "t/resistor-color.rakutest"
     ],
     "example": [
-      ".meta/solutions/ResistorColor.rakumod"
+      ".meta/solutions/lib/ResistorColor.rakumod"
     ]
   },
   "blurb": "Convert a resistor band's color to its numeric representation.",

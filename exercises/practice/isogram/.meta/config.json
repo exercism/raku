@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "Isogram.rakumod"
+      "lib/Isogram.rakumod"
     ],
     "test": [
-      "isogram.rakutest"
+      "t/isogram.rakutest"
     ],
     "example": [
-      ".meta/solutions/Isogram.rakumod"
+      ".meta/solutions/lib/Isogram.rakumod"
     ]
   },
   "blurb": "Determine if a word or phrase is an isogram.",

@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "Sieve.rakumod"
+      "lib/Sieve.rakumod"
     ],
     "test": [
-      "sieve.rakutest"
+      "t/sieve.rakutest"
     ],
     "example": [
-      ".meta/solutions/Sieve.rakumod"
+      ".meta/solutions/lib/Sieve.rakumod"
     ]
   },
   "blurb": "Use the Sieve of Eratosthenes to find all the primes from 2 up to a given number.",

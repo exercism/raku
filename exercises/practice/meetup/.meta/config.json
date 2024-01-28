@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "Meetup.rakumod"
+      "lib/Meetup.rakumod"
     ],
     "test": [
-      "meetup.rakutest"
+      "t/meetup.rakutest"
     ],
     "example": [
-      ".meta/solutions/Meetup.rakumod"
+      ".meta/solutions/lib/Meetup.rakumod"
     ]
   },
   "blurb": "Calculate the date of meetups.",

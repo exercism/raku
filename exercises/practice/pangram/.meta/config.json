@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "Pangram.rakumod"
+      "lib/Pangram.rakumod"
     ],
     "test": [
-      "pangram.rakutest"
+      "t/pangram.rakutest"
     ],
     "example": [
-      ".meta/solutions/Pangram.rakumod"
+      ".meta/solutions/lib/Pangram.rakumod"
     ]
   },
   "blurb": "Determine if a sentence is a pangram.",

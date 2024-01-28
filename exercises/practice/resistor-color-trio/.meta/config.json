@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "ResistorColorTrio.rakumod"
+      "lib/ResistorColorTrio.rakumod"
     ],
     "test": [
-      "resistor-color-trio.rakutest"
+      "t/resistor-color-trio.rakutest"
     ],
     "example": [
-      ".meta/solutions/ResistorColorTrio.rakumod"
+      ".meta/solutions/lib/ResistorColorTrio.rakumod"
     ]
   },
   "blurb": "Convert color codes, as used on resistors, to a human-readable label.",

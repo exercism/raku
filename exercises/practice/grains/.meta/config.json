@@ -9,13 +9,13 @@
   ],
   "files": {
     "solution": [
-      "Grains.rakumod"
+      "lib/Grains.rakumod"
     ],
     "test": [
-      "grains.rakutest"
+      "t/grains.rakutest"
     ],
     "example": [
-      ".meta/solutions/Grains.rakumod"
+      ".meta/solutions/lib/Grains.rakumod"
     ]
   },
   "blurb": "Calculate the number of grains of wheat on a chessboard given that the number on each square doubles.",

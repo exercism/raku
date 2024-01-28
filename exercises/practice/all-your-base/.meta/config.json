@@ -7,13 +7,13 @@
   ],
   "files": {
     "solution": [
-      "AllYourBase.rakumod"
+      "lib/AllYourBase.rakumod"
     ],
     "test": [
-      "all-your-base.rakutest"
+      "t/all-your-base.rakutest"
     ],
     "example": [
-      ".meta/solutions/AllYourBase.rakumod"
+      ".meta/solutions/lib/AllYourBase.rakumod"
     ]
   },
   "blurb": "Convert a number, represented as a sequence of digits in one base, to any other base."

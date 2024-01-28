@@ -8,13 +8,13 @@
   ],
   "files": {
     "solution": [
-      "LinkedList.rakumod"
+      "lib/LinkedList.rakumod"
     ],
     "test": [
-      "linked-list.rakutest"
+      "t/linked-list.rakutest"
     ],
     "example": [
-      ".meta/solutions/LinkedList.rakumod"
+      ".meta/solutions/lib/LinkedList.rakumod"
     ]
   },
   "blurb": "Implement a doubly linked list.",

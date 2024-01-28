@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "BookStore.rakumod"
+      "lib/BookStore.rakumod"
     ],
     "test": [
-      "book-store.rakutest"
+      "t/book-store.rakutest"
     ],
     "example": [
-      ".meta/solutions/BookStore.rakumod"
+      ".meta/solutions/lib/BookStore.rakumod"
     ]
   },
   "blurb": "To try and encourage more sales of different books from a popular 5 book series, a bookshop has decided to offer discounts of multiple-book purchases.",

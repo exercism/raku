@@ -1,14 +1,1 @@
-#!/usr/bin/env raku
-use Test;
-use lib $?FILE.IO.dirname;
-use Leap;
-
-plan 1;
-
-for Date, DateTime {
-    .^method_table<new>.wrap: sub (|) {
-        pass 'Creating a Date(Time) object is not allowed for this exercise.';
-    };
-}
-
-is-leap-year(2004);
+../../../../t/leap.rakutest

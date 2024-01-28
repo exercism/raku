@@ -7,13 +7,13 @@
   ],
   "files": {
     "solution": [
-      "RotationalCipher.rakumod"
+      "lib/RotationalCipher.rakumod"
     ],
     "test": [
-      "rotational-cipher.rakutest"
+      "t/rotational-cipher.rakutest"
     ],
     "example": [
-      ".meta/solutions/RotationalCipher.rakumod"
+      ".meta/solutions/lib/RotationalCipher.rakumod"
     ]
   },
   "blurb": "Create an implementation of the rotational cipher, also sometimes called the Caesar cipher.",

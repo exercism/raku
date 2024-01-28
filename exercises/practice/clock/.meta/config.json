@@ -7,13 +7,13 @@
   ],
   "files": {
     "solution": [
-      "Clock.rakumod"
+      "lib/Clock.rakumod"
     ],
     "test": [
-      "clock.rakutest"
+      "t/clock.rakutest"
     ],
     "example": [
-      ".meta/solutions/Clock.rakumod"
+      ".meta/solutions/lib/Clock.rakumod"
     ]
   },
   "blurb": "Implement a clock that handles times without dates.",

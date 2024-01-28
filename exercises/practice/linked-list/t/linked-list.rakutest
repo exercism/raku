@@ -1,0 +1,390 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use LinkedList;
+
+subtest "pop gets element from the list" => { # begin: 7f7e3987-b954-41b8-8084-99beca08752c
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(7) }, "push 7" );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        7,
+        "pop 7",
+    );
+}; # end: 7f7e3987-b954-41b8-8084-99beca08752c
+
+subtest "push/pop respectively add/remove at the end of the list" => { # begin: c3f67e5d-cfa2-4c3e-a18f-7ce999c3c885
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(11) }, "push 11" );
+    lives-ok( { $linked-list.push(13) }, "push 13" );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        13,
+        "pop 13",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        11,
+        "pop 11",
+    );
+}; # end: c3f67e5d-cfa2-4c3e-a18f-7ce999c3c885
+
+subtest "shift gets an element from the list" => { # begin: 00ea24ce-4f5c-4432-abb4-cc6e85462657
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(17) }, "push 17" );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        17,
+        "shift 17",
+    );
+}; # end: 00ea24ce-4f5c-4432-abb4-cc6e85462657
+
+subtest "shift gets first element from the list" => { # begin: 37962ee0-3324-4a29-b588-5a4c861e6564
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(23) }, "push 23" );
+    lives-ok( { $linked-list.push(5) }, "push 5" );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        23,
+        "shift 23",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        5,
+        "shift 5",
+    );
+}; # end: 37962ee0-3324-4a29-b588-5a4c861e6564
+
+subtest "unshift adds element at start of the list" => { # begin: 30a3586b-e9dc-43fb-9a73-2770cec2c718
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.unshift(23) }, "unshift 23" );
+    lives-ok( { $linked-list.unshift(5) }, "unshift 5" );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        5,
+        "shift 5",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        23,
+        "shift 23",
+    );
+}; # end: 30a3586b-e9dc-43fb-9a73-2770cec2c718
+
+subtest "pop, push, shift, and unshift can be used in any order" => { # begin: 042f71e4-a8a7-4cf0-8953-7e4f3a21c42d
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(1) }, "push 1" );
+    lives-ok( { $linked-list.push(2) }, "push 2" );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        2,
+        "pop 2",
+    );
+    lives-ok( { $linked-list.push(3) }, "push 3" );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        1,
+        "shift 1",
+    );
+    lives-ok( { $linked-list.unshift(4) }, "unshift 4" );
+    lives-ok( { $linked-list.push(5) }, "push 5" );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        4,
+        "shift 4",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        5,
+        "pop 5",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        3,
+        "shift 3",
+    );
+}; # end: 042f71e4-a8a7-4cf0-8953-7e4f3a21c42d
+
+subtest "count an empty list" => { # begin: 88f65c0c-4532-4093-8295-2384fb2f37df
+    my LinkedList $linked-list.=new;
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        0,
+        "count 0",
+    );
+}; # end: 88f65c0c-4532-4093-8295-2384fb2f37df
+
+subtest "count a list with items" => { # begin: fc055689-5cbe-4cd9-b994-02e2abbb40a5
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(37) }, "push 37" );
+    lives-ok( { $linked-list.push(1) }, "push 1" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        2,
+        "count 2",
+    );
+}; # end: fc055689-5cbe-4cd9-b994-02e2abbb40a5
+
+subtest "count is correct after mutation" => { # begin: 8272cef5-130d-40ea-b7f6-5ffd0790d650
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(31) }, "push 31" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+    lives-ok( { $linked-list.unshift(43) }, "unshift 43" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        2,
+        "count 2",
+    );
+    lives-ok( { $linked-list.shift }, "shift" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+    lives-ok( { $linked-list.pop }, "pop" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        0,
+        "count 0",
+    );
+}; # end: 8272cef5-130d-40ea-b7f6-5ffd0790d650
+
+subtest "popping to empty doesn't break the list" => { # begin: 229b8f7a-bd8a-4798-b64f-0dc0bb356d95
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(41) }, "push 41" );
+    lives-ok( { $linked-list.push(59) }, "push 59" );
+    lives-ok( { $linked-list.pop }, "pop" );
+    lives-ok( { $linked-list.pop }, "pop" );
+    lives-ok( { $linked-list.push(47) }, "push 47" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        47,
+        "pop 47",
+    );
+}; # end: 229b8f7a-bd8a-4798-b64f-0dc0bb356d95
+
+subtest "shifting to empty doesn't break the list" => { # begin: 4e1948b4-514e-424b-a3cf-a1ebbfa2d1ad
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(41) }, "push 41" );
+    lives-ok( { $linked-list.push(59) }, "push 59" );
+    lives-ok( { $linked-list.shift }, "shift" );
+    lives-ok( { $linked-list.shift }, "shift" );
+    lives-ok( { $linked-list.push(47) }, "push 47" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        47,
+        "shift 47",
+    );
+}; # end: 4e1948b4-514e-424b-a3cf-a1ebbfa2d1ad
+
+subtest "deletes the only element" => { # begin: e8f7c600-d597-4f79-949d-8ad8bae895a6
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(61) }, "push 61" );
+    lives-ok( { $linked-list.delete(61) }, "delete 61" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        0,
+        "count 0",
+    );
+}; # end: e8f7c600-d597-4f79-949d-8ad8bae895a6
+
+subtest "deletes the element with the specified value from the list" => { # begin: fd65e422-51f3-45c0-9fd0-c33da638f89b
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(71) }, "push 71" );
+    lives-ok( { $linked-list.push(83) }, "push 83" );
+    lives-ok( { $linked-list.push(79) }, "push 79" );
+    lives-ok( { $linked-list.delete(83) }, "delete 83" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        2,
+        "count 2",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        79,
+        "pop 79",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        71,
+        "shift 71",
+    );
+}; # end: fd65e422-51f3-45c0-9fd0-c33da638f89b
+
+subtest "deletes the element with the specified value from the list, re-assigns tail" => { # begin: 59db191a-b17f-4ab7-9c5c-60711ec1d013
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(71) }, "push 71" );
+    lives-ok( { $linked-list.push(83) }, "push 83" );
+    lives-ok( { $linked-list.push(79) }, "push 79" );
+    lives-ok( { $linked-list.delete(83) }, "delete 83" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        2,
+        "count 2",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        79,
+        "pop 79",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        71,
+        "pop 71",
+    );
+}; # end: 59db191a-b17f-4ab7-9c5c-60711ec1d013
+
+subtest "deletes the element with the specified value from the list, re-assigns head" => { # begin: 58242222-5d39-415b-951d-8128247f8993
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(71) }, "push 71" );
+    lives-ok( { $linked-list.push(83) }, "push 83" );
+    lives-ok( { $linked-list.push(79) }, "push 79" );
+    lives-ok( { $linked-list.delete(83) }, "delete 83" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        2,
+        "count 2",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        71,
+        "shift 71",
+    );
+    cmp-ok(
+        $linked-list.shift,
+        "==",
+        79,
+        "shift 79",
+    );
+}; # end: 58242222-5d39-415b-951d-8128247f8993
+
+subtest "deletes the first of two elements" => { # begin: ee3729ee-3405-4bd2-9bad-de0d4aa5d647
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(97) }, "push 97" );
+    lives-ok( { $linked-list.push(101) }, "push 101" );
+    lives-ok( { $linked-list.delete(97) }, "delete 97" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        101,
+        "pop 101",
+    );
+}; # end: ee3729ee-3405-4bd2-9bad-de0d4aa5d647
+
+subtest "deletes the second of two elements" => { # begin: 47e3b3b4-b82c-4c23-8c1a-ceb9b17cb9fb
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(97) }, "push 97" );
+    lives-ok( { $linked-list.push(101) }, "push 101" );
+    lives-ok( { $linked-list.delete(101) }, "delete 101" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        97,
+        "pop 97",
+    );
+}; # end: 47e3b3b4-b82c-4c23-8c1a-ceb9b17cb9fb
+
+subtest "delete does not modify the list if the element is not found" => { # begin: 7b420958-f285-4922-b8f9-10d9dcab5179
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(89) }, "push 89" );
+    lives-ok( { $linked-list.delete(103) }, "delete 103" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        1,
+        "count 1",
+    );
+}; # end: 7b420958-f285-4922-b8f9-10d9dcab5179
+
+subtest "deletes only the first occurrence" => { # begin: 7e04828f-6082-44e3-a059-201c63252a76
+    my LinkedList $linked-list.=new;
+    lives-ok( { $linked-list.push(73) }, "push 73" );
+    lives-ok( { $linked-list.push(9) }, "push 9" );
+    lives-ok( { $linked-list.push(9) }, "push 9" );
+    lives-ok( { $linked-list.push(107) }, "push 107" );
+    lives-ok( { $linked-list.delete(9) }, "delete 9" );
+    cmp-ok(
+        $linked-list.count,
+        "==",
+        3,
+        "count 3",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        107,
+        "pop 107",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        9,
+        "pop 9",
+    );
+    cmp-ok(
+        $linked-list.pop,
+        "==",
+        73,
+        "pop 73",
+    );
+}; # end: 7e04828f-6082-44e3-a059-201c63252a76
+
+done-testing;

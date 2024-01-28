@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "Matrix.rakumod"
+      "lib/Matrix.rakumod"
     ],
     "test": [
-      "matrix.rakutest"
+      "t/matrix.rakutest"
     ],
     "example": [
-      ".meta/solutions/Matrix.rakumod"
+      ".meta/solutions/lib/Matrix.rakumod"
     ]
   },
   "blurb": "Given a string representing a matrix of numbers, return the rows and columns of that matrix.",

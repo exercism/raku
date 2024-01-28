@@ -7,13 +7,13 @@
   ],
   "files": {
     "solution": [
-      "TwoFer.rakumod"
+      "lib/TwoFer.rakumod"
     ],
     "test": [
-      "two-fer.rakutest"
+      "t/two-fer.rakutest"
     ],
     "example": [
-      ".meta/solutions/TwoFer.rakumod"
+      ".meta/solutions/lib/TwoFer.rakumod"
     ]
   },
   "blurb": "Create a sentence of the form \"One for X, one for me.\".",

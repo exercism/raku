@@ -1,0 +1,45 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use Robot;
+
+srand 1; # begin: 1
+my Robot:D $robot := Robot.new;
+my Str:D @robot-names = $robot.name;
+like @robot-names[0], /^^<[A..Z]> <[0..9]>**2$$/, 'Name matches schema'; # end: 1
+
+srand 2; # begin: 2
+is $robot.name, @robot-names[0], 'Name is persistent';
+srand 1;
+@robot-names.push(Robot.new.name);
+isnt @robot-names[*-1], @robot-names[0],
+  'New Robot cannot claim previous Robot name'; # end: 2
+
+srand 1; # begin: 3
+$robot.reset-name;
+@robot-names.push($robot.name);
+isnt @robot-names[1], @robot-names[0],
+  "'reset-name' cannot use previous Robot name"; # end: 3
+isnt @robot-names[2], @robot-names[0], # begin: 4
+  "'reset-name' cannot use previous Robot name"; # end: 4
+
+until @robot-names.elems == 2600 {
+  @robot-names.push(Robot.new.name);
+}
+
+is @robot-names, @robot-names.unique, 'All names are unique'; # case: 5
+subtest 'Randomness', {
+  plan 2;
+  isnt @robot-names, @robot-names.sort, # begin: 6
+    'Names not ordered'; # end: 6
+  isnt @robot-names, @robot-names.sort.reverse, # begin: 7
+    'Names not reverse ordered'; # end: 7
+}
+
+throws-like # begin: 8
+  {Robot.new},
+  Exception,
+  message => /'All names used.'/,
+  'Throw exception when out of names'; # end: 8
+
+done-testing;

@@ -10,13 +10,13 @@
   ],
   "files": {
     "solution": [
-      "Scrabble.rakumod"
+      "lib/Scrabble.rakumod"
     ],
     "test": [
-      "scrabble-score.rakutest"
+      "t/scrabble-score.rakutest"
     ],
     "example": [
-      ".meta/solutions/Scrabble.rakumod"
+      ".meta/solutions/lib/Scrabble.rakumod"
     ]
   },
   "blurb": "Given a word, compute the Scrabble score for that word.",

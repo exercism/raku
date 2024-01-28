@@ -1,0 +1,27 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib'); #`[Look for the module inside the same directory as this test file.]
+use TwoFer;
+
+cmp-ok( # begin: 1cf3e15a-a3d7-4a87-aeb3-ba1b43bc8dce
+    two-fer(),
+    "eq",
+    "One for you, one for me.",
+    "no name given",
+); # end: 1cf3e15a-a3d7-4a87-aeb3-ba1b43bc8dce
+
+cmp-ok( # begin: b4c6dbb8-b4fb-42c2-bafd-10785abe7709
+    two-fer("Alice"),
+    "eq",
+    "One for Alice, one for me.",
+    "a name given",
+); # end: b4c6dbb8-b4fb-42c2-bafd-10785abe7709
+
+cmp-ok( # begin: 3549048d-1a6e-4653-9a79-b0bda163e8d5
+    two-fer("Bob"),
+    "eq",
+    "One for Bob, one for me.",
+    "another name given",
+); # end: 3549048d-1a6e-4653-9a79-b0bda163e8d5
+
+done-testing;

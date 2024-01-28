@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "SumOfMultiples.rakumod"
+      "lib/SumOfMultiples.rakumod"
     ],
     "test": [
-      "sum-of-multiples.rakutest"
+      "t/sum-of-multiples.rakutest"
     ],
     "example": [
-      ".meta/solutions/SumOfMultiples.rakumod"
+      ".meta/solutions/lib/SumOfMultiples.rakumod"
     ]
   },
   "blurb": "Given a number, find the sum of all the multiples of particular numbers up to but not including that number.",

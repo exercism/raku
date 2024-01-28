@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "DifferenceOfSquares.rakumod"
+      "lib/DifferenceOfSquares.rakumod"
     ],
     "test": [
-      "difference-of-squares.rakutest"
+      "t/difference-of-squares.rakutest"
     ],
     "example": [
-      ".meta/solutions/DifferenceOfSquares.rakumod"
+      ".meta/solutions/lib/DifferenceOfSquares.rakumod"
     ]
   },
   "blurb": "Find the difference between the square of the sum and the sum of the squares of the first N natural numbers.",

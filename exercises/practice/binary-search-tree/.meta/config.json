@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "BinarySearchTree.rakumod"
+      "lib/BinarySearchTree.rakumod"
     ],
     "test": [
-      "binary-search-tree.rakutest"
+      "t/binary-search-tree.rakutest"
     ],
     "example": [
-      ".meta/solutions/BinarySearchTree.rakumod"
+      ".meta/solutions/lib/BinarySearchTree.rakumod"
     ]
   },
   "blurb": "Insert and search for numbers in a binary tree.",
