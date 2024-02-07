@@ -1,0 +1,10 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use Bowling;
+
+my Bowling $game;
+
+
+
+done-testing;
