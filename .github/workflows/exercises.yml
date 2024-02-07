@@ -18,9 +18,10 @@ jobs:
         if: runner.os == 'Windows'
         run: >
           Invoke-WebRequest https://rakudo.org/latest/star/win -OutFile C:\rakudo-star.msi;
-          msiexec C:\rakudo-star.msi;
+          msiexec /a /jm C:\rakudo-star.msi;
           echo "C:\rakudo\bin;C:\rakudo\share\perl6\site\bin"
-          | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append;
+          dir C:\rakudo;
 
       - name: Install Rakudo Star with brew
         if: runner.os == 'macOS'
