@@ -14,10 +14,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
 
-      - name: Install Rakudo Star with choco
+      - name: Install Rakudo Star with msiexec
         if: runner.os == 'Windows'
         run: >
-          choco install rakudostar;
+          Invoke-WebRequest https://rakudo.org/latest/star/win -OutFile C:\rakudo-star.msi;
+          msiexec C:\rakudo-star.msi;
           echo "C:\rakudo\bin;C:\rakudo\share\perl6\site\bin"
           | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
