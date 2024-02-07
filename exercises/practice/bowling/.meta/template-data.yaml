@@ -83,12 +83,16 @@ example: |-
           has @.rolls is List;
           has Bool:D $.is-final = False;
           has UInt:D $!max-roll = 10;
+
+          multi method add-roll ($pins where * < 0) {
+              X::Bowling::NegativePins.new.throw;
+          }
           
-          multi method add-roll (UInt:D $pins where $pins > $!max-roll) {
+          multi method add-roll ($pins where * > $!max-roll) {
               X::Bowling::TooManyPins.new.throw;
           }
 
-          multi method add-roll (UInt:D $pins) {
+          multi method add-roll ($pins) {
               if $.is-final {
                   if @.rolls == 2 {
                       $!max-roll = 0;
@@ -127,19 +131,12 @@ example: |-
 
       has Frame @!frames = Frame.new;
 
-      multi method roll ($pins where * < 0) {
-          X::Bowling::NegativePins.new.throw;
-      }
-
-      multi method roll ($pins) {
+      method roll ($pins) {
           X::Bowling::GameOver.new.throw if $.is-complete;
 
           given @!frames[*-1] -> $current-frame {
-              if !$current-frame.is-final && $current-frame.rolls[0].defined && $current-frame.rolls[0] + $pins > 10 {
-                  X::Bowling::TooManyPins.new.throw;
-              }
-
               $current-frame.add-roll($pins);
+
               if $current-frame.is-complete && $current-frame.is-final.not {
                   @!frames.push(Frame.new(:is-final(@!frames.elems == 9)));
               }
@@ -147,13 +144,13 @@ example: |-
       }
 
       method score {
-          X::Bowling::GameInProgress.new.throw unless $.is-complete;
+          X::Bowling::GameInProgress.new.throw if $.is-complete.not;
 
           return sum gather {
               for ^@!frames -> $i {
                   .take for @!frames[$i].rolls;
 
-                  unless @!frames[$i].is-final {
+                  if @!frames[$i].is-final.not {
                       when @!frames[$i].is-strike {
                           if @!frames[$i+1].is-final {
                               .take for @!frames[$i+1].rolls[^2];
@@ -173,7 +170,7 @@ example: |-
       }
 
       method is-complete {
-          return @!frames[*-1].is-final && @!frames[*-1].is-complete;
+          return .is-final && .is-complete given @!frames[*-1];
       }
   }
 
