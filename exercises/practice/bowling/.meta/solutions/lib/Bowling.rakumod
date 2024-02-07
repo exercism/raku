@@ -16,24 +16,48 @@ my class X::Bowling::NegativePins is Exception {
 
 class Bowling {
     my class Frame {
-        has UInt @.rolls;
+        has @.rolls is List;
         has Bool:D $.is-final = False;
+        has UInt:D $!max-roll = 10;
+        
+        multi method add-roll (UInt:D $pins where $pins > $!max-roll) {
+            X::Bowling::TooManyPins.new.throw;
+        }
+
+        multi method add-roll (UInt:D $pins) {
+            if $.is-final {
+                if @.rolls == 2 {
+                    $!max-roll = 0;
+                }
+                elsif @.rolls == 1 && @.rolls[0] != 10 {
+                    $!max-roll = @.rolls[0] + $pins == 10 ?? 10 !! 0;
+                }
+                elsif @.rolls == 1 && @.rolls[0] == 10 && $pins < 10 {
+                    $!max-roll -= $pins;
+                }
+            }
+            elsif !@.rolls {
+                $!max-roll -= $pins;
+            }
+            elsif @.rolls == 1 {
+                $!max-roll = 0;
+            }
+
+            @!rolls := |@!rolls, $pins;
+        }
 
         method is-strike {
-            return Nil if $.is-final;
+            return Nil if $.is-final || $.is-complete.not;
             return @.rolls == 1 && @.rolls[0] == 10;
         }
 
         method is-spare {
-            return Nil if $.is-final;
-            return @.rolls == 2 and @.rolls.sum == 10;
+            return Nil if $.is-final || $.is-complete.not;
+            return @.rolls == 2 && @.rolls.sum == 10;
         }
 
         method is-complete {
-            if $.is-final {
-                return @.rolls.elems == 3 || @.rolls.elems == 2 && @.rolls.sum < 10;
-            }
-            return @.rolls.elems == 2 || self.is-strike;
+            return $!max-roll == 0;
         }
     }
 
@@ -43,28 +67,45 @@ class Bowling {
         X::Bowling::NegativePins.new.throw;
     }
 
-    multi method roll ($pins where * > 10) {
-        X::Bowling::TooManyPins.new.throw;
-    }
-
     multi method roll ($pins) {
-        X::Bowling::GameOver.new.throw if self.is-complete;
+        X::Bowling::GameOver.new.throw if $.is-complete;
 
         given @!frames[*-1] -> $current-frame {
             if !$current-frame.is-final && $current-frame.rolls[0].defined && $current-frame.rolls[0] + $pins > 10 {
                 X::Bowling::TooManyPins.new.throw;
             }
 
-            $current-frame.rolls.push($pins);
-            if $current-frame.is-complete && !$current-frame.is-final {
+            $current-frame.add-roll($pins);
+            if $current-frame.is-complete && $current-frame.is-final.not {
                 @!frames.push(Frame.new(:is-final(@!frames.elems == 9)));
             }
         }
     }
 
     method score {
-        X::Bowling::GameInProgress.new.throw unless self.is-complete;
-        return @!frames.map(*.rolls.sum).sum;
+        X::Bowling::GameInProgress.new.throw unless $.is-complete;
+
+        return sum gather {
+            for ^@!frames -> $i {
+                .take for @!frames[$i].rolls;
+
+                unless @!frames[$i].is-final {
+                    when @!frames[$i].is-strike {
+                        if @!frames[$i+1].is-final {
+                            .take for @!frames[$i+1].rolls[^2];
+                        }
+                        else {
+                            .take for @!frames[$i+1].rolls;
+                        }
+                        take @!frames[$i+2].rolls[0] if @!frames[$i+1].rolls == 1;
+                    }
+
+                    when @!frames[$i].is-spare {
+                        take @!frames[$i+1].rolls[0];
+                    } 
+                }
+            }
+        }
     }
 
     method is-complete {
