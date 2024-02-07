@@ -38,4 +38,4 @@ jobs:
 
       - name: Online Test Runner
         if: runner.os == 'Linux'
-        run: apt install jq
+        run: jq < config.json
