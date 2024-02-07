@@ -1,0 +1,120 @@
+unit: false
+methods: roll score
+tests: |
+  my Bowling $game;
+
+properties:
+  roll:
+    test: |-
+      my Str $prev = '$game.=new;' ~ "\n";
+      if %case<input><previousRolls> {
+        $prev ~= sprintf(q:to/END/, %case<input><previousRolls><>.raku);
+        for %s -> $pins {
+            $game.roll($pins);
+        }
+        END
+      }
+      my $error = do given %case<expected><error> {
+          when /^Pin/    {'X::Bowling::TooManyPins'}
+          when /^Cannot/ {'X::Bowling::GameOver'}
+          when /^Neg/    {'X::Bowling::NegativePins'}
+      }
+      $prev ~ sprintf(q:to/END/, %case<input><roll>, $error, %case<description>.raku, %case<expected><error>.raku);
+      throws-like(
+          { $game.roll(%s) },
+          %s,
+          %s,
+          :message(/^ %s $/),
+      );
+      END
+  score:
+    test: |-
+      my Str $prev = '$game.=new;' ~ "\n";
+      if %case<input><previousRolls> {
+        $prev ~= sprintf(q:to/END/, %case<input><previousRolls><>.raku);
+        for %s -> $pins {
+            $game.roll($pins);
+        }
+        END
+      }
+      if %case<expected><error>:exists {
+          my $error = do given %case<expected><error> {
+              when /^Score/  {'X::Bowling::GameInProgress'}
+          }
+          $prev ~ sprintf(q:to/END/, $error, %case<description>.raku, %case<expected><error>.raku);
+          throws-like(
+              { $game.score },
+              %s,
+              %s,
+              :message(/^ %s $/),
+          );
+          END
+      }
+      else {
+          $prev ~ sprintf(q:to/END/, %case<expected>, %case<description>.raku);
+          cmp-ok(
+              $game.score,
+              &infix:<==>,
+              %s,
+              %s,
+          );
+          END
+      }
+
+
+example: |-
+  my class X::Bowling::GameOver is Exception {
+      method message {'Cannot roll after game is over'}
+  }
+
+  my class X::Bowling::GameInProgress is Exception {
+      method message {'Score cannot be taken until the end of the game'}
+  }
+
+  my class X::Bowling::TooManyPins is Exception {
+      method message {'Pin count exceeds pins on the lane'}
+  }
+
+  my class X::Bowling::NegativePins is Exception {
+      method message {'Negative roll is invalid'}
+  }
+
+  class Bowling {
+      multi method roll ($pins where * < 0) {
+          X::Bowling::NegativePins.new.throw;
+      }
+
+      multi method roll ($pins where * > 10) {
+          X::Bowling::TooManyPins.new.throw;
+      }
+
+      multi method roll ($pins) {
+      }
+
+      method score {
+      }
+  }
+stub: |-
+  my class X::Bowling::GameOver is Exception {
+      method message {'Cannot roll after game is over'}
+  }
+
+  my class X::Bowling::GameInProgress is Exception {
+      method message {'Score cannot be taken until the end of the game'}
+  }
+
+  my class X::Bowling::TooManyPins is Exception {
+      method message {'Pin count exceeds pins on the lane'}
+  }
+
+  my class X::Bowling::NegativePins is Exception {
+      method message {'Negative roll is invalid'}
+  }
+
+  class Bowling {
+      method roll ($pins) {
+      }
+
+      method score {
+      }
+  }
