@@ -84,20 +84,15 @@ class Bowling {
 
         return sum gather {
             for ^@!frames -> $i {
-                .take for @!frames[$i].rolls;
+                given @!frames[$i] {
+                    .take for .rolls;
 
-                if @!frames[$i].is-final.not {
-                    when @!frames[$i].is-strike {
-                        if @!frames[$i+1].is-final {
-                            .take for @!frames[$i+1].rolls[^2];
-                        }
-                        else {
-                            .take for @!frames[$i+1].rolls;
-                        }
+                    when .is-strike {
+                        .take for @!frames[$i+1].rolls[* > 2 ?? ^2 !! *];
                         take @!frames[$i+2].rolls[0] if @!frames[$i+1].rolls == 1;
                     }
 
-                    when @!frames[$i].is-spare {
+                    when .is-spare {
                         take @!frames[$i+1].rolls[0];
                     } 
                 }
