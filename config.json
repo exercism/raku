@@ -393,6 +393,15 @@
         "topics": []
       },
       {
+        "slug": "bowling",
+        "name": "Bowling",
+        "uuid": "a3b551af-9956-4ef0-b169-36d472dcd351",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
+      },
+      {
         "slug": "collatz-conjecture",
         "name": "Collatz Conjecture",
         "uuid": "af004395-69cd-4151-ad42-b9e617abc99d",
