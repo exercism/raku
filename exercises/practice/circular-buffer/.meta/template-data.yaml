@@ -1,0 +1,83 @@
+properties:
+  run:
+    test: |-
+      my $ops = %case<input><operations>.map(-> %op {
+          given %op<operation> {
+              when 'read' {
+                  if %op<should_succeed> {
+                      sprintf(q:to/CASE/, %op<expected>).trim-trailing;
+                          is(
+                              $buffer.read,
+                              %s,
+                              "read buffer",
+                          );
+                      CASE
+                  }
+                  else {
+                      sprintf(q:to/CASE/).trim-trailing;
+                          throws-like(
+                              { $buffer.read },
+                              X::CircularBuffer::BufferIsEmpty,
+                              "read error",
+                          );
+                      CASE
+                  }
+              }
+              when 'write' {
+                  '    flunk "write NYI";'
+              }
+              when 'clear' {
+                  '    flunk "clear NYI";'
+              }
+              when 'overwrite' {
+                  '    flunk "overwrite NYI";'
+              }
+              default {
+                  '    flunk "NYI";'
+              }
+          }
+      }).join("\n\n");
+
+      sprintf(q:to/END/, %case<description>.raku, %case<input><capacity>, $ops);
+      subtest %s => {
+          my CircularBuffer $buffer.=new(:capacity(%s));
+
+      %s
+      };
+      END
+
+unit: false
+
+example: |-
+  my class X::CircularBuffer::BufferIsEmpty is Exception {
+      method message {'Buffer is empty'}
+  }
+
+  class CircularBuffer {
+      has $.capacity;
+      
+      method read {}
+
+      method write {}
+
+      method clear {}
+
+      method overwrite {}
+  }
+
+stub: |-
+  my class X::CircularBuffer::BufferIsEmpty is Exception {
+      method message {'Buffer is empty'}
+  }
+
+  class CircularBuffer {
+      has $.capacity;
+      
+      method read {}
+
+      method write {}
+
+      method clear {}
+
+      method overwrite {}
+  }
