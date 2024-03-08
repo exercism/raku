@@ -24,13 +24,39 @@ properties:
                   }
               }
               when 'write' {
-                  '    flunk "write NYI";'
+                  if %op<should_succeed> {
+                      sprintf(q:to/CASE/, %op<item>).trim-trailing;
+                          lives-ok(
+                              { $buffer.write(%s) },
+                              "write buffer",
+                          );
+                      CASE
+                  }
+                  else {
+                      sprintf(q:to/CASE/, %op<item>).trim-trailing;
+                          throws-like(
+                              { $buffer.write(%s) },
+                              X::CircularBuffer::BufferIsFull,
+                              "write error",
+                          );
+                      CASE
+                  }
               }
               when 'clear' {
-                  '    flunk "clear NYI";'
+                  sprintf(q:to/CASE/).trim-trailing;
+                      lives-ok(
+                          { $buffer.clear },
+                          "clear buffer",
+                      );
+                  CASE
               }
               when 'overwrite' {
-                  '    flunk "overwrite NYI";'
+                  sprintf(q:to/CASE/, %op<item>).trim-trailing;
+                      lives-ok(
+                          { $buffer.overwrite(%s) },
+                          "overwrite buffer",
+                      );
+                  CASE
               }
               default {
                   '    flunk "NYI";'
@@ -53,6 +79,10 @@ example: |-
       method message {'Buffer is empty'}
   }
 
+  my class X::CircularBuffer::BufferIsFull is Exception {
+      method message {'Buffer is full'}
+  }
+
   class CircularBuffer {
       has $.capacity;
       
@@ -68,6 +98,10 @@ example: |-
 stub: |-
   my class X::CircularBuffer::BufferIsEmpty is Exception {
       method message {'Buffer is empty'}
+  }
+
+  my class X::CircularBuffer::BufferIsFull is Exception {
+      method message {'Buffer is full'}
   }
 
   class CircularBuffer {

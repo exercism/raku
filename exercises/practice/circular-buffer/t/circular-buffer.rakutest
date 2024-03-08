@@ -16,7 +16,10 @@ subtest "reading empty buffer should fail" => { # begin: 28268ed4-4ff3-45f3-820e
 subtest "can read an item just written" => { # begin: 2e6db04a-58a1-425d-ade8-ac30b5f318f3
     my CircularBuffer $buffer.=new(:capacity(1));
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(1) },
+        "write buffer",
+    );
 
     is(
         $buffer.read,
@@ -28,7 +31,10 @@ subtest "can read an item just written" => { # begin: 2e6db04a-58a1-425d-ade8-ac
 subtest "each item may only be read once" => { # begin: 90741fe8-a448-45ce-be2b-de009a24c144
     my CircularBuffer $buffer.=new(:capacity(1));
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(1) },
+        "write buffer",
+    );
 
     is(
         $buffer.read,
@@ -46,9 +52,15 @@ subtest "each item may only be read once" => { # begin: 90741fe8-a448-45ce-be2b-
 subtest "items are read in the order they are written" => { # begin: be0e62d5-da9c-47a8-b037-5db21827baa7
     my CircularBuffer $buffer.=new(:capacity(2));
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(1) },
+        "write buffer",
+    );
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(2) },
+        "write buffer",
+    );
 
     is(
         $buffer.read,
@@ -66,15 +78,25 @@ subtest "items are read in the order they are written" => { # begin: be0e62d5-da
 subtest "full buffer can't be written to" => { # begin: 2af22046-3e44-4235-bfe6-05ba60439d38
     my CircularBuffer $buffer.=new(:capacity(1));
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(1) },
+        "write buffer",
+    );
 
-    flunk "write NYI";
+    throws-like(
+        { $buffer.write(2) },
+        X::CircularBuffer::BufferIsFull,
+        "write error",
+    );
 }; # end: 2af22046-3e44-4235-bfe6-05ba60439d38
 
 subtest "a read frees up capacity for another write" => { # begin: 547d192c-bbf0-4369-b8fa-fc37e71f2393
     my CircularBuffer $buffer.=new(:capacity(1));
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(1) },
+        "write buffer",
+    );
 
     is(
         $buffer.read,
@@ -82,7 +104,10 @@ subtest "a read frees up capacity for another write" => { # begin: 547d192c-bbf0
         "read buffer",
     );
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(2) },
+        "write buffer",
+    );
 
     is(
         $buffer.read,
@@ -94,9 +119,15 @@ subtest "a read frees up capacity for another write" => { # begin: 547d192c-bbf0
 subtest "read position is maintained even across multiple writes" => { # begin: 04a56659-3a81-4113-816b-6ecb659b4471
     my CircularBuffer $buffer.=new(:capacity(3));
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(1) },
+        "write buffer",
+    );
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(2) },
+        "write buffer",
+    );
 
     is(
         $buffer.read,
@@ -104,7 +135,10 @@ subtest "read position is maintained even across multiple writes" => { # begin: 
         "read buffer",
     );
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(3) },
+        "write buffer",
+    );
 
     is(
         $buffer.read,
@@ -122,9 +156,15 @@ subtest "read position is maintained even across multiple writes" => { # begin: 
 subtest "items cleared out of buffer can't be read" => { # begin: 60c3a19a-81a7-43d7-bb0a-f07242b1111f
     my CircularBuffer $buffer.=new(:capacity(1));
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(1) },
+        "write buffer",
+    );
 
-    flunk "clear NYI";
+    lives-ok(
+        { $buffer.clear },
+        "clear buffer",
+    );
 
     throws-like(
         { $buffer.read },
@@ -136,11 +176,20 @@ subtest "items cleared out of buffer can't be read" => { # begin: 60c3a19a-81a7-
 subtest "clear frees up capacity for another write" => { # begin: 45f3ae89-3470-49f3-b50e-362e4b330a59
     my CircularBuffer $buffer.=new(:capacity(1));
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(1) },
+        "write buffer",
+    );
 
-    flunk "clear NYI";
+    lives-ok(
+        { $buffer.clear },
+        "clear buffer",
+    );
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(2) },
+        "write buffer",
+    );
 
     is(
         $buffer.read,
@@ -152,9 +201,15 @@ subtest "clear frees up capacity for another write" => { # begin: 45f3ae89-3470-
 subtest "clear does nothing on empty buffer" => { # begin: e1ac5170-a026-4725-bfbe-0cf332eddecd
     my CircularBuffer $buffer.=new(:capacity(1));
 
-    flunk "clear NYI";
+    lives-ok(
+        { $buffer.clear },
+        "clear buffer",
+    );
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(1) },
+        "write buffer",
+    );
 
     is(
         $buffer.read,
@@ -166,9 +221,15 @@ subtest "clear does nothing on empty buffer" => { # begin: e1ac5170-a026-4725-bf
 subtest "overwrite acts like write on non-full buffer" => { # begin: 9c2d4f26-3ec7-453f-a895-7e7ff8ae7b5b
     my CircularBuffer $buffer.=new(:capacity(2));
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(1) },
+        "write buffer",
+    );
 
-    flunk "overwrite NYI";
+    lives-ok(
+        { $buffer.overwrite(2) },
+        "overwrite buffer",
+    );
 
     is(
         $buffer.read,
@@ -186,11 +247,20 @@ subtest "overwrite acts like write on non-full buffer" => { # begin: 9c2d4f26-3e
 subtest "overwrite replaces the oldest item on full buffer" => { # begin: 880f916b-5039-475c-bd5c-83463c36a147
     my CircularBuffer $buffer.=new(:capacity(2));
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(1) },
+        "write buffer",
+    );
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(2) },
+        "write buffer",
+    );
 
-    flunk "overwrite NYI";
+    lives-ok(
+        { $buffer.overwrite(3) },
+        "overwrite buffer",
+    );
 
     is(
         $buffer.read,
@@ -208,11 +278,20 @@ subtest "overwrite replaces the oldest item on full buffer" => { # begin: 880f91
 subtest "overwrite replaces the oldest item remaining in buffer following a read" => { # begin: bfecab5b-aca1-4fab-a2b0-cd4af2b053c3
     my CircularBuffer $buffer.=new(:capacity(3));
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(1) },
+        "write buffer",
+    );
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(2) },
+        "write buffer",
+    );
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(3) },
+        "write buffer",
+    );
 
     is(
         $buffer.read,
@@ -220,9 +299,15 @@ subtest "overwrite replaces the oldest item remaining in buffer following a read
         "read buffer",
     );
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(4) },
+        "write buffer",
+    );
 
-    flunk "overwrite NYI";
+    lives-ok(
+        { $buffer.overwrite(5) },
+        "overwrite buffer",
+    );
 
     is(
         $buffer.read,
@@ -246,15 +331,30 @@ subtest "overwrite replaces the oldest item remaining in buffer following a read
 subtest "initial clear does not affect wrapping around" => { # begin: 9cebe63a-c405-437b-8b62-e3fdc1ecec5a
     my CircularBuffer $buffer.=new(:capacity(2));
 
-    flunk "clear NYI";
+    lives-ok(
+        { $buffer.clear },
+        "clear buffer",
+    );
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(1) },
+        "write buffer",
+    );
 
-    flunk "write NYI";
+    lives-ok(
+        { $buffer.write(2) },
+        "write buffer",
+    );
 
-    flunk "overwrite NYI";
+    lives-ok(
+        { $buffer.overwrite(3) },
+        "overwrite buffer",
+    );
 
-    flunk "overwrite NYI";
+    lives-ok(
+        { $buffer.overwrite(4) },
+        "overwrite buffer",
+    );
 
     is(
         $buffer.read,
