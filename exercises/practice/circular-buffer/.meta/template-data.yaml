@@ -6,8 +6,9 @@ properties:
               when 'read' {
                   if %op<should_succeed> {
                       sprintf(q:to/CASE/, %op<expected>).trim-trailing;
-                          is(
+                          cmp-ok(
                               $buffer.read,
+                              "==",
                               %s,
                               "read buffer",
                           );
