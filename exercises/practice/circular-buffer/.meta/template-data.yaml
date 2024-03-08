@@ -67,7 +67,7 @@ properties:
 
       sprintf(q:to/END/, %case<description>.raku, %case<input><capacity>, $ops);
       subtest %s => {
-          my CircularBuffer $buffer.=new(:capacity(%s));
+          my $buffer := CircularBuffer.new( :capacity(%s) );
 
       %s
       };
