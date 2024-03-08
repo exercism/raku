@@ -9,11 +9,11 @@ my class X::CircularBuffer::BufferIsFull is Exception {
 class CircularBuffer {
     has $.capacity;
     
-    method read {}
+    method read () {}
 
-    method write {}
+    method write ($item) {}
 
-    method clear {}
+    method clear () {}
 
-    method overwrite {}
+    method overwrite ($item) {}
 }
