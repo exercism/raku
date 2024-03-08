@@ -1,5 +1,10 @@
 {
-  "authors": [],
+  "authors": [
+    "m-dango"
+  ],
+  "contributors": [
+    "rcmlz"
+  ],
   "files": {
     "solution": [
       "lib/CircularBuffer.rakumod"
