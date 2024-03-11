@@ -1,0 +1,25 @@
+properties:
+  calculateFrequencies:
+    test: |-
+      sprintf(q:to/END/, (%case<input><texts><>.List, %case<expected><>, %case<description>).map(*.raku));
+      cmp-ok(
+          letter-frequencies%s,
+          "(==)",
+          %s.Bag,
+          %s,
+      );
+      END
+
+unit: module
+
+example: |-
+  sub letter-frequencies (+@texts) is export {
+      return @texts
+        .race( :batch(2) )
+        .map( *.lc.comb(/<:L>/).Slip )
+        .Bag;
+  }
+
+stub: |-
+  sub letter-frequencies (+@texts) is export {
+  }

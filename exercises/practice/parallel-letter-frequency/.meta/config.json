@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "m-dango"
+  ],
+  "files": {
+    "solution": [
+      "lib/ParallelLetterFrequency.rakumod"
+    ],
+    "test": [
+      "t/parallel-letter-frequency.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/ParallelLetterFrequency.rakumod"
+    ]
+  },
+  "blurb": "Count the frequency of letters in texts using parallel computation."
+}
