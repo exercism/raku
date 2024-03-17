@@ -2,6 +2,9 @@
   "authors": [
     "m-dango"
   ],
+  "contributors": [
+    "rcmlz"
+  ],
   "files": {
     "solution": [
       "lib/ProteinTranslation.rakumod"
