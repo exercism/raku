@@ -17,13 +17,13 @@ jobs:
       - name: Install Rakudo Star with msiexec
         if: runner.os == 'Windows'
         run: >
-          $file = "rakudo-star.msi" 
+          $file = "rakudo-star.msi";
           Invoke-WebRequest https://rakudo.org/latest/star/win -OutFile "$file";
-          $log = "install.log" 
-          $procMain = Start-Process "msiexec" "/i `"$file`" /qn /l*! `"$log`"" -NoNewWindow -PassThru
-          $procLog = Start-Process "powershell" "Get-Content -Path `"$log`" -Wait" -NoNewWindow -PassThru 
-          $procMain.WaitForExit() 
-          $procLog.Kill()
+          $log = "install.log";
+          $procMain = Start-Process "msiexec" "/i `"$file`" /qn /l*! `"$log`"" -NoNewWindow -PassThru;
+          $procLog = Start-Process "powershell" "Get-Content -Path `"$log`" -Wait" -NoNewWindow -PassThru;
+          $procMain.WaitForExit();
+          $procLog.Kill();
 
       - name: Install Rakudo Star with brew
         if: runner.os == 'macOS'
