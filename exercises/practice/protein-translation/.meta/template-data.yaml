@@ -1,0 +1,29 @@
+properties:
+  proteins:
+    test: |-
+      if %case<expected><error>:exists {
+          sprintf(q:to/END/, (%case<input><strand>, %case<description>).map(*.raku));
+          dies-ok(
+              { protein-translation %s },
+              %s,
+          );
+          END
+      }
+      else {
+          sprintf(q:to/END/, (%case<input><strand>, %case<expected>.List<>, %case<description>).map(*.raku));
+          cmp-ok(
+              protein-translation(%s),
+              "~~",
+              %s,
+              %s,
+          );
+          END
+      }
+
+example: |-
+    sub protein-translation ($strand) {
+    }
+
+stub: |-
+    sub protein-translation ($strand) {
+    }
