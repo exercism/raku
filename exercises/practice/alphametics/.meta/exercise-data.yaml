@@ -1,0 +1,18 @@
+properties:
+  solve:
+    test: |-
+      sprintf(q:to/END/, (%case<input><puzzle>, (with %case<expected> { .<> } else { Nil }), %case<description>).map(*.raku));
+      is-deeply(
+          solve-alphametics(%s),
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  sub solve-alphametics ($puzzle) is export {
+  }
+stub: |-
+  sub solve-alphametics ($puzzle) is export {
+  }

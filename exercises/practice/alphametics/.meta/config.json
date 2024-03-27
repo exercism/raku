@@ -1,0 +1,15 @@
+{
+  "authors": ["m-dango"],
+  "files": {
+    "solution": [
+      "Alphametics.rakumod"
+    ],
+    "test": [
+      "alphametics.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/Alphametics.rakumod"
+    ]
+  },
+  "blurb": "Write a function to solve alphametics puzzles."
+}
