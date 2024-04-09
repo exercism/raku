@@ -769,6 +769,15 @@
         "prerequisites": [],
         "difficulty": 1,
         "topics": []
+      },
+      {
+        "slug": "list-ops",
+        "name": "List Ops",
+        "uuid": "f86509c5-5573-41e1-af4e-30e7d311b275",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1,
+        "topics": []
       }
     ]
   },

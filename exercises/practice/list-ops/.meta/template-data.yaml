@@ -1,0 +1,91 @@
+properties:
+  append:
+    test: |-
+      sprintf(q:to/END/, (%case<input><list1 list2>.map(*.List).Slip, %case<expected>.List, %case<description>).map(*.raku));
+      cmp-ok(
+          concatenate-lists( %s, %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+  concat:
+    test: |-
+      sprintf(q:to/END/,
+      cmp-ok(
+          concatenate-lists( %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+          (
+              %case<input><lists>.map({
+                  when Positional {
+                      .map(&?BLOCK).List;
+                  }
+                  default {$_}
+              }).List,
+              %case<expected>.map({
+                  when Positional {
+                      .map(&?BLOCK).List;
+                  }
+                  default {$_}
+              }).List,
+              %case<description>,
+          ).map(*.raku)
+      );
+
+  filter:
+    test: |-
+      sprintf(q:to/END/, (%case<input><list>.List, %case<expected>.List, %case<description>).map(*.raku));
+      cmp-ok(
+          filter-list( %s, -> $x { $x %% 2 == 1 } ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+  length:
+    test: |-
+      sprintf(q:to/END/, (%case<input><list>.List, %case<expected>, %case<description>).map(*.raku));
+      cmp-ok(
+          list-length( %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+  map:
+    test: |-
+      'flunk;'
+
+  foldl:
+    test: |-
+      'flunk;'
+
+  foldr:
+    test: |-
+      'flunk;'
+
+  reverse:
+    test: |-
+      'flunk;'
+
+unit: module
+
+example: |-
+  multi concatenate-lists (@list1, @list2) is export {
+      return @list1, @list2;
+  }
+
+  multi concatenate-lists (@lists) is export {
+      return |@lists;
+  }
+
+stub: |-
+  sub foo () is export {
+  }

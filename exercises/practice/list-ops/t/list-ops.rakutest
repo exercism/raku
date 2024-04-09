@@ -1,0 +1,105 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use ListOps;
+
+cmp-ok( # begin: 485b9452-bf94-40f7-a3db-c3cf4850066a
+    concatenate-lists( (), () ),
+    "eqv",
+    (),
+    "append entries to a list and return the new list: empty lists",
+); # end: 485b9452-bf94-40f7-a3db-c3cf4850066a
+
+cmp-ok( # begin: 2c894696-b609-4569-b149-8672134d340a
+    concatenate-lists( (), (1, 2, 3, 4) ),
+    "eqv",
+    (1, 2, 3, 4),
+    "append entries to a list and return the new list: list to empty list",
+); # end: 2c894696-b609-4569-b149-8672134d340a
+
+cmp-ok( # begin: e842efed-3bf6-4295-b371-4d67a4fdf19c
+    concatenate-lists( (1, 2, 3, 4), () ),
+    "eqv",
+    (1, 2, 3, 4),
+    "append entries to a list and return the new list: empty list to list",
+); # end: e842efed-3bf6-4295-b371-4d67a4fdf19c
+
+cmp-ok( # begin: 71dcf5eb-73ae-4a0e-b744-a52ee387922f
+    concatenate-lists( (1, 2), (2, 3, 4, 5) ),
+    "eqv",
+    (1, 2, 2, 3, 4, 5),
+    "append entries to a list and return the new list: non-empty lists",
+); # end: 71dcf5eb-73ae-4a0e-b744-a52ee387922f
+
+cmp-ok( # begin: 28444355-201b-4af2-a2f6-5550227bde21
+    concatenate-lists( () ),
+    "eqv",
+    (),
+    "concatenate a list of lists: empty list",
+); # end: 28444355-201b-4af2-a2f6-5550227bde21
+
+cmp-ok( # begin: 331451c1-9573-42a1-9869-2d06e3b389a9
+    concatenate-lists( ((1, 2), (3,), (), (4, 5, 6)) ),
+    "eqv",
+    (1, 2, 3, 4, 5, 6),
+    "concatenate a list of lists: list of lists",
+); # end: 331451c1-9573-42a1-9869-2d06e3b389a9
+
+cmp-ok( # begin: d6ecd72c-197f-40c3-89a4-aa1f45827e09
+    concatenate-lists( (((1,), (2,)), ((3,),), ((),), ((4, 5, 6),)) ),
+    "eqv",
+    ((1,), (2,), (3,), (), (4, 5, 6)),
+    "concatenate a list of lists: list of nested lists",
+); # end: d6ecd72c-197f-40c3-89a4-aa1f45827e09
+
+cmp-ok( # begin: 0524fba8-3e0f-4531-ad2b-f7a43da86a16
+    filter-list( (), -> $x { $x % 2 == 1 } ),
+    "eqv",
+    (),
+    "filter list returning only values that satisfy the filter function: empty list",
+); # end: 0524fba8-3e0f-4531-ad2b-f7a43da86a16
+
+cmp-ok( # begin: 88494bd5-f520-4edb-8631-88e415b62d24
+    filter-list( (1, 2, 3, 5), -> $x { $x % 2 == 1 } ),
+    "eqv",
+    (1, 3, 5),
+    "filter list returning only values that satisfy the filter function: non-empty list",
+); # end: 88494bd5-f520-4edb-8631-88e415b62d24
+
+cmp-ok( # begin: 1cf0b92d-8d96-41d5-9c21-7b3c37cb6aad
+    list-length( () ),
+    "eqv",
+    0,
+    "returns the length of a list: empty list",
+); # end: 1cf0b92d-8d96-41d5-9c21-7b3c37cb6aad
+
+cmp-ok( # begin: d7b8d2d9-2d16-44c4-9a19-6e5f237cb71e
+    list-length( (1, 2, 3, 4) ),
+    "eqv",
+    4,
+    "returns the length of a list: non-empty list",
+); # end: d7b8d2d9-2d16-44c4-9a19-6e5f237cb71e
+
+flunk; # case: c0bc8962-30e2-4bec-9ae4-668b8ecd75aa
+
+flunk; # case: 11e71a95-e78b-4909-b8e4-60cdcaec0e91
+
+flunk; # case: 36549237-f765-4a4c-bfd9-5d3a8f7b07d2
+
+flunk; # case: 7a626a3c-03ec-42bc-9840-53f280e13067
+
+flunk; # case: d7fcad99-e88e-40e1-a539-4c519681f390
+
+flunk; # case: 17214edb-20ba-42fc-bda8-000a5ab525b0
+
+flunk; # case: e1c64db7-9253-4a3d-a7c4-5273b9e2a1bd
+
+flunk; # case: 8066003b-f2ff-437e-9103-66e6df474844
+
+flunk; # case: 94231515-050e-4841-943d-d4488ab4ee30
+
+flunk; # case: fcc03d1e-42e0-4712-b689-d54ad761f360
+
+flunk; # case: 40872990-b5b8-4cb8-9085-d91fc0d05d26
+
+done-testing;
