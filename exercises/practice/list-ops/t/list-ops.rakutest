@@ -96,10 +96,25 @@ flunk; # case: e1c64db7-9253-4a3d-a7c4-5273b9e2a1bd
 
 flunk; # case: 8066003b-f2ff-437e-9103-66e6df474844
 
-flunk; # case: 94231515-050e-4841-943d-d4488ab4ee30
+cmp-ok( # begin: 94231515-050e-4841-943d-d4488ab4ee30
+    reverse-list( () ),
+    "eqv",
+    (),
+    "reverse the elements of the list: empty list",
+); # end: 94231515-050e-4841-943d-d4488ab4ee30
 
-flunk; # case: fcc03d1e-42e0-4712-b689-d54ad761f360
+cmp-ok( # begin: fcc03d1e-42e0-4712-b689-d54ad761f360
+    reverse-list( (1, 3, 5, 7) ),
+    "eqv",
+    (7, 5, 3, 1),
+    "reverse the elements of the list: non-empty list",
+); # end: fcc03d1e-42e0-4712-b689-d54ad761f360
 
-flunk; # case: 40872990-b5b8-4cb8-9085-d91fc0d05d26
+cmp-ok( # begin: 40872990-b5b8-4cb8-9085-d91fc0d05d26
+    reverse-list( ((1, 2), (3,), (), (4, 5, 6)) ),
+    "eqv",
+    ((4, 5, 6), (), (3,), (1, 2)),
+    "reverse the elements of the list: list of lists is not flattened",
+); # end: 40872990-b5b8-4cb8-9085-d91fc0d05d26
 
 done-testing;

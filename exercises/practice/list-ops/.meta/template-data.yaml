@@ -73,7 +73,30 @@ properties:
 
   reverse:
     test: |-
-      'flunk;'
+      sprintf(q:to/END/,
+      cmp-ok(
+          reverse-list( %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+          (
+              %case<input><list>.map({
+                  when Positional {
+                      .map(&?BLOCK).List;
+                  }
+                  default {$_}
+              }).List,
+              %case<expected>.map({
+                  when Positional {
+                      .map(&?BLOCK).List;
+                  }
+                  default {$_}
+              }).List,
+              %case<description>,
+          ).map(*.raku)
+      );
 
 unit: module
 
