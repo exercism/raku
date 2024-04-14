@@ -31,20 +31,10 @@ cmp-ok( # begin: ecfd0210-6f85-44f6-8280-f65534892ff6
     "large number of even and odd steps",
 ); # end: ecfd0210-6f85-44f6-8280-f65534892ff6
 
-dies-ok( # begin: 7d4750e6-def9-4b86-aec7-9f7eb44f95a3
-    { collatz-conjecture 0 },
-    "zero is an error",
-); # end: 7d4750e6-def9-4b86-aec7-9f7eb44f95a3
-
 dies-ok( # begin: 2187673d-77d6-4543-975e-66df6c50e2da
     { collatz-conjecture 0 },
     "zero is an error",
 ); # end: 2187673d-77d6-4543-975e-66df6c50e2da
-
-dies-ok( # begin: c6c795bf-a288-45e9-86a1-841359ad426d
-    { collatz-conjecture -15 },
-    "negative value is an error",
-); # end: c6c795bf-a288-45e9-86a1-841359ad426d
 
 dies-ok( # begin: ec11f479-56bc-47fd-a434-bcd7a31a7a2e
     { collatz-conjecture -15 },
