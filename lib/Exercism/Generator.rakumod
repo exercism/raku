@@ -33,16 +33,7 @@ has %.cdata = do if ( my $cdata-file = $ProblemSpecsDir.add("exercises/$!exercis
 has Str:D @.case-uuids = do if (
   my $toml-file = $base-dir.add("exercises/practice/$!exercise/.meta/tests.toml")
 ).f {
-  given from-toml($toml-file.slurp) {
-    # TODO: Remove old toml format
-    when .<canonical-tests>:exists {
-      .<canonical-tests>.Set.keys;
-    }
-
-    default {
-      .grep({ .value.<include>:!exists || .value.<include> }).map(*.key);
-    }
-  }
+  from-toml($toml-file.slurp).grep({ .value.<include>:!exists || .value.<include> }).map(*.key);
 } #= e.g. [ '00000000-0000-0000-0000-000000000000' ]
 ;
 
@@ -65,7 +56,7 @@ submethod build-cases ( %obj, Str $description = '' ) {
     }
 
     return %obj<cases>.map({
-      self.&?ROUTINE( $_, $new-desc || $description )
+      self.&samewith( $_, $new-desc || $description )
     }).flat;
   }
   elsif %obj<uuid> ∈ @!case-uuids {
@@ -88,6 +79,9 @@ submethod build-property-tests {
         @output[0] ~= " # begin: %case<uuid>\n";
       }
       @tests.push(@output.join.trim-trailing ~ ' # ' ~ (@output > 1 ?? 'end' !! 'case') ~ ": %case<uuid>\n");
+    }
+    else {
+      @tests.push("flunk; # case: %case<uuid>\n")
     }
   }
   return @tests;
