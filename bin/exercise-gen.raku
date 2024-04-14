@@ -1,6 +1,5 @@
 #!/usr/bin/env raku
 use YAMLish;
-use nqp;
 use lib ( my $base-dir = $?FILE.IO.resolve.parent(2) ).add('lib');
 use Exercism::Generator;
 
@@ -16,12 +15,12 @@ multi MAIN ( Bool:D :h(:help(:$man)) ) {
 
 #| Runs the generator for everything in the exercises/practice directory.
 multi MAIN (Bool:D :a(:$all) where *.so) {
-  generate .basename for $base-dir.add('exercises/practice').dir;
+  samewith $base-dir.add('exercises/practice').dir.map(*.basename).sort;
 }
 
 #| The generator will run for each exercise given as an argument.
 multi MAIN (*@exercises) {
-  @exercises».&generate;
+  .&generate for @exercises;
 }
 
 #|[The generator will attempt to run using the current directory.
@@ -47,22 +46,24 @@ sub generate ($exercise) {
       note '.meta/template-data.yaml not found for: ' ~ join ' ', @yaml-not-found
     }
   }
-  if (
+
+  when (
     my $exercise-dir = $base-dir.add("exercises/practice/$exercise")
   ) !~~ :d {
     push @dir-not-found, $exercise;
-    return;
   }
-  if (
+
+  when (
     my $yaml-file = $exercise-dir.add('.meta/template-data.yaml')
   ) !~~ :f {
     push @yaml-not-found, $exercise;
-    return;
   }
 
-  print "Generating $exercise... ";
+  default {
+    print "Generating $exercise... ";
 
-  Exercism::Generator.new(:$exercise).create-files;
+    Exercism::Generator.new(:$exercise).create-files;
 
-  say 'Generated.';
+    say 'Generated.';
+  }
 }
