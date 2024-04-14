@@ -93,4 +93,49 @@ subtest "an even-sized word" => { # begin: b9e7dec1-c6df-40bd-9fa3-cd7ded010c4c
   );
 } # end: b9e7dec1-c6df-40bd-9fa3-cd7ded010c4c
 
+subtest "wide characters" => { # begin: 1bed0f8a-13b0-4bd3-9d59-3d0593326fa2
+  cmp-ok(
+      reverse-string("子猫"),
+      "eq",
+      "猫子",
+      "reverse once",
+  );
+  cmp-ok(
+      reverse-string(reverse-string("子猫")),
+      "eq",
+      "子猫",
+      "reverse twice",
+  );
+} # end: 1bed0f8a-13b0-4bd3-9d59-3d0593326fa2
+
+subtest "grapheme cluster with pre-combined form" => { # begin: 93d7e1b8-f60f-4f3c-9559-4056e10d2ead
+  cmp-ok(
+      reverse-string("Würstchenstand"),
+      "eq",
+      "dnatsnehctsrüW",
+      "reverse once",
+  );
+  cmp-ok(
+      reverse-string(reverse-string("Würstchenstand")),
+      "eq",
+      "Würstchenstand",
+      "reverse twice",
+  );
+} # end: 93d7e1b8-f60f-4f3c-9559-4056e10d2ead
+
+subtest "grapheme clusters" => { # begin: 1028b2c1-6763-4459-8540-2da47ca512d9
+  cmp-ok(
+      reverse-string("ผู้เขียนโปรแกรม"),
+      "eq",
+      "มรกแรปโนยขีเผู้",
+      "reverse once",
+  );
+  cmp-ok(
+      reverse-string(reverse-string("ผู้เขียนโปรแกรม")),
+      "eq",
+      "ผู้เขียนโปรแกรม",
+      "reverse twice",
+  );
+} # end: 1028b2c1-6763-4459-8540-2da47ca512d9
+
 done-testing;
