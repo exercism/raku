@@ -1,0 +1,149 @@
+properties:
+  append:
+    test: |-
+      sprintf(q:to/END/, (%case<input><list1 list2>.map(*.List).Slip, %case<expected>.List, %case<description>).map(*.raku));
+      cmp-ok(
+          concatenate-lists( %s, %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+  concat:
+    test: |-
+      sprintf(q:to/END/,
+      cmp-ok(
+          concatenate-lists( %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+          (
+              %case<input><lists>.map({
+                  when Positional {
+                      .map(&?BLOCK).List;
+                  }
+                  default {$_}
+              }).List,
+              %case<expected>.map({
+                  when Positional {
+                      .map(&?BLOCK).List;
+                  }
+                  default {$_}
+              }).List,
+              %case<description>,
+          ).map(*.raku)
+      );
+
+  filter:
+    test: |-
+      sprintf(q:to/END/, (%case<input><list>.List, %case<expected>.List, %case<description>).map(*.raku));
+      cmp-ok(
+          filter-list( %s, -> $x { $x %% 2 == 1 } ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+  length:
+    test: |-
+      sprintf(q:to/END/, (%case<input><list>.List, %case<expected>, %case<description>).map(*.raku));
+      cmp-ok(
+          list-length( %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+  map:
+    test: |-
+      sprintf(q:to/END/, (%case<input><list>.List, %case<expected>.List, %case<description>).map(*.raku));
+      cmp-ok(
+          map-list( %s, -> $x { $x + 1 } ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+  foldl:
+    test: |-
+      my $func = '-> $acc, $el { $el %s $acc }'.sprintf(
+          do given %case<input><function> {
+              when /'*'/ { '*' }
+              when /'+'/ { '+' }
+              when /'/'/ { '/' }
+          }
+      );
+      sprintf(q:to/END/, %case<input><list>.List.raku, %case<input><initial>, $func, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          foldl( %s, %s, %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+  foldr:
+    test: |-
+      my $func = '-> $acc, $el { $el %s $acc }'.sprintf(
+          do given %case<input><function> {
+              when /'*'/ { '*' }
+              when /'+'/ { '+' }
+              when /'/'/ { '/' }
+          }
+      );
+      sprintf(q:to/END/, %case<input><list>.List.raku, %case<input><initial>, $func, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          foldr( %s, %s, %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+  reverse:
+    test: |-
+      sprintf(q:to/END/,
+      cmp-ok(
+          reverse-list( %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+          (
+              %case<input><list>.map({
+                  when Positional {
+                      .map(&?BLOCK).List;
+                  }
+                  default {$_}
+              }).List,
+              %case<expected>.map({
+                  when Positional {
+                      .map(&?BLOCK).List;
+                  }
+                  default {$_}
+              }).List,
+              %case<description>,
+          ).map(*.raku)
+      );
+
+unit: module
+
+example: |-
+  multi concatenate-lists (@list1, @list2) is export {
+      return @list1, @list2;
+  }
+
+  multi concatenate-lists (@lists) is export {
+      return |@lists;
+  }
+
+stub: |-
+  sub foo () is export {
+  }

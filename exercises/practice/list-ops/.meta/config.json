@@ -1,0 +1,15 @@
+{
+  "authors": [],
+  "files": {
+    "solution": [
+      "lib/ListOps.rakumod"
+    ],
+    "test": [
+      "t/list-ops.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/ListOps.rakumod"
+    ]
+  },
+  "blurb": "Implement basic list operations."
+}
