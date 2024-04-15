@@ -61,15 +61,50 @@ properties:
 
   map:
     test: |-
-      'flunk;'
+      sprintf(q:to/END/, (%case<input><list>.List, %case<expected>.List, %case<description>).map(*.raku));
+      cmp-ok(
+          map-list( %s, -> $x { $x + 1 } ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
 
   foldl:
     test: |-
-      'flunk;'
+      my $func = '-> $acc, $el { $el %s $acc }'.sprintf(
+          do given %case<input><function> {
+              when /'*'/ { '*' }
+              when /'+'/ { '+' }
+              when /'/'/ { '/' }
+          }
+      );
+      sprintf(q:to/END/, %case<input><list>.List.raku, %case<input><initial>, $func, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          foldl( %s, %s, %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
 
   foldr:
     test: |-
-      'flunk;'
+      my $func = '-> $acc, $el { $el %s $acc }'.sprintf(
+          do given %case<input><function> {
+              when /'*'/ { '*' }
+              when /'+'/ { '+' }
+              when /'/'/ { '/' }
+          }
+      );
+      sprintf(q:to/END/, %case<input><list>.List.raku, %case<input><initial>, $func, %case<expected>, %case<description>.raku);
+      cmp-ok(
+          foldr( %s, %s, %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
 
   reverse:
     test: |-
