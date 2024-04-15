@@ -1,0 +1,59 @@
+properties:
+  drinksWater:
+    test: |
+      sprintf(q:to/END/, %case<description>.raku);
+      cmp-ok(
+          Water.drinker,
+          "eqv",
+          Norwegian,
+          %s,
+      );
+      END
+
+  ownsZebra:
+    test: |
+      sprintf(q:to/END/, %case<description>.raku);
+      cmp-ok(
+          Zebra.owner,
+          "eqv",
+          Japanese,
+          %s,
+      );
+      END
+
+example: |
+  enum Nationality is export <Englishman Japanese Norwegian Spaniard Ukranian>;
+
+  my role Owned {
+      method owner (::?CLASS:D:) {
+          return Japanese;
+      }
+  }
+
+  my role Drinkable {
+      method drinker (::?CLASS:D:) {
+          return Norwegian;
+      }
+  }
+
+  enum Beverage does Drinkable is export <Coffee Milk OrangeJuice Tea Water>;
+  enum Pet does Owned          is export <Dog Fox Horse Snails Zebra>;
+  enum SmokeBrand                        <Chesterfield Kools LuckyStrike OldGold Parliament>;
+
+stub: |
+  my role Owned {
+      method owner (::?CLASS:D:) {
+          return Nil;
+      }
+  }
+
+  my role Drinkable {
+      method drinker (::?CLASS:D:) {
+          return Nil;
+      }
+  }
+
+  enum Beverage does Drinkable is export <Coffee Milk OrangeJuice Tea Water>;
+  enum Nationality             is export <Englishman Japanese Norwegian Spaniard Ukranian>;
+  enum Pet does Owned          is export <Dog Fox Horse Snails Zebra>;
+  enum SmokeBrand                        <Chesterfield Kools LuckyStrike OldGold Parliament>;
