@@ -12,8 +12,8 @@ my role Drinkable {
     }
 }
 
-enum Beverage does Drinkable is export <Coffee Milk OrangeJuice Tea Water>;
-enum Nationality             is export <Englishman Japanese Norwegian Spaniard Ukranian>;
-enum Pet does Owned          is export <Dog Fox Horse Snails Zebra>;
-enum SmokeBrand                        <Chesterfield Kools LuckyStrike OldGold Parliament>;
+enum Nationality                is export <Englishman Japanese Norwegian Spaniard Ukranian>;
+enum Beverage    does Drinkable is export <Coffee Milk OrangeJuice Tea Water>;
+enum Pet         does Owned     is export <Dog Fox Horse Snails Zebra>;
+enum SmokeBrand                           <Chesterfield Kools LuckyStrike OldGold Parliament>;
 
