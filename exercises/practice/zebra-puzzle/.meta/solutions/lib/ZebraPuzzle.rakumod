@@ -1,19 +1,13 @@
 unit module ZebraPuzzle;
 
-my role Owned {
-    method owner (::?CLASS:D:) {
-        return ::('Japanese');
-    }
-}
+enum Brand       is export <Chesterfield Kools LuckyStrike OldGold Parliament>;
+enum Color       is export <Blue Green Ivory Red Yellow>;
+enum Drink       is export <Coffee Milk OrangeJuice Tea Water>;
+enum Nationality is export <Englishman Japanese Norwegian Spaniard Ukrainian>;
+enum Pet         is export <Dog Fox Horse Snails Zebra>;
 
-my role Drinkable {
-    method drinker (::?CLASS:D:) {
-        return ::('Norwegian');
-    }
+sub get-nationality ($_) is export {
+    when * eqv Water { Norwegian }
+    when * eqv Zebra { Japanese }
 }
-
-enum Nationality                is export <Englishman Japanese Norwegian Spaniard Ukranian>;
-enum Beverage    does Drinkable is export <Coffee Milk OrangeJuice Tea Water>;
-enum Pet         does Owned     is export <Dog Fox Horse Snails Zebra>;
-enum SmokeBrand                           <Chesterfield Kools LuckyStrike OldGold Parliament>;
 

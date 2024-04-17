@@ -3,7 +3,7 @@ properties:
     test: |
       sprintf(q:to/END/, %case<description>.raku);
       cmp-ok(
-          Water.drinker,
+          get-nationality(Water),
           "eqv",
           Norwegian,
           %s,
@@ -14,7 +14,7 @@ properties:
     test: |
       sprintf(q:to/END/, %case<description>.raku);
       cmp-ok(
-          Zebra.owner,
+          get-nationality(Zebra),
           "eqv",
           Japanese,
           %s,
@@ -22,37 +22,23 @@ properties:
       END
 
 example: |
-  my role Owned {
-      method owner (::?CLASS:D:) {
-          return ::('Japanese');
-      }
-  }
+  enum Brand       is export <Chesterfield Kools LuckyStrike OldGold Parliament>;
+  enum Color       is export <Blue Green Ivory Red Yellow>;
+  enum Drink       is export <Coffee Milk OrangeJuice Tea Water>;
+  enum Nationality is export <Englishman Japanese Norwegian Spaniard Ukrainian>;
+  enum Pet         is export <Dog Fox Horse Snails Zebra>;
 
-  my role Drinkable {
-      method drinker (::?CLASS:D:) {
-          return ::('Norwegian');
-      }
+  sub get-nationality ($_) is export {
+      when * eqv Water { Norwegian }
+      when * eqv Zebra { Japanese }
   }
-
-  enum Nationality                is export <Englishman Japanese Norwegian Spaniard Ukranian>;
-  enum Beverage    does Drinkable is export <Coffee Milk OrangeJuice Tea Water>;
-  enum Pet         does Owned     is export <Dog Fox Horse Snails Zebra>;
-  enum SmokeBrand                           <Chesterfield Kools LuckyStrike OldGold Parliament>;
 
 stub: |
-  my role Owned {
-      method owner (::?CLASS:D:) {
-          return Nil;
-      }
-  }
+  enum Brand       is export <Chesterfield Kools LuckyStrike OldGold Parliament>;
+  enum Color       is export <Blue Green Ivory Red Yellow>;
+  enum Drink       is export <Coffee Milk OrangeJuice Tea Water>;
+  enum Nationality is export <Englishman Japanese Norwegian Spaniard Ukrainian>;
+  enum Pet         is export <Dog Fox Horse Snails Zebra>;
 
-  my role Drinkable {
-      method drinker (::?CLASS:D:) {
-          return Nil;
-      }
+  sub get-nationality ($obj) is export {
   }
-
-  enum Nationality                is export <Englishman Japanese Norwegian Spaniard Ukranian>;
-  enum Beverage    does Drinkable is export <Coffee Milk OrangeJuice Tea Water>;
-  enum Pet         does Owned     is export <Dog Fox Horse Snails Zebra>;
-  enum SmokeBrand                           <Chesterfield Kools LuckyStrike OldGold Parliament>;
