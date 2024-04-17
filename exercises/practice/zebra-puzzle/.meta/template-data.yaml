@@ -21,7 +21,7 @@ properties:
       );
       END
 
-example: |
+example: |-
   enum Brand       is export <Chesterfield Kools LuckyStrike OldGold Parliament>;
   enum Color       is export <Blue Green Ivory Red Yellow>;
   enum Drink       is export <Coffee Milk OrangeJuice Tea Water>;
@@ -33,7 +33,7 @@ example: |
       when * eqv Zebra { Japanese }
   }
 
-stub: |
+stub: |-
   enum Brand       is export <Chesterfield Kools LuckyStrike OldGold Parliament>;
   enum Color       is export <Blue Green Ivory Red Yellow>;
   enum Drink       is export <Coffee Milk OrangeJuice Tea Water>;

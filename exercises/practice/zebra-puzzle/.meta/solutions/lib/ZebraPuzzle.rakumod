@@ -10,4 +10,3 @@ sub get-nationality ($_) is export {
     when * eqv Water { Norwegian }
     when * eqv Zebra { Japanese }
 }
-

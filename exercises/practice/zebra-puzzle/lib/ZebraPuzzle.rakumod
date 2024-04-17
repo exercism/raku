@@ -8,4 +8,3 @@ enum Pet         is export <Dog Fox Horse Snails Zebra>;
 
 sub get-nationality ($obj) is export {
 }
-
