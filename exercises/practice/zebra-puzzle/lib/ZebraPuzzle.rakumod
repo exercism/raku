@@ -6,5 +6,5 @@ enum Drink       is export <Coffee Milk OrangeJuice Tea Water>;
 enum Nationality is export <Englishman Japanese Norwegian Spaniard Ukrainian>;
 enum Pet         is export <Dog Fox Horse Snails Zebra>;
 
-sub get-nationality ($obj) is export {
+sub get-nationality ($subject) is export {
 }
