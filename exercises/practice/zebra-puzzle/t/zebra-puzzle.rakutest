@@ -1,0 +1,20 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use ZebraPuzzle;
+
+cmp-ok( # begin: 16efb4e4-8ad7-4d5e-ba96-e5537b66fd42
+    get-nationality(Water),
+    "eqv",
+    Norwegian,
+    "resident who drinks water",
+); # end: 16efb4e4-8ad7-4d5e-ba96-e5537b66fd42
+
+cmp-ok( # begin: 084d5b8b-24e2-40e6-b008-c800da8cd257
+    get-nationality(Zebra),
+    "eqv",
+    Japanese,
+    "resident who owns zebra",
+); # end: 084d5b8b-24e2-40e6-b008-c800da8cd257
+
+done-testing;

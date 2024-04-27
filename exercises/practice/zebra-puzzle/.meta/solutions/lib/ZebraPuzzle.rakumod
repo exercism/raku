@@ -1,0 +1,50 @@
+unit module ZebraPuzzle;
+
+enum Brand       is export <Chesterfield Kools LuckyStrike OldGold Parliament>;
+enum Color       is export <Blue Green Ivory Red Yellow>;
+enum Drink       is export <Coffee Milk OrangeJuice Tea Water>;
+enum Nationality is export <Englishman Japanese Norwegian Spaniard Ukrainian>;
+enum Pet         is export <Dog Fox Horse Snails Zebra>;
+
+sub get-nationality ($subject) is export {
+    # Implementation incomplete but at a point where the necessary answers are known.
+
+    my @combinations = [X∪] Nationality::.values, Drink::.values, Pet::.values, Brand::.values, Color::.values;
+    @combinations.=grep({
+        $_ ∋ none(
+            Englishman^Red,
+            Spaniard^Dog,
+            Coffee^Green,
+            Ukrainian^Tea,
+            OldGold^Snails,
+            Kools^Yellow,
+            LuckyStrike^OrangeJuice,
+            Japanese^Parliament,
+            Chesterfield&Fox,
+            Kools&Horse,
+            # 1st = Nor <> Blue <> Milk = 3rd | Ivory <> Green
+            Norwegian&any(Blue, Milk, Ivory, Green),
+            Milk&Blue,
+        )
+    }); 
+
+    my @first = @combinations.grep(* ∋ Norwegian);
+    # Yellow, Kools, Norwegian, Water, (Fox | Zebra)
+
+    return Norwegian if $subject eqv Water;
+
+    @combinations.=grep({ $_ ∋ ([∩] @first).keys.none });
+
+    my @second = @combinations.grep({$_ ∋ Blue&Horse});
+    # Blue, Chesterfield, Horse, Tea, Ukrainian
+
+    @combinations.=grep({ $_ ∋ ([∩] @second).keys.none });
+
+    # Chesterfield next to Fox
+    my @right = @combinations.grep({$_ ∋ Green && $_ ∌ Fox});
+    # Coffee, Green, Japanese, Parliament, Zebra
+
+    return Japanese if $subject eqv Zebra;
+
+    die 'Nationality unknown';
+}
