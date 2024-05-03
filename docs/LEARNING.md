@@ -10,7 +10,7 @@ The [Resources](https://raku.org/resources/) page on [raku.org](https://raku.org
 
 ## From ... to Raku in a Nutshell
 
-* [Java Script](https://docs.raku.org/language/js-nutshell)
+* [JavaScript](https://docs.raku.org/language/js-nutshell)
 * [Python](https://docs.raku.org/language/py-nutshell)
 * [Ruby](https://docs.raku.org/language/rb-nutshell)
 * [Haskell](https://docs.raku.org/language/haskell-to-p6)
