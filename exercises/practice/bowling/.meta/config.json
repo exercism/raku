@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "m-dango"
+  ],
+  "files": {
+    "solution": [
+      "lib/Bowling.rakumod"
+    ],
+    "test": [
+      "t/bowling.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/Bowling.rakumod"
+    ]
+  },
+  "blurb": "Score a bowling game.",
+  "source": "The Bowling Game Kata from UncleBob",
+  "source_url": "https://web.archive.org/web/20221001111000/http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata"
+}

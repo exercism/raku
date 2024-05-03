@@ -10,13 +10,13 @@
   ],
   "files": {
     "solution": [
-      "Robot.rakumod"
+      "lib/Robot.rakumod"
     ],
     "test": [
-      "robot-name.rakutest"
+      "t/robot-name.rakutest"
     ],
     "example": [
-      ".meta/solutions/Robot.rakumod"
+      ".meta/solutions/lib/Robot.rakumod"
     ]
   },
   "blurb": "Manage robot factory settings.",

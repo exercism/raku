@@ -1,0 +1,21 @@
+{
+  "authors": [
+    "m-dango"
+  ],
+  "contributors": [
+    "rcmlz"
+  ],
+  "files": {
+    "solution": [
+      "lib/ProteinTranslation.rakumod"
+    ],
+    "test": [
+      "t/protein-translation.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/ProteinTranslation.rakumod"
+    ]
+  },
+  "blurb": "Translate RNA sequences into proteins.",
+  "source": "Tyler Long"
+}

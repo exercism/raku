@@ -1,0 +1,340 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use Bowling;
+
+my Bowling $game;
+
+$game.=new; # begin: 656ae006-25c2-438c-a549-f338e7ec7441
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    0,
+    "should be able to score a game with all zeros",
+); # end: 656ae006-25c2-438c-a549-f338e7ec7441
+
+$game.=new; # begin: f85dcc56-cd6b-4875-81b3-e50921e3597b
+for (3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    90,
+    "should be able to score a game with no strikes or spares",
+); # end: f85dcc56-cd6b-4875-81b3-e50921e3597b
+
+$game.=new; # begin: d1f56305-3ac2-4fe0-8645-0b37e3073e20
+for (6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    10,
+    "a spare followed by zeros is worth ten points",
+); # end: d1f56305-3ac2-4fe0-8645-0b37e3073e20
+
+$game.=new; # begin: 0b8c8bb7-764a-4287-801a-f9e9012f8be4
+for (6, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    16,
+    "points scored in the roll after a spare are counted twice",
+); # end: 0b8c8bb7-764a-4287-801a-f9e9012f8be4
+
+$game.=new; # begin: 4d54d502-1565-4691-84cd-f29a09c65bea
+for (5, 5, 3, 7, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    31,
+    "consecutive spares each get a one roll bonus",
+); # end: 4d54d502-1565-4691-84cd-f29a09c65bea
+
+$game.=new; # begin: e5c9cf3d-abbe-4b74-ad48-34051b2b08c0
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, 7) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    17,
+    "a spare in the last frame gets a one roll bonus that is counted once",
+); # end: e5c9cf3d-abbe-4b74-ad48-34051b2b08c0
+
+$game.=new; # begin: 75269642-2b34-4b72-95a4-9be28ab16902
+for (10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    10,
+    "a strike earns ten points in a frame with a single roll",
+); # end: 75269642-2b34-4b72-95a4-9be28ab16902
+
+$game.=new; # begin: 037f978c-5d01-4e49-bdeb-9e20a2e6f9a6
+for (10, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    26,
+    "points scored in the two rolls after a strike are counted twice as a bonus",
+); # end: 037f978c-5d01-4e49-bdeb-9e20a2e6f9a6
+
+$game.=new; # begin: 1635e82b-14ec-4cd1-bce4-4ea14bd13a49
+for (10, 10, 10, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    81,
+    "consecutive strikes each get the two roll bonus",
+); # end: 1635e82b-14ec-4cd1-bce4-4ea14bd13a49
+
+$game.=new; # begin: e483e8b6-cb4b-4959-b310-e3982030d766
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 7, 1) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    18,
+    "a strike in the last frame gets a two roll bonus that is counted once",
+); # end: e483e8b6-cb4b-4959-b310-e3982030d766
+
+$game.=new; # begin: 9d5c87db-84bc-4e01-8e95-53350c8af1f8
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 7, 3) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    20,
+    "rolling a spare with the two roll bonus does not get a bonus roll",
+); # end: 9d5c87db-84bc-4e01-8e95-53350c8af1f8
+
+$game.=new; # begin: 576faac1-7cff-4029-ad72-c16bcada79b5
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    30,
+    "strikes with the two roll bonus do not get bonus rolls",
+); # end: 576faac1-7cff-4029-ad72-c16bcada79b5
+
+$game.=new; # begin: efb426ec-7e15-42e6-9b96-b4fca3ec2359
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 1) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    31,
+    "last two strikes followed by only last bonus with non strike points",
+); # end: efb426ec-7e15-42e6-9b96-b4fca3ec2359
+
+$game.=new; # begin: 72e24404-b6c6-46af-b188-875514c0377b
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, 10) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    20,
+    "a strike with the one roll bonus after a spare in the last frame does not get a bonus",
+); # end: 72e24404-b6c6-46af-b188-875514c0377b
+
+$game.=new; # begin: 62ee4c72-8ee8-4250-b794-234f1fec17b1
+for (10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    300,
+    "all strikes is a perfect game",
+); # end: 62ee4c72-8ee8-4250-b794-234f1fec17b1
+
+$game.=new; # begin: 1245216b-19c6-422c-b34b-6e4012d7459f
+throws-like(
+    { $game.roll(-1) },
+    X::Bowling::NegativePins,
+    "rolls cannot score negative points",
+    :message(/^ "Negative roll is invalid" $/),
+); # end: 1245216b-19c6-422c-b34b-6e4012d7459f
+
+$game.=new; # begin: 5fcbd206-782c-4faa-8f3a-be5c538ba841
+throws-like(
+    { $game.roll(11) },
+    X::Bowling::TooManyPins,
+    "a roll cannot score more than 10 points",
+    :message(/^ "Pin count exceeds pins on the lane" $/),
+); # end: 5fcbd206-782c-4faa-8f3a-be5c538ba841
+
+$game.=new; # begin: fb023c31-d842-422d-ad7e-79ce1db23c21
+for (5,) -> $pins {
+    $game.roll($pins);
+}
+throws-like(
+    { $game.roll(6) },
+    X::Bowling::TooManyPins,
+    "two rolls in a frame cannot score more than 10 points",
+    :message(/^ "Pin count exceeds pins on the lane" $/),
+); # end: fb023c31-d842-422d-ad7e-79ce1db23c21
+
+$game.=new; # begin: 6082d689-d677-4214-80d7-99940189381b
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10) -> $pins {
+    $game.roll($pins);
+}
+throws-like(
+    { $game.roll(11) },
+    X::Bowling::TooManyPins,
+    "bonus roll after a strike in the last frame cannot score more than 10 points",
+    :message(/^ "Pin count exceeds pins on the lane" $/),
+); # end: 6082d689-d677-4214-80d7-99940189381b
+
+$game.=new; # begin: e9565fe6-510a-4675-ba6b-733a56767a45
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 5) -> $pins {
+    $game.roll($pins);
+}
+throws-like(
+    { $game.roll(6) },
+    X::Bowling::TooManyPins,
+    "two bonus rolls after a strike in the last frame cannot score more than 10 points",
+    :message(/^ "Pin count exceeds pins on the lane" $/),
+); # end: e9565fe6-510a-4675-ba6b-733a56767a45
+
+$game.=new; # begin: 2f6acf99-448e-4282-8103-0b9c7df99c3d
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 6) -> $pins {
+    $game.roll($pins);
+}
+cmp-ok(
+    $game.score,
+    "==",
+    26,
+    "two bonus rolls after a strike in the last frame can score more than 10 points if one is a strike",
+); # end: 2f6acf99-448e-4282-8103-0b9c7df99c3d
+
+$game.=new; # begin: 6380495a-8bc4-4cdb-a59f-5f0212dbed01
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 6) -> $pins {
+    $game.roll($pins);
+}
+throws-like(
+    { $game.roll(10) },
+    X::Bowling::TooManyPins,
+    "the second bonus rolls after a strike in the last frame cannot be a strike if the first one is not a strike",
+    :message(/^ "Pin count exceeds pins on the lane" $/),
+); # end: 6380495a-8bc4-4cdb-a59f-5f0212dbed01
+
+$game.=new; # begin: 2b2976ea-446c-47a3-9817-42777f09fe7e
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10) -> $pins {
+    $game.roll($pins);
+}
+throws-like(
+    { $game.roll(11) },
+    X::Bowling::TooManyPins,
+    "second bonus roll after a strike in the last frame cannot score more than 10 points",
+    :message(/^ "Pin count exceeds pins on the lane" $/),
+); # end: 2b2976ea-446c-47a3-9817-42777f09fe7e
+
+$game.=new; # begin: 29220245-ac8d-463d-bc19-98a94cfada8a
+throws-like(
+    { $game.score },
+    X::Bowling::GameInProgress,
+    "an unstarted game cannot be scored",
+    :message(/^ "Score cannot be taken until the end of the game" $/),
+); # end: 29220245-ac8d-463d-bc19-98a94cfada8a
+
+$game.=new; # begin: 4473dc5d-1f86-486f-bf79-426a52ddc955
+for (0, 0) -> $pins {
+    $game.roll($pins);
+}
+throws-like(
+    { $game.score },
+    X::Bowling::GameInProgress,
+    "an incomplete game cannot be scored",
+    :message(/^ "Score cannot be taken until the end of the game" $/),
+); # end: 4473dc5d-1f86-486f-bf79-426a52ddc955
+
+$game.=new; # begin: 2ccb8980-1b37-4988-b7d1-e5701c317df3
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) -> $pins {
+    $game.roll($pins);
+}
+throws-like(
+    { $game.roll(0) },
+    X::Bowling::GameOver,
+    "cannot roll if game already has ten frames",
+    :message(/^ "Cannot roll after game is over" $/),
+); # end: 2ccb8980-1b37-4988-b7d1-e5701c317df3
+
+$game.=new; # begin: 4864f09b-9df3-4b65-9924-c595ed236f1b
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10) -> $pins {
+    $game.roll($pins);
+}
+throws-like(
+    { $game.score },
+    X::Bowling::GameInProgress,
+    "bonus rolls for a strike in the last frame must be rolled before score can be calculated",
+    :message(/^ "Score cannot be taken until the end of the game" $/),
+); # end: 4864f09b-9df3-4b65-9924-c595ed236f1b
+
+$game.=new; # begin: 537f4e37-4b51-4d1c-97e2-986eb37b2ac1
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10) -> $pins {
+    $game.roll($pins);
+}
+throws-like(
+    { $game.score },
+    X::Bowling::GameInProgress,
+    "both bonus rolls for a strike in the last frame must be rolled before score can be calculated",
+    :message(/^ "Score cannot be taken until the end of the game" $/),
+); # end: 537f4e37-4b51-4d1c-97e2-986eb37b2ac1
+
+$game.=new; # begin: 8134e8c1-4201-4197-bf9f-1431afcde4b9
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3) -> $pins {
+    $game.roll($pins);
+}
+throws-like(
+    { $game.score },
+    X::Bowling::GameInProgress,
+    "bonus roll for a spare in the last frame must be rolled before score can be calculated",
+    :message(/^ "Score cannot be taken until the end of the game" $/),
+); # end: 8134e8c1-4201-4197-bf9f-1431afcde4b9
+
+$game.=new; # begin: 9d4a9a55-134a-4bad-bae8-3babf84bd570
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, 2) -> $pins {
+    $game.roll($pins);
+}
+throws-like(
+    { $game.roll(2) },
+    X::Bowling::GameOver,
+    "cannot roll after bonus roll for spare",
+    :message(/^ "Cannot roll after game is over" $/),
+); # end: 9d4a9a55-134a-4bad-bae8-3babf84bd570
+
+$game.=new; # begin: d3e02652-a799-4ae3-b53b-68582cc604be
+for (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 3, 2) -> $pins {
+    $game.roll($pins);
+}
+throws-like(
+    { $game.roll(2) },
+    X::Bowling::GameOver,
+    "cannot roll after bonus rolls for strike",
+    :message(/^ "Cannot roll after game is over" $/),
+); # end: d3e02652-a799-4ae3-b53b-68582cc604be
+
+done-testing;

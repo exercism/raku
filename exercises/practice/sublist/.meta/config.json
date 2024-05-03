@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "Sublist.rakumod"
+      "lib/Sublist.rakumod"
     ],
     "test": [
-      "sublist.rakutest"
+      "t/sublist.rakutest"
     ],
     "example": [
-      ".meta/solutions/Sublist.rakumod"
+      ".meta/solutions/lib/Sublist.rakumod"
     ]
   },
   "blurb": "Write a function to determine if a list is a sublist of another list."

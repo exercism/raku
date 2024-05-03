@@ -1,0 +1,83 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use ArmstrongNumbers;
+
+cmp-ok( # begin: c1ed103c-258d-45b2-be73-d8c6d9580c7b
+    is-armstrong-number(0),
+    "eqv",
+    True,
+    "Zero is an Armstrong number",
+); # end: c1ed103c-258d-45b2-be73-d8c6d9580c7b
+
+cmp-ok( # begin: 579e8f03-9659-4b85-a1a2-d64350f6b17a
+    is-armstrong-number(5),
+    "eqv",
+    True,
+    "Single-digit numbers are Armstrong numbers",
+); # end: 579e8f03-9659-4b85-a1a2-d64350f6b17a
+
+cmp-ok( # begin: 2d6db9dc-5bf8-4976-a90b-b2c2b9feba60
+    is-armstrong-number(10),
+    "eqv",
+    False,
+    "There are no two-digit Armstrong numbers",
+); # end: 2d6db9dc-5bf8-4976-a90b-b2c2b9feba60
+
+cmp-ok( # begin: 509c087f-e327-4113-a7d2-26a4e9d18283
+    is-armstrong-number(153),
+    "eqv",
+    True,
+    "Three-digit number that is an Armstrong number",
+); # end: 509c087f-e327-4113-a7d2-26a4e9d18283
+
+cmp-ok( # begin: 7154547d-c2ce-468d-b214-4cb953b870cf
+    is-armstrong-number(100),
+    "eqv",
+    False,
+    "Three-digit number that is not an Armstrong number",
+); # end: 7154547d-c2ce-468d-b214-4cb953b870cf
+
+cmp-ok( # begin: 6bac5b7b-42e9-4ecb-a8b0-4832229aa103
+    is-armstrong-number(9474),
+    "eqv",
+    True,
+    "Four-digit number that is an Armstrong number",
+); # end: 6bac5b7b-42e9-4ecb-a8b0-4832229aa103
+
+cmp-ok( # begin: eed4b331-af80-45b5-a80b-19c9ea444b2e
+    is-armstrong-number(9475),
+    "eqv",
+    False,
+    "Four-digit number that is not an Armstrong number",
+); # end: eed4b331-af80-45b5-a80b-19c9ea444b2e
+
+cmp-ok( # begin: f971ced7-8d68-4758-aea1-d4194900b864
+    is-armstrong-number(9926315),
+    "eqv",
+    True,
+    "Seven-digit number that is an Armstrong number",
+); # end: f971ced7-8d68-4758-aea1-d4194900b864
+
+cmp-ok( # begin: 7ee45d52-5d35-4fbd-b6f1-5c8cd8a67f18
+    is-armstrong-number(9926314),
+    "eqv",
+    False,
+    "Seven-digit number that is not an Armstrong number",
+); # end: 7ee45d52-5d35-4fbd-b6f1-5c8cd8a67f18
+
+cmp-ok( # begin: 5ee2fdf8-334e-4a46-bb8d-e5c19c02c148
+    is-armstrong-number(186709961001538790100634132976990),
+    "eqv",
+    True,
+    "Armstrong number containing seven zeroes",
+); # end: 5ee2fdf8-334e-4a46-bb8d-e5c19c02c148
+
+cmp-ok( # begin: 12ffbf10-307a-434e-b4ad-c925680e1dd4
+    is-armstrong-number(115132219018763992565095597973971522401),
+    "eqv",
+    True,
+    "The largest and last Armstrong number",
+); # end: 12ffbf10-307a-434e-b4ad-c925680e1dd4
+
+done-testing;

@@ -1,0 +1,44 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use CollatzConjecture;
+
+cmp-ok( # begin: 540a3d51-e7a6-47a5-92a3-4ad1838f0bfd
+    collatz-conjecture(1),
+    "==",
+    0,
+    "zero steps for one",
+); # end: 540a3d51-e7a6-47a5-92a3-4ad1838f0bfd
+
+cmp-ok( # begin: 3d76a0a6-ea84-444a-821a-f7857c2c1859
+    collatz-conjecture(16),
+    "==",
+    4,
+    "divide if even",
+); # end: 3d76a0a6-ea84-444a-821a-f7857c2c1859
+
+cmp-ok( # begin: 754dea81-123c-429e-b8bc-db20b05a87b9
+    collatz-conjecture(12),
+    "==",
+    9,
+    "even and odd steps",
+); # end: 754dea81-123c-429e-b8bc-db20b05a87b9
+
+cmp-ok( # begin: ecfd0210-6f85-44f6-8280-f65534892ff6
+    collatz-conjecture(1000000),
+    "==",
+    152,
+    "large number of even and odd steps",
+); # end: ecfd0210-6f85-44f6-8280-f65534892ff6
+
+dies-ok( # begin: 2187673d-77d6-4543-975e-66df6c50e2da
+    { collatz-conjecture 0 },
+    "zero is an error",
+); # end: 2187673d-77d6-4543-975e-66df6c50e2da
+
+dies-ok( # begin: ec11f479-56bc-47fd-a434-bcd7a31a7a2e
+    { collatz-conjecture -15 },
+    "negative value is an error",
+); # end: ec11f479-56bc-47fd-a434-bcd7a31a7a2e
+
+done-testing;

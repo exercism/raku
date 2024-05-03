@@ -1,0 +1,69 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use SpaceAge;
+
+cmp-ok( # begin: 84f609af-5a91-4d68-90a3-9e32d8a5cd34
+    age-on(:planet("Earth"), :seconds(1000000000)),
+    "==",
+    31.69,
+    "age on Earth",
+); # end: 84f609af-5a91-4d68-90a3-9e32d8a5cd34
+
+cmp-ok( # begin: ca20c4e9-6054-458c-9312-79679ffab40b
+    age-on(:planet("Mercury"), :seconds(2134835688)),
+    "==",
+    280.88,
+    "age on Mercury",
+); # end: ca20c4e9-6054-458c-9312-79679ffab40b
+
+cmp-ok( # begin: 502c6529-fd1b-41d3-8fab-65e03082b024
+    age-on(:planet("Venus"), :seconds(189839836)),
+    "==",
+    9.78,
+    "age on Venus",
+); # end: 502c6529-fd1b-41d3-8fab-65e03082b024
+
+cmp-ok( # begin: 9ceadf5e-a0d5-4388-9d40-2c459227ceb8
+    age-on(:planet("Mars"), :seconds(2129871239)),
+    "==",
+    35.88,
+    "age on Mars",
+); # end: 9ceadf5e-a0d5-4388-9d40-2c459227ceb8
+
+cmp-ok( # begin: 42927dc3-fe5e-4f76-a5b5-f737fc19bcde
+    age-on(:planet("Jupiter"), :seconds(901876382)),
+    "==",
+    2.41,
+    "age on Jupiter",
+); # end: 42927dc3-fe5e-4f76-a5b5-f737fc19bcde
+
+cmp-ok( # begin: 8469b332-7837-4ada-b27c-00ee043ebcad
+    age-on(:planet("Saturn"), :seconds(2000000000)),
+    "==",
+    2.15,
+    "age on Saturn",
+); # end: 8469b332-7837-4ada-b27c-00ee043ebcad
+
+cmp-ok( # begin: 999354c1-76f8-4bb5-a672-f317b6436743
+    age-on(:planet("Uranus"), :seconds(1210123456)),
+    "==",
+    0.46,
+    "age on Uranus",
+); # end: 999354c1-76f8-4bb5-a672-f317b6436743
+
+cmp-ok( # begin: 80096d30-a0d4-4449-903e-a381178355d8
+    age-on(:planet("Neptune"), :seconds(1821023456)),
+    "==",
+    0.35,
+    "age on Neptune",
+); # end: 80096d30-a0d4-4449-903e-a381178355d8
+
+throws-like( # begin: 57b96e2a-1178-40b7-b34d-f3c9c34e4bf4
+    { age-on(:planet("Sun"), :seconds(680804807)) },
+    Exception,
+    :message("not a planet"),
+    "invalid planet causes error",
+); # end: 57b96e2a-1178-40b7-b34d-f3c9c34e4bf4
+
+done-testing;

@@ -1,0 +1,48 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use RNA;
+
+cmp-ok( # begin: b4631f82-c98c-4a2f-90b3-c5c2b6c6f661
+    to-rna(""),
+    "eq",
+    "",
+    "Empty RNA sequence",
+); # end: b4631f82-c98c-4a2f-90b3-c5c2b6c6f661
+
+cmp-ok( # begin: a9558a3c-318c-4240-9256-5d5ed47005a6
+    to-rna("C"),
+    "eq",
+    "G",
+    "RNA complement of cytosine is guanine",
+); # end: a9558a3c-318c-4240-9256-5d5ed47005a6
+
+cmp-ok( # begin: 6eedbb5c-12cb-4c8b-9f51-f8320b4dc2e7
+    to-rna("G"),
+    "eq",
+    "C",
+    "RNA complement of guanine is cytosine",
+); # end: 6eedbb5c-12cb-4c8b-9f51-f8320b4dc2e7
+
+cmp-ok( # begin: 870bd3ec-8487-471d-8d9a-a25046488d3e
+    to-rna("T"),
+    "eq",
+    "A",
+    "RNA complement of thymine is adenine",
+); # end: 870bd3ec-8487-471d-8d9a-a25046488d3e
+
+cmp-ok( # begin: aade8964-02e1-4073-872f-42d3ffd74c5f
+    to-rna("A"),
+    "eq",
+    "U",
+    "RNA complement of adenine is uracil",
+); # end: aade8964-02e1-4073-872f-42d3ffd74c5f
+
+cmp-ok( # begin: 79ed2757-f018-4f47-a1d7-34a559392dbf
+    to-rna("ACGTGGTCTTAA"),
+    "eq",
+    "UGCACCAGAAUU",
+    "RNA complement",
+); # end: 79ed2757-f018-4f47-a1d7-34a559392dbf
+
+done-testing;

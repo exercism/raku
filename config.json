@@ -20,13 +20,13 @@
   },
   "files": {
     "solution": [
-      "%{pascal_slug}.rakumod"
+      "lib/%{pascal_slug}.rakumod"
     ],
     "test": [
-      "%{kebab_slug}.rakutest"
+      "t/%{kebab_slug}.rakutest"
     ],
     "example": [
-      ".meta/solutions/%{pascal_slug}.rakumod"
+      ".meta/solutions/lib/%{pascal_slug}.rakumod"
     ],
     "exemplar": [
       ".meta/%{pascal_slug}.rakumod"
@@ -361,6 +361,14 @@
         "difficulty": 5
       },
       {
+        "slug": "bowling",
+        "name": "Bowling",
+        "uuid": "a3b551af-9956-4ef0-b169-36d472dcd351",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
+      },
+      {
         "slug": "collatz-conjecture",
         "name": "Collatz Conjecture",
         "uuid": "af004395-69cd-4151-ad42-b9e617abc99d",
@@ -660,6 +668,38 @@
         "slug": "rotational-cipher",
         "name": "Rotational Cipher",
         "uuid": "97aeb214-c566-498d-aa91-33358d105418",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
+      },
+      {
+        "slug": "circular-buffer",
+        "name": "Circular Buffer",
+        "uuid": "2e709c96-56e3-4a48-8948-e180b210e86d",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
+      },
+      {
+        "slug": "parallel-letter-frequency",
+        "name": "Parallel Letter Frequency",
+        "uuid": "e0e62b08-01d7-48a3-ae50-51f4a05ac003",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
+      },
+      {
+        "slug": "protein-translation",
+        "name": "Protein Translation",
+        "uuid": "c446a757-3dad-4455-a633-a3a7873e4405",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
+      },
+      {
+        "slug": "zebra-puzzle",
+        "name": "Zebra Puzzle",
+        "uuid": "8d09fafa-21e0-4a6b-82f3-95d04446fcc5",
         "practices": [],
         "prerequisites": [],
         "difficulty": 1

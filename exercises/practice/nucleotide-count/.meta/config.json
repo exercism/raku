@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "NucleotideCount.rakumod"
+      "lib/NucleotideCount.rakumod"
     ],
     "test": [
-      "nucleotide-count.rakutest"
+      "t/nucleotide-count.rakutest"
     ],
     "example": [
-      ".meta/solutions/NucleotideCount.rakumod"
+      ".meta/solutions/lib/NucleotideCount.rakumod"
     ]
   },
   "blurb": "Given a DNA string, compute how many times each nucleotide occurs in the string.",

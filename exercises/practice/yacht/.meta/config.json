@@ -7,13 +7,13 @@
   ],
   "files": {
     "solution": [
-      "Yacht.rakumod"
+      "lib/Yacht.rakumod"
     ],
     "test": [
-      "yacht.rakutest"
+      "t/yacht.rakutest"
     ],
     "example": [
-      ".meta/solutions/Yacht.rakumod"
+      ".meta/solutions/lib/Yacht.rakumod"
     ]
   },
   "blurb": "Score a single throw of dice in the game Yacht.",

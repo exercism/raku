@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "LargestSeriesProduct.rakumod"
+      "lib/LargestSeriesProduct.rakumod"
     ],
     "test": [
-      "largest-series-product.rakutest"
+      "t/largest-series-product.rakutest"
     ],
     "example": [
-      ".meta/solutions/LargestSeriesProduct.rakumod"
+      ".meta/solutions/lib/LargestSeriesProduct.rakumod"
     ]
   },
   "blurb": "Given a string of digits, calculate the largest product for a contiguous substring of digits of length n.",

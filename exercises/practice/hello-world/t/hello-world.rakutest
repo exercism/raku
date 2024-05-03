@@ -1,0 +1,13 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib'); #`[Look for the module inside the same directory as this test file.]
+use HelloWorld;
+
+cmp-ok( # begin: af9ffe10-dc13-42d8-a742-e7bdafac449d
+    hello,           # Run the 'hello' subroutine, which is imported from your module.
+    "eq",            # The comparison we're using ('eq' for comparing strings).
+    "Hello, World!", # The expected result to compare with 'hello'.
+    "Say Hi!",       # The test description.
+); # end: af9ffe10-dc13-42d8-a742-e7bdafac449d
+
+done-testing;

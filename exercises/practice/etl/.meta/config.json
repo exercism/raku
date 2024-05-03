@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "ETL.rakumod"
+      "lib/ETL.rakumod"
     ],
     "test": [
-      "etl.rakutest"
+      "t/etl.rakutest"
     ],
     "example": [
-      ".meta/solutions/ETL.rakumod"
+      ".meta/solutions/lib/ETL.rakumod"
     ]
   },
   "blurb": "Change the data format for scoring a game to more easily add other languages.",

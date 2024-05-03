@@ -8,13 +8,13 @@
   ],
   "files": {
     "solution": [
-      "Wordy.rakumod"
+      "lib/Wordy.rakumod"
     ],
     "test": [
-      "wordy.rakutest"
+      "t/wordy.rakutest"
     ],
     "example": [
-      ".meta/solutions/Wordy.rakumod"
+      ".meta/solutions/lib/Wordy.rakumod"
     ]
   },
   "blurb": "Parse and evaluate simple math word problems returning the answer as an integer.",

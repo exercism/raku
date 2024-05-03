@@ -11,13 +11,13 @@
   ],
   "files": {
     "solution": [
-      "Anagram.rakumod"
+      "lib/Anagram.rakumod"
     ],
     "test": [
-      "anagram.rakutest"
+      "t/anagram.rakutest"
     ],
     "example": [
-      ".meta/solutions/Anagram.rakumod"
+      ".meta/solutions/lib/Anagram.rakumod"
     ]
   },
   "blurb": "Given a word and a list of possible anagrams, select the correct sublist.",

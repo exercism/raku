@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "BottleSong.rakumod"
+      "lib/BottleSong.rakumod"
     ],
     "test": [
-      "bottle-song.rakutest"
+      "t/bottle-song.rakutest"
     ],
     "example": [
-      ".meta/solutions/BottleSong.rakumod"
+      ".meta/solutions/lib/BottleSong.rakumod"
     ]
   },
   "blurb": "Produce the lyrics to the popular children's repetitive song: Ten Green Bottles.",

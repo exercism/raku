@@ -5,13 +5,13 @@
   ],
   "files": {
     "solution": [
-      "MatchingBrackets.rakumod"
+      "lib/MatchingBrackets.rakumod"
     ],
     "test": [
-      "matching-brackets.rakutest"
+      "t/matching-brackets.rakutest"
     ],
     "example": [
-      ".meta/solutions/MatchingBrackets.rakumod"
+      ".meta/solutions/lib/MatchingBrackets.rakumod"
     ]
   },
   "blurb": "Make sure the brackets and braces all match.",

@@ -7,13 +7,13 @@
   ],
   "files": {
     "solution": [
-      "AffineCipher.rakumod"
+      "lib/AffineCipher.rakumod"
     ],
     "test": [
-      "affine-cipher.rakutest"
+      "t/affine-cipher.rakutest"
     ],
     "example": [
-      ".meta/solutions/AffineCipher.rakumod"
+      ".meta/solutions/lib/AffineCipher.rakumod"
     ]
   },
   "blurb": "Create an implementation of the Affine cipher, an ancient encryption algorithm from the Middle East.",

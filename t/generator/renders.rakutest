@@ -9,7 +9,7 @@ subtest 'Rendered test files' => {
     is .test, q:to/TEST/, 'No data';
       #!/usr/bin/env raku
       use Test;
-      use lib $?FILE.IO.dirname;
+      use lib $?FILE.IO.parent(2).add('lib');
       use TestExercise;
 
       done-testing;
@@ -20,7 +20,7 @@ subtest 'Rendered test files' => {
     is .test, q:to/TEST/, 'A plan';
       #!/usr/bin/env raku
       use Test;
-      use lib $?FILE.IO.dirname;
+      use lib $?FILE.IO.parent(2).add('lib');
       use TestExercise;
       plan 1;
       TEST
@@ -30,7 +30,7 @@ subtest 'Rendered test files' => {
     is .test, q:to/TEST/, 'A test';
       #!/usr/bin/env raku
       use Test;
-      use lib $?FILE.IO.dirname;
+      use lib $?FILE.IO.parent(2).add('lib');
       use TestExercise;
 
       ok True;
@@ -44,7 +44,7 @@ subtest 'Rendered test files' => {
       #!/usr/bin/env raku
       use Test;
       use JSON::Fast;
-      use lib $?FILE.IO.dirname;
+      use lib $?FILE.IO.parent(2).add('lib');
       use TestExercise;
 
       my @test-cases = from-json($=pod[*-1].contents).List;
@@ -66,7 +66,7 @@ subtest 'Rendered test files' => {
       #!/usr/bin/env raku
       use Test;
       use JSON::Fast;
-      use lib $?FILE.IO.dirname;
+      use lib $?FILE.IO.parent(2).add('lib');
       use TestExercise;
 
       my @test-cases = from-json($=pod[*-1].contents).List;

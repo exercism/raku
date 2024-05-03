@@ -33,16 +33,7 @@ has %.cdata = do if ( my $cdata-file = $ProblemSpecsDir.add("exercises/$!exercis
 has Str:D @.case-uuids = do if (
   my $toml-file = $base-dir.add("exercises/practice/$!exercise/.meta/tests.toml")
 ).f {
-  given from-toml($toml-file.slurp) {
-    # TODO: Remove old toml format
-    when .<canonical-tests>:exists {
-      .<canonical-tests>.Set.keys;
-    }
-
-    default {
-      .grep({ .value.<include>:!exists || .value.<include> }).map(*.key);
-    }
-  }
+  from-toml($toml-file.slurp).grep({ .value.<include>:!exists || .value.<include> }).map(*.key);
 } #= e.g. [ '00000000-0000-0000-0000-000000000000' ]
 ;
 
@@ -65,7 +56,7 @@ submethod build-cases ( %obj, Str $description = '' ) {
     }
 
     return %obj<cases>.map({
-      self.&?ROUTINE( $_, $new-desc || $description )
+      self.&samewith( $_, $new-desc || $description )
     }).flat;
   }
   elsif %obj<uuid> ∈ @!case-uuids {
@@ -88,6 +79,9 @@ submethod build-property-tests {
         @output[0] ~= " # begin: %case<uuid>\n";
       }
       @tests.push(@output.join.trim-trailing ~ ' # ' ~ (@output > 1 ?? 'end' !! 'case') ~ ": %case<uuid>\n");
+    }
+    else {
+      @tests.push("flunk; # case: %case<uuid>\n")
     }
   }
   return @tests;
@@ -139,36 +133,54 @@ method create-files ( --> Nil ) {
   my $exercise-dir = $base-dir.add("exercises/practice/$.exercise").mkdir;
 
   # Test
-  my $testfile = $exercise-dir.add("$.exercise.rakutest");
+  my $testdir  = $exercise-dir.add('t');
+  if !$testdir.d {
+    $testdir.mkdir;
+  }
+  my $testfile = $testdir.add("$.exercise.rakutest");
   $testfile.spurt($.test);
   $testfile.chmod(0o755);
 
   # Stub
-  $exercise-dir.add("$.package.rakumod").spurt($.stub);
+  my $stubdir  = $exercise-dir.add('lib');
+  if !$stubdir.d {
+    $stubdir.mkdir;
+  }
+  $stubdir.add("$.package.rakumod").spurt($.stub);
 
   # Examples
   for $.examples.pairs -> $example {
     if $example.key eq 'base' {
+      if !$exercise-dir.add('.meta', 'solutions', 'lib').d {
+        $exercise-dir.add('.meta', 'solutions', 'lib').mkdir;
+      }
+      if !$exercise-dir.add('.meta', 'solutions', 't').d {
+        $exercise-dir.add('.meta', 'solutions', 't').mkdir;
+      }
       ( my $solution-dir = $exercise-dir
-        .add('.meta/solutions') )
-        .mkdir
-        .add("$.package.rakumod")
+        .add('.meta', 'solutions') )
+        .add('lib', "$.package.rakumod")
         .spurt($example.value);
       # This emulates Raku's symlink, which does not yet support non-absolute paths
       try nqp::symlink(
-        "../../$_",
-        nqp::unbox_s( $solution-dir.add($_).absolute )
+        "../../../t/$_",
+        nqp::unbox_s( $solution-dir.add('t', $_).absolute )
       ) given $testfile.basename;
     }
     else {
+      if !$exercise-dir.add('.meta', 'solutions', $example.key, 'lib').d {
+        $exercise-dir.add('.meta', 'solutions', $example.key, 'lib').mkdir;
+      }
+      if !$exercise-dir.add('.meta', 'solutions', $example.key, 't').d {
+        $exercise-dir.add('.meta', 'solutions', $example.key, 't').mkdir;
+      }
       ( my $solution-dir = $exercise-dir
         .add(".meta/solutions/{$example.key}") )
-        .mkdir
-        .add("$.package.rakumod")
+        .add('lib', "$.package.rakumod")
         .spurt($example.value);
       # This emulates Raku's symlink, which does not yet support non-absolute paths
       try nqp::symlink(
-        "../../../$_",
+        "../../../../t/$_",
         nqp::unbox_s( $solution-dir.add($_).absolute )
       ) given $testfile.basename;
     }

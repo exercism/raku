@@ -4,16 +4,15 @@
   ],
   "files": {
     "solution": [
-      "Meetup.rakumod"
+      "lib/Meetup.rakumod"
     ],
     "test": [
-      "meetup.rakutest"
+      "t/meetup.rakutest"
     ],
     "example": [
-      ".meta/solutions/Meetup.rakumod"
+      ".meta/solutions/lib/Meetup.rakumod"
     ]
   },
   "blurb": "Calculate the date of meetups.",
-  "source": "Jeremy Hinegardner mentioned a Boulder meetup that happens on the Wednesteenth of every month",
-  "source_url": "https://twitter.com/copiousfreetime"
+  "source": "Jeremy Hinegardner mentioned a Boulder meetup that happens on the Wednesteenth of every month"
 }

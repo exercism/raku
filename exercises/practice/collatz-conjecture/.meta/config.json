@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "CollatzConjecture.rakumod"
+      "lib/CollatzConjecture.rakumod"
     ],
     "test": [
-      "collatz-conjecture.rakutest"
+      "t/collatz-conjecture.rakutest"
     ],
     "example": [
-      ".meta/solutions/CollatzConjecture.rakumod"
+      ".meta/solutions/lib/CollatzConjecture.rakumod"
     ]
   },
   "blurb": "Calculate the number of steps to reach 1 using the Collatz conjecture.",

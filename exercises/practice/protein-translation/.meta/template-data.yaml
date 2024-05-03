@@ -1,0 +1,50 @@
+properties:
+  proteins:
+    test: |-
+      if %case<expected><error>:exists {
+          sprintf(q:to/END/, (%case<input><strand>, %case<description>).map(*.raku));
+          dies-ok(
+              { protein-translation %s },
+              %s,
+          );
+          END
+      }
+      else {
+          sprintf(q:to/END/, (%case<input><strand>, %case<expected>.List<>, %case<description>).map(*.raku));
+          cmp-ok(
+              protein-translation(%s),
+              "~~",
+              %s,
+              %s,
+          );
+          END
+      }
+
+example: |-
+  my class X::InvalidCodon is Exception {
+      method message {
+          'Invalid codon'
+      }
+  }
+
+  our %PROTEIN is default(X::InvalidCodon) = {
+      Methionine => <AUG>,
+      Phenylalanine => <UUU UUC>,
+      Leucine => <UUA UUG>,
+      Serine => <UCU UCC UCA UCG>,
+      Tyrosine => <UAU UAC>,
+      Cysteine => <UGU UGC>,
+      Tryptophan => <UGG>,
+      STOP => <UAA UAG UGA> }.invert;
+
+  sub protein-translation (Str $rna --> Seq) is export {
+      $rna.comb(3).map: { given %PROTEIN{$_} {
+          when 'STOP' { last }
+          when X::InvalidCodon { $_.new.throw }
+          default { $_ or [] }
+      }}
+  }
+
+stub: |-
+    sub protein-translation ($strand) is export {
+    }

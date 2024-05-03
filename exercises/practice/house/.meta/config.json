@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "House.rakumod"
+      "lib/House.rakumod"
     ],
     "test": [
-      "house.rakutest"
+      "t/house.rakutest"
     ],
     "example": [
-      ".meta/solutions/House.rakumod"
+      ".meta/solutions/lib/House.rakumod"
     ]
   },
   "blurb": "Output the nursery rhyme 'This is the House that Jack Built'.",

@@ -4,13 +4,13 @@
   ],
   "files": {
     "solution": [
-      "KillerSudokuHelper.rakumod"
+      "lib/KillerSudokuHelper.rakumod"
     ],
     "test": [
-      "killer-sudoku-helper.rakutest"
+      "t/killer-sudoku-helper.rakutest"
     ],
     "example": [
-      ".meta/solutions/KillerSudokuHelper.rakumod"
+      ".meta/solutions/lib/KillerSudokuHelper.rakumod"
     ]
   },
   "blurb": "Write a tool that makes it easier to solve Killer Sudokus",
