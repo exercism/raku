@@ -15,7 +15,6 @@ Raku learns from other languages:
 * Strictures and warnings are now automatic, cutting out huge swathes of potential errors.
 * ... and it knows how to do [math](https://docs.raku.org/language/math): ```1/10 * 3 == 0.3 ``` - try that in your favorite language!
 
-
 Raku’s mottos:
 * "Raku is designed to make the easy jobs easy, without making the hard jobs impossible."
 * "There Is More Than One Way To Do It - now with even more -Ofun (optimized for fun) added."
