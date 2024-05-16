@@ -1,6 +1,6 @@
 # About
 
-I doubt you'll ever find a more expressive programming language. [Raku](https://raku.org/) is a modern, multi-paradigm language. Raku offers [procedural](https://docs.raku.org/language/functions), [object-oriented](https://docs.raku.org/language/objects) and [functional programming](https://docs.raku.org/language/functions#Functions_are_first-class_objects) methodologies.
+It may be difficult to find a programming language that is more expressive. [Raku](https://raku.org/) is a modern, multi-paradigm language. Raku offers [procedural](https://docs.raku.org/language/functions), [object-oriented](https://docs.raku.org/language/objects) and [functional programming](https://docs.raku.org/language/functions#Functions_are_first-class_objects) methodologies.
 
 [Curious?](https://raku.org/) Dig deeper in the [documentation](https://docs.raku.org/) or the module [repository](https://raku.land/) (like pypi or CPAN).
 
