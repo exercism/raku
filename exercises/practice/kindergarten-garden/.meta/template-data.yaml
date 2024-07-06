@@ -1,0 +1,39 @@
+properties:
+  plants:
+    test: |-
+      sprintf(q:to/END/, (|(%case<input><diagram student>:p), %case<expected>.List, %case<description>).map(*.raku));
+      cmp-ok(
+          plants( %s, %s ),
+          "~~",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  constant %PLANTS = 
+      :C<clover>,
+      :G<grass>,
+      :R<radishes>,
+      :V<violets>,
+  ;
+
+  sub plants (:$diagram, :$student) is export {
+      return %PLANTS{
+          $diagram
+          .lines
+          .map(*.substr((ord($student) - ord('A')) * 2, 2).comb.Slip)
+      };
+  }
+
+stub: |-
+  constant %PLANTS = 
+      :C<clover>,
+      :G<grass>,
+      :R<radishes>,
+      :V<violets>,
+  ;
+
+  sub plants (:$diagram, :$student) is export {
+  }
