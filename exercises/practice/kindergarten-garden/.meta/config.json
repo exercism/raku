@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "m-dango"
+  ],
+  "files": {
+    "solution": [
+      "lib/KindergartenGarden.rakumod"
+    ],
+    "test": [
+      "t/kindergarten-garden.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/KindergartenGarden.rakumod"
+    ]
+  },
+  "blurb": "Given a diagram, determine which plants each child in the kindergarten class is responsible for.",
+  "source": "Exercise by the JumpstartLab team for students at The Turing School of Software and Design.",
+  "source_url": "https://turing.edu"
+}
