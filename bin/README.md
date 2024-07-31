@@ -15,13 +15,6 @@ If it finds a `canonical-data.json` file for the exercise in question (via `bin/
 
 Example of a yaml file:
 ```yaml
-modules:
-  - use: Data::Dump
-  - use: Foo::Bar
-
-# For class methods
-methods: 'foo bar'
-
 # This is a string containing Raku code, to be inserted before any properties
 tests: |-
   my $baz;

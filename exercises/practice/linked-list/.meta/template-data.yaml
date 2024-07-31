@@ -1,4 +1,3 @@
-methods: push pop shift unshift count delete
 properties:
   list:
     test: |-
@@ -27,6 +26,7 @@ properties:
       }).join("\n") ~ "\n};\n";
 
 unit: class
+
 example: |-
   class Node {
       has Node ( $.head, $.tail ) is rw;

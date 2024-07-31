@@ -1,6 +1,6 @@
 package: Robot
-methods: name reset-name
-tests: |-
+
+tests: |
   srand 1; # begin: 1
   my Robot:D $robot := Robot.new;
   my Str:D @robot-names = $robot.name;
