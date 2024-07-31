@@ -1,6 +1,6 @@
-methods: add roster
 tests: |
   my GradeSchool $grade-school;
+
 properties:
   add:
     test: |-

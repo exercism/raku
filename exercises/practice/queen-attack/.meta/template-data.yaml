@@ -1,7 +1,8 @@
 package: Queen
-methods: can-attack
+
 tests: |
   my Queen %queen;
+
 properties:
   create:
     test: |-

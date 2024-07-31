@@ -78,10 +78,10 @@ submethod build-property-tests {
         @output[0].=trim-trailing;
         @output[0] ~= " # begin: %case<uuid>\n";
       }
-      @tests.push(@output.join.trim-trailing ~ ' # ' ~ (@output > 1 ?? 'end' !! 'case') ~ ": %case<uuid>\n");
+      @tests.push(@output.join.trim-trailing ~ ' # ' ~ (@output > 1 ?? 'end' !! 'case') ~ ": %case<uuid>");
     }
     else {
-      @tests.push("flunk; # case: %case<uuid>\n")
+      @tests.push("flunk; # case: %case<uuid>")
     }
   }
   return @tests;
@@ -112,12 +112,10 @@ method examples ( --> Hash() ) {
 
 method !render ( Str $module_file? --> Str:D ) {
   my %data = %.data;
-  %data<cases>   //= $.json-tests;
   %data<package> //= $.package;
   %data<unit>    //= 'module';
   if %data<properties> {
-    %data<tests> ~= ("\n" if %data<tests>) ~ self.property-tests.join("\n").trim;
-    %data<cases> = Nil;
+    %data<property_tests> = self.property-tests;
   }
 
   Template::Mustache.render(

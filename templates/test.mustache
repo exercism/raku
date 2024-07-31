@@ -1,19 +1,11 @@
 #!/usr/bin/env raku{{=#`{{ }}=}}#`{{! Mustache tags double up as Raku embedded comments}}
-use Test;#`{{#cases}}
-use JSON::Fast;#`{{/cases}}#`{{#modules}}
-use #`{{&use}};#`{{/modules}}
+use Test;
 use lib $?FILE.IO.parent(2).add('lib');#`{{#lib_comment}} #`[#`{{&lib_comment}}]#`{{/lib_comment}}
-use #`{{&package}};#`{{#plan}}
-plan #`{{&plan}};#`{{#plan_comment}} #`[#`{{&plan_comment}}]#`{{/plan_comment}}#`{{/plan}}#`{{#cases}}
+use #`{{&package}};
+#`{{#tests}}
 
-my @test-cases = from-json($=pod[*-1].contents).List;#`{{/cases}}#`{{#tests}}#`{{^cases}}
-#`{{/cases}}
+#`{{&tests}}#`{{/tests}}#`{{#property_tests}}
+#`{{&.}}
+#`{{/property_tests}}
 
-#`{{&tests}}#`{{/tests}}#`{{^plan}}
-
-done-testing;#`{{/plan}}#`{{#cases}}
-
-=head2 Test Cases
-=begin code
-#`{{&cases}}
-=end code#`{{/cases}}
+done-testing;
