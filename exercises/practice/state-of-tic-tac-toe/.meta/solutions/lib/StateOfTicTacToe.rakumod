@@ -1,36 +1,30 @@
 unit module StateOfTicTacToe;
 
-enum Player ( X => '100', O => '010' );
+enum Player < X O >;
 enum State is export < win draw ongoing invalid >;
 
-constant @MASK = < 448 56 7 292 146 73 273 84 >;
-
-multi is-win ( @board ) {
+multi can-win ( @board ) {
     samewith @board, piece => X | O
 }
 
-multi is-win ( @board, :$piece! ) {
-    @board.join
-          .map( *.trans: 'XO ' => $piece.value )
-          .flat
-          .map( *.parse-base: 2 )
-          <<+&<< @MASK
-          >>==<< @MASK
-    andthen *.Bag{ True }.so;
+multi can-win ( @board, :$piece! ) {
+    $piece x 3 ∈ flat @board,
+    @board.map( *.comb ).reduce( &[Z~] ),
+    map *.join, .[0,4,8], .[2,4,6] with @board.join.comb
 }
 
 sub is-invalid ( @board ) {
-    is-win @board, piece => X & O or
-    not 0|1 == [-] @board.map( *.comb ).Bag< X O >
+    can-win @board, piece => X & O or
+    not 0|1 == [-] @board.join.comb.Bag< X O >
 }
 
-sub is-draw ( @board ) {
-    @board.join.contains( none ' ' ) and not is-win @board
+sub has-drawn ( @board ) {
+    @board.join.contains: none ' ' and not can-win @board
 }
 
 sub state-of-tic-tac-toe ( @board ) of State is export {
     when    is-invalid @board { invalid }
-    when    is-draw    @board { draw    }
-    when    is-win     @board { win     }
+    when    has-drawn  @board { draw    }
+    when    can-win    @board { win     }
     default                   { ongoing }
 }
