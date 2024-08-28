@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+  ],
+  "files": {
+    "solution": [
+      "lib/StateOfTicTacToe.rakumod"
+    ],
+    "test": [
+      "t/state-of-tic-tac-toe.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/StateOfTicTacToe.rakumod"
+    ]
+  },
+  "blurb": "Determine the game state of a match of Tic-Tac-Toe.",
+  "source": "Created by Sascha Mann for the Julia track of the Exercism Research Experiment.",
+  "source_url": "https://github.com/exercism/research_experiment_1/tree/julia-dev/exercises/julia-1-a"
+}
