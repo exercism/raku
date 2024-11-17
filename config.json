@@ -719,6 +719,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 1
+      },
+      {
+        "slug": "eliuds-eggs",
+        "name": "Eliud's Eggs",
+        "uuid": "cc172e3c-5537-4de8-9488-ef6db3d7d912",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
       }
     ]
   },
