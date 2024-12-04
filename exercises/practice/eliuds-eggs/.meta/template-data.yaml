@@ -1,0 +1,22 @@
+properties:
+  eggCount:
+    test: |-
+      sprintf(q :to 'END', %case<input><number>.Int, %case<expected>.Int, %case<description>.raku);
+        cmp-ok(
+          count-eggs(%s),
+          "==",
+          %s,
+          %s,
+        );
+        END
+
+
+unit: module
+example: |-
+  sub count-eggs ( $display ) is export {
+    $display.base( 2 ).comb.Bag{ '1' };
+  }
+
+stub: |-
+  sub count-eggs ( $display ) is export {
+  }
