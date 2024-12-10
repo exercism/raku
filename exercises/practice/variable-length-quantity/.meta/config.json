@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+  ],
+  "files": {
+    "solution": [
+      "lib/VariableLengthQuantity.rakumod"
+    ],
+    "test": [
+      "t/variable-length-quantity.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/VariableLengthQuantity.rakumod"
+    ]
+  },
+  "blurb": "Implement variable length quantity encoding and decoding.",
+  "source": "A poor Splice developer having to implement MIDI encoding/decoding.",
+  "source_url": "https://splice.com"
+}
