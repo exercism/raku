@@ -1,0 +1,48 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use Proverb;
+
+cmp-ok( # begin: e974b73e-7851-484f-8d6d-92e07fe742fc
+  recite([]),
+  "eq",
+  "",
+  "zero pieces",
+); # end: e974b73e-7851-484f-8d6d-92e07fe742fc
+
+cmp-ok( # begin: 2fcd5f5e-8b82-4e74-b51d-df28a5e0faa4
+  recite(["nail"]),
+  "eq",
+  "And all for the want of a nail.",
+  "one piece",
+); # end: 2fcd5f5e-8b82-4e74-b51d-df28a5e0faa4
+
+cmp-ok( # begin: d9d0a8a1-d933-46e2-aa94-eecf679f4b0e
+  recite(["nail", "shoe"]),
+  "eq",
+  "For want of a nail the shoe was lost.\nAnd all for the want of a nail.",
+  "two pieces",
+); # end: d9d0a8a1-d933-46e2-aa94-eecf679f4b0e
+
+cmp-ok( # begin: c95ef757-5e94-4f0d-a6cb-d2083f5e5a83
+  recite(["nail", "shoe", "horse"]),
+  "eq",
+  "For want of a nail the shoe was lost.\nFor want of a shoe the horse was lost.\nAnd all for the want of a nail.",
+  "three pieces",
+); # end: c95ef757-5e94-4f0d-a6cb-d2083f5e5a83
+
+cmp-ok( # begin: 433fb91c-35a2-4d41-aeab-4de1e82b2126
+  recite(["nail", "shoe", "horse", "rider", "message", "battle", "kingdom"]),
+  "eq",
+  "For want of a nail the shoe was lost.\nFor want of a shoe the horse was lost.\nFor want of a horse the rider was lost.\nFor want of a rider the message was lost.\nFor want of a message the battle was lost.\nFor want of a battle the kingdom was lost.\nAnd all for the want of a nail.",
+  "full proverb",
+); # end: 433fb91c-35a2-4d41-aeab-4de1e82b2126
+
+cmp-ok( # begin: c1eefa5a-e8d9-41c7-91d4-99fab6d6b9f7
+  recite(["pin", "gun", "soldier", "battle"]),
+  "eq",
+  "For want of a pin the gun was lost.\nFor want of a gun the soldier was lost.\nFor want of a soldier the battle was lost.\nAnd all for the want of a pin.",
+  "four pieces modernized",
+); # end: c1eefa5a-e8d9-41c7-91d4-99fab6d6b9f7
+
+done-testing;
