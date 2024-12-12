@@ -1,5 +1,8 @@
 unit module Proverb;
 
-sub recite (*@nouns --> Str()) is export {
+multi recite ($nouns) is export {
+  ...
+}
+multi recite (@nouns) is export {
   ...
 }
