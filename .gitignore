@@ -3,5 +3,3 @@ bin/configlet
 bin/configlet.exe
 # dir created when a Raku module is used
 .precomp
-.DS_Store
-
