@@ -1,4 +1,4 @@
 unit module Proverb;
 
-sub proverb (@nouns) is export {
+sub recite (@nouns) is export {
 }
