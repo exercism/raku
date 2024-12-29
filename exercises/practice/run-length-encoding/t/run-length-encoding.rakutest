@@ -1,0 +1,97 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use RunLengthEncoding;
+
+cmp-ok( # begin: ad53b61b-6ffc-422f-81a6-61f7df92a231
+  rle-encode(""),
+  "eq",
+  "",
+  "run-length encode a string: empty string",
+); # end: ad53b61b-6ffc-422f-81a6-61f7df92a231
+
+cmp-ok( # begin: 52012823-b7e6-4277-893c-5b96d42f82de
+  rle-encode("XYZ"),
+  "eq",
+  "XYZ",
+  "run-length encode a string: single characters only are encoded without count",
+); # end: 52012823-b7e6-4277-893c-5b96d42f82de
+
+cmp-ok( # begin: b7868492-7e3a-415f-8da3-d88f51f80409
+  rle-encode("AABBBCCCC"),
+  "eq",
+  "2A3B4C",
+  "run-length encode a string: string with no single characters",
+); # end: b7868492-7e3a-415f-8da3-d88f51f80409
+
+cmp-ok( # begin: 859b822b-6e9f-44d6-9c46-6091ee6ae358
+  rle-encode("WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB"),
+  "eq",
+  "12WB12W3B24WB",
+  "run-length encode a string: single characters mixed with repeated characters",
+); # end: 859b822b-6e9f-44d6-9c46-6091ee6ae358
+
+cmp-ok( # begin: 1b34de62-e152-47be-bc88-469746df63b3
+  rle-encode("  hsqq qww  "),
+  "eq",
+  "2 hs2q q2w2 ",
+  "run-length encode a string: multiple whitespace mixed in string",
+); # end: 1b34de62-e152-47be-bc88-469746df63b3
+
+cmp-ok( # begin: abf176e2-3fbd-40ad-bb2f-2dd6d4df721a
+  rle-encode("aabbbcccc"),
+  "eq",
+  "2a3b4c",
+  "run-length encode a string: lowercase characters",
+); # end: abf176e2-3fbd-40ad-bb2f-2dd6d4df721a
+
+cmp-ok( # begin: 7ec5c390-f03c-4acf-ac29-5f65861cdeb5
+  rle-decode(""),
+  "eq",
+  "",
+  "run-length decode a string: empty string",
+); # end: 7ec5c390-f03c-4acf-ac29-5f65861cdeb5
+
+cmp-ok( # begin: ad23f455-1ac2-4b0e-87d0-b85b10696098
+  rle-decode("XYZ"),
+  "eq",
+  "XYZ",
+  "run-length decode a string: single characters only",
+); # end: ad23f455-1ac2-4b0e-87d0-b85b10696098
+
+cmp-ok( # begin: 21e37583-5a20-4a0e-826c-3dee2c375f54
+  rle-decode("2A3B4C"),
+  "eq",
+  "AABBBCCCC",
+  "run-length decode a string: string with no single characters",
+); # end: 21e37583-5a20-4a0e-826c-3dee2c375f54
+
+cmp-ok( # begin: 1389ad09-c3a8-4813-9324-99363fba429c
+  rle-decode("12WB12W3B24WB"),
+  "eq",
+  "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB",
+  "run-length decode a string: single characters with repeated characters",
+); # end: 1389ad09-c3a8-4813-9324-99363fba429c
+
+cmp-ok( # begin: 3f8e3c51-6aca-4670-b86c-a213bf4706b0
+  rle-decode("2 hs2q q2w2 "),
+  "eq",
+  "  hsqq qww  ",
+  "run-length decode a string: multiple whitespace mixed in string",
+); # end: 3f8e3c51-6aca-4670-b86c-a213bf4706b0
+
+cmp-ok( # begin: 29f721de-9aad-435f-ba37-7662df4fb551
+  rle-decode("2a3b4c"),
+  "eq",
+  "aabbbcccc",
+  "run-length decode a string: lowercase string",
+); # end: 29f721de-9aad-435f-ba37-7662df4fb551
+
+cmp-ok( # begin: 2a762efd-8695-4e04-b0d6-9736899fbc16
+  rle-decode(rle-encode("zzz ZZ  zZ")),
+  "eq",
+  "zzz ZZ  zZ",
+  "encode and then decode: encode followed by decode gives original string",
+); # end: 2a762efd-8695-4e04-b0d6-9736899fbc16
+
+done-testing;

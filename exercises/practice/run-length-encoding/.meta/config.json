@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+  ],
+  "files": {
+    "solution": [
+      "lib/RunLengthEncoding.rakumod"
+    ],
+    "test": [
+      "t/run-length-encoding.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/RunLengthEncoding.rakumod"
+    ]
+  },
+  "blurb": "Implement run-length encoding and decoding.",
+  "source": "Wikipedia",
+  "source_url": "https://en.wikipedia.org/wiki/Run-length_encoding"
+}
