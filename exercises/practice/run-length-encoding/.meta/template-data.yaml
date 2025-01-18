@@ -1,0 +1,64 @@
+properties:
+  encode:
+    test: |-
+      sprintf(q :to 'END', %case<input><string>.Str.raku, %case<expected>.Str.raku, %case<description>.raku);
+        cmp-ok(
+          rle-encode(%s),
+          "eq",
+          %s,
+          %s,
+        );
+        END
+  decode:
+    test: |-
+      sprintf(q :to 'END', %case<input><string>.Str.raku, %case<expected>.Str.raku, %case<description>.raku);
+        cmp-ok(
+          rle-decode(%s),
+          "eq",
+          %s,
+          %s,
+        );
+        END
+  consistency:
+    test: |-
+      sprintf(q :to 'END', %case<input><string>.Str.raku, %case<expected>.Str.raku, %case<description>.raku);
+        cmp-ok(
+          rle-decode(rle-encode(%s)),
+          "eq",
+          %s,
+          %s,
+        );
+        END
+
+unit: module
+example: |-
+  grammar RLE {
+    token TOP     { <pair>+            }
+    token pair    { <tally>? <element> }
+    token tally   { <digit>+           }
+    token element { <alpha> | ' '      }
+  }
+  class RLE::Decode {
+    method TOP     ($/) { make $<pair>.map( *.made ).join               }
+    method pair    ($/) { make $<element>.made x ( $<tally>.made // 1 ) }
+    method tally   ($/) { make $/.Int                                   }
+    method element ($/) { make $/.Str                                   }
+  }
+  sub rle-decode ($compressed) is export {
+    RLE.parse( $compressed, actions => RLE::Decode ).made
+  }
+  sub rle-encode ($raw) is export {
+    given $raw.comb( / ( [<digit>+]? ) [<alpha> | ' ']+ % <same> / )
+       .map( { .chars == 1 ?? $_ !! .chars ~ .comb.head } )
+       .join
+    -> $compressed {
+      fail unless $raw eq rle-decode($compressed);
+      return $compressed
+    }
+  }
+
+stub: |-
+  sub rle-encode ($raw) is export {
+  }
+  sub rle-decode ($compressed) is export {
+  }
