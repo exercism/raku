@@ -1,0 +1,42 @@
+properties:
+  encode:
+    test: |-
+      sprintf(q :to 'END', %case<input><msg>.Str, %case<input><rails>.Int, %case<expected>.Str, %case<description>.raku);
+        cmp-ok(
+          zigzag-encode('%s', %s),
+          'eq',
+          '%s',
+          %s,
+        );
+        END
+  decode:
+    test: |-
+      sprintf(q :to 'END', %case<input><msg>.Str, %case<input><rails>.Int, %case<expected>.Str, %case<description>.raku);
+        cmp-ok(
+          zigzag-decode('%s', %s),
+          'eq',
+          '%s',
+          %s,
+        );
+        END
+
+
+unit: module
+example: |-
+  sub index-map ($len, $rails, @rect=[], @indexes = [...] (0, $rails.pred).Slip xx $len div $rails){
+    @rect[ $_ ; @indexes[$_] ] = $_ for ^$len;
+    grep Int, flat roundrobin @rect.List;
+  }
+  sub invert-map { @_.pairs.sort( *.value ).map: *.key }
+  sub zigzag-encode ( $plain-text, $rails ) is export {
+    join '', grep Str, flat roundrobin $plain-text.comb[ index-map( $plain-text.chars, $rails) ]
+  }
+  sub zigzag-decode ( $cipher-text, $rails ) is export {
+    $cipher-text.comb[ invert-map index-map($cipher-text.chars, $rails) ].join
+  }
+
+stub: |-
+  sub zigzag-encode ( $plain-text, $rails ) is export {
+  }
+  sub zigzag-decode ( $cipher-text, $rails ) is export {
+  }
