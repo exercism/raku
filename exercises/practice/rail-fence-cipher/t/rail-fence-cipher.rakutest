@@ -1,0 +1,48 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use RailFenceCipher;
+
+cmp-ok( # begin: 46dc5c50-5538-401d-93a5-41102680d068
+  zigzag-encode('XOXOXOXOXOXOXOXOXO', 2),
+  'eq',
+  'XXXXXXXXXOOOOOOOOO',
+  "encode: encode with two rails",
+); # end: 46dc5c50-5538-401d-93a5-41102680d068
+
+cmp-ok( # begin: 25691697-fbd8-4278-8c38-b84068b7bc29
+  zigzag-encode('WEAREDISCOVEREDFLEEATONCE', 3),
+  'eq',
+  'WECRLTEERDSOEEFEAOCAIVDEN',
+  "encode: encode with three rails",
+); # end: 25691697-fbd8-4278-8c38-b84068b7bc29
+
+cmp-ok( # begin: 384f0fea-1442-4f1a-a7c4-5cbc2044002c
+  zigzag-encode('EXERCISES', 4),
+  'eq',
+  'ESXIEECSR',
+  "encode: encode with ending in the middle",
+); # end: 384f0fea-1442-4f1a-a7c4-5cbc2044002c
+
+cmp-ok( # begin: cd525b17-ec34-45ef-8f0e-4f27c24a7127
+  zigzag-decode('TEITELHDVLSNHDTISEIIEA', 3),
+  'eq',
+  'THEDEVILISINTHEDETAILS',
+  "decode: decode with three rails",
+); # end: cd525b17-ec34-45ef-8f0e-4f27c24a7127
+
+cmp-ok( # begin: dd7b4a98-1a52-4e5c-9499-cbb117833507
+  zigzag-decode('EIEXMSMESAORIWSCE', 5),
+  'eq',
+  'EXERCISMISAWESOME',
+  "decode: decode with five rails",
+); # end: dd7b4a98-1a52-4e5c-9499-cbb117833507
+
+cmp-ok( # begin: 93e1ecf4-fac9-45d9-9cd2-591f47d3b8d3
+  zigzag-decode('133714114238148966225439541018335470986172518171757571896261', 6),
+  'eq',
+  '112358132134558914423337761098715972584418167651094617711286',
+  "decode: decode with six rails",
+); # end: 93e1ecf4-fac9-45d9-9cd2-591f47d3b8d3
+
+done-testing;
