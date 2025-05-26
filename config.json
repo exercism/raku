@@ -759,6 +759,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 1
+      },
+      {
+        "slug": "ocr-numbers",
+        "name": "OCR Numbers",
+        "uuid": "00f7b37c-b460-47ed-949e-d62469d8d6d5",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
       }
     ]
   },
