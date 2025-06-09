@@ -6,9 +6,9 @@ tests: |
 properties:
   empty:
     test: |-
-      sprintf(q:to/END/, map *.raku, %case<input><set>.Set, %case<expected>, %case<description>);
+      sprintf(q:to/END/, map *.raku, %case<input><set>, %case<expected>, %case<description>);
         cmp-ok(
-          $ensemble.new(elements => %s).is-empty,
+          $ensemble.new(elements => %s.Set).is-empty,
           'eqv',
           %s,
           %s,
@@ -16,9 +16,9 @@ properties:
         END
   contains:
     test: |-
-      sprintf(q:to/END/, map *.raku, %case<input><set>.Set, %case<input><element>.Int, %case<expected>, %case<description>);
+      sprintf(q:to/END/, map *.raku, %case<input><set>, %case<input><element>.Int, %case<expected>, %case<description>);
         cmp-ok(
-          $ensemble.new(elements => %s).contains(%s),
+          $ensemble.new(elements => %s.Set).contains(%s),
           'eqv',
           %s,
           %s,
@@ -26,9 +26,9 @@ properties:
         END
   subset:
     test: |-
-      sprintf(q:to/END/, map *.raku, %case<input><set1>.Set, %case<input><set2>.Set, %case<expected>, %case<description>);
+      sprintf(q:to/END/, map *.raku, %case<input><set1>, %case<input><set2>, %case<expected>, %case<description>);
         cmp-ok(
-          $ensemble.new(elements => %s).has-subset(%s),
+          $ensemble.new(elements => %s.Set).has-subset(%s.Set),
           'eqv',
           %s,
           %s,
@@ -36,9 +36,9 @@ properties:
         END
   disjoint:
     test: |-
-      sprintf(q:to/END/, map *.raku, %case<input><set1>.Set, %case<input><set2>.Set, %case<expected>, %case<description>);
+      sprintf(q:to/END/, map *.raku, %case<input><set1>, %case<input><set2>, %case<expected>, %case<description>);
       cmp-ok(
-        $ensemble.new(elements => %s).is-disjoint(%s),
+        $ensemble.new(elements => %s.Set).is-disjoint(%s.Set),
         'eqv',
         %s,
         %s,
@@ -46,9 +46,9 @@ properties:
       END
   equal:
     test: |-
-      sprintf(q:to/END/, map *.raku, %case<input><set1>.Set, %case<input><set2>.Set, %case<expected>, %case<description>);
+      sprintf(q:to/END/, map *.raku, %case<input><set1>, %case<input><set2>, %case<expected>, %case<description>);
         cmp-ok(
-          $ensemble.new(elements => %s).is-equal(%s),
+          $ensemble.new(elements => %s.Set).is-equal(%s.Set),
           'eqv',
           %s,
           %s,
@@ -56,41 +56,49 @@ properties:
         END
   add:
     test: |-
-      sprintf(q:to/END/, map *.raku, %case<input><set>.Set, %case<input><element>.Int, %case<expected>.Set, %case<description>);
+      sprintf(q:to/END/, map *.raku, %case<input><set>, %case<input><element>.Int, %case<expected>, %case<description>);
         cmp-ok(
-          $ensemble.new(elements => %s).add(%s),
-          'eqv',
-          %s,
+          $ensemble.new(elements => %s.Set).add(%s),
+          '≡',
+          %s.Set,
           %s,
         );
         END
   intersection:
     test: |-
-      sprintf(q:to/END/, map *.raku, %case<input><set1>.Set, %case<input><set2>.Set, %case<expected>.Set, %case<description>);
+      sprintf(q:to/END/, map *.raku, %case<input><set1>, %case<input><set2>, %case<expected>, %case<description>);
         cmp-ok(
-          $ensemble.new(elements => %s).intersection(%s),
-          'eqv',
-          %s,
+          $ensemble.new(elements => %s.Set).intersection(%s.Set),
+          '≡',
+          %s.Set,
           %s,
         );
         END
   difference:
     test: |-
-      sprintf(q:to/END/, map *.raku, %case<input><set1>.Set, %case<input><set2>.Set, %case<expected>.Set, %case<description>);
+      sprintf(q:to/END/, map *.raku, %case<input><set1>, %case<input><set2>, %case<expected>, %case<description>);
         cmp-ok(
-          $ensemble.new(elements => %s).compliment(%s),
-          'eqv',
+          $ensemble.new(elements => %s.Set).difference(%s.Set),
+          '≡',
+          %s.Set,
           %s,
+        );
+        END
+      sprintf(q:to/END/, map *.raku, %case<input><set1>, %case<input><set2>, %case<expected>, %case<description>);
+        cmp-ok(
+          $ensemble.new(elements => %s.Set).complement(%s.Set),
+          '≡',
+          %s.Set,
           %s,
         );
         END
   union:
     test: |-
-      sprintf(q:to/END/, map *.raku, %case<input><set1>.Set, %case<input><set2>.Set, %case<expected>.Set, %case<description>);
+      sprintf(q:to/END/, map *.raku, %case<input><set1>, %case<input><set2>, %case<expected>, %case<description>);
         cmp-ok(
-          $ensemble.new(elements => %s).union(%s),
-          'eqv',
-          %s,
+          $ensemble.new(elements => %s.Set).union(%s.Set),
+          '≡',
+          %s.Set,
           %s,
         );
         END
@@ -120,8 +128,11 @@ example: |-
   method intersection ($set) {
     $!elements ∩= $set
   }
-  method compliment ($set) {
+  method difference ($set) {
     self.elements ∖ $set
+  }
+  method complement ($set) {
+    self.difference($set)
   }
   method union ($set) {
     self.add($set)
@@ -144,7 +155,9 @@ stub: |-
   }
   method intersection ($set) {
   }
-  method compliment ($set) {
+  method difference ($set) {
+  }
+  method complement ($set) {
   }
   method union ($set) {
   }

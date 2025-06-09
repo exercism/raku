@@ -23,8 +23,11 @@ method add ($set) {
 method intersection ($set) {
   $!elements ∩= $set
 }
-method compliment ($set) {
+method difference ($set) {
   self.elements ∖ $set
+}
+method complement ($set) {
+  self.difference($set)
 }
 method union ($set) {
   self.add($set)

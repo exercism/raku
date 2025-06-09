@@ -16,7 +16,9 @@ method add ($element) {
 }
 method intersection ($set) {
 }
-method compliment ($set) {
+method difference ($set) {
+}
+method complement ($set) {
 }
 method union ($set) {
 }
