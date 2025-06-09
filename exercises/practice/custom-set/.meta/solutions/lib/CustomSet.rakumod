@@ -9,7 +9,7 @@ method contains ($element) {
   $element ∈ self.elements
 }
 method has-subset ($set) {
-  self.elements ⊆ $set 
+  self.elements ⊆ $set
 }
 method is-disjoint ($set) {
   self.intersection($set) eqv ∅
