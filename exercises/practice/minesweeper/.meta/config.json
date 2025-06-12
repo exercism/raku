@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+    ],
+  "files": {
+    "solution": [
+      "lib/Minesweeper.rakumod"
+    ],
+    "test": [
+      "t/minesweeper.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/Minesweeper.rakumod"
+    ]
+  },
+  "blurb": "Add the numbers to a minesweeper board."
+}
