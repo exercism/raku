@@ -12,17 +12,17 @@ properties:
 
 unit: module
 example: |-
-  sub demine (@board, @offsets = cross -1..1, -1..1) of Array() is export {
-    return @board unless @board.defined and @board ne "";
-    my @coords = gather take [.comb] for @board;
-    for ^@coords.elems X ^@coords.head.elems -> ($x, $y) {
-      next unless @coords[$x][$y] eq '*';
-      for @offsets.map: {.head+$x, .tail+$y} {
-        next unless .head ∈ ^@coords.elems and .tail ∈ ^@coords.head.elems;
-        @coords[.head][.tail] += 1 unless @coords[.head][.tail] eq '*';
+  sub demine (@board, @near = cross -1..1, -1..1) of Array() is export {
+    .return unless .defined and $_ ne '' given @board;
+    @board = gather take [.comb] for @board;
+    for ^@board.elems X ^@board.head.elems -> ($x,$y) {
+      next unless @board[$x;$y] eq '*';
+      for @near.map: {.head+$x, .tail+$y} {
+        next unless .head ∈ ^@board.elems and .tail ∈ ^@board.head.elems;
+        $_ += 1 unless $_ eq '*' given @board[.head;.tail];
       }
     }
-    return @coords.map: *.join;
+    @board.map: *.join;
   }
 
 stub: |-
