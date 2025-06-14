@@ -8,6 +8,9 @@ for Int, Rat, FatRat {
     bail-out 'Access to the built-in is-prime method has been disabled for this exercise.';
   };
 }
+sub is-prime (*@) {
+  bail-out 'Access to the built-in is-prime subroutine has been disabled for this exercise.';
+}
 
 cmp-ok( # begin: 75c65189-8aef-471a-81de-0a90c728160c
   nth-prime(1),
