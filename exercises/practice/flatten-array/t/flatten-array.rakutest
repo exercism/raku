@@ -46,35 +46,35 @@ cmp-ok( # begin: d572bdba-c127-43ed-bdcd-6222ac83d9f7
 ); # end: d572bdba-c127-43ed-bdcd-6222ac83d9f7
 
 cmp-ok( # begin: 0705a8e5-dc86-4cec-8909-150c5e54fa9c
-    flatten-array([1, 2, Nil]),
+    flatten-array([1, 2, Any]),
     "eqv",
     [1, 2],
     "null values are omitted from the final result",
 ); # end: 0705a8e5-dc86-4cec-8909-150c5e54fa9c
 
 cmp-ok( # begin: c6cf26de-8ccd-4410-84bd-b9efd88fd2bc
-    flatten-array([Nil, Nil, 3]),
+    flatten-array([Any, Any, 3]),
     "eqv",
     [3],
     "consecutive null values at the front of the list are omitted from the final result",
 ); # end: c6cf26de-8ccd-4410-84bd-b9efd88fd2bc
 
 cmp-ok( # begin: 382c5242-587e-4577-b8ce-a5fb51e385a1
-    flatten-array([1, Nil, Nil, 4]),
+    flatten-array([1, Any, Any, 4]),
     "eqv",
     [1, 4],
     "consecutive null values in the middle of the list are omitted from the final result",
 ); # end: 382c5242-587e-4577-b8ce-a5fb51e385a1
 
 cmp-ok( # begin: ef1d4790-1b1e-4939-a179-51ace0829dbd
-    flatten-array([0, 2, [[2, 3], 8, [[100],], Nil, [[Nil],]], -2]),
+    flatten-array([0, 2, [[2, 3], 8, [[100],], Any, [[Any],]], -2]),
     "eqv",
     [0, 2, 2, 3, 8, 100, -2],
     "6 level nest list with null values",
 ); # end: ef1d4790-1b1e-4939-a179-51ace0829dbd
 
 cmp-ok( # begin: 85721643-705a-4150-93ab-7ae398e2942d
-    flatten-array([Nil, [[[Nil],],], Nil, Nil, [[Nil, Nil], Nil], Nil]),
+    flatten-array([Any, [[[Any],],], Any, Any, [[Any, Any], Any], Any]),
     "eqv",
     [],
     "all values in nested list are null",
