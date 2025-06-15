@@ -1,4 +1,4 @@
 unit module Minesweeper;
 
-sub demine (@board) is export {
+sub find-mines (@board) is export {
 }
