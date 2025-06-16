@@ -4,84 +4,84 @@ use lib $?FILE.IO.parent(2).add('lib');
 use Minesweeper;
 
 cmp-ok( # begin: 0c5ec4bd-dea7-4138-8651-1203e1cb9f44
-  find-mines([]),
+  mark-mines([]),
   'eqv',
   [],
   "no rows",
 ); # end: 0c5ec4bd-dea7-4138-8651-1203e1cb9f44
 
 cmp-ok( # begin: 650ac4c0-ad6b-4b41-acde-e4ea5852c3b8
-  find-mines([""]),
+  mark-mines([""]),
   'eqv',
   [""],
   "no columns",
 ); # end: 650ac4c0-ad6b-4b41-acde-e4ea5852c3b8
 
 cmp-ok( # begin: 6fbf8f6d-a03b-42c9-9a58-b489e9235478
-  find-mines(["   ", "   ", "   "]),
+  mark-mines(["   ", "   ", "   "]),
   'eqv',
   ["   ", "   ", "   "],
   "no mines",
 ); # end: 6fbf8f6d-a03b-42c9-9a58-b489e9235478
 
 cmp-ok( # begin: 61aff1c4-fb31-4078-acad-cd5f1e635655
-  find-mines(["***", "***", "***"]),
+  mark-mines(["***", "***", "***"]),
   'eqv',
   ["***", "***", "***"],
   "minefield with only mines",
 ); # end: 61aff1c4-fb31-4078-acad-cd5f1e635655
 
 cmp-ok( # begin: 84167147-c504-4896-85d7-246b01dea7c5
-  find-mines(["   ", " * ", "   "]),
+  mark-mines(["   ", " * ", "   "]),
   'eqv',
   ["111", "1*1", "111"],
   "mine surrounded by spaces",
 ); # end: 84167147-c504-4896-85d7-246b01dea7c5
 
 cmp-ok( # begin: cb878f35-43e3-4c9d-93d9-139012cccc4a
-  find-mines(["***", "* *", "***"]),
+  mark-mines(["***", "* *", "***"]),
   'eqv',
   ["***", "*8*", "***"],
   "space surrounded by mines",
 ); # end: cb878f35-43e3-4c9d-93d9-139012cccc4a
 
 cmp-ok( # begin: 7037f483-ddb4-4b35-b005-0d0f4ef4606f
-  find-mines([" * * "]),
+  mark-mines([" * * "]),
   'eqv',
   ["1*2*1"],
   "horizontal line",
 ); # end: 7037f483-ddb4-4b35-b005-0d0f4ef4606f
 
 cmp-ok( # begin: e359820f-bb8b-4eda-8762-47b64dba30a6
-  find-mines(["*   *"]),
+  mark-mines(["*   *"]),
   'eqv',
   ["*1 1*"],
   "horizontal line, mines at edges",
 ); # end: e359820f-bb8b-4eda-8762-47b64dba30a6
 
 cmp-ok( # begin: c5198b50-804f-47e9-ae02-c3b42f7ce3ab
-  find-mines([" ", "*", " ", "*", " "]),
+  mark-mines([" ", "*", " ", "*", " "]),
   'eqv',
   ["1", "*", "2", "*", "1"],
   "vertical line",
 ); # end: c5198b50-804f-47e9-ae02-c3b42f7ce3ab
 
 cmp-ok( # begin: 0c79a64d-703d-4660-9e90-5adfa5408939
-  find-mines(["*", " ", " ", " ", "*"]),
+  mark-mines(["*", " ", " ", " ", "*"]),
   'eqv',
   ["*", "1", " ", "1", "*"],
   "vertical line, mines at edges",
 ); # end: 0c79a64d-703d-4660-9e90-5adfa5408939
 
 cmp-ok( # begin: 4b098563-b7f3-401c-97c6-79dd1b708f34
-  find-mines(["  *  ", "  *  ", "*****", "  *  ", "  *  "]),
+  mark-mines(["  *  ", "  *  ", "*****", "  *  ", "  *  "]),
   'eqv',
   [" 2*2 ", "25*52", "*****", "25*52", " 2*2 "],
   "cross",
 ); # end: 4b098563-b7f3-401c-97c6-79dd1b708f34
 
 cmp-ok( # begin: 04a260f1-b40a-4e89-839e-8dd8525abe0e
-  find-mines([" *  * ", "  *   ", "    * ", "   * *", " *  * ", "      "]),
+  mark-mines([" *  * ", "  *   ", "    * ", "   * *", " *  * ", "      "]),
   'eqv',
   ["1*22*1", "12*322", " 123*2", "112*4*", "1*22*2", "111111"],
   "large minefield",

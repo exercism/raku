@@ -3,7 +3,7 @@ properties:
     test: |-
       sprintf(q:to/END/, map *.raku, %case<input><minefield>.Array, %case<expected>.Array, %case<description>);
         cmp-ok(
-          find-mines(%s),
+          mark-mines(%s),
           'eqv',
           %s,
           %s,
@@ -12,18 +12,17 @@ properties:
 
 unit: module
 example: |-
-  sub find-mines (@board, @near = cross -1..1, -1..1) of Array() is export {
+  sub mark-mines (@board, @near = cross -1..1, -1..1) of Array() is export {
     return @board if @board eq [];
     my @coords[@board.elems;@board.head.chars] = gather take [.comb] for @board;
-    for ^@coords.shape.head X ^@coords.shape.tail -> ($x,$y) {
-      next unless @coords[$x;$y] eq '*';
+    for map *.key, grep *.value eq '*', pairs @coords -> ($x,$y) {
       for @near.map: {.head+$x, .tail+$y} {
         @coords[.head;.tail] += 1 if try defined @coords[.head;.tail].Numeric
       }
     }
-    @coords.rotor(@coords.shape.tail).map: *.join
+    .batch(.shape.tail).map: *.join with @coords
   }
 
 stub: |-
-  sub find-mines (@board) is export {
+  sub mark-mines (@board) is export {
   }
