@@ -767,6 +767,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 1
+      },
+      {
+        "slug": "flower-field",
+        "name": "Flower Field",
+        "uuid": "2d648900-d336-4086-bb47-a928acf3f18f",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
       }
     ]
   },
