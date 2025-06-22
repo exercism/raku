@@ -1,5 +1,7 @@
 {
-  "authors": [],
+  "authors": [
+    "habere-et-dispertire"
+  ],
   "files": {
     "solution": [
       "lib/FlowerField.rakumod"
