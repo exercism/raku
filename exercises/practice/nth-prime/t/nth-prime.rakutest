@@ -1,0 +1,48 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use NthPrime;
+
+for Int, Rat, FatRat {
+  .^method_table<is-prime>.wrap: method (|) {
+    bail-out 'Access to the built-in is-prime method has been disabled for this exercise.';
+  };
+}
+sub is-prime (*@) {
+  bail-out 'Access to the built-in is-prime subroutine has been disabled for this exercise.';
+}
+
+cmp-ok( # begin: 75c65189-8aef-471a-81de-0a90c728160c
+  nth-prime(1),
+  '==',
+  2,
+  "first prime",
+); # end: 75c65189-8aef-471a-81de-0a90c728160c
+
+cmp-ok( # begin: 2c38804c-295f-4701-b728-56dea34fd1a0
+  nth-prime(2),
+  '==',
+  3,
+  "second prime",
+); # end: 2c38804c-295f-4701-b728-56dea34fd1a0
+
+cmp-ok( # begin: 56692534-781e-4e8c-b1f9-3e82c1640259
+  nth-prime(6),
+  '==',
+  13,
+  "sixth prime",
+); # end: 56692534-781e-4e8c-b1f9-3e82c1640259
+
+cmp-ok( # begin: fce1e979-0edb-412d-93aa-2c744e8f50ff
+  nth-prime(10001),
+  '==',
+  104743,
+  "big prime",
+); # end: fce1e979-0edb-412d-93aa-2c744e8f50ff
+
+dies-ok( # begin: bd0a9eae-6df7-485b-a144-80e13c7d55b2
+  { nth-prime(0) },
+  "there is no zeroth prime",
+); # end: bd0a9eae-6df7-485b-a144-80e13c7d55b2
+
+done-testing;
