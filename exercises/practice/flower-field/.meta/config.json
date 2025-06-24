@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+  ],
+  "files": {
+    "solution": [
+      "lib/FlowerField.rakumod"
+    ],
+    "test": [
+      "t/flower-field.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/FlowerField.rakumod"
+    ]
+  },
+  "blurb": "Mark all the flowers in a garden."
+}
