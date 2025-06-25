@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+    ],
+  "files": {
+    "solution": [
+      "lib/CustomSet.rakumod"
+    ],
+    "test": [
+      "t/custom-set.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/CustomSet.rakumod"
+    ]
+  },
+  "blurb": "Create a custom set type."
+}
