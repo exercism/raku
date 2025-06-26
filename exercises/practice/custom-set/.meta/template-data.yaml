@@ -1,0 +1,158 @@
+Package: CustomSet
+
+tests: |
+  my CustomSet $ensemble;
+properties:
+  empty:
+    test: |-
+      sprintf(q:to/END/, map *.raku, %case<input><set>.Array, %case<expected>, %case<description>);
+        cmp-ok(
+          $ensemble.new(elements => %s.Set).is-empty,
+          'eqv',
+          %s,
+          %s,
+        );
+        END
+  contains:
+    test: |-
+      sprintf(q:to/END/, map *.raku, %case<input><set>.Array, %case<input><element>.Int, %case<expected>, %case<description>);
+        cmp-ok(
+          $ensemble.new(elements => %s.Set).contains(%s),
+          'eqv',
+          %s,
+          %s,
+        );
+        END
+  subset:
+    test: |-
+      sprintf(q:to/END/, map *.raku, %case<input><set1>.Array, %case<input><set2>.Array, %case<expected>, %case<description>);
+        cmp-ok(
+          $ensemble.new(elements => %s.Set).has-subset(%s.Set),
+          'eqv',
+          %s,
+          %s,
+        );
+        END
+  disjoint:
+    test: |-
+      sprintf(q:to/END/, map *.raku, %case<input><set1>.Array, %case<input><set2>.Array, %case<expected>, %case<description>);
+      cmp-ok(
+        $ensemble.new(elements => %s.Set).is-disjoint(%s.Set),
+        'eqv',
+        %s,
+        %s,
+      );
+      END
+  equal:
+    test: |-
+      sprintf(q:to/END/, map *.raku, %case<input><set1>.Array, %case<input><set2>.Array, %case<expected>, %case<description>);
+        cmp-ok(
+          $ensemble.new(elements => %s.Set).is-equal(%s.Set),
+          'eqv',
+          %s,
+          %s,
+        );
+        END
+  add:
+    test: |-
+      sprintf(q:to/END/, map *.raku, %case<input><set>.Array, %case<input><element>.Int, %case<expected>.Array, %case<description>);
+        cmp-ok(
+          $ensemble.new(elements => %s.Set).add(%s),
+          '≡',
+          %s.Set,
+          %s,
+        );
+        END
+  intersection:
+    test: |-
+      sprintf(q:to/END/, map *.raku, %case<input><set1>.Array, %case<input><set2>.Array, %case<expected>.Array, %case<description>);
+        cmp-ok(
+          $ensemble.new(elements => %s.Set).intersection(%s.Set),
+          '≡',
+          %s.Set,
+          %s,
+        );
+        END
+  difference:
+    test: |-
+      sprintf(q:to/END/, map *.raku, %case<input><set1>.Array, %case<input><set2>.Array, %case<expected>.Array, %case<description>);
+        cmp-ok(
+          $ensemble.new(elements => %s.Set).difference(%s.Set),
+          '≡',
+          %s.Set,
+          %s,
+        );
+        END
+      sprintf(q:to/END/, map *.raku, %case<input><set1>.Array, %case<input><set2>.Array, %case<expected>.Array, %case<description>);
+        cmp-ok(
+          $ensemble.new(elements => %s.Set).complement(%s.Set),
+          '≡',
+          %s.Set,
+          %s,
+        );
+        END
+  union:
+    test: |-
+      sprintf(q:to/END/, map *.raku, %case<input><set1>.Array, %case<input><set2>.Array, %case<expected>.Array, %case<description>);
+        cmp-ok(
+          $ensemble.new(elements => %s.Set).union(%s.Set),
+          '≡',
+          %s.Set,
+          %s,
+        );
+        END
+unit: class
+example: |-
+  has Set $.elements;
+  method is-empty {
+    self.elements eqv ∅
+  }
+  method contains ($element) {
+    $element ∈ self.elements
+  }
+  method has-subset ($set) {
+    self.elements ⊆ $set
+  }
+  method is-disjoint ($set) {
+    self.intersection($set) eqv ∅
+  }
+  method is-equal ($set) {
+    self.elements ≡ $set
+  }
+  method add ($set) {
+    $!elements ∪= $set
+  }
+  method intersection ($set) {
+    $!elements ∩= $set
+  }
+  method difference ($set) {
+    self.elements ∖ $set
+  }
+  method complement ($set) {
+    self.difference($set)
+  }
+  method union ($set) {
+    self.add($set)
+  }
+stub: |-
+  has Set $.elements;
+  method is-empty {
+  }
+  method contains ($element) {
+  }
+  method has-subset ($set)  {
+  }
+  method is-disjoint ($set) {
+  }
+  method is-equal ($set) {
+  }
+  method add ($element) {
+  }
+  method intersection ($set) {
+  }
+  method difference ($set) {
+  }
+  method complement ($set) {
+  }
+  method union ($set) {
+  }

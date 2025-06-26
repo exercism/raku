@@ -775,6 +775,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 1
+      },
+      {
+        "slug": "custom-set",
+        "name": "Custom Set",
+        "uuid": "40dedba0-40ee-4752-97b7-2dbaaf39acc6",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
       }
     ]
   },
