@@ -8,18 +8,22 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: ['ubuntu-22.04', 'macos-14']
+        os: ['ubuntu-22.04', 'macos-14', 'windows-2022']
     name: Rakudo Star on ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
-      - name: Install Rakudo Star with choco
+      - name: Install Rakudo Star with msiexec
         if: runner.os == 'Windows'
         run: >
-          choco install rakudostar;
-          echo "C:\rakudo\bin;C:\rakudo\share\perl6\site\bin"
-          | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          $file = "rakudo-star.msi";
+          Invoke-WebRequest https://rakudo.org/latest/star/win -OutFile "$file";
+          $log = "install.log";
+          $procMain = Start-Process "msiexec" "/i `"$file`" /qn /l*! `"$log`"" -NoNewWindow -PassThru;
+          $procLog = Start-Process "powershell" "Get-Content -Path `"$log`" -Wait" -NoNewWindow -PassThru;
+          $procMain.WaitForExit();
+          $procLog.Kill();
 
       - name: Install Rakudo Star with brew
         if: runner.os == 'macOS'
