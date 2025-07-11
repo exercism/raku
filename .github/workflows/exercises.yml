@@ -35,3 +35,7 @@ jobs:
         uses: docker://rakudo-star:latest
         with:
           args: /bin/bash -c "prove6 --jobs 2 /github/workspace/exercises/practice/*/.meta/solutions/"
+
+      - name: Online Test Runner
+        if: runner.os == 'Linux'
+        run: jq < config.json
