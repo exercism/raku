@@ -27,4 +27,3 @@ example: |-
 stub: |-
   sub saddle-points( @matrix ) is export {
   }
-
