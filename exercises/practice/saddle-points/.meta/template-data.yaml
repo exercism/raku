@@ -1,0 +1,29 @@
+properties:
+  saddlePoints:
+    test: |-
+      sprintf(q:to/END/, %case<input><matrix>.Array.raku, %case<expected>.map( { [.<row>, .<column>] } ).sort.Array.raku, %case<description>.raku);
+      cmp-ok(
+          saddle-points( %s ),
+          "eqv",
+          %s,
+          %s,
+      );
+      END
+
+unit: module
+example: |-
+  multi saddle-points ( [ [], ] ) is export { [] }
+  multi saddle-points ( @matrix ) of Array() {
+    my @row-max = map *.max,     @matrix;
+    my @col-min = map *.min, [Z] @matrix;
+    my @coords[ .elems ; .head.elems ] = $_ with @matrix;    
+    gather for @coords.pairs {
+        next if @matrix.head.end and .value != @row-max[ .key.head ];
+        next if @matrix     .end and .value != @col-min[ .key.tail ];
+        take [ .key.map: *.succ ]
+    }
+  }
+
+stub: |-
+  sub saddle-points( @matrix ) is export {
+  }

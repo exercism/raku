@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+    ],
+  "files": {
+    "solution": [
+      "lib/SaddlePoints.rakumod"
+    ],
+    "test": [
+      "t/saddle-points.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/SaddlePoints.rakumod"
+    ]
+  },
+  "blurb": "Detect saddle points in a matrix.",
+  "source": "J Dalbey's Programming Practice problems",
+  "source_url": "https://users.csc.calpoly.edu/~jdalbey/103/Projects/ProgrammingPractice.html"
+}
