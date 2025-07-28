@@ -8,4 +8,3 @@ You can check with:
 note Kernel.cpu-cores
 # 2
 ~~~~
-
