@@ -16,6 +16,8 @@ Operators are available in mathematical notation (via Unicode) along with ASCII 
 
 ## Boolean context
 
+| Unicode | ASCII     | Description
+| :-----: | :-------- | :----------
 | `≡`     | `(==)`    | are identical
 | `≢`     | `!(==)`   | not identical
 | `∈`     | `(elem)`  | is an element of
