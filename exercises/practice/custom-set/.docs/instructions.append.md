@@ -1,8 +1,10 @@
 ## Set Operators
 
-`raku` has [built-in set support.](https://docs.raku.org/language/setbagmix)
+`raku` has (built-in set support.)[https://docs.raku.org/language/setbagmix]
 
 Operators are available in mathematical notation (via Unicode) along with ASCII equivalents:
+
+## Set context
 
 | Unicode | ASCII     | Description
 | :-----: | :-------- | :----------
@@ -11,7 +13,11 @@ Operators are available in mathematical notation (via Unicode) along with ASCII 
 | `∪`     |  `(\|)`   | union
 | `∖`     |  `(-)`    | set difference
 | `⊖`     |  `(^)`    | set symmetric difference
-|         |           |
+
+## Boolean context
+
+| `≡`     | `(==)`    | are identical
+| `≢`     | `!(==)`   | not identical
 | `∈`     | `(elem)`  | is an element of
 | `∉`     | `!(elem)` | is not an element of
 | `∋`     | `(cont)`  | contains
@@ -24,5 +30,3 @@ Operators are available in mathematical notation (via Unicode) along with ASCII 
 | `⊉`     | `!(>=)`   | is not a superset or equal to
 | `⊃`     | `(>)`     | is a strict superset of
 | `⊅`     | `!(>)`    | is not a strict superset of
-| `≡`     | `(==)`    | are identical
-| `≢`     | `!(==)`   | not identical
