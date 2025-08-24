@@ -19,7 +19,7 @@ properties:
       my $final-op = %case<input><operations>[*-1];
       my $lives = %case<input><operations>[0..*-2].map(&gen-op-string).join("\n");
       if $lives {
-          $lives = "\n    lives-ok(\n        \{\n" ~ $lives ~ "\n        },\n        'operations',\n    );";
+          $lives = "\n    lives-ok(\n        \{\n$lives\n        },\n        'operations',\n    );";
       }
 
       if %case<expected><error>:exists {
