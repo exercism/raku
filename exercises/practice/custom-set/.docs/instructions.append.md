@@ -1,6 +1,6 @@
 ## Set Operators
 
-`raku` has (built-in set support.)[https://docs.raku.org/language/setbagmix]
+`raku` has [built-in set support.](https://docs.raku.org/language/setbagmix)
 
 Operators are available in mathematical notation (via Unicode) along with ASCII equivalents:
 
