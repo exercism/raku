@@ -5,7 +5,8 @@ setup:
 create-practice-exercise slug author diff='1':
   bin/configlet create --practice-exercise {{slug}} --author {{author}} --difficulty {{diff}}
 
-generate-practice-exercise slug='':
+generate-practice-exercise slug:
+  bin/configlet sync --exercise {{slug}} --update --docs --filepaths --metadata --tests choose
   bin/exercise-gen.raku {{slug}}
 
 test-practice-example slug:
