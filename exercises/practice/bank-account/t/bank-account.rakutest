@@ -4,7 +4,7 @@ use lib $?FILE.IO.parent(2).add('lib');
 use BankAccount;
 
 subtest "Newly opened account has zero balance" => { # begin: 983a1528-4ceb-45e5-8257-8ce01aceb5ed
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -20,7 +20,7 @@ subtest "Newly opened account has zero balance" => { # begin: 983a1528-4ceb-45e5
 } # end: 983a1528-4ceb-45e5-8257-8ce01aceb5ed
 
 subtest "Single deposit" => { # begin: e88d4ec3-c6bf-4752-8e59-5046c44e3ba7
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -37,7 +37,7 @@ subtest "Single deposit" => { # begin: e88d4ec3-c6bf-4752-8e59-5046c44e3ba7
 } # end: e88d4ec3-c6bf-4752-8e59-5046c44e3ba7
 
 subtest "Multiple deposits" => { # begin: 3d9147d4-63f4-4844-8d2b-1fee2e9a2a0d
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -55,7 +55,7 @@ subtest "Multiple deposits" => { # begin: 3d9147d4-63f4-4844-8d2b-1fee2e9a2a0d
 } # end: 3d9147d4-63f4-4844-8d2b-1fee2e9a2a0d
 
 subtest "Withdraw once" => { # begin: 08f1af07-27ae-4b38-aa19-770bde558064
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -73,7 +73,7 @@ subtest "Withdraw once" => { # begin: 08f1af07-27ae-4b38-aa19-770bde558064
 } # end: 08f1af07-27ae-4b38-aa19-770bde558064
 
 subtest "Withdraw twice" => { # begin: 6f6d242f-8c31-4ac6-8995-a90d42cad59f
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -92,7 +92,7 @@ subtest "Withdraw twice" => { # begin: 6f6d242f-8c31-4ac6-8995-a90d42cad59f
 } # end: 6f6d242f-8c31-4ac6-8995-a90d42cad59f
 
 subtest "Can do multiple operations sequentially" => { # begin: 45161c94-a094-4c77-9cec-998b70429bda
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -113,7 +113,7 @@ subtest "Can do multiple operations sequentially" => { # begin: 45161c94-a094-4c
 } # end: 45161c94-a094-4c77-9cec-998b70429bda
 
 subtest "Cannot check balance of closed account" => { # begin: f9facfaa-d824-486e-8381-48832c4bbffd
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -130,7 +130,7 @@ subtest "Cannot check balance of closed account" => { # begin: f9facfaa-d824-486
 } # end: f9facfaa-d824-486e-8381-48832c4bbffd
 
 subtest "Cannot deposit into closed account" => { # begin: 7a65ba52-e35c-4fd2-8159-bda2bde6e59c
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -147,7 +147,7 @@ subtest "Cannot deposit into closed account" => { # begin: 7a65ba52-e35c-4fd2-81
 } # end: 7a65ba52-e35c-4fd2-8159-bda2bde6e59c
 
 subtest "Cannot deposit into unopened account" => { # begin: a0a1835d-faae-4ad4-a6f3-1fcc2121380b
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     throws-like(
         { $account.deposit(50) },
         X::BankAccount::Closed,
@@ -157,7 +157,7 @@ subtest "Cannot deposit into unopened account" => { # begin: a0a1835d-faae-4ad4-
 } # end: a0a1835d-faae-4ad4-a6f3-1fcc2121380b
 
 subtest "Cannot withdraw from closed account" => { # begin: 570dfaa5-0532-4c1f-a7d3-0f65c3265608
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -174,7 +174,7 @@ subtest "Cannot withdraw from closed account" => { # begin: 570dfaa5-0532-4c1f-a
 } # end: 570dfaa5-0532-4c1f-a7d3-0f65c3265608
 
 subtest "Cannot close an account that was not opened" => { # begin: c396d233-1c49-4272-98dc-7f502dbb9470
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     throws-like(
         { $account.close },
         X::BankAccount::Closed,
@@ -184,7 +184,7 @@ subtest "Cannot close an account that was not opened" => { # begin: c396d233-1c4
 } # end: c396d233-1c49-4272-98dc-7f502dbb9470
 
 subtest "Cannot open an already opened account" => { # begin: c06f534f-bdc2-4a02-a388-1063400684de
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -200,7 +200,7 @@ subtest "Cannot open an already opened account" => { # begin: c06f534f-bdc2-4a02
 } # end: c06f534f-bdc2-4a02-a388-1063400684de
 
 subtest "Reopened account does not retain balance" => { # begin: 0722d404-6116-4f92-ba3b-da7f88f1669c
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -219,7 +219,7 @@ subtest "Reopened account does not retain balance" => { # begin: 0722d404-6116-4
 } # end: 0722d404-6116-4f92-ba3b-da7f88f1669c
 
 subtest "Cannot withdraw more than deposited" => { # begin: ec42245f-9361-4341-8231-a22e8d19c52f
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -236,7 +236,7 @@ subtest "Cannot withdraw more than deposited" => { # begin: ec42245f-9361-4341-8
 } # end: ec42245f-9361-4341-8231-a22e8d19c52f
 
 subtest "Cannot withdraw negative" => { # begin: 4f381ef8-10ef-4507-8e1d-0631ecc8ee72
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -253,7 +253,7 @@ subtest "Cannot withdraw negative" => { # begin: 4f381ef8-10ef-4507-8e1d-0631ecc
 } # end: 4f381ef8-10ef-4507-8e1d-0631ecc8ee72
 
 subtest "Cannot deposit negative" => { # begin: d45df9ea-1db0-47f3-b18c-d365db49d938
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;
@@ -269,7 +269,7 @@ subtest "Cannot deposit negative" => { # begin: d45df9ea-1db0-47f3-b18c-d365db49
 } # end: d45df9ea-1db0-47f3-b18c-d365db49d938
 
 subtest "Can handle concurrent transactions" => { # begin: ba0c1e0b-0f00-416f-8097-a7dfc97871ff
-    my BankAccount $account.=new;
+    my $account := BankAccount.new;
     lives-ok(
         {
             $account.open;

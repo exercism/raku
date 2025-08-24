@@ -22,20 +22,7 @@ properties:
           $lives = "\n    lives-ok(\n        \{\n" ~ $lives ~ "\n        },\n        'operations',\n    );";
       }
 
-      if 'concurrent' ∈ %case<scenarios> {
-          sprintf(q:to/END/, %case<description>.raku, $lives, %case<expected>);
-          subtest %s => {
-              my BankAccount $account.=new;%s
-              cmp-ok(
-                  $account.balance,
-                  &infix:<eqv>,
-                  %s,
-                  'balance',
-              );
-          }
-          END
-      }
-      elsif %case<expected><error>:exists {
+      if %case<expected><error>:exists {
           my $error = do given %case<expected><error> {
               when / 'not open' $/          {'X::BankAccount::Closed'}
               when / 'already open' $/      {'X::BankAccount::AlreadyOpen'}
@@ -45,7 +32,7 @@ properties:
 
           sprintf(q:to/END/, %case<description>.raku, $lives, $final-op<operation>, ($final-op<amount>:exists ?? "({$final-op<amount>})" !! ''), $error, %case<expected><error>.raku);
           subtest %s => {
-              my BankAccount $account.=new;%s
+              my $account := BankAccount.new;%s
               throws-like(
                   { $account.%s%s },
                   %s,
@@ -58,7 +45,7 @@ properties:
       else {
           sprintf(q:to/END/, %case<description>.raku, $lives, $final-op<operation>, %case<expected>);
           subtest %s => {
-              my BankAccount $account.=new;%s
+              my $account := BankAccount.new;%s
               cmp-ok(
                   $account.%s,
                   &infix:<eqv>,
