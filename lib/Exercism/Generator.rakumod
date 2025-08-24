@@ -61,7 +61,7 @@ submethod build-cases ( %obj, Str $description = '' ) {
   }
   elsif %obj<uuid> ∈ @!case-uuids {
     return %(
-      |( %obj<input expected property uuid>:p ),
+      |( %obj<input expected property uuid scenarios>:p ),
       :description($description ~ %obj<description>),
     ).item;
   }
