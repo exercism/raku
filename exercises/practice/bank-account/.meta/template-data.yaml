@@ -7,13 +7,36 @@ properties:
           $lives = "\n    lives-ok(\n        \{\n" ~ $lives ~ "\n        },\n        'operations',\n    );";
       }
       if 'concurrent' ∈ %case<scenarios> {
-          'flunk "NYI";'
+          sprintf(q:to/END/, %case<description>.raku, %case<expected>);
+          subtest %s => {
+              my BankAccount $account.=new;
+              lives-ok(
+                  {
+                      $account.open;
+                      await Promise.allof(
+                          start {
+                              $account.deposit(1);
+                              $account.withdraw(1);
+                          } xx 1000
+                      );
+                  },
+                  'operations',
+              );
+              cmp-ok(
+                  $account.balance,
+                  &infix:<eqv>,
+                  %s,
+                  'balance',
+              );
+          }
+          END
+
       }
       elsif %case<expected><error>:exists {
           my $error = do given %case<expected><error> {
               when / 'not open' $/          {'X::BankAccount::Closed'}
               when / 'already open' $/      {'X::BankAccount::AlreadyOpen'}
-              when / 'greater than 0' $/    {'X::BankAccount::NotPositive'}
+              when / 'greater than 0' $/    {'X::BankAccount::AmountNotPositive'}
               when / 'less than balance' $/ {'X::BankAccount::NoOverdraft'}
           };
           sprintf(q:to/END/, %case<description>.raku, $lives, $final-op<operation>, ($final-op<amount>:exists ?? "({$final-op<amount>})" !! ''), $error, %case<expected><error>.raku);
@@ -29,17 +52,17 @@ properties:
           END
       }
       else {
-        sprintf(q:to/END/, %case<description>.raku, $lives, %case<input><operations>[*-1]<operation>, %case<expected>);
-        subtest %s => {
-            my BankAccount $account.=new;%s
-            cmp-ok(
-                $account.%s,
-                &infix:<eqv>,
-                %s,
-                'balance',
-            );
-        }
-        END
+          sprintf(q:to/END/, %case<description>.raku, $lives, %case<expected>);
+          subtest %s => {
+              my BankAccount $account.=new;%s
+              cmp-ok(
+                  $account.balance,
+                  &infix:<eqv>,
+                  %s,
+                  'balance',
+              );
+          }
+          END
       }
 
 unit: false
@@ -52,7 +75,7 @@ example: |-
       method message {'account already open'}
   }
 
-  my class X::BankAccount::NotPositive is Exception {
+  my class X::BankAccount::AmountNotPositive is Exception {
       method message {'amount must be greater than 0'}
   }
 
@@ -61,39 +84,38 @@ example: |-
   }
 
   class BankAccount {
-
-      has UInt:D $!balance = 0;
-      has Bool:D $.is-open = False;
+      has atomicint $!balance;
+      has Bool:D    $!is-open = False;
 
       method balance {
-          X::BankAccount::Closed.new.throw unless $.is-open;
+          X::BankAccount::Closed.new.throw unless $!is-open;
           return $!balance;
       }
 
-      method open {
-          X::BankAccount::AlreadyOpen.new.throw if $.is-open;
-          return $!is-open.=succ;
+      method open (--> True) {
+          X::BankAccount::AlreadyOpen.new.throw if $!is-open;
+          $!is-open.=succ;
       }
 
-      method close {
+      method close (--> True) {
           self!change-balance(-$.balance);
-          return $!is-open.=pred;
+          $!is-open.=pred;
       }
 
       method withdraw (Int:D $amount) {
-          X::BankAccount::NotPositive.new.throw if $amount < 0;
+          X::BankAccount::AmountNotPositive.new.throw if $amount < 0;
           return self!change-balance(-$amount);
       }
 
       method deposit (Int:D $amount) {
-          X::BankAccount::NotPositive.new.throw if $amount < 0;
+          X::BankAccount::AmountNotPositive.new.throw if $amount < 0;
           return self!change-balance($amount);
       }
 
       method !change-balance ($amount) {
-          X::BankAccount::Closed.new.throw unless $.is-open;
+          X::BankAccount::Closed.new.throw unless $!is-open;
           X::BankAccount::NoOverdraft.new.throw if $amount < 0 && $amount.abs > $.balance;
-          return $!balance += $amount;
+          return $!balance ⚛+= $amount;
       }
 
   }
@@ -104,9 +126,25 @@ stub: |-
       method message {'account not open'}
   }
 
+  my class X::BankAccount::AlreadyOpen is Exception {
+      method message {'account already open'}
+  }
+
+  my class X::BankAccount::AmountNotPositive is Exception {
+      method message {'amount must be greater than 0'}
+  }
+
+  my class X::BankAccount::NoOverdraft is Exception {
+      method message {'amount must be less than balance'}
+  }
+
   class BankAccount {
 
-      has UInt:D $.balance = 0;
+      has atomicint $!balance;
+
+      method balance {
+          return $!balance;
+      }
 
       method open {
           return True;
@@ -116,12 +154,9 @@ stub: |-
           return True;
       }
 
-      method withdraw (Int:D $amount where * > 0) {
+      method withdraw ($amount) {
       }
 
-      method deposit (Int:D $amount where * > 0) {
-      }
-
-      method !change-balance ($amount) {
+      method deposit ($amount) {
       }
   }

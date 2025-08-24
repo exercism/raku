@@ -2,9 +2,25 @@ my class X::BankAccount::Closed is Exception {
     method message {'account not open'}
 }
 
+my class X::BankAccount::AlreadyOpen is Exception {
+    method message {'account already open'}
+}
+
+my class X::BankAccount::AmountNotPositive is Exception {
+    method message {'amount must be greater than 0'}
+}
+
+my class X::BankAccount::NoOverdraft is Exception {
+    method message {'amount must be less than balance'}
+}
+
 class BankAccount {
 
-    has UInt:D $.balance = 0;
+    has atomicint $!balance;
+
+    method balance {
+        return $!balance;
+    }
 
     method open {
         return True;
@@ -14,12 +30,9 @@ class BankAccount {
         return True;
     }
 
-    method withdraw (Int:D $amount where * > 0) {
+    method withdraw ($amount) {
     }
 
-    method deposit (Int:D $amount where * > 0) {
-    }
-
-    method !change-balance ($amount) {
+    method deposit ($amount) {
     }
 }

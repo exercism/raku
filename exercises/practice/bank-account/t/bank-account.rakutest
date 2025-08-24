@@ -246,7 +246,7 @@ subtest "Cannot withdraw negative" => { # begin: 4f381ef8-10ef-4507-8e1d-0631ecc
     );
     throws-like(
         { $account.withdraw(-50) },
-        X::BankAccount::NotPositive,
+        X::BankAccount::AmountNotPositive,
         :message(/^ "amount must be greater than 0" $/),
         'error',
     );
@@ -262,12 +262,32 @@ subtest "Cannot deposit negative" => { # begin: d45df9ea-1db0-47f3-b18c-d365db49
     );
     throws-like(
         { $account.deposit(-50) },
-        X::BankAccount::NotPositive,
+        X::BankAccount::AmountNotPositive,
         :message(/^ "amount must be greater than 0" $/),
         'error',
     );
 } # end: d45df9ea-1db0-47f3-b18c-d365db49d938
 
-flunk "NYI"; # case: ba0c1e0b-0f00-416f-8097-a7dfc97871ff
+subtest "Can handle concurrent transactions" => { # begin: ba0c1e0b-0f00-416f-8097-a7dfc97871ff
+    my BankAccount $account.=new;
+    lives-ok(
+        {
+            $account.open;
+            await Promise.allof(
+                start {
+                    $account.deposit(1);
+                    $account.withdraw(1);
+                } xx 1000
+            );
+        },
+        'operations',
+    );
+    cmp-ok(
+        $account.balance,
+        &infix:<eqv>,
+        0,
+        'balance',
+    );
+} # end: ba0c1e0b-0f00-416f-8097-a7dfc97871ff
 
 done-testing;
