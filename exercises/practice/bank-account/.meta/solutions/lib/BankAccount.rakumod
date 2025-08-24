@@ -23,14 +23,16 @@ class BankAccount {
         return $!balance;
     }
 
-    method open (--> True) {
+    method open {
         X::BankAccount::AlreadyOpen.new.throw if $!is-open;
         $!is-open.=succ;
+        return self;
     }
 
-    method close (--> True) {
+    method close {
         self!change-balance(-$.balance);
         $!is-open.=pred;
+        return self;
     }
 
     method withdraw (Int:D $amount) {
@@ -46,7 +48,7 @@ class BankAccount {
     method !change-balance ($amount) {
         X::BankAccount::Closed.new.throw unless $!is-open;
         X::BankAccount::NoOverdraft.new.throw if $amount < 0 && $amount.abs > $.balance;
-        return $!balance ⚛+= $amount;
+        $!balance ⚛+= $amount;
+        return self;
     }
-
 }

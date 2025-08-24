@@ -1,27 +1,31 @@
 properties:
   bankAccount:
     test: |-
+      my &gen-op-string = {
+          if .<operation> eq 'concurrent' {
+              sprintf(q:to/END/, .<operations>.map(&gen-op-string).join("\n        "), .<number>).trim-trailing;
+                          await Promise.allof(
+                              start {
+                      %s
+                              } xx %s
+                          );
+              END
+          }
+          else {
+              '            $account.' ~ .<operation> ~ ( .<amount>:exists ?? "({.<amount>})" !! '' ) ~ ';'
+          }
+      };
+
       my $final-op = %case<input><operations>[*-1];
-      my $lives = %case<input><operations>[0..*-2].map({ '            $account.' ~ .<operation> ~ ( .<amount>:exists ?? "({.<amount>})" !! '' ) ~ ';' }).join("\n");
+      my $lives = %case<input><operations>[0..*-2].map(&gen-op-string).join("\n");
       if $lives {
           $lives = "\n    lives-ok(\n        \{\n" ~ $lives ~ "\n        },\n        'operations',\n    );";
       }
+
       if 'concurrent' ∈ %case<scenarios> {
-          sprintf(q:to/END/, %case<description>.raku, %case<expected>);
+          sprintf(q:to/END/, %case<description>.raku, $lives, %case<expected>);
           subtest %s => {
-              my BankAccount $account.=new;
-              lives-ok(
-                  {
-                      $account.open;
-                      await Promise.allof(
-                          start {
-                              $account.deposit(1);
-                              $account.withdraw(1);
-                          } xx 1000
-                      );
-                  },
-                  'operations',
-              );
+              my BankAccount $account.=new;%s
               cmp-ok(
                   $account.balance,
                   &infix:<eqv>,
@@ -30,7 +34,6 @@ properties:
               );
           }
           END
-
       }
       elsif %case<expected><error>:exists {
           my $error = do given %case<expected><error> {
@@ -39,6 +42,7 @@ properties:
               when / 'greater than 0' $/    {'X::BankAccount::AmountNotPositive'}
               when / 'less than balance' $/ {'X::BankAccount::NoOverdraft'}
           };
+
           sprintf(q:to/END/, %case<description>.raku, $lives, $final-op<operation>, ($final-op<amount>:exists ?? "({$final-op<amount>})" !! ''), $error, %case<expected><error>.raku);
           subtest %s => {
               my BankAccount $account.=new;%s
@@ -52,11 +56,11 @@ properties:
           END
       }
       else {
-          sprintf(q:to/END/, %case<description>.raku, $lives, %case<expected>);
+          sprintf(q:to/END/, %case<description>.raku, $lives, $final-op<operation>, %case<expected>);
           subtest %s => {
               my BankAccount $account.=new;%s
               cmp-ok(
-                  $account.balance,
+                  $account.%s,
                   &infix:<eqv>,
                   %s,
                   'balance',
@@ -92,14 +96,16 @@ example: |-
           return $!balance;
       }
 
-      method open (--> True) {
+      method open {
           X::BankAccount::AlreadyOpen.new.throw if $!is-open;
           $!is-open.=succ;
+          return self;
       }
 
-      method close (--> True) {
+      method close {
           self!change-balance(-$.balance);
           $!is-open.=pred;
+          return self;
       }
 
       method withdraw (Int:D $amount) {
@@ -115,9 +121,9 @@ example: |-
       method !change-balance ($amount) {
           X::BankAccount::Closed.new.throw unless $!is-open;
           X::BankAccount::NoOverdraft.new.throw if $amount < 0 && $amount.abs > $.balance;
-          return $!balance ⚛+= $amount;
+          $!balance ⚛+= $amount;
+          return self;
       }
-
   }
 
 
@@ -139,19 +145,12 @@ stub: |-
   }
 
   class BankAccount {
-
-      has atomicint $!balance;
-
-      method balance {
-          return $!balance;
-      }
+      has $.balance;
 
       method open {
-          return True;
       }
 
       method close {
-          return True;
       }
 
       method withdraw ($amount) {

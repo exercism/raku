@@ -15,19 +15,12 @@ my class X::BankAccount::NoOverdraft is Exception {
 }
 
 class BankAccount {
-
-    has atomicint $!balance;
-
-    method balance {
-        return $!balance;
-    }
+    has $.balance;
 
     method open {
-        return True;
     }
 
     method close {
-        return True;
     }
 
     method withdraw ($amount) {
