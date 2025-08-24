@@ -1,6 +1,6 @@
 setup:
   bin/fetch-configlet
-  zef install --deps-only .
+  zef install --/test --deps-only .
 
 create-practice-exercise slug author diff='1':
   bin/configlet create --practice-exercise {{slug}} --author {{author}} --difficulty {{diff}}
