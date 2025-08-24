@@ -179,7 +179,7 @@ method create-files ( --> Nil ) {
       # This emulates Raku's symlink, which does not yet support non-absolute paths
       try nqp::symlink(
         "../../../../t/$_",
-        nqp::unbox_s( $solution-dir.add('t', $_).absolute )
+        nqp::unbox_s( $solution-dir.add($_).absolute )
       ) given $testfile.basename;
     }
   }
