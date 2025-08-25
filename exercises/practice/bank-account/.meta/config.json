@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "m-dango"
+  ],
+  "files": {
+    "solution": [
+      "lib/BankAccount.rakumod"
+    ],
+    "test": [
+      "t/bank-account.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/BankAccount.rakumod"
+    ]
+  },
+  "blurb": "Simulate a bank account supporting opening/closing, withdraws, and deposits of money. Watch out for concurrent transactions!"
+}

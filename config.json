@@ -799,6 +799,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 1
+      },
+      {
+        "slug": "bank-account",
+        "name": "Bank Account",
+        "uuid": "e8c59ccc-be29-447a-972d-c18bc7ba6c61",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
       }
     ]
   },
