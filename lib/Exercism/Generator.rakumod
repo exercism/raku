@@ -61,7 +61,7 @@ submethod build-cases ( %obj, Str $description = '' ) {
   }
   elsif %obj<uuid> ∈ @!case-uuids {
     return %(
-      |( %obj<input expected property uuid>:p ),
+      |( %obj<input expected property uuid scenarios>:p ),
       :description($description ~ %obj<description>),
     ).item;
   }
@@ -179,7 +179,7 @@ method create-files ( --> Nil ) {
       # This emulates Raku's symlink, which does not yet support non-absolute paths
       try nqp::symlink(
         "../../../../t/$_",
-        nqp::unbox_s( $solution-dir.add($_).absolute )
+        nqp::unbox_s( $solution-dir.add('t', $_).absolute )
       ) given $testfile.basename;
     }
   }
