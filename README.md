@@ -18,6 +18,7 @@ Use the command `just setup` provided by the `justfile`.
 
 ## Adding and Updating Exercises
 
+
 Use the commands `just create-practice-exercise` and `just generate-practice-exercise` provided by the `justfile`.
 
 ## Running The Tests
