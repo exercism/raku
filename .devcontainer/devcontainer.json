@@ -1,0 +1,13 @@
+{
+    "name": "exercism-raku",
+    "image": "mcr.microsoft.com/devcontainers/base:noble",
+    "features": {
+        "ghcr.io/guiyomh/features/just:0": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers-extra/features/raku-asdf:1": {
+            "version": "latest"
+        }
+    },
+    "postCreateCommand": "just setup"
+}
