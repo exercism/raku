@@ -87,4 +87,11 @@ cmp-ok( # begin: dd9d4ca8-9e68-4f78-a677-a2a70fd7a7b8
   "large garden",
 ); # end: dd9d4ca8-9e68-4f78-a677-a2a70fd7a7b8
 
+cmp-ok( # begin: 6e4ac13a-3e43-4728-a2e3-3551d4b1a996
+  mark-flowers([" ** "]),
+  'eqv',
+  ["1**1"],
+  "multiple adjacent flowers",
+); # end: 6e4ac13a-3e43-4728-a2e3-3551d4b1a996
+
 done-testing;
