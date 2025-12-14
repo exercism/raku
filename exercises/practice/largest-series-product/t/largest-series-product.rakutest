@@ -66,10 +66,10 @@ cmp-ok( # begin: 6ef0df9f-52d4-4a5d-b210-f6fae5f20e19
     "reports zero if all spans include zero",
 ); # end: 6ef0df9f-52d4-4a5d-b210-f6fae5f20e19
 
-dies-ok( # begin: 5d81aaf7-4f67-4125-bf33-11493cc7eab7
+dies-ok( # begin: 0ae1ce53-d9ba-41bb-827f-2fceb64f058b
     { largest-product("123", 4) },
     "rejects span longer than string length",
-); # end: 5d81aaf7-4f67-4125-bf33-11493cc7eab7
+); # end: 0ae1ce53-d9ba-41bb-827f-2fceb64f058b
 
 cmp-ok( # begin: 06bc8b90-0c51-4c54-ac22-3ec3893a079e
     largest-product("", 0),
@@ -85,10 +85,10 @@ cmp-ok( # begin: 3ec0d92e-f2e2-4090-a380-70afee02f4c0
     "reports 1 for nonempty string and empty product (0 span)",
 ); # end: 3ec0d92e-f2e2-4090-a380-70afee02f4c0
 
-dies-ok( # begin: 6d96c691-4374-4404-80ee-2ea8f3613dd4
+dies-ok( # begin: 6cf66098-a6af-4223-aab1-26aeeefc7402
     { largest-product("", 1) },
     "rejects empty string and nonzero span",
-); # end: 6d96c691-4374-4404-80ee-2ea8f3613dd4
+); # end: 6cf66098-a6af-4223-aab1-26aeeefc7402
 
 dies-ok( # begin: 7a38f2d6-3c35-45f6-8d6f-12e6e32d4d74
     { largest-product("1234a5", 2) },
