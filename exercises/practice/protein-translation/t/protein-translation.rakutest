@@ -185,6 +185,13 @@ cmp-ok( # begin: 2c2a2a60-401f-4a80-b977-e0715b23b93d
     "Translation stops if STOP codon in middle of six-codon sequence",
 ); # end: 2c2a2a60-401f-4a80-b977-e0715b23b93d
 
+cmp-ok( # begin: f6f92714-769f-4187-9524-e353e8a41a80
+    protein-translation("AUGAUG"),
+    "~~",
+    ("Methionine", "Methionine"),
+    "Sequence of two non-STOP codons does not translate to a STOP codon",
+); # end: f6f92714-769f-4187-9524-e353e8a41a80
+
 dies-ok( # begin: 1e75ea2a-f907-4994-ae5c-118632a1cb0f
     { protein-translation "AAA" },
     "Non-existing codon can't translate",
