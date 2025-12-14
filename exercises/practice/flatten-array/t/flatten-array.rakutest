@@ -52,32 +52,32 @@ cmp-ok( # begin: 0705a8e5-dc86-4cec-8909-150c5e54fa9c
     "null values are omitted from the final result",
 ); # end: 0705a8e5-dc86-4cec-8909-150c5e54fa9c
 
-cmp-ok( # begin: c6cf26de-8ccd-4410-84bd-b9efd88fd2bc
+cmp-ok( # begin: bc72da10-5f55-4ada-baf3-50e4da02ec8e
     flatten-array([Any, Any, 3]),
     "eqv",
     [3],
-    "consecutive null values at the front of the list are omitted from the final result",
-); # end: c6cf26de-8ccd-4410-84bd-b9efd88fd2bc
+    "consecutive null values at the front of the array are omitted from the final result",
+); # end: bc72da10-5f55-4ada-baf3-50e4da02ec8e
 
-cmp-ok( # begin: 382c5242-587e-4577-b8ce-a5fb51e385a1
+cmp-ok( # begin: 6991836d-0d9b-4703-80a0-3f1f23eb5981
     flatten-array([1, Any, Any, 4]),
     "eqv",
     [1, 4],
-    "consecutive null values in the middle of the list are omitted from the final result",
-); # end: 382c5242-587e-4577-b8ce-a5fb51e385a1
+    "consecutive null values in the middle of the array are omitted from the final result",
+); # end: 6991836d-0d9b-4703-80a0-3f1f23eb5981
 
-cmp-ok( # begin: ef1d4790-1b1e-4939-a179-51ace0829dbd
+cmp-ok( # begin: dc90a09c-5376-449c-a7b3-c2d20d540069
     flatten-array([0, 2, [[2, 3], 8, [[100],], Any, [[Any],]], -2]),
     "eqv",
     [0, 2, 2, 3, 8, 100, -2],
-    "6 level nest list with null values",
-); # end: ef1d4790-1b1e-4939-a179-51ace0829dbd
+    "6 level nested array with null values",
+); # end: dc90a09c-5376-449c-a7b3-c2d20d540069
 
-cmp-ok( # begin: 85721643-705a-4150-93ab-7ae398e2942d
+cmp-ok( # begin: 51f5d9af-8f7f-4fb5-a156-69e8282cb275
     flatten-array([Any, [[[Any],],], Any, Any, [[Any, Any], Any], Any]),
     "eqv",
     [],
-    "all values in nested list are null",
-); # end: 85721643-705a-4150-93ab-7ae398e2942d
+    "all values in nested array are null",
+); # end: 51f5d9af-8f7f-4fb5-a156-69e8282cb275
 
 done-testing;
