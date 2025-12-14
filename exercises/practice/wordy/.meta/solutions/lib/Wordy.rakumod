@@ -39,5 +39,5 @@ class Calculation {
 
 sub answer ($question) is export {
     Calculate.parse( $question, :actions(Calculation.new) ).made
-      or die 'syntax error';
+      orelse fail 'unable to parse problem';
 }
