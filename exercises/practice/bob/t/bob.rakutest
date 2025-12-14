@@ -203,16 +203,6 @@ cmp-ok( # begin: 4428f28d-4100-4d85-a902-e5a78cb0ecd3
     "alternate silence",
 ); # end: 4428f28d-4100-4d85-a902-e5a78cb0ecd3
 
-cmp-ok( # begin: 66953780-165b-4e7e-8ce3-4bcb80b6385a
-    (
-        hey "\nDoes this cryogenic chamber make me look fat?\nNo."
-        does Bob:
-    ),
-    "eq",
-    "Whatever.",
-    "multiple line question",
-); # end: 66953780-165b-4e7e-8ce3-4bcb80b6385a
-
 cmp-ok( # begin: 5371ef75-d9ea-4103-bcfa-2da973ddec1b
     (
         hey "         hmmmmmmm..."
@@ -252,5 +242,15 @@ cmp-ok( # begin: 12983553-8601-46a8-92fa-fcaa3bc4a2a0
     "Whatever.",
     "non-question ending with whitespace",
 ); # end: 12983553-8601-46a8-92fa-fcaa3bc4a2a0
+
+cmp-ok( # begin: 2c7278ac-f955-4eb4-bf8f-e33eb4116a15
+    (
+        hey "\nDoes this cryogenic chamber make\n me look fat?"
+        does Bob:
+    ),
+    "eq",
+    "Sure.",
+    "multiple line question",
+); # end: 2c7278ac-f955-4eb4-bf8f-e33eb4116a15
 
 done-testing;
