@@ -52,6 +52,20 @@ cmp-ok( # begin: 28025280-2c39-4092-9719-f3234b89c627
     "X is only valid as a check digit",
 ); # end: 28025280-2c39-4092-9719-f3234b89c627
 
+cmp-ok( # begin: 8005b57f-f194-44ee-88d2-a77ac4142591
+    is-isbn10("3-598-21508-96"),
+    "eqv",
+    False,
+    "only one check digit is allowed",
+); # end: 8005b57f-f194-44ee-88d2-a77ac4142591
+
+cmp-ok( # begin: fdb14c99-4cf8-43c5-b06d-eb1638eff343
+    is-isbn10("3-598-2X507-5"),
+    "eqv",
+    False,
+    "X is not substituted by the value 10",
+); # end: fdb14c99-4cf8-43c5-b06d-eb1638eff343
+
 cmp-ok( # begin: f6294e61-7e79-46b3-977b-f48789a4945b
     is-isbn10("3598215088"),
     "eqv",
