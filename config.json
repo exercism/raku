@@ -64,7 +64,7 @@
           "variables-containers-types"
         ],
         "prerequisites": [
-          "routines-code-blocks-signatures"
+          "basics"
         ],
         "status": "beta"
       },
@@ -76,7 +76,7 @@
           "arrays-lists-sequences"
         ],
         "prerequisites": [
-          "variables-containers-types"
+          "basics"
         ],
         "status": "wip"
       }
