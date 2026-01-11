@@ -1,0 +1,135 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use Say;
+
+cmp-ok( # begin: 5d22a120-ba0c-428c-bd25-8682235d83e8
+    utter(0),
+    "eq",
+    "zero",
+    "zero",
+); # end: 5d22a120-ba0c-428c-bd25-8682235d83e8
+
+cmp-ok( # begin: 9b5eed77-dbf6-439d-b920-3f7eb58928f6
+    utter(1),
+    "eq",
+    "one",
+    "one",
+); # end: 9b5eed77-dbf6-439d-b920-3f7eb58928f6
+
+cmp-ok( # begin: 7c499be1-612e-4096-a5e1-43b2f719406d
+    utter(14),
+    "eq",
+    "fourteen",
+    "fourteen",
+); # end: 7c499be1-612e-4096-a5e1-43b2f719406d
+
+cmp-ok( # begin: f541dd8e-f070-4329-92b4-b7ce2fcf06b4
+    utter(20),
+    "eq",
+    "twenty",
+    "twenty",
+); # end: f541dd8e-f070-4329-92b4-b7ce2fcf06b4
+
+cmp-ok( # begin: d78601eb-4a84-4bfa-bf0e-665aeb8abe94
+    utter(22),
+    "eq",
+    "twenty-two",
+    "twenty-two",
+); # end: d78601eb-4a84-4bfa-bf0e-665aeb8abe94
+
+cmp-ok( # begin: f010d4ca-12c9-44e9-803a-27789841adb1
+    utter(30),
+    "eq",
+    "thirty",
+    "thirty",
+); # end: f010d4ca-12c9-44e9-803a-27789841adb1
+
+cmp-ok( # begin: 738ce12d-ee5c-4dfb-ad26-534753a98327
+    utter(99),
+    "eq",
+    "ninety-nine",
+    "ninety-nine",
+); # end: 738ce12d-ee5c-4dfb-ad26-534753a98327
+
+cmp-ok( # begin: e417d452-129e-4056-bd5b-6eb1df334dce
+    utter(100),
+    "eq",
+    "one hundred",
+    "one hundred",
+); # end: e417d452-129e-4056-bd5b-6eb1df334dce
+
+cmp-ok( # begin: d6924f30-80ba-4597-acf6-ea3f16269da8
+    utter(123),
+    "eq",
+    "one hundred twenty-three",
+    "one hundred twenty-three",
+); # end: d6924f30-80ba-4597-acf6-ea3f16269da8
+
+cmp-ok( # begin: 2f061132-54bc-4fd4-b5df-0a3b778959b9
+    utter(200),
+    "eq",
+    "two hundred",
+    "two hundred",
+); # end: 2f061132-54bc-4fd4-b5df-0a3b778959b9
+
+cmp-ok( # begin: feed6627-5387-4d38-9692-87c0dbc55c33
+    utter(999),
+    "eq",
+    "nine hundred ninety-nine",
+    "nine hundred ninety-nine",
+); # end: feed6627-5387-4d38-9692-87c0dbc55c33
+
+cmp-ok( # begin: 3d83da89-a372-46d3-b10d-de0c792432b3
+    utter(1000),
+    "eq",
+    "one thousand",
+    "one thousand",
+); # end: 3d83da89-a372-46d3-b10d-de0c792432b3
+
+cmp-ok( # begin: 865af898-1d5b-495f-8ff0-2f06d3c73709
+    utter(1234),
+    "eq",
+    "one thousand two hundred thirty-four",
+    "one thousand two hundred thirty-four",
+); # end: 865af898-1d5b-495f-8ff0-2f06d3c73709
+
+cmp-ok( # begin: b6a3f442-266e-47a3-835d-7f8a35f6cf7f
+    utter(1000000),
+    "eq",
+    "one million",
+    "one million",
+); # end: b6a3f442-266e-47a3-835d-7f8a35f6cf7f
+
+cmp-ok( # begin: 2cea9303-e77e-4212-b8ff-c39f1978fc70
+    utter(1002345),
+    "eq",
+    "one million two thousand three hundred forty-five",
+    "one million two thousand three hundred forty-five",
+); # end: 2cea9303-e77e-4212-b8ff-c39f1978fc70
+
+cmp-ok( # begin: 3e240eeb-f564-4b80-9421-db123f66a38f
+    utter(1000000000),
+    "eq",
+    "one billion",
+    "one billion",
+); # end: 3e240eeb-f564-4b80-9421-db123f66a38f
+
+cmp-ok( # begin: 9a43fed1-c875-4710-8286-5065d73b8a9e
+    utter(987654321123),
+    "eq",
+    "nine hundred eighty-seven billion six hundred fifty-four million three hundred twenty-one thousand one hundred twenty-three",
+    "a big number",
+); # end: 9a43fed1-c875-4710-8286-5065d73b8a9e
+
+dies-ok( # begin: 49a6a17b-084e-423e-994d-a87c0ecc05ef
+    { utter -1 },
+    "numbers below zero are out of range",
+); # end: 49a6a17b-084e-423e-994d-a87c0ecc05ef
+
+dies-ok( # begin: 4d6492eb-5853-4d16-9d34-b0f61b261fd9
+    { utter 1000000000000 },
+    "numbers above 999,999,999,999 are out of range",
+); # end: 4d6492eb-5853-4d16-9d34-b0f61b261fd9
+
+done-testing;
