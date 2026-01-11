@@ -815,6 +815,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 1
+      },
+      {
+        "slug": "line-up",
+        "name": "Line Up",
+        "uuid": "0b640c0b-b3a8-4830-babc-28ca370cac9d",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
       }
     ]
   },

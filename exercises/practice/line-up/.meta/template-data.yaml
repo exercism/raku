@@ -1,0 +1,28 @@
+properties:
+  format:
+    test: |-
+      sprintf(q:to/END/, %case<input><name>.Str.raku, %case<input><number>.Int.raku, %case<expected>.raku, %case<description>.raku);
+      cmp-ok(
+          deli-order(customer=>%s, ticket=>%s),
+          "eq",
+          %s,
+          %s,
+      );
+      END
+
+
+unit: module
+example: |-
+  sub deli-order (:$customer, :$ticket) is export {
+    sub ordinal ($num) {
+      return .value with first { $ticket.ends-with: .key }, ( <11 12 13 1 2 3> Z=> <th th th st nd rd> );
+      return 'th'
+    }
+    sprintf
+      '%s, you are the %d%s customer we serve today. Thank you!',
+      $customer, $ticket, ordinal $ticket
+  }
+
+stub: |-
+  sub deli-order (:$customer, :$ticket) is export {
+  }
