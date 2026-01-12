@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+  ],
+  "files": {
+    "solution": [
+      "lib/LineUp.rakumod"
+    ],
+    "test": [
+      "t/line-up.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/LineUp.rakumod"
+    ]
+  },
+  "blurb": "Help lining up customers at Yaʻqūb's Deli.",
+  "source": "mk-mxp, based on previous work from Exercism contributors codedge and neenjaw",
+  "source_url": "https://forum.exercism.org/t/new-exercise-ordinal-numbers/19147"
+}
