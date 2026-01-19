@@ -24,6 +24,14 @@ Use the commands `just create-practice-exercise` and `just generate-practice-exe
 Run `just test-practice-example` to run the exercise test against the example implementation.
 Use `'*'` as the slug to run all tests.
 
+Examples:
+
+```shell
+just test-practice-example hello-world
+just test-practice-example \*
+just test-practice-example '*'
+```
+
 ### Raku icon
 
 The Raku "Camelia" logo is owned by Larry Wall and is released under version 2.0 of the Artistic License.
