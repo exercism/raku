@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+    ],
+  "files": {
+    "solution": [
+      "lib/MicroBlog.rakumod"
+    ],
+    "test": [
+      "t/micro-blog.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/MicroBlog.rakumod"
+    ]
+  },
+  "blurb": "Given an input string, truncate it to 5 characters."
+}
