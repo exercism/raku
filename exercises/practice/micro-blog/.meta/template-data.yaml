@@ -1,0 +1,19 @@
+properties:
+  truncate:
+    test: |-
+      sprintf(q:to/END/, %case<input><phrase>.raku, %case<expected>.raku, %case<description>.raku);
+      cmp-ok(
+          post( tweet => %s ),
+          "eq",
+          %s,
+          %s,
+      );
+      END
+
+
+unit: module
+example: |-
+  sub post (Str :$tweet) is export { $tweet.substr: ^5 }
+
+stub: |-
+  sub post (Str :$tweet) is export { }

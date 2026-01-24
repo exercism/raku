@@ -823,6 +823,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 1
+      },
+      {
+        "slug": "micro-blog",
+        "name": "Micro Blog",
+        "uuid": "79679af1-59ae-4f42-8d55-f631e769b5a5",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
       }
     ]
   },
