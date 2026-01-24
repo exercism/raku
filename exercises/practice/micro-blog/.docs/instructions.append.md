@@ -1,6 +1,5 @@
 ## Unicode support
 
-Raku supports [Unicode][unicode] version 17 as of [release 2025-12.
+raku supports Unicode version 17 as of release 2025-12[^changelog].
 
-[unicode]: https://github.com/rakudo/rakudo/releases/tag/2025.12
-
+[^changelog]: https://github.com/rakudo/rakudo/releases/tag/2025.12
