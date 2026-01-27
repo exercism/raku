@@ -1,0 +1,106 @@
+unit: class
+
+properties:
+  scores:
+    test: |-
+      sprintf(q:to/END/, %case<input><scores>.Array.raku, %case<expected>.Array.raku, %case<description>.raku);
+      cmp-ok(
+        HighScores.new( scores => %s ).scores,
+        "eqv",
+        %s,
+        %s,
+      );
+      END
+
+  latest:
+    test: |-
+      sprintf(q:to/END/, %case<input><scores>.Array.raku, %case<expected>.Int.raku, %case<description>.raku);
+      cmp-ok(
+        HighScores.new( scores => %s ).latest,
+        "==",
+        %s,
+        %s,
+      );
+      END
+
+  personalBest:
+    test: |-
+      sprintf(q:to/END/, %case<input><scores>.Array.raku, %case<expected>.Int.raku, %case<description>.raku);
+      cmp-ok(
+        HighScores.new( scores => %s ).personal-best,
+        "==",
+        %s,
+        %s,
+      );
+      END
+
+  personalTopThree:
+    test: |-
+      sprintf(q:to/END/, %case<input><scores>.Array.raku, %case<expected>.Int.raku, %case<description>.raku);
+      cmp-ok(
+        HighScores.new( scores => %s ).personal-top-three,
+        "==",
+        %s,
+        %s,
+      );
+      END
+
+  latestAfterTopThree:
+    test: |-
+      sprintf(q:to/END/, %case<input><scores>.Array.raku, %case<expected>.Int.raku, %case<description>.raku);
+      cmp-ok(
+        ( given HighScores.new( scores => %s ) { sink .personal-top-three; .latest } ),
+        "==",
+        %s,
+        %s,
+      );
+      END
+
+  scoresAfterTopThree:
+    test: |-
+      sprintf(q:to/END/, %case<input><scores>.Array.raku, %case<expected>.Array.raku, %case<description>.raku);
+      cmp-ok(
+        ( given HighScores.new( scores => %s ) { sink .personal-top-three; .scores } ),
+        "eqv",
+        %s,
+        %s,
+      );
+      END
+
+  latestAfterBest:
+    test: |-
+      sprintf(q:to/END/, %case<input><scores>.Array.raku, %case<expected>.Int.raku, %case<description>.raku);
+      cmp-ok(
+        ( given HighScores.new( scores => %s ) { sink .personal-best; .latest } ),
+        "==",
+        %s,
+        %s,
+      );
+      END
+
+  scoresAfterBest:
+    test: |-
+      sprintf(q:to/END/, %case<input><scores>.Array.raku, %case<expected>.Array.raku, %case<description>.raku);
+      cmp-ok(
+        ( given HighScores.new( scores => %s ) { sink .personal-best; .scores } ),
+        "eqv",
+        %s,
+        %s,
+      );
+      END
+
+example: |-
+  has $.scores;
+
+  method scores             { $!scores                      }
+  method latest             { $!scores.tail                 }
+  method personal-best      { $!scores.max                  }
+  method personal-top-three { $!scores.sort.reverse.head(3) }
+
+stub: |-
+  has $.scores;
+
+  method scores             { }
+  method latest             { }
+  method personal-best      { }
+  method personal-top-three { }
