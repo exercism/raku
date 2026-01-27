@@ -1,0 +1,273 @@
+unit: module
+
+tests: |
+  grammar Complex::Expression {
+    token TOP  { <frac>                             }
+    token frac { <nu> [ '/' <de> ]?                 }
+    token nu   { <num> | <e> | <pi> | <ln>          }
+    token de   { <num>                              }
+    token num  { '-'? <:Number>+ ['.' <:Number>+ ]? }
+    token e    { 'e'                                }
+    token pi   { 'pi'                               }
+    token ln   { 'ln(' <num> ')'                    }
+  }
+  class Complex::Calc {
+    method TOP  ($/) { make $<frac>.made                     }
+    method frac ($/) { make $<nu>.made / ( $<de>.made // 1 ) }
+    method num  ($/) { make $/.Numeric                       }
+    method nu   ($/) { make $/{ $/.keys.head }.made          }
+    method de   ($/) { make $/.Numeric                       }
+    method e    ($/) { make e                                }
+    method pi   ($/) { make pi                               }
+    method ln   ($/) { make log $<num>.made                  }
+  }
+  sub myComplex ($a, $b?) {
+    .narrow with Complex.new(
+      Complex::Expression.parse($a, actions => Complex::Calc).made,
+      $b.defined ?? Complex::Expression.parse($b, actions => Complex::Calc).made !! 0
+    )
+  }
+
+properties:
+  real:
+    test: |-
+      sprintf(q:to/END/, Complex.new(|%case<input><z>).raku, %case<expected>.Int.raku, %case<description>.raku);
+      cmp-ok(
+          Re %s,
+          "==",
+          %s,
+          %s,
+      );
+      END
+  imaginary:
+    test: |-
+      sprintf(q:to/END/, Complex.new(|%case<input><z>).raku, %case<expected>.Int.raku, %case<description>.raku);
+      cmp-ok(
+          Im %s,
+          "==",
+          %s,
+          %s,
+      );
+      END
+  mul:
+    test: |-
+      grammar Complex::Expression {
+        token TOP  { <frac>                             }
+        token frac { <nu> [ '/' <de> ]?                 }
+        token nu   { <num> | <e> | <pi> | <ln>          }
+        token de   { <num>                              }
+        token num  { '-'? <:Number>+ ['.' <:Number>+ ]? }
+        token e    { 'e'                                }
+        token pi   { 'pi'                               }
+        token ln   { 'ln(' <num> ')'                    }
+      }
+      class Complex::Calc {
+        method TOP  ($/) { make $<frac>.made                     }
+        method frac ($/) { make $<nu>.made / ( $<de>.made // 1 ) }
+        method num  ($/) { make $/.Numeric                       }
+        method nu   ($/) { make $/{ $/.keys.head }.made          }
+        method de   ($/) { make $/.Numeric                       }
+        method e    ($/) { make e                                }
+        method pi   ($/) { make pi                               }
+        method ln   ($/) { make log $<num>.made                  }
+      }
+      sub myComplex ($a, $b?) {
+        .narrow with Complex.new(
+          Complex::Expression.parse($a, actions => Complex::Calc).made,
+          $b.defined ?? Complex::Expression.parse($b, actions => Complex::Calc).made !! 0
+        )
+      }
+      sprintf(q:to/END/, myComplex(|%case<input><z1>).raku, myComplex(|%case<input><z2>).raku, myComplex(|%case<expected>).raku, %case<description>.raku);
+      cmp-ok(
+          %s ⋅ %s,
+          "==",
+          %s,
+          %s,
+      );
+      END
+  add:
+    test: |-
+      grammar Complex::Expression {
+        token TOP  { <frac>                             }
+        token frac { <nu> [ '/' <de> ]?                 }
+        token nu   { <num> | <e> | <pi> | <ln>          }
+        token de   { <num>                              }
+        token num  { '-'? <:Number>+ ['.' <:Number>+ ]? }
+        token e    { 'e'                                }
+        token pi   { 'pi'                               }
+        token ln   { 'ln(' <num> ')'                    }
+      }
+      class Complex::Calc {
+        method TOP  ($/) { make $<frac>.made                     }
+        method frac ($/) { make $<nu>.made / ( $<de>.made // 1 ) }
+        method num  ($/) { make $/.Numeric                       }
+        method nu   ($/) { make $/{ $/.keys.head }.made          }
+        method de   ($/) { make $/.Numeric                       }
+        method e    ($/) { make e                                }
+        method pi   ($/) { make pi                               }
+        method ln   ($/) { make log $<num>.made                  }
+      }
+      sub myComplex ($a, $b?) {
+        .narrow with Complex.new(
+          Complex::Expression.parse($a, actions => Complex::Calc).made,
+          $b.defined ?? Complex::Expression.parse($b, actions => Complex::Calc).made !! 0
+        )
+      }
+      sprintf(q:to/END/, myComplex(|%case<input><z1>), myComplex(|%case<input><z2>), Complex.new(|%case<expected>).raku, %case<description>.raku);
+      cmp-ok(
+          %s ＋ %s,
+          "==",
+          %s,
+          %s,
+      );
+      END
+  sub:
+    test: |-
+      grammar Complex::Expression {
+        token TOP  { <frac>                             }
+        token frac { <nu> [ '/' <de> ]?                 }
+        token nu   { <num> | <e> | <pi> | <ln>          }
+        token de   { <num>                              }
+        token num  { '-'? <:Number>+ ['.' <:Number>+ ]? }
+        token e    { 'e'                                }
+        token pi   { 'pi'                               }
+        token ln   { 'ln(' <num> ')'                    }
+      }
+      class Complex::Calc {
+        method TOP  ($/) { make $<frac>.made                     }
+        method frac ($/) { make $<nu>.made / ( $<de>.made // 1 ) }
+        method num  ($/) { make $/.Numeric                       }
+        method nu   ($/) { make $/{ $/.keys.head }.made          }
+        method de   ($/) { make $/.Numeric                       }
+        method e    ($/) { make e                                }
+        method pi   ($/) { make pi                               }
+        method ln   ($/) { make log $<num>.made                  }
+      }
+      sub myComplex ($a, $b?) {
+        .narrow with Complex.new(
+          Complex::Expression.parse($a, actions => Complex::Calc).made,
+          $b.defined ?? Complex::Expression.parse($b, actions => Complex::Calc).made !! 0
+        )
+      }
+      sprintf(q:to/END/, myComplex(|%case<input><z1>).raku, myComplex(|%case<input><z2>).raku, myComplex(|%case<expected>).raku, %case<description>.raku);
+      cmp-ok(
+          %s － %s,
+          "==",
+          %s,
+          %s,
+      );
+      END
+  div:
+    test: |-
+      grammar Complex::Expression {
+        token TOP  { <frac>                             }
+        token frac { <nu> [ '/' <de> ]?                 }
+        token nu   { <num> | <e> | <pi> | <ln>          }
+        token de   { <num>                              }
+        token num  { '-'? <:Number>+ ['.' <:Number>+ ]? }
+        token e    { 'e'                                }
+        token pi   { 'pi'                               }
+        token ln   { 'ln(' <num> ')'                    }
+      }
+      class Complex::Calc {
+        method TOP  ($/) { make $<frac>.made                     }
+        method frac ($/) { make $<nu>.made / ( $<de>.made // 1 ) }
+        method num  ($/) { make $/.Numeric                       }
+        method nu   ($/) { make $/{ $/.keys.head }.made          }
+        method de   ($/) { make $/.Numeric                       }
+        method e    ($/) { make e                                }
+        method pi   ($/) { make pi                               }
+        method ln   ($/) { make log $<num>.made                  }
+      }
+      sub myComplex ($a, $b?) {
+        .narrow with Complex.new(
+          Complex::Expression.parse($a, actions => Complex::Calc).made,
+          $b.defined ?? Complex::Expression.parse($b, actions => Complex::Calc).made !! 0
+        )
+      }
+      sprintf(q:to/END/, myComplex(|%case<input><z1>).raku, myComplex(|%case<input><z2>).raku, myComplex(|%case<expected>).raku, %case<description>.raku);
+      cmp-ok(
+          %s ∕ %s,
+          "==",
+          %s,
+          %s,
+      );
+      END
+  abs:
+    test: |-
+      sprintf(q:to/END/, Complex.new(|%case<input><z>).raku, %case<expected>.Int.raku, %case<description>.raku);
+      cmp-ok(
+          ｜%s｜,
+          "==",
+          %s,
+          %s,
+      );
+      END
+  conjugate:
+    test: |-
+      sprintf(q:to/END/, Complex.new(|%case<input><z>).raku, Complex.new(|%case<expected>).raku, %case<description>.raku);
+      cmp-ok(
+          %s∗,
+          "==",
+          %s,
+          %s,
+      );
+      END
+  exp:
+    test: |-
+      grammar Complex::Expression {
+        token TOP  { <frac>                             }
+        token frac { <nu> [ '/' <de> ]?                 }
+        token nu   { <num> | <e> | <pi> | <ln>          }
+        token de   { <num>                              }
+        token num  { '-'? <:Number>+ ['.' <:Number>+ ]? }
+        token e    { 'e'                                }
+        token pi   { 'pi'                               }
+        token ln   { 'ln(' <num> ')'                    }
+      }
+      class Complex::Calc {
+        method TOP  ($/) { make $<frac>.made                     }
+        method frac ($/) { make $<nu>.made / ( $<de>.made // 1 ) }
+        method num  ($/) { make $/.Numeric                       }
+        method nu   ($/) { make $/{ $/.keys.head }.made          }
+        method de   ($/) { make $/.Numeric                       }
+        method e    ($/) { make e                                }
+        method pi   ($/) { make pi                               }
+        method ln   ($/) { make log $<num>.made                  }
+      }
+      sub myComplex ($a, $b?) {
+        .narrow with Complex.new(
+          Complex::Expression.parse($a, actions => Complex::Calc).made,
+          $b.defined ?? Complex::Expression.parse($b, actions => Complex::Calc).made !! 0
+        )
+      }
+      sprintf(q:to/END/, myComplex( |%case<input><z> ).raku, myComplex( |%case<expected> ).raku, %case<description>.raku);
+      cmp-ok(
+          e^%s,
+          "=~=",
+          %s,
+          %s,
+      );
+      END
+
+example: |-
+  sub prefix:<Re> (Numeric $op) is export { $op.Complex.re } # real part
+  sub prefix:<Im> (Numeric $op) is export { $op.Complex.im } # imaginary part
+  sub infix:<＋> (Numeric $left, Numeric $right) is export { $left + $right } # addition with fullwidth plus sign
+  sub infix:<－> (Numeric $left, Numeric $right) is export { $left - $right } # subtraction with fullwidth hyphen-minus
+  sub infix:<⋅> (Numeric $left, Numeric $right) is export { $left * $right } # multiplication with dot operator
+  sub infix:<∕> (Numeric $left, Numeric $right) is export { $left / $right } # division with division slash
+  sub circumfix:<｜ ｜> (Numeric $op) is export { $op.abs } # absolute value with verticla line
+  sub postfix:<∗> (Numeric $op) is export { $op.conj } # conjugate with asterisk operator
+  sub infix:<^> (e, Numeric $right) is export { $right.exp } # exponent with circumflex accent
+
+stub: |-
+  sub prefix:<Re> (Numeric $operand) is export { } # real part
+  sub prefix:<Im> (Numeric $operand) is export { } # imaginary part
+  sub infix:<＋> (Numeric $operand) is export { } # addition with fullwidth plus sign
+  sub infix:<－> (Numeric $operand) is export { } # subtraction with fullwidth hyphen-minus
+  sub infix:<⋅> (Numeric $operand) is export { } # multiplication with dot operator
+  sub infix:<∕> (Numeric $operand) is export { } # division with division slash
+  sub circumfix:<｜ ｜> (Numeric $operand) is export { } # absolute value with vertical line
+  sub postfix:<∗> (Numeric $operand) is export { } # conjugate with asterisk operator
+  sub infix:<^> (e, Numeric $operand) is export { } # exponent with circumflex accent
