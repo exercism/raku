@@ -2,7 +2,7 @@
 
 A **complex number** is expressed in the form `z = a + b * i`, where:
 
-- `a` is the **real part** (a real number)\
+- `a` is the **real part** (a real number)
 - `b` is the **imaginary part** (also a real number)
 - `i` is the **imaginary unit** satisfying `i^2 = -1`
 
