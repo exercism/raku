@@ -1,0 +1,18 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+    ],
+  "files": {
+    "solution": [
+      "lib/HighScores.rakumod"
+    ],
+    "test": [
+      "t/high-scores.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/HighScores.rakumod"
+    ]
+  },
+  "blurb": "Manage a player's High Score list.",
+  "source": "Tribute to the eighties' arcade game Frogger"
+}
