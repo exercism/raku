@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "habere-et-dispertire"
+    ],
+  "files": {
+    "solution": [
+      "lib/RationalNumbers.rakumod"
+    ],
+    "test": [
+      "t/rational-numbers.rakutest"
+    ],
+    "example": [
+      ".meta/solutions/lib/RationalNumbers.rakumod"
+    ]
+  },
+  "blurb": "Implement rational numbers.",
+  "source": "Wikipedia",
+  "source_url": "https://en.wikipedia.org/wiki/Rational_number"
+}
