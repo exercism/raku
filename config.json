@@ -833,6 +833,14 @@
         "difficulty": 1
       },
       {
+        "slug": "rational-numbers",
+        "name": "Rational Numbers",
+        "uuid": "ff74a970-b108-4c3e-b29c-2c1ae9967c0e",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
+      },
+      {
         "slug": "complex-numbers",
         "name": "Complex Numbers",
         "uuid": "b75cabda-fa31-46b1-b69e-ea085a234a13",

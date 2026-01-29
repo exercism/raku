@@ -1,0 +1,158 @@
+unit: class
+
+tests: |-
+  for (Rat, FatRat) -> $rat-type {
+    for <new nude numerator> -> $rat-method {
+      $rat-type.^find_method($rat-method) andthen .wrap: sub (|) {
+        bail-out 'Using a (Fat)Rat is not allowed for this exercise.'
+      }
+    }
+  }
+
+properties:
+  add:
+    test: |-
+      sprintf(q:to/END/, %case<input><r1>.head.Int, %case<input><r1>.tail.Int, %case<input><r2>.head.Int, %case<input><r2>.tail.Int, %case<expected>.head.Int, %case<expected>.tail.Int, %case<description>.raku);
+      cmp-ok(
+        RationalNumbers.new( a => %s, b => %s ).add( RationalNumbers.new( a => %s, b => %s ) ),
+        "eqv",
+        RationalNumbers.new( a => %s, b => %s ),
+        %s,
+      );
+      END
+  sub:
+    test: |-
+      sprintf(q:to/END/, %case<input><r1>.head.Int, %case<input><r1>.tail.Int, %case<input><r2>.head.Int, %case<input><r2>.tail.Int, %case<expected>.head.Int, %case<expected>.tail.Int, %case<description>.raku);
+      cmp-ok(
+        RationalNumbers.new( a => %s, b => %s ).subtract( RationalNumbers.new( a => %s, b => %s ) ),
+        "eqv",
+        RationalNumbers.new( a => %s, b => %s ),
+        %s,
+      );
+      END
+  mul:
+    test: |-
+      sprintf(q:to/END/, %case<input><r1>.head.Int, %case<input><r1>.tail.Int, %case<input><r2>.head.Int, %case<input><r2>.tail.Int, %case<expected>.head.Int, %case<expected>.tail.Int, %case<description>.raku);
+      cmp-ok(
+        RationalNumbers.new( a => %s, b => %s ).multiply( RationalNumbers.new( a => %s, b => %s ) ),
+        "eqv",
+        RationalNumbers.new( a => %s, b => %s ),
+        %s,
+      );
+      END
+  div:
+    test: |-
+      sprintf(q:to/END/, %case<input><r1>.head.Int, %case<input><r1>.tail.Int, %case<input><r2>.head.Int, %case<input><r2>.tail.Int, %case<expected>.head.Int, %case<expected>.tail.Int, %case<description>.raku);
+      cmp-ok(
+        RationalNumbers.new( a => %s, b => %s ).divide( RationalNumbers.new( a => %s, b => %s ) ),
+        "eqv",
+        RationalNumbers.new( a => %s, b => %s ),
+        %s,
+      );
+      END
+  abs:
+    test: |-
+      sprintf(q:to/END/, %case<input><r>.head.Int, %case<input><r>.tail.Int, %case<expected>.head.Int, %case<expected>.tail.Int, %case<description>.raku);
+      cmp-ok(
+        RationalNumbers.new( a => %s, b => %s ).absolute,
+        "eqv",
+        RationalNumbers.new( a => %s, b => %s ),
+        %s,
+      );
+      END
+  exprational:
+    test: |-
+      sprintf(q:to/END/, %case<input><r>.head.Int, %case<input><r>.tail.Int, %case<input><n>.Int, %case<expected>.head.Int, %case<expected>.tail.Int, %case<description>.raku);
+      cmp-ok(
+        RationalNumbers.new( a => %s, b => %s ).exponent( %s ),
+        "eqv",
+        RationalNumbers.new( a => %s, b => %s ),
+        %s,
+      );
+      END
+  expreal:
+    test: |-
+      sprintf(q:to/END/, %case<input><r>.head.Int, %case<input><r>.tail.Int, %case<input><x>.Int, %case<expected>.Num, %case<description>.raku);
+      cmp-ok(
+        RationalNumbers.new( a => %s, b => %s ).base( %s ),
+        "=~=",
+        %s,
+        %s,
+      );
+      END
+  reduce:
+    test: |-
+      sprintf(q:to/END/, %case<input><r>.head.Int, %case<input><r>.tail.Int, %case<expected>.head.Int, %case<expected>.tail.Int, %case<description>.raku);
+      cmp-ok(
+        RationalNumbers.new( a => %s, b => %s ),
+        "eqv",
+        RationalNumbers.new( a => %s, b => %s ),
+        %s,
+      );
+      END
+
+example: |-
+    has Int $.a;
+    has Int $.b;
+
+    method reduce {
+      ($!a, $!b) Xdiv= $!a gcd $!b;
+      ($!a, $!b)     = -$!a, $!b.abs if $!b < 0;
+      self;
+    }
+    
+    submethod TWEAK {
+      self.reduce;
+    }
+    
+    method add (RationalNumbers $foo) {
+      given $!b lcm $foo.b -> $lcm {
+        $!a = ($lcm div $!b)*$!a + ($lcm div $foo.b)*$foo.a;
+        $!b =  $lcm;
+      }
+      self.reduce;
+    }
+
+    method subtract (RationalNumbers $foo) {
+      self.add( RationalNumbers.new( a => -$foo.a, b => $foo.b ) )
+          .reduce;
+    }
+
+    method multiply (RationalNumbers $foo) {
+      ($!a, $!b) Z*= $foo.a, $foo.b;
+      self.reduce;
+    }
+
+    method divide (RationalNumbers $foo) {
+      self.multiply( RationalNumbers.new( a => $foo.b, b => $foo.a ) )
+          .reduce;
+    }
+
+    method absolute {
+      ($!a, $!b) .= map( *.abs );
+      self.reduce;
+    }
+
+    method exponent ($power) {
+      ($!a, $!b) = ($!b, $!a) if $power < 0;
+      ($!a, $!b) X**= $power.abs;
+      self.reduce;
+    }
+
+    method base ($base) {
+      $base**( $!a/$!b );
+    }
+
+stub: |-
+  class RationalNumbers {
+    has Int $.a;
+    has Int $.b;
+
+    method add (RationalNumbers $op) { }
+    method subtract (RationalNumbers $op) { }
+    method multiply (RationalNumbers $op) { }    
+    method divide (RationalNumbers $op) { }
+    method absolute { }
+    method exponent ($power) { }
+    method base ($base) { }
+  }
