@@ -1,0 +1,314 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use RationalNumbers;
+
+for (Rat, FatRat) -> $rat-type {
+  for <new nude numerator> -> $rat-method {
+    $rat-type.^find_method($rat-method) andthen .wrap: sub (|) {
+      bail-out 'Using a (Fat)Rat is not allowed for this exercise.'
+    }
+  }
+}
+cmp-ok( # begin: 0ba4d988-044c-4ed5-9215-4d0bb8d0ae9f
+  RationalNumbers.new( a => 1, b => 2 ).add( RationalNumbers.new( a => 2, b => 3 ) ),
+  "eqv",
+  RationalNumbers.new( a => 7, b => 6 ),
+  "Arithmetic: Addition: Add two positive rational numbers",
+); # end: 0ba4d988-044c-4ed5-9215-4d0bb8d0ae9f
+
+cmp-ok( # begin: 88ebc342-a2ac-4812-a656-7b664f718b6a
+  RationalNumbers.new( a => 1, b => 2 ).add( RationalNumbers.new( a => -2, b => 3 ) ),
+  "eqv",
+  RationalNumbers.new( a => -1, b => 6 ),
+  "Arithmetic: Addition: Add a positive rational number and a negative rational number",
+); # end: 88ebc342-a2ac-4812-a656-7b664f718b6a
+
+cmp-ok( # begin: 92ed09c2-991e-4082-a602-13557080205c
+  RationalNumbers.new( a => -1, b => 2 ).add( RationalNumbers.new( a => -2, b => 3 ) ),
+  "eqv",
+  RationalNumbers.new( a => -7, b => 6 ),
+  "Arithmetic: Addition: Add two negative rational numbers",
+); # end: 92ed09c2-991e-4082-a602-13557080205c
+
+cmp-ok( # begin: 6e58999e-3350-45fb-a104-aac7f4a9dd11
+  RationalNumbers.new( a => 1, b => 2 ).add( RationalNumbers.new( a => -1, b => 2 ) ),
+  "eqv",
+  RationalNumbers.new( a => 0, b => 1 ),
+  "Arithmetic: Addition: Add a rational number to its additive inverse",
+); # end: 6e58999e-3350-45fb-a104-aac7f4a9dd11
+
+cmp-ok( # begin: 47bba350-9db1-4ab9-b412-4a7e1f72a66e
+  RationalNumbers.new( a => 1, b => 2 ).subtract( RationalNumbers.new( a => 2, b => 3 ) ),
+  "eqv",
+  RationalNumbers.new( a => -1, b => 6 ),
+  "Arithmetic: Subtraction: Subtract two positive rational numbers",
+); # end: 47bba350-9db1-4ab9-b412-4a7e1f72a66e
+
+cmp-ok( # begin: 93926e2a-3e82-4aee-98a7-fc33fb328e87
+  RationalNumbers.new( a => 1, b => 2 ).subtract( RationalNumbers.new( a => -2, b => 3 ) ),
+  "eqv",
+  RationalNumbers.new( a => 7, b => 6 ),
+  "Arithmetic: Subtraction: Subtract a positive rational number and a negative rational number",
+); # end: 93926e2a-3e82-4aee-98a7-fc33fb328e87
+
+cmp-ok( # begin: a965ba45-9b26-442b-bdc7-7728e4b8d4cc
+  RationalNumbers.new( a => -1, b => 2 ).subtract( RationalNumbers.new( a => -2, b => 3 ) ),
+  "eqv",
+  RationalNumbers.new( a => 1, b => 6 ),
+  "Arithmetic: Subtraction: Subtract two negative rational numbers",
+); # end: a965ba45-9b26-442b-bdc7-7728e4b8d4cc
+
+cmp-ok( # begin: 0df0e003-f68e-4209-8c6e-6a4e76af5058
+  RationalNumbers.new( a => 1, b => 2 ).subtract( RationalNumbers.new( a => 1, b => 2 ) ),
+  "eqv",
+  RationalNumbers.new( a => 0, b => 1 ),
+  "Arithmetic: Subtraction: Subtract a rational number from itself",
+); # end: 0df0e003-f68e-4209-8c6e-6a4e76af5058
+
+cmp-ok( # begin: 34fde77a-75f4-4204-8050-8d3a937958d3
+  RationalNumbers.new( a => 1, b => 2 ).multiply( RationalNumbers.new( a => 2, b => 3 ) ),
+  "eqv",
+  RationalNumbers.new( a => 1, b => 3 ),
+  "Arithmetic: Multiplication: Multiply two positive rational numbers",
+); # end: 34fde77a-75f4-4204-8050-8d3a937958d3
+
+cmp-ok( # begin: 6d015cf0-0ea3-41f1-93de-0b8e38e88bae
+  RationalNumbers.new( a => -1, b => 2 ).multiply( RationalNumbers.new( a => 2, b => 3 ) ),
+  "eqv",
+  RationalNumbers.new( a => -1, b => 3 ),
+  "Arithmetic: Multiplication: Multiply a negative rational number by a positive rational number",
+); # end: 6d015cf0-0ea3-41f1-93de-0b8e38e88bae
+
+cmp-ok( # begin: d1bf1b55-954e-41b1-8c92-9fc6beeb76fa
+  RationalNumbers.new( a => -1, b => 2 ).multiply( RationalNumbers.new( a => -2, b => 3 ) ),
+  "eqv",
+  RationalNumbers.new( a => 1, b => 3 ),
+  "Arithmetic: Multiplication: Multiply two negative rational numbers",
+); # end: d1bf1b55-954e-41b1-8c92-9fc6beeb76fa
+
+cmp-ok( # begin: a9b8f529-9ec7-4c79-a517-19365d779040
+  RationalNumbers.new( a => 1, b => 2 ).multiply( RationalNumbers.new( a => 2, b => 1 ) ),
+  "eqv",
+  RationalNumbers.new( a => 1, b => 1 ),
+  "Arithmetic: Multiplication: Multiply a rational number by its reciprocal",
+); # end: a9b8f529-9ec7-4c79-a517-19365d779040
+
+cmp-ok( # begin: d89d6429-22fa-4368-ab04-9e01a44d3b48
+  RationalNumbers.new( a => 1, b => 2 ).multiply( RationalNumbers.new( a => 1, b => 1 ) ),
+  "eqv",
+  RationalNumbers.new( a => 1, b => 2 ),
+  "Arithmetic: Multiplication: Multiply a rational number by 1",
+); # end: d89d6429-22fa-4368-ab04-9e01a44d3b48
+
+cmp-ok( # begin: 0d95c8b9-1482-4ed7-bac9-b8694fa90145
+  RationalNumbers.new( a => 1, b => 2 ).multiply( RationalNumbers.new( a => 0, b => 1 ) ),
+  "eqv",
+  RationalNumbers.new( a => 0, b => 1 ),
+  "Arithmetic: Multiplication: Multiply a rational number by 0",
+); # end: 0d95c8b9-1482-4ed7-bac9-b8694fa90145
+
+cmp-ok( # begin: 1de088f4-64be-4e6e-93fd-5997ae7c9798
+  RationalNumbers.new( a => 1, b => 2 ).divide( RationalNumbers.new( a => 2, b => 3 ) ),
+  "eqv",
+  RationalNumbers.new( a => 3, b => 4 ),
+  "Arithmetic: Division: Divide two positive rational numbers",
+); # end: 1de088f4-64be-4e6e-93fd-5997ae7c9798
+
+cmp-ok( # begin: 7d7983db-652a-4e66-981a-e921fb38d9a9
+  RationalNumbers.new( a => 1, b => 2 ).divide( RationalNumbers.new( a => -2, b => 3 ) ),
+  "eqv",
+  RationalNumbers.new( a => -3, b => 4 ),
+  "Arithmetic: Division: Divide a positive rational number by a negative rational number",
+); # end: 7d7983db-652a-4e66-981a-e921fb38d9a9
+
+cmp-ok( # begin: 1b434d1b-5b38-4cee-aaf5-b9495c399e34
+  RationalNumbers.new( a => -1, b => 2 ).divide( RationalNumbers.new( a => -2, b => 3 ) ),
+  "eqv",
+  RationalNumbers.new( a => 3, b => 4 ),
+  "Arithmetic: Division: Divide two negative rational numbers",
+); # end: 1b434d1b-5b38-4cee-aaf5-b9495c399e34
+
+cmp-ok( # begin: d81c2ebf-3612-45a6-b4e0-f0d47812bd59
+  RationalNumbers.new( a => 1, b => 2 ).divide( RationalNumbers.new( a => 1, b => 1 ) ),
+  "eqv",
+  RationalNumbers.new( a => 1, b => 2 ),
+  "Arithmetic: Division: Divide a rational number by 1",
+); # end: d81c2ebf-3612-45a6-b4e0-f0d47812bd59
+
+cmp-ok( # begin: 5fee0d8e-5955-4324-acbe-54cdca94ddaa
+  RationalNumbers.new( a => 1, b => 2 ).absolute,
+  "eqv",
+  RationalNumbers.new( a => 1, b => 2 ),
+  "Absolute value: Absolute value of a positive rational number",
+); # end: 5fee0d8e-5955-4324-acbe-54cdca94ddaa
+
+cmp-ok( # begin: 3cb570b6-c36a-4963-a380-c0834321bcaa
+  RationalNumbers.new( a => -1, b => -2 ).absolute,
+  "eqv",
+  RationalNumbers.new( a => 1, b => 2 ),
+  "Absolute value: Absolute value of a positive rational number with negative numerator and denominator",
+); # end: 3cb570b6-c36a-4963-a380-c0834321bcaa
+
+cmp-ok( # begin: 6a05f9a0-1f6b-470b-8ff7-41af81773f25
+  RationalNumbers.new( a => -1, b => 2 ).absolute,
+  "eqv",
+  RationalNumbers.new( a => 1, b => 2 ),
+  "Absolute value: Absolute value of a negative rational number",
+); # end: 6a05f9a0-1f6b-470b-8ff7-41af81773f25
+
+cmp-ok( # begin: 5d0f2336-3694-464f-8df9-f5852fda99dd
+  RationalNumbers.new( a => 1, b => -2 ).absolute,
+  "eqv",
+  RationalNumbers.new( a => 1, b => 2 ),
+  "Absolute value: Absolute value of a negative rational number with negative denominator",
+); # end: 5d0f2336-3694-464f-8df9-f5852fda99dd
+
+cmp-ok( # begin: f8e1ed4b-9dca-47fb-a01e-5311457b3118
+  RationalNumbers.new( a => 0, b => 1 ).absolute,
+  "eqv",
+  RationalNumbers.new( a => 0, b => 1 ),
+  "Absolute value: Absolute value of zero",
+); # end: f8e1ed4b-9dca-47fb-a01e-5311457b3118
+
+cmp-ok( # begin: 4a8c939f-f958-473b-9f88-6ad0f83bb4c4
+  RationalNumbers.new( a => 2, b => 4 ).absolute,
+  "eqv",
+  RationalNumbers.new( a => 1, b => 2 ),
+  "Absolute value: Absolute value of a rational number is reduced to lowest terms",
+); # end: 4a8c939f-f958-473b-9f88-6ad0f83bb4c4
+
+cmp-ok( # begin: ea2ad2af-3dab-41e7-bb9f-bd6819668a84
+  RationalNumbers.new( a => 1, b => 2 ).exponent( 3 ),
+  "eqv",
+  RationalNumbers.new( a => 1, b => 8 ),
+  "Exponentiation of a rational number: Raise a positive rational number to a positive integer power",
+); # end: ea2ad2af-3dab-41e7-bb9f-bd6819668a84
+
+cmp-ok( # begin: 8168edd2-0af3-45b1-b03f-72c01332e10a
+  RationalNumbers.new( a => -1, b => 2 ).exponent( 3 ),
+  "eqv",
+  RationalNumbers.new( a => -1, b => 8 ),
+  "Exponentiation of a rational number: Raise a negative rational number to a positive integer power",
+); # end: 8168edd2-0af3-45b1-b03f-72c01332e10a
+
+cmp-ok( # begin: c291cfae-cfd8-44f5-aa6c-b175c148a492
+  RationalNumbers.new( a => 3, b => 5 ).exponent( -2 ),
+  "eqv",
+  RationalNumbers.new( a => 25, b => 9 ),
+  "Exponentiation of a rational number: Raise a positive rational number to a negative integer power",
+); # end: c291cfae-cfd8-44f5-aa6c-b175c148a492
+
+cmp-ok( # begin: 45cb3288-4ae4-4465-9ae5-c129de4fac8e
+  RationalNumbers.new( a => -3, b => 5 ).exponent( -2 ),
+  "eqv",
+  RationalNumbers.new( a => 25, b => 9 ),
+  "Exponentiation of a rational number: Raise a negative rational number to an even negative integer power",
+); # end: 45cb3288-4ae4-4465-9ae5-c129de4fac8e
+
+cmp-ok( # begin: 2d47f945-ffe1-4916-a399-c2e8c27d7f72
+  RationalNumbers.new( a => -3, b => 5 ).exponent( -3 ),
+  "eqv",
+  RationalNumbers.new( a => -125, b => 27 ),
+  "Exponentiation of a rational number: Raise a negative rational number to an odd negative integer power",
+); # end: 2d47f945-ffe1-4916-a399-c2e8c27d7f72
+
+cmp-ok( # begin: e2f25b1d-e4de-4102-abc3-c2bb7c4591e4
+  RationalNumbers.new( a => 0, b => 1 ).exponent( 5 ),
+  "eqv",
+  RationalNumbers.new( a => 0, b => 1 ),
+  "Exponentiation of a rational number: Raise zero to an integer power",
+); # end: e2f25b1d-e4de-4102-abc3-c2bb7c4591e4
+
+cmp-ok( # begin: 431cac50-ab8b-4d58-8e73-319d5404b762
+  RationalNumbers.new( a => 1, b => 1 ).exponent( 4 ),
+  "eqv",
+  RationalNumbers.new( a => 1, b => 1 ),
+  "Exponentiation of a rational number: Raise one to an integer power",
+); # end: 431cac50-ab8b-4d58-8e73-319d5404b762
+
+cmp-ok( # begin: 7d164739-d68a-4a9c-b99f-dd77ce5d55e6
+  RationalNumbers.new( a => 1, b => 2 ).exponent( 0 ),
+  "eqv",
+  RationalNumbers.new( a => 1, b => 1 ),
+  "Exponentiation of a rational number: Raise a positive rational number to the power of zero",
+); # end: 7d164739-d68a-4a9c-b99f-dd77ce5d55e6
+
+cmp-ok( # begin: eb6bd5f5-f880-4bcd-8103-e736cb6e41d1
+  RationalNumbers.new( a => -1, b => 2 ).exponent( 0 ),
+  "eqv",
+  RationalNumbers.new( a => 1, b => 1 ),
+  "Exponentiation of a rational number: Raise a negative rational number to the power of zero",
+); # end: eb6bd5f5-f880-4bcd-8103-e736cb6e41d1
+
+cmp-ok( # begin: 30b467dd-c158-46f5-9ffb-c106de2fd6fa
+  RationalNumbers.new( a => 4, b => 3 ).base( 8 ),
+  "=~=",
+  16,
+  "Exponentiation of a real number to a rational number: Raise a real number to a positive rational number",
+); # end: 30b467dd-c158-46f5-9ffb-c106de2fd6fa
+
+cmp-ok( # begin: 6e026bcc-be40-4b7b-ae22-eeaafc5a1789
+  RationalNumbers.new( a => -1, b => 2 ).base( 9 ),
+  "=~=",
+  0.3333333333333333,
+  "Exponentiation of a real number to a rational number: Raise a real number to a negative rational number",
+); # end: 6e026bcc-be40-4b7b-ae22-eeaafc5a1789
+
+cmp-ok( # begin: 9f866da7-e893-407f-8cd2-ee85d496eec5
+  RationalNumbers.new( a => 0, b => 1 ).base( 2 ),
+  "=~=",
+  1,
+  "Exponentiation of a real number to a rational number: Raise a real number to a zero rational number",
+); # end: 9f866da7-e893-407f-8cd2-ee85d496eec5
+
+cmp-ok( # begin: 0a63fbde-b59c-4c26-8237-1e0c73354d0a
+  RationalNumbers.new( a => 2, b => 4 ),
+  "eqv",
+  RationalNumbers.new( a => 1, b => 2 ),
+  "Reduction to lowest terms: Reduce a positive rational number to lowest terms",
+); # end: 0a63fbde-b59c-4c26-8237-1e0c73354d0a
+
+cmp-ok( # begin: 5ed6f248-ad8d-4d4e-a545-9146c6727f33
+  RationalNumbers.new( a => 3, b => -4 ),
+  "eqv",
+  RationalNumbers.new( a => -3, b => 4 ),
+  "Reduction to lowest terms: Reduce places the minus sign on the numerator",
+); # end: 5ed6f248-ad8d-4d4e-a545-9146c6727f33
+
+cmp-ok( # begin: f87c2a4e-d29c-496e-a193-318c503e4402
+  RationalNumbers.new( a => -4, b => 6 ),
+  "eqv",
+  RationalNumbers.new( a => -2, b => 3 ),
+  "Reduction to lowest terms: Reduce a negative rational number to lowest terms",
+); # end: f87c2a4e-d29c-496e-a193-318c503e4402
+
+cmp-ok( # begin: 3b92ffc0-5b70-4a43-8885-8acee79cdaaf
+  RationalNumbers.new( a => 3, b => -9 ),
+  "eqv",
+  RationalNumbers.new( a => -1, b => 3 ),
+  "Reduction to lowest terms: Reduce a rational number with a negative denominator to lowest terms",
+); # end: 3b92ffc0-5b70-4a43-8885-8acee79cdaaf
+
+cmp-ok( # begin: c9dbd2e6-5ac0-4a41-84c1-48b645b4f663
+  RationalNumbers.new( a => 0, b => 6 ),
+  "eqv",
+  RationalNumbers.new( a => 0, b => 1 ),
+  "Reduction to lowest terms: Reduce zero to lowest terms",
+); # end: c9dbd2e6-5ac0-4a41-84c1-48b645b4f663
+
+cmp-ok( # begin: 297b45ad-2054-4874-84d4-0358dc1b8887
+  RationalNumbers.new( a => -14, b => 7 ),
+  "eqv",
+  RationalNumbers.new( a => -2, b => 1 ),
+  "Reduction to lowest terms: Reduce an integer to lowest terms",
+); # end: 297b45ad-2054-4874-84d4-0358dc1b8887
+
+cmp-ok( # begin: a73a17fe-fe8c-4a1c-a63b-e7579e333d9e
+  RationalNumbers.new( a => 13, b => 13 ),
+  "eqv",
+  RationalNumbers.new( a => 1, b => 1 ),
+  "Reduction to lowest terms: Reduce one to lowest terms",
+); # end: a73a17fe-fe8c-4a1c-a63b-e7579e333d9e
+
+done-testing;
