@@ -164,35 +164,35 @@ cmp-ok( # begin: c4e7fef5-64ac-4537-91c2-c6529707701f
 ); # end: c4e7fef5-64ac-4537-91c2-c6529707701f
 
 cmp-ok( # begin: c56a7332-aad2-4437-83a0-b3580ecee843
-     ｜<5+0i>｜,
+    ｜<5+0i>｜,
     "==",
     5,
     "Absolute value: Absolute value of a positive purely real number",
 ); # end: c56a7332-aad2-4437-83a0-b3580ecee843
 
 cmp-ok( # begin: cf88d7d3-ee74-4f4e-8a88-a1b0090ecb0c
-     ｜<-5+0i>｜,
+    ｜<-5+0i>｜,
     "==",
     5,
     "Absolute value: Absolute value of a negative purely real number",
 ); # end: cf88d7d3-ee74-4f4e-8a88-a1b0090ecb0c
 
 cmp-ok( # begin: bbe26568-86c1-4bb4-ba7a-da5697e2b994
-     ｜<0+5i>｜,
+    ｜<0+5i>｜,
     "==",
     5,
     "Absolute value: Absolute value of a purely imaginary number with positive imaginary part",
 ); # end: bbe26568-86c1-4bb4-ba7a-da5697e2b994
 
 cmp-ok( # begin: 3b48233d-468e-4276-9f59-70f4ca1f26f3
-     ｜<0-5i>｜,
+    ｜<0-5i>｜,
     "==",
     5,
     "Absolute value: Absolute value of a purely imaginary number with negative imaginary part",
 ); # end: 3b48233d-468e-4276-9f59-70f4ca1f26f3
 
 cmp-ok( # begin: fe400a9f-aa22-4b49-af92-51e0f5a2a6d3
-     ｜<3+4i>｜,
+    ｜<3+4i>｜,
     "==",
     5,
     "Absolute value: Absolute value of a number with real and imaginary part",
