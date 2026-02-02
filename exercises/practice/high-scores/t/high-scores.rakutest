@@ -1,0 +1,90 @@
+#!/usr/bin/env raku
+use Test;
+use lib $?FILE.IO.parent(2).add('lib');
+use HighScores;
+
+cmp-ok( # begin: 1035eb93-2208-4c22-bab8-fef06769a73c
+  HighScores.new( scores => [30, 50, 20, 70] ).scores,
+  "eqv",
+  [30, 50, 20, 70],
+  "List of scores",
+); # end: 1035eb93-2208-4c22-bab8-fef06769a73c
+
+cmp-ok( # begin: 6aa5dbf5-78fa-4375-b22c-ffaa989732d2
+  HighScores.new( scores => [100, 0, 90, 30] ).latest,
+  "==",
+  30,
+  "Latest score",
+); # end: 6aa5dbf5-78fa-4375-b22c-ffaa989732d2
+
+cmp-ok( # begin: b661a2e1-aebf-4f50-9139-0fb817dd12c6
+  HighScores.new( scores => [40, 100, 70] ).personal-best,
+  "==",
+  100,
+  "Personal best",
+); # end: b661a2e1-aebf-4f50-9139-0fb817dd12c6
+
+cmp-ok( # begin: 3d996a97-c81c-4642-9afc-80b80dc14015
+  HighScores.new( scores => [10, 30, 90, 30, 100, 20, 10, 0, 30, 40, 40, 70, 70] ).personal-top-three,
+  "==",
+  3,
+  "Top 3 scores: Personal top three from a list of scores",
+); # end: 3d996a97-c81c-4642-9afc-80b80dc14015
+
+cmp-ok( # begin: 1084ecb5-3eb4-46fe-a816-e40331a4e83a
+  HighScores.new( scores => [20, 10, 30] ).personal-top-three,
+  "==",
+  3,
+  "Top 3 scores: Personal top highest to lowest",
+); # end: 1084ecb5-3eb4-46fe-a816-e40331a4e83a
+
+cmp-ok( # begin: e6465b6b-5a11-4936-bfe3-35241c4f4f16
+  HighScores.new( scores => [40, 20, 40, 30] ).personal-top-three,
+  "==",
+  3,
+  "Top 3 scores: Personal top when there is a tie",
+); # end: e6465b6b-5a11-4936-bfe3-35241c4f4f16
+
+cmp-ok( # begin: f73b02af-c8fd-41c9-91b9-c86eaa86bce2
+  HighScores.new( scores => [30, 70] ).personal-top-three,
+  "==",
+  2,
+  "Top 3 scores: Personal top when there are less than 3",
+); # end: f73b02af-c8fd-41c9-91b9-c86eaa86bce2
+
+cmp-ok( # begin: 16608eae-f60f-4a88-800e-aabce5df2865
+  HighScores.new( scores => [40] ).personal-top-three,
+  "==",
+  1,
+  "Top 3 scores: Personal top when there is only one",
+); # end: 16608eae-f60f-4a88-800e-aabce5df2865
+
+cmp-ok( # begin: 2df075f9-fec9-4756-8f40-98c52a11504f
+  ( given HighScores.new( scores => [70, 50, 20, 30] ) { sink .personal-top-three; .latest } ),
+  "==",
+  30,
+  "Top 3 scores: Latest score after personal top scores",
+); # end: 2df075f9-fec9-4756-8f40-98c52a11504f
+
+cmp-ok( # begin: 809c4058-7eb1-4206-b01e-79238b9b71bc
+  ( given HighScores.new( scores => [30, 50, 20, 70] ) { sink .personal-top-three; .scores } ),
+  "eqv",
+  [30, 50, 20, 70],
+  "Top 3 scores: Scores after personal top scores",
+); # end: 809c4058-7eb1-4206-b01e-79238b9b71bc
+
+cmp-ok( # begin: ddb0efc0-9a86-4f82-bc30-21ae0bdc6418
+  ( given HighScores.new( scores => [20, 70, 15, 25, 30] ) { sink .personal-best; .latest } ),
+  "==",
+  30,
+  "Top 3 scores: Latest score after personal best",
+); # end: ddb0efc0-9a86-4f82-bc30-21ae0bdc6418
+
+cmp-ok( # begin: 6a0fd2d1-4cc4-46b9-a5bb-2fb667ca2364
+  ( given HighScores.new( scores => [20, 70, 15, 25, 30] ) { sink .personal-best; .scores } ),
+  "eqv",
+  [20, 70, 15, 25, 30],
+  "Top 3 scores: Scores after personal best",
+); # end: 6a0fd2d1-4cc4-46b9-a5bb-2fb667ca2364
+
+done-testing;
