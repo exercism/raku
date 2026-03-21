@@ -855,6 +855,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 1
+      },
+      {
+        "slug": "spiral-matrix",
+        "name": "Spiral Matrix",
+        "uuid": "7319a333-3120-4de2-9e5d-f2e0a7362901",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
       }
     ]
   },
