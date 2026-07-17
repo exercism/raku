@@ -192,4 +192,18 @@ cmp-ok( # begin: 4801cda2-f5b7-4c36-8317-3cdd167ac22c
     "Invalid boards: Invalid board: players kept playing after a win",
 ); # end: 4801cda2-f5b7-4c36-8317-3cdd167ac22c
 
+cmp-ok( # begin: 5a84757a-fc86-4328-aec9-a5759e6ed35d
+    state-of-tic-tac-toe(["OO ", "XXX", " O "]),
+    "eqv",
+    State::invalid,
+    "Invalid boards: Invalid board: O kept playing after X wins",
+); # end: 5a84757a-fc86-4328-aec9-a5759e6ed35d
+
+cmp-ok( # begin: cf25543d-583a-4656-b9ab-f82dc00a4a02
+    state-of-tic-tac-toe(["XX ", "OOO", " XX"]),
+    "eqv",
+    State::invalid,
+    "Invalid boards: Invalid board: X kept playing after O wins",
+); # end: cf25543d-583a-4656-b9ab-f82dc00a4a02
+
 done-testing;

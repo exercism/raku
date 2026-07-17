@@ -37,8 +37,9 @@ example: |-
   }
 
   sub is-invalid ( @board ) {
-      can-win @board, piece => X & O or
-      not 0|1 == [-] @board.join.comb.Bag< X O >
+      my $lead = [-] @board.join.comb.Bag< X O >;
+      not $lead == 0|1 or
+      can-win @board, piece => $lead == 1 ?? O !! X
   }
 
   sub has-drawn ( @board ) {

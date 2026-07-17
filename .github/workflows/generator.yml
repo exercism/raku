@@ -11,6 +11,9 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - run: bin/fetch-configlet
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - run: bin/configlet sync || true
 
       - name: Install Raku
