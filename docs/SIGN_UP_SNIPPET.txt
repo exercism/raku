@@ -1,0 +1,9 @@
+sub most-common-word(Str $text) {
+    my %counts;
+    my $best = '';
+    for $text.lc.words -> $word {
+        %counts{$word}++;
+        $best = $word if %counts{$word} > (%counts{$best} // 0);
+    }
+    return "\"$best\" appears %counts{$best} times";
+}
